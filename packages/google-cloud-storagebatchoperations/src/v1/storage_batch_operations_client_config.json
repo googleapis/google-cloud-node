@@ -58,12 +58,14 @@
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "ListBucketOperations": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "GetBucketOperation": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         }
       }
     }

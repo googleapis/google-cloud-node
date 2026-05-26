@@ -21,6 +21,8 @@ import * as http from 'http';
 import * as common from '../src/nodejs-common/index.js';
 
 describe('Common', () => {
+  // MOCK_HOST_PORT is kept for Service initialization but individual tests
+  // now use dynamic ports to avoid EADDRINUSE collisions in CI.
   const MOCK_HOST_PORT = 8118;
   const MOCK_HOST = `http://localhost:${MOCK_HOST_PORT}`;
 
@@ -42,18 +44,26 @@ describe('Common', () => {
         res.end(mockResponse);
       });
 
-      mockServer.listen(MOCK_HOST_PORT);
+      // Listen on port 0 to allow the OS to assign a random available port.
+      // This prevents "port already in use" errors if tests run in parallel.
+      mockServer.listen(0, () => {
+        const port = (mockServer.address() as import('net').AddressInfo).port;
 
-      service.request(
-        {
-          uri: '/mock-endpoint',
-        },
-        (err, resp) => {
-          assert.ifError(err);
-          assert.strictEqual(resp, mockResponse);
-          mockServer.close(done);
-        },
-      );
+        service.request(
+          {
+            uri: `http://localhost:${port}/mock-endpoint`,
+          },
+          (err, resp) => {
+            try {
+              assert.ifError(err);
+              assert.strictEqual(resp, mockResponse);
+              mockServer.close(done);
+            } catch (e) {
+              mockServer.close(() => done(e));
+            }
+          },
+        );
+      });
     });
 
     it('should retry a request', function (done) {
@@ -70,18 +80,24 @@ describe('Common', () => {
         res.end();
       });
 
-      mockServer.listen(MOCK_HOST_PORT);
+      mockServer.listen(0, () => {
+        const port = (mockServer.address() as import('net').AddressInfo).port;
 
-      service.request(
-        {
-          uri: '/mock-endpoint-retry',
-        },
-        err => {
-          assert.strictEqual((err! as common.ApiError).code, 408);
-          assert.strictEqual(numRequestAttempts, 4);
-          mockServer.close(done);
-        },
-      );
+        service.request(
+          {
+            uri: `http://localhost:${port}/mock-endpoint-retry`,
+          },
+          err => {
+            try {
+              assert.strictEqual((err! as common.ApiError).code, 408);
+              assert.strictEqual(numRequestAttempts, 4);
+              mockServer.close(done); // Ensure done is called only after server is closed
+            } catch (e) {
+              mockServer.close(() => done(e)); // Cleanup even if assertion fails
+            }
+          },
+        );
+      });
     });
 
     it('should retry non-responsive hosts', function (done) {
@@ -102,15 +118,17 @@ describe('Common', () => {
 
       service.request(
         {
-          uri: '/mock-endpoint-no-response',
+          // Using port :1 (reserved) ensures an immediate ECONNREFUSED
+          // without risking hitting a real service on the runner.
+          uri: 'http://localhost:1/mock-endpoint-no-response',
         },
         err => {
           assert(err?.message.includes('ECONNREFUSED'));
           const timeResponse = Date.now();
           assert(timeResponse - timeRequest > minExpectedResponseTime);
+          done();
         },
       );
-      done();
     });
   });
 });

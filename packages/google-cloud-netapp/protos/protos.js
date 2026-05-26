@@ -14061,6 +14061,22 @@
                     })();
     
                     /**
+                     * ScaleType enum.
+                     * @name google.cloud.netapp.v1.ScaleType
+                     * @enum {number}
+                     * @property {number} SCALE_TYPE_UNSPECIFIED=0 SCALE_TYPE_UNSPECIFIED value
+                     * @property {number} SCALE_TYPE_DEFAULT=1 SCALE_TYPE_DEFAULT value
+                     * @property {number} SCALE_TYPE_SCALEOUT=2 SCALE_TYPE_SCALEOUT value
+                     */
+                    v1.ScaleType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SCALE_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SCALE_TYPE_DEFAULT"] = 1;
+                        values[valuesById[2] = "SCALE_TYPE_SCALEOUT"] = 2;
+                        return values;
+                    })();
+    
+                    /**
                      * HybridReplicationSchedule enum.
                      * @name google.cloud.netapp.v1.HybridReplicationSchedule
                      * @enum {number}
@@ -27880,6 +27896,7 @@
                          * @property {google.cloud.netapp.v1.ICacheParameters|null} [cacheParameters] Volume cacheParameters
                          * @property {number|Long|null} [hotTierSizeUsedGib] Volume hotTierSizeUsedGib
                          * @property {Array.<google.cloud.netapp.v1.IBlockDevice>|null} [blockDevices] Volume blockDevices
+                         * @property {google.cloud.netapp.v1.ILargeCapacityConfig|null} [largeCapacityConfig] Volume largeCapacityConfig
                          * @property {google.cloud.netapp.v1.Volume.ICloneDetails|null} [cloneDetails] Volume cloneDetails
                          */
     
@@ -28241,6 +28258,14 @@
                         Volume.prototype.blockDevices = $util.emptyArray;
     
                         /**
+                         * Volume largeCapacityConfig.
+                         * @member {google.cloud.netapp.v1.ILargeCapacityConfig|null|undefined} largeCapacityConfig
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.largeCapacityConfig = null;
+    
+                        /**
                          * Volume cloneDetails.
                          * @member {google.cloud.netapp.v1.Volume.ICloneDetails|null|undefined} cloneDetails
                          * @memberof google.cloud.netapp.v1.Volume
@@ -28386,6 +28411,8 @@
                             if (message.blockDevices != null && message.blockDevices.length)
                                 for (var i = 0; i < message.blockDevices.length; ++i)
                                     $root.google.cloud.netapp.v1.BlockDevice.encode(message.blockDevices[i], writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
+                            if (message.largeCapacityConfig != null && Object.hasOwnProperty.call(message, "largeCapacityConfig"))
+                                $root.google.cloud.netapp.v1.LargeCapacityConfig.encode(message.largeCapacityConfig, writer.uint32(/* id 46, wireType 2 =*/370).fork()).ldelim();
                             if (message.cloneDetails != null && Object.hasOwnProperty.call(message, "cloneDetails"))
                                 $root.google.cloud.netapp.v1.Volume.CloneDetails.encode(message.cloneDetails, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                             return writer;
@@ -28634,6 +28661,10 @@
                                         if (!(message.blockDevices && message.blockDevices.length))
                                             message.blockDevices = [];
                                         message.blockDevices.push($root.google.cloud.netapp.v1.BlockDevice.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 46: {
+                                        message.largeCapacityConfig = $root.google.cloud.netapp.v1.LargeCapacityConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 47: {
@@ -28911,6 +28942,11 @@
                                     if (error)
                                         return "blockDevices." + error;
                                 }
+                            }
+                            if (message.largeCapacityConfig != null && message.hasOwnProperty("largeCapacityConfig")) {
+                                var error = $root.google.cloud.netapp.v1.LargeCapacityConfig.verify(message.largeCapacityConfig);
+                                if (error)
+                                    return "largeCapacityConfig." + error;
                             }
                             if (message.cloneDetails != null && message.hasOwnProperty("cloneDetails")) {
                                 var error = $root.google.cloud.netapp.v1.Volume.CloneDetails.verify(message.cloneDetails);
@@ -29298,6 +29334,11 @@
                                     message.blockDevices[i] = $root.google.cloud.netapp.v1.BlockDevice.fromObject(object.blockDevices[i]);
                                 }
                             }
+                            if (object.largeCapacityConfig != null) {
+                                if (typeof object.largeCapacityConfig !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.Volume.largeCapacityConfig: object expected");
+                                message.largeCapacityConfig = $root.google.cloud.netapp.v1.LargeCapacityConfig.fromObject(object.largeCapacityConfig);
+                            }
                             if (object.cloneDetails != null) {
                                 if (typeof object.cloneDetails !== "object")
                                     throw TypeError(".google.cloud.netapp.v1.Volume.cloneDetails: object expected");
@@ -29379,6 +29420,7 @@
                                     object.hotTierSizeUsedGib = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.hotTierSizeUsedGib = options.longs === String ? "0" : 0;
+                                object.largeCapacityConfig = null;
                                 object.cloneDetails = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -29502,6 +29544,8 @@
                                 for (var j = 0; j < message.blockDevices.length; ++j)
                                     object.blockDevices[j] = $root.google.cloud.netapp.v1.BlockDevice.toObject(message.blockDevices[j], options);
                             }
+                            if (message.largeCapacityConfig != null && message.hasOwnProperty("largeCapacityConfig"))
+                                object.largeCapacityConfig = $root.google.cloud.netapp.v1.LargeCapacityConfig.toObject(message.largeCapacityConfig, options);
                             if (message.cloneDetails != null && message.hasOwnProperty("cloneDetails"))
                                 object.cloneDetails = $root.google.cloud.netapp.v1.Volume.CloneDetails.toObject(message.cloneDetails, options);
                             return object;
@@ -29830,6 +29874,211 @@
                         })();
     
                         return Volume;
+                    })();
+    
+                    v1.LargeCapacityConfig = (function() {
+    
+                        /**
+                         * Properties of a LargeCapacityConfig.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ILargeCapacityConfig
+                         * @property {number|null} [constituentCount] LargeCapacityConfig constituentCount
+                         */
+    
+                        /**
+                         * Constructs a new LargeCapacityConfig.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a LargeCapacityConfig.
+                         * @implements ILargeCapacityConfig
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ILargeCapacityConfig=} [properties] Properties to set
+                         */
+                        function LargeCapacityConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LargeCapacityConfig constituentCount.
+                         * @member {number} constituentCount
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @instance
+                         */
+                        LargeCapacityConfig.prototype.constituentCount = 0;
+    
+                        /**
+                         * Creates a new LargeCapacityConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.ILargeCapacityConfig=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.LargeCapacityConfig} LargeCapacityConfig instance
+                         */
+                        LargeCapacityConfig.create = function create(properties) {
+                            return new LargeCapacityConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LargeCapacityConfig message. Does not implicitly {@link google.cloud.netapp.v1.LargeCapacityConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.ILargeCapacityConfig} message LargeCapacityConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LargeCapacityConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.constituentCount != null && Object.hasOwnProperty.call(message, "constituentCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.constituentCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LargeCapacityConfig message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.LargeCapacityConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.ILargeCapacityConfig} message LargeCapacityConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LargeCapacityConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LargeCapacityConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.LargeCapacityConfig} LargeCapacityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LargeCapacityConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.LargeCapacityConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.constituentCount = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LargeCapacityConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.LargeCapacityConfig} LargeCapacityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LargeCapacityConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LargeCapacityConfig message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LargeCapacityConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.constituentCount != null && message.hasOwnProperty("constituentCount"))
+                                if (!$util.isInteger(message.constituentCount))
+                                    return "constituentCount: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LargeCapacityConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.LargeCapacityConfig} LargeCapacityConfig
+                         */
+                        LargeCapacityConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.LargeCapacityConfig)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.LargeCapacityConfig();
+                            if (object.constituentCount != null)
+                                message.constituentCount = object.constituentCount | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LargeCapacityConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.LargeCapacityConfig} message LargeCapacityConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LargeCapacityConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.constituentCount = 0;
+                            if (message.constituentCount != null && message.hasOwnProperty("constituentCount"))
+                                object.constituentCount = message.constituentCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LargeCapacityConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LargeCapacityConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LargeCapacityConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.LargeCapacityConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LargeCapacityConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.LargeCapacityConfig";
+                        };
+    
+                        return LargeCapacityConfig;
                     })();
     
                     v1.ExportPolicy = (function() {
@@ -40156,6 +40405,7 @@
                          * @property {number|Long|null} [hotTierSizeUsedGib] StoragePool hotTierSizeUsedGib
                          * @property {google.cloud.netapp.v1.StoragePoolType|null} [type] StoragePool type
                          * @property {google.cloud.netapp.v1.Mode|null} [mode] StoragePool mode
+                         * @property {google.cloud.netapp.v1.ScaleType|null} [scaleType] StoragePool scaleType
                          */
     
                         /**
@@ -40438,6 +40688,14 @@
                          */
                         StoragePool.prototype.mode = null;
     
+                        /**
+                         * StoragePool scaleType.
+                         * @member {google.cloud.netapp.v1.ScaleType} scaleType
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.scaleType = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -40556,6 +40814,8 @@
                                 writer.uint32(/* id 35, wireType 0 =*/280).int32(message.type);
                             if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
                                 writer.uint32(/* id 36, wireType 0 =*/288).int32(message.mode);
+                            if (message.scaleType != null && Object.hasOwnProperty.call(message, "scaleType"))
+                                writer.uint32(/* id 38, wireType 0 =*/304).int32(message.scaleType);
                             return writer;
                         };
     
@@ -40741,6 +41001,10 @@
                                     }
                                 case 36: {
                                         message.mode = reader.int32();
+                                        break;
+                                    }
+                                case 38: {
+                                        message.scaleType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -40936,6 +41200,15 @@
                                     break;
                                 }
                             }
+                            if (message.scaleType != null && message.hasOwnProperty("scaleType"))
+                                switch (message.scaleType) {
+                                default:
+                                    return "scaleType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -41210,6 +41483,26 @@
                                 message.mode = 2;
                                 break;
                             }
+                            switch (object.scaleType) {
+                            default:
+                                if (typeof object.scaleType === "number") {
+                                    message.scaleType = object.scaleType;
+                                    break;
+                                }
+                                break;
+                            case "SCALE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.scaleType = 0;
+                                break;
+                            case "SCALE_TYPE_DEFAULT":
+                            case 1:
+                                message.scaleType = 1;
+                                break;
+                            case "SCALE_TYPE_SCALEOUT":
+                            case 2:
+                                message.scaleType = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -41285,6 +41578,7 @@
                                     object.hotTierSizeUsedGib = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.hotTierSizeUsedGib = options.longs === String ? "0" : 0;
+                                object.scaleType = options.enums === String ? "SCALE_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -41389,6 +41683,8 @@
                                 if (options.oneofs)
                                     object._mode = "mode";
                             }
+                            if (message.scaleType != null && message.hasOwnProperty("scaleType"))
+                                object.scaleType = options.enums === String ? $root.google.cloud.netapp.v1.ScaleType[message.scaleType] === undefined ? message.scaleType : $root.google.cloud.netapp.v1.ScaleType[message.scaleType] : message.scaleType;
                             return object;
                         };
     

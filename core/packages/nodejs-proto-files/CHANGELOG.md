@@ -1,24 +1,17 @@
 # Changelog
 
+
 [npm history][1]
 
 [1]: https://www.npmjs.com/package/google-proto-files?activeTab=versions
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node-core/compare/google-proto-files-v5.0.1...google-proto-files-v6.0.0) (2025-12-17)
+## [5.0.2](https://github.com/googleapis/google-cloud-node/compare/google-proto-files-v5.0.1...google-proto-files-v5.0.2) (2026-05-06)
 
-
-### ⚠ BREAKING CHANGES
-
-* update library to Node 18 ([#508](https://github.com/googleapis/google-cloud-node-core/issues/508))
 
 ### Bug Fixes
 
-* **deps:** Update dependency protobufjs to v7.5.4 ([#524](https://github.com/googleapis/google-cloud-node-core/issues/524)) ([80c71bc](https://github.com/googleapis/google-cloud-node-core/commit/80c71bcca642b8b85349454671955a6529a2e28d))
-
-
-### Miscellaneous Chores
-
-* Update library to Node 18 ([#508](https://github.com/googleapis/google-cloud-node-core/issues/508)) ([5a0d43f](https://github.com/googleapis/google-cloud-node-core/commit/5a0d43f4525577855b0b8beed28d3f043e478eaa))
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
 
 ## [5.0.1](https://github.com/googleapis/nodejs-proto-files/compare/v5.0.0...v5.0.1) (2025-08-21)
 

@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/logging-bunyan",
   "description": "Cloud Logging stream for Bunyan",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -42,7 +42,7 @@
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 600000",
-    "test": "c8 mocha --recursive build/test",
+    "test": "cross-env NODE_OPTIONS='--no-deprecation' c8 mocha --recursive build/test",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "postcompile": "cpy \"src/types/*\" build/src/types",
@@ -69,6 +69,7 @@
     "bunyan": "^1.8.12",
     "c8": "^9.0.0",
     "codecov": "^3.0.2",
+    "cross-env": "^7.0.3",
     "cpy-cli": "^4.0.0",
     "delay": "^5.0.0",
     "express": "^4.16.3",

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/projectify",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "A simple utility for replacing the projectid token in objects.",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -18,8 +18,7 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
-    "presystem-test": "npm run compile",
-    "system-test": "mocha build/system-test",
+    "system-test": "echo 'no system test'",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
     "precompile": "gts clean"

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AnalyticsHubServiceClient} from './analytics_hub_service_client';
+export { AnalyticsHubServiceClient } from './analytics_hub_service_client';

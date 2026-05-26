@@ -1,5 +1,13 @@
 # Changelog
 
+
+## [8.0.3](https://github.com/googleapis/google-cloud-node/compare/retry-request-v8.0.2...retry-request-v8.0.3) (2026-05-11)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+
 ## [8.0.2](https://github.com/googleapis/retry-request/compare/v8.0.1...v8.0.2) (2025-08-05)
 
 

@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +53,7 @@ export class SecurityCenterManagementClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('securitycentermanagement');
@@ -57,10 +66,10 @@ export class SecurityCenterManagementClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  securityCenterManagementStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  securityCenterManagementStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of SecurityCenterManagementClient.
@@ -101,21 +110,43 @@ export class SecurityCenterManagementClient {
    *     const client = new SecurityCenterManagementClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof SecurityCenterManagementClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof SecurityCenterManagementClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'securitycentermanagement.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +171,7 @@ export class SecurityCenterManagementClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,15 +185,11 @@ export class SecurityCenterManagementClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -183,71 +210,86 @@ export class SecurityCenterManagementClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      folderLocationEffectiveEventThreatDetectionCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}'
-      ),
-      folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}'
-      ),
-      folderLocationEventThreatDetectionCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}'
-      ),
-      folderLocationSecurityCenterServicesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/securityCenterServices/{service}'
-      ),
-      folderLocationSecurityHealthAnalyticsCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}'
-      ),
+      folderLocationEffectiveEventThreatDetectionCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}',
+        ),
+      folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}',
+        ),
+      folderLocationEventThreatDetectionCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}',
+        ),
+      folderLocationSecurityCenterServicesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/securityCenterServices/{service}',
+        ),
+      folderLocationSecurityHealthAnalyticsCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}',
+        ),
       folderSourceFindingsPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/sources/{source}/findings/{finding}'
+        'folders/{folder}/sources/{source}/findings/{finding}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}'
+        'organizations/{organization}',
       ),
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}'
+        'organizations/{organization}/locations/{location}',
       ),
-      organizationLocationEffectiveEventThreatDetectionCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}'
-      ),
-      organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}'
-      ),
-      organizationLocationEventThreatDetectionCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}'
-      ),
-      organizationLocationSecurityCenterServicesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityCenterServices/{service}'
-      ),
-      organizationLocationSecurityHealthAnalyticsCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}'
-      ),
+      organizationLocationEffectiveEventThreatDetectionCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}',
+        ),
+      organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}',
+        ),
+      organizationLocationEventThreatDetectionCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}',
+        ),
+      organizationLocationSecurityCenterServicesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityCenterServices/{service}',
+        ),
+      organizationLocationSecurityHealthAnalyticsCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}',
+        ),
       organizationSourceFindingsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/sources/{source}/findings/{finding}'
+        'organizations/{organization}/sources/{source}/findings/{finding}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
-      projectLocationEffectiveEventThreatDetectionCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}'
-      ),
-      projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}'
-      ),
-      projectLocationEventThreatDetectionCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}'
-      ),
-      projectLocationSecurityCenterServicesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityCenterServices/{service}'
-      ),
-      projectLocationSecurityHealthAnalyticsCustomModulesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}'
-      ),
+      projectLocationEffectiveEventThreatDetectionCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}',
+        ),
+      projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}',
+        ),
+      projectLocationEventThreatDetectionCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}',
+        ),
+      projectLocationSecurityCenterServicesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityCenterServices/{service}',
+        ),
+      projectLocationSecurityHealthAnalyticsCustomModulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}',
+        ),
       projectSourceFindingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/sources/{source}/findings/{finding}'
+        'projects/{project}/sources/{source}/findings/{finding}',
       ),
     };
 
@@ -256,25 +298,54 @@ export class SecurityCenterManagementClient {
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
       listEffectiveSecurityHealthAnalyticsCustomModules:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'effectiveSecurityHealthAnalyticsCustomModules'),
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'effectiveSecurityHealthAnalyticsCustomModules',
+        ),
       listSecurityHealthAnalyticsCustomModules:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'securityHealthAnalyticsCustomModules'),
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'securityHealthAnalyticsCustomModules',
+        ),
       listDescendantSecurityHealthAnalyticsCustomModules:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'securityHealthAnalyticsCustomModules'),
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'securityHealthAnalyticsCustomModules',
+        ),
       listEffectiveEventThreatDetectionCustomModules:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'effectiveEventThreatDetectionCustomModules'),
-      listEventThreatDetectionCustomModules:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'eventThreatDetectionCustomModules'),
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'effectiveEventThreatDetectionCustomModules',
+        ),
+      listEventThreatDetectionCustomModules: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'eventThreatDetectionCustomModules',
+      ),
       listDescendantEventThreatDetectionCustomModules:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'eventThreatDetectionCustomModules'),
-      listSecurityCenterServices:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'securityCenterServices')
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'eventThreatDetectionCustomModules',
+        ),
+      listSecurityCenterServices: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'securityCenterServices',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.securitycentermanagement.v1.SecurityCenterManagement', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.securitycentermanagement.v1.SecurityCenterManagement',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -305,37 +376,63 @@ export class SecurityCenterManagementClient {
     // Put together the "service stub" for
     // google.cloud.securitycentermanagement.v1.SecurityCenterManagement.
     this.securityCenterManagementStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.securitycentermanagement.v1.SecurityCenterManagement') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.securitycentermanagement.v1.SecurityCenterManagement,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.securitycentermanagement.v1.SecurityCenterManagement',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.securitycentermanagement.v1
+            .SecurityCenterManagement,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const securityCenterManagementStubMethods =
-        ['listEffectiveSecurityHealthAnalyticsCustomModules', 'getEffectiveSecurityHealthAnalyticsCustomModule', 'listSecurityHealthAnalyticsCustomModules', 'listDescendantSecurityHealthAnalyticsCustomModules', 'getSecurityHealthAnalyticsCustomModule', 'createSecurityHealthAnalyticsCustomModule', 'updateSecurityHealthAnalyticsCustomModule', 'deleteSecurityHealthAnalyticsCustomModule', 'simulateSecurityHealthAnalyticsCustomModule', 'listEffectiveEventThreatDetectionCustomModules', 'getEffectiveEventThreatDetectionCustomModule', 'listEventThreatDetectionCustomModules', 'listDescendantEventThreatDetectionCustomModules', 'getEventThreatDetectionCustomModule', 'createEventThreatDetectionCustomModule', 'updateEventThreatDetectionCustomModule', 'deleteEventThreatDetectionCustomModule', 'validateEventThreatDetectionCustomModule', 'getSecurityCenterService', 'listSecurityCenterServices', 'updateSecurityCenterService'];
+    const securityCenterManagementStubMethods = [
+      'listEffectiveSecurityHealthAnalyticsCustomModules',
+      'getEffectiveSecurityHealthAnalyticsCustomModule',
+      'listSecurityHealthAnalyticsCustomModules',
+      'listDescendantSecurityHealthAnalyticsCustomModules',
+      'getSecurityHealthAnalyticsCustomModule',
+      'createSecurityHealthAnalyticsCustomModule',
+      'updateSecurityHealthAnalyticsCustomModule',
+      'deleteSecurityHealthAnalyticsCustomModule',
+      'simulateSecurityHealthAnalyticsCustomModule',
+      'listEffectiveEventThreatDetectionCustomModules',
+      'getEffectiveEventThreatDetectionCustomModule',
+      'listEventThreatDetectionCustomModules',
+      'listDescendantEventThreatDetectionCustomModules',
+      'getEventThreatDetectionCustomModule',
+      'createEventThreatDetectionCustomModule',
+      'updateEventThreatDetectionCustomModule',
+      'deleteEventThreatDetectionCustomModule',
+      'validateEventThreatDetectionCustomModule',
+      'getSecurityCenterService',
+      'listSecurityCenterServices',
+      'updateSecurityCenterService',
+    ];
     for (const methodName of securityCenterManagementStubMethods) {
       const callPromise = this.securityCenterManagementStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -350,8 +447,14 @@ export class SecurityCenterManagementClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'securitycentermanagement.googleapis.com';
   }
@@ -362,8 +465,14 @@ export class SecurityCenterManagementClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'securitycentermanagement.googleapis.com';
   }
@@ -394,9 +503,7 @@ export class SecurityCenterManagementClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -405,8 +512,9 @@ export class SecurityCenterManagementClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -417,2992 +525,4138 @@ export class SecurityCenterManagementClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single
- * {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The full resource name of the custom module, specified in one of
- *   the following formats:
- *
- *   * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
- *   * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
- *   * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.get_effective_security_health_analytics_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetEffectiveSecurityHealthAnalyticsCustomModule_async
- */
+  /**
+   * Gets details of a single
+   * {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The full resource name of the custom module, specified in one of
+   *   the following formats:
+   *
+   *   * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+   *   * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+   *   * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.get_effective_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetEffectiveSecurityHealthAnalyticsCustomModule_async
+   */
   getEffectiveSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getEffectiveSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEffectiveSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEffectiveSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
+          | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'getEffectiveSecurityHealthAnalyticsCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
-    this.initialize().catch(err => {throw err});
-    this._log.info('getEffectiveSecurityHealthAnalyticsCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+          | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEffectiveSecurityHealthAnalyticsCustomModule response %j', response);
+          this._log.info(
+            'getEffectiveSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEffectiveSecurityHealthAnalyticsCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEffectiveSecurityHealthAnalyticsCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEffectiveSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getEffectiveSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves a
- * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource, in the format
- *   `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.get_security_health_analytics_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetSecurityHealthAnalyticsCustomModule_async
- */
+  /**
+   * Retrieves a
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource, in the format
+   *   `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.get_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetSecurityHealthAnalyticsCustomModule_async
+   */
   getSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('getSecurityHealthAnalyticsCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'getSecurityHealthAnalyticsCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSecurityHealthAnalyticsCustomModule response %j', response);
+          this._log.info(
+            'getSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSecurityHealthAnalyticsCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSecurityHealthAnalyticsCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSecurityHealthAnalyticsCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a resident
- * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
- * at the scope of the given organization, folder, or project, and also
- * creates inherited `SecurityHealthAnalyticsCustomModule` resources for all
- * folders and projects that are descendants of the given parent. These
- * modules are enabled by default.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of the parent organization, folder, or project of the
- *   module, in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
- *   Required. The resource being created.
- * @param {boolean} [request.validateOnly]
- *   Optional. When set to `true`, the request will be validated (including IAM
- *   checks), but no module will be created. An `OK` response indicates that the
- *   request is valid, while an error response indicates that the request is
- *   invalid.
- *
- *   If the request is valid, a subsequent request to create the module could
- *   still fail for one of the following reasons:
- *
- *   *  The state of your cloud resources changed; for example, you lost a
- *      required IAM permission
- *   *  An error occurred during creation of the module
- *
- *   Defaults to `false`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.create_security_health_analytics_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_CreateSecurityHealthAnalyticsCustomModule_async
- */
+  /**
+   * Creates a resident
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * at the scope of the given organization, folder, or project, and also
+   * creates inherited `SecurityHealthAnalyticsCustomModule` resources for all
+   * folders and projects that are descendants of the given parent. These
+   * modules are enabled by default.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent organization, folder, or project of the
+   *   module, in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
+   *   Required. The resource being created.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be created. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to create the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during creation of the module
+   *
+   *   Defaults to `false`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.create_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_CreateSecurityHealthAnalyticsCustomModule_async
+   */
   createSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('createSecurityHealthAnalyticsCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'createSecurityHealthAnalyticsCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSecurityHealthAnalyticsCustomModule response %j', response);
+          this._log.info(
+            'createSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createSecurityHealthAnalyticsCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createSecurityHealthAnalyticsCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the
- * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
- * under the given name based on the given update mask. Updating the
- * enablement state is supported on both resident and inherited modules
- * (though resident modules cannot have an enablement state of "inherited").
- * Updating the display name and custom configuration of a module is supported
- * on resident modules only.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The fields to update. The following values are valid:
- *
- *   * `custom_config`
- *   * `enablement_state`
- *
- *   If you omit this field or set it to the wildcard value `*`, then all
- *   eligible fields are updated.
- * @param {google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
- *   Required. The resource being updated.
- * @param {boolean} [request.validateOnly]
- *   Optional. When set to `true`, the request will be validated (including IAM
- *   checks), but no module will be updated. An `OK` response indicates that the
- *   request is valid, while an error response indicates that the request is
- *   invalid.
- *
- *   If the request is valid, a subsequent request to update the module could
- *   still fail for one of the following reasons:
- *
- *   *  The state of your cloud resources changed; for example, you lost a
- *      required IAM permission
- *   *  An error occurred during creation of the module
- *
- *   Defaults to `false`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.update_security_health_analytics_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateSecurityHealthAnalyticsCustomModule_async
- */
+  /**
+   * Updates the
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * under the given name based on the given update mask. Updating the
+   * enablement state is supported on both resident and inherited modules
+   * (though resident modules cannot have an enablement state of "inherited").
+   * Updating the display name and custom configuration of a module is supported
+   * on resident modules only.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to update. The following values are valid:
+   *
+   *   * `custom_config`
+   *   * `enablement_state`
+   *
+   *   If you omit this field or set it to the wildcard value `*`, then all
+   *   eligible fields are updated.
+   * @param {google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
+   *   Required. The resource being updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be updated. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to update the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during creation of the module
+   *
+   *   Defaults to `false`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.update_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateSecurityHealthAnalyticsCustomModule_async
+   */
   updateSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
+          | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'security_health_analytics_custom_module.name':
+          request.securityHealthAnalyticsCustomModule!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'updateSecurityHealthAnalyticsCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'security_health_analytics_custom_module.name': request.securityHealthAnalyticsCustomModule!.name ?? '',
-    });
-    this.initialize().catch(err => {throw err});
-    this._log.info('updateSecurityHealthAnalyticsCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+          | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSecurityHealthAnalyticsCustomModule response %j', response);
+          this._log.info(
+            'updateSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateSecurityHealthAnalyticsCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateSecurityHealthAnalyticsCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified
- * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
- * and all of its descendants in the resource hierarchy. This method is only
- * supported for resident custom modules.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the SHA custom module, in one of the
- *   following formats:
- *
- *     * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
- *     * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
- *     * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
- * @param {boolean} [request.validateOnly]
- *   Optional. When set to `true`, the request will be validated (including IAM
- *   checks), but no module will be deleted. An `OK` response indicates that the
- *   request is valid, while an error response indicates that the request is
- *   invalid.
- *
- *   If the request is valid, a subsequent request to delete the module could
- *   still fail for one of the following reasons:
- *
- *   *  The state of your cloud resources changed; for example, you lost a
- *      required IAM permission
- *   *  An error occurred during deletion of the module
- *
- *   Defaults to `false`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.delete_security_health_analytics_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteSecurityHealthAnalyticsCustomModule_async
- */
+  /**
+   * Deletes the specified
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * and all of its descendants in the resource hierarchy. This method is only
+   * supported for resident custom modules.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the SHA custom module, in one of the
+   *   following formats:
+   *
+   *     * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
+   *     * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
+   *     * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
+   * @param {boolean} [request.validateOnly]
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be deleted. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to delete the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during deletion of the module
+   *
+   *   Defaults to `false`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.delete_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteSecurityHealthAnalyticsCustomModule_async
+   */
   deleteSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('deleteSecurityHealthAnalyticsCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'deleteSecurityHealthAnalyticsCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteSecurityHealthAnalyticsCustomModule response %j', response);
+          this._log.info(
+            'deleteSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteSecurityHealthAnalyticsCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteSecurityHealthAnalyticsCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Simulates the result of using a
- * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
- * to check a resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The relative resource name of the organization, project, or
- *   folder. For more information about relative resource names, see [AIP-122:
- *   Resource names](https://google.aip.dev/122). Example:
- *   `organizations/{organization_id}`.
- * @param {google.cloud.securitycentermanagement.v1.CustomConfig} request.customConfig
- *   Required. The custom configuration that you need to test.
- * @param {google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource} request.resource
- *   Required. Resource data to simulate custom module against.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse|SimulateSecurityHealthAnalyticsCustomModuleResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.simulate_security_health_analytics_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_SimulateSecurityHealthAnalyticsCustomModule_async
- */
+  /**
+   * Simulates the result of using a
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * to check a resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The relative resource name of the organization, project, or
+   *   folder. For more information about relative resource names, see [AIP-122:
+   *   Resource names](https://google.aip.dev/122). Example:
+   *   `organizations/{organization_id}`.
+   * @param {google.cloud.securitycentermanagement.v1.CustomConfig} request.customConfig
+   *   Required. The custom configuration that you need to test.
+   * @param {google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource} request.resource
+   *   Required. Resource data to simulate custom module against.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse|SimulateSecurityHealthAnalyticsCustomModuleResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.simulate_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_SimulateSecurityHealthAnalyticsCustomModule_async
+   */
   simulateSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
-        protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   simulateSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
-          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+      | protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   simulateSecurityHealthAnalyticsCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
-          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+      | protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   simulateSecurityHealthAnalyticsCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
-          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
-          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
-        protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+      | protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('simulateSecurityHealthAnalyticsCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
-        protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'simulateSecurityHealthAnalyticsCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+          | protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('simulateSecurityHealthAnalyticsCustomModule response %j', response);
+          this._log.info(
+            'simulateSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.simulateSecurityHealthAnalyticsCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
-        protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('simulateSecurityHealthAnalyticsCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .simulateSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'simulateSecurityHealthAnalyticsCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets the effective Event Threat Detection custom module at the given level.
- *
- * The difference between an
- * {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}
- * and an
- * {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}
- * is that the fields for an `EffectiveEventThreatDetectionCustomModule` are
- * computed from ancestors if needed. For example, the enablement state for an
- * `EventThreatDetectionCustomModule` can be `ENABLED`, `DISABLED`, or
- * `INHERITED`. In contrast, the enablement state for an
- * `EffectiveEventThreatDetectionCustomModule` is always computed as `ENABLED`
- * or `DISABLED`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the Event Threat Detection custom module, in
- *   one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
- *   * `folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
- *   * `projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.get_effective_event_threat_detection_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetEffectiveEventThreatDetectionCustomModule_async
- */
+  /**
+   * Gets the effective Event Threat Detection custom module at the given level.
+   *
+   * The difference between an
+   * {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}
+   * and an
+   * {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}
+   * is that the fields for an `EffectiveEventThreatDetectionCustomModule` are
+   * computed from ancestors if needed. For example, the enablement state for an
+   * `EventThreatDetectionCustomModule` can be `ENABLED`, `DISABLED`, or
+   * `INHERITED`. In contrast, the enablement state for an
+   * `EffectiveEventThreatDetectionCustomModule` is always computed as `ENABLED`
+   * or `DISABLED`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Event Threat Detection custom module, in
+   *   one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
+   *   * `folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
+   *   * `projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.get_effective_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetEffectiveEventThreatDetectionCustomModule_async
+   */
   getEffectiveEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getEffectiveEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEffectiveEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEffectiveEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('getEffectiveEventThreatDetectionCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'getEffectiveEventThreatDetectionCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEffectiveEventThreatDetectionCustomModule response %j', response);
+          this._log.info(
+            'getEffectiveEventThreatDetectionCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEffectiveEventThreatDetectionCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEffectiveEventThreatDetectionCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEffectiveEventThreatDetectionCustomModule(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getEffectiveEventThreatDetectionCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets an Event Threat Detection custom module.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the Event Threat Detection custom module, in
- *   one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
- *   * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
- *   * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.get_event_threat_detection_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetEventThreatDetectionCustomModule_async
- */
+  /**
+   * Gets an Event Threat Detection custom module.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Event Threat Detection custom module, in
+   *   one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *   * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *   * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.get_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetEventThreatDetectionCustomModule_async
+   */
   getEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getEventThreatDetectionCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEventThreatDetectionCustomModule response %j', response);
+          this._log.info(
+            'getEventThreatDetectionCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEventThreatDetectionCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEventThreatDetectionCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getEventThreatDetectionCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a resident Event Threat Detection custom module at the scope of the
- * given organization, folder, or project, and creates inherited custom
- * modules for all descendants of the given parent. These modules are enabled
- * by default.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent for the module, in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule} request.eventThreatDetectionCustomModule
- *   Required. The module to create. The
- *   {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule.name|EventThreatDetectionCustomModule.name}
- *   field is ignored; Security Command Center generates the name.
- * @param {boolean} [request.validateOnly]
- *   Optional. When set to `true`, the request will be validated (including IAM
- *   checks), but no module will be created. An `OK` response indicates that the
- *   request is valid, while an error response indicates that the request is
- *   invalid.
- *
- *   If the request is valid, a subsequent request to create the module could
- *   still fail for one of the following reasons:
- *
- *   *  The state of your cloud resources changed; for example, you lost a
- *      required IAM permission
- *   *  An error occurred during creation of the module
- *
- *   Defaults to `false`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.create_event_threat_detection_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_CreateEventThreatDetectionCustomModule_async
- */
+  /**
+   * Creates a resident Event Threat Detection custom module at the scope of the
+   * given organization, folder, or project, and creates inherited custom
+   * modules for all descendants of the given parent. These modules are enabled
+   * by default.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent for the module, in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule} request.eventThreatDetectionCustomModule
+   *   Required. The module to create. The
+   *   {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule.name|EventThreatDetectionCustomModule.name}
+   *   field is ignored; Security Command Center generates the name.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be created. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to create the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during creation of the module
+   *
+   *   Defaults to `false`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.create_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_CreateEventThreatDetectionCustomModule_async
+   */
   createEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('createEventThreatDetectionCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'createEventThreatDetectionCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createEventThreatDetectionCustomModule response %j', response);
+          this._log.info(
+            'createEventThreatDetectionCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createEventThreatDetectionCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createEventThreatDetectionCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createEventThreatDetectionCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the Event Threat Detection custom module with the given name based
- * on the given update mask. Updating the enablement state is supported for
- * both resident and inherited modules (though resident modules cannot have an
- * enablement state of "inherited"). Updating the display name or
- * configuration of a module is supported for resident modules only. The type
- * of a module cannot be changed.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The fields to update. If omitted, then all fields are updated.
- * @param {google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule} request.eventThreatDetectionCustomModule
- *   Required. The module being updated.
- * @param {boolean} [request.validateOnly]
- *   Optional. When set to `true`, the request will be validated (including IAM
- *   checks), but no module will be updated. An `OK` response indicates that the
- *   request is valid, while an error response indicates that the request is
- *   invalid.
- *
- *   If the request is valid, a subsequent request to update the module could
- *   still fail for one of the following reasons:
- *
- *   *  The state of your cloud resources changed; for example, you lost a
- *      required IAM permission
- *   *  An error occurred during creation of the module
- *
- *   Defaults to `false`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.update_event_threat_detection_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateEventThreatDetectionCustomModule_async
- */
+  /**
+   * Updates the Event Threat Detection custom module with the given name based
+   * on the given update mask. Updating the enablement state is supported for
+   * both resident and inherited modules (though resident modules cannot have an
+   * enablement state of "inherited"). Updating the display name or
+   * configuration of a module is supported for resident modules only. The type
+   * of a module cannot be changed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to update. If omitted, then all fields are updated.
+   * @param {google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule} request.eventThreatDetectionCustomModule
+   *   Required. The module being updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be updated. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to update the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during creation of the module
+   *
+   *   Defaults to `false`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.update_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateEventThreatDetectionCustomModule_async
+   */
   updateEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'event_threat_detection_custom_module.name': request.eventThreatDetectionCustomModule!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'event_threat_detection_custom_module.name':
+          request.eventThreatDetectionCustomModule!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('updateEventThreatDetectionCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'updateEventThreatDetectionCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEventThreatDetectionCustomModule response %j', response);
+          this._log.info(
+            'updateEventThreatDetectionCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateEventThreatDetectionCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateEventThreatDetectionCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateEventThreatDetectionCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified Event Threat Detection custom module and all of its
- * descendants in the resource hierarchy. This method is only supported for
- * resident custom modules.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the Event Threat Detection custom module, in
- *   one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
- *   * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
- *   * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
- * @param {boolean} [request.validateOnly]
- *   Optional. When set to `true`, the request will be validated (including IAM
- *   checks), but no module will be deleted. An `OK` response indicates that the
- *   request is valid, while an error response indicates that the request is
- *   invalid.
- *
- *   If the request is valid, a subsequent request to delete the module could
- *   still fail for one of the following reasons:
- *
- *   *  The state of your cloud resources changed; for example, you lost a
- *      required IAM permission
- *   *  An error occurred during creation of the module
- *
- *   Defaults to `false`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.delete_event_threat_detection_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteEventThreatDetectionCustomModule_async
- */
+  /**
+   * Deletes the specified Event Threat Detection custom module and all of its
+   * descendants in the resource hierarchy. This method is only supported for
+   * resident custom modules.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Event Threat Detection custom module, in
+   *   one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *   * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *   * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   * @param {boolean} [request.validateOnly]
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be deleted. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to delete the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during creation of the module
+   *
+   *   Defaults to `false`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.delete_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteEventThreatDetectionCustomModule_async
+   */
   deleteEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('deleteEventThreatDetectionCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'deleteEventThreatDetectionCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteEventThreatDetectionCustomModule response %j', response);
+          this._log.info(
+            'deleteEventThreatDetectionCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteEventThreatDetectionCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteEventThreatDetectionCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteEventThreatDetectionCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Validates the given Event Threat Detection custom module.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Resource name of the parent to validate the custom modules under,
- *   in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- * @param {string} request.rawText
- *   Required. The raw text of the module's contents. Used to generate error
- *   messages.
- * @param {string} request.type
- *   Required. The type of the module. For example, `CONFIGURABLE_BAD_IP`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleResponse|ValidateEventThreatDetectionCustomModuleResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.validate_event_threat_detection_custom_module.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ValidateEventThreatDetectionCustomModule_async
- */
+  /**
+   * Validates the given Event Threat Detection custom module.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent to validate the custom modules under,
+   *   in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   * @param {string} request.rawText
+   *   Required. The raw text of the module's contents. Used to generate error
+   *   messages.
+   * @param {string} request.type
+   *   Required. The type of the module. For example, `CONFIGURABLE_BAD_IP`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleResponse|ValidateEventThreatDetectionCustomModuleResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.validate_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ValidateEventThreatDetectionCustomModule_async
+   */
   validateEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
-        protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   validateEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
-          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
+      | protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   validateEventThreatDetectionCustomModule(
-      request: protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
-          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
+      | protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   validateEventThreatDetectionCustomModule(
-      request?: protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
-          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
-          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
-        protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
+      | protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('validateEventThreatDetectionCustomModule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
-        protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'validateEventThreatDetectionCustomModule request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
+          | protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('validateEventThreatDetectionCustomModule response %j', response);
+          this._log.info(
+            'validateEventThreatDetectionCustomModule response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.validateEventThreatDetectionCustomModule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
-        protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('validateEventThreatDetectionCustomModule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .validateEventThreatDetectionCustomModule(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'validateEventThreatDetectionCustomModule response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets service settings for the specified Security Command Center service.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Security Command Center service to retrieve, in one of the
- *   following formats:
- *
- *   * organizations/{organization}/locations/{location}/securityCenterServices/{service}
- *   * folders/{folder}/locations/{location}/securityCenterServices/{service}
- *   * projects/{project}/locations/{location}/securityCenterServices/{service}
- *
- *   The following values are valid for `{service}`:
- *
- *   * `container-threat-detection`
- *   * `event-threat-detection`
- *   * `security-health-analytics`
- *   * `vm-threat-detection`
- *   * `web-security-scanner`
- * @param {boolean} request.showEligibleModulesOnly
- *   Set to `true` to show only modules that are in scope. By default, all
- *   modules are shown.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.get_security_center_service.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetSecurityCenterService_async
- */
+  /**
+   * Gets service settings for the specified Security Command Center service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Security Command Center service to retrieve, in one of the
+   *   following formats:
+   *
+   *   * organizations/{organization}/locations/{location}/securityCenterServices/{service}
+   *   * folders/{folder}/locations/{location}/securityCenterServices/{service}
+   *   * projects/{project}/locations/{location}/securityCenterServices/{service}
+   *
+   *   The following values are valid for `{service}`:
+   *
+   *   * `container-threat-detection`
+   *   * `event-threat-detection`
+   *   * `security-health-analytics`
+   *   * `vm-threat-detection`
+   *   * `web-security-scanner`
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Set to `true` to show only modules that are in scope. By default, all
+   *   modules are shown.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.get_security_center_service.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetSecurityCenterService_async
+   */
   getSecurityCenterService(
-      request?: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-        protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSecurityCenterService(
-      request: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-          protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSecurityCenterService(
-      request: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-          protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSecurityCenterService(
-      request?: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-          protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-          protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-        protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSecurityCenterService request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-        protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+          | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSecurityCenterService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSecurityCenterService(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-        protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSecurityCenterService response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSecurityCenterService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSecurityCenterService response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a Security Command Center service using the given update mask.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService} request.securityCenterService
- *   Required. The updated service.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The fields to update. Accepts the following values:
- *
- *   * `intended_enablement_state`
- *   * `modules`
- *
- *   If omitted, then all eligible fields are updated.
- * @param {boolean} [request.validateOnly]
- *   Optional. When set to `true`, the request will be validated (including IAM
- *   checks), but no service will be updated. An `OK` response indicates that
- *   the request is valid, while an error response indicates that the request is
- *   invalid.
- *
- *   If the request is valid, a subsequent request to update the service could
- *   still fail for one of the following reasons:
- *
- *   *  The state of your cloud resources changed; for example, you lost a
- *      required IAM permission
- *   *  An error occurred during update of the service
- *
- *   Defaults to `false`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.update_security_center_service.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateSecurityCenterService_async
- */
+  /**
+   * Updates a Security Command Center service using the given update mask.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService} request.securityCenterService
+   *   Required. The updated service.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to update. Accepts the following values:
+   *
+   *   * `intended_enablement_state`
+   *   * `modules`
+   *
+   *   If omitted, then all eligible fields are updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no service will be updated. An `OK` response indicates that
+   *   the request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to update the service could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during update of the service
+   *
+   *   Defaults to `false`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.update_security_center_service.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateSecurityCenterService_async
+   */
   updateSecurityCenterService(
-      request?: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateSecurityCenterService(
-      request: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSecurityCenterService(
-      request: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
-      callback: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSecurityCenterService(
-      request?: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-          protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'security_center_service.name': request.securityCenterService!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'security_center_service.name':
+          request.securityCenterService!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateSecurityCenterService request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+          | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSecurityCenterService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateSecurityCenterService(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
-        protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateSecurityCenterService response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateSecurityCenterService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSecurityCenterService response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Returns a list of all
- * {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}
- * resources for the given parent. This includes resident modules defined at
- * the scope of the parent, and inherited modules, inherited from ancestor
- * organizations, folders, and projects (no descendants).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list effective custom modules, in one of the
- *   following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEffectiveSecurityHealthAnalyticsCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Returns a list of all
+   * {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}
+   * resources for the given parent. This includes resident modules defined at
+   * the scope of the parent, and inherited modules, inherited from ancestor
+   * organizations, folders, and projects (no descendants).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEffectiveSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEffectiveSecurityHealthAnalyticsCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse,
+    ]
+  >;
   listEffectiveSecurityHealthAnalyticsCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+    >,
+  ): void;
   listEffectiveSecurityHealthAnalyticsCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+    >,
+  ): void;
   listEffectiveSecurityHealthAnalyticsCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-      protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-      protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEffectiveSecurityHealthAnalyticsCustomModules values %j', values);
+          this._log.info(
+            'listEffectiveSecurityHealthAnalyticsCustomModules values %j',
+            values,
+          );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEffectiveSecurityHealthAnalyticsCustomModules request %j', request);
+    this._log.info(
+      'listEffectiveSecurityHealthAnalyticsCustomModules request %j',
+      request,
+    );
     return this.innerApiCalls
-      .listEffectiveSecurityHealthAnalyticsCustomModules(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
-      ]) => {
-        this._log.info('listEffectiveSecurityHealthAnalyticsCustomModules values %j', response);
-        return [response, input, output];
-      });
+      .listEffectiveSecurityHealthAnalyticsCustomModules(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listEffectiveSecurityHealthAnalyticsCustomModules values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEffectiveSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list effective custom modules, in one of the
- *   following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEffectiveSecurityHealthAnalyticsCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listEffectiveSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEffectiveSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEffectiveSecurityHealthAnalyticsCustomModulesStream(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listEffectiveSecurityHealthAnalyticsCustomModules stream %j', request);
-    return this.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.createStream(
-      this.innerApiCalls.listEffectiveSecurityHealthAnalyticsCustomModules as GaxCall,
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listEffectiveSecurityHealthAnalyticsCustomModules stream %j',
       request,
-      callSettings
+    );
+    return this.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.createStream(
+      this.innerApiCalls
+        .listEffectiveSecurityHealthAnalyticsCustomModules as GaxCall,
+      request,
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEffectiveSecurityHealthAnalyticsCustomModules`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list effective custom modules, in one of the
- *   following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.list_effective_security_health_analytics_custom_modules.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListEffectiveSecurityHealthAnalyticsCustomModules_async
- */
+  /**
+   * Equivalent to `listEffectiveSecurityHealthAnalyticsCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.list_effective_security_health_analytics_custom_modules.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListEffectiveSecurityHealthAnalyticsCustomModules_async
+   */
   listEffectiveSecurityHealthAnalyticsCustomModulesAsync(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule>{
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listEffectiveSecurityHealthAnalyticsCustomModules iterate %j', request);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listEffectiveSecurityHealthAnalyticsCustomModules iterate %j',
+      request,
+    );
     return this.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.asyncIterate(
-      this.innerApiCalls['listEffectiveSecurityHealthAnalyticsCustomModules'] as GaxCall,
+      this.innerApiCalls[
+        'listEffectiveSecurityHealthAnalyticsCustomModules'
+      ] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule>;
   }
- /**
- * Returns a list of all
- * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
- * resources for the given parent. This includes resident modules defined at
- * the scope of the parent, and inherited modules, inherited from ancestor
- * organizations, folders, and projects (no descendants).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of the parent organization, folder, or project in which to
- *   list custom modules, in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSecurityHealthAnalyticsCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Returns a list of all
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * resources for the given parent. This includes resident modules defined at
+   * the scope of the parent, and inherited modules, inherited from ancestor
+   * organizations, folders, and projects (no descendants).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSecurityHealthAnalyticsCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse,
+    ]
+  >;
   listSecurityHealthAnalyticsCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+    >,
+  ): void;
   listSecurityHealthAnalyticsCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+    >,
+  ): void;
   listSecurityHealthAnalyticsCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-      protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSecurityHealthAnalyticsCustomModules values %j', values);
+          this._log.info(
+            'listSecurityHealthAnalyticsCustomModules values %j',
+            values,
+          );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSecurityHealthAnalyticsCustomModules request %j', request);
+    this._log.info(
+      'listSecurityHealthAnalyticsCustomModules request %j',
+      request,
+    );
     return this.innerApiCalls
-      .listSecurityHealthAnalyticsCustomModules(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse
-      ]) => {
-        this._log.info('listSecurityHealthAnalyticsCustomModules values %j', response);
-        return [response, input, output];
-      });
+      .listSecurityHealthAnalyticsCustomModules(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listSecurityHealthAnalyticsCustomModules values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of the parent organization, folder, or project in which to
- *   list custom modules, in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSecurityHealthAnalyticsCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSecurityHealthAnalyticsCustomModulesStream(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listSecurityHealthAnalyticsCustomModules'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listSecurityHealthAnalyticsCustomModules stream %j', request);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listSecurityHealthAnalyticsCustomModules stream %j',
+      request,
+    );
     return this.descriptors.page.listSecurityHealthAnalyticsCustomModules.createStream(
       this.innerApiCalls.listSecurityHealthAnalyticsCustomModules as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSecurityHealthAnalyticsCustomModules`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of the parent organization, folder, or project in which to
- *   list custom modules, in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.list_security_health_analytics_custom_modules.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListSecurityHealthAnalyticsCustomModules_async
- */
+  /**
+   * Equivalent to `listSecurityHealthAnalyticsCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.list_security_health_analytics_custom_modules.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListSecurityHealthAnalyticsCustomModules_async
+   */
   listSecurityHealthAnalyticsCustomModulesAsync(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>{
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listSecurityHealthAnalyticsCustomModules'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listSecurityHealthAnalyticsCustomModules iterate %j', request);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listSecurityHealthAnalyticsCustomModules iterate %j',
+      request,
+    );
     return this.descriptors.page.listSecurityHealthAnalyticsCustomModules.asyncIterate(
       this.innerApiCalls['listSecurityHealthAnalyticsCustomModules'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>;
   }
- /**
- * Returns a list of all resident
- * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
- * resources under the given organization, folder, or project and all of its
- * descendants.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of the parent organization, folder, or project in which to
- *   list custom modules, in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDescendantSecurityHealthAnalyticsCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Returns a list of all resident
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * resources under the given organization, folder, or project and all of its
+   * descendants.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDescendantSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDescendantSecurityHealthAnalyticsCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse,
+    ]
+  >;
   listDescendantSecurityHealthAnalyticsCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>): void;
-  listDescendantSecurityHealthAnalyticsCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>): void;
-  listDescendantSecurityHealthAnalyticsCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
+    request: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
       protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-      protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse|null|undefined,
-      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>|undefined = callback
-      ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDescendantSecurityHealthAnalyticsCustomModules values %j', values);
-          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    this._log.info('listDescendantSecurityHealthAnalyticsCustomModules request %j', request);
-    return this.innerApiCalls
-      .listDescendantSecurityHealthAnalyticsCustomModules(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
-      ]) => {
-        this._log.info('listDescendantSecurityHealthAnalyticsCustomModules values %j', response);
-        return [response, input, output];
-      });
-  }
-
-/**
- * Equivalent to `listDescendantSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of the parent organization, folder, or project in which to
- *   list custom modules, in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDescendantSecurityHealthAnalyticsCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
-  listDescendantSecurityHealthAnalyticsCustomModulesStream(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-      options?: CallOptions):
-    Transform{
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listDescendantSecurityHealthAnalyticsCustomModules stream %j', request);
-    return this.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.createStream(
-      this.innerApiCalls.listDescendantSecurityHealthAnalyticsCustomModules as GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-/**
- * Equivalent to `listDescendantSecurityHealthAnalyticsCustomModules`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of the parent organization, folder, or project in which to
- *   list custom modules, in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.list_descendant_security_health_analytics_custom_modules.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListDescendantSecurityHealthAnalyticsCustomModules_async
- */
-  listDescendantSecurityHealthAnalyticsCustomModulesAsync(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>{
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listDescendantSecurityHealthAnalyticsCustomModules iterate %j', request);
-    return this.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.asyncIterate(
-      this.innerApiCalls['listDescendantSecurityHealthAnalyticsCustomModules'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>;
-  }
- /**
- * Lists all effective Event Threat Detection custom modules for the
- * given parent. This includes resident modules defined at the scope of the
- * parent along with modules inherited from its ancestors.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list effective custom modules, in one of the
- *   following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEffectiveEventThreatDetectionCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
-  listEffectiveEventThreatDetectionCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
-      ]>;
-  listEffectiveEventThreatDetectionCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule>): void;
-  listEffectiveEventThreatDetectionCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule>): void;
-  listEffectiveEventThreatDetectionCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
-      ]>|void {
+      | protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+    >,
+  ): void;
+  listDescendantSecurityHealthAnalyticsCustomModules(
+    request: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+    >,
+  ): void;
+  listDescendantSecurityHealthAnalyticsCustomModules(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-      protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse|null|undefined,
-      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEffectiveEventThreatDetectionCustomModules values %j', values);
+          this._log.info(
+            'listDescendantSecurityHealthAnalyticsCustomModules values %j',
+            values,
+          );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEffectiveEventThreatDetectionCustomModules request %j', request);
+    this._log.info(
+      'listDescendantSecurityHealthAnalyticsCustomModules request %j',
+      request,
+    );
     return this.innerApiCalls
-      .listEffectiveEventThreatDetectionCustomModules(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
-      ]) => {
-        this._log.info('listEffectiveEventThreatDetectionCustomModules values %j', response);
-        return [response, input, output];
-      });
+      .listDescendantSecurityHealthAnalyticsCustomModules(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listDescendantSecurityHealthAnalyticsCustomModules values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEffectiveEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list effective custom modules, in one of the
- *   following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEffectiveEventThreatDetectionCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
-  listEffectiveEventThreatDetectionCustomModulesStream(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-      options?: CallOptions):
-    Transform{
+  /**
+   * Equivalent to `listDescendantSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDescendantSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDescendantSecurityHealthAnalyticsCustomModulesStream(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listEffectiveEventThreatDetectionCustomModules'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listEffectiveEventThreatDetectionCustomModules stream %j', request);
-    return this.descriptors.page.listEffectiveEventThreatDetectionCustomModules.createStream(
-      this.innerApiCalls.listEffectiveEventThreatDetectionCustomModules as GaxCall,
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listDescendantSecurityHealthAnalyticsCustomModules stream %j',
       request,
-      callSettings
+    );
+    return this.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.createStream(
+      this.innerApiCalls
+        .listDescendantSecurityHealthAnalyticsCustomModules as GaxCall,
+      request,
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEffectiveEventThreatDetectionCustomModules`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list effective custom modules, in one of the
- *   following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.list_effective_event_threat_detection_custom_modules.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListEffectiveEventThreatDetectionCustomModules_async
- */
-  listEffectiveEventThreatDetectionCustomModulesAsync(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule>{
+  /**
+   * Equivalent to `listDescendantSecurityHealthAnalyticsCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.list_descendant_security_health_analytics_custom_modules.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListDescendantSecurityHealthAnalyticsCustomModules_async
+   */
+  listDescendantSecurityHealthAnalyticsCustomModulesAsync(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listEffectiveEventThreatDetectionCustomModules'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listEffectiveEventThreatDetectionCustomModules iterate %j', request);
-    return this.descriptors.page.listEffectiveEventThreatDetectionCustomModules.asyncIterate(
-      this.innerApiCalls['listEffectiveEventThreatDetectionCustomModules'] as GaxCall,
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listDescendantSecurityHealthAnalyticsCustomModules iterate %j',
+      request,
+    );
+    return this.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.asyncIterate(
+      this.innerApiCalls[
+        'listDescendantSecurityHealthAnalyticsCustomModules'
+      ] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>;
+  }
+  /**
+   * Lists all effective Event Threat Detection custom modules for the
+   * given parent. This includes resident modules defined at the scope of the
+   * parent along with modules inherited from its ancestors.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEffectiveEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listEffectiveEventThreatDetectionCustomModules(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse,
+    ]
+  >;
+  listEffectiveEventThreatDetectionCustomModules(
+    request: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule
+    >,
+  ): void;
+  listEffectiveEventThreatDetectionCustomModules(
+    request: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule
+    >,
+  ): void;
+  listEffectiveEventThreatDetectionCustomModules(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listEffectiveEventThreatDetectionCustomModules values %j',
+            values,
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listEffectiveEventThreatDetectionCustomModules request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .listEffectiveEventThreatDetectionCustomModules(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listEffectiveEventThreatDetectionCustomModules values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listEffectiveEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEffectiveEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listEffectiveEventThreatDetectionCustomModulesStream(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEffectiveEventThreatDetectionCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listEffectiveEventThreatDetectionCustomModules stream %j',
+      request,
+    );
+    return this.descriptors.page.listEffectiveEventThreatDetectionCustomModules.createStream(
+      this.innerApiCalls
+        .listEffectiveEventThreatDetectionCustomModules as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listEffectiveEventThreatDetectionCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.list_effective_event_threat_detection_custom_modules.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListEffectiveEventThreatDetectionCustomModules_async
+   */
+  listEffectiveEventThreatDetectionCustomModulesAsync(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEffectiveEventThreatDetectionCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listEffectiveEventThreatDetectionCustomModules iterate %j',
+      request,
+    );
+    return this.descriptors.page.listEffectiveEventThreatDetectionCustomModules.asyncIterate(
+      this.innerApiCalls[
+        'listEffectiveEventThreatDetectionCustomModules'
+      ] as GaxCall,
+      request as {},
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule>;
   }
- /**
- * Lists all Event Threat Detection custom modules for the given organization,
- * folder, or project. This includes resident modules defined at the scope of
- * the parent along with modules inherited from ancestors.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list custom modules, in one of the following
- *   formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of modules to return. The service may return
- *   fewer than this value. If unspecified, at most 10 modules will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEventThreatDetectionCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all Event Threat Detection custom modules for the given organization,
+   * folder, or project. This includes resident modules defined at the scope of
+   * the parent along with modules inherited from ancestors.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of modules to return. The service may return
+   *   fewer than this value. If unspecified, at most 10 modules will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEventThreatDetectionCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse,
+    ]
+  >;
   listEventThreatDetectionCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+    >,
+  ): void;
   listEventThreatDetectionCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+    >,
+  ): void;
   listEventThreatDetectionCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-      protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse|null|undefined,
-      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEventThreatDetectionCustomModules values %j', values);
+          this._log.info(
+            'listEventThreatDetectionCustomModules values %j',
+            values,
+          );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
     this._log.info('listEventThreatDetectionCustomModules request %j', request);
     return this.innerApiCalls
       .listEventThreatDetectionCustomModules(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse
-      ]) => {
-        this._log.info('listEventThreatDetectionCustomModules values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listEventThreatDetectionCustomModules values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list custom modules, in one of the following
- *   formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of modules to return. The service may return
- *   fewer than this value. If unspecified, at most 10 modules will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEventThreatDetectionCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of modules to return. The service may return
+   *   fewer than this value. If unspecified, at most 10 modules will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEventThreatDetectionCustomModulesStream(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listEventThreatDetectionCustomModules'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEventThreatDetectionCustomModules stream %j', request);
     return this.descriptors.page.listEventThreatDetectionCustomModules.createStream(
       this.innerApiCalls.listEventThreatDetectionCustomModules as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEventThreatDetectionCustomModules`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list custom modules, in one of the following
- *   formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of modules to return. The service may return
- *   fewer than this value. If unspecified, at most 10 modules will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.list_event_threat_detection_custom_modules.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListEventThreatDetectionCustomModules_async
- */
+  /**
+   * Equivalent to `listEventThreatDetectionCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of modules to return. The service may return
+   *   fewer than this value. If unspecified, at most 10 modules will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.list_event_threat_detection_custom_modules.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListEventThreatDetectionCustomModules_async
+   */
   listEventThreatDetectionCustomModulesAsync(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>{
+    request?: protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listEventThreatDetectionCustomModules'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEventThreatDetectionCustomModules iterate %j', request);
     return this.descriptors.page.listEventThreatDetectionCustomModules.asyncIterate(
       this.innerApiCalls['listEventThreatDetectionCustomModules'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>;
   }
- /**
- * Lists all resident Event Threat Detection custom modules for the given
- * organization, folder, or project and its descendants.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list custom modules, in one of the following
- *   formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of modules to return. The service may return
- *   fewer than this value. If unspecified, at most 10 configs will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDescendantEventThreatDetectionCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all resident Event Threat Detection custom modules for the given
+   * organization, folder, or project and its descendants.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of modules to return. The service may return
+   *   fewer than this value. If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDescendantEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDescendantEventThreatDetectionCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse,
+    ]
+  >;
   listDescendantEventThreatDetectionCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+    >,
+  ): void;
   listDescendantEventThreatDetectionCustomModules(
-      request: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+    >,
+  ): void;
   listDescendantEventThreatDetectionCustomModules(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-      protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse|null|undefined,
-      protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDescendantEventThreatDetectionCustomModules values %j', values);
+          this._log.info(
+            'listDescendantEventThreatDetectionCustomModules values %j',
+            values,
+          );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDescendantEventThreatDetectionCustomModules request %j', request);
+    this._log.info(
+      'listDescendantEventThreatDetectionCustomModules request %j',
+      request,
+    );
     return this.innerApiCalls
-      .listDescendantEventThreatDetectionCustomModules(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse
-      ]) => {
-        this._log.info('listDescendantEventThreatDetectionCustomModules values %j', response);
-        return [response, input, output];
-      });
+      .listDescendantEventThreatDetectionCustomModules(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listDescendantEventThreatDetectionCustomModules values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDescendantEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list custom modules, in one of the following
- *   formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of modules to return. The service may return
- *   fewer than this value. If unspecified, at most 10 configs will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDescendantEventThreatDetectionCustomModulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDescendantEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of modules to return. The service may return
+   *   fewer than this value. If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDescendantEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDescendantEventThreatDetectionCustomModulesStream(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listDescendantEventThreatDetectionCustomModules'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listDescendantEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listDescendantEventThreatDetectionCustomModules stream %j', request);
-    return this.descriptors.page.listDescendantEventThreatDetectionCustomModules.createStream(
-      this.innerApiCalls.listDescendantEventThreatDetectionCustomModules as GaxCall,
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listDescendantEventThreatDetectionCustomModules stream %j',
       request,
-      callSettings
+    );
+    return this.descriptors.page.listDescendantEventThreatDetectionCustomModules.createStream(
+      this.innerApiCalls
+        .listDescendantEventThreatDetectionCustomModules as GaxCall,
+      request,
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDescendantEventThreatDetectionCustomModules`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Name of parent to list custom modules, in one of the following
- *   formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of modules to return. The service may return
- *   fewer than this value. If unspecified, at most 10 configs will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.list_descendant_event_threat_detection_custom_modules.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListDescendantEventThreatDetectionCustomModules_async
- */
+  /**
+   * Equivalent to `listDescendantEventThreatDetectionCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of modules to return. The service may return
+   *   fewer than this value. If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.list_descendant_event_threat_detection_custom_modules.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListDescendantEventThreatDetectionCustomModules_async
+   */
   listDescendantEventThreatDetectionCustomModulesAsync(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>{
+    request?: protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listDescendantEventThreatDetectionCustomModules'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listDescendantEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listDescendantEventThreatDetectionCustomModules iterate %j', request);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listDescendantEventThreatDetectionCustomModules iterate %j',
+      request,
+    );
     return this.descriptors.page.listDescendantEventThreatDetectionCustomModules.asyncIterate(
-      this.innerApiCalls['listDescendantEventThreatDetectionCustomModules'] as GaxCall,
+      this.innerApiCalls[
+        'listDescendantEventThreatDetectionCustomModules'
+      ] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>;
   }
- /**
- * Returns a list of all Security Command Center services for the given
- * parent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the parent to list Security Command Center services,
- *   in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {boolean} request.showEligibleModulesOnly
- *   Flag that, when set, is used to filter the module settings that are shown.
- *   The default setting is that all modules are shown.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSecurityCenterServicesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Returns a list of all Security Command Center services for the given
+   * parent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent to list Security Command Center services,
+   *   in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, is used to filter the module settings that are shown.
+   *   The default setting is that all modules are shown.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSecurityCenterServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSecurityCenterServices(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[],
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
-      ]>;
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[],
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse,
+    ]
+  >;
   listSecurityCenterServices(
-      request: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService
+    >,
+  ): void;
   listSecurityCenterServices(
-      request: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService>): void;
+    request: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService
+    >,
+  ): void;
   listSecurityCenterServices(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse|null|undefined,
-          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService>):
-      Promise<[
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[],
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
-      ]>|void {
+          | protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[],
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse|null|undefined,
-      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSecurityCenterServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3411,135 +4665,140 @@ export class SecurityCenterManagementClient {
     this._log.info('listSecurityCenterServices request %j', request);
     return this.innerApiCalls
       .listSecurityCenterServices(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[],
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest|null,
-        protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
-      ]) => {
-        this._log.info('listSecurityCenterServices values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[],
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse,
+        ]) => {
+          this._log.info('listSecurityCenterServices values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSecurityCenterServices`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the parent to list Security Command Center services,
- *   in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {boolean} request.showEligibleModulesOnly
- *   Flag that, when set, is used to filter the module settings that are shown.
- *   The default setting is that all modules are shown.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSecurityCenterServicesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSecurityCenterServices`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent to list Security Command Center services,
+   *   in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, is used to filter the module settings that are shown.
+   *   The default setting is that all modules are shown.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSecurityCenterServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSecurityCenterServicesStream(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSecurityCenterServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSecurityCenterServices stream %j', request);
     return this.descriptors.page.listSecurityCenterServices.createStream(
       this.innerApiCalls.listSecurityCenterServices as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSecurityCenterServices`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the parent to list Security Command Center services,
- *   in one of the following formats:
- *
- *   * `organizations/{organization}/locations/{location}`
- *   * `folders/{folder}/locations/{location}`
- *   * `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return in a single response.
- *   Default is 10, minimum is 1, maximum is 1000.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request. Provide this
- *   token to retrieve the next page of results.
- *
- *   When paginating, the rest of the request must match the request that
- *   generated the page token.
- * @param {boolean} request.showEligibleModulesOnly
- *   Flag that, when set, is used to filter the module settings that are shown.
- *   The default setting is that all modules are shown.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/security_center_management.list_security_center_services.js</caption>
- * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListSecurityCenterServices_async
- */
+  /**
+   * Equivalent to `listSecurityCenterServices`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent to list Security Command Center services,
+   *   in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, is used to filter the module settings that are shown.
+   *   The default setting is that all modules are shown.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.list_security_center_services.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListSecurityCenterServices_async
+   */
   listSecurityCenterServicesAsync(
-      request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService>{
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSecurityCenterServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSecurityCenterServices iterate %j', request);
     return this.descriptors.page.listSecurityCenterServices.asyncIterate(
       this.innerApiCalls['listSecurityCenterServices'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3574,12 +4833,11 @@ export class SecurityCenterManagementClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3612,7 +4870,7 @@ export class SecurityCenterManagementClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -3629,12 +4887,19 @@ export class SecurityCenterManagementClient {
    * @param {string} effective_event_threat_detection_custom_module
    * @returns {string} Resource name string.
    */
-  folderLocationEffectiveEventThreatDetectionCustomModulesPath(folder:string,location:string,effectiveEventThreatDetectionCustomModule:string) {
-    return this.pathTemplates.folderLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.render({
-      folder: folder,
-      location: location,
-      effective_event_threat_detection_custom_module: effectiveEventThreatDetectionCustomModule,
-    });
+  folderLocationEffectiveEventThreatDetectionCustomModulesPath(
+    folder: string,
+    location: string,
+    effectiveEventThreatDetectionCustomModule: string,
+  ) {
+    return this.pathTemplates.folderLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        effective_event_threat_detection_custom_module:
+          effectiveEventThreatDetectionCustomModule,
+      },
+    );
   }
 
   /**
@@ -3644,8 +4909,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_effectiveEventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationEffectiveEventThreatDetectionCustomModulesName(folderLocationEffectiveEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.folderLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(folderLocationEffectiveEventThreatDetectionCustomModulesName).folder;
+  matchFolderFromFolderLocationEffectiveEventThreatDetectionCustomModulesName(
+    folderLocationEffectiveEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(
+      folderLocationEffectiveEventThreatDetectionCustomModulesName,
+    ).folder;
   }
 
   /**
@@ -3655,8 +4924,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_effectiveEventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationEffectiveEventThreatDetectionCustomModulesName(folderLocationEffectiveEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.folderLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(folderLocationEffectiveEventThreatDetectionCustomModulesName).location;
+  matchLocationFromFolderLocationEffectiveEventThreatDetectionCustomModulesName(
+    folderLocationEffectiveEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(
+      folderLocationEffectiveEventThreatDetectionCustomModulesName,
+    ).location;
   }
 
   /**
@@ -3666,8 +4939,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_effectiveEventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the effective_event_threat_detection_custom_module.
    */
-  matchEffectiveEventThreatDetectionCustomModuleFromFolderLocationEffectiveEventThreatDetectionCustomModulesName(folderLocationEffectiveEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.folderLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(folderLocationEffectiveEventThreatDetectionCustomModulesName).effective_event_threat_detection_custom_module;
+  matchEffectiveEventThreatDetectionCustomModuleFromFolderLocationEffectiveEventThreatDetectionCustomModulesName(
+    folderLocationEffectiveEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(
+      folderLocationEffectiveEventThreatDetectionCustomModulesName,
+    ).effective_event_threat_detection_custom_module;
   }
 
   /**
@@ -3678,12 +4955,19 @@ export class SecurityCenterManagementClient {
    * @param {string} effective_security_health_analytics_custom_module
    * @returns {string} Resource name string.
    */
-  folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPath(folder:string,location:string,effectiveSecurityHealthAnalyticsCustomModule:string) {
-    return this.pathTemplates.folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.render({
-      folder: folder,
-      location: location,
-      effective_security_health_analytics_custom_module: effectiveSecurityHealthAnalyticsCustomModule,
-    });
+  folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPath(
+    folder: string,
+    location: string,
+    effectiveSecurityHealthAnalyticsCustomModule: string,
+  ) {
+    return this.pathTemplates.folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        effective_security_health_analytics_custom_module:
+          effectiveSecurityHealthAnalyticsCustomModule,
+      },
+    );
   }
 
   /**
@@ -3693,8 +4977,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_effectiveSecurityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationEffectiveSecurityHealthAnalyticsCustomModulesName(folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName).folder;
+  matchFolderFromFolderLocationEffectiveSecurityHealthAnalyticsCustomModulesName(
+    folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName,
+    ).folder;
   }
 
   /**
@@ -3704,8 +4992,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_effectiveSecurityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationEffectiveSecurityHealthAnalyticsCustomModulesName(folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName).location;
+  matchLocationFromFolderLocationEffectiveSecurityHealthAnalyticsCustomModulesName(
+    folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName,
+    ).location;
   }
 
   /**
@@ -3715,8 +5007,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_effectiveSecurityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the effective_security_health_analytics_custom_module.
    */
-  matchEffectiveSecurityHealthAnalyticsCustomModuleFromFolderLocationEffectiveSecurityHealthAnalyticsCustomModulesName(folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName).effective_security_health_analytics_custom_module;
+  matchEffectiveSecurityHealthAnalyticsCustomModuleFromFolderLocationEffectiveSecurityHealthAnalyticsCustomModulesName(
+    folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      folderLocationEffectiveSecurityHealthAnalyticsCustomModulesName,
+    ).effective_security_health_analytics_custom_module;
   }
 
   /**
@@ -3727,12 +5023,18 @@ export class SecurityCenterManagementClient {
    * @param {string} event_threat_detection_custom_module
    * @returns {string} Resource name string.
    */
-  folderLocationEventThreatDetectionCustomModulesPath(folder:string,location:string,eventThreatDetectionCustomModule:string) {
-    return this.pathTemplates.folderLocationEventThreatDetectionCustomModulesPathTemplate.render({
-      folder: folder,
-      location: location,
-      event_threat_detection_custom_module: eventThreatDetectionCustomModule,
-    });
+  folderLocationEventThreatDetectionCustomModulesPath(
+    folder: string,
+    location: string,
+    eventThreatDetectionCustomModule: string,
+  ) {
+    return this.pathTemplates.folderLocationEventThreatDetectionCustomModulesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        event_threat_detection_custom_module: eventThreatDetectionCustomModule,
+      },
+    );
   }
 
   /**
@@ -3742,8 +5044,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_eventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationEventThreatDetectionCustomModulesName(folderLocationEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.folderLocationEventThreatDetectionCustomModulesPathTemplate.match(folderLocationEventThreatDetectionCustomModulesName).folder;
+  matchFolderFromFolderLocationEventThreatDetectionCustomModulesName(
+    folderLocationEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationEventThreatDetectionCustomModulesPathTemplate.match(
+      folderLocationEventThreatDetectionCustomModulesName,
+    ).folder;
   }
 
   /**
@@ -3753,8 +5059,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_eventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationEventThreatDetectionCustomModulesName(folderLocationEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.folderLocationEventThreatDetectionCustomModulesPathTemplate.match(folderLocationEventThreatDetectionCustomModulesName).location;
+  matchLocationFromFolderLocationEventThreatDetectionCustomModulesName(
+    folderLocationEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationEventThreatDetectionCustomModulesPathTemplate.match(
+      folderLocationEventThreatDetectionCustomModulesName,
+    ).location;
   }
 
   /**
@@ -3764,8 +5074,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_eventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the event_threat_detection_custom_module.
    */
-  matchEventThreatDetectionCustomModuleFromFolderLocationEventThreatDetectionCustomModulesName(folderLocationEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.folderLocationEventThreatDetectionCustomModulesPathTemplate.match(folderLocationEventThreatDetectionCustomModulesName).event_threat_detection_custom_module;
+  matchEventThreatDetectionCustomModuleFromFolderLocationEventThreatDetectionCustomModulesName(
+    folderLocationEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationEventThreatDetectionCustomModulesPathTemplate.match(
+      folderLocationEventThreatDetectionCustomModulesName,
+    ).event_threat_detection_custom_module;
   }
 
   /**
@@ -3776,12 +5090,18 @@ export class SecurityCenterManagementClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  folderLocationSecurityCenterServicesPath(folder:string,location:string,service:string) {
-    return this.pathTemplates.folderLocationSecurityCenterServicesPathTemplate.render({
-      folder: folder,
-      location: location,
-      service: service,
-    });
+  folderLocationSecurityCenterServicesPath(
+    folder: string,
+    location: string,
+    service: string,
+  ) {
+    return this.pathTemplates.folderLocationSecurityCenterServicesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        service: service,
+      },
+    );
   }
 
   /**
@@ -3791,8 +5111,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_securityCenterServices resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationSecurityCenterServicesName(folderLocationSecurityCenterServicesName: string) {
-    return this.pathTemplates.folderLocationSecurityCenterServicesPathTemplate.match(folderLocationSecurityCenterServicesName).folder;
+  matchFolderFromFolderLocationSecurityCenterServicesName(
+    folderLocationSecurityCenterServicesName: string,
+  ) {
+    return this.pathTemplates.folderLocationSecurityCenterServicesPathTemplate.match(
+      folderLocationSecurityCenterServicesName,
+    ).folder;
   }
 
   /**
@@ -3802,8 +5126,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_securityCenterServices resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationSecurityCenterServicesName(folderLocationSecurityCenterServicesName: string) {
-    return this.pathTemplates.folderLocationSecurityCenterServicesPathTemplate.match(folderLocationSecurityCenterServicesName).location;
+  matchLocationFromFolderLocationSecurityCenterServicesName(
+    folderLocationSecurityCenterServicesName: string,
+  ) {
+    return this.pathTemplates.folderLocationSecurityCenterServicesPathTemplate.match(
+      folderLocationSecurityCenterServicesName,
+    ).location;
   }
 
   /**
@@ -3813,8 +5141,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_securityCenterServices resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromFolderLocationSecurityCenterServicesName(folderLocationSecurityCenterServicesName: string) {
-    return this.pathTemplates.folderLocationSecurityCenterServicesPathTemplate.match(folderLocationSecurityCenterServicesName).service;
+  matchServiceFromFolderLocationSecurityCenterServicesName(
+    folderLocationSecurityCenterServicesName: string,
+  ) {
+    return this.pathTemplates.folderLocationSecurityCenterServicesPathTemplate.match(
+      folderLocationSecurityCenterServicesName,
+    ).service;
   }
 
   /**
@@ -3825,12 +5157,19 @@ export class SecurityCenterManagementClient {
    * @param {string} security_health_analytics_custom_module
    * @returns {string} Resource name string.
    */
-  folderLocationSecurityHealthAnalyticsCustomModulesPath(folder:string,location:string,securityHealthAnalyticsCustomModule:string) {
-    return this.pathTemplates.folderLocationSecurityHealthAnalyticsCustomModulesPathTemplate.render({
-      folder: folder,
-      location: location,
-      security_health_analytics_custom_module: securityHealthAnalyticsCustomModule,
-    });
+  folderLocationSecurityHealthAnalyticsCustomModulesPath(
+    folder: string,
+    location: string,
+    securityHealthAnalyticsCustomModule: string,
+  ) {
+    return this.pathTemplates.folderLocationSecurityHealthAnalyticsCustomModulesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        security_health_analytics_custom_module:
+          securityHealthAnalyticsCustomModule,
+      },
+    );
   }
 
   /**
@@ -3840,8 +5179,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_securityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationSecurityHealthAnalyticsCustomModulesName(folderLocationSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.folderLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(folderLocationSecurityHealthAnalyticsCustomModulesName).folder;
+  matchFolderFromFolderLocationSecurityHealthAnalyticsCustomModulesName(
+    folderLocationSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      folderLocationSecurityHealthAnalyticsCustomModulesName,
+    ).folder;
   }
 
   /**
@@ -3851,8 +5194,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_securityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationSecurityHealthAnalyticsCustomModulesName(folderLocationSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.folderLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(folderLocationSecurityHealthAnalyticsCustomModulesName).location;
+  matchLocationFromFolderLocationSecurityHealthAnalyticsCustomModulesName(
+    folderLocationSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      folderLocationSecurityHealthAnalyticsCustomModulesName,
+    ).location;
   }
 
   /**
@@ -3862,8 +5209,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing folder_location_securityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the security_health_analytics_custom_module.
    */
-  matchSecurityHealthAnalyticsCustomModuleFromFolderLocationSecurityHealthAnalyticsCustomModulesName(folderLocationSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.folderLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(folderLocationSecurityHealthAnalyticsCustomModulesName).security_health_analytics_custom_module;
+  matchSecurityHealthAnalyticsCustomModuleFromFolderLocationSecurityHealthAnalyticsCustomModulesName(
+    folderLocationSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      folderLocationSecurityHealthAnalyticsCustomModulesName,
+    ).security_health_analytics_custom_module;
   }
 
   /**
@@ -3874,7 +5225,7 @@ export class SecurityCenterManagementClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  folderSourceFindingsPath(folder:string,source:string,finding:string) {
+  folderSourceFindingsPath(folder: string, source: string, finding: string) {
     return this.pathTemplates.folderSourceFindingsPathTemplate.render({
       folder: folder,
       source: source,
@@ -3890,7 +5241,9 @@ export class SecurityCenterManagementClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderSourceFindingsName(folderSourceFindingsName: string) {
-    return this.pathTemplates.folderSourceFindingsPathTemplate.match(folderSourceFindingsName).folder;
+    return this.pathTemplates.folderSourceFindingsPathTemplate.match(
+      folderSourceFindingsName,
+    ).folder;
   }
 
   /**
@@ -3901,7 +5254,9 @@ export class SecurityCenterManagementClient {
    * @returns {string} A string representing the source.
    */
   matchSourceFromFolderSourceFindingsName(folderSourceFindingsName: string) {
-    return this.pathTemplates.folderSourceFindingsPathTemplate.match(folderSourceFindingsName).source;
+    return this.pathTemplates.folderSourceFindingsPathTemplate.match(
+      folderSourceFindingsName,
+    ).source;
   }
 
   /**
@@ -3912,7 +5267,9 @@ export class SecurityCenterManagementClient {
    * @returns {string} A string representing the finding.
    */
   matchFindingFromFolderSourceFindingsName(folderSourceFindingsName: string) {
-    return this.pathTemplates.folderSourceFindingsPathTemplate.match(folderSourceFindingsName).finding;
+    return this.pathTemplates.folderSourceFindingsPathTemplate.match(
+      folderSourceFindingsName,
+    ).finding;
   }
 
   /**
@@ -3922,7 +5279,7 @@ export class SecurityCenterManagementClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3957,7 +5314,7 @@ export class SecurityCenterManagementClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization:string) {
+  organizationPath(organization: string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -3971,7 +5328,8 @@ export class SecurityCenterManagementClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName)
+      .organization;
   }
 
   /**
@@ -3981,7 +5339,7 @@ export class SecurityCenterManagementClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationPath(organization:string,location:string) {
+  organizationLocationPath(organization: string, location: string) {
     return this.pathTemplates.organizationLocationPathTemplate.render({
       organization: organization,
       location: location,
@@ -3995,8 +5353,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing OrganizationLocation resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).organization;
+  matchOrganizationFromOrganizationLocationName(
+    organizationLocationName: string,
+  ) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName,
+    ).organization;
   }
 
   /**
@@ -4007,7 +5369,9 @@ export class SecurityCenterManagementClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).location;
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName,
+    ).location;
   }
 
   /**
@@ -4018,12 +5382,19 @@ export class SecurityCenterManagementClient {
    * @param {string} effective_event_threat_detection_custom_module
    * @returns {string} Resource name string.
    */
-  organizationLocationEffectiveEventThreatDetectionCustomModulesPath(organization:string,location:string,effectiveEventThreatDetectionCustomModule:string) {
-    return this.pathTemplates.organizationLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.render({
-      organization: organization,
-      location: location,
-      effective_event_threat_detection_custom_module: effectiveEventThreatDetectionCustomModule,
-    });
+  organizationLocationEffectiveEventThreatDetectionCustomModulesPath(
+    organization: string,
+    location: string,
+    effectiveEventThreatDetectionCustomModule: string,
+  ) {
+    return this.pathTemplates.organizationLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        effective_event_threat_detection_custom_module:
+          effectiveEventThreatDetectionCustomModule,
+      },
+    );
   }
 
   /**
@@ -4033,8 +5404,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_effectiveEventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationEffectiveEventThreatDetectionCustomModulesName(organizationLocationEffectiveEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(organizationLocationEffectiveEventThreatDetectionCustomModulesName).organization;
+  matchOrganizationFromOrganizationLocationEffectiveEventThreatDetectionCustomModulesName(
+    organizationLocationEffectiveEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(
+      organizationLocationEffectiveEventThreatDetectionCustomModulesName,
+    ).organization;
   }
 
   /**
@@ -4044,8 +5419,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_effectiveEventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationEffectiveEventThreatDetectionCustomModulesName(organizationLocationEffectiveEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(organizationLocationEffectiveEventThreatDetectionCustomModulesName).location;
+  matchLocationFromOrganizationLocationEffectiveEventThreatDetectionCustomModulesName(
+    organizationLocationEffectiveEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(
+      organizationLocationEffectiveEventThreatDetectionCustomModulesName,
+    ).location;
   }
 
   /**
@@ -4055,8 +5434,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_effectiveEventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the effective_event_threat_detection_custom_module.
    */
-  matchEffectiveEventThreatDetectionCustomModuleFromOrganizationLocationEffectiveEventThreatDetectionCustomModulesName(organizationLocationEffectiveEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(organizationLocationEffectiveEventThreatDetectionCustomModulesName).effective_event_threat_detection_custom_module;
+  matchEffectiveEventThreatDetectionCustomModuleFromOrganizationLocationEffectiveEventThreatDetectionCustomModulesName(
+    organizationLocationEffectiveEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(
+      organizationLocationEffectiveEventThreatDetectionCustomModulesName,
+    ).effective_event_threat_detection_custom_module;
   }
 
   /**
@@ -4067,12 +5450,19 @@ export class SecurityCenterManagementClient {
    * @param {string} effective_security_health_analytics_custom_module
    * @returns {string} Resource name string.
    */
-  organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPath(organization:string,location:string,effectiveSecurityHealthAnalyticsCustomModule:string) {
-    return this.pathTemplates.organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.render({
-      organization: organization,
-      location: location,
-      effective_security_health_analytics_custom_module: effectiveSecurityHealthAnalyticsCustomModule,
-    });
+  organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPath(
+    organization: string,
+    location: string,
+    effectiveSecurityHealthAnalyticsCustomModule: string,
+  ) {
+    return this.pathTemplates.organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        effective_security_health_analytics_custom_module:
+          effectiveSecurityHealthAnalyticsCustomModule,
+      },
+    );
   }
 
   /**
@@ -4082,8 +5472,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_effectiveSecurityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName(organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName).organization;
+  matchOrganizationFromOrganizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName(
+    organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName,
+    ).organization;
   }
 
   /**
@@ -4093,8 +5487,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_effectiveSecurityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName(organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName).location;
+  matchLocationFromOrganizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName(
+    organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName,
+    ).location;
   }
 
   /**
@@ -4104,8 +5502,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_effectiveSecurityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the effective_security_health_analytics_custom_module.
    */
-  matchEffectiveSecurityHealthAnalyticsCustomModuleFromOrganizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName(organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName).effective_security_health_analytics_custom_module;
+  matchEffectiveSecurityHealthAnalyticsCustomModuleFromOrganizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName(
+    organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      organizationLocationEffectiveSecurityHealthAnalyticsCustomModulesName,
+    ).effective_security_health_analytics_custom_module;
   }
 
   /**
@@ -4116,12 +5518,18 @@ export class SecurityCenterManagementClient {
    * @param {string} event_threat_detection_custom_module
    * @returns {string} Resource name string.
    */
-  organizationLocationEventThreatDetectionCustomModulesPath(organization:string,location:string,eventThreatDetectionCustomModule:string) {
-    return this.pathTemplates.organizationLocationEventThreatDetectionCustomModulesPathTemplate.render({
-      organization: organization,
-      location: location,
-      event_threat_detection_custom_module: eventThreatDetectionCustomModule,
-    });
+  organizationLocationEventThreatDetectionCustomModulesPath(
+    organization: string,
+    location: string,
+    eventThreatDetectionCustomModule: string,
+  ) {
+    return this.pathTemplates.organizationLocationEventThreatDetectionCustomModulesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        event_threat_detection_custom_module: eventThreatDetectionCustomModule,
+      },
+    );
   }
 
   /**
@@ -4131,8 +5539,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_eventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationEventThreatDetectionCustomModulesName(organizationLocationEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationEventThreatDetectionCustomModulesPathTemplate.match(organizationLocationEventThreatDetectionCustomModulesName).organization;
+  matchOrganizationFromOrganizationLocationEventThreatDetectionCustomModulesName(
+    organizationLocationEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationEventThreatDetectionCustomModulesPathTemplate.match(
+      organizationLocationEventThreatDetectionCustomModulesName,
+    ).organization;
   }
 
   /**
@@ -4142,8 +5554,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_eventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationEventThreatDetectionCustomModulesName(organizationLocationEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationEventThreatDetectionCustomModulesPathTemplate.match(organizationLocationEventThreatDetectionCustomModulesName).location;
+  matchLocationFromOrganizationLocationEventThreatDetectionCustomModulesName(
+    organizationLocationEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationEventThreatDetectionCustomModulesPathTemplate.match(
+      organizationLocationEventThreatDetectionCustomModulesName,
+    ).location;
   }
 
   /**
@@ -4153,8 +5569,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_eventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the event_threat_detection_custom_module.
    */
-  matchEventThreatDetectionCustomModuleFromOrganizationLocationEventThreatDetectionCustomModulesName(organizationLocationEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationEventThreatDetectionCustomModulesPathTemplate.match(organizationLocationEventThreatDetectionCustomModulesName).event_threat_detection_custom_module;
+  matchEventThreatDetectionCustomModuleFromOrganizationLocationEventThreatDetectionCustomModulesName(
+    organizationLocationEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationEventThreatDetectionCustomModulesPathTemplate.match(
+      organizationLocationEventThreatDetectionCustomModulesName,
+    ).event_threat_detection_custom_module;
   }
 
   /**
@@ -4165,12 +5585,18 @@ export class SecurityCenterManagementClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityCenterServicesPath(organization:string,location:string,service:string) {
-    return this.pathTemplates.organizationLocationSecurityCenterServicesPathTemplate.render({
-      organization: organization,
-      location: location,
-      service: service,
-    });
+  organizationLocationSecurityCenterServicesPath(
+    organization: string,
+    location: string,
+    service: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityCenterServicesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        service: service,
+      },
+    );
   }
 
   /**
@@ -4180,8 +5606,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_securityCenterServices resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityCenterServicesName(organizationLocationSecurityCenterServicesName: string) {
-    return this.pathTemplates.organizationLocationSecurityCenterServicesPathTemplate.match(organizationLocationSecurityCenterServicesName).organization;
+  matchOrganizationFromOrganizationLocationSecurityCenterServicesName(
+    organizationLocationSecurityCenterServicesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityCenterServicesPathTemplate.match(
+      organizationLocationSecurityCenterServicesName,
+    ).organization;
   }
 
   /**
@@ -4191,8 +5621,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_securityCenterServices resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityCenterServicesName(organizationLocationSecurityCenterServicesName: string) {
-    return this.pathTemplates.organizationLocationSecurityCenterServicesPathTemplate.match(organizationLocationSecurityCenterServicesName).location;
+  matchLocationFromOrganizationLocationSecurityCenterServicesName(
+    organizationLocationSecurityCenterServicesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityCenterServicesPathTemplate.match(
+      organizationLocationSecurityCenterServicesName,
+    ).location;
   }
 
   /**
@@ -4202,8 +5636,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_securityCenterServices resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromOrganizationLocationSecurityCenterServicesName(organizationLocationSecurityCenterServicesName: string) {
-    return this.pathTemplates.organizationLocationSecurityCenterServicesPathTemplate.match(organizationLocationSecurityCenterServicesName).service;
+  matchServiceFromOrganizationLocationSecurityCenterServicesName(
+    organizationLocationSecurityCenterServicesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityCenterServicesPathTemplate.match(
+      organizationLocationSecurityCenterServicesName,
+    ).service;
   }
 
   /**
@@ -4214,12 +5652,19 @@ export class SecurityCenterManagementClient {
    * @param {string} security_health_analytics_custom_module
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityHealthAnalyticsCustomModulesPath(organization:string,location:string,securityHealthAnalyticsCustomModule:string) {
-    return this.pathTemplates.organizationLocationSecurityHealthAnalyticsCustomModulesPathTemplate.render({
-      organization: organization,
-      location: location,
-      security_health_analytics_custom_module: securityHealthAnalyticsCustomModule,
-    });
+  organizationLocationSecurityHealthAnalyticsCustomModulesPath(
+    organization: string,
+    location: string,
+    securityHealthAnalyticsCustomModule: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityHealthAnalyticsCustomModulesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_health_analytics_custom_module:
+          securityHealthAnalyticsCustomModule,
+      },
+    );
   }
 
   /**
@@ -4229,8 +5674,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_securityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityHealthAnalyticsCustomModulesName(organizationLocationSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(organizationLocationSecurityHealthAnalyticsCustomModulesName).organization;
+  matchOrganizationFromOrganizationLocationSecurityHealthAnalyticsCustomModulesName(
+    organizationLocationSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      organizationLocationSecurityHealthAnalyticsCustomModulesName,
+    ).organization;
   }
 
   /**
@@ -4240,8 +5689,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_securityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityHealthAnalyticsCustomModulesName(organizationLocationSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(organizationLocationSecurityHealthAnalyticsCustomModulesName).location;
+  matchLocationFromOrganizationLocationSecurityHealthAnalyticsCustomModulesName(
+    organizationLocationSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      organizationLocationSecurityHealthAnalyticsCustomModulesName,
+    ).location;
   }
 
   /**
@@ -4251,8 +5704,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_location_securityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the security_health_analytics_custom_module.
    */
-  matchSecurityHealthAnalyticsCustomModuleFromOrganizationLocationSecurityHealthAnalyticsCustomModulesName(organizationLocationSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.organizationLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(organizationLocationSecurityHealthAnalyticsCustomModulesName).security_health_analytics_custom_module;
+  matchSecurityHealthAnalyticsCustomModuleFromOrganizationLocationSecurityHealthAnalyticsCustomModulesName(
+    organizationLocationSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      organizationLocationSecurityHealthAnalyticsCustomModulesName,
+    ).security_health_analytics_custom_module;
   }
 
   /**
@@ -4263,7 +5720,11 @@ export class SecurityCenterManagementClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  organizationSourceFindingsPath(organization:string,source:string,finding:string) {
+  organizationSourceFindingsPath(
+    organization: string,
+    source: string,
+    finding: string,
+  ) {
     return this.pathTemplates.organizationSourceFindingsPathTemplate.render({
       organization: organization,
       source: source,
@@ -4278,8 +5739,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_source_findings resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSourceFindingsName(organizationSourceFindingsName: string) {
-    return this.pathTemplates.organizationSourceFindingsPathTemplate.match(organizationSourceFindingsName).organization;
+  matchOrganizationFromOrganizationSourceFindingsName(
+    organizationSourceFindingsName: string,
+  ) {
+    return this.pathTemplates.organizationSourceFindingsPathTemplate.match(
+      organizationSourceFindingsName,
+    ).organization;
   }
 
   /**
@@ -4289,8 +5754,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_source_findings resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromOrganizationSourceFindingsName(organizationSourceFindingsName: string) {
-    return this.pathTemplates.organizationSourceFindingsPathTemplate.match(organizationSourceFindingsName).source;
+  matchSourceFromOrganizationSourceFindingsName(
+    organizationSourceFindingsName: string,
+  ) {
+    return this.pathTemplates.organizationSourceFindingsPathTemplate.match(
+      organizationSourceFindingsName,
+    ).source;
   }
 
   /**
@@ -4300,8 +5769,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing organization_source_findings resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromOrganizationSourceFindingsName(organizationSourceFindingsName: string) {
-    return this.pathTemplates.organizationSourceFindingsPathTemplate.match(organizationSourceFindingsName).finding;
+  matchFindingFromOrganizationSourceFindingsName(
+    organizationSourceFindingsName: string,
+  ) {
+    return this.pathTemplates.organizationSourceFindingsPathTemplate.match(
+      organizationSourceFindingsName,
+    ).finding;
   }
 
   /**
@@ -4310,7 +5783,7 @@ export class SecurityCenterManagementClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -4335,12 +5808,19 @@ export class SecurityCenterManagementClient {
    * @param {string} effective_event_threat_detection_custom_module
    * @returns {string} Resource name string.
    */
-  projectLocationEffectiveEventThreatDetectionCustomModulesPath(project:string,location:string,effectiveEventThreatDetectionCustomModule:string) {
-    return this.pathTemplates.projectLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.render({
-      project: project,
-      location: location,
-      effective_event_threat_detection_custom_module: effectiveEventThreatDetectionCustomModule,
-    });
+  projectLocationEffectiveEventThreatDetectionCustomModulesPath(
+    project: string,
+    location: string,
+    effectiveEventThreatDetectionCustomModule: string,
+  ) {
+    return this.pathTemplates.projectLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        effective_event_threat_detection_custom_module:
+          effectiveEventThreatDetectionCustomModule,
+      },
+    );
   }
 
   /**
@@ -4350,8 +5830,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_effectiveEventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationEffectiveEventThreatDetectionCustomModulesName(projectLocationEffectiveEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.projectLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(projectLocationEffectiveEventThreatDetectionCustomModulesName).project;
+  matchProjectFromProjectLocationEffectiveEventThreatDetectionCustomModulesName(
+    projectLocationEffectiveEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(
+      projectLocationEffectiveEventThreatDetectionCustomModulesName,
+    ).project;
   }
 
   /**
@@ -4361,8 +5845,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_effectiveEventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationEffectiveEventThreatDetectionCustomModulesName(projectLocationEffectiveEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.projectLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(projectLocationEffectiveEventThreatDetectionCustomModulesName).location;
+  matchLocationFromProjectLocationEffectiveEventThreatDetectionCustomModulesName(
+    projectLocationEffectiveEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(
+      projectLocationEffectiveEventThreatDetectionCustomModulesName,
+    ).location;
   }
 
   /**
@@ -4372,8 +5860,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_effectiveEventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the effective_event_threat_detection_custom_module.
    */
-  matchEffectiveEventThreatDetectionCustomModuleFromProjectLocationEffectiveEventThreatDetectionCustomModulesName(projectLocationEffectiveEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.projectLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(projectLocationEffectiveEventThreatDetectionCustomModulesName).effective_event_threat_detection_custom_module;
+  matchEffectiveEventThreatDetectionCustomModuleFromProjectLocationEffectiveEventThreatDetectionCustomModulesName(
+    projectLocationEffectiveEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationEffectiveEventThreatDetectionCustomModulesPathTemplate.match(
+      projectLocationEffectiveEventThreatDetectionCustomModulesName,
+    ).effective_event_threat_detection_custom_module;
   }
 
   /**
@@ -4384,12 +5876,19 @@ export class SecurityCenterManagementClient {
    * @param {string} effective_security_health_analytics_custom_module
    * @returns {string} Resource name string.
    */
-  projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPath(project:string,location:string,effectiveSecurityHealthAnalyticsCustomModule:string) {
-    return this.pathTemplates.projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.render({
-      project: project,
-      location: location,
-      effective_security_health_analytics_custom_module: effectiveSecurityHealthAnalyticsCustomModule,
-    });
+  projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPath(
+    project: string,
+    location: string,
+    effectiveSecurityHealthAnalyticsCustomModule: string,
+  ) {
+    return this.pathTemplates.projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        effective_security_health_analytics_custom_module:
+          effectiveSecurityHealthAnalyticsCustomModule,
+      },
+    );
   }
 
   /**
@@ -4399,8 +5898,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_effectiveSecurityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationEffectiveSecurityHealthAnalyticsCustomModulesName(projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName).project;
+  matchProjectFromProjectLocationEffectiveSecurityHealthAnalyticsCustomModulesName(
+    projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName,
+    ).project;
   }
 
   /**
@@ -4410,8 +5913,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_effectiveSecurityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationEffectiveSecurityHealthAnalyticsCustomModulesName(projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName).location;
+  matchLocationFromProjectLocationEffectiveSecurityHealthAnalyticsCustomModulesName(
+    projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName,
+    ).location;
   }
 
   /**
@@ -4421,8 +5928,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_effectiveSecurityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the effective_security_health_analytics_custom_module.
    */
-  matchEffectiveSecurityHealthAnalyticsCustomModuleFromProjectLocationEffectiveSecurityHealthAnalyticsCustomModulesName(projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName).effective_security_health_analytics_custom_module;
+  matchEffectiveSecurityHealthAnalyticsCustomModuleFromProjectLocationEffectiveSecurityHealthAnalyticsCustomModulesName(
+    projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationEffectiveSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      projectLocationEffectiveSecurityHealthAnalyticsCustomModulesName,
+    ).effective_security_health_analytics_custom_module;
   }
 
   /**
@@ -4433,12 +5944,18 @@ export class SecurityCenterManagementClient {
    * @param {string} event_threat_detection_custom_module
    * @returns {string} Resource name string.
    */
-  projectLocationEventThreatDetectionCustomModulesPath(project:string,location:string,eventThreatDetectionCustomModule:string) {
-    return this.pathTemplates.projectLocationEventThreatDetectionCustomModulesPathTemplate.render({
-      project: project,
-      location: location,
-      event_threat_detection_custom_module: eventThreatDetectionCustomModule,
-    });
+  projectLocationEventThreatDetectionCustomModulesPath(
+    project: string,
+    location: string,
+    eventThreatDetectionCustomModule: string,
+  ) {
+    return this.pathTemplates.projectLocationEventThreatDetectionCustomModulesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        event_threat_detection_custom_module: eventThreatDetectionCustomModule,
+      },
+    );
   }
 
   /**
@@ -4448,8 +5965,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_eventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationEventThreatDetectionCustomModulesName(projectLocationEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.projectLocationEventThreatDetectionCustomModulesPathTemplate.match(projectLocationEventThreatDetectionCustomModulesName).project;
+  matchProjectFromProjectLocationEventThreatDetectionCustomModulesName(
+    projectLocationEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationEventThreatDetectionCustomModulesPathTemplate.match(
+      projectLocationEventThreatDetectionCustomModulesName,
+    ).project;
   }
 
   /**
@@ -4459,8 +5980,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_eventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationEventThreatDetectionCustomModulesName(projectLocationEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.projectLocationEventThreatDetectionCustomModulesPathTemplate.match(projectLocationEventThreatDetectionCustomModulesName).location;
+  matchLocationFromProjectLocationEventThreatDetectionCustomModulesName(
+    projectLocationEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationEventThreatDetectionCustomModulesPathTemplate.match(
+      projectLocationEventThreatDetectionCustomModulesName,
+    ).location;
   }
 
   /**
@@ -4470,8 +5995,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_eventThreatDetectionCustomModules resource.
    * @returns {string} A string representing the event_threat_detection_custom_module.
    */
-  matchEventThreatDetectionCustomModuleFromProjectLocationEventThreatDetectionCustomModulesName(projectLocationEventThreatDetectionCustomModulesName: string) {
-    return this.pathTemplates.projectLocationEventThreatDetectionCustomModulesPathTemplate.match(projectLocationEventThreatDetectionCustomModulesName).event_threat_detection_custom_module;
+  matchEventThreatDetectionCustomModuleFromProjectLocationEventThreatDetectionCustomModulesName(
+    projectLocationEventThreatDetectionCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationEventThreatDetectionCustomModulesPathTemplate.match(
+      projectLocationEventThreatDetectionCustomModulesName,
+    ).event_threat_detection_custom_module;
   }
 
   /**
@@ -4482,12 +6011,18 @@ export class SecurityCenterManagementClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityCenterServicesPath(project:string,location:string,service:string) {
-    return this.pathTemplates.projectLocationSecurityCenterServicesPathTemplate.render({
-      project: project,
-      location: location,
-      service: service,
-    });
+  projectLocationSecurityCenterServicesPath(
+    project: string,
+    location: string,
+    service: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityCenterServicesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        service: service,
+      },
+    );
   }
 
   /**
@@ -4497,8 +6032,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_securityCenterServices resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityCenterServicesName(projectLocationSecurityCenterServicesName: string) {
-    return this.pathTemplates.projectLocationSecurityCenterServicesPathTemplate.match(projectLocationSecurityCenterServicesName).project;
+  matchProjectFromProjectLocationSecurityCenterServicesName(
+    projectLocationSecurityCenterServicesName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityCenterServicesPathTemplate.match(
+      projectLocationSecurityCenterServicesName,
+    ).project;
   }
 
   /**
@@ -4508,8 +6047,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_securityCenterServices resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityCenterServicesName(projectLocationSecurityCenterServicesName: string) {
-    return this.pathTemplates.projectLocationSecurityCenterServicesPathTemplate.match(projectLocationSecurityCenterServicesName).location;
+  matchLocationFromProjectLocationSecurityCenterServicesName(
+    projectLocationSecurityCenterServicesName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityCenterServicesPathTemplate.match(
+      projectLocationSecurityCenterServicesName,
+    ).location;
   }
 
   /**
@@ -4519,8 +6062,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_securityCenterServices resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromProjectLocationSecurityCenterServicesName(projectLocationSecurityCenterServicesName: string) {
-    return this.pathTemplates.projectLocationSecurityCenterServicesPathTemplate.match(projectLocationSecurityCenterServicesName).service;
+  matchServiceFromProjectLocationSecurityCenterServicesName(
+    projectLocationSecurityCenterServicesName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityCenterServicesPathTemplate.match(
+      projectLocationSecurityCenterServicesName,
+    ).service;
   }
 
   /**
@@ -4531,12 +6078,19 @@ export class SecurityCenterManagementClient {
    * @param {string} security_health_analytics_custom_module
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityHealthAnalyticsCustomModulesPath(project:string,location:string,securityHealthAnalyticsCustomModule:string) {
-    return this.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulesPathTemplate.render({
-      project: project,
-      location: location,
-      security_health_analytics_custom_module: securityHealthAnalyticsCustomModule,
-    });
+  projectLocationSecurityHealthAnalyticsCustomModulesPath(
+    project: string,
+    location: string,
+    securityHealthAnalyticsCustomModule: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_health_analytics_custom_module:
+          securityHealthAnalyticsCustomModule,
+      },
+    );
   }
 
   /**
@@ -4546,8 +6100,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_securityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityHealthAnalyticsCustomModulesName(projectLocationSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(projectLocationSecurityHealthAnalyticsCustomModulesName).project;
+  matchProjectFromProjectLocationSecurityHealthAnalyticsCustomModulesName(
+    projectLocationSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      projectLocationSecurityHealthAnalyticsCustomModulesName,
+    ).project;
   }
 
   /**
@@ -4557,8 +6115,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_securityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityHealthAnalyticsCustomModulesName(projectLocationSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(projectLocationSecurityHealthAnalyticsCustomModulesName).location;
+  matchLocationFromProjectLocationSecurityHealthAnalyticsCustomModulesName(
+    projectLocationSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      projectLocationSecurityHealthAnalyticsCustomModulesName,
+    ).location;
   }
 
   /**
@@ -4568,8 +6130,12 @@ export class SecurityCenterManagementClient {
    *   A fully-qualified path representing project_location_securityHealthAnalyticsCustomModules resource.
    * @returns {string} A string representing the security_health_analytics_custom_module.
    */
-  matchSecurityHealthAnalyticsCustomModuleFromProjectLocationSecurityHealthAnalyticsCustomModulesName(projectLocationSecurityHealthAnalyticsCustomModulesName: string) {
-    return this.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(projectLocationSecurityHealthAnalyticsCustomModulesName).security_health_analytics_custom_module;
+  matchSecurityHealthAnalyticsCustomModuleFromProjectLocationSecurityHealthAnalyticsCustomModulesName(
+    projectLocationSecurityHealthAnalyticsCustomModulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulesPathTemplate.match(
+      projectLocationSecurityHealthAnalyticsCustomModulesName,
+    ).security_health_analytics_custom_module;
   }
 
   /**
@@ -4580,7 +6146,7 @@ export class SecurityCenterManagementClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  projectSourceFindingsPath(project:string,source:string,finding:string) {
+  projectSourceFindingsPath(project: string, source: string, finding: string) {
     return this.pathTemplates.projectSourceFindingsPathTemplate.render({
       project: project,
       source: source,
@@ -4596,7 +6162,9 @@ export class SecurityCenterManagementClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectSourceFindingsName(projectSourceFindingsName: string) {
-    return this.pathTemplates.projectSourceFindingsPathTemplate.match(projectSourceFindingsName).project;
+    return this.pathTemplates.projectSourceFindingsPathTemplate.match(
+      projectSourceFindingsName,
+    ).project;
   }
 
   /**
@@ -4607,7 +6175,9 @@ export class SecurityCenterManagementClient {
    * @returns {string} A string representing the source.
    */
   matchSourceFromProjectSourceFindingsName(projectSourceFindingsName: string) {
-    return this.pathTemplates.projectSourceFindingsPathTemplate.match(projectSourceFindingsName).source;
+    return this.pathTemplates.projectSourceFindingsPathTemplate.match(
+      projectSourceFindingsName,
+    ).source;
   }
 
   /**
@@ -4618,7 +6188,9 @@ export class SecurityCenterManagementClient {
    * @returns {string} A string representing the finding.
    */
   matchFindingFromProjectSourceFindingsName(projectSourceFindingsName: string) {
-    return this.pathTemplates.projectSourceFindingsPathTemplate.match(projectSourceFindingsName).finding;
+    return this.pathTemplates.projectSourceFindingsPathTemplate.match(
+      projectSourceFindingsName,
+    ).finding;
   }
 
   /**
@@ -4629,11 +6201,13 @@ export class SecurityCenterManagementClient {
    */
   close(): Promise<void> {
     if (this.securityCenterManagementStub && !this._terminated) {
-      return this.securityCenterManagementStub.then(stub => {
+      return this.securityCenterManagementStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

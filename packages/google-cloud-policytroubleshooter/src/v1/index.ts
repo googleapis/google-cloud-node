@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {IamCheckerClient} from './iam_checker_client';
+export { IamCheckerClient } from './iam_checker_client';

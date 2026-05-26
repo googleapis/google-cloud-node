@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-storage",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "Client for the BigQuery Storage API",
   "repository": {
     "type": "git",
@@ -38,10 +38,11 @@
     "extend": "^3.0.2",
     "google-auth-library": "^10.0.0",
     "google-gax": "^5.0.0",
-    "long": "^5.2.0"
+    "long": "^5.2.0",
+    "protobufjs": "^7.5.5"
   },
   "peerDependencies": {
-    "protobufjs": "7.2.4 - 7.5.0"
+    "protobufjs": "^7.5.5"
   },
   "devDependencies": {
     "@google-cloud/bigquery": "^8.0.0",

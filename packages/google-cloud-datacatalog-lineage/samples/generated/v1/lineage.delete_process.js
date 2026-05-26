@@ -33,7 +33,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  If set to true and the process is not found, the request
+   *  Optional. If set to true and the process is not found, the request
    *  succeeds but the server doesn't perform any actions.
    */
   // const allowMissing = true

@@ -688,6 +688,102 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_Advice_Capacity_async",
+      "title": "AcceleratorTypes capacity Sample",
+      "origin": "API_DEFINITION",
+      "description": " Advice on making real-time decisions (such as choosing zone or machine types) during deployment to maximize your chances of obtaining capacity.",
+      "canonical": true,
+      "file": "advice.capacity.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Capacity",
+        "fullName": "google.cloud.compute.v1beta.Advice.Capacity",
+        "async": true,
+        "parameters": [
+          {
+            "name": "capacity_advice_request_resource",
+            "type": ".google.cloud.compute.v1beta.CapacityAdviceRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.CapacityAdviceResponse",
+        "client": {
+          "shortName": "AdviceClient",
+          "fullName": "google.cloud.compute.v1beta.AdviceClient"
+        },
+        "method": {
+          "shortName": "Capacity",
+          "fullName": "google.cloud.compute.v1beta.Advice.Capacity",
+          "service": {
+            "shortName": "Advice",
+            "fullName": "google.cloud.compute.v1beta.Advice"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_Advice_CapacityHistory_async",
+      "title": "AcceleratorTypes capacityHistory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the capacity history.",
+      "canonical": true,
+      "file": "advice.capacity_history.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CapacityHistory",
+        "fullName": "google.cloud.compute.v1beta.Advice.CapacityHistory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "capacity_history_request_resource",
+            "type": ".google.cloud.compute.v1beta.CapacityHistoryRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.CapacityHistoryResponse",
+        "client": {
+          "shortName": "AdviceClient",
+          "fullName": "google.cloud.compute.v1beta.AdviceClient"
+        },
+        "method": {
+          "shortName": "CapacityHistory",
+          "fullName": "google.cloud.compute.v1beta.Advice.CapacityHistory",
+          "service": {
+            "shortName": "Advice",
+            "fullName": "google.cloud.compute.v1beta.Advice"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_Autoscalers_AggregatedList_async",
       "title": "AcceleratorTypes aggregatedList Sample",
       "origin": "API_DEFINITION",
@@ -4068,6 +4164,62 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_Disks_UpdateKmsKey_async",
+      "title": "AcceleratorTypes updateKmsKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rotates the customer-managed encryption key to the latest version for the specified persistent disk.",
+      "canonical": true,
+      "file": "disks.update_kms_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKmsKey",
+        "fullName": "google.cloud.compute.v1beta.Disks.UpdateKmsKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "disk",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "disk_update_kms_key_request_resource",
+            "type": ".google.cloud.compute.v1beta.DiskUpdateKmsKeyRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "DisksClient",
+          "fullName": "google.cloud.compute.v1beta.DisksClient"
+        },
+        "method": {
+          "shortName": "UpdateKmsKey",
+          "fullName": "google.cloud.compute.v1beta.Disks.UpdateKmsKey",
+          "service": {
+            "shortName": "Disks",
+            "fullName": "google.cloud.compute.v1beta.Disks"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_DiskSettingsService_Get_async",
       "title": "AcceleratorTypes get Sample",
       "origin": "API_DEFINITION",
@@ -6166,7 +6318,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 63,
+          "end": 67,
           "type": "FULL"
         }
       ],
@@ -6185,6 +6337,10 @@
           },
           {
             "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
             "type": "TYPE_STRING"
           }
         ],
@@ -7342,7 +7498,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 58,
+          "end": 62,
           "type": "FULL"
         }
       ],
@@ -7357,6 +7513,10 @@
           },
           {
             "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
             "type": "TYPE_STRING"
           }
         ],
@@ -10638,7 +10798,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 78,
+          "end": 83,
           "type": "FULL"
         }
       ],
@@ -10650,6 +10810,10 @@
           {
             "name": "instance_group_manager",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -10690,7 +10854,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 83,
+          "end": 88,
           "type": "FULL"
         }
       ],
@@ -10706,6 +10870,10 @@
           {
             "name": "instance_group_managers_delete_instances_request_resource",
             "type": ".google.cloud.compute.v1beta.InstanceGroupManagersDeleteInstancesRequest"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -11326,7 +11494,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 83,
+          "end": 88,
           "type": "FULL"
         }
       ],
@@ -11342,6 +11510,10 @@
           {
             "name": "instance_group_managers_recreate_instances_request_resource",
             "type": ".google.cloud.compute.v1beta.InstanceGroupManagersRecreateInstancesRequest"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -11774,7 +11946,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 83,
+          "end": 88,
           "type": "FULL"
         }
       ],
@@ -11790,6 +11962,10 @@
           {
             "name": "instance_group_managers_stop_instances_request_resource",
             "type": ".google.cloud.compute.v1beta.InstanceGroupManagersStopInstancesRequest"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -19220,6 +19396,102 @@
         "method": {
           "shortName": "Get",
           "fullName": "google.cloud.compute.v1beta.LicenseCodes.Get",
+          "service": {
+            "shortName": "LicenseCodes",
+            "fullName": "google.cloud.compute.v1beta.LicenseCodes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_LicenseCodes_GetIamPolicy_async",
+      "title": "AcceleratorTypes getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.  *Caution* This resource is intended for use only by third-party partners who are creatingCloud Marketplace images.",
+      "canonical": true,
+      "file": "license_codes.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.compute.v1beta.LicenseCodes.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "options_requested_policy_version",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Policy",
+        "client": {
+          "shortName": "LicenseCodesClient",
+          "fullName": "google.cloud.compute.v1beta.LicenseCodesClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.compute.v1beta.LicenseCodes.GetIamPolicy",
+          "service": {
+            "shortName": "LicenseCodes",
+            "fullName": "google.cloud.compute.v1beta.LicenseCodes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_LicenseCodes_SetIamPolicy_async",
+      "title": "AcceleratorTypes setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy on the specified resource. Replaces any existing policy.  *Caution* This resource is intended for use only by third-party partners who are creatingCloud Marketplace images.",
+      "canonical": true,
+      "file": "license_codes.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.compute.v1beta.LicenseCodes.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_set_policy_request_resource",
+            "type": ".google.cloud.compute.v1beta.GlobalSetPolicyRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Policy",
+        "client": {
+          "shortName": "LicenseCodesClient",
+          "fullName": "google.cloud.compute.v1beta.LicenseCodesClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.compute.v1beta.LicenseCodes.SetIamPolicy",
           "service": {
             "shortName": "LicenseCodes",
             "fullName": "google.cloud.compute.v1beta.LicenseCodes"
@@ -29908,6 +30180,54 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_RegionCompositeHealthChecks_GetHealth_async",
+      "title": "AcceleratorTypes getHealth Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the most recent health check results for this regional CompositeHealthCheck.",
+      "canonical": true,
+      "file": "region_composite_health_checks.get_health.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetHealth",
+        "fullName": "google.cloud.compute.v1beta.RegionCompositeHealthChecks.GetHealth",
+        "async": true,
+        "parameters": [
+          {
+            "name": "composite_health_check",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.CompositeHealthCheckHealth",
+        "client": {
+          "shortName": "RegionCompositeHealthChecksClient",
+          "fullName": "google.cloud.compute.v1beta.RegionCompositeHealthChecksClient"
+        },
+        "method": {
+          "shortName": "GetHealth",
+          "fullName": "google.cloud.compute.v1beta.RegionCompositeHealthChecks.GetHealth",
+          "service": {
+            "shortName": "RegionCompositeHealthChecks",
+            "fullName": "google.cloud.compute.v1beta.RegionCompositeHealthChecks"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_RegionCompositeHealthChecks_Insert_async",
       "title": "AcceleratorTypes insert Sample",
       "origin": "API_DEFINITION",
@@ -31056,6 +31376,62 @@
         "method": {
           "shortName": "Update",
           "fullName": "google.cloud.compute.v1beta.RegionDisks.Update",
+          "service": {
+            "shortName": "RegionDisks",
+            "fullName": "google.cloud.compute.v1beta.RegionDisks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionDisks_UpdateKmsKey_async",
+      "title": "AcceleratorTypes updateKmsKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rotates the customer-managed encryption key to the latest version for the specified persistent disk.",
+      "canonical": true,
+      "file": "region_disks.update_kms_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKmsKey",
+        "fullName": "google.cloud.compute.v1beta.RegionDisks.UpdateKmsKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "disk",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_disk_update_kms_key_request_resource",
+            "type": ".google.cloud.compute.v1beta.RegionDiskUpdateKmsKeyRequest"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionDisksClient",
+          "fullName": "google.cloud.compute.v1beta.RegionDisksClient"
+        },
+        "method": {
+          "shortName": "UpdateKmsKey",
+          "fullName": "google.cloud.compute.v1beta.RegionDisks.UpdateKmsKey",
           "service": {
             "shortName": "RegionDisks",
             "fullName": "google.cloud.compute.v1beta.RegionDisks"
@@ -32608,6 +32984,54 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_RegionHealthSources_GetHealth_async",
+      "title": "AcceleratorTypes getHealth Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the most recent health check results for this regional HealthSource.",
+      "canonical": true,
+      "file": "region_health_sources.get_health.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetHealth",
+        "fullName": "google.cloud.compute.v1beta.RegionHealthSources.GetHealth",
+        "async": true,
+        "parameters": [
+          {
+            "name": "health_source",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.HealthSourceHealth",
+        "client": {
+          "shortName": "RegionHealthSourcesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSourcesClient"
+        },
+        "method": {
+          "shortName": "GetHealth",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSources.GetHealth",
+          "service": {
+            "shortName": "RegionHealthSources",
+            "fullName": "google.cloud.compute.v1beta.RegionHealthSources"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_RegionHealthSources_Insert_async",
       "title": "AcceleratorTypes insert Sample",
       "origin": "API_DEFINITION",
@@ -33350,7 +33774,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 77,
+          "end": 82,
           "type": "FULL"
         }
       ],
@@ -33362,6 +33786,10 @@
           {
             "name": "instance_group_manager",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -33402,7 +33830,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 82,
+          "end": 87,
           "type": "FULL"
         }
       ],
@@ -33414,6 +33842,10 @@
           {
             "name": "instance_group_manager",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -33990,7 +34422,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 82,
+          "end": 87,
           "type": "FULL"
         }
       ],
@@ -34002,6 +34434,10 @@
           {
             "name": "instance_group_manager",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -34438,7 +34874,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 82,
+          "end": 87,
           "type": "FULL"
         }
       ],
@@ -34450,6 +34886,10 @@
           {
             "name": "instance_group_manager",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -40156,6 +40596,62 @@
         "method": {
           "shortName": "TestIamPermissions",
           "fullName": "google.cloud.compute.v1beta.RegionSnapshots.TestIamPermissions",
+          "service": {
+            "shortName": "RegionSnapshots",
+            "fullName": "google.cloud.compute.v1beta.RegionSnapshots"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionSnapshots_UpdateKmsKey_async",
+      "title": "AcceleratorTypes updateKmsKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rotates the customer-managed encryption key to the latest version for the specified snapshot.",
+      "canonical": true,
+      "file": "region_snapshots.update_kms_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKmsKey",
+        "fullName": "google.cloud.compute.v1beta.RegionSnapshots.UpdateKmsKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_snapshot_update_kms_key_request_resource",
+            "type": ".google.cloud.compute.v1beta.RegionSnapshotUpdateKmsKeyRequest"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionSnapshotsClient",
+          "fullName": "google.cloud.compute.v1beta.RegionSnapshotsClient"
+        },
+        "method": {
+          "shortName": "UpdateKmsKey",
+          "fullName": "google.cloud.compute.v1beta.RegionSnapshots.UpdateKmsKey",
           "service": {
             "shortName": "RegionSnapshots",
             "fullName": "google.cloud.compute.v1beta.RegionSnapshots"
@@ -48660,6 +49156,58 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_Snapshots_UpdateKmsKey_async",
+      "title": "AcceleratorTypes updateKmsKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rotates the customer-managed encryption key to the latest version for the specified snapshot.",
+      "canonical": true,
+      "file": "snapshots.update_kms_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKmsKey",
+        "fullName": "google.cloud.compute.v1beta.Snapshots.UpdateKmsKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot_update_kms_key_request_resource",
+            "type": ".google.cloud.compute.v1beta.SnapshotUpdateKmsKeyRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "SnapshotsClient",
+          "fullName": "google.cloud.compute.v1beta.SnapshotsClient"
+        },
+        "method": {
+          "shortName": "UpdateKmsKey",
+          "fullName": "google.cloud.compute.v1beta.Snapshots.UpdateKmsKey",
+          "service": {
+            "shortName": "Snapshots",
+            "fullName": "google.cloud.compute.v1beta.Snapshots"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_SnapshotSettingsService_Get_async",
       "title": "AcceleratorTypes get Sample",
       "origin": "API_DEFINITION",
@@ -56671,7 +57219,7 @@
       "regionTag": "compute_v1beta_generated_ZoneVmExtensionPolicies_Delete_async",
       "title": "AcceleratorTypes delete Sample",
       "origin": "API_DEFINITION",
-      "description": " Deletes a specified zone VM extension policy.",
+      "description": " Deletes a specified zone VM extension policy within a project.",
       "canonical": true,
       "file": "zone_vm_extension_policies.delete.js",
       "language": "JAVASCRIPT",
@@ -56723,7 +57271,7 @@
       "regionTag": "compute_v1beta_generated_ZoneVmExtensionPolicies_Get_async",
       "title": "AcceleratorTypes get Sample",
       "origin": "API_DEFINITION",
-      "description": " Retrieves details of a specific zone VM extension policy.",
+      "description": " Retrieves details of a specific zone VM extension policy within a project.",
       "canonical": true,
       "file": "zone_vm_extension_policies.get.js",
       "language": "JAVASCRIPT",
@@ -56887,7 +57435,7 @@
       "regionTag": "compute_v1beta_generated_ZoneVmExtensionPolicies_Update_async",
       "title": "AcceleratorTypes update Sample",
       "origin": "API_DEFINITION",
-      "description": " Modifies an existing zone VM extension policy.",
+      "description": " Modifies an existing zone VM extension policy within a project.",
       "canonical": true,
       "file": "zone_vm_extension_policies.update.js",
       "language": "JAVASCRIPT",
