@@ -331,6 +331,23 @@ service Spanner {
     };
     option (google.api.method_signature) = "session,mutation_groups";
   }
+
+  // Retrieves a cache update for a given database.
+  //
+  // This RPC can be used to warm up the client cache by fetching key recipes
+  // and server information for a given database. It is recommended to call
+  // this RPC at the beginning of the client's lifecycle, prior to any other
+  // data plane operations.
+  //
+  // The cache update is returned as a stream because the response can be too
+  // large to fit into a single `CacheUpdate` message.
+  rpc FetchCacheUpdate(FetchCacheUpdateRequest) returns (stream CacheUpdate) {
+    option (google.api.http) = {
+      post: "/v1/{database=projects/*/instances/*/databases/*}:cacheUpdate"
+      body: "*"
+    };
+    option (google.api.method_signature) = "database";
+  }
 }
 
 // The request for [CreateSession][google.spanner.v1.Spanner.CreateSession].
@@ -827,7 +844,7 @@ message ExecuteSqlRequest {
   // be assumed until a subsequent `Commit` call completes successfully.
   bool last_statement = 17 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. If present, it makes the Spanner requests location-aware.
+  // Optional. Makes the Spanner requests location-aware if present.
   //
   // It gives the server hints that can be used to route the request
   // to an appropriate server, potentially significantly decreasing latency and
@@ -1268,7 +1285,7 @@ message ReadRequest {
   // transactions.
   LockHint lock_hint = 17 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. If present, it makes the Spanner requests location-aware.
+  // Optional. Makes the Spanner requests location-aware if present.
   //
   // It gives the server hints that can be used to route the request
   // to an appropriate server, potentially significantly decreasing latency and
@@ -1301,6 +1318,14 @@ message BeginTransactionRequest {
   // randomly select one of the mutations from the mutation set and send it as a
   // part of this request.
   Mutation mutation_key = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Makes the Spanner requests location-aware if present.
+  //
+  // It gives the server hints that can be used to route the request
+  // to an appropriate server, potentially significantly decreasing latency and
+  // improving throughput. To achieve improved performance, most fields must be
+  // filled in with accurate values.
+  RoutingHint routing_hint = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The request for [Commit][google.spanner.v1.Spanner.Commit].
@@ -1355,6 +1380,14 @@ message CommitRequest {
   // results in a `FailedPrecondition` error.
   MultiplexedSessionPrecommitToken precommit_token = 9
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Makes the Spanner requests location-aware if present.
+  //
+  // It gives the server hints that can be used to route the request
+  // to an appropriate server, potentially significantly decreasing latency and
+  // improving throughput. To achieve improved performance, most fields must be
+  // filled in with accurate values.
+  RoutingHint routing_hint = 10 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The request for [Rollback][google.spanner.v1.Spanner.Rollback].
@@ -1416,4 +1449,24 @@ message BatchWriteResponse {
   // commit_timestamp means that the mutation groups were not applied due to the
   // condition not being satisfied after evaluation.
   google.protobuf.Timestamp commit_timestamp = 3;
+}
+
+// The request for
+// [FetchCacheUpdate][google.spanner.v1.Spanner.FetchCacheUpdate].
+message FetchCacheUpdateRequest {
+  // Required. The database for which to retrieve the cache update.
+  string database = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "spanner.googleapis.com/Database"
+    }
+  ];
+
+  // Optional. The maximum number of key recipes to return in the response.
+  // If not set, a default limit of 100 will be used.
+  int32 max_recipe_count = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The maximum number of ranges to return in the response.
+  // If not set, a default limit of 10000 will be used.
+  int32 max_range_count = 3 [(google.api.field_behavior) = OPTIONAL];
 }
