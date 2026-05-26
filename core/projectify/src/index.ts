@@ -14,6 +14,9 @@ import {Stream} from 'stream';
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const PROJECT_ID_TOKEN = '{{projectId}}';
+const PROJECT_ID_TOKEN_REGEX = /{{projectId}}/g;
+
 /**
  * Populate the `{{projectId}}` placeholder.
  *
@@ -25,33 +28,43 @@ import {Stream} from 'stream';
  */
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 export function replaceProjectIdToken(value: any, projectId: string): any {
-  if (Array.isArray(value)) {
-    value = (value as string[]).map(v => replaceProjectIdToken(v, projectId));
+  if (typeof value === 'string') {
+    if (value.includes(PROJECT_ID_TOKEN)) {
+      if (!projectId || projectId === PROJECT_ID_TOKEN) {
+        throw new MissingProjectIdError();
+      }
+      return value.replace(PROJECT_ID_TOKEN_REGEX, projectId);
+    }
+    return value;
   }
 
-  if (
-    value !== null &&
-    typeof value === 'object' &&
-    !(value instanceof Buffer) &&
-    !(value instanceof Stream) &&
-    typeof value.hasOwnProperty === 'function'
-  ) {
-    for (const opt in value) {
-      // eslint-disable-next-line no-prototype-builtins
-      if (value.hasOwnProperty(opt)) {
-        value[opt] = replaceProjectIdToken(value[opt], projectId);
+  if (value === null || typeof value !== 'object') {
+    return value;
+  }
+
+  if (Array.isArray(value)) {
+    for (let i = 0; i < value.length; i++) {
+      const original = value[i];
+      const processed = replaceProjectIdToken(original, projectId);
+      if (processed !== original) {
+        value[i] = processed;
       }
     }
+    return value;
   }
 
-  if (
-    typeof value === 'string' &&
-    (value as string).indexOf('{{projectId}}') > -1
-  ) {
-    if (!projectId || projectId === '{{projectId}}') {
-      throw new MissingProjectIdError();
+  if (value instanceof Buffer || value instanceof Stream) {
+    return value;
+  }
+
+  for (const key in value) {
+    if (Object.prototype.hasOwnProperty.call(value, key)) {
+      const original = value[key];
+      const processed = replaceProjectIdToken(original, projectId);
+      if (processed !== original) {
+        value[key] = processed;
+      }
     }
-    value = (value as string).replace(/{{projectId}}/g, projectId);
   }
 
   return value;

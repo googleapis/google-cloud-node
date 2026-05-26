@@ -47,6 +47,7 @@ describe('projectId placeholder', () => {
               ],
             },
           ],
+          simpleArray: ['A {{projectId}} Z'],
         },
         PROJECT_ID,
       ),
@@ -74,6 +75,7 @@ describe('projectId placeholder', () => {
             ],
           },
         ],
+        simpleArray: ['A ' + PROJECT_ID + ' Z'],
       },
     );
   });
@@ -114,6 +116,36 @@ describe('projectId placeholder', () => {
       },
       replaced,
     );
+  });
+
+  it('should return values without placeholder as-is', () => {
+    assert.strictEqual(
+      replaceProjectIdToken('no-placeholder', PROJECT_ID),
+      'no-placeholder',
+    );
+    assert.strictEqual(replaceProjectIdToken(123, PROJECT_ID), 123);
+    assert.strictEqual(replaceProjectIdToken(true, PROJECT_ID), true);
+    assert.strictEqual(replaceProjectIdToken(null, PROJECT_ID), null);
+    assert.strictEqual(replaceProjectIdToken(undefined, PROJECT_ID), undefined);
+
+    const array = [1, 2, 3];
+    assert.strictEqual(replaceProjectIdToken(array, PROJECT_ID), array);
+
+    const object = {a: 1, b: 2};
+    assert.strictEqual(replaceProjectIdToken(object, PROJECT_ID), object);
+  });
+
+  it('should handle frozen arrays and objects without placeholders correctly without throwing', () => {
+    const frozenArray = Object.freeze(['no-placeholder', 123, true]);
+    const replacedArray = replaceProjectIdToken(frozenArray, PROJECT_ID);
+    assert.strictEqual(frozenArray, replacedArray);
+
+    const frozenObject = Object.freeze({
+      prop: 'no-placeholder',
+      other: 123,
+    });
+    const replacedObject = replaceProjectIdToken(frozenObject, PROJECT_ID);
+    assert.strictEqual(frozenObject, replacedObject);
   });
 
   it('should not inject projectId into stream', () => {
