@@ -276,23 +276,25 @@ async function createTestBenchRetryTest(
   methodName: string,
   transport: StorageTransport,
 ): Promise<ConformanceTestCreationResult> {
-  return (await transport.makeRequest({
+  const response = await transport.makeRequest({
     method: 'POST',
     url: 'retry_test',
     body: JSON.stringify({instructions: {[methodName]: instructions}}),
     headers: {'Content-Type': 'application/json'},
-  })) as ConformanceTestCreationResult;
+  });
+  return response.data as ConformanceTestCreationResult;
 }
 
 async function getTestBenchRetryTest(
   testId: string,
   transport: StorageTransport,
 ): Promise<ConformanceTestResult> {
-  return (await transport.makeRequest({
+  const response = await transport.makeRequest({
     url: `retry_test/${testId}`,
     method: 'GET',
     headers: {'x-retry-test-id': testId},
-  })) as ConformanceTestResult;
+  });
+  return response.data as ConformanceTestResult;
 }
 
 function generateName(method: String, type: string) {

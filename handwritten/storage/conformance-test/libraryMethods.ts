@@ -141,7 +141,7 @@ export async function create(options: ConformanceTestOptions) {
       };
       const listResult = await options.storageTransport.makeRequest(listReq);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const objects = (listResult as any)?.items || [];
+      const objects = (listResult as any)?.data?.items || [];
 
       for (const obj of objects) {
         const deleteObjReq: StorageRequestOptions = {
@@ -1205,7 +1205,7 @@ export async function iamSetPolicy(options: ConformanceTestOptions) {
       headers: retryId ? {'x-retry-test-id': retryId} : {},
     });
 
-    const currentPolicy = getResponse as Policy;
+    const currentPolicy = (getResponse as any).data as Policy;
     const fetchedEtag = currentPolicy.etag;
 
     if (fetchedEtag) {
