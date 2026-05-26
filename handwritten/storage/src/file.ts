@@ -4047,12 +4047,12 @@ class File extends ServiceObject<File, FileMetadata> {
    * @returns {Promise<File>}
    */
   async restore(options: RestoreOptions): Promise<File> {
-    const file = await this.storageTransport.makeRequest<File>({
+    const response = await this.storageTransport.makeRequest<File>({
       method: 'POST',
       url: `/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}/restore`,
       queryParameters: options as unknown as StorageQueryParameters,
     });
-    return file as File;
+    return response.data as File;
   }
 
   rotateEncryptionKey(

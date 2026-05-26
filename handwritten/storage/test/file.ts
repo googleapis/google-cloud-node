@@ -613,13 +613,17 @@ describe('File', () => {
             'x-goog-encryption-key-sha256': 'hash-dest',
           });
           callback?.(null, {done: true}, {});
-          done();
+          return { data: {done: true} } as any;
         } catch (e) {
           done(e);
+          throw e;
         }
       };
 
-      file.copy(newFile, assert.ifError);
+      file.copy(newFile, (err: any) => {
+        assert.ifError(err);
+        done();
+      });
     });
 
     it('should set destination KMS key name', done => {

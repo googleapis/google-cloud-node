@@ -127,7 +127,7 @@ export class StorageTransport {
   async makeRequest<T>(
     reqOpts: StorageRequestOptions,
     callback?: StorageTransportCallback<T>,
-  ): Promise<void | T> {
+  ): Promise<GaxiosResponse<T>> {
     // Project ID Resolution
     if (!this.projectId) {
       this.projectId =
@@ -160,18 +160,13 @@ export class StorageTransport {
       ? urlString
       : new URL(urlString, this.baseUrl).toString();
 
-    // Safely extract and inspect the payload for an 'etag' property
     let hasEtagInBody = false;
-    const payload = reqOpts.body || reqOpts.data;
-
-    if (payload !== null && typeof payload === 'object') {
-      // Handles plain JSON objects 
-      hasEtagInBody = 'etag' in payload;
-    } else if (typeof payload === 'string') {
-      // Handles stringified JSON without causing false positives on plain text
+    if (reqOpts.body && typeof reqOpts.body === 'string') {
       try {
-        const parsed = JSON.parse(payload);
-        hasEtagInBody = parsed !== null && typeof parsed === 'object' && 'etag' in parsed;
+        const parsed = JSON.parse(reqOpts.body);
+        if (parsed && parsed.etag) {
+          hasEtagInBody = true;
+        }
       } catch (e) {
         // If it's not valid JSON, it's just a raw string/file upload. 
         // We safely ignore it to prevent false positives.
@@ -223,44 +218,37 @@ export class StorageTransport {
         },
       } as any);
 
-      // Response Handling
-      const isPlainObject = (obj: any): boolean =>
-        obj !== null &&
-        typeof obj === 'object' &&
-        !(obj instanceof Buffer) &&
-        !(typeof obj.on === 'function') &&
-        !Array.isArray(obj);
-
-      const responseHandler = (resp: GaxiosResponse<T>) => {
+      // Helper to decorate plain JSON objects with metadata for backward-compatibility callbacks
+      const decorateMetadata = (resp: GaxiosResponse<T>) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = resp.data as any;
+        const isPlainObject = (obj: any): boolean =>
+          obj !== null &&
+          typeof obj === 'object' &&
+          !(obj instanceof Buffer) &&
+          !(typeof obj.on === 'function') &&
+          !Array.isArray(obj);
+
         if (isPlainObject(data)) {
-          // Standard JSON responses: Mutate and return data
           data.headers = resp.headers;
           data.status = resp.status;
-          return data;
         }
-        if (data !== null && typeof data === 'object') {
-          // Binary payloads (Buffer, Stream, etc.): Return raw data without mutating.
-          // This maintains backward compatibility for downloads.
-          return data;
-        }
-
-        // Primitives (strings, empty bodies, null): Return the full GaxiosResponse.
-        // This ensures resumable upload init calls can still read `resp.headers.location`.
-        return resp;
+        return data;
       };
 
       if (callback) {
         requestPromise
-          .then(resp => callback(null, responseHandler(resp), resp))
+          .then(resp => callback(null, decorateMetadata(resp), resp))
           .catch(err => callback(err, null, err.response));
-        return;
+        return requestPromise;
       }
 
-      return requestPromise.then(responseHandler);
+      return requestPromise;
     } catch (e) {
-      if (callback) return callback(e as GaxiosError);
+      if (callback) {
+        callback(e as GaxiosError);
+        return Promise.reject(e);
+      }
       throw e;
     }
   }
