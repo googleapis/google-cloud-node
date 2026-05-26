@@ -17,8 +17,8 @@ const TABLE    = 'AsyncBenchmarkTable';
 const SQL = `SELECT * FROM ${TABLE} LIMIT 1000`;
 const WARMUP_MS = 10_000;
 const DURATION_MS = 30_000;
-const CONCURRENCY_LEVELS = [1, 2, 4, 8, 16, 32];
-const CHANNELS_TEST = [1, 2, 4, 8, 10, 12, 16];
+const CONCURRENCY_LEVELS = [32];
+const CHANNELS_TEST = [8, 12, 16, 20, 25, 30];
 
 class CPUMonitor {
   constructor() {
