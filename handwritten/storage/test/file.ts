@@ -3772,7 +3772,12 @@ describe('File', () => {
 
     it('should correctly format URL and method in the request', done => {
       gaxiosStub.resolves({data: {}});
-      const expectedUrl = `https://${file.storage.apiEndpoint}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
+      // const expectedUrl = `https://${file.storage.apiEndpoint}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
+      const baseUrl = file.storage.apiEndpoint.startsWith('http') 
+        ? file.storage.apiEndpoint 
+        : `https://${file.storage.apiEndpoint}`;
+        
+      const expectedUrl = `${baseUrl}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
 
       file.isPublic(err => {
         assert.ifError(err);

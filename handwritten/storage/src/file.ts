@@ -3337,7 +3337,11 @@ class File extends ServiceObject<File, FileMetadata> {
       undefined,
       callback,
     );
-    const url = `https://${this.storage.apiEndpoint}/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}`;
+    const baseUrl = this.storage.apiEndpoint.startsWith('http') 
+      ? this.storage.apiEndpoint 
+      : `https://${this.storage.apiEndpoint}`;
+
+    const url = `${baseUrl}/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}`;
 
     const gaxios = new Gaxios();
     const storageInterceptors = this.storage?.interceptors || [];
