@@ -131,6 +131,7 @@
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.9",
     "@types/sinon": "^17.0.4",
+    "@types/uuid": "^10.0.0",
     "c8": "^10.1.3",
     "chai": "^5.2.0",
     "gapic-tools": "^1.0.0",
@@ -142,9 +143,10 @@
     "long": "^5.3.1",
     "mocha": "^11.1.0",
     "pack-n-play": "^3.0.0",
+    "serialize-javascript": "^6.0.2",
     "sinon": "21.0.3",
     "typescript": "^5.8.2",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.1"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-compute",
   "overrides": {

@@ -39,7 +39,7 @@
     "prelint": "cd samples && npm link ../ && npm install"
   },
   "dependencies": {
-    "protobufjs": "^7.5.4"
+    "protobufjs": "^7.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -53,7 +53,8 @@
     "linkinator": "^6.1.2",
     "mocha": "^11.1.0",
     "pack-n-play": "^4.0.0",
-    "protobufjs-cli": "^1.2.0",
+    "protobufjs-cli": "^1.2.1",
+    "serialize-javascript": "^6.0.2",
     "typescript": "5.8.3"
   },
   "engines": {

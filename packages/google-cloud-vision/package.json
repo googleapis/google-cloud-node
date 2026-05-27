@@ -70,9 +70,10 @@
     "long": "^5.3.1",
     "mocha": "^11.1.0",
     "pack-n-play": "^3.0.0",
+    "serialize-javascript": "^6.0.2",
     "sinon": "21.0.3",
     "typescript": "^5.8.2",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.1"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vision",
   "overrides": {

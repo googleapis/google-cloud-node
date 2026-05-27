@@ -51,8 +51,8 @@
     "long": "^5.3.2",
     "object-hash": "^3.0.0",
     "proto3-json-serializer": "^3.0.3",
-    "protobufjs": "^7.5.6",
-    "protobufjs-cli": "^1.2.0",
+    "protobufjs": "^7.5.8",
+    "protobufjs-cli": "^1.2.1",
     "prettier": "^3.2.5",
     "yargs": "^17.7.2"
   },
@@ -70,6 +70,7 @@
     "google-gax": "^5.1.1-rc.1",
     "gts": "^6.0.2",
     "mocha": "^11.7.4",
+    "serialize-javascript": "^6.0.2",
     "nunjucks": "^3.2.4",
     "typescript": "5.6.2"
   },

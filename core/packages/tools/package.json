@@ -34,7 +34,7 @@
     "@babel/traverse": "^7.26.8",
     "google-gax": "^5.0.6",
     "google-proto-files": "^5.0.0",
-    "protobufjs-cli": "^1.2.0",
+    "protobufjs-cli": "^1.2.1",
     "uglify-js": "^3.19.3",
     "walk-up-path": "^3.0.0",
     "walkdir": "^0.4.1"
@@ -56,7 +56,8 @@
     "gts": "^6.0.2",
     "mocha": "^11.1.0",
     "ncp": "^2.0.0",
-    "protobufjs": "^7.5.3",
+    "protobufjs": "^7.5.8",
+    "serialize-javascript": "^6.0.2",
     "typescript": "5.8.3"
   },
   "bugs": {
