@@ -351,6 +351,11 @@ const GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
 
 /**
  * @private
+ */
+const ENCRYPTION_ALGORITHM_AES256 = 'AES256';
+
+/**
+ * @private
  * This regex will match compressible content types. These are primarily text/*, +json, +text, +xml content types.
  * This was based off of mime-db and may periodically need to be updated if new compressible content types become
  * standards.
@@ -1393,7 +1398,10 @@ class File extends ServiceObject<File, FileMetadata> {
     const headers = new Headers();
 
     if (this.encryptionKey !== undefined) {
-      headers.set('x-goog-copy-source-encryption-algorithm', 'AES256');
+      headers.set(
+        'x-goog-copy-source-encryption-algorithm',
+        ENCRYPTION_ALGORITHM_AES256,
+      );
       headers.set(
         'x-goog-copy-source-encryption-key',
         this.encryptionKeyBase64!,
@@ -1405,7 +1413,7 @@ class File extends ServiceObject<File, FileMetadata> {
     }
 
     if (newFile.encryptionKey !== undefined) {
-      headers.set('x-goog-encryption-algorithm', 'AES256');
+      headers.set('x-goog-encryption-algorithm', ENCRYPTION_ALGORITHM_AES256);
       headers.set('x-goog-encryption-key', newFile.encryptionKeyBase64 || '');
       headers.set(
         'x-goog-encryption-key-sha256',
@@ -2442,7 +2450,7 @@ class File extends ServiceObject<File, FileMetadata> {
     }
 
     return {
-      'x-goog-encryption-algorithm': 'AES256',
+      'x-goog-encryption-algorithm': ENCRYPTION_ALGORITHM_AES256,
       'x-goog-encryption-key': this.encryptionKey.toString('base64'),
       'x-goog-encryption-key-sha256': this.encryptionKeyHash || '',
     };
@@ -2507,7 +2515,10 @@ class File extends ServiceObject<File, FileMetadata> {
     this.encryptionKeyInterceptor = {
       resolved: reqOpts => {
         reqOpts.headers = new Headers(reqOpts.headers || {});
-        reqOpts.headers.set('x-goog-encryption-algorithm', 'AES256');
+        reqOpts.headers.set(
+          'x-goog-encryption-algorithm',
+          ENCRYPTION_ALGORITHM_AES256,
+        );
         reqOpts.headers.set('x-goog-encryption-key', this.encryptionKeyBase64!);
         reqOpts.headers.set(
           'x-goog-encryption-key-sha256',
@@ -4590,7 +4601,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const headers: Record<string, string> = {};
     if (this.encryptionKey) {
-      headers['x-goog-encryption-algorithm'] = 'AES256';
+      headers['x-goog-encryption-algorithm'] = ENCRYPTION_ALGORITHM_AES256;
       headers['x-goog-encryption-key'] = this.encryptionKeyBase64!;
       headers['x-goog-encryption-key-sha256'] = this.encryptionKeyHash!;
     }
