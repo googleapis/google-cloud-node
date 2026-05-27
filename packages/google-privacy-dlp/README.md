@@ -13,7 +13,9 @@ are addressed with the highest priority
 
 Sensitive Data Protection (DLP) client for Node.js
 
-[//]: # "partials.introduction"
+The [Data Loss Prevention API](https://cloud.google.com/dlp/docs/) provides programmatic access to a
+powerful detection engine for personally identifiable information and other privacy-sensitive
+data in unstructured data streams.
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
