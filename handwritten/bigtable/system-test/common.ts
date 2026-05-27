@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as crypto from 'crypto';
+import * as uuid from 'uuid';
 import {Cluster} from '../src/cluster';
 import * as inst from '../src/instance';
 
 export const PREFIX = 'gt-';
 
 export function generateId(resourceType: string) {
-  const newUuid = crypto.randomUUID().substr(4, 4);
+  const newUuid = uuid.v1().substr(4, 4);
   return `${PREFIX}${resourceType}-${newUuid}-${Date.now()}`;
 }
 
