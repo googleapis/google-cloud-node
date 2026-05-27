@@ -126,6 +126,21 @@
         "grpc": {
           "libraryClient": "DataSubscriptionServiceClient",
           "rpcs": {
+            "CreateSubscription": {
+              "methods": [
+                "createSubscription"
+              ]
+            },
+            "UpdateSubscription": {
+              "methods": [
+                "updateSubscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "deleteSubscription"
+              ]
+            },
             "CreateSubscriber": {
               "methods": [
                 "createSubscriber"
@@ -146,6 +161,13 @@
                 "listSubscribers",
                 "listSubscribersStream",
                 "listSubscribersAsync"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "listSubscriptions",
+                "listSubscriptionsStream",
+                "listSubscriptionsAsync"
               ]
             }
           }
@@ -153,6 +175,21 @@
         "grpc-fallback": {
           "libraryClient": "DataSubscriptionServiceClient",
           "rpcs": {
+            "CreateSubscription": {
+              "methods": [
+                "createSubscription"
+              ]
+            },
+            "UpdateSubscription": {
+              "methods": [
+                "updateSubscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "deleteSubscription"
+              ]
+            },
             "CreateSubscriber": {
               "methods": [
                 "createSubscriber"
@@ -173,6 +210,13 @@
                 "listSubscribers",
                 "listSubscribersStream",
                 "listSubscribersAsync"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "listSubscriptions",
+                "listSubscriptionsStream",
+                "listSubscriptionsAsync"
               ]
             }
           }
@@ -208,6 +252,23 @@
               "methods": [
                 "getIdentity"
               ]
+            },
+            "GetIrnProfile": {
+              "methods": [
+                "getIrnProfile"
+              ]
+            },
+            "GetPairedDevice": {
+              "methods": [
+                "getPairedDevice"
+              ]
+            },
+            "ListPairedDevices": {
+              "methods": [
+                "listPairedDevices",
+                "listPairedDevicesStream",
+                "listPairedDevicesAsync"
+              ]
             }
           }
         },
@@ -237,6 +298,23 @@
             "GetIdentity": {
               "methods": [
                 "getIdentity"
+              ]
+            },
+            "GetIrnProfile": {
+              "methods": [
+                "getIrnProfile"
+              ]
+            },
+            "GetPairedDevice": {
+              "methods": [
+                "getPairedDevice"
+              ]
+            },
+            "ListPairedDevices": {
+              "methods": [
+                "listPairedDevices",
+                "listPairedDevicesStream",
+                "listPairedDevicesAsync"
               ]
             }
           }

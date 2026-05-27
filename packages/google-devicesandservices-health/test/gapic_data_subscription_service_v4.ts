@@ -365,6 +365,421 @@ describe('v4.DataSubscriptionServiceClient', () => {
     });
   });
 
+  describe('createSubscription', () => {
+    it('invokes createSubscription without error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.CreateSubscriptionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.CreateSubscriptionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Subscription(),
+      );
+      client.innerApiCalls.createSubscription =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createSubscription(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSubscription as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSubscription as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSubscription without error using callback', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.CreateSubscriptionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.CreateSubscriptionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Subscription(),
+      );
+      client.innerApiCalls.createSubscription =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createSubscription(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.ISubscription | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSubscription as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSubscription as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSubscription with error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.CreateSubscriptionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.CreateSubscriptionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createSubscription = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createSubscription(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createSubscription as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSubscription as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSubscription with closed client', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.CreateSubscriptionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.CreateSubscriptionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.createSubscription(request), expectedError);
+    });
+  });
+
+  describe('updateSubscription', () => {
+    it('invokes updateSubscription without error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateSubscriptionRequest(),
+      );
+      request.subscription ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateSubscriptionRequest',
+        ['subscription', 'name'],
+      );
+      request.subscription.name = defaultValue1;
+      const expectedHeaderRequestParams = `subscription.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Subscription(),
+      );
+      client.innerApiCalls.updateSubscription =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSubscription(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSubscription as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSubscription as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSubscription without error using callback', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateSubscriptionRequest(),
+      );
+      request.subscription ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateSubscriptionRequest',
+        ['subscription', 'name'],
+      );
+      request.subscription.name = defaultValue1;
+      const expectedHeaderRequestParams = `subscription.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Subscription(),
+      );
+      client.innerApiCalls.updateSubscription =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSubscription(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.ISubscription | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSubscription as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSubscription as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSubscription with error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateSubscriptionRequest(),
+      );
+      request.subscription ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateSubscriptionRequest',
+        ['subscription', 'name'],
+      );
+      request.subscription.name = defaultValue1;
+      const expectedHeaderRequestParams = `subscription.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSubscription = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateSubscription(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSubscription as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSubscription as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSubscription with closed client', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateSubscriptionRequest(),
+      );
+      request.subscription ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateSubscriptionRequest',
+        ['subscription', 'name'],
+      );
+      request.subscription.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateSubscription(request), expectedError);
+    });
+  });
+
+  describe('deleteSubscription', () => {
+    it('invokes deleteSubscription without error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DeleteSubscriptionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.DeleteSubscriptionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteSubscription =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteSubscription(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSubscription as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSubscription as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSubscription without error using callback', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DeleteSubscriptionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.DeleteSubscriptionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteSubscription =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteSubscription(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSubscription as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSubscription as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSubscription with error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DeleteSubscriptionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.DeleteSubscriptionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSubscription = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteSubscription(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteSubscription as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSubscription as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSubscription with closed client', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DeleteSubscriptionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.DeleteSubscriptionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.deleteSubscription(request), expectedError);
+    });
+  });
+
   describe('createSubscriber', () => {
     it('invokes createSubscriber without error', async () => {
       const client =
@@ -1307,6 +1722,348 @@ describe('v4.DataSubscriptionServiceClient', () => {
     });
   });
 
+  describe('listSubscriptions', () => {
+    it('invokes listSubscriptions without error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListSubscriptionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListSubscriptionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+      ];
+      client.innerApiCalls.listSubscriptions = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSubscriptions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSubscriptions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSubscriptions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSubscriptions without error using callback', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListSubscriptionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListSubscriptionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+      ];
+      client.innerApiCalls.listSubscriptions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSubscriptions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.devicesandservices.health.v4.ISubscription[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSubscriptions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSubscriptions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSubscriptions with error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListSubscriptionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListSubscriptionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSubscriptions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listSubscriptions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listSubscriptions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSubscriptions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSubscriptionsStream without error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListSubscriptionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListSubscriptionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+      ];
+      client.descriptors.page.listSubscriptions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSubscriptionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4.Subscription[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devicesandservices.health.v4.Subscription,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listSubscriptions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSubscriptions, request),
+      );
+      assert(
+        (client.descriptors.page.listSubscriptions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listSubscriptionsStream with error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListSubscriptionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListSubscriptionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSubscriptions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSubscriptionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4.Subscription[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devicesandservices.health.v4.Subscription,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listSubscriptions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSubscriptions, request),
+      );
+      assert(
+        (client.descriptors.page.listSubscriptions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listSubscriptions without error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListSubscriptionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListSubscriptionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.Subscription(),
+        ),
+      ];
+      client.descriptors.page.listSubscriptions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devicesandservices.health.v4.ISubscription[] =
+        [];
+      const iterable = client.listSubscriptionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSubscriptions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listSubscriptions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listSubscriptions with error', async () => {
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListSubscriptionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListSubscriptionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSubscriptions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSubscriptionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.devicesandservices.health.v4.ISubscription[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSubscriptions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listSubscriptions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('dataPoint', async () => {
       const fakePath = '/rendered/path/dataPoint';
@@ -1456,6 +2213,98 @@ describe('v4.DataSubscriptionServiceClient', () => {
         assert.strictEqual(result, 'userValue');
         assert(
           (client.pathTemplates.identityPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('irnProfile', async () => {
+      const fakePath = '/rendered/path/irnProfile';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.irnProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.irnProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('irnProfilePath', () => {
+        const result = client.irnProfilePath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.irnProfilePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromIrnProfileName', () => {
+        const result = client.matchUserFromIrnProfileName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.irnProfilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('pairedDevice', async () => {
+      const fakePath = '/rendered/path/pairedDevice';
+      const expectedParameters = {
+        user: 'userValue',
+        paired_device: 'pairedDeviceValue',
+      };
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.pairedDevicePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pairedDevicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('pairedDevicePath', () => {
+        const result = client.pairedDevicePath(
+          'userValue',
+          'pairedDeviceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromPairedDeviceName', () => {
+        const result = client.matchUserFromPairedDeviceName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPairedDeviceFromPairedDeviceName', () => {
+        const result = client.matchPairedDeviceFromPairedDeviceName(fakePath);
+        assert.strictEqual(result, 'pairedDeviceValue');
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -1623,6 +2472,110 @@ describe('v4.DataSubscriptionServiceClient', () => {
         assert.strictEqual(result, 'subscriberValue');
         assert(
           (client.pathTemplates.subscriberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('subscription', async () => {
+      const fakePath = '/rendered/path/subscription';
+      const expectedParameters = {
+        project: 'projectValue',
+        subscriber: 'subscriberValue',
+        subscription: 'subscriptionValue',
+      };
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.subscriptionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.subscriptionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('subscriptionPath', () => {
+        const result = client.subscriptionPath(
+          'projectValue',
+          'subscriberValue',
+          'subscriptionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromSubscriptionName', () => {
+        const result = client.matchProjectFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSubscriberFromSubscriptionName', () => {
+        const result = client.matchSubscriberFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'subscriberValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSubscriptionFromSubscriptionName', () => {
+        const result = client.matchSubscriptionFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'subscriptionValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('user', async () => {
+      const fakePath = '/rendered/path/user';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client =
+        new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.userPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userPath', () => {
+        const result = client.userPath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.userPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromUserName', () => {
+        const result = client.matchUserFromUserName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.userPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

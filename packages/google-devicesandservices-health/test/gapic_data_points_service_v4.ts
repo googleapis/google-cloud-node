@@ -2496,6 +2496,96 @@ describe('v4.DataPointsServiceClient', () => {
       });
     });
 
+    describe('irnProfile', async () => {
+      const fakePath = '/rendered/path/irnProfile';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.irnProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.irnProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('irnProfilePath', () => {
+        const result = client.irnProfilePath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.irnProfilePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromIrnProfileName', () => {
+        const result = client.matchUserFromIrnProfileName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.irnProfilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('pairedDevice', async () => {
+      const fakePath = '/rendered/path/pairedDevice';
+      const expectedParameters = {
+        user: 'userValue',
+        paired_device: 'pairedDeviceValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.pairedDevicePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pairedDevicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('pairedDevicePath', () => {
+        const result = client.pairedDevicePath(
+          'userValue',
+          'pairedDeviceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromPairedDeviceName', () => {
+        const result = client.matchUserFromPairedDeviceName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPairedDeviceFromPairedDeviceName', () => {
+        const result = client.matchPairedDeviceFromPairedDeviceName(fakePath);
+        assert.strictEqual(result, 'pairedDeviceValue');
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('profile', async () => {
       const fakePath = '/rendered/path/profile';
       const expectedParameters = {
@@ -2615,6 +2705,108 @@ describe('v4.DataPointsServiceClient', () => {
         assert.strictEqual(result, 'subscriberValue');
         assert(
           (client.pathTemplates.subscriberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('subscription', async () => {
+      const fakePath = '/rendered/path/subscription';
+      const expectedParameters = {
+        project: 'projectValue',
+        subscriber: 'subscriberValue',
+        subscription: 'subscriptionValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.subscriptionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.subscriptionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('subscriptionPath', () => {
+        const result = client.subscriptionPath(
+          'projectValue',
+          'subscriberValue',
+          'subscriptionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromSubscriptionName', () => {
+        const result = client.matchProjectFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSubscriberFromSubscriptionName', () => {
+        const result = client.matchSubscriberFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'subscriberValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSubscriptionFromSubscriptionName', () => {
+        const result = client.matchSubscriptionFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'subscriptionValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('user', async () => {
+      const fakePath = '/rendered/path/user';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.userPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userPath', () => {
+        const result = client.userPath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.userPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromUserName', () => {
+        const result = client.matchUserFromUserName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.userPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

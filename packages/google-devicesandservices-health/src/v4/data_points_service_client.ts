@@ -215,6 +215,12 @@ export class DataPointsServiceClient {
       identityPathTemplate: new this._gaxModule.PathTemplate(
         'users/{user}/identity',
       ),
+      irnProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/irnProfile',
+      ),
+      pairedDevicePathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/pairedDevices/{paired_device}',
+      ),
       profilePathTemplate: new this._gaxModule.PathTemplate(
         'users/{user}/profile',
       ),
@@ -224,6 +230,10 @@ export class DataPointsServiceClient {
       subscriberPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/subscribers/{subscriber}',
       ),
+      subscriptionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/subscribers/{subscriber}/subscriptions/{subscription}',
+      ),
+      userPathTemplate: new this._gaxModule.PathTemplate('users/{user}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1606,16 +1616,7 @@ export class DataPointsServiceClient {
    *
    *
    *
-   *   - Session start time (**ECG specific**):
-   *       - Pattern: `electrocardiogram.interval.start_time`
-   *       - Supported comparison operators: `>=`
-   *       - Timestamp literal expected in RFC-3339 format
-   *       - Example:
-   *           - `electrocardiogram.interval.start_time >= "2024-08-14T12:34:56Z"`
-   *       - Note: Only filtering by start time is supported for ECG. Filtering
-   *         by end time (e.g., `electrocardiogram.interval.end_time`) is not
-   *         supported.
-   *   - Session civil start time (**Excluding Sleep**):
+   *   - Session civil start time (**Excluding Sleep and ECG**):
    *       - Pattern: `{session_data_type}.interval.civil_start_time`
    *       - Supported comparison operators: `>=`, `<`
    *       - Date with optional time literal expected in ISO 8601
@@ -1625,6 +1626,16 @@ export class DataPointsServiceClient {
    *          - `exercise.interval.civil_start_time >= "2023-11-24" AND
    *          exercise.interval.civil_start_time < "2023-11-25"`
    *          - `exercise.interval.civil_start_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Session start time (**ECG specific**):
+   *       - Pattern: `electrocardiogram.interval.start_time`
+   *       - Supported comparison operators: `>=`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Example:
+   *           - `electrocardiogram.interval.start_time >= "2024-08-14T12:34:56Z"`
+   *       - Note: Only filtering by start time is supported for ECG. Filtering
+   *         by end time (e.g., `electrocardiogram.interval.end_time`) is not
+   *         supported.
    *
    *   - Session end time (**Sleep specific**):
    *       - Pattern: `sleep.interval.end_time`
@@ -1848,16 +1859,7 @@ export class DataPointsServiceClient {
    *
    *
    *
-   *   - Session start time (**ECG specific**):
-   *       - Pattern: `electrocardiogram.interval.start_time`
-   *       - Supported comparison operators: `>=`
-   *       - Timestamp literal expected in RFC-3339 format
-   *       - Example:
-   *           - `electrocardiogram.interval.start_time >= "2024-08-14T12:34:56Z"`
-   *       - Note: Only filtering by start time is supported for ECG. Filtering
-   *         by end time (e.g., `electrocardiogram.interval.end_time`) is not
-   *         supported.
-   *   - Session civil start time (**Excluding Sleep**):
+   *   - Session civil start time (**Excluding Sleep and ECG**):
    *       - Pattern: `{session_data_type}.interval.civil_start_time`
    *       - Supported comparison operators: `>=`, `<`
    *       - Date with optional time literal expected in ISO 8601
@@ -1867,6 +1869,16 @@ export class DataPointsServiceClient {
    *          - `exercise.interval.civil_start_time >= "2023-11-24" AND
    *          exercise.interval.civil_start_time < "2023-11-25"`
    *          - `exercise.interval.civil_start_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Session start time (**ECG specific**):
+   *       - Pattern: `electrocardiogram.interval.start_time`
+   *       - Supported comparison operators: `>=`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Example:
+   *           - `electrocardiogram.interval.start_time >= "2024-08-14T12:34:56Z"`
+   *       - Note: Only filtering by start time is supported for ECG. Filtering
+   *         by end time (e.g., `electrocardiogram.interval.end_time`) is not
+   *         supported.
    *
    *   - Session end time (**Sleep specific**):
    *       - Pattern: `sleep.interval.end_time`
@@ -2013,16 +2025,7 @@ export class DataPointsServiceClient {
    *
    *
    *
-   *   - Session start time (**ECG specific**):
-   *       - Pattern: `electrocardiogram.interval.start_time`
-   *       - Supported comparison operators: `>=`
-   *       - Timestamp literal expected in RFC-3339 format
-   *       - Example:
-   *           - `electrocardiogram.interval.start_time >= "2024-08-14T12:34:56Z"`
-   *       - Note: Only filtering by start time is supported for ECG. Filtering
-   *         by end time (e.g., `electrocardiogram.interval.end_time`) is not
-   *         supported.
-   *   - Session civil start time (**Excluding Sleep**):
+   *   - Session civil start time (**Excluding Sleep and ECG**):
    *       - Pattern: `{session_data_type}.interval.civil_start_time`
    *       - Supported comparison operators: `>=`, `<`
    *       - Date with optional time literal expected in ISO 8601
@@ -2032,6 +2035,16 @@ export class DataPointsServiceClient {
    *          - `exercise.interval.civil_start_time >= "2023-11-24" AND
    *          exercise.interval.civil_start_time < "2023-11-25"`
    *          - `exercise.interval.civil_start_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Session start time (**ECG specific**):
+   *       - Pattern: `electrocardiogram.interval.start_time`
+   *       - Supported comparison operators: `>=`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Example:
+   *           - `electrocardiogram.interval.start_time >= "2024-08-14T12:34:56Z"`
+   *       - Note: Only filtering by start time is supported for ECG. Filtering
+   *         by end time (e.g., `electrocardiogram.interval.end_time`) is not
+   *         supported.
    *
    *   - Session end time (**Sleep specific**):
    *       - Pattern: `sleep.interval.end_time`
@@ -2857,6 +2870,67 @@ export class DataPointsServiceClient {
   }
 
   /**
+   * Return a fully-qualified irnProfile resource name string.
+   *
+   * @param {string} user
+   * @returns {string} Resource name string.
+   */
+  irnProfilePath(user: string) {
+    return this.pathTemplates.irnProfilePathTemplate.render({
+      user: user,
+    });
+  }
+
+  /**
+   * Parse the user from IrnProfile resource.
+   *
+   * @param {string} irnProfileName
+   *   A fully-qualified path representing IrnProfile resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromIrnProfileName(irnProfileName: string) {
+    return this.pathTemplates.irnProfilePathTemplate.match(irnProfileName).user;
+  }
+
+  /**
+   * Return a fully-qualified pairedDevice resource name string.
+   *
+   * @param {string} user
+   * @param {string} paired_device
+   * @returns {string} Resource name string.
+   */
+  pairedDevicePath(user: string, pairedDevice: string) {
+    return this.pathTemplates.pairedDevicePathTemplate.render({
+      user: user,
+      paired_device: pairedDevice,
+    });
+  }
+
+  /**
+   * Parse the user from PairedDevice resource.
+   *
+   * @param {string} pairedDeviceName
+   *   A fully-qualified path representing PairedDevice resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromPairedDeviceName(pairedDeviceName: string) {
+    return this.pathTemplates.pairedDevicePathTemplate.match(pairedDeviceName)
+      .user;
+  }
+
+  /**
+   * Parse the paired_device from PairedDevice resource.
+   *
+   * @param {string} pairedDeviceName
+   *   A fully-qualified path representing PairedDevice resource.
+   * @returns {string} A string representing the paired_device.
+   */
+  matchPairedDeviceFromPairedDeviceName(pairedDeviceName: string) {
+    return this.pathTemplates.pairedDevicePathTemplate.match(pairedDeviceName)
+      .paired_device;
+  }
+
+  /**
    * Return a fully-qualified profile resource name string.
    *
    * @param {string} user
@@ -2938,6 +3012,81 @@ export class DataPointsServiceClient {
   matchSubscriberFromSubscriberName(subscriberName: string) {
     return this.pathTemplates.subscriberPathTemplate.match(subscriberName)
       .subscriber;
+  }
+
+  /**
+   * Return a fully-qualified subscription resource name string.
+   *
+   * @param {string} project
+   * @param {string} subscriber
+   * @param {string} subscription
+   * @returns {string} Resource name string.
+   */
+  subscriptionPath(project: string, subscriber: string, subscription: string) {
+    return this.pathTemplates.subscriptionPathTemplate.render({
+      project: project,
+      subscriber: subscriber,
+      subscription: subscription,
+    });
+  }
+
+  /**
+   * Parse the project from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .project;
+  }
+
+  /**
+   * Parse the subscriber from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the subscriber.
+   */
+  matchSubscriberFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .subscriber;
+  }
+
+  /**
+   * Parse the subscription from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the subscription.
+   */
+  matchSubscriptionFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .subscription;
+  }
+
+  /**
+   * Return a fully-qualified user resource name string.
+   *
+   * @param {string} user
+   * @returns {string} Resource name string.
+   */
+  userPath(user: string) {
+    return this.pathTemplates.userPathTemplate.render({
+      user: user,
+    });
+  }
+
+  /**
+   * Parse the user from User resource.
+   *
+   * @param {string} userName
+   *   A fully-qualified path representing User resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromUserName(userName: string) {
+    return this.pathTemplates.userPathTemplate.match(userName).user;
   }
 
   /**

@@ -218,6 +218,12 @@ export class DataSubscriptionServiceClient {
       identityPathTemplate: new this._gaxModule.PathTemplate(
         'users/{user}/identity',
       ),
+      irnProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/irnProfile',
+      ),
+      pairedDevicePathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/pairedDevices/{paired_device}',
+      ),
       profilePathTemplate: new this._gaxModule.PathTemplate(
         'users/{user}/profile',
       ),
@@ -230,6 +236,10 @@ export class DataSubscriptionServiceClient {
       subscriberPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/subscribers/{subscriber}',
       ),
+      subscriptionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/subscribers/{subscriber}/subscriptions/{subscription}',
+      ),
+      userPathTemplate: new this._gaxModule.PathTemplate('users/{user}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -240,6 +250,11 @@ export class DataSubscriptionServiceClient {
         'pageToken',
         'nextPageToken',
         'subscribers',
+      ),
+      listSubscriptions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'subscriptions',
       ),
     };
 
@@ -350,6 +365,10 @@ export class DataSubscriptionServiceClient {
       'listSubscribers',
       'updateSubscriber',
       'deleteSubscriber',
+      'createSubscription',
+      'listSubscriptions',
+      'updateSubscription',
+      'deleteSubscription',
     ];
     for (const methodName of dataSubscriptionServiceStubMethods) {
       const callPromise = this.dataSubscriptionServiceStub.then(
@@ -467,6 +486,464 @@ export class DataSubscriptionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates a subscription for a specific user to a specific subscriber.
+   * This method requires the subscriber to have a `SubscriptionCreatePolicy`
+   * set to `MANUAL` for the given data types.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent subscriber.
+   *   Format: projects/{project}/subscribers/{subscriber}
+   *   The {subscriber} ID is user-settable (4-36 characters, matching
+   *   /[a-z]([a-z0-9-]{2,34}[a-z0-9])/) if provided during creation, or
+   *   system-generated otherwise.
+   * @param {string} [request.subscriptionId]
+   *   Optional. The {subscription_id} is user-settable
+   *   (4-36 chars, matching /[a-z]([a-z0-9-]{2,34}[a-z0-9])/) or system-generated
+   *   otherwise.
+   *   If provided, the ID must be unique within the parent subscriber.
+   * @param {google.devicesandservices.health.v4.CreateSubscriptionPayload} request.subscription
+   *   Required. The subscription to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devicesandservices.health.v4.Subscription|Subscription}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_subscription_service.create_subscription.js</caption>
+   * region_tag:health_v4_generated_DataSubscriptionService_CreateSubscription_async
+   */
+  createSubscription(
+    request?: protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.ISubscription,
+      (
+        | protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createSubscription(
+    request: protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devicesandservices.health.v4.ISubscription,
+      | protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createSubscription(
+    request: protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest,
+    callback: Callback<
+      protos.google.devicesandservices.health.v4.ISubscription,
+      | protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createSubscription(
+    request?: protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devicesandservices.health.v4.ISubscription,
+          | protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devicesandservices.health.v4.ISubscription,
+      | protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.ISubscription,
+      (
+        | protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('createSubscription request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devicesandservices.health.v4.ISubscription,
+          | protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSubscription response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devicesandservices.health.v4.ISubscription,
+          (
+            | protos.google.devicesandservices.health.v4.ICreateSubscriptionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSubscription response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates the data types for an existing user subscription.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devicesandservices.health.v4.Subscription} request.subscription
+   *   Required. The subscription to update.
+   *   The subscription's `name` field is used to identify the subscription to
+   *   update. Format:
+   *   projects/{project}/subscribers/{subscriber}/subscriptions/{subscription}
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devicesandservices.health.v4.Subscription|Subscription}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_subscription_service.update_subscription.js</caption>
+   * region_tag:health_v4_generated_DataSubscriptionService_UpdateSubscription_async
+   */
+  updateSubscription(
+    request?: protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.ISubscription,
+      (
+        | protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateSubscription(
+    request: protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devicesandservices.health.v4.ISubscription,
+      | protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateSubscription(
+    request: protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest,
+    callback: Callback<
+      protos.google.devicesandservices.health.v4.ISubscription,
+      | protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateSubscription(
+    request?: protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devicesandservices.health.v4.ISubscription,
+          | protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devicesandservices.health.v4.ISubscription,
+      | protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.ISubscription,
+      (
+        | protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'subscription.name': request.subscription!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateSubscription request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devicesandservices.health.v4.ISubscription,
+          | protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSubscription response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devicesandservices.health.v4.ISubscription,
+          (
+            | protos.google.devicesandservices.health.v4.IUpdateSubscriptionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSubscription response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes a specific user subscription, stopping notifications for this
+   * user to this subscriber.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the subscription to delete.
+   *   Format:
+   *   `projects/{project}/subscribers/{subscriber}/subscriptions/{subscription}`
+   *   Example:
+   *   `projects/my-project/subscribers/my-subscriber-123/subscriptions/my-subscription-456`
+   *   The {subscriber} ID is user-settable (4-36 characters, matching
+   *   /[a-z]([a-z0-9-]{2,34}[a-z0-9])/) if provided during creation, or
+   *   system-generated otherwise. The {subscription} ID is user-settable (4-36
+   *   characters, matching
+   *   /[a-z]([a-z0-9-]{2,34}[a-z0-9])/) or system-generated if not provided
+   *   during creation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_subscription_service.delete_subscription.js</caption>
+   * region_tag:health_v4_generated_DataSubscriptionService_DeleteSubscription_async
+   */
+  deleteSubscription(
+    request?: protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteSubscription(
+    request: protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteSubscription(
+    request: protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteSubscription(
+    request?: protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('deleteSubscription request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSubscription response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.devicesandservices.health.v4.IDeleteSubscriptionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSubscription response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Registers a new subscriber endpoint to receive notifications.
@@ -1289,6 +1766,299 @@ export class DataSubscriptionServiceClient {
       callSettings,
     ) as AsyncIterable<protos.google.devicesandservices.health.v4.ISubscriber>;
   }
+  /**
+   * Lists all active subscriptions for a given subscriber. This can be
+   * filtered, for example, by user or data type.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent subscriber.
+   *   Format: projects/{project}/subscribers/{subscriber}
+   *   The {subscriber} ID is user-settable (4-36 characters, matching
+   *   /[a-z]([a-z0-9-]{2,34}[a-z0-9])/) if provided during creation, or
+   *   system-generated otherwise.
+   * @param {string} [request.filter]
+   *   Optional. A filter to apply to the list of subscriptions.
+   *   The filter syntax is described in https://google.aip.dev/160.
+   *   The filter can be applied to the following fields:
+   *   - `user`
+   *   - `data_type`
+   *
+   *   The `user` identifier (e.g., `user1` in `users/user1`) refers to the public
+   *   `healthUserId`
+   *
+   *   Example: user = "users/user1"
+   *   Example: user = "users/user1" OR user = "users/user2"
+   *   Example: user = "users/user1" AND (data_type = "sleep" OR data_type =
+   *   "weight")
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of subscriptions to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 subscriptions will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListSubscriptions` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListSubscriptions` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.devicesandservices.health.v4.Subscription|Subscription}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSubscriptionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSubscriptions(
+    request?: protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.ISubscription[],
+      protos.google.devicesandservices.health.v4.IListSubscriptionsRequest | null,
+      protos.google.devicesandservices.health.v4.IListSubscriptionsResponse,
+    ]
+  >;
+  listSubscriptions(
+    request: protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+      | protos.google.devicesandservices.health.v4.IListSubscriptionsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.ISubscription
+    >,
+  ): void;
+  listSubscriptions(
+    request: protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+    callback: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+      | protos.google.devicesandservices.health.v4.IListSubscriptionsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.ISubscription
+    >,
+  ): void;
+  listSubscriptions(
+    request?: protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+          | protos.google.devicesandservices.health.v4.IListSubscriptionsResponse
+          | null
+          | undefined,
+          protos.google.devicesandservices.health.v4.ISubscription
+        >,
+    callback?: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+      | protos.google.devicesandservices.health.v4.IListSubscriptionsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.ISubscription
+    >,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.ISubscription[],
+      protos.google.devicesandservices.health.v4.IListSubscriptionsRequest | null,
+      protos.google.devicesandservices.health.v4.IListSubscriptionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+          | protos.google.devicesandservices.health.v4.IListSubscriptionsResponse
+          | null
+          | undefined,
+          protos.google.devicesandservices.health.v4.ISubscription
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSubscriptions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSubscriptions request %j', request);
+    return this.innerApiCalls
+      .listSubscriptions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devicesandservices.health.v4.ISubscription[],
+          protos.google.devicesandservices.health.v4.IListSubscriptionsRequest | null,
+          protos.google.devicesandservices.health.v4.IListSubscriptionsResponse,
+        ]) => {
+          this._log.info('listSubscriptions values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listSubscriptions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent subscriber.
+   *   Format: projects/{project}/subscribers/{subscriber}
+   *   The {subscriber} ID is user-settable (4-36 characters, matching
+   *   /[a-z]([a-z0-9-]{2,34}[a-z0-9])/) if provided during creation, or
+   *   system-generated otherwise.
+   * @param {string} [request.filter]
+   *   Optional. A filter to apply to the list of subscriptions.
+   *   The filter syntax is described in https://google.aip.dev/160.
+   *   The filter can be applied to the following fields:
+   *   - `user`
+   *   - `data_type`
+   *
+   *   The `user` identifier (e.g., `user1` in `users/user1`) refers to the public
+   *   `healthUserId`
+   *
+   *   Example: user = "users/user1"
+   *   Example: user = "users/user1" OR user = "users/user2"
+   *   Example: user = "users/user1" AND (data_type = "sleep" OR data_type =
+   *   "weight")
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of subscriptions to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 subscriptions will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListSubscriptions` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListSubscriptions` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.devicesandservices.health.v4.Subscription|Subscription} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSubscriptionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSubscriptionsStream(
+    request?: protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSubscriptions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listSubscriptions stream %j', request);
+    return this.descriptors.page.listSubscriptions.createStream(
+      this.innerApiCalls.listSubscriptions as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listSubscriptions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent subscriber.
+   *   Format: projects/{project}/subscribers/{subscriber}
+   *   The {subscriber} ID is user-settable (4-36 characters, matching
+   *   /[a-z]([a-z0-9-]{2,34}[a-z0-9])/) if provided during creation, or
+   *   system-generated otherwise.
+   * @param {string} [request.filter]
+   *   Optional. A filter to apply to the list of subscriptions.
+   *   The filter syntax is described in https://google.aip.dev/160.
+   *   The filter can be applied to the following fields:
+   *   - `user`
+   *   - `data_type`
+   *
+   *   The `user` identifier (e.g., `user1` in `users/user1`) refers to the public
+   *   `healthUserId`
+   *
+   *   Example: user = "users/user1"
+   *   Example: user = "users/user1" OR user = "users/user2"
+   *   Example: user = "users/user1" AND (data_type = "sleep" OR data_type =
+   *   "weight")
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of subscriptions to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 subscriptions will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListSubscriptions` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListSubscriptions` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.devicesandservices.health.v4.Subscription|Subscription}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_subscription_service.list_subscriptions.js</caption>
+   * region_tag:health_v4_generated_DataSubscriptionService_ListSubscriptions_async
+   */
+  listSubscriptionsAsync(
+    request?: protos.google.devicesandservices.health.v4.IListSubscriptionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.devicesandservices.health.v4.ISubscription> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSubscriptions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listSubscriptions iterate %j', request);
+    return this.descriptors.page.listSubscriptions.asyncIterate(
+      this.innerApiCalls['listSubscriptions'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.devicesandservices.health.v4.ISubscription>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1405,6 +2175,67 @@ export class DataSubscriptionServiceClient {
   }
 
   /**
+   * Return a fully-qualified irnProfile resource name string.
+   *
+   * @param {string} user
+   * @returns {string} Resource name string.
+   */
+  irnProfilePath(user: string) {
+    return this.pathTemplates.irnProfilePathTemplate.render({
+      user: user,
+    });
+  }
+
+  /**
+   * Parse the user from IrnProfile resource.
+   *
+   * @param {string} irnProfileName
+   *   A fully-qualified path representing IrnProfile resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromIrnProfileName(irnProfileName: string) {
+    return this.pathTemplates.irnProfilePathTemplate.match(irnProfileName).user;
+  }
+
+  /**
+   * Return a fully-qualified pairedDevice resource name string.
+   *
+   * @param {string} user
+   * @param {string} paired_device
+   * @returns {string} Resource name string.
+   */
+  pairedDevicePath(user: string, pairedDevice: string) {
+    return this.pathTemplates.pairedDevicePathTemplate.render({
+      user: user,
+      paired_device: pairedDevice,
+    });
+  }
+
+  /**
+   * Parse the user from PairedDevice resource.
+   *
+   * @param {string} pairedDeviceName
+   *   A fully-qualified path representing PairedDevice resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromPairedDeviceName(pairedDeviceName: string) {
+    return this.pathTemplates.pairedDevicePathTemplate.match(pairedDeviceName)
+      .user;
+  }
+
+  /**
+   * Parse the paired_device from PairedDevice resource.
+   *
+   * @param {string} pairedDeviceName
+   *   A fully-qualified path representing PairedDevice resource.
+   * @returns {string} A string representing the paired_device.
+   */
+  matchPairedDeviceFromPairedDeviceName(pairedDeviceName: string) {
+    return this.pathTemplates.pairedDevicePathTemplate.match(pairedDeviceName)
+      .paired_device;
+  }
+
+  /**
    * Return a fully-qualified profile resource name string.
    *
    * @param {string} user
@@ -1509,6 +2340,81 @@ export class DataSubscriptionServiceClient {
   matchSubscriberFromSubscriberName(subscriberName: string) {
     return this.pathTemplates.subscriberPathTemplate.match(subscriberName)
       .subscriber;
+  }
+
+  /**
+   * Return a fully-qualified subscription resource name string.
+   *
+   * @param {string} project
+   * @param {string} subscriber
+   * @param {string} subscription
+   * @returns {string} Resource name string.
+   */
+  subscriptionPath(project: string, subscriber: string, subscription: string) {
+    return this.pathTemplates.subscriptionPathTemplate.render({
+      project: project,
+      subscriber: subscriber,
+      subscription: subscription,
+    });
+  }
+
+  /**
+   * Parse the project from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .project;
+  }
+
+  /**
+   * Parse the subscriber from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the subscriber.
+   */
+  matchSubscriberFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .subscriber;
+  }
+
+  /**
+   * Parse the subscription from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the subscription.
+   */
+  matchSubscriptionFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .subscription;
+  }
+
+  /**
+   * Return a fully-qualified user resource name string.
+   *
+   * @param {string} user
+   * @returns {string} Resource name string.
+   */
+  userPath(user: string) {
+    return this.pathTemplates.userPathTemplate.render({
+      user: user,
+    });
+  }
+
+  /**
+   * Parse the user from User resource.
+   *
+   * @param {string} userName
+   *   A fully-qualified path representing User resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromUserName(userName: string) {
+    return this.pathTemplates.userPathTemplate.match(userName).user;
   }
 
   /**

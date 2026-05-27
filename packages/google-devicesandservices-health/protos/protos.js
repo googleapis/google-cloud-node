@@ -1534,6 +1534,192 @@
                     })();
     
                     /**
+                     * FoodAccessLevel enum.
+                     * @name google.devicesandservices.health.v4.FoodAccessLevel
+                     * @enum {number}
+                     * @property {number} FOOD_ACCESS_LEVEL_UNSPECIFIED=0 FOOD_ACCESS_LEVEL_UNSPECIFIED value
+                     * @property {number} FOOD_ACCESS_LEVEL_PUBLIC=1 FOOD_ACCESS_LEVEL_PUBLIC value
+                     * @property {number} FOOD_ACCESS_LEVEL_PRIVATE=2 FOOD_ACCESS_LEVEL_PRIVATE value
+                     */
+                    v4.FoodAccessLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FOOD_ACCESS_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FOOD_ACCESS_LEVEL_PUBLIC"] = 1;
+                        values[valuesById[2] = "FOOD_ACCESS_LEVEL_PRIVATE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * MealType enum.
+                     * @name google.devicesandservices.health.v4.MealType
+                     * @enum {number}
+                     * @property {number} MEAL_TYPE_UNSPECIFIED=0 MEAL_TYPE_UNSPECIFIED value
+                     * @property {number} BEFORE_BREAKFAST=1 BEFORE_BREAKFAST value
+                     * @property {number} BREAKFAST=2 BREAKFAST value
+                     * @property {number} BEFORE_LUNCH=3 BEFORE_LUNCH value
+                     * @property {number} LUNCH=4 LUNCH value
+                     * @property {number} BEFORE_DINNER=5 BEFORE_DINNER value
+                     * @property {number} DINNER=6 DINNER value
+                     * @property {number} AFTER_DINNER=7 AFTER_DINNER value
+                     * @property {number} SNACK=8 SNACK value
+                     * @property {number} ANYTIME=9 ANYTIME value
+                     */
+                    v4.MealType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MEAL_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "BEFORE_BREAKFAST"] = 1;
+                        values[valuesById[2] = "BREAKFAST"] = 2;
+                        values[valuesById[3] = "BEFORE_LUNCH"] = 3;
+                        values[valuesById[4] = "LUNCH"] = 4;
+                        values[valuesById[5] = "BEFORE_DINNER"] = 5;
+                        values[valuesById[6] = "DINNER"] = 6;
+                        values[valuesById[7] = "AFTER_DINNER"] = 7;
+                        values[valuesById[8] = "SNACK"] = 8;
+                        values[valuesById[9] = "ANYTIME"] = 9;
+                        return values;
+                    })();
+    
+                    /**
+                     * EnergyUnit enum.
+                     * @name google.devicesandservices.health.v4.EnergyUnit
+                     * @enum {number}
+                     * @property {number} ENERGY_UNIT_UNSPECIFIED=0 ENERGY_UNIT_UNSPECIFIED value
+                     * @property {number} JOULE=1 JOULE value
+                     * @property {number} KILOJOULE=2 KILOJOULE value
+                     * @property {number} KILOCALORIE=3 KILOCALORIE value
+                     * @property {number} SMALL_CALORIE=4 SMALL_CALORIE value
+                     * @property {number} CALORIE=5 CALORIE value
+                     */
+                    v4.EnergyUnit = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENERGY_UNIT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "JOULE"] = 1;
+                        values[valuesById[2] = "KILOJOULE"] = 2;
+                        values[valuesById[3] = "KILOCALORIE"] = 3;
+                        values[valuesById[4] = "SMALL_CALORIE"] = 4;
+                        values[valuesById[5] = "CALORIE"] = 5;
+                        return values;
+                    })();
+    
+                    /**
+                     * Nutrient enum.
+                     * @name google.devicesandservices.health.v4.Nutrient
+                     * @enum {number}
+                     * @property {number} NUTRIENT_UNSPECIFIED=0 NUTRIENT_UNSPECIFIED value
+                     * @property {number} BIOTIN=1 BIOTIN value
+                     * @property {number} CAFFEINE=2 CAFFEINE value
+                     * @property {number} CALCIUM=3 CALCIUM value
+                     * @property {number} CHLORIDE=4 CHLORIDE value
+                     * @property {number} CARBOHYDRATES=5 CARBOHYDRATES value
+                     * @property {number} CHOLESTEROL=6 CHOLESTEROL value
+                     * @property {number} CHROMIUM=7 CHROMIUM value
+                     * @property {number} COPPER=8 COPPER value
+                     * @property {number} DIETARY_FIBER=9 DIETARY_FIBER value
+                     * @property {number} FOLIC_ACID=10 FOLIC_ACID value
+                     * @property {number} IODINE=11 IODINE value
+                     * @property {number} IRON=12 IRON value
+                     * @property {number} MAGNESIUM=13 MAGNESIUM value
+                     * @property {number} MANGANESE=14 MANGANESE value
+                     * @property {number} MOLYBDENUM=15 MOLYBDENUM value
+                     * @property {number} MONOUNSATURATED_FAT=16 MONOUNSATURATED_FAT value
+                     * @property {number} NIACIN=17 NIACIN value
+                     * @property {number} PANTOTHENIC_ACID=18 PANTOTHENIC_ACID value
+                     * @property {number} PHOSPHORUS=19 PHOSPHORUS value
+                     * @property {number} POLYUNSATURATED_FAT=20 POLYUNSATURATED_FAT value
+                     * @property {number} POTASSIUM=21 POTASSIUM value
+                     * @property {number} PROTEIN=22 PROTEIN value
+                     * @property {number} RIBOFLAVIN=23 RIBOFLAVIN value
+                     * @property {number} SATURATED_FAT=24 SATURATED_FAT value
+                     * @property {number} SELENIUM=25 SELENIUM value
+                     * @property {number} SODIUM=26 SODIUM value
+                     * @property {number} SUGAR=27 SUGAR value
+                     * @property {number} THIAMIN=28 THIAMIN value
+                     * @property {number} TRANS_FAT=29 TRANS_FAT value
+                     * @property {number} UNSATURATED_FAT=30 UNSATURATED_FAT value
+                     * @property {number} VITAMIN_A=31 VITAMIN_A value
+                     * @property {number} VITAMIN_B12=32 VITAMIN_B12 value
+                     * @property {number} VITAMIN_B6=33 VITAMIN_B6 value
+                     * @property {number} VITAMIN_C=34 VITAMIN_C value
+                     * @property {number} VITAMIN_D=35 VITAMIN_D value
+                     * @property {number} VITAMIN_E=36 VITAMIN_E value
+                     * @property {number} VITAMIN_K=37 VITAMIN_K value
+                     * @property {number} ZINC=38 ZINC value
+                     * @property {number} FOLATE=39 FOLATE value
+                     */
+                    v4.Nutrient = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NUTRIENT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "BIOTIN"] = 1;
+                        values[valuesById[2] = "CAFFEINE"] = 2;
+                        values[valuesById[3] = "CALCIUM"] = 3;
+                        values[valuesById[4] = "CHLORIDE"] = 4;
+                        values[valuesById[5] = "CARBOHYDRATES"] = 5;
+                        values[valuesById[6] = "CHOLESTEROL"] = 6;
+                        values[valuesById[7] = "CHROMIUM"] = 7;
+                        values[valuesById[8] = "COPPER"] = 8;
+                        values[valuesById[9] = "DIETARY_FIBER"] = 9;
+                        values[valuesById[10] = "FOLIC_ACID"] = 10;
+                        values[valuesById[11] = "IODINE"] = 11;
+                        values[valuesById[12] = "IRON"] = 12;
+                        values[valuesById[13] = "MAGNESIUM"] = 13;
+                        values[valuesById[14] = "MANGANESE"] = 14;
+                        values[valuesById[15] = "MOLYBDENUM"] = 15;
+                        values[valuesById[16] = "MONOUNSATURATED_FAT"] = 16;
+                        values[valuesById[17] = "NIACIN"] = 17;
+                        values[valuesById[18] = "PANTOTHENIC_ACID"] = 18;
+                        values[valuesById[19] = "PHOSPHORUS"] = 19;
+                        values[valuesById[20] = "POLYUNSATURATED_FAT"] = 20;
+                        values[valuesById[21] = "POTASSIUM"] = 21;
+                        values[valuesById[22] = "PROTEIN"] = 22;
+                        values[valuesById[23] = "RIBOFLAVIN"] = 23;
+                        values[valuesById[24] = "SATURATED_FAT"] = 24;
+                        values[valuesById[25] = "SELENIUM"] = 25;
+                        values[valuesById[26] = "SODIUM"] = 26;
+                        values[valuesById[27] = "SUGAR"] = 27;
+                        values[valuesById[28] = "THIAMIN"] = 28;
+                        values[valuesById[29] = "TRANS_FAT"] = 29;
+                        values[valuesById[30] = "UNSATURATED_FAT"] = 30;
+                        values[valuesById[31] = "VITAMIN_A"] = 31;
+                        values[valuesById[32] = "VITAMIN_B12"] = 32;
+                        values[valuesById[33] = "VITAMIN_B6"] = 33;
+                        values[valuesById[34] = "VITAMIN_C"] = 34;
+                        values[valuesById[35] = "VITAMIN_D"] = 35;
+                        values[valuesById[36] = "VITAMIN_E"] = 36;
+                        values[valuesById[37] = "VITAMIN_K"] = 37;
+                        values[valuesById[38] = "ZINC"] = 38;
+                        values[valuesById[39] = "FOLATE"] = 39;
+                        return values;
+                    })();
+    
+                    /**
+                     * WeightUnit enum.
+                     * @name google.devicesandservices.health.v4.WeightUnit
+                     * @enum {number}
+                     * @property {number} WEIGHT_UNIT_UNSPECIFIED=0 WEIGHT_UNIT_UNSPECIFIED value
+                     * @property {number} GRAM=1 GRAM value
+                     * @property {number} KILOGRAM=2 KILOGRAM value
+                     * @property {number} OUNCE=3 OUNCE value
+                     * @property {number} POUND=4 POUND value
+                     * @property {number} STONE=5 STONE value
+                     * @property {number} MILLIGRAM=6 MILLIGRAM value
+                     * @property {number} MICROGRAM=7 MICROGRAM value
+                     * @property {number} NANOGRAM=8 NANOGRAM value
+                     */
+                    v4.WeightUnit = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "WEIGHT_UNIT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GRAM"] = 1;
+                        values[valuesById[2] = "KILOGRAM"] = 2;
+                        values[valuesById[3] = "OUNCE"] = 3;
+                        values[valuesById[4] = "POUND"] = 4;
+                        values[valuesById[5] = "STONE"] = 5;
+                        values[valuesById[6] = "MILLIGRAM"] = 6;
+                        values[valuesById[7] = "MICROGRAM"] = 7;
+                        values[valuesById[8] = "NANOGRAM"] = 8;
+                        return values;
+                    })();
+    
+                    /**
                      * VolumeUnit enum.
                      * @name google.devicesandservices.health.v4.VolumeUnit
                      * @enum {number}
@@ -5013,6 +5199,729 @@
                         };
     
                         return BodyFatRollupValue;
+                    })();
+    
+                    v4.CoreBodyTemperature = (function() {
+    
+                        /**
+                         * Properties of a CoreBodyTemperature.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface ICoreBodyTemperature
+                         * @property {google.devicesandservices.health.v4.IObservationSampleTime|null} [sampleTime] CoreBodyTemperature sampleTime
+                         * @property {number|null} [temperatureCelsius] CoreBodyTemperature temperatureCelsius
+                         * @property {google.devicesandservices.health.v4.CoreBodyTemperature.MeasurementLocation|null} [measurementLocation] CoreBodyTemperature measurementLocation
+                         * @property {string|null} [id] CoreBodyTemperature id
+                         */
+    
+                        /**
+                         * Constructs a new CoreBodyTemperature.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a CoreBodyTemperature.
+                         * @implements ICoreBodyTemperature
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.ICoreBodyTemperature=} [properties] Properties to set
+                         */
+                        function CoreBodyTemperature(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CoreBodyTemperature sampleTime.
+                         * @member {google.devicesandservices.health.v4.IObservationSampleTime|null|undefined} sampleTime
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @instance
+                         */
+                        CoreBodyTemperature.prototype.sampleTime = null;
+    
+                        /**
+                         * CoreBodyTemperature temperatureCelsius.
+                         * @member {number|null|undefined} temperatureCelsius
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @instance
+                         */
+                        CoreBodyTemperature.prototype.temperatureCelsius = null;
+    
+                        /**
+                         * CoreBodyTemperature measurementLocation.
+                         * @member {google.devicesandservices.health.v4.CoreBodyTemperature.MeasurementLocation} measurementLocation
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @instance
+                         */
+                        CoreBodyTemperature.prototype.measurementLocation = 0;
+    
+                        /**
+                         * CoreBodyTemperature id.
+                         * @member {string} id
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @instance
+                         */
+                        CoreBodyTemperature.prototype.id = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CoreBodyTemperature.prototype, "_temperatureCelsius", {
+                            get: $util.oneOfGetter($oneOfFields = ["temperatureCelsius"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CoreBodyTemperature instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICoreBodyTemperature=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.CoreBodyTemperature} CoreBodyTemperature instance
+                         */
+                        CoreBodyTemperature.create = function create(properties) {
+                            return new CoreBodyTemperature(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CoreBodyTemperature message. Does not implicitly {@link google.devicesandservices.health.v4.CoreBodyTemperature.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICoreBodyTemperature} message CoreBodyTemperature message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CoreBodyTemperature.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sampleTime != null && Object.hasOwnProperty.call(message, "sampleTime"))
+                                $root.google.devicesandservices.health.v4.ObservationSampleTime.encode(message.sampleTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.temperatureCelsius != null && Object.hasOwnProperty.call(message, "temperatureCelsius"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.temperatureCelsius);
+                            if (message.measurementLocation != null && Object.hasOwnProperty.call(message, "measurementLocation"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.measurementLocation);
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.id);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CoreBodyTemperature message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CoreBodyTemperature.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICoreBodyTemperature} message CoreBodyTemperature message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CoreBodyTemperature.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CoreBodyTemperature message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.CoreBodyTemperature} CoreBodyTemperature
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CoreBodyTemperature.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.CoreBodyTemperature();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.temperatureCelsius = reader.double();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.measurementLocation = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CoreBodyTemperature message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.CoreBodyTemperature} CoreBodyTemperature
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CoreBodyTemperature.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CoreBodyTemperature message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CoreBodyTemperature.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.sampleTime != null && message.hasOwnProperty("sampleTime")) {
+                                var error = $root.google.devicesandservices.health.v4.ObservationSampleTime.verify(message.sampleTime);
+                                if (error)
+                                    return "sampleTime." + error;
+                            }
+                            if (message.temperatureCelsius != null && message.hasOwnProperty("temperatureCelsius")) {
+                                properties._temperatureCelsius = 1;
+                                if (typeof message.temperatureCelsius !== "number")
+                                    return "temperatureCelsius: number expected";
+                            }
+                            if (message.measurementLocation != null && message.hasOwnProperty("measurementLocation"))
+                                switch (message.measurementLocation) {
+                                default:
+                                    return "measurementLocation: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                    break;
+                                }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CoreBodyTemperature message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.CoreBodyTemperature} CoreBodyTemperature
+                         */
+                        CoreBodyTemperature.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.CoreBodyTemperature)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.CoreBodyTemperature();
+                            if (object.sampleTime != null) {
+                                if (typeof object.sampleTime !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.CoreBodyTemperature.sampleTime: object expected");
+                                message.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.fromObject(object.sampleTime);
+                            }
+                            if (object.temperatureCelsius != null)
+                                message.temperatureCelsius = Number(object.temperatureCelsius);
+                            switch (object.measurementLocation) {
+                            default:
+                                if (typeof object.measurementLocation === "number") {
+                                    message.measurementLocation = object.measurementLocation;
+                                    break;
+                                }
+                                break;
+                            case "MEASUREMENT_LOCATION_UNSPECIFIED":
+                            case 0:
+                                message.measurementLocation = 0;
+                                break;
+                            case "OTHER":
+                            case 1:
+                                message.measurementLocation = 1;
+                                break;
+                            case "ARMPIT":
+                            case 2:
+                                message.measurementLocation = 2;
+                                break;
+                            case "BODY":
+                            case 3:
+                                message.measurementLocation = 3;
+                                break;
+                            case "EAR":
+                            case 4:
+                                message.measurementLocation = 4;
+                                break;
+                            case "FINGER":
+                            case 5:
+                                message.measurementLocation = 5;
+                                break;
+                            case "GASTRO_INTESTINAL":
+                            case 6:
+                                message.measurementLocation = 6;
+                                break;
+                            case "MOUTH":
+                            case 7:
+                                message.measurementLocation = 7;
+                                break;
+                            case "RECTUM":
+                            case 8:
+                                message.measurementLocation = 8;
+                                break;
+                            case "TOE":
+                            case 9:
+                                message.measurementLocation = 9;
+                                break;
+                            case "EAR_DRUM":
+                            case 10:
+                                message.measurementLocation = 10;
+                                break;
+                            case "TEMPORAL_ARTERY":
+                            case 11:
+                                message.measurementLocation = 11;
+                                break;
+                            case "FOREHEAD":
+                            case 12:
+                                message.measurementLocation = 12;
+                                break;
+                            case "URINARY_BLADDER":
+                            case 13:
+                                message.measurementLocation = 13;
+                                break;
+                            case "NASAL":
+                            case 14:
+                                message.measurementLocation = 14;
+                                break;
+                            case "NASOPHARYNGEAL":
+                            case 15:
+                                message.measurementLocation = 15;
+                                break;
+                            case "WRIST":
+                            case 16:
+                                message.measurementLocation = 16;
+                                break;
+                            case "VAGINA":
+                            case 17:
+                                message.measurementLocation = 17;
+                                break;
+                            }
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CoreBodyTemperature message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @static
+                         * @param {google.devicesandservices.health.v4.CoreBodyTemperature} message CoreBodyTemperature
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CoreBodyTemperature.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sampleTime = null;
+                                object.measurementLocation = options.enums === String ? "MEASUREMENT_LOCATION_UNSPECIFIED" : 0;
+                                object.id = "";
+                            }
+                            if (message.sampleTime != null && message.hasOwnProperty("sampleTime"))
+                                object.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.toObject(message.sampleTime, options);
+                            if (message.temperatureCelsius != null && message.hasOwnProperty("temperatureCelsius")) {
+                                object.temperatureCelsius = options.json && !isFinite(message.temperatureCelsius) ? String(message.temperatureCelsius) : message.temperatureCelsius;
+                                if (options.oneofs)
+                                    object._temperatureCelsius = "temperatureCelsius";
+                            }
+                            if (message.measurementLocation != null && message.hasOwnProperty("measurementLocation"))
+                                object.measurementLocation = options.enums === String ? $root.google.devicesandservices.health.v4.CoreBodyTemperature.MeasurementLocation[message.measurementLocation] === undefined ? message.measurementLocation : $root.google.devicesandservices.health.v4.CoreBodyTemperature.MeasurementLocation[message.measurementLocation] : message.measurementLocation;
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CoreBodyTemperature to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CoreBodyTemperature.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CoreBodyTemperature
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperature
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CoreBodyTemperature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.CoreBodyTemperature";
+                        };
+    
+                        /**
+                         * MeasurementLocation enum.
+                         * @name google.devicesandservices.health.v4.CoreBodyTemperature.MeasurementLocation
+                         * @enum {number}
+                         * @property {number} MEASUREMENT_LOCATION_UNSPECIFIED=0 MEASUREMENT_LOCATION_UNSPECIFIED value
+                         * @property {number} OTHER=1 OTHER value
+                         * @property {number} ARMPIT=2 ARMPIT value
+                         * @property {number} BODY=3 BODY value
+                         * @property {number} EAR=4 EAR value
+                         * @property {number} FINGER=5 FINGER value
+                         * @property {number} GASTRO_INTESTINAL=6 GASTRO_INTESTINAL value
+                         * @property {number} MOUTH=7 MOUTH value
+                         * @property {number} RECTUM=8 RECTUM value
+                         * @property {number} TOE=9 TOE value
+                         * @property {number} EAR_DRUM=10 EAR_DRUM value
+                         * @property {number} TEMPORAL_ARTERY=11 TEMPORAL_ARTERY value
+                         * @property {number} FOREHEAD=12 FOREHEAD value
+                         * @property {number} URINARY_BLADDER=13 URINARY_BLADDER value
+                         * @property {number} NASAL=14 NASAL value
+                         * @property {number} NASOPHARYNGEAL=15 NASOPHARYNGEAL value
+                         * @property {number} WRIST=16 WRIST value
+                         * @property {number} VAGINA=17 VAGINA value
+                         */
+                        CoreBodyTemperature.MeasurementLocation = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MEASUREMENT_LOCATION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "OTHER"] = 1;
+                            values[valuesById[2] = "ARMPIT"] = 2;
+                            values[valuesById[3] = "BODY"] = 3;
+                            values[valuesById[4] = "EAR"] = 4;
+                            values[valuesById[5] = "FINGER"] = 5;
+                            values[valuesById[6] = "GASTRO_INTESTINAL"] = 6;
+                            values[valuesById[7] = "MOUTH"] = 7;
+                            values[valuesById[8] = "RECTUM"] = 8;
+                            values[valuesById[9] = "TOE"] = 9;
+                            values[valuesById[10] = "EAR_DRUM"] = 10;
+                            values[valuesById[11] = "TEMPORAL_ARTERY"] = 11;
+                            values[valuesById[12] = "FOREHEAD"] = 12;
+                            values[valuesById[13] = "URINARY_BLADDER"] = 13;
+                            values[valuesById[14] = "NASAL"] = 14;
+                            values[valuesById[15] = "NASOPHARYNGEAL"] = 15;
+                            values[valuesById[16] = "WRIST"] = 16;
+                            values[valuesById[17] = "VAGINA"] = 17;
+                            return values;
+                        })();
+    
+                        return CoreBodyTemperature;
+                    })();
+    
+                    v4.CoreBodyTemperatureRollupValue = (function() {
+    
+                        /**
+                         * Properties of a CoreBodyTemperatureRollupValue.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface ICoreBodyTemperatureRollupValue
+                         * @property {number|null} [temperatureCelsiusAvg] CoreBodyTemperatureRollupValue temperatureCelsiusAvg
+                         * @property {number|null} [temperatureCelsiusMax] CoreBodyTemperatureRollupValue temperatureCelsiusMax
+                         * @property {number|null} [temperatureCelsiusMin] CoreBodyTemperatureRollupValue temperatureCelsiusMin
+                         */
+    
+                        /**
+                         * Constructs a new CoreBodyTemperatureRollupValue.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a CoreBodyTemperatureRollupValue.
+                         * @implements ICoreBodyTemperatureRollupValue
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue=} [properties] Properties to set
+                         */
+                        function CoreBodyTemperatureRollupValue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CoreBodyTemperatureRollupValue temperatureCelsiusAvg.
+                         * @member {number|null|undefined} temperatureCelsiusAvg
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @instance
+                         */
+                        CoreBodyTemperatureRollupValue.prototype.temperatureCelsiusAvg = null;
+    
+                        /**
+                         * CoreBodyTemperatureRollupValue temperatureCelsiusMax.
+                         * @member {number|null|undefined} temperatureCelsiusMax
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @instance
+                         */
+                        CoreBodyTemperatureRollupValue.prototype.temperatureCelsiusMax = null;
+    
+                        /**
+                         * CoreBodyTemperatureRollupValue temperatureCelsiusMin.
+                         * @member {number|null|undefined} temperatureCelsiusMin
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @instance
+                         */
+                        CoreBodyTemperatureRollupValue.prototype.temperatureCelsiusMin = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CoreBodyTemperatureRollupValue.prototype, "_temperatureCelsiusAvg", {
+                            get: $util.oneOfGetter($oneOfFields = ["temperatureCelsiusAvg"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CoreBodyTemperatureRollupValue.prototype, "_temperatureCelsiusMax", {
+                            get: $util.oneOfGetter($oneOfFields = ["temperatureCelsiusMax"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CoreBodyTemperatureRollupValue.prototype, "_temperatureCelsiusMin", {
+                            get: $util.oneOfGetter($oneOfFields = ["temperatureCelsiusMin"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CoreBodyTemperatureRollupValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue} CoreBodyTemperatureRollupValue instance
+                         */
+                        CoreBodyTemperatureRollupValue.create = function create(properties) {
+                            return new CoreBodyTemperatureRollupValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CoreBodyTemperatureRollupValue message. Does not implicitly {@link google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue} message CoreBodyTemperatureRollupValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CoreBodyTemperatureRollupValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.temperatureCelsiusAvg != null && Object.hasOwnProperty.call(message, "temperatureCelsiusAvg"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.temperatureCelsiusAvg);
+                            if (message.temperatureCelsiusMax != null && Object.hasOwnProperty.call(message, "temperatureCelsiusMax"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.temperatureCelsiusMax);
+                            if (message.temperatureCelsiusMin != null && Object.hasOwnProperty.call(message, "temperatureCelsiusMin"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.temperatureCelsiusMin);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CoreBodyTemperatureRollupValue message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue} message CoreBodyTemperatureRollupValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CoreBodyTemperatureRollupValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CoreBodyTemperatureRollupValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue} CoreBodyTemperatureRollupValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CoreBodyTemperatureRollupValue.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.temperatureCelsiusAvg = reader.double();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.temperatureCelsiusMax = reader.double();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.temperatureCelsiusMin = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CoreBodyTemperatureRollupValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue} CoreBodyTemperatureRollupValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CoreBodyTemperatureRollupValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CoreBodyTemperatureRollupValue message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CoreBodyTemperatureRollupValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.temperatureCelsiusAvg != null && message.hasOwnProperty("temperatureCelsiusAvg")) {
+                                properties._temperatureCelsiusAvg = 1;
+                                if (typeof message.temperatureCelsiusAvg !== "number")
+                                    return "temperatureCelsiusAvg: number expected";
+                            }
+                            if (message.temperatureCelsiusMax != null && message.hasOwnProperty("temperatureCelsiusMax")) {
+                                properties._temperatureCelsiusMax = 1;
+                                if (typeof message.temperatureCelsiusMax !== "number")
+                                    return "temperatureCelsiusMax: number expected";
+                            }
+                            if (message.temperatureCelsiusMin != null && message.hasOwnProperty("temperatureCelsiusMin")) {
+                                properties._temperatureCelsiusMin = 1;
+                                if (typeof message.temperatureCelsiusMin !== "number")
+                                    return "temperatureCelsiusMin: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CoreBodyTemperatureRollupValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue} CoreBodyTemperatureRollupValue
+                         */
+                        CoreBodyTemperatureRollupValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue();
+                            if (object.temperatureCelsiusAvg != null)
+                                message.temperatureCelsiusAvg = Number(object.temperatureCelsiusAvg);
+                            if (object.temperatureCelsiusMax != null)
+                                message.temperatureCelsiusMax = Number(object.temperatureCelsiusMax);
+                            if (object.temperatureCelsiusMin != null)
+                                message.temperatureCelsiusMin = Number(object.temperatureCelsiusMin);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CoreBodyTemperatureRollupValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue} message CoreBodyTemperatureRollupValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CoreBodyTemperatureRollupValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.temperatureCelsiusAvg != null && message.hasOwnProperty("temperatureCelsiusAvg")) {
+                                object.temperatureCelsiusAvg = options.json && !isFinite(message.temperatureCelsiusAvg) ? String(message.temperatureCelsiusAvg) : message.temperatureCelsiusAvg;
+                                if (options.oneofs)
+                                    object._temperatureCelsiusAvg = "temperatureCelsiusAvg";
+                            }
+                            if (message.temperatureCelsiusMax != null && message.hasOwnProperty("temperatureCelsiusMax")) {
+                                object.temperatureCelsiusMax = options.json && !isFinite(message.temperatureCelsiusMax) ? String(message.temperatureCelsiusMax) : message.temperatureCelsiusMax;
+                                if (options.oneofs)
+                                    object._temperatureCelsiusMax = "temperatureCelsiusMax";
+                            }
+                            if (message.temperatureCelsiusMin != null && message.hasOwnProperty("temperatureCelsiusMin")) {
+                                object.temperatureCelsiusMin = options.json && !isFinite(message.temperatureCelsiusMin) ? String(message.temperatureCelsiusMin) : message.temperatureCelsiusMin;
+                                if (options.oneofs)
+                                    object._temperatureCelsiusMin = "temperatureCelsiusMin";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CoreBodyTemperatureRollupValue to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CoreBodyTemperatureRollupValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CoreBodyTemperatureRollupValue
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CoreBodyTemperatureRollupValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue";
+                        };
+    
+                        return CoreBodyTemperatureRollupValue;
                     })();
     
                     v4.CaloriesInHeartRateZoneRollupValue = (function() {
@@ -8772,6 +9681,537 @@
                         };
     
                         return DistanceRollupValue;
+                    })();
+    
+                    v4.Electrocardiogram = (function() {
+    
+                        /**
+                         * Properties of an Electrocardiogram.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IElectrocardiogram
+                         * @property {google.devicesandservices.health.v4.ISessionTimeInterval|null} [interval] Electrocardiogram interval
+                         * @property {number|Long|null} [beatsPerMinuteAvg] Electrocardiogram beatsPerMinuteAvg
+                         * @property {google.devicesandservices.health.v4.Electrocardiogram.ResultClassification|null} [resultClassification] Electrocardiogram resultClassification
+                         * @property {Array.<number>|null} [waveformSamples] Electrocardiogram waveformSamples
+                         * @property {number|null} [samplingFrequencyHertz] Electrocardiogram samplingFrequencyHertz
+                         * @property {number|null} [millivoltsScalingFactor] Electrocardiogram millivoltsScalingFactor
+                         * @property {number|null} [leadNumber] Electrocardiogram leadNumber
+                         * @property {google.devicesandservices.health.v4.IMedicalDeviceInfo|null} [medicalDeviceInfo] Electrocardiogram medicalDeviceInfo
+                         */
+    
+                        /**
+                         * Constructs a new Electrocardiogram.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents an Electrocardiogram.
+                         * @implements IElectrocardiogram
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IElectrocardiogram=} [properties] Properties to set
+                         */
+                        function Electrocardiogram(properties) {
+                            this.waveformSamples = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Electrocardiogram interval.
+                         * @member {google.devicesandservices.health.v4.ISessionTimeInterval|null|undefined} interval
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @instance
+                         */
+                        Electrocardiogram.prototype.interval = null;
+    
+                        /**
+                         * Electrocardiogram beatsPerMinuteAvg.
+                         * @member {number|Long|null|undefined} beatsPerMinuteAvg
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @instance
+                         */
+                        Electrocardiogram.prototype.beatsPerMinuteAvg = null;
+    
+                        /**
+                         * Electrocardiogram resultClassification.
+                         * @member {google.devicesandservices.health.v4.Electrocardiogram.ResultClassification} resultClassification
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @instance
+                         */
+                        Electrocardiogram.prototype.resultClassification = 0;
+    
+                        /**
+                         * Electrocardiogram waveformSamples.
+                         * @member {Array.<number>} waveformSamples
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @instance
+                         */
+                        Electrocardiogram.prototype.waveformSamples = $util.emptyArray;
+    
+                        /**
+                         * Electrocardiogram samplingFrequencyHertz.
+                         * @member {number|null|undefined} samplingFrequencyHertz
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @instance
+                         */
+                        Electrocardiogram.prototype.samplingFrequencyHertz = null;
+    
+                        /**
+                         * Electrocardiogram millivoltsScalingFactor.
+                         * @member {number|null|undefined} millivoltsScalingFactor
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @instance
+                         */
+                        Electrocardiogram.prototype.millivoltsScalingFactor = null;
+    
+                        /**
+                         * Electrocardiogram leadNumber.
+                         * @member {number|null|undefined} leadNumber
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @instance
+                         */
+                        Electrocardiogram.prototype.leadNumber = null;
+    
+                        /**
+                         * Electrocardiogram medicalDeviceInfo.
+                         * @member {google.devicesandservices.health.v4.IMedicalDeviceInfo|null|undefined} medicalDeviceInfo
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @instance
+                         */
+                        Electrocardiogram.prototype.medicalDeviceInfo = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Electrocardiogram.prototype, "_beatsPerMinuteAvg", {
+                            get: $util.oneOfGetter($oneOfFields = ["beatsPerMinuteAvg"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Electrocardiogram.prototype, "_samplingFrequencyHertz", {
+                            get: $util.oneOfGetter($oneOfFields = ["samplingFrequencyHertz"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Electrocardiogram.prototype, "_millivoltsScalingFactor", {
+                            get: $util.oneOfGetter($oneOfFields = ["millivoltsScalingFactor"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Electrocardiogram.prototype, "_leadNumber", {
+                            get: $util.oneOfGetter($oneOfFields = ["leadNumber"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Electrocardiogram instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IElectrocardiogram=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.Electrocardiogram} Electrocardiogram instance
+                         */
+                        Electrocardiogram.create = function create(properties) {
+                            return new Electrocardiogram(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Electrocardiogram message. Does not implicitly {@link google.devicesandservices.health.v4.Electrocardiogram.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IElectrocardiogram} message Electrocardiogram message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Electrocardiogram.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
+                                $root.google.devicesandservices.health.v4.SessionTimeInterval.encode(message.interval, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.beatsPerMinuteAvg != null && Object.hasOwnProperty.call(message, "beatsPerMinuteAvg"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.beatsPerMinuteAvg);
+                            if (message.resultClassification != null && Object.hasOwnProperty.call(message, "resultClassification"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.resultClassification);
+                            if (message.waveformSamples != null && message.waveformSamples.length) {
+                                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                                for (var i = 0; i < message.waveformSamples.length; ++i)
+                                    writer.sint32(message.waveformSamples[i]);
+                                writer.ldelim();
+                            }
+                            if (message.samplingFrequencyHertz != null && Object.hasOwnProperty.call(message, "samplingFrequencyHertz"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.samplingFrequencyHertz);
+                            if (message.millivoltsScalingFactor != null && Object.hasOwnProperty.call(message, "millivoltsScalingFactor"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.millivoltsScalingFactor);
+                            if (message.leadNumber != null && Object.hasOwnProperty.call(message, "leadNumber"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.leadNumber);
+                            if (message.medicalDeviceInfo != null && Object.hasOwnProperty.call(message, "medicalDeviceInfo"))
+                                $root.google.devicesandservices.health.v4.MedicalDeviceInfo.encode(message.medicalDeviceInfo, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Electrocardiogram message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Electrocardiogram.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IElectrocardiogram} message Electrocardiogram message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Electrocardiogram.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Electrocardiogram message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.Electrocardiogram} Electrocardiogram
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Electrocardiogram.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.Electrocardiogram();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.interval = $root.google.devicesandservices.health.v4.SessionTimeInterval.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.beatsPerMinuteAvg = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.resultClassification = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.waveformSamples && message.waveformSamples.length))
+                                            message.waveformSamples = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.waveformSamples.push(reader.sint32());
+                                        } else
+                                            message.waveformSamples.push(reader.sint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.samplingFrequencyHertz = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.millivoltsScalingFactor = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.leadNumber = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.medicalDeviceInfo = $root.google.devicesandservices.health.v4.MedicalDeviceInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Electrocardiogram message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.Electrocardiogram} Electrocardiogram
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Electrocardiogram.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Electrocardiogram message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Electrocardiogram.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.interval != null && message.hasOwnProperty("interval")) {
+                                var error = $root.google.devicesandservices.health.v4.SessionTimeInterval.verify(message.interval);
+                                if (error)
+                                    return "interval." + error;
+                            }
+                            if (message.beatsPerMinuteAvg != null && message.hasOwnProperty("beatsPerMinuteAvg")) {
+                                properties._beatsPerMinuteAvg = 1;
+                                if (!$util.isInteger(message.beatsPerMinuteAvg) && !(message.beatsPerMinuteAvg && $util.isInteger(message.beatsPerMinuteAvg.low) && $util.isInteger(message.beatsPerMinuteAvg.high)))
+                                    return "beatsPerMinuteAvg: integer|Long expected";
+                            }
+                            if (message.resultClassification != null && message.hasOwnProperty("resultClassification"))
+                                switch (message.resultClassification) {
+                                default:
+                                    return "resultClassification: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.waveformSamples != null && message.hasOwnProperty("waveformSamples")) {
+                                if (!Array.isArray(message.waveformSamples))
+                                    return "waveformSamples: array expected";
+                                for (var i = 0; i < message.waveformSamples.length; ++i)
+                                    if (!$util.isInteger(message.waveformSamples[i]))
+                                        return "waveformSamples: integer[] expected";
+                            }
+                            if (message.samplingFrequencyHertz != null && message.hasOwnProperty("samplingFrequencyHertz")) {
+                                properties._samplingFrequencyHertz = 1;
+                                if (!$util.isInteger(message.samplingFrequencyHertz))
+                                    return "samplingFrequencyHertz: integer expected";
+                            }
+                            if (message.millivoltsScalingFactor != null && message.hasOwnProperty("millivoltsScalingFactor")) {
+                                properties._millivoltsScalingFactor = 1;
+                                if (!$util.isInteger(message.millivoltsScalingFactor))
+                                    return "millivoltsScalingFactor: integer expected";
+                            }
+                            if (message.leadNumber != null && message.hasOwnProperty("leadNumber")) {
+                                properties._leadNumber = 1;
+                                if (!$util.isInteger(message.leadNumber))
+                                    return "leadNumber: integer expected";
+                            }
+                            if (message.medicalDeviceInfo != null && message.hasOwnProperty("medicalDeviceInfo")) {
+                                var error = $root.google.devicesandservices.health.v4.MedicalDeviceInfo.verify(message.medicalDeviceInfo);
+                                if (error)
+                                    return "medicalDeviceInfo." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Electrocardiogram message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.Electrocardiogram} Electrocardiogram
+                         */
+                        Electrocardiogram.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.Electrocardiogram)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.Electrocardiogram();
+                            if (object.interval != null) {
+                                if (typeof object.interval !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Electrocardiogram.interval: object expected");
+                                message.interval = $root.google.devicesandservices.health.v4.SessionTimeInterval.fromObject(object.interval);
+                            }
+                            if (object.beatsPerMinuteAvg != null)
+                                if ($util.Long)
+                                    (message.beatsPerMinuteAvg = $util.Long.fromValue(object.beatsPerMinuteAvg)).unsigned = false;
+                                else if (typeof object.beatsPerMinuteAvg === "string")
+                                    message.beatsPerMinuteAvg = parseInt(object.beatsPerMinuteAvg, 10);
+                                else if (typeof object.beatsPerMinuteAvg === "number")
+                                    message.beatsPerMinuteAvg = object.beatsPerMinuteAvg;
+                                else if (typeof object.beatsPerMinuteAvg === "object")
+                                    message.beatsPerMinuteAvg = new $util.LongBits(object.beatsPerMinuteAvg.low >>> 0, object.beatsPerMinuteAvg.high >>> 0).toNumber();
+                            switch (object.resultClassification) {
+                            default:
+                                if (typeof object.resultClassification === "number") {
+                                    message.resultClassification = object.resultClassification;
+                                    break;
+                                }
+                                break;
+                            case "RESULT_CLASSIFICATION_UNSPECIFIED":
+                            case 0:
+                                message.resultClassification = 0;
+                                break;
+                            case "NORMAL_SINUS_RHYTHM":
+                            case 1:
+                                message.resultClassification = 1;
+                                break;
+                            case "ATRIAL_FIBRILLATION":
+                            case 2:
+                                message.resultClassification = 2;
+                                break;
+                            case "INCONCLUSIVE":
+                            case 3:
+                                message.resultClassification = 3;
+                                break;
+                            case "INCONCLUSIVE_HIGH_HEART_RATE":
+                            case 4:
+                                message.resultClassification = 4;
+                                break;
+                            case "INCONCLUSIVE_LOW_HEART_RATE":
+                            case 5:
+                                message.resultClassification = 5;
+                                break;
+                            case "UNREADABLE":
+                            case 6:
+                                message.resultClassification = 6;
+                                break;
+                            case "NOT_ANALYZED":
+                            case 7:
+                                message.resultClassification = 7;
+                                break;
+                            }
+                            if (object.waveformSamples) {
+                                if (!Array.isArray(object.waveformSamples))
+                                    throw TypeError(".google.devicesandservices.health.v4.Electrocardiogram.waveformSamples: array expected");
+                                message.waveformSamples = [];
+                                for (var i = 0; i < object.waveformSamples.length; ++i)
+                                    message.waveformSamples[i] = object.waveformSamples[i] | 0;
+                            }
+                            if (object.samplingFrequencyHertz != null)
+                                message.samplingFrequencyHertz = object.samplingFrequencyHertz | 0;
+                            if (object.millivoltsScalingFactor != null)
+                                message.millivoltsScalingFactor = object.millivoltsScalingFactor | 0;
+                            if (object.leadNumber != null)
+                                message.leadNumber = object.leadNumber | 0;
+                            if (object.medicalDeviceInfo != null) {
+                                if (typeof object.medicalDeviceInfo !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Electrocardiogram.medicalDeviceInfo: object expected");
+                                message.medicalDeviceInfo = $root.google.devicesandservices.health.v4.MedicalDeviceInfo.fromObject(object.medicalDeviceInfo);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Electrocardiogram message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @static
+                         * @param {google.devicesandservices.health.v4.Electrocardiogram} message Electrocardiogram
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Electrocardiogram.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.waveformSamples = [];
+                            if (options.defaults) {
+                                object.interval = null;
+                                object.resultClassification = options.enums === String ? "RESULT_CLASSIFICATION_UNSPECIFIED" : 0;
+                                object.medicalDeviceInfo = null;
+                            }
+                            if (message.interval != null && message.hasOwnProperty("interval"))
+                                object.interval = $root.google.devicesandservices.health.v4.SessionTimeInterval.toObject(message.interval, options);
+                            if (message.beatsPerMinuteAvg != null && message.hasOwnProperty("beatsPerMinuteAvg")) {
+                                if (typeof message.beatsPerMinuteAvg === "number")
+                                    object.beatsPerMinuteAvg = options.longs === String ? String(message.beatsPerMinuteAvg) : message.beatsPerMinuteAvg;
+                                else
+                                    object.beatsPerMinuteAvg = options.longs === String ? $util.Long.prototype.toString.call(message.beatsPerMinuteAvg) : options.longs === Number ? new $util.LongBits(message.beatsPerMinuteAvg.low >>> 0, message.beatsPerMinuteAvg.high >>> 0).toNumber() : message.beatsPerMinuteAvg;
+                                if (options.oneofs)
+                                    object._beatsPerMinuteAvg = "beatsPerMinuteAvg";
+                            }
+                            if (message.resultClassification != null && message.hasOwnProperty("resultClassification"))
+                                object.resultClassification = options.enums === String ? $root.google.devicesandservices.health.v4.Electrocardiogram.ResultClassification[message.resultClassification] === undefined ? message.resultClassification : $root.google.devicesandservices.health.v4.Electrocardiogram.ResultClassification[message.resultClassification] : message.resultClassification;
+                            if (message.waveformSamples && message.waveformSamples.length) {
+                                object.waveformSamples = [];
+                                for (var j = 0; j < message.waveformSamples.length; ++j)
+                                    object.waveformSamples[j] = message.waveformSamples[j];
+                            }
+                            if (message.samplingFrequencyHertz != null && message.hasOwnProperty("samplingFrequencyHertz")) {
+                                object.samplingFrequencyHertz = message.samplingFrequencyHertz;
+                                if (options.oneofs)
+                                    object._samplingFrequencyHertz = "samplingFrequencyHertz";
+                            }
+                            if (message.millivoltsScalingFactor != null && message.hasOwnProperty("millivoltsScalingFactor")) {
+                                object.millivoltsScalingFactor = message.millivoltsScalingFactor;
+                                if (options.oneofs)
+                                    object._millivoltsScalingFactor = "millivoltsScalingFactor";
+                            }
+                            if (message.leadNumber != null && message.hasOwnProperty("leadNumber")) {
+                                object.leadNumber = message.leadNumber;
+                                if (options.oneofs)
+                                    object._leadNumber = "leadNumber";
+                            }
+                            if (message.medicalDeviceInfo != null && message.hasOwnProperty("medicalDeviceInfo"))
+                                object.medicalDeviceInfo = $root.google.devicesandservices.health.v4.MedicalDeviceInfo.toObject(message.medicalDeviceInfo, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Electrocardiogram to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Electrocardiogram.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Electrocardiogram
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.Electrocardiogram
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Electrocardiogram.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.Electrocardiogram";
+                        };
+    
+                        /**
+                         * ResultClassification enum.
+                         * @name google.devicesandservices.health.v4.Electrocardiogram.ResultClassification
+                         * @enum {number}
+                         * @property {number} RESULT_CLASSIFICATION_UNSPECIFIED=0 RESULT_CLASSIFICATION_UNSPECIFIED value
+                         * @property {number} NORMAL_SINUS_RHYTHM=1 NORMAL_SINUS_RHYTHM value
+                         * @property {number} ATRIAL_FIBRILLATION=2 ATRIAL_FIBRILLATION value
+                         * @property {number} INCONCLUSIVE=3 INCONCLUSIVE value
+                         * @property {number} INCONCLUSIVE_HIGH_HEART_RATE=4 INCONCLUSIVE_HIGH_HEART_RATE value
+                         * @property {number} INCONCLUSIVE_LOW_HEART_RATE=5 INCONCLUSIVE_LOW_HEART_RATE value
+                         * @property {number} UNREADABLE=6 UNREADABLE value
+                         * @property {number} NOT_ANALYZED=7 NOT_ANALYZED value
+                         */
+                        Electrocardiogram.ResultClassification = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RESULT_CLASSIFICATION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NORMAL_SINUS_RHYTHM"] = 1;
+                            values[valuesById[2] = "ATRIAL_FIBRILLATION"] = 2;
+                            values[valuesById[3] = "INCONCLUSIVE"] = 3;
+                            values[valuesById[4] = "INCONCLUSIVE_HIGH_HEART_RATE"] = 4;
+                            values[valuesById[5] = "INCONCLUSIVE_LOW_HEART_RATE"] = 5;
+                            values[valuesById[6] = "UNREADABLE"] = 6;
+                            values[valuesById[7] = "NOT_ANALYZED"] = 7;
+                            return values;
+                        })();
+    
+                        return Electrocardiogram;
                     })();
     
                     v4.Exercise = (function() {
@@ -14428,6 +15868,1013 @@
                         return HydrationLogRollupValue;
                     })();
     
+                    v4.IrregularRhythmNotification = (function() {
+    
+                        /**
+                         * Properties of an IrregularRhythmNotification.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IIrregularRhythmNotification
+                         * @property {google.devicesandservices.health.v4.ISessionTimeInterval|null} [interval] IrregularRhythmNotification interval
+                         * @property {Array.<google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow>|null} [alertWindows] IrregularRhythmNotification alertWindows
+                         * @property {google.devicesandservices.health.v4.IMedicalDeviceInfo|null} [medicalDeviceInfo] IrregularRhythmNotification medicalDeviceInfo
+                         */
+    
+                        /**
+                         * Constructs a new IrregularRhythmNotification.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents an IrregularRhythmNotification.
+                         * @implements IIrregularRhythmNotification
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IIrregularRhythmNotification=} [properties] Properties to set
+                         */
+                        function IrregularRhythmNotification(properties) {
+                            this.alertWindows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IrregularRhythmNotification interval.
+                         * @member {google.devicesandservices.health.v4.ISessionTimeInterval|null|undefined} interval
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @instance
+                         */
+                        IrregularRhythmNotification.prototype.interval = null;
+    
+                        /**
+                         * IrregularRhythmNotification alertWindows.
+                         * @member {Array.<google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow>} alertWindows
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @instance
+                         */
+                        IrregularRhythmNotification.prototype.alertWindows = $util.emptyArray;
+    
+                        /**
+                         * IrregularRhythmNotification medicalDeviceInfo.
+                         * @member {google.devicesandservices.health.v4.IMedicalDeviceInfo|null|undefined} medicalDeviceInfo
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @instance
+                         */
+                        IrregularRhythmNotification.prototype.medicalDeviceInfo = null;
+    
+                        /**
+                         * Creates a new IrregularRhythmNotification instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IIrregularRhythmNotification=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification} IrregularRhythmNotification instance
+                         */
+                        IrregularRhythmNotification.create = function create(properties) {
+                            return new IrregularRhythmNotification(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IrregularRhythmNotification message. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IIrregularRhythmNotification} message IrregularRhythmNotification message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IrregularRhythmNotification.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
+                                $root.google.devicesandservices.health.v4.SessionTimeInterval.encode(message.interval, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.alertWindows != null && message.alertWindows.length)
+                                for (var i = 0; i < message.alertWindows.length; ++i)
+                                    $root.google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.encode(message.alertWindows[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.medicalDeviceInfo != null && Object.hasOwnProperty.call(message, "medicalDeviceInfo"))
+                                $root.google.devicesandservices.health.v4.MedicalDeviceInfo.encode(message.medicalDeviceInfo, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IrregularRhythmNotification message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IIrregularRhythmNotification} message IrregularRhythmNotification message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IrregularRhythmNotification.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IrregularRhythmNotification message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification} IrregularRhythmNotification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IrregularRhythmNotification.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.IrregularRhythmNotification();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.interval = $root.google.devicesandservices.health.v4.SessionTimeInterval.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.alertWindows && message.alertWindows.length))
+                                            message.alertWindows = [];
+                                        message.alertWindows.push($root.google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.medicalDeviceInfo = $root.google.devicesandservices.health.v4.MedicalDeviceInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IrregularRhythmNotification message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification} IrregularRhythmNotification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IrregularRhythmNotification.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IrregularRhythmNotification message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IrregularRhythmNotification.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.interval != null && message.hasOwnProperty("interval")) {
+                                var error = $root.google.devicesandservices.health.v4.SessionTimeInterval.verify(message.interval);
+                                if (error)
+                                    return "interval." + error;
+                            }
+                            if (message.alertWindows != null && message.hasOwnProperty("alertWindows")) {
+                                if (!Array.isArray(message.alertWindows))
+                                    return "alertWindows: array expected";
+                                for (var i = 0; i < message.alertWindows.length; ++i) {
+                                    var error = $root.google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.verify(message.alertWindows[i]);
+                                    if (error)
+                                        return "alertWindows." + error;
+                                }
+                            }
+                            if (message.medicalDeviceInfo != null && message.hasOwnProperty("medicalDeviceInfo")) {
+                                var error = $root.google.devicesandservices.health.v4.MedicalDeviceInfo.verify(message.medicalDeviceInfo);
+                                if (error)
+                                    return "medicalDeviceInfo." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IrregularRhythmNotification message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification} IrregularRhythmNotification
+                         */
+                        IrregularRhythmNotification.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.IrregularRhythmNotification)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.IrregularRhythmNotification();
+                            if (object.interval != null) {
+                                if (typeof object.interval !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.interval: object expected");
+                                message.interval = $root.google.devicesandservices.health.v4.SessionTimeInterval.fromObject(object.interval);
+                            }
+                            if (object.alertWindows) {
+                                if (!Array.isArray(object.alertWindows))
+                                    throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.alertWindows: array expected");
+                                message.alertWindows = [];
+                                for (var i = 0; i < object.alertWindows.length; ++i) {
+                                    if (typeof object.alertWindows[i] !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.alertWindows: object expected");
+                                    message.alertWindows[i] = $root.google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.fromObject(object.alertWindows[i]);
+                                }
+                            }
+                            if (object.medicalDeviceInfo != null) {
+                                if (typeof object.medicalDeviceInfo !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.medicalDeviceInfo: object expected");
+                                message.medicalDeviceInfo = $root.google.devicesandservices.health.v4.MedicalDeviceInfo.fromObject(object.medicalDeviceInfo);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IrregularRhythmNotification message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IrregularRhythmNotification} message IrregularRhythmNotification
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IrregularRhythmNotification.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.alertWindows = [];
+                            if (options.defaults) {
+                                object.interval = null;
+                                object.medicalDeviceInfo = null;
+                            }
+                            if (message.interval != null && message.hasOwnProperty("interval"))
+                                object.interval = $root.google.devicesandservices.health.v4.SessionTimeInterval.toObject(message.interval, options);
+                            if (message.alertWindows && message.alertWindows.length) {
+                                object.alertWindows = [];
+                                for (var j = 0; j < message.alertWindows.length; ++j)
+                                    object.alertWindows[j] = $root.google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.toObject(message.alertWindows[j], options);
+                            }
+                            if (message.medicalDeviceInfo != null && message.hasOwnProperty("medicalDeviceInfo"))
+                                object.medicalDeviceInfo = $root.google.devicesandservices.health.v4.MedicalDeviceInfo.toObject(message.medicalDeviceInfo, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IrregularRhythmNotification to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IrregularRhythmNotification.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IrregularRhythmNotification
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IrregularRhythmNotification.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.IrregularRhythmNotification";
+                        };
+    
+                        IrregularRhythmNotification.HeartBeat = (function() {
+    
+                            /**
+                             * Properties of a HeartBeat.
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                             * @interface IHeartBeat
+                             * @property {google.protobuf.ITimestamp|null} [physicalTime] HeartBeat physicalTime
+                             * @property {google.protobuf.IDuration|null} [utcOffset] HeartBeat utcOffset
+                             * @property {google.devicesandservices.health.v4.ICivilDateTime|null} [civilTime] HeartBeat civilTime
+                             * @property {number|null} [beatsPerMinute] HeartBeat beatsPerMinute
+                             */
+    
+                            /**
+                             * Constructs a new HeartBeat.
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                             * @classdesc Represents a HeartBeat.
+                             * @implements IHeartBeat
+                             * @constructor
+                             * @param {google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat=} [properties] Properties to set
+                             */
+                            function HeartBeat(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * HeartBeat physicalTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} physicalTime
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @instance
+                             */
+                            HeartBeat.prototype.physicalTime = null;
+    
+                            /**
+                             * HeartBeat utcOffset.
+                             * @member {google.protobuf.IDuration|null|undefined} utcOffset
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @instance
+                             */
+                            HeartBeat.prototype.utcOffset = null;
+    
+                            /**
+                             * HeartBeat civilTime.
+                             * @member {google.devicesandservices.health.v4.ICivilDateTime|null|undefined} civilTime
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @instance
+                             */
+                            HeartBeat.prototype.civilTime = null;
+    
+                            /**
+                             * HeartBeat beatsPerMinute.
+                             * @member {number|null|undefined} beatsPerMinute
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @instance
+                             */
+                            HeartBeat.prototype.beatsPerMinute = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(HeartBeat.prototype, "_beatsPerMinute", {
+                                get: $util.oneOfGetter($oneOfFields = ["beatsPerMinute"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new HeartBeat instance using the specified properties.
+                             * @function create
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @static
+                             * @param {google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat=} [properties] Properties to set
+                             * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat} HeartBeat instance
+                             */
+                            HeartBeat.create = function create(properties) {
+                                return new HeartBeat(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified HeartBeat message. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @static
+                             * @param {google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat} message HeartBeat message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HeartBeat.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.physicalTime != null && Object.hasOwnProperty.call(message, "physicalTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.physicalTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.utcOffset != null && Object.hasOwnProperty.call(message, "utcOffset"))
+                                    $root.google.protobuf.Duration.encode(message.utcOffset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.civilTime != null && Object.hasOwnProperty.call(message, "civilTime"))
+                                    $root.google.devicesandservices.health.v4.CivilDateTime.encode(message.civilTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.beatsPerMinute != null && Object.hasOwnProperty.call(message, "beatsPerMinute"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.beatsPerMinute);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified HeartBeat message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @static
+                             * @param {google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat} message HeartBeat message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HeartBeat.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a HeartBeat message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat} HeartBeat
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HeartBeat.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.physicalTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.utcOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.civilTime = $root.google.devicesandservices.health.v4.CivilDateTime.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.beatsPerMinute = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a HeartBeat message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat} HeartBeat
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HeartBeat.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a HeartBeat message.
+                             * @function verify
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            HeartBeat.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.physicalTime != null && message.hasOwnProperty("physicalTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.physicalTime);
+                                    if (error)
+                                        return "physicalTime." + error;
+                                }
+                                if (message.utcOffset != null && message.hasOwnProperty("utcOffset")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.utcOffset);
+                                    if (error)
+                                        return "utcOffset." + error;
+                                }
+                                if (message.civilTime != null && message.hasOwnProperty("civilTime")) {
+                                    var error = $root.google.devicesandservices.health.v4.CivilDateTime.verify(message.civilTime);
+                                    if (error)
+                                        return "civilTime." + error;
+                                }
+                                if (message.beatsPerMinute != null && message.hasOwnProperty("beatsPerMinute")) {
+                                    properties._beatsPerMinute = 1;
+                                    if (!$util.isInteger(message.beatsPerMinute))
+                                        return "beatsPerMinute: integer expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a HeartBeat message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat} HeartBeat
+                             */
+                            HeartBeat.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat)
+                                    return object;
+                                var message = new $root.google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat();
+                                if (object.physicalTime != null) {
+                                    if (typeof object.physicalTime !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.physicalTime: object expected");
+                                    message.physicalTime = $root.google.protobuf.Timestamp.fromObject(object.physicalTime);
+                                }
+                                if (object.utcOffset != null) {
+                                    if (typeof object.utcOffset !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.utcOffset: object expected");
+                                    message.utcOffset = $root.google.protobuf.Duration.fromObject(object.utcOffset);
+                                }
+                                if (object.civilTime != null) {
+                                    if (typeof object.civilTime !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.civilTime: object expected");
+                                    message.civilTime = $root.google.devicesandservices.health.v4.CivilDateTime.fromObject(object.civilTime);
+                                }
+                                if (object.beatsPerMinute != null)
+                                    message.beatsPerMinute = object.beatsPerMinute | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a HeartBeat message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @static
+                             * @param {google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat} message HeartBeat
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            HeartBeat.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.physicalTime = null;
+                                    object.utcOffset = null;
+                                    object.civilTime = null;
+                                }
+                                if (message.physicalTime != null && message.hasOwnProperty("physicalTime"))
+                                    object.physicalTime = $root.google.protobuf.Timestamp.toObject(message.physicalTime, options);
+                                if (message.utcOffset != null && message.hasOwnProperty("utcOffset"))
+                                    object.utcOffset = $root.google.protobuf.Duration.toObject(message.utcOffset, options);
+                                if (message.civilTime != null && message.hasOwnProperty("civilTime"))
+                                    object.civilTime = $root.google.devicesandservices.health.v4.CivilDateTime.toObject(message.civilTime, options);
+                                if (message.beatsPerMinute != null && message.hasOwnProperty("beatsPerMinute")) {
+                                    object.beatsPerMinute = message.beatsPerMinute;
+                                    if (options.oneofs)
+                                        object._beatsPerMinute = "beatsPerMinute";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this HeartBeat to JSON.
+                             * @function toJSON
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            HeartBeat.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HeartBeat
+                             * @function getTypeUrl
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HeartBeat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat";
+                            };
+    
+                            return HeartBeat;
+                        })();
+    
+                        IrregularRhythmNotification.AlertWindow = (function() {
+    
+                            /**
+                             * Properties of an AlertWindow.
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                             * @interface IAlertWindow
+                             * @property {google.protobuf.ITimestamp|null} [startTime] AlertWindow startTime
+                             * @property {google.protobuf.IDuration|null} [startUtcOffset] AlertWindow startUtcOffset
+                             * @property {google.protobuf.ITimestamp|null} [endTime] AlertWindow endTime
+                             * @property {google.protobuf.IDuration|null} [endUtcOffset] AlertWindow endUtcOffset
+                             * @property {google.devicesandservices.health.v4.ICivilDateTime|null} [civilStartTime] AlertWindow civilStartTime
+                             * @property {google.devicesandservices.health.v4.ICivilDateTime|null} [civilEndTime] AlertWindow civilEndTime
+                             * @property {boolean|null} [positive] AlertWindow positive
+                             * @property {Array.<google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat>|null} [heartBeats] AlertWindow heartBeats
+                             */
+    
+                            /**
+                             * Constructs a new AlertWindow.
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification
+                             * @classdesc Represents an AlertWindow.
+                             * @implements IAlertWindow
+                             * @constructor
+                             * @param {google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow=} [properties] Properties to set
+                             */
+                            function AlertWindow(properties) {
+                                this.heartBeats = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AlertWindow startTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @instance
+                             */
+                            AlertWindow.prototype.startTime = null;
+    
+                            /**
+                             * AlertWindow startUtcOffset.
+                             * @member {google.protobuf.IDuration|null|undefined} startUtcOffset
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @instance
+                             */
+                            AlertWindow.prototype.startUtcOffset = null;
+    
+                            /**
+                             * AlertWindow endTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @instance
+                             */
+                            AlertWindow.prototype.endTime = null;
+    
+                            /**
+                             * AlertWindow endUtcOffset.
+                             * @member {google.protobuf.IDuration|null|undefined} endUtcOffset
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @instance
+                             */
+                            AlertWindow.prototype.endUtcOffset = null;
+    
+                            /**
+                             * AlertWindow civilStartTime.
+                             * @member {google.devicesandservices.health.v4.ICivilDateTime|null|undefined} civilStartTime
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @instance
+                             */
+                            AlertWindow.prototype.civilStartTime = null;
+    
+                            /**
+                             * AlertWindow civilEndTime.
+                             * @member {google.devicesandservices.health.v4.ICivilDateTime|null|undefined} civilEndTime
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @instance
+                             */
+                            AlertWindow.prototype.civilEndTime = null;
+    
+                            /**
+                             * AlertWindow positive.
+                             * @member {boolean} positive
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @instance
+                             */
+                            AlertWindow.prototype.positive = false;
+    
+                            /**
+                             * AlertWindow heartBeats.
+                             * @member {Array.<google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat>} heartBeats
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @instance
+                             */
+                            AlertWindow.prototype.heartBeats = $util.emptyArray;
+    
+                            /**
+                             * Creates a new AlertWindow instance using the specified properties.
+                             * @function create
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @static
+                             * @param {google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow=} [properties] Properties to set
+                             * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow} AlertWindow instance
+                             */
+                            AlertWindow.create = function create(properties) {
+                                return new AlertWindow(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AlertWindow message. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @static
+                             * @param {google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow} message AlertWindow message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AlertWindow.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.startUtcOffset != null && Object.hasOwnProperty.call(message, "startUtcOffset"))
+                                    $root.google.protobuf.Duration.encode(message.startUtcOffset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.endUtcOffset != null && Object.hasOwnProperty.call(message, "endUtcOffset"))
+                                    $root.google.protobuf.Duration.encode(message.endUtcOffset, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.civilStartTime != null && Object.hasOwnProperty.call(message, "civilStartTime"))
+                                    $root.google.devicesandservices.health.v4.CivilDateTime.encode(message.civilStartTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.civilEndTime != null && Object.hasOwnProperty.call(message, "civilEndTime"))
+                                    $root.google.devicesandservices.health.v4.CivilDateTime.encode(message.civilEndTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.positive != null && Object.hasOwnProperty.call(message, "positive"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.positive);
+                                if (message.heartBeats != null && message.heartBeats.length)
+                                    for (var i = 0; i < message.heartBeats.length; ++i)
+                                        $root.google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.encode(message.heartBeats[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AlertWindow message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @static
+                             * @param {google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow} message AlertWindow message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AlertWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AlertWindow message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow} AlertWindow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AlertWindow.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.startUtcOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.endUtcOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.civilStartTime = $root.google.devicesandservices.health.v4.CivilDateTime.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.civilEndTime = $root.google.devicesandservices.health.v4.CivilDateTime.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.positive = reader.bool();
+                                            break;
+                                        }
+                                    case 8: {
+                                            if (!(message.heartBeats && message.heartBeats.length))
+                                                message.heartBeats = [];
+                                            message.heartBeats.push($root.google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AlertWindow message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow} AlertWindow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AlertWindow.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AlertWindow message.
+                             * @function verify
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AlertWindow.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                    if (error)
+                                        return "startTime." + error;
+                                }
+                                if (message.startUtcOffset != null && message.hasOwnProperty("startUtcOffset")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.startUtcOffset);
+                                    if (error)
+                                        return "startUtcOffset." + error;
+                                }
+                                if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                    if (error)
+                                        return "endTime." + error;
+                                }
+                                if (message.endUtcOffset != null && message.hasOwnProperty("endUtcOffset")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.endUtcOffset);
+                                    if (error)
+                                        return "endUtcOffset." + error;
+                                }
+                                if (message.civilStartTime != null && message.hasOwnProperty("civilStartTime")) {
+                                    var error = $root.google.devicesandservices.health.v4.CivilDateTime.verify(message.civilStartTime);
+                                    if (error)
+                                        return "civilStartTime." + error;
+                                }
+                                if (message.civilEndTime != null && message.hasOwnProperty("civilEndTime")) {
+                                    var error = $root.google.devicesandservices.health.v4.CivilDateTime.verify(message.civilEndTime);
+                                    if (error)
+                                        return "civilEndTime." + error;
+                                }
+                                if (message.positive != null && message.hasOwnProperty("positive"))
+                                    if (typeof message.positive !== "boolean")
+                                        return "positive: boolean expected";
+                                if (message.heartBeats != null && message.hasOwnProperty("heartBeats")) {
+                                    if (!Array.isArray(message.heartBeats))
+                                        return "heartBeats: array expected";
+                                    for (var i = 0; i < message.heartBeats.length; ++i) {
+                                        var error = $root.google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.verify(message.heartBeats[i]);
+                                        if (error)
+                                            return "heartBeats." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AlertWindow message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow} AlertWindow
+                             */
+                            AlertWindow.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow)
+                                    return object;
+                                var message = new $root.google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow();
+                                if (object.startTime != null) {
+                                    if (typeof object.startTime !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.startTime: object expected");
+                                    message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                                }
+                                if (object.startUtcOffset != null) {
+                                    if (typeof object.startUtcOffset !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.startUtcOffset: object expected");
+                                    message.startUtcOffset = $root.google.protobuf.Duration.fromObject(object.startUtcOffset);
+                                }
+                                if (object.endTime != null) {
+                                    if (typeof object.endTime !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.endTime: object expected");
+                                    message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                                }
+                                if (object.endUtcOffset != null) {
+                                    if (typeof object.endUtcOffset !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.endUtcOffset: object expected");
+                                    message.endUtcOffset = $root.google.protobuf.Duration.fromObject(object.endUtcOffset);
+                                }
+                                if (object.civilStartTime != null) {
+                                    if (typeof object.civilStartTime !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.civilStartTime: object expected");
+                                    message.civilStartTime = $root.google.devicesandservices.health.v4.CivilDateTime.fromObject(object.civilStartTime);
+                                }
+                                if (object.civilEndTime != null) {
+                                    if (typeof object.civilEndTime !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.civilEndTime: object expected");
+                                    message.civilEndTime = $root.google.devicesandservices.health.v4.CivilDateTime.fromObject(object.civilEndTime);
+                                }
+                                if (object.positive != null)
+                                    message.positive = Boolean(object.positive);
+                                if (object.heartBeats) {
+                                    if (!Array.isArray(object.heartBeats))
+                                        throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.heartBeats: array expected");
+                                    message.heartBeats = [];
+                                    for (var i = 0; i < object.heartBeats.length; ++i) {
+                                        if (typeof object.heartBeats[i] !== "object")
+                                            throw TypeError(".google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.heartBeats: object expected");
+                                        message.heartBeats[i] = $root.google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.fromObject(object.heartBeats[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AlertWindow message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @static
+                             * @param {google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow} message AlertWindow
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AlertWindow.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.heartBeats = [];
+                                if (options.defaults) {
+                                    object.startTime = null;
+                                    object.startUtcOffset = null;
+                                    object.endTime = null;
+                                    object.endUtcOffset = null;
+                                    object.civilStartTime = null;
+                                    object.civilEndTime = null;
+                                    object.positive = false;
+                                }
+                                if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                    object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                                if (message.startUtcOffset != null && message.hasOwnProperty("startUtcOffset"))
+                                    object.startUtcOffset = $root.google.protobuf.Duration.toObject(message.startUtcOffset, options);
+                                if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                    object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                                if (message.endUtcOffset != null && message.hasOwnProperty("endUtcOffset"))
+                                    object.endUtcOffset = $root.google.protobuf.Duration.toObject(message.endUtcOffset, options);
+                                if (message.civilStartTime != null && message.hasOwnProperty("civilStartTime"))
+                                    object.civilStartTime = $root.google.devicesandservices.health.v4.CivilDateTime.toObject(message.civilStartTime, options);
+                                if (message.civilEndTime != null && message.hasOwnProperty("civilEndTime"))
+                                    object.civilEndTime = $root.google.devicesandservices.health.v4.CivilDateTime.toObject(message.civilEndTime, options);
+                                if (message.positive != null && message.hasOwnProperty("positive"))
+                                    object.positive = message.positive;
+                                if (message.heartBeats && message.heartBeats.length) {
+                                    object.heartBeats = [];
+                                    for (var j = 0; j < message.heartBeats.length; ++j)
+                                        object.heartBeats[j] = $root.google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.toObject(message.heartBeats[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AlertWindow to JSON.
+                             * @function toJSON
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AlertWindow.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AlertWindow
+                             * @function getTypeUrl
+                             * @memberof google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AlertWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow";
+                            };
+    
+                            return AlertWindow;
+                        })();
+    
+                        return IrregularRhythmNotification;
+                    })();
+    
                     v4.MetricsSummary = (function() {
     
                         /**
@@ -15692,6 +18139,4178 @@
                         return MetricsSummary;
                     })();
     
+                    v4.WeightQuantity = (function() {
+    
+                        /**
+                         * Properties of a WeightQuantity.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IWeightQuantity
+                         * @property {number|null} [grams] WeightQuantity grams
+                         * @property {google.devicesandservices.health.v4.WeightUnit|null} [userProvidedUnit] WeightQuantity userProvidedUnit
+                         */
+    
+                        /**
+                         * Constructs a new WeightQuantity.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a WeightQuantity.
+                         * @implements IWeightQuantity
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IWeightQuantity=} [properties] Properties to set
+                         */
+                        function WeightQuantity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WeightQuantity grams.
+                         * @member {number|null|undefined} grams
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @instance
+                         */
+                        WeightQuantity.prototype.grams = null;
+    
+                        /**
+                         * WeightQuantity userProvidedUnit.
+                         * @member {google.devicesandservices.health.v4.WeightUnit} userProvidedUnit
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @instance
+                         */
+                        WeightQuantity.prototype.userProvidedUnit = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(WeightQuantity.prototype, "_grams", {
+                            get: $util.oneOfGetter($oneOfFields = ["grams"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new WeightQuantity instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IWeightQuantity=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.WeightQuantity} WeightQuantity instance
+                         */
+                        WeightQuantity.create = function create(properties) {
+                            return new WeightQuantity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WeightQuantity message. Does not implicitly {@link google.devicesandservices.health.v4.WeightQuantity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IWeightQuantity} message WeightQuantity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeightQuantity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.grams != null && Object.hasOwnProperty.call(message, "grams"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.grams);
+                            if (message.userProvidedUnit != null && Object.hasOwnProperty.call(message, "userProvidedUnit"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.userProvidedUnit);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WeightQuantity message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.WeightQuantity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IWeightQuantity} message WeightQuantity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeightQuantity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WeightQuantity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.WeightQuantity} WeightQuantity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeightQuantity.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.WeightQuantity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.grams = reader.double();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.userProvidedUnit = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WeightQuantity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.WeightQuantity} WeightQuantity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeightQuantity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WeightQuantity message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WeightQuantity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.grams != null && message.hasOwnProperty("grams")) {
+                                properties._grams = 1;
+                                if (typeof message.grams !== "number")
+                                    return "grams: number expected";
+                            }
+                            if (message.userProvidedUnit != null && message.hasOwnProperty("userProvidedUnit"))
+                                switch (message.userProvidedUnit) {
+                                default:
+                                    return "userProvidedUnit: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WeightQuantity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.WeightQuantity} WeightQuantity
+                         */
+                        WeightQuantity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.WeightQuantity)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.WeightQuantity();
+                            if (object.grams != null)
+                                message.grams = Number(object.grams);
+                            switch (object.userProvidedUnit) {
+                            default:
+                                if (typeof object.userProvidedUnit === "number") {
+                                    message.userProvidedUnit = object.userProvidedUnit;
+                                    break;
+                                }
+                                break;
+                            case "WEIGHT_UNIT_UNSPECIFIED":
+                            case 0:
+                                message.userProvidedUnit = 0;
+                                break;
+                            case "GRAM":
+                            case 1:
+                                message.userProvidedUnit = 1;
+                                break;
+                            case "KILOGRAM":
+                            case 2:
+                                message.userProvidedUnit = 2;
+                                break;
+                            case "OUNCE":
+                            case 3:
+                                message.userProvidedUnit = 3;
+                                break;
+                            case "POUND":
+                            case 4:
+                                message.userProvidedUnit = 4;
+                                break;
+                            case "STONE":
+                            case 5:
+                                message.userProvidedUnit = 5;
+                                break;
+                            case "MILLIGRAM":
+                            case 6:
+                                message.userProvidedUnit = 6;
+                                break;
+                            case "MICROGRAM":
+                            case 7:
+                                message.userProvidedUnit = 7;
+                                break;
+                            case "NANOGRAM":
+                            case 8:
+                                message.userProvidedUnit = 8;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WeightQuantity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.WeightQuantity} message WeightQuantity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WeightQuantity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.userProvidedUnit = options.enums === String ? "WEIGHT_UNIT_UNSPECIFIED" : 0;
+                            if (message.grams != null && message.hasOwnProperty("grams")) {
+                                object.grams = options.json && !isFinite(message.grams) ? String(message.grams) : message.grams;
+                                if (options.oneofs)
+                                    object._grams = "grams";
+                            }
+                            if (message.userProvidedUnit != null && message.hasOwnProperty("userProvidedUnit"))
+                                object.userProvidedUnit = options.enums === String ? $root.google.devicesandservices.health.v4.WeightUnit[message.userProvidedUnit] === undefined ? message.userProvidedUnit : $root.google.devicesandservices.health.v4.WeightUnit[message.userProvidedUnit] : message.userProvidedUnit;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WeightQuantity to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WeightQuantity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WeightQuantity
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.WeightQuantity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WeightQuantity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.WeightQuantity";
+                        };
+    
+                        return WeightQuantity;
+                    })();
+    
+                    v4.EnergyQuantity = (function() {
+    
+                        /**
+                         * Properties of an EnergyQuantity.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IEnergyQuantity
+                         * @property {number|null} [kcal] EnergyQuantity kcal
+                         * @property {google.devicesandservices.health.v4.EnergyUnit|null} [userProvidedUnit] EnergyQuantity userProvidedUnit
+                         */
+    
+                        /**
+                         * Constructs a new EnergyQuantity.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents an EnergyQuantity.
+                         * @implements IEnergyQuantity
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IEnergyQuantity=} [properties] Properties to set
+                         */
+                        function EnergyQuantity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EnergyQuantity kcal.
+                         * @member {number|null|undefined} kcal
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @instance
+                         */
+                        EnergyQuantity.prototype.kcal = null;
+    
+                        /**
+                         * EnergyQuantity userProvidedUnit.
+                         * @member {google.devicesandservices.health.v4.EnergyUnit} userProvidedUnit
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @instance
+                         */
+                        EnergyQuantity.prototype.userProvidedUnit = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EnergyQuantity.prototype, "_kcal", {
+                            get: $util.oneOfGetter($oneOfFields = ["kcal"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new EnergyQuantity instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IEnergyQuantity=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.EnergyQuantity} EnergyQuantity instance
+                         */
+                        EnergyQuantity.create = function create(properties) {
+                            return new EnergyQuantity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EnergyQuantity message. Does not implicitly {@link google.devicesandservices.health.v4.EnergyQuantity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IEnergyQuantity} message EnergyQuantity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EnergyQuantity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kcal != null && Object.hasOwnProperty.call(message, "kcal"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.kcal);
+                            if (message.userProvidedUnit != null && Object.hasOwnProperty.call(message, "userProvidedUnit"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.userProvidedUnit);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EnergyQuantity message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.EnergyQuantity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IEnergyQuantity} message EnergyQuantity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EnergyQuantity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EnergyQuantity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.EnergyQuantity} EnergyQuantity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EnergyQuantity.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.EnergyQuantity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.kcal = reader.double();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.userProvidedUnit = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EnergyQuantity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.EnergyQuantity} EnergyQuantity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EnergyQuantity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EnergyQuantity message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EnergyQuantity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.kcal != null && message.hasOwnProperty("kcal")) {
+                                properties._kcal = 1;
+                                if (typeof message.kcal !== "number")
+                                    return "kcal: number expected";
+                            }
+                            if (message.userProvidedUnit != null && message.hasOwnProperty("userProvidedUnit"))
+                                switch (message.userProvidedUnit) {
+                                default:
+                                    return "userProvidedUnit: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EnergyQuantity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.EnergyQuantity} EnergyQuantity
+                         */
+                        EnergyQuantity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.EnergyQuantity)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.EnergyQuantity();
+                            if (object.kcal != null)
+                                message.kcal = Number(object.kcal);
+                            switch (object.userProvidedUnit) {
+                            default:
+                                if (typeof object.userProvidedUnit === "number") {
+                                    message.userProvidedUnit = object.userProvidedUnit;
+                                    break;
+                                }
+                                break;
+                            case "ENERGY_UNIT_UNSPECIFIED":
+                            case 0:
+                                message.userProvidedUnit = 0;
+                                break;
+                            case "JOULE":
+                            case 1:
+                                message.userProvidedUnit = 1;
+                                break;
+                            case "KILOJOULE":
+                            case 2:
+                                message.userProvidedUnit = 2;
+                                break;
+                            case "KILOCALORIE":
+                            case 3:
+                                message.userProvidedUnit = 3;
+                                break;
+                            case "SMALL_CALORIE":
+                            case 4:
+                                message.userProvidedUnit = 4;
+                                break;
+                            case "CALORIE":
+                            case 5:
+                                message.userProvidedUnit = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EnergyQuantity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.EnergyQuantity} message EnergyQuantity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EnergyQuantity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.userProvidedUnit = options.enums === String ? "ENERGY_UNIT_UNSPECIFIED" : 0;
+                            if (message.kcal != null && message.hasOwnProperty("kcal")) {
+                                object.kcal = options.json && !isFinite(message.kcal) ? String(message.kcal) : message.kcal;
+                                if (options.oneofs)
+                                    object._kcal = "kcal";
+                            }
+                            if (message.userProvidedUnit != null && message.hasOwnProperty("userProvidedUnit"))
+                                object.userProvidedUnit = options.enums === String ? $root.google.devicesandservices.health.v4.EnergyUnit[message.userProvidedUnit] === undefined ? message.userProvidedUnit : $root.google.devicesandservices.health.v4.EnergyUnit[message.userProvidedUnit] : message.userProvidedUnit;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EnergyQuantity to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EnergyQuantity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EnergyQuantity
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.EnergyQuantity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EnergyQuantity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.EnergyQuantity";
+                        };
+    
+                        return EnergyQuantity;
+                    })();
+    
+                    v4.NutrientQuantity = (function() {
+    
+                        /**
+                         * Properties of a NutrientQuantity.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface INutrientQuantity
+                         * @property {google.devicesandservices.health.v4.IWeightQuantity|null} [quantity] NutrientQuantity quantity
+                         * @property {google.devicesandservices.health.v4.Nutrient|null} [nutrient] NutrientQuantity nutrient
+                         */
+    
+                        /**
+                         * Constructs a new NutrientQuantity.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a NutrientQuantity.
+                         * @implements INutrientQuantity
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.INutrientQuantity=} [properties] Properties to set
+                         */
+                        function NutrientQuantity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NutrientQuantity quantity.
+                         * @member {google.devicesandservices.health.v4.IWeightQuantity|null|undefined} quantity
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @instance
+                         */
+                        NutrientQuantity.prototype.quantity = null;
+    
+                        /**
+                         * NutrientQuantity nutrient.
+                         * @member {google.devicesandservices.health.v4.Nutrient} nutrient
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @instance
+                         */
+                        NutrientQuantity.prototype.nutrient = 0;
+    
+                        /**
+                         * Creates a new NutrientQuantity instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.INutrientQuantity=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.NutrientQuantity} NutrientQuantity instance
+                         */
+                        NutrientQuantity.create = function create(properties) {
+                            return new NutrientQuantity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NutrientQuantity message. Does not implicitly {@link google.devicesandservices.health.v4.NutrientQuantity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.INutrientQuantity} message NutrientQuantity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NutrientQuantity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.quantity != null && Object.hasOwnProperty.call(message, "quantity"))
+                                $root.google.devicesandservices.health.v4.WeightQuantity.encode(message.quantity, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nutrient != null && Object.hasOwnProperty.call(message, "nutrient"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nutrient);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NutrientQuantity message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutrientQuantity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.INutrientQuantity} message NutrientQuantity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NutrientQuantity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NutrientQuantity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.NutrientQuantity} NutrientQuantity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NutrientQuantity.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.NutrientQuantity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.quantity = $root.google.devicesandservices.health.v4.WeightQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nutrient = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NutrientQuantity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.NutrientQuantity} NutrientQuantity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NutrientQuantity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NutrientQuantity message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NutrientQuantity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.quantity != null && message.hasOwnProperty("quantity")) {
+                                var error = $root.google.devicesandservices.health.v4.WeightQuantity.verify(message.quantity);
+                                if (error)
+                                    return "quantity." + error;
+                            }
+                            if (message.nutrient != null && message.hasOwnProperty("nutrient"))
+                                switch (message.nutrient) {
+                                default:
+                                    return "nutrient: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NutrientQuantity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.NutrientQuantity} NutrientQuantity
+                         */
+                        NutrientQuantity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.NutrientQuantity)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.NutrientQuantity();
+                            if (object.quantity != null) {
+                                if (typeof object.quantity !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutrientQuantity.quantity: object expected");
+                                message.quantity = $root.google.devicesandservices.health.v4.WeightQuantity.fromObject(object.quantity);
+                            }
+                            switch (object.nutrient) {
+                            default:
+                                if (typeof object.nutrient === "number") {
+                                    message.nutrient = object.nutrient;
+                                    break;
+                                }
+                                break;
+                            case "NUTRIENT_UNSPECIFIED":
+                            case 0:
+                                message.nutrient = 0;
+                                break;
+                            case "BIOTIN":
+                            case 1:
+                                message.nutrient = 1;
+                                break;
+                            case "CAFFEINE":
+                            case 2:
+                                message.nutrient = 2;
+                                break;
+                            case "CALCIUM":
+                            case 3:
+                                message.nutrient = 3;
+                                break;
+                            case "CHLORIDE":
+                            case 4:
+                                message.nutrient = 4;
+                                break;
+                            case "CARBOHYDRATES":
+                            case 5:
+                                message.nutrient = 5;
+                                break;
+                            case "CHOLESTEROL":
+                            case 6:
+                                message.nutrient = 6;
+                                break;
+                            case "CHROMIUM":
+                            case 7:
+                                message.nutrient = 7;
+                                break;
+                            case "COPPER":
+                            case 8:
+                                message.nutrient = 8;
+                                break;
+                            case "DIETARY_FIBER":
+                            case 9:
+                                message.nutrient = 9;
+                                break;
+                            case "FOLIC_ACID":
+                            case 10:
+                                message.nutrient = 10;
+                                break;
+                            case "IODINE":
+                            case 11:
+                                message.nutrient = 11;
+                                break;
+                            case "IRON":
+                            case 12:
+                                message.nutrient = 12;
+                                break;
+                            case "MAGNESIUM":
+                            case 13:
+                                message.nutrient = 13;
+                                break;
+                            case "MANGANESE":
+                            case 14:
+                                message.nutrient = 14;
+                                break;
+                            case "MOLYBDENUM":
+                            case 15:
+                                message.nutrient = 15;
+                                break;
+                            case "MONOUNSATURATED_FAT":
+                            case 16:
+                                message.nutrient = 16;
+                                break;
+                            case "NIACIN":
+                            case 17:
+                                message.nutrient = 17;
+                                break;
+                            case "PANTOTHENIC_ACID":
+                            case 18:
+                                message.nutrient = 18;
+                                break;
+                            case "PHOSPHORUS":
+                            case 19:
+                                message.nutrient = 19;
+                                break;
+                            case "POLYUNSATURATED_FAT":
+                            case 20:
+                                message.nutrient = 20;
+                                break;
+                            case "POTASSIUM":
+                            case 21:
+                                message.nutrient = 21;
+                                break;
+                            case "PROTEIN":
+                            case 22:
+                                message.nutrient = 22;
+                                break;
+                            case "RIBOFLAVIN":
+                            case 23:
+                                message.nutrient = 23;
+                                break;
+                            case "SATURATED_FAT":
+                            case 24:
+                                message.nutrient = 24;
+                                break;
+                            case "SELENIUM":
+                            case 25:
+                                message.nutrient = 25;
+                                break;
+                            case "SODIUM":
+                            case 26:
+                                message.nutrient = 26;
+                                break;
+                            case "SUGAR":
+                            case 27:
+                                message.nutrient = 27;
+                                break;
+                            case "THIAMIN":
+                            case 28:
+                                message.nutrient = 28;
+                                break;
+                            case "TRANS_FAT":
+                            case 29:
+                                message.nutrient = 29;
+                                break;
+                            case "UNSATURATED_FAT":
+                            case 30:
+                                message.nutrient = 30;
+                                break;
+                            case "VITAMIN_A":
+                            case 31:
+                                message.nutrient = 31;
+                                break;
+                            case "VITAMIN_B12":
+                            case 32:
+                                message.nutrient = 32;
+                                break;
+                            case "VITAMIN_B6":
+                            case 33:
+                                message.nutrient = 33;
+                                break;
+                            case "VITAMIN_C":
+                            case 34:
+                                message.nutrient = 34;
+                                break;
+                            case "VITAMIN_D":
+                            case 35:
+                                message.nutrient = 35;
+                                break;
+                            case "VITAMIN_E":
+                            case 36:
+                                message.nutrient = 36;
+                                break;
+                            case "VITAMIN_K":
+                            case 37:
+                                message.nutrient = 37;
+                                break;
+                            case "ZINC":
+                            case 38:
+                                message.nutrient = 38;
+                                break;
+                            case "FOLATE":
+                            case 39:
+                                message.nutrient = 39;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NutrientQuantity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @static
+                         * @param {google.devicesandservices.health.v4.NutrientQuantity} message NutrientQuantity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NutrientQuantity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.quantity = null;
+                                object.nutrient = options.enums === String ? "NUTRIENT_UNSPECIFIED" : 0;
+                            }
+                            if (message.quantity != null && message.hasOwnProperty("quantity"))
+                                object.quantity = $root.google.devicesandservices.health.v4.WeightQuantity.toObject(message.quantity, options);
+                            if (message.nutrient != null && message.hasOwnProperty("nutrient"))
+                                object.nutrient = options.enums === String ? $root.google.devicesandservices.health.v4.Nutrient[message.nutrient] === undefined ? message.nutrient : $root.google.devicesandservices.health.v4.Nutrient[message.nutrient] : message.nutrient;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NutrientQuantity to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NutrientQuantity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NutrientQuantity
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.NutrientQuantity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NutrientQuantity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.NutrientQuantity";
+                        };
+    
+                        return NutrientQuantity;
+                    })();
+    
+                    v4.NutritionLog = (function() {
+    
+                        /**
+                         * Properties of a NutritionLog.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface INutritionLog
+                         * @property {google.devicesandservices.health.v4.ISessionTimeInterval|null} [interval] NutritionLog interval
+                         * @property {Array.<google.devicesandservices.health.v4.INutrientQuantity>|null} [nutrients] NutritionLog nutrients
+                         * @property {google.devicesandservices.health.v4.IEnergyQuantity|null} [energy] NutritionLog energy
+                         * @property {google.devicesandservices.health.v4.IEnergyQuantity|null} [energyFromFat] NutritionLog energyFromFat
+                         * @property {google.devicesandservices.health.v4.IWeightQuantity|null} [totalCarbohydrate] NutritionLog totalCarbohydrate
+                         * @property {google.devicesandservices.health.v4.IWeightQuantity|null} [totalFat] NutritionLog totalFat
+                         * @property {google.devicesandservices.health.v4.MealType|null} [mealType] NutritionLog mealType
+                         * @property {google.devicesandservices.health.v4.NutritionLog.IServing|null} [serving] NutritionLog serving
+                         * @property {string|null} [food] NutritionLog food
+                         * @property {string|null} [foodDisplayName] NutritionLog foodDisplayName
+                         */
+    
+                        /**
+                         * Constructs a new NutritionLog.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a NutritionLog.
+                         * @implements INutritionLog
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.INutritionLog=} [properties] Properties to set
+                         */
+                        function NutritionLog(properties) {
+                            this.nutrients = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NutritionLog interval.
+                         * @member {google.devicesandservices.health.v4.ISessionTimeInterval|null|undefined} interval
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         */
+                        NutritionLog.prototype.interval = null;
+    
+                        /**
+                         * NutritionLog nutrients.
+                         * @member {Array.<google.devicesandservices.health.v4.INutrientQuantity>} nutrients
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         */
+                        NutritionLog.prototype.nutrients = $util.emptyArray;
+    
+                        /**
+                         * NutritionLog energy.
+                         * @member {google.devicesandservices.health.v4.IEnergyQuantity|null|undefined} energy
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         */
+                        NutritionLog.prototype.energy = null;
+    
+                        /**
+                         * NutritionLog energyFromFat.
+                         * @member {google.devicesandservices.health.v4.IEnergyQuantity|null|undefined} energyFromFat
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         */
+                        NutritionLog.prototype.energyFromFat = null;
+    
+                        /**
+                         * NutritionLog totalCarbohydrate.
+                         * @member {google.devicesandservices.health.v4.IWeightQuantity|null|undefined} totalCarbohydrate
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         */
+                        NutritionLog.prototype.totalCarbohydrate = null;
+    
+                        /**
+                         * NutritionLog totalFat.
+                         * @member {google.devicesandservices.health.v4.IWeightQuantity|null|undefined} totalFat
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         */
+                        NutritionLog.prototype.totalFat = null;
+    
+                        /**
+                         * NutritionLog mealType.
+                         * @member {google.devicesandservices.health.v4.MealType} mealType
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         */
+                        NutritionLog.prototype.mealType = 0;
+    
+                        /**
+                         * NutritionLog serving.
+                         * @member {google.devicesandservices.health.v4.NutritionLog.IServing|null|undefined} serving
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         */
+                        NutritionLog.prototype.serving = null;
+    
+                        /**
+                         * NutritionLog food.
+                         * @member {string} food
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         */
+                        NutritionLog.prototype.food = "";
+    
+                        /**
+                         * NutritionLog foodDisplayName.
+                         * @member {string} foodDisplayName
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         */
+                        NutritionLog.prototype.foodDisplayName = "";
+    
+                        /**
+                         * Creates a new NutritionLog instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @static
+                         * @param {google.devicesandservices.health.v4.INutritionLog=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.NutritionLog} NutritionLog instance
+                         */
+                        NutritionLog.create = function create(properties) {
+                            return new NutritionLog(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NutritionLog message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLog.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @static
+                         * @param {google.devicesandservices.health.v4.INutritionLog} message NutritionLog message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NutritionLog.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
+                                $root.google.devicesandservices.health.v4.SessionTimeInterval.encode(message.interval, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.nutrients != null && message.nutrients.length)
+                                for (var i = 0; i < message.nutrients.length; ++i)
+                                    $root.google.devicesandservices.health.v4.NutrientQuantity.encode(message.nutrients[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.energy != null && Object.hasOwnProperty.call(message, "energy"))
+                                $root.google.devicesandservices.health.v4.EnergyQuantity.encode(message.energy, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.energyFromFat != null && Object.hasOwnProperty.call(message, "energyFromFat"))
+                                $root.google.devicesandservices.health.v4.EnergyQuantity.encode(message.energyFromFat, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.totalCarbohydrate != null && Object.hasOwnProperty.call(message, "totalCarbohydrate"))
+                                $root.google.devicesandservices.health.v4.WeightQuantity.encode(message.totalCarbohydrate, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.totalFat != null && Object.hasOwnProperty.call(message, "totalFat"))
+                                $root.google.devicesandservices.health.v4.WeightQuantity.encode(message.totalFat, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.mealType != null && Object.hasOwnProperty.call(message, "mealType"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.mealType);
+                            if (message.serving != null && Object.hasOwnProperty.call(message, "serving"))
+                                $root.google.devicesandservices.health.v4.NutritionLog.Serving.encode(message.serving, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.food != null && Object.hasOwnProperty.call(message, "food"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.food);
+                            if (message.foodDisplayName != null && Object.hasOwnProperty.call(message, "foodDisplayName"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.foodDisplayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NutritionLog message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLog.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @static
+                         * @param {google.devicesandservices.health.v4.INutritionLog} message NutritionLog message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NutritionLog.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NutritionLog message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.NutritionLog} NutritionLog
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NutritionLog.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.NutritionLog();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.interval = $root.google.devicesandservices.health.v4.SessionTimeInterval.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.nutrients && message.nutrients.length))
+                                            message.nutrients = [];
+                                        message.nutrients.push($root.google.devicesandservices.health.v4.NutrientQuantity.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.energy = $root.google.devicesandservices.health.v4.EnergyQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.energyFromFat = $root.google.devicesandservices.health.v4.EnergyQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.totalCarbohydrate = $root.google.devicesandservices.health.v4.WeightQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.totalFat = $root.google.devicesandservices.health.v4.WeightQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.mealType = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.serving = $root.google.devicesandservices.health.v4.NutritionLog.Serving.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.food = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.foodDisplayName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NutritionLog message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.NutritionLog} NutritionLog
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NutritionLog.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NutritionLog message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NutritionLog.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.interval != null && message.hasOwnProperty("interval")) {
+                                var error = $root.google.devicesandservices.health.v4.SessionTimeInterval.verify(message.interval);
+                                if (error)
+                                    return "interval." + error;
+                            }
+                            if (message.nutrients != null && message.hasOwnProperty("nutrients")) {
+                                if (!Array.isArray(message.nutrients))
+                                    return "nutrients: array expected";
+                                for (var i = 0; i < message.nutrients.length; ++i) {
+                                    var error = $root.google.devicesandservices.health.v4.NutrientQuantity.verify(message.nutrients[i]);
+                                    if (error)
+                                        return "nutrients." + error;
+                                }
+                            }
+                            if (message.energy != null && message.hasOwnProperty("energy")) {
+                                var error = $root.google.devicesandservices.health.v4.EnergyQuantity.verify(message.energy);
+                                if (error)
+                                    return "energy." + error;
+                            }
+                            if (message.energyFromFat != null && message.hasOwnProperty("energyFromFat")) {
+                                var error = $root.google.devicesandservices.health.v4.EnergyQuantity.verify(message.energyFromFat);
+                                if (error)
+                                    return "energyFromFat." + error;
+                            }
+                            if (message.totalCarbohydrate != null && message.hasOwnProperty("totalCarbohydrate")) {
+                                var error = $root.google.devicesandservices.health.v4.WeightQuantity.verify(message.totalCarbohydrate);
+                                if (error)
+                                    return "totalCarbohydrate." + error;
+                            }
+                            if (message.totalFat != null && message.hasOwnProperty("totalFat")) {
+                                var error = $root.google.devicesandservices.health.v4.WeightQuantity.verify(message.totalFat);
+                                if (error)
+                                    return "totalFat." + error;
+                            }
+                            if (message.mealType != null && message.hasOwnProperty("mealType"))
+                                switch (message.mealType) {
+                                default:
+                                    return "mealType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                    break;
+                                }
+                            if (message.serving != null && message.hasOwnProperty("serving")) {
+                                var error = $root.google.devicesandservices.health.v4.NutritionLog.Serving.verify(message.serving);
+                                if (error)
+                                    return "serving." + error;
+                            }
+                            if (message.food != null && message.hasOwnProperty("food"))
+                                if (!$util.isString(message.food))
+                                    return "food: string expected";
+                            if (message.foodDisplayName != null && message.hasOwnProperty("foodDisplayName"))
+                                if (!$util.isString(message.foodDisplayName))
+                                    return "foodDisplayName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NutritionLog message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.NutritionLog} NutritionLog
+                         */
+                        NutritionLog.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.NutritionLog)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.NutritionLog();
+                            if (object.interval != null) {
+                                if (typeof object.interval !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLog.interval: object expected");
+                                message.interval = $root.google.devicesandservices.health.v4.SessionTimeInterval.fromObject(object.interval);
+                            }
+                            if (object.nutrients) {
+                                if (!Array.isArray(object.nutrients))
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLog.nutrients: array expected");
+                                message.nutrients = [];
+                                for (var i = 0; i < object.nutrients.length; ++i) {
+                                    if (typeof object.nutrients[i] !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.NutritionLog.nutrients: object expected");
+                                    message.nutrients[i] = $root.google.devicesandservices.health.v4.NutrientQuantity.fromObject(object.nutrients[i]);
+                                }
+                            }
+                            if (object.energy != null) {
+                                if (typeof object.energy !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLog.energy: object expected");
+                                message.energy = $root.google.devicesandservices.health.v4.EnergyQuantity.fromObject(object.energy);
+                            }
+                            if (object.energyFromFat != null) {
+                                if (typeof object.energyFromFat !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLog.energyFromFat: object expected");
+                                message.energyFromFat = $root.google.devicesandservices.health.v4.EnergyQuantity.fromObject(object.energyFromFat);
+                            }
+                            if (object.totalCarbohydrate != null) {
+                                if (typeof object.totalCarbohydrate !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLog.totalCarbohydrate: object expected");
+                                message.totalCarbohydrate = $root.google.devicesandservices.health.v4.WeightQuantity.fromObject(object.totalCarbohydrate);
+                            }
+                            if (object.totalFat != null) {
+                                if (typeof object.totalFat !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLog.totalFat: object expected");
+                                message.totalFat = $root.google.devicesandservices.health.v4.WeightQuantity.fromObject(object.totalFat);
+                            }
+                            switch (object.mealType) {
+                            default:
+                                if (typeof object.mealType === "number") {
+                                    message.mealType = object.mealType;
+                                    break;
+                                }
+                                break;
+                            case "MEAL_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.mealType = 0;
+                                break;
+                            case "BEFORE_BREAKFAST":
+                            case 1:
+                                message.mealType = 1;
+                                break;
+                            case "BREAKFAST":
+                            case 2:
+                                message.mealType = 2;
+                                break;
+                            case "BEFORE_LUNCH":
+                            case 3:
+                                message.mealType = 3;
+                                break;
+                            case "LUNCH":
+                            case 4:
+                                message.mealType = 4;
+                                break;
+                            case "BEFORE_DINNER":
+                            case 5:
+                                message.mealType = 5;
+                                break;
+                            case "DINNER":
+                            case 6:
+                                message.mealType = 6;
+                                break;
+                            case "AFTER_DINNER":
+                            case 7:
+                                message.mealType = 7;
+                                break;
+                            case "SNACK":
+                            case 8:
+                                message.mealType = 8;
+                                break;
+                            case "ANYTIME":
+                            case 9:
+                                message.mealType = 9;
+                                break;
+                            }
+                            if (object.serving != null) {
+                                if (typeof object.serving !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLog.serving: object expected");
+                                message.serving = $root.google.devicesandservices.health.v4.NutritionLog.Serving.fromObject(object.serving);
+                            }
+                            if (object.food != null)
+                                message.food = String(object.food);
+                            if (object.foodDisplayName != null)
+                                message.foodDisplayName = String(object.foodDisplayName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NutritionLog message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @static
+                         * @param {google.devicesandservices.health.v4.NutritionLog} message NutritionLog
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NutritionLog.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.nutrients = [];
+                            if (options.defaults) {
+                                object.interval = null;
+                                object.energy = null;
+                                object.energyFromFat = null;
+                                object.totalCarbohydrate = null;
+                                object.totalFat = null;
+                                object.mealType = options.enums === String ? "MEAL_TYPE_UNSPECIFIED" : 0;
+                                object.serving = null;
+                                object.food = "";
+                                object.foodDisplayName = "";
+                            }
+                            if (message.interval != null && message.hasOwnProperty("interval"))
+                                object.interval = $root.google.devicesandservices.health.v4.SessionTimeInterval.toObject(message.interval, options);
+                            if (message.nutrients && message.nutrients.length) {
+                                object.nutrients = [];
+                                for (var j = 0; j < message.nutrients.length; ++j)
+                                    object.nutrients[j] = $root.google.devicesandservices.health.v4.NutrientQuantity.toObject(message.nutrients[j], options);
+                            }
+                            if (message.energy != null && message.hasOwnProperty("energy"))
+                                object.energy = $root.google.devicesandservices.health.v4.EnergyQuantity.toObject(message.energy, options);
+                            if (message.energyFromFat != null && message.hasOwnProperty("energyFromFat"))
+                                object.energyFromFat = $root.google.devicesandservices.health.v4.EnergyQuantity.toObject(message.energyFromFat, options);
+                            if (message.totalCarbohydrate != null && message.hasOwnProperty("totalCarbohydrate"))
+                                object.totalCarbohydrate = $root.google.devicesandservices.health.v4.WeightQuantity.toObject(message.totalCarbohydrate, options);
+                            if (message.totalFat != null && message.hasOwnProperty("totalFat"))
+                                object.totalFat = $root.google.devicesandservices.health.v4.WeightQuantity.toObject(message.totalFat, options);
+                            if (message.mealType != null && message.hasOwnProperty("mealType"))
+                                object.mealType = options.enums === String ? $root.google.devicesandservices.health.v4.MealType[message.mealType] === undefined ? message.mealType : $root.google.devicesandservices.health.v4.MealType[message.mealType] : message.mealType;
+                            if (message.serving != null && message.hasOwnProperty("serving"))
+                                object.serving = $root.google.devicesandservices.health.v4.NutritionLog.Serving.toObject(message.serving, options);
+                            if (message.food != null && message.hasOwnProperty("food"))
+                                object.food = message.food;
+                            if (message.foodDisplayName != null && message.hasOwnProperty("foodDisplayName"))
+                                object.foodDisplayName = message.foodDisplayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NutritionLog to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NutritionLog.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NutritionLog
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.NutritionLog
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NutritionLog.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.NutritionLog";
+                        };
+    
+                        NutritionLog.Serving = (function() {
+    
+                            /**
+                             * Properties of a Serving.
+                             * @memberof google.devicesandservices.health.v4.NutritionLog
+                             * @interface IServing
+                             * @property {number|null} [amount] Serving amount
+                             * @property {string|null} [foodMeasurementUnit] Serving foodMeasurementUnit
+                             * @property {string|null} [foodMeasurementUnitDisplayName] Serving foodMeasurementUnitDisplayName
+                             */
+    
+                            /**
+                             * Constructs a new Serving.
+                             * @memberof google.devicesandservices.health.v4.NutritionLog
+                             * @classdesc Represents a Serving.
+                             * @implements IServing
+                             * @constructor
+                             * @param {google.devicesandservices.health.v4.NutritionLog.IServing=} [properties] Properties to set
+                             */
+                            function Serving(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Serving amount.
+                             * @member {number|null|undefined} amount
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @instance
+                             */
+                            Serving.prototype.amount = null;
+    
+                            /**
+                             * Serving foodMeasurementUnit.
+                             * @member {string} foodMeasurementUnit
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @instance
+                             */
+                            Serving.prototype.foodMeasurementUnit = "";
+    
+                            /**
+                             * Serving foodMeasurementUnitDisplayName.
+                             * @member {string} foodMeasurementUnitDisplayName
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @instance
+                             */
+                            Serving.prototype.foodMeasurementUnitDisplayName = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Serving.prototype, "_amount", {
+                                get: $util.oneOfGetter($oneOfFields = ["amount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Serving instance using the specified properties.
+                             * @function create
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLog.IServing=} [properties] Properties to set
+                             * @returns {google.devicesandservices.health.v4.NutritionLog.Serving} Serving instance
+                             */
+                            Serving.create = function create(properties) {
+                                return new Serving(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Serving message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLog.Serving.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLog.IServing} message Serving message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Serving.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
+                                    writer.uint32(/* id 1, wireType 1 =*/9).double(message.amount);
+                                if (message.foodMeasurementUnit != null && Object.hasOwnProperty.call(message, "foodMeasurementUnit"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.foodMeasurementUnit);
+                                if (message.foodMeasurementUnitDisplayName != null && Object.hasOwnProperty.call(message, "foodMeasurementUnitDisplayName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.foodMeasurementUnitDisplayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Serving message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLog.Serving.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLog.IServing} message Serving message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Serving.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Serving message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devicesandservices.health.v4.NutritionLog.Serving} Serving
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Serving.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.NutritionLog.Serving();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.amount = reader.double();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.foodMeasurementUnit = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.foodMeasurementUnitDisplayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Serving message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devicesandservices.health.v4.NutritionLog.Serving} Serving
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Serving.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Serving message.
+                             * @function verify
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Serving.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.amount != null && message.hasOwnProperty("amount")) {
+                                    properties._amount = 1;
+                                    if (typeof message.amount !== "number")
+                                        return "amount: number expected";
+                                }
+                                if (message.foodMeasurementUnit != null && message.hasOwnProperty("foodMeasurementUnit"))
+                                    if (!$util.isString(message.foodMeasurementUnit))
+                                        return "foodMeasurementUnit: string expected";
+                                if (message.foodMeasurementUnitDisplayName != null && message.hasOwnProperty("foodMeasurementUnitDisplayName"))
+                                    if (!$util.isString(message.foodMeasurementUnitDisplayName))
+                                        return "foodMeasurementUnitDisplayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Serving message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devicesandservices.health.v4.NutritionLog.Serving} Serving
+                             */
+                            Serving.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devicesandservices.health.v4.NutritionLog.Serving)
+                                    return object;
+                                var message = new $root.google.devicesandservices.health.v4.NutritionLog.Serving();
+                                if (object.amount != null)
+                                    message.amount = Number(object.amount);
+                                if (object.foodMeasurementUnit != null)
+                                    message.foodMeasurementUnit = String(object.foodMeasurementUnit);
+                                if (object.foodMeasurementUnitDisplayName != null)
+                                    message.foodMeasurementUnitDisplayName = String(object.foodMeasurementUnitDisplayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Serving message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLog.Serving} message Serving
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Serving.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.foodMeasurementUnit = "";
+                                    object.foodMeasurementUnitDisplayName = "";
+                                }
+                                if (message.amount != null && message.hasOwnProperty("amount")) {
+                                    object.amount = options.json && !isFinite(message.amount) ? String(message.amount) : message.amount;
+                                    if (options.oneofs)
+                                        object._amount = "amount";
+                                }
+                                if (message.foodMeasurementUnit != null && message.hasOwnProperty("foodMeasurementUnit"))
+                                    object.foodMeasurementUnit = message.foodMeasurementUnit;
+                                if (message.foodMeasurementUnitDisplayName != null && message.hasOwnProperty("foodMeasurementUnitDisplayName"))
+                                    object.foodMeasurementUnitDisplayName = message.foodMeasurementUnitDisplayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Serving to JSON.
+                             * @function toJSON
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Serving.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Serving
+                             * @function getTypeUrl
+                             * @memberof google.devicesandservices.health.v4.NutritionLog.Serving
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Serving.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devicesandservices.health.v4.NutritionLog.Serving";
+                            };
+    
+                            return Serving;
+                        })();
+    
+                        return NutritionLog;
+                    })();
+    
+                    v4.Food = (function() {
+    
+                        /**
+                         * Properties of a Food.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IFood
+                         * @property {string|null} [displayName] Food displayName
+                         * @property {string|null} [brand] Food brand
+                         * @property {google.devicesandservices.health.v4.FoodAccessLevel|null} [accessLevel] Food accessLevel
+                         * @property {string|null} [description] Food description
+                         * @property {string|null} [languageCode] Food languageCode
+                         * @property {google.devicesandservices.health.v4.MealType|null} [mealType] Food mealType
+                         * @property {Array.<google.devicesandservices.health.v4.INutrientQuantity>|null} [nutrients] Food nutrients
+                         * @property {google.devicesandservices.health.v4.IEnergyQuantity|null} [energyFromFat] Food energyFromFat
+                         * @property {google.devicesandservices.health.v4.IWeightQuantity|null} [totalCarbohydrate] Food totalCarbohydrate
+                         * @property {google.devicesandservices.health.v4.IWeightQuantity|null} [totalFat] Food totalFat
+                         * @property {google.devicesandservices.health.v4.IEnergyQuantity|null} [energyMin] Food energyMin
+                         * @property {google.devicesandservices.health.v4.IEnergyQuantity|null} [energyAvg] Food energyAvg
+                         * @property {google.devicesandservices.health.v4.IEnergyQuantity|null} [energyMax] Food energyMax
+                         * @property {google.devicesandservices.health.v4.Food.IFoodServing|null} [defaultServing] Food defaultServing
+                         * @property {Array.<google.devicesandservices.health.v4.Food.IFoodServing>|null} [servings] Food servings
+                         */
+    
+                        /**
+                         * Constructs a new Food.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a Food.
+                         * @implements IFood
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IFood=} [properties] Properties to set
+                         */
+                        function Food(properties) {
+                            this.nutrients = [];
+                            this.servings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Food displayName.
+                         * @member {string} displayName
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.displayName = "";
+    
+                        /**
+                         * Food brand.
+                         * @member {string} brand
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.brand = "";
+    
+                        /**
+                         * Food accessLevel.
+                         * @member {google.devicesandservices.health.v4.FoodAccessLevel} accessLevel
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.accessLevel = 0;
+    
+                        /**
+                         * Food description.
+                         * @member {string} description
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.description = "";
+    
+                        /**
+                         * Food languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.languageCode = "";
+    
+                        /**
+                         * Food mealType.
+                         * @member {google.devicesandservices.health.v4.MealType} mealType
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.mealType = 0;
+    
+                        /**
+                         * Food nutrients.
+                         * @member {Array.<google.devicesandservices.health.v4.INutrientQuantity>} nutrients
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.nutrients = $util.emptyArray;
+    
+                        /**
+                         * Food energyFromFat.
+                         * @member {google.devicesandservices.health.v4.IEnergyQuantity|null|undefined} energyFromFat
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.energyFromFat = null;
+    
+                        /**
+                         * Food totalCarbohydrate.
+                         * @member {google.devicesandservices.health.v4.IWeightQuantity|null|undefined} totalCarbohydrate
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.totalCarbohydrate = null;
+    
+                        /**
+                         * Food totalFat.
+                         * @member {google.devicesandservices.health.v4.IWeightQuantity|null|undefined} totalFat
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.totalFat = null;
+    
+                        /**
+                         * Food energyMin.
+                         * @member {google.devicesandservices.health.v4.IEnergyQuantity|null|undefined} energyMin
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.energyMin = null;
+    
+                        /**
+                         * Food energyAvg.
+                         * @member {google.devicesandservices.health.v4.IEnergyQuantity|null|undefined} energyAvg
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.energyAvg = null;
+    
+                        /**
+                         * Food energyMax.
+                         * @member {google.devicesandservices.health.v4.IEnergyQuantity|null|undefined} energyMax
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.energyMax = null;
+    
+                        /**
+                         * Food defaultServing.
+                         * @member {google.devicesandservices.health.v4.Food.IFoodServing|null|undefined} defaultServing
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.defaultServing = null;
+    
+                        /**
+                         * Food servings.
+                         * @member {Array.<google.devicesandservices.health.v4.Food.IFoodServing>} servings
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         */
+                        Food.prototype.servings = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Food instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IFood=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.Food} Food instance
+                         */
+                        Food.create = function create(properties) {
+                            return new Food(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Food message. Does not implicitly {@link google.devicesandservices.health.v4.Food.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IFood} message Food message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Food.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.brand != null && Object.hasOwnProperty.call(message, "brand"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.brand);
+                            if (message.accessLevel != null && Object.hasOwnProperty.call(message, "accessLevel"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.accessLevel);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.languageCode);
+                            if (message.mealType != null && Object.hasOwnProperty.call(message, "mealType"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.mealType);
+                            if (message.nutrients != null && message.nutrients.length)
+                                for (var i = 0; i < message.nutrients.length; ++i)
+                                    $root.google.devicesandservices.health.v4.NutrientQuantity.encode(message.nutrients[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.energyFromFat != null && Object.hasOwnProperty.call(message, "energyFromFat"))
+                                $root.google.devicesandservices.health.v4.EnergyQuantity.encode(message.energyFromFat, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.totalCarbohydrate != null && Object.hasOwnProperty.call(message, "totalCarbohydrate"))
+                                $root.google.devicesandservices.health.v4.WeightQuantity.encode(message.totalCarbohydrate, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.totalFat != null && Object.hasOwnProperty.call(message, "totalFat"))
+                                $root.google.devicesandservices.health.v4.WeightQuantity.encode(message.totalFat, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.energyMin != null && Object.hasOwnProperty.call(message, "energyMin"))
+                                $root.google.devicesandservices.health.v4.EnergyQuantity.encode(message.energyMin, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.energyAvg != null && Object.hasOwnProperty.call(message, "energyAvg"))
+                                $root.google.devicesandservices.health.v4.EnergyQuantity.encode(message.energyAvg, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.energyMax != null && Object.hasOwnProperty.call(message, "energyMax"))
+                                $root.google.devicesandservices.health.v4.EnergyQuantity.encode(message.energyMax, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.defaultServing != null && Object.hasOwnProperty.call(message, "defaultServing"))
+                                $root.google.devicesandservices.health.v4.Food.FoodServing.encode(message.defaultServing, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.servings != null && message.servings.length)
+                                for (var i = 0; i < message.servings.length; ++i)
+                                    $root.google.devicesandservices.health.v4.Food.FoodServing.encode(message.servings[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Food message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Food.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IFood} message Food message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Food.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Food message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.Food} Food
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Food.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.Food();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.brand = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.accessLevel = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.languageCode = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.mealType = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.nutrients && message.nutrients.length))
+                                            message.nutrients = [];
+                                        message.nutrients.push($root.google.devicesandservices.health.v4.NutrientQuantity.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 13: {
+                                        message.energyFromFat = $root.google.devicesandservices.health.v4.EnergyQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.totalCarbohydrate = $root.google.devicesandservices.health.v4.WeightQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.totalFat = $root.google.devicesandservices.health.v4.WeightQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.energyMin = $root.google.devicesandservices.health.v4.EnergyQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.energyAvg = $root.google.devicesandservices.health.v4.EnergyQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 18: {
+                                        message.energyMax = $root.google.devicesandservices.health.v4.EnergyQuantity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 19: {
+                                        message.defaultServing = $root.google.devicesandservices.health.v4.Food.FoodServing.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 20: {
+                                        if (!(message.servings && message.servings.length))
+                                            message.servings = [];
+                                        message.servings.push($root.google.devicesandservices.health.v4.Food.FoodServing.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Food message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.Food} Food
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Food.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Food message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Food.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.brand != null && message.hasOwnProperty("brand"))
+                                if (!$util.isString(message.brand))
+                                    return "brand: string expected";
+                            if (message.accessLevel != null && message.hasOwnProperty("accessLevel"))
+                                switch (message.accessLevel) {
+                                default:
+                                    return "accessLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            if (message.mealType != null && message.hasOwnProperty("mealType"))
+                                switch (message.mealType) {
+                                default:
+                                    return "mealType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                    break;
+                                }
+                            if (message.nutrients != null && message.hasOwnProperty("nutrients")) {
+                                if (!Array.isArray(message.nutrients))
+                                    return "nutrients: array expected";
+                                for (var i = 0; i < message.nutrients.length; ++i) {
+                                    var error = $root.google.devicesandservices.health.v4.NutrientQuantity.verify(message.nutrients[i]);
+                                    if (error)
+                                        return "nutrients." + error;
+                                }
+                            }
+                            if (message.energyFromFat != null && message.hasOwnProperty("energyFromFat")) {
+                                var error = $root.google.devicesandservices.health.v4.EnergyQuantity.verify(message.energyFromFat);
+                                if (error)
+                                    return "energyFromFat." + error;
+                            }
+                            if (message.totalCarbohydrate != null && message.hasOwnProperty("totalCarbohydrate")) {
+                                var error = $root.google.devicesandservices.health.v4.WeightQuantity.verify(message.totalCarbohydrate);
+                                if (error)
+                                    return "totalCarbohydrate." + error;
+                            }
+                            if (message.totalFat != null && message.hasOwnProperty("totalFat")) {
+                                var error = $root.google.devicesandservices.health.v4.WeightQuantity.verify(message.totalFat);
+                                if (error)
+                                    return "totalFat." + error;
+                            }
+                            if (message.energyMin != null && message.hasOwnProperty("energyMin")) {
+                                var error = $root.google.devicesandservices.health.v4.EnergyQuantity.verify(message.energyMin);
+                                if (error)
+                                    return "energyMin." + error;
+                            }
+                            if (message.energyAvg != null && message.hasOwnProperty("energyAvg")) {
+                                var error = $root.google.devicesandservices.health.v4.EnergyQuantity.verify(message.energyAvg);
+                                if (error)
+                                    return "energyAvg." + error;
+                            }
+                            if (message.energyMax != null && message.hasOwnProperty("energyMax")) {
+                                var error = $root.google.devicesandservices.health.v4.EnergyQuantity.verify(message.energyMax);
+                                if (error)
+                                    return "energyMax." + error;
+                            }
+                            if (message.defaultServing != null && message.hasOwnProperty("defaultServing")) {
+                                var error = $root.google.devicesandservices.health.v4.Food.FoodServing.verify(message.defaultServing);
+                                if (error)
+                                    return "defaultServing." + error;
+                            }
+                            if (message.servings != null && message.hasOwnProperty("servings")) {
+                                if (!Array.isArray(message.servings))
+                                    return "servings: array expected";
+                                for (var i = 0; i < message.servings.length; ++i) {
+                                    var error = $root.google.devicesandservices.health.v4.Food.FoodServing.verify(message.servings[i]);
+                                    if (error)
+                                        return "servings." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Food message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.Food} Food
+                         */
+                        Food.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.Food)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.Food();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.brand != null)
+                                message.brand = String(object.brand);
+                            switch (object.accessLevel) {
+                            default:
+                                if (typeof object.accessLevel === "number") {
+                                    message.accessLevel = object.accessLevel;
+                                    break;
+                                }
+                                break;
+                            case "FOOD_ACCESS_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.accessLevel = 0;
+                                break;
+                            case "FOOD_ACCESS_LEVEL_PUBLIC":
+                            case 1:
+                                message.accessLevel = 1;
+                                break;
+                            case "FOOD_ACCESS_LEVEL_PRIVATE":
+                            case 2:
+                                message.accessLevel = 2;
+                                break;
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            switch (object.mealType) {
+                            default:
+                                if (typeof object.mealType === "number") {
+                                    message.mealType = object.mealType;
+                                    break;
+                                }
+                                break;
+                            case "MEAL_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.mealType = 0;
+                                break;
+                            case "BEFORE_BREAKFAST":
+                            case 1:
+                                message.mealType = 1;
+                                break;
+                            case "BREAKFAST":
+                            case 2:
+                                message.mealType = 2;
+                                break;
+                            case "BEFORE_LUNCH":
+                            case 3:
+                                message.mealType = 3;
+                                break;
+                            case "LUNCH":
+                            case 4:
+                                message.mealType = 4;
+                                break;
+                            case "BEFORE_DINNER":
+                            case 5:
+                                message.mealType = 5;
+                                break;
+                            case "DINNER":
+                            case 6:
+                                message.mealType = 6;
+                                break;
+                            case "AFTER_DINNER":
+                            case 7:
+                                message.mealType = 7;
+                                break;
+                            case "SNACK":
+                            case 8:
+                                message.mealType = 8;
+                                break;
+                            case "ANYTIME":
+                            case 9:
+                                message.mealType = 9;
+                                break;
+                            }
+                            if (object.nutrients) {
+                                if (!Array.isArray(object.nutrients))
+                                    throw TypeError(".google.devicesandservices.health.v4.Food.nutrients: array expected");
+                                message.nutrients = [];
+                                for (var i = 0; i < object.nutrients.length; ++i) {
+                                    if (typeof object.nutrients[i] !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.Food.nutrients: object expected");
+                                    message.nutrients[i] = $root.google.devicesandservices.health.v4.NutrientQuantity.fromObject(object.nutrients[i]);
+                                }
+                            }
+                            if (object.energyFromFat != null) {
+                                if (typeof object.energyFromFat !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Food.energyFromFat: object expected");
+                                message.energyFromFat = $root.google.devicesandservices.health.v4.EnergyQuantity.fromObject(object.energyFromFat);
+                            }
+                            if (object.totalCarbohydrate != null) {
+                                if (typeof object.totalCarbohydrate !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Food.totalCarbohydrate: object expected");
+                                message.totalCarbohydrate = $root.google.devicesandservices.health.v4.WeightQuantity.fromObject(object.totalCarbohydrate);
+                            }
+                            if (object.totalFat != null) {
+                                if (typeof object.totalFat !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Food.totalFat: object expected");
+                                message.totalFat = $root.google.devicesandservices.health.v4.WeightQuantity.fromObject(object.totalFat);
+                            }
+                            if (object.energyMin != null) {
+                                if (typeof object.energyMin !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Food.energyMin: object expected");
+                                message.energyMin = $root.google.devicesandservices.health.v4.EnergyQuantity.fromObject(object.energyMin);
+                            }
+                            if (object.energyAvg != null) {
+                                if (typeof object.energyAvg !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Food.energyAvg: object expected");
+                                message.energyAvg = $root.google.devicesandservices.health.v4.EnergyQuantity.fromObject(object.energyAvg);
+                            }
+                            if (object.energyMax != null) {
+                                if (typeof object.energyMax !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Food.energyMax: object expected");
+                                message.energyMax = $root.google.devicesandservices.health.v4.EnergyQuantity.fromObject(object.energyMax);
+                            }
+                            if (object.defaultServing != null) {
+                                if (typeof object.defaultServing !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Food.defaultServing: object expected");
+                                message.defaultServing = $root.google.devicesandservices.health.v4.Food.FoodServing.fromObject(object.defaultServing);
+                            }
+                            if (object.servings) {
+                                if (!Array.isArray(object.servings))
+                                    throw TypeError(".google.devicesandservices.health.v4.Food.servings: array expected");
+                                message.servings = [];
+                                for (var i = 0; i < object.servings.length; ++i) {
+                                    if (typeof object.servings[i] !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.Food.servings: object expected");
+                                    message.servings[i] = $root.google.devicesandservices.health.v4.Food.FoodServing.fromObject(object.servings[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Food message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @static
+                         * @param {google.devicesandservices.health.v4.Food} message Food
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Food.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.nutrients = [];
+                                object.servings = [];
+                            }
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.brand = "";
+                                object.accessLevel = options.enums === String ? "FOOD_ACCESS_LEVEL_UNSPECIFIED" : 0;
+                                object.description = "";
+                                object.languageCode = "";
+                                object.mealType = options.enums === String ? "MEAL_TYPE_UNSPECIFIED" : 0;
+                                object.energyFromFat = null;
+                                object.totalCarbohydrate = null;
+                                object.totalFat = null;
+                                object.energyMin = null;
+                                object.energyAvg = null;
+                                object.energyMax = null;
+                                object.defaultServing = null;
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.brand != null && message.hasOwnProperty("brand"))
+                                object.brand = message.brand;
+                            if (message.accessLevel != null && message.hasOwnProperty("accessLevel"))
+                                object.accessLevel = options.enums === String ? $root.google.devicesandservices.health.v4.FoodAccessLevel[message.accessLevel] === undefined ? message.accessLevel : $root.google.devicesandservices.health.v4.FoodAccessLevel[message.accessLevel] : message.accessLevel;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
+                            if (message.mealType != null && message.hasOwnProperty("mealType"))
+                                object.mealType = options.enums === String ? $root.google.devicesandservices.health.v4.MealType[message.mealType] === undefined ? message.mealType : $root.google.devicesandservices.health.v4.MealType[message.mealType] : message.mealType;
+                            if (message.nutrients && message.nutrients.length) {
+                                object.nutrients = [];
+                                for (var j = 0; j < message.nutrients.length; ++j)
+                                    object.nutrients[j] = $root.google.devicesandservices.health.v4.NutrientQuantity.toObject(message.nutrients[j], options);
+                            }
+                            if (message.energyFromFat != null && message.hasOwnProperty("energyFromFat"))
+                                object.energyFromFat = $root.google.devicesandservices.health.v4.EnergyQuantity.toObject(message.energyFromFat, options);
+                            if (message.totalCarbohydrate != null && message.hasOwnProperty("totalCarbohydrate"))
+                                object.totalCarbohydrate = $root.google.devicesandservices.health.v4.WeightQuantity.toObject(message.totalCarbohydrate, options);
+                            if (message.totalFat != null && message.hasOwnProperty("totalFat"))
+                                object.totalFat = $root.google.devicesandservices.health.v4.WeightQuantity.toObject(message.totalFat, options);
+                            if (message.energyMin != null && message.hasOwnProperty("energyMin"))
+                                object.energyMin = $root.google.devicesandservices.health.v4.EnergyQuantity.toObject(message.energyMin, options);
+                            if (message.energyAvg != null && message.hasOwnProperty("energyAvg"))
+                                object.energyAvg = $root.google.devicesandservices.health.v4.EnergyQuantity.toObject(message.energyAvg, options);
+                            if (message.energyMax != null && message.hasOwnProperty("energyMax"))
+                                object.energyMax = $root.google.devicesandservices.health.v4.EnergyQuantity.toObject(message.energyMax, options);
+                            if (message.defaultServing != null && message.hasOwnProperty("defaultServing"))
+                                object.defaultServing = $root.google.devicesandservices.health.v4.Food.FoodServing.toObject(message.defaultServing, options);
+                            if (message.servings && message.servings.length) {
+                                object.servings = [];
+                                for (var j = 0; j < message.servings.length; ++j)
+                                    object.servings[j] = $root.google.devicesandservices.health.v4.Food.FoodServing.toObject(message.servings[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Food to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Food.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Food
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.Food
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Food.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.Food";
+                        };
+    
+                        Food.FoodServing = (function() {
+    
+                            /**
+                             * Properties of a FoodServing.
+                             * @memberof google.devicesandservices.health.v4.Food
+                             * @interface IFoodServing
+                             * @property {number|null} [amount] FoodServing amount
+                             * @property {string|null} [foodMeasurementUnit] FoodServing foodMeasurementUnit
+                             * @property {string|null} [foodMeasurementUnitDisplayName] FoodServing foodMeasurementUnitDisplayName
+                             * @property {string|null} [foodMeasurementUnitDisplayNamePlural] FoodServing foodMeasurementUnitDisplayNamePlural
+                             * @property {number|null} [multiplier] FoodServing multiplier
+                             */
+    
+                            /**
+                             * Constructs a new FoodServing.
+                             * @memberof google.devicesandservices.health.v4.Food
+                             * @classdesc Represents a FoodServing.
+                             * @implements IFoodServing
+                             * @constructor
+                             * @param {google.devicesandservices.health.v4.Food.IFoodServing=} [properties] Properties to set
+                             */
+                            function FoodServing(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FoodServing amount.
+                             * @member {number|null|undefined} amount
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @instance
+                             */
+                            FoodServing.prototype.amount = null;
+    
+                            /**
+                             * FoodServing foodMeasurementUnit.
+                             * @member {string} foodMeasurementUnit
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @instance
+                             */
+                            FoodServing.prototype.foodMeasurementUnit = "";
+    
+                            /**
+                             * FoodServing foodMeasurementUnitDisplayName.
+                             * @member {string} foodMeasurementUnitDisplayName
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @instance
+                             */
+                            FoodServing.prototype.foodMeasurementUnitDisplayName = "";
+    
+                            /**
+                             * FoodServing foodMeasurementUnitDisplayNamePlural.
+                             * @member {string} foodMeasurementUnitDisplayNamePlural
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @instance
+                             */
+                            FoodServing.prototype.foodMeasurementUnitDisplayNamePlural = "";
+    
+                            /**
+                             * FoodServing multiplier.
+                             * @member {number} multiplier
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @instance
+                             */
+                            FoodServing.prototype.multiplier = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(FoodServing.prototype, "_amount", {
+                                get: $util.oneOfGetter($oneOfFields = ["amount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new FoodServing instance using the specified properties.
+                             * @function create
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @static
+                             * @param {google.devicesandservices.health.v4.Food.IFoodServing=} [properties] Properties to set
+                             * @returns {google.devicesandservices.health.v4.Food.FoodServing} FoodServing instance
+                             */
+                            FoodServing.create = function create(properties) {
+                                return new FoodServing(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FoodServing message. Does not implicitly {@link google.devicesandservices.health.v4.Food.FoodServing.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @static
+                             * @param {google.devicesandservices.health.v4.Food.IFoodServing} message FoodServing message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FoodServing.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
+                                    writer.uint32(/* id 1, wireType 1 =*/9).double(message.amount);
+                                if (message.foodMeasurementUnit != null && Object.hasOwnProperty.call(message, "foodMeasurementUnit"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.foodMeasurementUnit);
+                                if (message.foodMeasurementUnitDisplayName != null && Object.hasOwnProperty.call(message, "foodMeasurementUnitDisplayName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.foodMeasurementUnitDisplayName);
+                                if (message.foodMeasurementUnitDisplayNamePlural != null && Object.hasOwnProperty.call(message, "foodMeasurementUnitDisplayNamePlural"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.foodMeasurementUnitDisplayNamePlural);
+                                if (message.multiplier != null && Object.hasOwnProperty.call(message, "multiplier"))
+                                    writer.uint32(/* id 5, wireType 1 =*/41).double(message.multiplier);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FoodServing message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Food.FoodServing.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @static
+                             * @param {google.devicesandservices.health.v4.Food.IFoodServing} message FoodServing message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FoodServing.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FoodServing message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devicesandservices.health.v4.Food.FoodServing} FoodServing
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FoodServing.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.Food.FoodServing();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.amount = reader.double();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.foodMeasurementUnit = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.foodMeasurementUnitDisplayName = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.foodMeasurementUnitDisplayNamePlural = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.multiplier = reader.double();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FoodServing message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devicesandservices.health.v4.Food.FoodServing} FoodServing
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FoodServing.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FoodServing message.
+                             * @function verify
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FoodServing.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.amount != null && message.hasOwnProperty("amount")) {
+                                    properties._amount = 1;
+                                    if (typeof message.amount !== "number")
+                                        return "amount: number expected";
+                                }
+                                if (message.foodMeasurementUnit != null && message.hasOwnProperty("foodMeasurementUnit"))
+                                    if (!$util.isString(message.foodMeasurementUnit))
+                                        return "foodMeasurementUnit: string expected";
+                                if (message.foodMeasurementUnitDisplayName != null && message.hasOwnProperty("foodMeasurementUnitDisplayName"))
+                                    if (!$util.isString(message.foodMeasurementUnitDisplayName))
+                                        return "foodMeasurementUnitDisplayName: string expected";
+                                if (message.foodMeasurementUnitDisplayNamePlural != null && message.hasOwnProperty("foodMeasurementUnitDisplayNamePlural"))
+                                    if (!$util.isString(message.foodMeasurementUnitDisplayNamePlural))
+                                        return "foodMeasurementUnitDisplayNamePlural: string expected";
+                                if (message.multiplier != null && message.hasOwnProperty("multiplier"))
+                                    if (typeof message.multiplier !== "number")
+                                        return "multiplier: number expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FoodServing message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devicesandservices.health.v4.Food.FoodServing} FoodServing
+                             */
+                            FoodServing.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devicesandservices.health.v4.Food.FoodServing)
+                                    return object;
+                                var message = new $root.google.devicesandservices.health.v4.Food.FoodServing();
+                                if (object.amount != null)
+                                    message.amount = Number(object.amount);
+                                if (object.foodMeasurementUnit != null)
+                                    message.foodMeasurementUnit = String(object.foodMeasurementUnit);
+                                if (object.foodMeasurementUnitDisplayName != null)
+                                    message.foodMeasurementUnitDisplayName = String(object.foodMeasurementUnitDisplayName);
+                                if (object.foodMeasurementUnitDisplayNamePlural != null)
+                                    message.foodMeasurementUnitDisplayNamePlural = String(object.foodMeasurementUnitDisplayNamePlural);
+                                if (object.multiplier != null)
+                                    message.multiplier = Number(object.multiplier);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FoodServing message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @static
+                             * @param {google.devicesandservices.health.v4.Food.FoodServing} message FoodServing
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FoodServing.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.foodMeasurementUnit = "";
+                                    object.foodMeasurementUnitDisplayName = "";
+                                    object.foodMeasurementUnitDisplayNamePlural = "";
+                                    object.multiplier = 0;
+                                }
+                                if (message.amount != null && message.hasOwnProperty("amount")) {
+                                    object.amount = options.json && !isFinite(message.amount) ? String(message.amount) : message.amount;
+                                    if (options.oneofs)
+                                        object._amount = "amount";
+                                }
+                                if (message.foodMeasurementUnit != null && message.hasOwnProperty("foodMeasurementUnit"))
+                                    object.foodMeasurementUnit = message.foodMeasurementUnit;
+                                if (message.foodMeasurementUnitDisplayName != null && message.hasOwnProperty("foodMeasurementUnitDisplayName"))
+                                    object.foodMeasurementUnitDisplayName = message.foodMeasurementUnitDisplayName;
+                                if (message.foodMeasurementUnitDisplayNamePlural != null && message.hasOwnProperty("foodMeasurementUnitDisplayNamePlural"))
+                                    object.foodMeasurementUnitDisplayNamePlural = message.foodMeasurementUnitDisplayNamePlural;
+                                if (message.multiplier != null && message.hasOwnProperty("multiplier"))
+                                    object.multiplier = options.json && !isFinite(message.multiplier) ? String(message.multiplier) : message.multiplier;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FoodServing to JSON.
+                             * @function toJSON
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FoodServing.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FoodServing
+                             * @function getTypeUrl
+                             * @memberof google.devicesandservices.health.v4.Food.FoodServing
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FoodServing.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devicesandservices.health.v4.Food.FoodServing";
+                            };
+    
+                            return FoodServing;
+                        })();
+    
+                        return Food;
+                    })();
+    
+                    v4.NutritionLogRollupValue = (function() {
+    
+                        /**
+                         * Properties of a NutritionLogRollupValue.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface INutritionLogRollupValue
+                         * @property {Array.<google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup>|null} [nutrients] NutritionLogRollupValue nutrients
+                         * @property {google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup|null} [energy] NutritionLogRollupValue energy
+                         * @property {google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup|null} [energyFromFat] NutritionLogRollupValue energyFromFat
+                         * @property {google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null} [totalCarbohydrate] NutritionLogRollupValue totalCarbohydrate
+                         * @property {google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null} [totalFat] NutritionLogRollupValue totalFat
+                         */
+    
+                        /**
+                         * Constructs a new NutritionLogRollupValue.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a NutritionLogRollupValue.
+                         * @implements INutritionLogRollupValue
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.INutritionLogRollupValue=} [properties] Properties to set
+                         */
+                        function NutritionLogRollupValue(properties) {
+                            this.nutrients = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NutritionLogRollupValue nutrients.
+                         * @member {Array.<google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup>} nutrients
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @instance
+                         */
+                        NutritionLogRollupValue.prototype.nutrients = $util.emptyArray;
+    
+                        /**
+                         * NutritionLogRollupValue energy.
+                         * @member {google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup|null|undefined} energy
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @instance
+                         */
+                        NutritionLogRollupValue.prototype.energy = null;
+    
+                        /**
+                         * NutritionLogRollupValue energyFromFat.
+                         * @member {google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup|null|undefined} energyFromFat
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @instance
+                         */
+                        NutritionLogRollupValue.prototype.energyFromFat = null;
+    
+                        /**
+                         * NutritionLogRollupValue totalCarbohydrate.
+                         * @member {google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null|undefined} totalCarbohydrate
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @instance
+                         */
+                        NutritionLogRollupValue.prototype.totalCarbohydrate = null;
+    
+                        /**
+                         * NutritionLogRollupValue totalFat.
+                         * @member {google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null|undefined} totalFat
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @instance
+                         */
+                        NutritionLogRollupValue.prototype.totalFat = null;
+    
+                        /**
+                         * Creates a new NutritionLogRollupValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.INutritionLogRollupValue=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue} NutritionLogRollupValue instance
+                         */
+                        NutritionLogRollupValue.create = function create(properties) {
+                            return new NutritionLogRollupValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NutritionLogRollupValue message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.INutritionLogRollupValue} message NutritionLogRollupValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NutritionLogRollupValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.nutrients != null && message.nutrients.length)
+                                for (var i = 0; i < message.nutrients.length; ++i)
+                                    $root.google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup.encode(message.nutrients[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.energy != null && Object.hasOwnProperty.call(message, "energy"))
+                                $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.encode(message.energy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.energyFromFat != null && Object.hasOwnProperty.call(message, "energyFromFat"))
+                                $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.encode(message.energyFromFat, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.totalCarbohydrate != null && Object.hasOwnProperty.call(message, "totalCarbohydrate"))
+                                $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.encode(message.totalCarbohydrate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.totalFat != null && Object.hasOwnProperty.call(message, "totalFat"))
+                                $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.encode(message.totalFat, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NutritionLogRollupValue message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.INutritionLogRollupValue} message NutritionLogRollupValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NutritionLogRollupValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NutritionLogRollupValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue} NutritionLogRollupValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NutritionLogRollupValue.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.NutritionLogRollupValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.nutrients && message.nutrients.length))
+                                            message.nutrients = [];
+                                        message.nutrients.push($root.google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.energy = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.energyFromFat = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.totalCarbohydrate = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.totalFat = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NutritionLogRollupValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue} NutritionLogRollupValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NutritionLogRollupValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NutritionLogRollupValue message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NutritionLogRollupValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.nutrients != null && message.hasOwnProperty("nutrients")) {
+                                if (!Array.isArray(message.nutrients))
+                                    return "nutrients: array expected";
+                                for (var i = 0; i < message.nutrients.length; ++i) {
+                                    var error = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup.verify(message.nutrients[i]);
+                                    if (error)
+                                        return "nutrients." + error;
+                                }
+                            }
+                            if (message.energy != null && message.hasOwnProperty("energy")) {
+                                var error = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.verify(message.energy);
+                                if (error)
+                                    return "energy." + error;
+                            }
+                            if (message.energyFromFat != null && message.hasOwnProperty("energyFromFat")) {
+                                var error = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.verify(message.energyFromFat);
+                                if (error)
+                                    return "energyFromFat." + error;
+                            }
+                            if (message.totalCarbohydrate != null && message.hasOwnProperty("totalCarbohydrate")) {
+                                var error = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.verify(message.totalCarbohydrate);
+                                if (error)
+                                    return "totalCarbohydrate." + error;
+                            }
+                            if (message.totalFat != null && message.hasOwnProperty("totalFat")) {
+                                var error = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.verify(message.totalFat);
+                                if (error)
+                                    return "totalFat." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NutritionLogRollupValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue} NutritionLogRollupValue
+                         */
+                        NutritionLogRollupValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.NutritionLogRollupValue)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.NutritionLogRollupValue();
+                            if (object.nutrients) {
+                                if (!Array.isArray(object.nutrients))
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLogRollupValue.nutrients: array expected");
+                                message.nutrients = [];
+                                for (var i = 0; i < object.nutrients.length; ++i) {
+                                    if (typeof object.nutrients[i] !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.NutritionLogRollupValue.nutrients: object expected");
+                                    message.nutrients[i] = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup.fromObject(object.nutrients[i]);
+                                }
+                            }
+                            if (object.energy != null) {
+                                if (typeof object.energy !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLogRollupValue.energy: object expected");
+                                message.energy = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.fromObject(object.energy);
+                            }
+                            if (object.energyFromFat != null) {
+                                if (typeof object.energyFromFat !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLogRollupValue.energyFromFat: object expected");
+                                message.energyFromFat = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.fromObject(object.energyFromFat);
+                            }
+                            if (object.totalCarbohydrate != null) {
+                                if (typeof object.totalCarbohydrate !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLogRollupValue.totalCarbohydrate: object expected");
+                                message.totalCarbohydrate = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.fromObject(object.totalCarbohydrate);
+                            }
+                            if (object.totalFat != null) {
+                                if (typeof object.totalFat !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.NutritionLogRollupValue.totalFat: object expected");
+                                message.totalFat = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.fromObject(object.totalFat);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NutritionLogRollupValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.NutritionLogRollupValue} message NutritionLogRollupValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NutritionLogRollupValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.nutrients = [];
+                            if (options.defaults) {
+                                object.energy = null;
+                                object.energyFromFat = null;
+                                object.totalCarbohydrate = null;
+                                object.totalFat = null;
+                            }
+                            if (message.nutrients && message.nutrients.length) {
+                                object.nutrients = [];
+                                for (var j = 0; j < message.nutrients.length; ++j)
+                                    object.nutrients[j] = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup.toObject(message.nutrients[j], options);
+                            }
+                            if (message.energy != null && message.hasOwnProperty("energy"))
+                                object.energy = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.toObject(message.energy, options);
+                            if (message.energyFromFat != null && message.hasOwnProperty("energyFromFat"))
+                                object.energyFromFat = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.toObject(message.energyFromFat, options);
+                            if (message.totalCarbohydrate != null && message.hasOwnProperty("totalCarbohydrate"))
+                                object.totalCarbohydrate = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.toObject(message.totalCarbohydrate, options);
+                            if (message.totalFat != null && message.hasOwnProperty("totalFat"))
+                                object.totalFat = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.toObject(message.totalFat, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NutritionLogRollupValue to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NutritionLogRollupValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NutritionLogRollupValue
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NutritionLogRollupValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.NutritionLogRollupValue";
+                        };
+    
+                        NutritionLogRollupValue.WeightQuantityRollup = (function() {
+    
+                            /**
+                             * Properties of a WeightQuantityRollup.
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                             * @interface IWeightQuantityRollup
+                             * @property {number|null} [gramsSum] WeightQuantityRollup gramsSum
+                             * @property {google.devicesandservices.health.v4.WeightUnit|null} [userProvidedUnitLast] WeightQuantityRollup userProvidedUnitLast
+                             */
+    
+                            /**
+                             * Constructs a new WeightQuantityRollup.
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                             * @classdesc Represents a WeightQuantityRollup.
+                             * @implements IWeightQuantityRollup
+                             * @constructor
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup=} [properties] Properties to set
+                             */
+                            function WeightQuantityRollup(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * WeightQuantityRollup gramsSum.
+                             * @member {number|null|undefined} gramsSum
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @instance
+                             */
+                            WeightQuantityRollup.prototype.gramsSum = null;
+    
+                            /**
+                             * WeightQuantityRollup userProvidedUnitLast.
+                             * @member {google.devicesandservices.health.v4.WeightUnit} userProvidedUnitLast
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @instance
+                             */
+                            WeightQuantityRollup.prototype.userProvidedUnitLast = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(WeightQuantityRollup.prototype, "_gramsSum", {
+                                get: $util.oneOfGetter($oneOfFields = ["gramsSum"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new WeightQuantityRollup instance using the specified properties.
+                             * @function create
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup=} [properties] Properties to set
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup} WeightQuantityRollup instance
+                             */
+                            WeightQuantityRollup.create = function create(properties) {
+                                return new WeightQuantityRollup(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified WeightQuantityRollup message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup} message WeightQuantityRollup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WeightQuantityRollup.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.gramsSum != null && Object.hasOwnProperty.call(message, "gramsSum"))
+                                    writer.uint32(/* id 1, wireType 1 =*/9).double(message.gramsSum);
+                                if (message.userProvidedUnitLast != null && Object.hasOwnProperty.call(message, "userProvidedUnitLast"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.userProvidedUnitLast);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified WeightQuantityRollup message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup} message WeightQuantityRollup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WeightQuantityRollup.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a WeightQuantityRollup message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup} WeightQuantityRollup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WeightQuantityRollup.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.gramsSum = reader.double();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.userProvidedUnitLast = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a WeightQuantityRollup message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup} WeightQuantityRollup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WeightQuantityRollup.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a WeightQuantityRollup message.
+                             * @function verify
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            WeightQuantityRollup.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.gramsSum != null && message.hasOwnProperty("gramsSum")) {
+                                    properties._gramsSum = 1;
+                                    if (typeof message.gramsSum !== "number")
+                                        return "gramsSum: number expected";
+                                }
+                                if (message.userProvidedUnitLast != null && message.hasOwnProperty("userProvidedUnitLast"))
+                                    switch (message.userProvidedUnitLast) {
+                                    default:
+                                        return "userProvidedUnitLast: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a WeightQuantityRollup message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup} WeightQuantityRollup
+                             */
+                            WeightQuantityRollup.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup)
+                                    return object;
+                                var message = new $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup();
+                                if (object.gramsSum != null)
+                                    message.gramsSum = Number(object.gramsSum);
+                                switch (object.userProvidedUnitLast) {
+                                default:
+                                    if (typeof object.userProvidedUnitLast === "number") {
+                                        message.userProvidedUnitLast = object.userProvidedUnitLast;
+                                        break;
+                                    }
+                                    break;
+                                case "WEIGHT_UNIT_UNSPECIFIED":
+                                case 0:
+                                    message.userProvidedUnitLast = 0;
+                                    break;
+                                case "GRAM":
+                                case 1:
+                                    message.userProvidedUnitLast = 1;
+                                    break;
+                                case "KILOGRAM":
+                                case 2:
+                                    message.userProvidedUnitLast = 2;
+                                    break;
+                                case "OUNCE":
+                                case 3:
+                                    message.userProvidedUnitLast = 3;
+                                    break;
+                                case "POUND":
+                                case 4:
+                                    message.userProvidedUnitLast = 4;
+                                    break;
+                                case "STONE":
+                                case 5:
+                                    message.userProvidedUnitLast = 5;
+                                    break;
+                                case "MILLIGRAM":
+                                case 6:
+                                    message.userProvidedUnitLast = 6;
+                                    break;
+                                case "MICROGRAM":
+                                case 7:
+                                    message.userProvidedUnitLast = 7;
+                                    break;
+                                case "NANOGRAM":
+                                case 8:
+                                    message.userProvidedUnitLast = 8;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a WeightQuantityRollup message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup} message WeightQuantityRollup
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            WeightQuantityRollup.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.userProvidedUnitLast = options.enums === String ? "WEIGHT_UNIT_UNSPECIFIED" : 0;
+                                if (message.gramsSum != null && message.hasOwnProperty("gramsSum")) {
+                                    object.gramsSum = options.json && !isFinite(message.gramsSum) ? String(message.gramsSum) : message.gramsSum;
+                                    if (options.oneofs)
+                                        object._gramsSum = "gramsSum";
+                                }
+                                if (message.userProvidedUnitLast != null && message.hasOwnProperty("userProvidedUnitLast"))
+                                    object.userProvidedUnitLast = options.enums === String ? $root.google.devicesandservices.health.v4.WeightUnit[message.userProvidedUnitLast] === undefined ? message.userProvidedUnitLast : $root.google.devicesandservices.health.v4.WeightUnit[message.userProvidedUnitLast] : message.userProvidedUnitLast;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this WeightQuantityRollup to JSON.
+                             * @function toJSON
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            WeightQuantityRollup.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for WeightQuantityRollup
+                             * @function getTypeUrl
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            WeightQuantityRollup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup";
+                            };
+    
+                            return WeightQuantityRollup;
+                        })();
+    
+                        NutritionLogRollupValue.EnergyQuantityRollup = (function() {
+    
+                            /**
+                             * Properties of an EnergyQuantityRollup.
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                             * @interface IEnergyQuantityRollup
+                             * @property {number|null} [kcalSum] EnergyQuantityRollup kcalSum
+                             * @property {google.devicesandservices.health.v4.EnergyUnit|null} [userProvidedUnitLast] EnergyQuantityRollup userProvidedUnitLast
+                             */
+    
+                            /**
+                             * Constructs a new EnergyQuantityRollup.
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                             * @classdesc Represents an EnergyQuantityRollup.
+                             * @implements IEnergyQuantityRollup
+                             * @constructor
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup=} [properties] Properties to set
+                             */
+                            function EnergyQuantityRollup(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EnergyQuantityRollup kcalSum.
+                             * @member {number|null|undefined} kcalSum
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @instance
+                             */
+                            EnergyQuantityRollup.prototype.kcalSum = null;
+    
+                            /**
+                             * EnergyQuantityRollup userProvidedUnitLast.
+                             * @member {google.devicesandservices.health.v4.EnergyUnit} userProvidedUnitLast
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @instance
+                             */
+                            EnergyQuantityRollup.prototype.userProvidedUnitLast = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(EnergyQuantityRollup.prototype, "_kcalSum", {
+                                get: $util.oneOfGetter($oneOfFields = ["kcalSum"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new EnergyQuantityRollup instance using the specified properties.
+                             * @function create
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup=} [properties] Properties to set
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup} EnergyQuantityRollup instance
+                             */
+                            EnergyQuantityRollup.create = function create(properties) {
+                                return new EnergyQuantityRollup(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EnergyQuantityRollup message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup} message EnergyQuantityRollup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EnergyQuantityRollup.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.kcalSum != null && Object.hasOwnProperty.call(message, "kcalSum"))
+                                    writer.uint32(/* id 1, wireType 1 =*/9).double(message.kcalSum);
+                                if (message.userProvidedUnitLast != null && Object.hasOwnProperty.call(message, "userProvidedUnitLast"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.userProvidedUnitLast);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EnergyQuantityRollup message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup} message EnergyQuantityRollup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EnergyQuantityRollup.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EnergyQuantityRollup message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup} EnergyQuantityRollup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EnergyQuantityRollup.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.kcalSum = reader.double();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.userProvidedUnitLast = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EnergyQuantityRollup message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup} EnergyQuantityRollup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EnergyQuantityRollup.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EnergyQuantityRollup message.
+                             * @function verify
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EnergyQuantityRollup.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.kcalSum != null && message.hasOwnProperty("kcalSum")) {
+                                    properties._kcalSum = 1;
+                                    if (typeof message.kcalSum !== "number")
+                                        return "kcalSum: number expected";
+                                }
+                                if (message.userProvidedUnitLast != null && message.hasOwnProperty("userProvidedUnitLast"))
+                                    switch (message.userProvidedUnitLast) {
+                                    default:
+                                        return "userProvidedUnitLast: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EnergyQuantityRollup message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup} EnergyQuantityRollup
+                             */
+                            EnergyQuantityRollup.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup)
+                                    return object;
+                                var message = new $root.google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup();
+                                if (object.kcalSum != null)
+                                    message.kcalSum = Number(object.kcalSum);
+                                switch (object.userProvidedUnitLast) {
+                                default:
+                                    if (typeof object.userProvidedUnitLast === "number") {
+                                        message.userProvidedUnitLast = object.userProvidedUnitLast;
+                                        break;
+                                    }
+                                    break;
+                                case "ENERGY_UNIT_UNSPECIFIED":
+                                case 0:
+                                    message.userProvidedUnitLast = 0;
+                                    break;
+                                case "JOULE":
+                                case 1:
+                                    message.userProvidedUnitLast = 1;
+                                    break;
+                                case "KILOJOULE":
+                                case 2:
+                                    message.userProvidedUnitLast = 2;
+                                    break;
+                                case "KILOCALORIE":
+                                case 3:
+                                    message.userProvidedUnitLast = 3;
+                                    break;
+                                case "SMALL_CALORIE":
+                                case 4:
+                                    message.userProvidedUnitLast = 4;
+                                    break;
+                                case "CALORIE":
+                                case 5:
+                                    message.userProvidedUnitLast = 5;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EnergyQuantityRollup message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup} message EnergyQuantityRollup
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EnergyQuantityRollup.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.userProvidedUnitLast = options.enums === String ? "ENERGY_UNIT_UNSPECIFIED" : 0;
+                                if (message.kcalSum != null && message.hasOwnProperty("kcalSum")) {
+                                    object.kcalSum = options.json && !isFinite(message.kcalSum) ? String(message.kcalSum) : message.kcalSum;
+                                    if (options.oneofs)
+                                        object._kcalSum = "kcalSum";
+                                }
+                                if (message.userProvidedUnitLast != null && message.hasOwnProperty("userProvidedUnitLast"))
+                                    object.userProvidedUnitLast = options.enums === String ? $root.google.devicesandservices.health.v4.EnergyUnit[message.userProvidedUnitLast] === undefined ? message.userProvidedUnitLast : $root.google.devicesandservices.health.v4.EnergyUnit[message.userProvidedUnitLast] : message.userProvidedUnitLast;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EnergyQuantityRollup to JSON.
+                             * @function toJSON
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EnergyQuantityRollup.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EnergyQuantityRollup
+                             * @function getTypeUrl
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EnergyQuantityRollup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup";
+                            };
+    
+                            return EnergyQuantityRollup;
+                        })();
+    
+                        NutritionLogRollupValue.NutrientQuantityRollup = (function() {
+    
+                            /**
+                             * Properties of a NutrientQuantityRollup.
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                             * @interface INutrientQuantityRollup
+                             * @property {google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null} [quantity] NutrientQuantityRollup quantity
+                             * @property {google.devicesandservices.health.v4.Nutrient|null} [nutrient] NutrientQuantityRollup nutrient
+                             */
+    
+                            /**
+                             * Constructs a new NutrientQuantityRollup.
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue
+                             * @classdesc Represents a NutrientQuantityRollup.
+                             * @implements INutrientQuantityRollup
+                             * @constructor
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup=} [properties] Properties to set
+                             */
+                            function NutrientQuantityRollup(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NutrientQuantityRollup quantity.
+                             * @member {google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null|undefined} quantity
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @instance
+                             */
+                            NutrientQuantityRollup.prototype.quantity = null;
+    
+                            /**
+                             * NutrientQuantityRollup nutrient.
+                             * @member {google.devicesandservices.health.v4.Nutrient} nutrient
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @instance
+                             */
+                            NutrientQuantityRollup.prototype.nutrient = 0;
+    
+                            /**
+                             * Creates a new NutrientQuantityRollup instance using the specified properties.
+                             * @function create
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup=} [properties] Properties to set
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup} NutrientQuantityRollup instance
+                             */
+                            NutrientQuantityRollup.create = function create(properties) {
+                                return new NutrientQuantityRollup(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NutrientQuantityRollup message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup} message NutrientQuantityRollup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NutrientQuantityRollup.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.quantity != null && Object.hasOwnProperty.call(message, "quantity"))
+                                    $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.encode(message.quantity, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nutrient != null && Object.hasOwnProperty.call(message, "nutrient"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nutrient);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NutrientQuantityRollup message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup} message NutrientQuantityRollup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NutrientQuantityRollup.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NutrientQuantityRollup message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup} NutrientQuantityRollup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NutrientQuantityRollup.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.quantity = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nutrient = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NutrientQuantityRollup message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup} NutrientQuantityRollup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NutrientQuantityRollup.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NutrientQuantityRollup message.
+                             * @function verify
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NutrientQuantityRollup.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.quantity != null && message.hasOwnProperty("quantity")) {
+                                    var error = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.verify(message.quantity);
+                                    if (error)
+                                        return "quantity." + error;
+                                }
+                                if (message.nutrient != null && message.hasOwnProperty("nutrient"))
+                                    switch (message.nutrient) {
+                                    default:
+                                        return "nutrient: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                    case 13:
+                                    case 14:
+                                    case 15:
+                                    case 16:
+                                    case 17:
+                                    case 18:
+                                    case 19:
+                                    case 20:
+                                    case 21:
+                                    case 22:
+                                    case 23:
+                                    case 24:
+                                    case 25:
+                                    case 26:
+                                    case 27:
+                                    case 28:
+                                    case 29:
+                                    case 30:
+                                    case 31:
+                                    case 32:
+                                    case 33:
+                                    case 34:
+                                    case 35:
+                                    case 36:
+                                    case 37:
+                                    case 38:
+                                    case 39:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NutrientQuantityRollup message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup} NutrientQuantityRollup
+                             */
+                            NutrientQuantityRollup.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup)
+                                    return object;
+                                var message = new $root.google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup();
+                                if (object.quantity != null) {
+                                    if (typeof object.quantity !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup.quantity: object expected");
+                                    message.quantity = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.fromObject(object.quantity);
+                                }
+                                switch (object.nutrient) {
+                                default:
+                                    if (typeof object.nutrient === "number") {
+                                        message.nutrient = object.nutrient;
+                                        break;
+                                    }
+                                    break;
+                                case "NUTRIENT_UNSPECIFIED":
+                                case 0:
+                                    message.nutrient = 0;
+                                    break;
+                                case "BIOTIN":
+                                case 1:
+                                    message.nutrient = 1;
+                                    break;
+                                case "CAFFEINE":
+                                case 2:
+                                    message.nutrient = 2;
+                                    break;
+                                case "CALCIUM":
+                                case 3:
+                                    message.nutrient = 3;
+                                    break;
+                                case "CHLORIDE":
+                                case 4:
+                                    message.nutrient = 4;
+                                    break;
+                                case "CARBOHYDRATES":
+                                case 5:
+                                    message.nutrient = 5;
+                                    break;
+                                case "CHOLESTEROL":
+                                case 6:
+                                    message.nutrient = 6;
+                                    break;
+                                case "CHROMIUM":
+                                case 7:
+                                    message.nutrient = 7;
+                                    break;
+                                case "COPPER":
+                                case 8:
+                                    message.nutrient = 8;
+                                    break;
+                                case "DIETARY_FIBER":
+                                case 9:
+                                    message.nutrient = 9;
+                                    break;
+                                case "FOLIC_ACID":
+                                case 10:
+                                    message.nutrient = 10;
+                                    break;
+                                case "IODINE":
+                                case 11:
+                                    message.nutrient = 11;
+                                    break;
+                                case "IRON":
+                                case 12:
+                                    message.nutrient = 12;
+                                    break;
+                                case "MAGNESIUM":
+                                case 13:
+                                    message.nutrient = 13;
+                                    break;
+                                case "MANGANESE":
+                                case 14:
+                                    message.nutrient = 14;
+                                    break;
+                                case "MOLYBDENUM":
+                                case 15:
+                                    message.nutrient = 15;
+                                    break;
+                                case "MONOUNSATURATED_FAT":
+                                case 16:
+                                    message.nutrient = 16;
+                                    break;
+                                case "NIACIN":
+                                case 17:
+                                    message.nutrient = 17;
+                                    break;
+                                case "PANTOTHENIC_ACID":
+                                case 18:
+                                    message.nutrient = 18;
+                                    break;
+                                case "PHOSPHORUS":
+                                case 19:
+                                    message.nutrient = 19;
+                                    break;
+                                case "POLYUNSATURATED_FAT":
+                                case 20:
+                                    message.nutrient = 20;
+                                    break;
+                                case "POTASSIUM":
+                                case 21:
+                                    message.nutrient = 21;
+                                    break;
+                                case "PROTEIN":
+                                case 22:
+                                    message.nutrient = 22;
+                                    break;
+                                case "RIBOFLAVIN":
+                                case 23:
+                                    message.nutrient = 23;
+                                    break;
+                                case "SATURATED_FAT":
+                                case 24:
+                                    message.nutrient = 24;
+                                    break;
+                                case "SELENIUM":
+                                case 25:
+                                    message.nutrient = 25;
+                                    break;
+                                case "SODIUM":
+                                case 26:
+                                    message.nutrient = 26;
+                                    break;
+                                case "SUGAR":
+                                case 27:
+                                    message.nutrient = 27;
+                                    break;
+                                case "THIAMIN":
+                                case 28:
+                                    message.nutrient = 28;
+                                    break;
+                                case "TRANS_FAT":
+                                case 29:
+                                    message.nutrient = 29;
+                                    break;
+                                case "UNSATURATED_FAT":
+                                case 30:
+                                    message.nutrient = 30;
+                                    break;
+                                case "VITAMIN_A":
+                                case 31:
+                                    message.nutrient = 31;
+                                    break;
+                                case "VITAMIN_B12":
+                                case 32:
+                                    message.nutrient = 32;
+                                    break;
+                                case "VITAMIN_B6":
+                                case 33:
+                                    message.nutrient = 33;
+                                    break;
+                                case "VITAMIN_C":
+                                case 34:
+                                    message.nutrient = 34;
+                                    break;
+                                case "VITAMIN_D":
+                                case 35:
+                                    message.nutrient = 35;
+                                    break;
+                                case "VITAMIN_E":
+                                case 36:
+                                    message.nutrient = 36;
+                                    break;
+                                case "VITAMIN_K":
+                                case 37:
+                                    message.nutrient = 37;
+                                    break;
+                                case "ZINC":
+                                case 38:
+                                    message.nutrient = 38;
+                                    break;
+                                case "FOLATE":
+                                case 39:
+                                    message.nutrient = 39;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NutrientQuantityRollup message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @static
+                             * @param {google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup} message NutrientQuantityRollup
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NutrientQuantityRollup.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.quantity = null;
+                                    object.nutrient = options.enums === String ? "NUTRIENT_UNSPECIFIED" : 0;
+                                }
+                                if (message.quantity != null && message.hasOwnProperty("quantity"))
+                                    object.quantity = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.toObject(message.quantity, options);
+                                if (message.nutrient != null && message.hasOwnProperty("nutrient"))
+                                    object.nutrient = options.enums === String ? $root.google.devicesandservices.health.v4.Nutrient[message.nutrient] === undefined ? message.nutrient : $root.google.devicesandservices.health.v4.Nutrient[message.nutrient] : message.nutrient;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NutrientQuantityRollup to JSON.
+                             * @function toJSON
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NutrientQuantityRollup.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NutrientQuantityRollup
+                             * @function getTypeUrl
+                             * @memberof google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NutrientQuantityRollup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup";
+                            };
+    
+                            return NutrientQuantityRollup;
+                        })();
+    
+                        return NutritionLogRollupValue;
+                    })();
+    
                     v4.OxygenSaturation = (function() {
     
                         /**
@@ -16188,6 +22807,235 @@
                         };
     
                         return RestingHeartRatePersonalRangeRollupValue;
+                    })();
+    
+                    v4.FoodMeasurementUnit = (function() {
+    
+                        /**
+                         * Properties of a FoodMeasurementUnit.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IFoodMeasurementUnit
+                         * @property {string|null} [displayName] FoodMeasurementUnit displayName
+                         * @property {string|null} [pluralDisplayName] FoodMeasurementUnit pluralDisplayName
+                         */
+    
+                        /**
+                         * Constructs a new FoodMeasurementUnit.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a FoodMeasurementUnit.
+                         * @implements IFoodMeasurementUnit
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IFoodMeasurementUnit=} [properties] Properties to set
+                         */
+                        function FoodMeasurementUnit(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FoodMeasurementUnit displayName.
+                         * @member {string} displayName
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @instance
+                         */
+                        FoodMeasurementUnit.prototype.displayName = "";
+    
+                        /**
+                         * FoodMeasurementUnit pluralDisplayName.
+                         * @member {string} pluralDisplayName
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @instance
+                         */
+                        FoodMeasurementUnit.prototype.pluralDisplayName = "";
+    
+                        /**
+                         * Creates a new FoodMeasurementUnit instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IFoodMeasurementUnit=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.FoodMeasurementUnit} FoodMeasurementUnit instance
+                         */
+                        FoodMeasurementUnit.create = function create(properties) {
+                            return new FoodMeasurementUnit(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FoodMeasurementUnit message. Does not implicitly {@link google.devicesandservices.health.v4.FoodMeasurementUnit.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IFoodMeasurementUnit} message FoodMeasurementUnit message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FoodMeasurementUnit.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.pluralDisplayName != null && Object.hasOwnProperty.call(message, "pluralDisplayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pluralDisplayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FoodMeasurementUnit message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.FoodMeasurementUnit.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IFoodMeasurementUnit} message FoodMeasurementUnit message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FoodMeasurementUnit.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FoodMeasurementUnit message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.FoodMeasurementUnit} FoodMeasurementUnit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FoodMeasurementUnit.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.FoodMeasurementUnit();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pluralDisplayName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FoodMeasurementUnit message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.FoodMeasurementUnit} FoodMeasurementUnit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FoodMeasurementUnit.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FoodMeasurementUnit message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FoodMeasurementUnit.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.pluralDisplayName != null && message.hasOwnProperty("pluralDisplayName"))
+                                if (!$util.isString(message.pluralDisplayName))
+                                    return "pluralDisplayName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FoodMeasurementUnit message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.FoodMeasurementUnit} FoodMeasurementUnit
+                         */
+                        FoodMeasurementUnit.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.FoodMeasurementUnit)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.FoodMeasurementUnit();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.pluralDisplayName != null)
+                                message.pluralDisplayName = String(object.pluralDisplayName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FoodMeasurementUnit message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @static
+                         * @param {google.devicesandservices.health.v4.FoodMeasurementUnit} message FoodMeasurementUnit
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FoodMeasurementUnit.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.pluralDisplayName = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.pluralDisplayName != null && message.hasOwnProperty("pluralDisplayName"))
+                                object.pluralDisplayName = message.pluralDisplayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FoodMeasurementUnit to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FoodMeasurementUnit.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FoodMeasurementUnit
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.FoodMeasurementUnit
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FoodMeasurementUnit.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.FoodMeasurementUnit";
+                        };
+    
+                        return FoodMeasurementUnit;
                     })();
     
                     v4.RespiratoryRateSleepSummary = (function() {
@@ -22072,6 +28920,824 @@
                         return WeightRollupValue;
                     })();
     
+                    v4.BloodGlucose = (function() {
+    
+                        /**
+                         * Properties of a BloodGlucose.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IBloodGlucose
+                         * @property {google.devicesandservices.health.v4.IObservationSampleTime|null} [sampleTime] BloodGlucose sampleTime
+                         * @property {number|null} [bloodGlucoseMilligramsPerDeciliter] BloodGlucose bloodGlucoseMilligramsPerDeciliter
+                         * @property {google.devicesandservices.health.v4.BloodGlucose.MeasurementSource|null} [measurementSource] BloodGlucose measurementSource
+                         * @property {google.devicesandservices.health.v4.BloodGlucose.MealType|null} [mealType] BloodGlucose mealType
+                         * @property {google.devicesandservices.health.v4.BloodGlucose.MeasurementTiming|null} [measurementTiming] BloodGlucose measurementTiming
+                         * @property {google.devicesandservices.health.v4.BloodGlucose.Specimen|null} [specimen] BloodGlucose specimen
+                         * @property {string|null} [notes] BloodGlucose notes
+                         */
+    
+                        /**
+                         * Constructs a new BloodGlucose.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a BloodGlucose.
+                         * @implements IBloodGlucose
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IBloodGlucose=} [properties] Properties to set
+                         */
+                        function BloodGlucose(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BloodGlucose sampleTime.
+                         * @member {google.devicesandservices.health.v4.IObservationSampleTime|null|undefined} sampleTime
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @instance
+                         */
+                        BloodGlucose.prototype.sampleTime = null;
+    
+                        /**
+                         * BloodGlucose bloodGlucoseMilligramsPerDeciliter.
+                         * @member {number|null|undefined} bloodGlucoseMilligramsPerDeciliter
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @instance
+                         */
+                        BloodGlucose.prototype.bloodGlucoseMilligramsPerDeciliter = null;
+    
+                        /**
+                         * BloodGlucose measurementSource.
+                         * @member {google.devicesandservices.health.v4.BloodGlucose.MeasurementSource} measurementSource
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @instance
+                         */
+                        BloodGlucose.prototype.measurementSource = 0;
+    
+                        /**
+                         * BloodGlucose mealType.
+                         * @member {google.devicesandservices.health.v4.BloodGlucose.MealType} mealType
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @instance
+                         */
+                        BloodGlucose.prototype.mealType = 0;
+    
+                        /**
+                         * BloodGlucose measurementTiming.
+                         * @member {google.devicesandservices.health.v4.BloodGlucose.MeasurementTiming} measurementTiming
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @instance
+                         */
+                        BloodGlucose.prototype.measurementTiming = 0;
+    
+                        /**
+                         * BloodGlucose specimen.
+                         * @member {google.devicesandservices.health.v4.BloodGlucose.Specimen} specimen
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @instance
+                         */
+                        BloodGlucose.prototype.specimen = 0;
+    
+                        /**
+                         * BloodGlucose notes.
+                         * @member {string} notes
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @instance
+                         */
+                        BloodGlucose.prototype.notes = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(BloodGlucose.prototype, "_bloodGlucoseMilligramsPerDeciliter", {
+                            get: $util.oneOfGetter($oneOfFields = ["bloodGlucoseMilligramsPerDeciliter"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BloodGlucose instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IBloodGlucose=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.BloodGlucose} BloodGlucose instance
+                         */
+                        BloodGlucose.create = function create(properties) {
+                            return new BloodGlucose(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BloodGlucose message. Does not implicitly {@link google.devicesandservices.health.v4.BloodGlucose.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IBloodGlucose} message BloodGlucose message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BloodGlucose.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sampleTime != null && Object.hasOwnProperty.call(message, "sampleTime"))
+                                $root.google.devicesandservices.health.v4.ObservationSampleTime.encode(message.sampleTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.bloodGlucoseMilligramsPerDeciliter != null && Object.hasOwnProperty.call(message, "bloodGlucoseMilligramsPerDeciliter"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.bloodGlucoseMilligramsPerDeciliter);
+                            if (message.measurementSource != null && Object.hasOwnProperty.call(message, "measurementSource"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.measurementSource);
+                            if (message.mealType != null && Object.hasOwnProperty.call(message, "mealType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.mealType);
+                            if (message.measurementTiming != null && Object.hasOwnProperty.call(message, "measurementTiming"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.measurementTiming);
+                            if (message.specimen != null && Object.hasOwnProperty.call(message, "specimen"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.specimen);
+                            if (message.notes != null && Object.hasOwnProperty.call(message, "notes"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.notes);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BloodGlucose message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.BloodGlucose.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IBloodGlucose} message BloodGlucose message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BloodGlucose.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BloodGlucose message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.BloodGlucose} BloodGlucose
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BloodGlucose.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.BloodGlucose();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.bloodGlucoseMilligramsPerDeciliter = reader.double();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.measurementSource = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.mealType = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.measurementTiming = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.specimen = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.notes = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BloodGlucose message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.BloodGlucose} BloodGlucose
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BloodGlucose.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BloodGlucose message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BloodGlucose.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.sampleTime != null && message.hasOwnProperty("sampleTime")) {
+                                var error = $root.google.devicesandservices.health.v4.ObservationSampleTime.verify(message.sampleTime);
+                                if (error)
+                                    return "sampleTime." + error;
+                            }
+                            if (message.bloodGlucoseMilligramsPerDeciliter != null && message.hasOwnProperty("bloodGlucoseMilligramsPerDeciliter")) {
+                                properties._bloodGlucoseMilligramsPerDeciliter = 1;
+                                if (typeof message.bloodGlucoseMilligramsPerDeciliter !== "number")
+                                    return "bloodGlucoseMilligramsPerDeciliter: number expected";
+                            }
+                            if (message.measurementSource != null && message.hasOwnProperty("measurementSource"))
+                                switch (message.measurementSource) {
+                                default:
+                                    return "measurementSource: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.mealType != null && message.hasOwnProperty("mealType"))
+                                switch (message.mealType) {
+                                default:
+                                    return "mealType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.measurementTiming != null && message.hasOwnProperty("measurementTiming"))
+                                switch (message.measurementTiming) {
+                                default:
+                                    return "measurementTiming: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.specimen != null && message.hasOwnProperty("specimen"))
+                                switch (message.specimen) {
+                                default:
+                                    return "specimen: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.notes != null && message.hasOwnProperty("notes"))
+                                if (!$util.isString(message.notes))
+                                    return "notes: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BloodGlucose message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.BloodGlucose} BloodGlucose
+                         */
+                        BloodGlucose.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.BloodGlucose)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.BloodGlucose();
+                            if (object.sampleTime != null) {
+                                if (typeof object.sampleTime !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.BloodGlucose.sampleTime: object expected");
+                                message.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.fromObject(object.sampleTime);
+                            }
+                            if (object.bloodGlucoseMilligramsPerDeciliter != null)
+                                message.bloodGlucoseMilligramsPerDeciliter = Number(object.bloodGlucoseMilligramsPerDeciliter);
+                            switch (object.measurementSource) {
+                            default:
+                                if (typeof object.measurementSource === "number") {
+                                    message.measurementSource = object.measurementSource;
+                                    break;
+                                }
+                                break;
+                            case "MEASUREMENT_SOURCE_UNSPECIFIED":
+                            case 0:
+                                message.measurementSource = 0;
+                                break;
+                            case "SELF_MONITORING_BLOOD_GLUCOSE":
+                            case 1:
+                                message.measurementSource = 1;
+                                break;
+                            case "CONTINUOUS_GLUCOSE_MONITORING":
+                            case 2:
+                                message.measurementSource = 2;
+                                break;
+                            case "LAB_TEST":
+                            case 3:
+                                message.measurementSource = 3;
+                                break;
+                            }
+                            switch (object.mealType) {
+                            default:
+                                if (typeof object.mealType === "number") {
+                                    message.mealType = object.mealType;
+                                    break;
+                                }
+                                break;
+                            case "MEAL_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.mealType = 0;
+                                break;
+                            case "BREAKFAST":
+                            case 1:
+                                message.mealType = 1;
+                                break;
+                            case "LUNCH":
+                            case 2:
+                                message.mealType = 2;
+                                break;
+                            case "DINNER":
+                            case 3:
+                                message.mealType = 3;
+                                break;
+                            case "SNACK":
+                            case 4:
+                                message.mealType = 4;
+                                break;
+                            }
+                            switch (object.measurementTiming) {
+                            default:
+                                if (typeof object.measurementTiming === "number") {
+                                    message.measurementTiming = object.measurementTiming;
+                                    break;
+                                }
+                                break;
+                            case "MEASUREMENT_TIMING_UNSPECIFIED":
+                            case 0:
+                                message.measurementTiming = 0;
+                                break;
+                            case "AFTER_MEAL":
+                            case 1:
+                                message.measurementTiming = 1;
+                                break;
+                            case "BEFORE_MEAL":
+                            case 2:
+                                message.measurementTiming = 2;
+                                break;
+                            case "FASTING":
+                            case 3:
+                                message.measurementTiming = 3;
+                                break;
+                            case "GENERAL":
+                            case 4:
+                                message.measurementTiming = 4;
+                                break;
+                            case "BEFORE_BED":
+                            case 5:
+                                message.measurementTiming = 5;
+                                break;
+                            case "OVER_NIGHT":
+                            case 6:
+                                message.measurementTiming = 6;
+                                break;
+                            }
+                            switch (object.specimen) {
+                            default:
+                                if (typeof object.specimen === "number") {
+                                    message.specimen = object.specimen;
+                                    break;
+                                }
+                                break;
+                            case "SPECIMEN_UNSPECIFIED":
+                            case 0:
+                                message.specimen = 0;
+                                break;
+                            case "CAPILLARY_BLOOD":
+                            case 1:
+                                message.specimen = 1;
+                                break;
+                            case "INTERSTITIAL_FLUID":
+                            case 2:
+                                message.specimen = 2;
+                                break;
+                            case "PLASMA":
+                            case 3:
+                                message.specimen = 3;
+                                break;
+                            case "SERUM":
+                            case 4:
+                                message.specimen = 4;
+                                break;
+                            case "TEARS":
+                            case 5:
+                                message.specimen = 5;
+                                break;
+                            case "WHOLE_BLOOD":
+                            case 6:
+                                message.specimen = 6;
+                                break;
+                            }
+                            if (object.notes != null)
+                                message.notes = String(object.notes);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BloodGlucose message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @static
+                         * @param {google.devicesandservices.health.v4.BloodGlucose} message BloodGlucose
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BloodGlucose.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sampleTime = null;
+                                object.measurementSource = options.enums === String ? "MEASUREMENT_SOURCE_UNSPECIFIED" : 0;
+                                object.mealType = options.enums === String ? "MEAL_TYPE_UNSPECIFIED" : 0;
+                                object.measurementTiming = options.enums === String ? "MEASUREMENT_TIMING_UNSPECIFIED" : 0;
+                                object.specimen = options.enums === String ? "SPECIMEN_UNSPECIFIED" : 0;
+                                object.notes = "";
+                            }
+                            if (message.sampleTime != null && message.hasOwnProperty("sampleTime"))
+                                object.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.toObject(message.sampleTime, options);
+                            if (message.bloodGlucoseMilligramsPerDeciliter != null && message.hasOwnProperty("bloodGlucoseMilligramsPerDeciliter")) {
+                                object.bloodGlucoseMilligramsPerDeciliter = options.json && !isFinite(message.bloodGlucoseMilligramsPerDeciliter) ? String(message.bloodGlucoseMilligramsPerDeciliter) : message.bloodGlucoseMilligramsPerDeciliter;
+                                if (options.oneofs)
+                                    object._bloodGlucoseMilligramsPerDeciliter = "bloodGlucoseMilligramsPerDeciliter";
+                            }
+                            if (message.measurementSource != null && message.hasOwnProperty("measurementSource"))
+                                object.measurementSource = options.enums === String ? $root.google.devicesandservices.health.v4.BloodGlucose.MeasurementSource[message.measurementSource] === undefined ? message.measurementSource : $root.google.devicesandservices.health.v4.BloodGlucose.MeasurementSource[message.measurementSource] : message.measurementSource;
+                            if (message.mealType != null && message.hasOwnProperty("mealType"))
+                                object.mealType = options.enums === String ? $root.google.devicesandservices.health.v4.BloodGlucose.MealType[message.mealType] === undefined ? message.mealType : $root.google.devicesandservices.health.v4.BloodGlucose.MealType[message.mealType] : message.mealType;
+                            if (message.measurementTiming != null && message.hasOwnProperty("measurementTiming"))
+                                object.measurementTiming = options.enums === String ? $root.google.devicesandservices.health.v4.BloodGlucose.MeasurementTiming[message.measurementTiming] === undefined ? message.measurementTiming : $root.google.devicesandservices.health.v4.BloodGlucose.MeasurementTiming[message.measurementTiming] : message.measurementTiming;
+                            if (message.specimen != null && message.hasOwnProperty("specimen"))
+                                object.specimen = options.enums === String ? $root.google.devicesandservices.health.v4.BloodGlucose.Specimen[message.specimen] === undefined ? message.specimen : $root.google.devicesandservices.health.v4.BloodGlucose.Specimen[message.specimen] : message.specimen;
+                            if (message.notes != null && message.hasOwnProperty("notes"))
+                                object.notes = message.notes;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BloodGlucose to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BloodGlucose.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BloodGlucose
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.BloodGlucose
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BloodGlucose.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.BloodGlucose";
+                        };
+    
+                        /**
+                         * MeasurementSource enum.
+                         * @name google.devicesandservices.health.v4.BloodGlucose.MeasurementSource
+                         * @enum {number}
+                         * @property {number} MEASUREMENT_SOURCE_UNSPECIFIED=0 MEASUREMENT_SOURCE_UNSPECIFIED value
+                         * @property {number} SELF_MONITORING_BLOOD_GLUCOSE=1 SELF_MONITORING_BLOOD_GLUCOSE value
+                         * @property {number} CONTINUOUS_GLUCOSE_MONITORING=2 CONTINUOUS_GLUCOSE_MONITORING value
+                         * @property {number} LAB_TEST=3 LAB_TEST value
+                         */
+                        BloodGlucose.MeasurementSource = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MEASUREMENT_SOURCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SELF_MONITORING_BLOOD_GLUCOSE"] = 1;
+                            values[valuesById[2] = "CONTINUOUS_GLUCOSE_MONITORING"] = 2;
+                            values[valuesById[3] = "LAB_TEST"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * MealType enum.
+                         * @name google.devicesandservices.health.v4.BloodGlucose.MealType
+                         * @enum {number}
+                         * @property {number} MEAL_TYPE_UNSPECIFIED=0 MEAL_TYPE_UNSPECIFIED value
+                         * @property {number} BREAKFAST=1 BREAKFAST value
+                         * @property {number} LUNCH=2 LUNCH value
+                         * @property {number} DINNER=3 DINNER value
+                         * @property {number} SNACK=4 SNACK value
+                         */
+                        BloodGlucose.MealType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MEAL_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BREAKFAST"] = 1;
+                            values[valuesById[2] = "LUNCH"] = 2;
+                            values[valuesById[3] = "DINNER"] = 3;
+                            values[valuesById[4] = "SNACK"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * MeasurementTiming enum.
+                         * @name google.devicesandservices.health.v4.BloodGlucose.MeasurementTiming
+                         * @enum {number}
+                         * @property {number} MEASUREMENT_TIMING_UNSPECIFIED=0 MEASUREMENT_TIMING_UNSPECIFIED value
+                         * @property {number} AFTER_MEAL=1 AFTER_MEAL value
+                         * @property {number} BEFORE_MEAL=2 BEFORE_MEAL value
+                         * @property {number} FASTING=3 FASTING value
+                         * @property {number} GENERAL=4 GENERAL value
+                         * @property {number} BEFORE_BED=5 BEFORE_BED value
+                         * @property {number} OVER_NIGHT=6 OVER_NIGHT value
+                         */
+                        BloodGlucose.MeasurementTiming = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MEASUREMENT_TIMING_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AFTER_MEAL"] = 1;
+                            values[valuesById[2] = "BEFORE_MEAL"] = 2;
+                            values[valuesById[3] = "FASTING"] = 3;
+                            values[valuesById[4] = "GENERAL"] = 4;
+                            values[valuesById[5] = "BEFORE_BED"] = 5;
+                            values[valuesById[6] = "OVER_NIGHT"] = 6;
+                            return values;
+                        })();
+    
+                        /**
+                         * Specimen enum.
+                         * @name google.devicesandservices.health.v4.BloodGlucose.Specimen
+                         * @enum {number}
+                         * @property {number} SPECIMEN_UNSPECIFIED=0 SPECIMEN_UNSPECIFIED value
+                         * @property {number} CAPILLARY_BLOOD=1 CAPILLARY_BLOOD value
+                         * @property {number} INTERSTITIAL_FLUID=2 INTERSTITIAL_FLUID value
+                         * @property {number} PLASMA=3 PLASMA value
+                         * @property {number} SERUM=4 SERUM value
+                         * @property {number} TEARS=5 TEARS value
+                         * @property {number} WHOLE_BLOOD=6 WHOLE_BLOOD value
+                         */
+                        BloodGlucose.Specimen = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SPECIMEN_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CAPILLARY_BLOOD"] = 1;
+                            values[valuesById[2] = "INTERSTITIAL_FLUID"] = 2;
+                            values[valuesById[3] = "PLASMA"] = 3;
+                            values[valuesById[4] = "SERUM"] = 4;
+                            values[valuesById[5] = "TEARS"] = 5;
+                            values[valuesById[6] = "WHOLE_BLOOD"] = 6;
+                            return values;
+                        })();
+    
+                        return BloodGlucose;
+                    })();
+    
+                    v4.BloodGlucoseRollupValue = (function() {
+    
+                        /**
+                         * Properties of a BloodGlucoseRollupValue.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IBloodGlucoseRollupValue
+                         * @property {number|null} [bloodGlucoseMilligramsPerDeciliterAvg] BloodGlucoseRollupValue bloodGlucoseMilligramsPerDeciliterAvg
+                         */
+    
+                        /**
+                         * Constructs a new BloodGlucoseRollupValue.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a BloodGlucoseRollupValue.
+                         * @implements IBloodGlucoseRollupValue
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IBloodGlucoseRollupValue=} [properties] Properties to set
+                         */
+                        function BloodGlucoseRollupValue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BloodGlucoseRollupValue bloodGlucoseMilligramsPerDeciliterAvg.
+                         * @member {number|null|undefined} bloodGlucoseMilligramsPerDeciliterAvg
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @instance
+                         */
+                        BloodGlucoseRollupValue.prototype.bloodGlucoseMilligramsPerDeciliterAvg = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(BloodGlucoseRollupValue.prototype, "_bloodGlucoseMilligramsPerDeciliterAvg", {
+                            get: $util.oneOfGetter($oneOfFields = ["bloodGlucoseMilligramsPerDeciliterAvg"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BloodGlucoseRollupValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IBloodGlucoseRollupValue=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.BloodGlucoseRollupValue} BloodGlucoseRollupValue instance
+                         */
+                        BloodGlucoseRollupValue.create = function create(properties) {
+                            return new BloodGlucoseRollupValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BloodGlucoseRollupValue message. Does not implicitly {@link google.devicesandservices.health.v4.BloodGlucoseRollupValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IBloodGlucoseRollupValue} message BloodGlucoseRollupValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BloodGlucoseRollupValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bloodGlucoseMilligramsPerDeciliterAvg != null && Object.hasOwnProperty.call(message, "bloodGlucoseMilligramsPerDeciliterAvg"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.bloodGlucoseMilligramsPerDeciliterAvg);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BloodGlucoseRollupValue message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.BloodGlucoseRollupValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IBloodGlucoseRollupValue} message BloodGlucoseRollupValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BloodGlucoseRollupValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BloodGlucoseRollupValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.BloodGlucoseRollupValue} BloodGlucoseRollupValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BloodGlucoseRollupValue.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.bloodGlucoseMilligramsPerDeciliterAvg = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BloodGlucoseRollupValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.BloodGlucoseRollupValue} BloodGlucoseRollupValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BloodGlucoseRollupValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BloodGlucoseRollupValue message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BloodGlucoseRollupValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.bloodGlucoseMilligramsPerDeciliterAvg != null && message.hasOwnProperty("bloodGlucoseMilligramsPerDeciliterAvg")) {
+                                properties._bloodGlucoseMilligramsPerDeciliterAvg = 1;
+                                if (typeof message.bloodGlucoseMilligramsPerDeciliterAvg !== "number")
+                                    return "bloodGlucoseMilligramsPerDeciliterAvg: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BloodGlucoseRollupValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.BloodGlucoseRollupValue} BloodGlucoseRollupValue
+                         */
+                        BloodGlucoseRollupValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue();
+                            if (object.bloodGlucoseMilligramsPerDeciliterAvg != null)
+                                message.bloodGlucoseMilligramsPerDeciliterAvg = Number(object.bloodGlucoseMilligramsPerDeciliterAvg);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BloodGlucoseRollupValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.BloodGlucoseRollupValue} message BloodGlucoseRollupValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BloodGlucoseRollupValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.bloodGlucoseMilligramsPerDeciliterAvg != null && message.hasOwnProperty("bloodGlucoseMilligramsPerDeciliterAvg")) {
+                                object.bloodGlucoseMilligramsPerDeciliterAvg = options.json && !isFinite(message.bloodGlucoseMilligramsPerDeciliterAvg) ? String(message.bloodGlucoseMilligramsPerDeciliterAvg) : message.bloodGlucoseMilligramsPerDeciliterAvg;
+                                if (options.oneofs)
+                                    object._bloodGlucoseMilligramsPerDeciliterAvg = "bloodGlucoseMilligramsPerDeciliterAvg";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BloodGlucoseRollupValue to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BloodGlucoseRollupValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BloodGlucoseRollupValue
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.BloodGlucoseRollupValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BloodGlucoseRollupValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.BloodGlucoseRollupValue";
+                        };
+    
+                        return BloodGlucoseRollupValue;
+                    })();
+    
                     v4.SedentaryPeriod = (function() {
     
                         /**
@@ -22492,6 +30158,769 @@
                         return SedentaryPeriodRollupValue;
                     })();
     
+                    v4.ActiveEnergyBurned = (function() {
+    
+                        /**
+                         * Properties of an ActiveEnergyBurned.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IActiveEnergyBurned
+                         * @property {google.devicesandservices.health.v4.IObservationTimeInterval|null} [interval] ActiveEnergyBurned interval
+                         * @property {number|null} [kcal] ActiveEnergyBurned kcal
+                         */
+    
+                        /**
+                         * Constructs a new ActiveEnergyBurned.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents an ActiveEnergyBurned.
+                         * @implements IActiveEnergyBurned
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IActiveEnergyBurned=} [properties] Properties to set
+                         */
+                        function ActiveEnergyBurned(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ActiveEnergyBurned interval.
+                         * @member {google.devicesandservices.health.v4.IObservationTimeInterval|null|undefined} interval
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @instance
+                         */
+                        ActiveEnergyBurned.prototype.interval = null;
+    
+                        /**
+                         * ActiveEnergyBurned kcal.
+                         * @member {number|null|undefined} kcal
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @instance
+                         */
+                        ActiveEnergyBurned.prototype.kcal = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ActiveEnergyBurned.prototype, "_kcal", {
+                            get: $util.oneOfGetter($oneOfFields = ["kcal"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ActiveEnergyBurned instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IActiveEnergyBurned=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.ActiveEnergyBurned} ActiveEnergyBurned instance
+                         */
+                        ActiveEnergyBurned.create = function create(properties) {
+                            return new ActiveEnergyBurned(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ActiveEnergyBurned message. Does not implicitly {@link google.devicesandservices.health.v4.ActiveEnergyBurned.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IActiveEnergyBurned} message ActiveEnergyBurned message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ActiveEnergyBurned.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
+                                $root.google.devicesandservices.health.v4.ObservationTimeInterval.encode(message.interval, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.kcal != null && Object.hasOwnProperty.call(message, "kcal"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.kcal);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ActiveEnergyBurned message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ActiveEnergyBurned.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IActiveEnergyBurned} message ActiveEnergyBurned message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ActiveEnergyBurned.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ActiveEnergyBurned message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.ActiveEnergyBurned} ActiveEnergyBurned
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ActiveEnergyBurned.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.ActiveEnergyBurned();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.interval = $root.google.devicesandservices.health.v4.ObservationTimeInterval.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.kcal = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ActiveEnergyBurned message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.ActiveEnergyBurned} ActiveEnergyBurned
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ActiveEnergyBurned.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ActiveEnergyBurned message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ActiveEnergyBurned.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.interval != null && message.hasOwnProperty("interval")) {
+                                var error = $root.google.devicesandservices.health.v4.ObservationTimeInterval.verify(message.interval);
+                                if (error)
+                                    return "interval." + error;
+                            }
+                            if (message.kcal != null && message.hasOwnProperty("kcal")) {
+                                properties._kcal = 1;
+                                if (typeof message.kcal !== "number")
+                                    return "kcal: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ActiveEnergyBurned message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.ActiveEnergyBurned} ActiveEnergyBurned
+                         */
+                        ActiveEnergyBurned.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.ActiveEnergyBurned)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.ActiveEnergyBurned();
+                            if (object.interval != null) {
+                                if (typeof object.interval !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.ActiveEnergyBurned.interval: object expected");
+                                message.interval = $root.google.devicesandservices.health.v4.ObservationTimeInterval.fromObject(object.interval);
+                            }
+                            if (object.kcal != null)
+                                message.kcal = Number(object.kcal);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ActiveEnergyBurned message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ActiveEnergyBurned} message ActiveEnergyBurned
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ActiveEnergyBurned.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.interval = null;
+                            if (message.interval != null && message.hasOwnProperty("interval"))
+                                object.interval = $root.google.devicesandservices.health.v4.ObservationTimeInterval.toObject(message.interval, options);
+                            if (message.kcal != null && message.hasOwnProperty("kcal")) {
+                                object.kcal = options.json && !isFinite(message.kcal) ? String(message.kcal) : message.kcal;
+                                if (options.oneofs)
+                                    object._kcal = "kcal";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ActiveEnergyBurned to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ActiveEnergyBurned.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ActiveEnergyBurned
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurned
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ActiveEnergyBurned.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.ActiveEnergyBurned";
+                        };
+    
+                        return ActiveEnergyBurned;
+                    })();
+    
+                    v4.ActiveEnergyBurnedRollupValue = (function() {
+    
+                        /**
+                         * Properties of an ActiveEnergyBurnedRollupValue.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IActiveEnergyBurnedRollupValue
+                         * @property {number|null} [kcalSum] ActiveEnergyBurnedRollupValue kcalSum
+                         */
+    
+                        /**
+                         * Constructs a new ActiveEnergyBurnedRollupValue.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents an ActiveEnergyBurnedRollupValue.
+                         * @implements IActiveEnergyBurnedRollupValue
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue=} [properties] Properties to set
+                         */
+                        function ActiveEnergyBurnedRollupValue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ActiveEnergyBurnedRollupValue kcalSum.
+                         * @member {number|null|undefined} kcalSum
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @instance
+                         */
+                        ActiveEnergyBurnedRollupValue.prototype.kcalSum = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ActiveEnergyBurnedRollupValue.prototype, "_kcalSum", {
+                            get: $util.oneOfGetter($oneOfFields = ["kcalSum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ActiveEnergyBurnedRollupValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue} ActiveEnergyBurnedRollupValue instance
+                         */
+                        ActiveEnergyBurnedRollupValue.create = function create(properties) {
+                            return new ActiveEnergyBurnedRollupValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ActiveEnergyBurnedRollupValue message. Does not implicitly {@link google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue} message ActiveEnergyBurnedRollupValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ActiveEnergyBurnedRollupValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kcalSum != null && Object.hasOwnProperty.call(message, "kcalSum"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.kcalSum);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ActiveEnergyBurnedRollupValue message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue} message ActiveEnergyBurnedRollupValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ActiveEnergyBurnedRollupValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ActiveEnergyBurnedRollupValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue} ActiveEnergyBurnedRollupValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ActiveEnergyBurnedRollupValue.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.kcalSum = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ActiveEnergyBurnedRollupValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue} ActiveEnergyBurnedRollupValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ActiveEnergyBurnedRollupValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ActiveEnergyBurnedRollupValue message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ActiveEnergyBurnedRollupValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.kcalSum != null && message.hasOwnProperty("kcalSum")) {
+                                properties._kcalSum = 1;
+                                if (typeof message.kcalSum !== "number")
+                                    return "kcalSum: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ActiveEnergyBurnedRollupValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue} ActiveEnergyBurnedRollupValue
+                         */
+                        ActiveEnergyBurnedRollupValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue();
+                            if (object.kcalSum != null)
+                                message.kcalSum = Number(object.kcalSum);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ActiveEnergyBurnedRollupValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue} message ActiveEnergyBurnedRollupValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ActiveEnergyBurnedRollupValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.kcalSum != null && message.hasOwnProperty("kcalSum")) {
+                                object.kcalSum = options.json && !isFinite(message.kcalSum) ? String(message.kcalSum) : message.kcalSum;
+                                if (options.oneofs)
+                                    object._kcalSum = "kcalSum";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ActiveEnergyBurnedRollupValue to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ActiveEnergyBurnedRollupValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ActiveEnergyBurnedRollupValue
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ActiveEnergyBurnedRollupValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue";
+                        };
+    
+                        return ActiveEnergyBurnedRollupValue;
+                    })();
+    
+                    v4.MedicalDeviceInfo = (function() {
+    
+                        /**
+                         * Properties of a MedicalDeviceInfo.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IMedicalDeviceInfo
+                         * @property {string|null} [algorithmVersion] MedicalDeviceInfo algorithmVersion
+                         * @property {string|null} [serviceVersion] MedicalDeviceInfo serviceVersion
+                         * @property {string|null} [firmwareVersion] MedicalDeviceInfo firmwareVersion
+                         * @property {string|null} [featureVersion] MedicalDeviceInfo featureVersion
+                         * @property {string|null} [deviceModel] MedicalDeviceInfo deviceModel
+                         */
+    
+                        /**
+                         * Constructs a new MedicalDeviceInfo.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a MedicalDeviceInfo.
+                         * @implements IMedicalDeviceInfo
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IMedicalDeviceInfo=} [properties] Properties to set
+                         */
+                        function MedicalDeviceInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MedicalDeviceInfo algorithmVersion.
+                         * @member {string} algorithmVersion
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @instance
+                         */
+                        MedicalDeviceInfo.prototype.algorithmVersion = "";
+    
+                        /**
+                         * MedicalDeviceInfo serviceVersion.
+                         * @member {string} serviceVersion
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @instance
+                         */
+                        MedicalDeviceInfo.prototype.serviceVersion = "";
+    
+                        /**
+                         * MedicalDeviceInfo firmwareVersion.
+                         * @member {string} firmwareVersion
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @instance
+                         */
+                        MedicalDeviceInfo.prototype.firmwareVersion = "";
+    
+                        /**
+                         * MedicalDeviceInfo featureVersion.
+                         * @member {string} featureVersion
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @instance
+                         */
+                        MedicalDeviceInfo.prototype.featureVersion = "";
+    
+                        /**
+                         * MedicalDeviceInfo deviceModel.
+                         * @member {string} deviceModel
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @instance
+                         */
+                        MedicalDeviceInfo.prototype.deviceModel = "";
+    
+                        /**
+                         * Creates a new MedicalDeviceInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IMedicalDeviceInfo=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.MedicalDeviceInfo} MedicalDeviceInfo instance
+                         */
+                        MedicalDeviceInfo.create = function create(properties) {
+                            return new MedicalDeviceInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MedicalDeviceInfo message. Does not implicitly {@link google.devicesandservices.health.v4.MedicalDeviceInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IMedicalDeviceInfo} message MedicalDeviceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MedicalDeviceInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.algorithmVersion != null && Object.hasOwnProperty.call(message, "algorithmVersion"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.algorithmVersion);
+                            if (message.serviceVersion != null && Object.hasOwnProperty.call(message, "serviceVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceVersion);
+                            if (message.firmwareVersion != null && Object.hasOwnProperty.call(message, "firmwareVersion"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.firmwareVersion);
+                            if (message.featureVersion != null && Object.hasOwnProperty.call(message, "featureVersion"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.featureVersion);
+                            if (message.deviceModel != null && Object.hasOwnProperty.call(message, "deviceModel"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.deviceModel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MedicalDeviceInfo message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.MedicalDeviceInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IMedicalDeviceInfo} message MedicalDeviceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MedicalDeviceInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MedicalDeviceInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.MedicalDeviceInfo} MedicalDeviceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MedicalDeviceInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.MedicalDeviceInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.algorithmVersion = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.serviceVersion = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.firmwareVersion = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.featureVersion = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.deviceModel = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MedicalDeviceInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.MedicalDeviceInfo} MedicalDeviceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MedicalDeviceInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MedicalDeviceInfo message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MedicalDeviceInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.algorithmVersion != null && message.hasOwnProperty("algorithmVersion"))
+                                if (!$util.isString(message.algorithmVersion))
+                                    return "algorithmVersion: string expected";
+                            if (message.serviceVersion != null && message.hasOwnProperty("serviceVersion"))
+                                if (!$util.isString(message.serviceVersion))
+                                    return "serviceVersion: string expected";
+                            if (message.firmwareVersion != null && message.hasOwnProperty("firmwareVersion"))
+                                if (!$util.isString(message.firmwareVersion))
+                                    return "firmwareVersion: string expected";
+                            if (message.featureVersion != null && message.hasOwnProperty("featureVersion"))
+                                if (!$util.isString(message.featureVersion))
+                                    return "featureVersion: string expected";
+                            if (message.deviceModel != null && message.hasOwnProperty("deviceModel"))
+                                if (!$util.isString(message.deviceModel))
+                                    return "deviceModel: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MedicalDeviceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.MedicalDeviceInfo} MedicalDeviceInfo
+                         */
+                        MedicalDeviceInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.MedicalDeviceInfo)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.MedicalDeviceInfo();
+                            if (object.algorithmVersion != null)
+                                message.algorithmVersion = String(object.algorithmVersion);
+                            if (object.serviceVersion != null)
+                                message.serviceVersion = String(object.serviceVersion);
+                            if (object.firmwareVersion != null)
+                                message.firmwareVersion = String(object.firmwareVersion);
+                            if (object.featureVersion != null)
+                                message.featureVersion = String(object.featureVersion);
+                            if (object.deviceModel != null)
+                                message.deviceModel = String(object.deviceModel);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MedicalDeviceInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @static
+                         * @param {google.devicesandservices.health.v4.MedicalDeviceInfo} message MedicalDeviceInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MedicalDeviceInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.algorithmVersion = "";
+                                object.serviceVersion = "";
+                                object.firmwareVersion = "";
+                                object.featureVersion = "";
+                                object.deviceModel = "";
+                            }
+                            if (message.algorithmVersion != null && message.hasOwnProperty("algorithmVersion"))
+                                object.algorithmVersion = message.algorithmVersion;
+                            if (message.serviceVersion != null && message.hasOwnProperty("serviceVersion"))
+                                object.serviceVersion = message.serviceVersion;
+                            if (message.firmwareVersion != null && message.hasOwnProperty("firmwareVersion"))
+                                object.firmwareVersion = message.firmwareVersion;
+                            if (message.featureVersion != null && message.hasOwnProperty("featureVersion"))
+                                object.featureVersion = message.featureVersion;
+                            if (message.deviceModel != null && message.hasOwnProperty("deviceModel"))
+                                object.deviceModel = message.deviceModel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MedicalDeviceInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MedicalDeviceInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MedicalDeviceInfo
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.MedicalDeviceInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MedicalDeviceInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.MedicalDeviceInfo";
+                        };
+    
+                        return MedicalDeviceInfo;
+                    })();
+    
                     v4.DataPointsService = (function() {
     
                         /**
@@ -22851,8 +31280,12 @@
                          * @property {google.devicesandservices.health.v4.IActivityLevel|null} [activityLevel] DataPoint activityLevel
                          * @property {google.devicesandservices.health.v4.IVO2Max|null} [vo2Max] DataPoint vo2Max
                          * @property {google.devicesandservices.health.v4.IDailyVO2Max|null} [dailyVo2Max] DataPoint dailyVo2Max
+                         * @property {google.devicesandservices.health.v4.INutritionLog|null} [nutritionLog] DataPoint nutritionLog
+                         * @property {google.devicesandservices.health.v4.IIrregularRhythmNotification|null} [irregularRhythmNotification] DataPoint irregularRhythmNotification
+                         * @property {google.devicesandservices.health.v4.IElectrocardiogram|null} [electrocardiogram] DataPoint electrocardiogram
                          * @property {google.devicesandservices.health.v4.IDailyHeartRateZones|null} [dailyHeartRateZones] DataPoint dailyHeartRateZones
                          * @property {google.devicesandservices.health.v4.IHydrationLog|null} [hydrationLog] DataPoint hydrationLog
+                         * @property {google.devicesandservices.health.v4.IFood|null} [food] DataPoint food
                          * @property {google.devicesandservices.health.v4.ITimeInHeartRateZone|null} [timeInHeartRateZone] DataPoint timeInHeartRateZone
                          * @property {google.devicesandservices.health.v4.IActiveMinutes|null} [activeMinutes] DataPoint activeMinutes
                          * @property {google.devicesandservices.health.v4.IRespiratoryRateSleepSummary|null} [respiratoryRateSleepSummary] DataPoint respiratoryRateSleepSummary
@@ -22860,6 +31293,10 @@
                          * @property {google.devicesandservices.health.v4.ISwimLengthsData|null} [swimLengthsData] DataPoint swimLengthsData
                          * @property {google.devicesandservices.health.v4.IHeight|null} [height] DataPoint height
                          * @property {google.devicesandservices.health.v4.IBasalEnergyBurned|null} [basalEnergyBurned] DataPoint basalEnergyBurned
+                         * @property {google.devicesandservices.health.v4.ICoreBodyTemperature|null} [coreBodyTemperature] DataPoint coreBodyTemperature
+                         * @property {google.devicesandservices.health.v4.IActiveEnergyBurned|null} [activeEnergyBurned] DataPoint activeEnergyBurned
+                         * @property {google.devicesandservices.health.v4.IFoodMeasurementUnit|null} [foodMeasurementUnit] DataPoint foodMeasurementUnit
+                         * @property {google.devicesandservices.health.v4.IBloodGlucose|null} [bloodGlucose] DataPoint bloodGlucose
                          * @property {string|null} [name] DataPoint name
                          * @property {google.devicesandservices.health.v4.IDataSource|null} [dataSource] DataPoint dataSource
                          */
@@ -23048,6 +31485,30 @@
                         DataPoint.prototype.dailyVo2Max = null;
     
                         /**
+                         * DataPoint nutritionLog.
+                         * @member {google.devicesandservices.health.v4.INutritionLog|null|undefined} nutritionLog
+                         * @memberof google.devicesandservices.health.v4.DataPoint
+                         * @instance
+                         */
+                        DataPoint.prototype.nutritionLog = null;
+    
+                        /**
+                         * DataPoint irregularRhythmNotification.
+                         * @member {google.devicesandservices.health.v4.IIrregularRhythmNotification|null|undefined} irregularRhythmNotification
+                         * @memberof google.devicesandservices.health.v4.DataPoint
+                         * @instance
+                         */
+                        DataPoint.prototype.irregularRhythmNotification = null;
+    
+                        /**
+                         * DataPoint electrocardiogram.
+                         * @member {google.devicesandservices.health.v4.IElectrocardiogram|null|undefined} electrocardiogram
+                         * @memberof google.devicesandservices.health.v4.DataPoint
+                         * @instance
+                         */
+                        DataPoint.prototype.electrocardiogram = null;
+    
+                        /**
                          * DataPoint dailyHeartRateZones.
                          * @member {google.devicesandservices.health.v4.IDailyHeartRateZones|null|undefined} dailyHeartRateZones
                          * @memberof google.devicesandservices.health.v4.DataPoint
@@ -23062,6 +31523,14 @@
                          * @instance
                          */
                         DataPoint.prototype.hydrationLog = null;
+    
+                        /**
+                         * DataPoint food.
+                         * @member {google.devicesandservices.health.v4.IFood|null|undefined} food
+                         * @memberof google.devicesandservices.health.v4.DataPoint
+                         * @instance
+                         */
+                        DataPoint.prototype.food = null;
     
                         /**
                          * DataPoint timeInHeartRateZone.
@@ -23120,6 +31589,38 @@
                         DataPoint.prototype.basalEnergyBurned = null;
     
                         /**
+                         * DataPoint coreBodyTemperature.
+                         * @member {google.devicesandservices.health.v4.ICoreBodyTemperature|null|undefined} coreBodyTemperature
+                         * @memberof google.devicesandservices.health.v4.DataPoint
+                         * @instance
+                         */
+                        DataPoint.prototype.coreBodyTemperature = null;
+    
+                        /**
+                         * DataPoint activeEnergyBurned.
+                         * @member {google.devicesandservices.health.v4.IActiveEnergyBurned|null|undefined} activeEnergyBurned
+                         * @memberof google.devicesandservices.health.v4.DataPoint
+                         * @instance
+                         */
+                        DataPoint.prototype.activeEnergyBurned = null;
+    
+                        /**
+                         * DataPoint foodMeasurementUnit.
+                         * @member {google.devicesandservices.health.v4.IFoodMeasurementUnit|null|undefined} foodMeasurementUnit
+                         * @memberof google.devicesandservices.health.v4.DataPoint
+                         * @instance
+                         */
+                        DataPoint.prototype.foodMeasurementUnit = null;
+    
+                        /**
+                         * DataPoint bloodGlucose.
+                         * @member {google.devicesandservices.health.v4.IBloodGlucose|null|undefined} bloodGlucose
+                         * @memberof google.devicesandservices.health.v4.DataPoint
+                         * @instance
+                         */
+                        DataPoint.prototype.bloodGlucose = null;
+    
+                        /**
                          * DataPoint name.
                          * @member {string} name
                          * @memberof google.devicesandservices.health.v4.DataPoint
@@ -23140,12 +31641,12 @@
     
                         /**
                          * DataPoint data.
-                         * @member {"steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"dailyHeartRateZones"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|undefined} data
+                         * @member {"steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"nutritionLog"|"irregularRhythmNotification"|"electrocardiogram"|"dailyHeartRateZones"|"hydrationLog"|"food"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|"coreBodyTemperature"|"activeEnergyBurned"|"foodMeasurementUnit"|"bloodGlucose"|undefined} data
                          * @memberof google.devicesandservices.health.v4.DataPoint
                          * @instance
                          */
                         Object.defineProperty(DataPoint.prototype, "data", {
-                            get: $util.oneOfGetter($oneOfFields = ["steps", "floors", "heartRate", "sleep", "dailyRestingHeartRate", "dailyHeartRateVariability", "exercise", "weight", "altitude", "distance", "bodyFat", "activeZoneMinutes", "heartRateVariability", "dailySleepTemperatureDerivations", "sedentaryPeriod", "runVo2Max", "oxygenSaturation", "dailyOxygenSaturation", "activityLevel", "vo2Max", "dailyVo2Max", "dailyHeartRateZones", "hydrationLog", "timeInHeartRateZone", "activeMinutes", "respiratoryRateSleepSummary", "dailyRespiratoryRate", "swimLengthsData", "height", "basalEnergyBurned"]),
+                            get: $util.oneOfGetter($oneOfFields = ["steps", "floors", "heartRate", "sleep", "dailyRestingHeartRate", "dailyHeartRateVariability", "exercise", "weight", "altitude", "distance", "bodyFat", "activeZoneMinutes", "heartRateVariability", "dailySleepTemperatureDerivations", "sedentaryPeriod", "runVo2Max", "oxygenSaturation", "dailyOxygenSaturation", "activityLevel", "vo2Max", "dailyVo2Max", "nutritionLog", "irregularRhythmNotification", "electrocardiogram", "dailyHeartRateZones", "hydrationLog", "food", "timeInHeartRateZone", "activeMinutes", "respiratoryRateSleepSummary", "dailyRespiratoryRate", "swimLengthsData", "height", "basalEnergyBurned", "coreBodyTemperature", "activeEnergyBurned", "foodMeasurementUnit", "bloodGlucose"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -23219,10 +31720,18 @@
                                 $root.google.devicesandservices.health.v4.VO2Max.encode(message.vo2Max, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             if (message.dailyVo2Max != null && Object.hasOwnProperty.call(message, "dailyVo2Max"))
                                 $root.google.devicesandservices.health.v4.DailyVO2Max.encode(message.dailyVo2Max, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                            if (message.nutritionLog != null && Object.hasOwnProperty.call(message, "nutritionLog"))
+                                $root.google.devicesandservices.health.v4.NutritionLog.encode(message.nutritionLog, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
+                            if (message.irregularRhythmNotification != null && Object.hasOwnProperty.call(message, "irregularRhythmNotification"))
+                                $root.google.devicesandservices.health.v4.IrregularRhythmNotification.encode(message.irregularRhythmNotification, writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
+                            if (message.electrocardiogram != null && Object.hasOwnProperty.call(message, "electrocardiogram"))
+                                $root.google.devicesandservices.health.v4.Electrocardiogram.encode(message.electrocardiogram, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
                             if (message.dailyHeartRateZones != null && Object.hasOwnProperty.call(message, "dailyHeartRateZones"))
                                 $root.google.devicesandservices.health.v4.DailyHeartRateZones.encode(message.dailyHeartRateZones, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                             if (message.hydrationLog != null && Object.hasOwnProperty.call(message, "hydrationLog"))
                                 $root.google.devicesandservices.health.v4.HydrationLog.encode(message.hydrationLog, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
+                            if (message.food != null && Object.hasOwnProperty.call(message, "food"))
+                                $root.google.devicesandservices.health.v4.Food.encode(message.food, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                             if (message.timeInHeartRateZone != null && Object.hasOwnProperty.call(message, "timeInHeartRateZone"))
                                 $root.google.devicesandservices.health.v4.TimeInHeartRateZone.encode(message.timeInHeartRateZone, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                             if (message.activeMinutes != null && Object.hasOwnProperty.call(message, "activeMinutes"))
@@ -23237,6 +31746,14 @@
                                 $root.google.devicesandservices.health.v4.Height.encode(message.height, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                             if (message.basalEnergyBurned != null && Object.hasOwnProperty.call(message, "basalEnergyBurned"))
                                 $root.google.devicesandservices.health.v4.BasalEnergyBurned.encode(message.basalEnergyBurned, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                            if (message.coreBodyTemperature != null && Object.hasOwnProperty.call(message, "coreBodyTemperature"))
+                                $root.google.devicesandservices.health.v4.CoreBodyTemperature.encode(message.coreBodyTemperature, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
+                            if (message.activeEnergyBurned != null && Object.hasOwnProperty.call(message, "activeEnergyBurned"))
+                                $root.google.devicesandservices.health.v4.ActiveEnergyBurned.encode(message.activeEnergyBurned, writer.uint32(/* id 44, wireType 2 =*/354).fork()).ldelim();
+                            if (message.foodMeasurementUnit != null && Object.hasOwnProperty.call(message, "foodMeasurementUnit"))
+                                $root.google.devicesandservices.health.v4.FoodMeasurementUnit.encode(message.foodMeasurementUnit, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
+                            if (message.bloodGlucose != null && Object.hasOwnProperty.call(message, "bloodGlucose"))
+                                $root.google.devicesandservices.health.v4.BloodGlucose.encode(message.bloodGlucose, writer.uint32(/* id 46, wireType 2 =*/370).fork()).ldelim();
                             return writer;
                         };
     
@@ -23357,12 +31874,28 @@
                                         message.dailyVo2Max = $root.google.devicesandservices.health.v4.DailyVO2Max.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 29: {
+                                        message.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLog.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 30: {
+                                        message.irregularRhythmNotification = $root.google.devicesandservices.health.v4.IrregularRhythmNotification.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 31: {
+                                        message.electrocardiogram = $root.google.devicesandservices.health.v4.Electrocardiogram.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 32: {
                                         message.dailyHeartRateZones = $root.google.devicesandservices.health.v4.DailyHeartRateZones.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 33: {
                                         message.hydrationLog = $root.google.devicesandservices.health.v4.HydrationLog.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 34: {
+                                        message.food = $root.google.devicesandservices.health.v4.Food.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 35: {
@@ -23391,6 +31924,22 @@
                                     }
                                 case 41: {
                                         message.basalEnergyBurned = $root.google.devicesandservices.health.v4.BasalEnergyBurned.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 42: {
+                                        message.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperature.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 44: {
+                                        message.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurned.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 45: {
+                                        message.foodMeasurementUnit = $root.google.devicesandservices.health.v4.FoodMeasurementUnit.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 46: {
+                                        message.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucose.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -23645,6 +32194,36 @@
                                         return "dailyVo2Max." + error;
                                 }
                             }
+                            if (message.nutritionLog != null && message.hasOwnProperty("nutritionLog")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.NutritionLog.verify(message.nutritionLog);
+                                    if (error)
+                                        return "nutritionLog." + error;
+                                }
+                            }
+                            if (message.irregularRhythmNotification != null && message.hasOwnProperty("irregularRhythmNotification")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.IrregularRhythmNotification.verify(message.irregularRhythmNotification);
+                                    if (error)
+                                        return "irregularRhythmNotification." + error;
+                                }
+                            }
+                            if (message.electrocardiogram != null && message.hasOwnProperty("electrocardiogram")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.Electrocardiogram.verify(message.electrocardiogram);
+                                    if (error)
+                                        return "electrocardiogram." + error;
+                                }
+                            }
                             if (message.dailyHeartRateZones != null && message.hasOwnProperty("dailyHeartRateZones")) {
                                 if (properties.data === 1)
                                     return "data: multiple values";
@@ -23663,6 +32242,16 @@
                                     var error = $root.google.devicesandservices.health.v4.HydrationLog.verify(message.hydrationLog);
                                     if (error)
                                         return "hydrationLog." + error;
+                                }
+                            }
+                            if (message.food != null && message.hasOwnProperty("food")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.Food.verify(message.food);
+                                    if (error)
+                                        return "food." + error;
                                 }
                             }
                             if (message.timeInHeartRateZone != null && message.hasOwnProperty("timeInHeartRateZone")) {
@@ -23733,6 +32322,46 @@
                                     var error = $root.google.devicesandservices.health.v4.BasalEnergyBurned.verify(message.basalEnergyBurned);
                                     if (error)
                                         return "basalEnergyBurned." + error;
+                                }
+                            }
+                            if (message.coreBodyTemperature != null && message.hasOwnProperty("coreBodyTemperature")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.CoreBodyTemperature.verify(message.coreBodyTemperature);
+                                    if (error)
+                                        return "coreBodyTemperature." + error;
+                                }
+                            }
+                            if (message.activeEnergyBurned != null && message.hasOwnProperty("activeEnergyBurned")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.ActiveEnergyBurned.verify(message.activeEnergyBurned);
+                                    if (error)
+                                        return "activeEnergyBurned." + error;
+                                }
+                            }
+                            if (message.foodMeasurementUnit != null && message.hasOwnProperty("foodMeasurementUnit")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.FoodMeasurementUnit.verify(message.foodMeasurementUnit);
+                                    if (error)
+                                        return "foodMeasurementUnit." + error;
+                                }
+                            }
+                            if (message.bloodGlucose != null && message.hasOwnProperty("bloodGlucose")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.BloodGlucose.verify(message.bloodGlucose);
+                                    if (error)
+                                        return "bloodGlucose." + error;
                                 }
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -23863,6 +32492,21 @@
                                     throw TypeError(".google.devicesandservices.health.v4.DataPoint.dailyVo2Max: object expected");
                                 message.dailyVo2Max = $root.google.devicesandservices.health.v4.DailyVO2Max.fromObject(object.dailyVo2Max);
                             }
+                            if (object.nutritionLog != null) {
+                                if (typeof object.nutritionLog !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DataPoint.nutritionLog: object expected");
+                                message.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLog.fromObject(object.nutritionLog);
+                            }
+                            if (object.irregularRhythmNotification != null) {
+                                if (typeof object.irregularRhythmNotification !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DataPoint.irregularRhythmNotification: object expected");
+                                message.irregularRhythmNotification = $root.google.devicesandservices.health.v4.IrregularRhythmNotification.fromObject(object.irregularRhythmNotification);
+                            }
+                            if (object.electrocardiogram != null) {
+                                if (typeof object.electrocardiogram !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DataPoint.electrocardiogram: object expected");
+                                message.electrocardiogram = $root.google.devicesandservices.health.v4.Electrocardiogram.fromObject(object.electrocardiogram);
+                            }
                             if (object.dailyHeartRateZones != null) {
                                 if (typeof object.dailyHeartRateZones !== "object")
                                     throw TypeError(".google.devicesandservices.health.v4.DataPoint.dailyHeartRateZones: object expected");
@@ -23872,6 +32516,11 @@
                                 if (typeof object.hydrationLog !== "object")
                                     throw TypeError(".google.devicesandservices.health.v4.DataPoint.hydrationLog: object expected");
                                 message.hydrationLog = $root.google.devicesandservices.health.v4.HydrationLog.fromObject(object.hydrationLog);
+                            }
+                            if (object.food != null) {
+                                if (typeof object.food !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DataPoint.food: object expected");
+                                message.food = $root.google.devicesandservices.health.v4.Food.fromObject(object.food);
                             }
                             if (object.timeInHeartRateZone != null) {
                                 if (typeof object.timeInHeartRateZone !== "object")
@@ -23907,6 +32556,26 @@
                                 if (typeof object.basalEnergyBurned !== "object")
                                     throw TypeError(".google.devicesandservices.health.v4.DataPoint.basalEnergyBurned: object expected");
                                 message.basalEnergyBurned = $root.google.devicesandservices.health.v4.BasalEnergyBurned.fromObject(object.basalEnergyBurned);
+                            }
+                            if (object.coreBodyTemperature != null) {
+                                if (typeof object.coreBodyTemperature !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DataPoint.coreBodyTemperature: object expected");
+                                message.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperature.fromObject(object.coreBodyTemperature);
+                            }
+                            if (object.activeEnergyBurned != null) {
+                                if (typeof object.activeEnergyBurned !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DataPoint.activeEnergyBurned: object expected");
+                                message.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurned.fromObject(object.activeEnergyBurned);
+                            }
+                            if (object.foodMeasurementUnit != null) {
+                                if (typeof object.foodMeasurementUnit !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DataPoint.foodMeasurementUnit: object expected");
+                                message.foodMeasurementUnit = $root.google.devicesandservices.health.v4.FoodMeasurementUnit.fromObject(object.foodMeasurementUnit);
+                            }
+                            if (object.bloodGlucose != null) {
+                                if (typeof object.bloodGlucose !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DataPoint.bloodGlucose: object expected");
+                                message.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucose.fromObject(object.bloodGlucose);
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -24044,6 +32713,21 @@
                                 if (options.oneofs)
                                     object.data = "dailyVo2Max";
                             }
+                            if (message.nutritionLog != null && message.hasOwnProperty("nutritionLog")) {
+                                object.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLog.toObject(message.nutritionLog, options);
+                                if (options.oneofs)
+                                    object.data = "nutritionLog";
+                            }
+                            if (message.irregularRhythmNotification != null && message.hasOwnProperty("irregularRhythmNotification")) {
+                                object.irregularRhythmNotification = $root.google.devicesandservices.health.v4.IrregularRhythmNotification.toObject(message.irregularRhythmNotification, options);
+                                if (options.oneofs)
+                                    object.data = "irregularRhythmNotification";
+                            }
+                            if (message.electrocardiogram != null && message.hasOwnProperty("electrocardiogram")) {
+                                object.electrocardiogram = $root.google.devicesandservices.health.v4.Electrocardiogram.toObject(message.electrocardiogram, options);
+                                if (options.oneofs)
+                                    object.data = "electrocardiogram";
+                            }
                             if (message.dailyHeartRateZones != null && message.hasOwnProperty("dailyHeartRateZones")) {
                                 object.dailyHeartRateZones = $root.google.devicesandservices.health.v4.DailyHeartRateZones.toObject(message.dailyHeartRateZones, options);
                                 if (options.oneofs)
@@ -24053,6 +32737,11 @@
                                 object.hydrationLog = $root.google.devicesandservices.health.v4.HydrationLog.toObject(message.hydrationLog, options);
                                 if (options.oneofs)
                                     object.data = "hydrationLog";
+                            }
+                            if (message.food != null && message.hasOwnProperty("food")) {
+                                object.food = $root.google.devicesandservices.health.v4.Food.toObject(message.food, options);
+                                if (options.oneofs)
+                                    object.data = "food";
                             }
                             if (message.timeInHeartRateZone != null && message.hasOwnProperty("timeInHeartRateZone")) {
                                 object.timeInHeartRateZone = $root.google.devicesandservices.health.v4.TimeInHeartRateZone.toObject(message.timeInHeartRateZone, options);
@@ -24088,6 +32777,26 @@
                                 object.basalEnergyBurned = $root.google.devicesandservices.health.v4.BasalEnergyBurned.toObject(message.basalEnergyBurned, options);
                                 if (options.oneofs)
                                     object.data = "basalEnergyBurned";
+                            }
+                            if (message.coreBodyTemperature != null && message.hasOwnProperty("coreBodyTemperature")) {
+                                object.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperature.toObject(message.coreBodyTemperature, options);
+                                if (options.oneofs)
+                                    object.data = "coreBodyTemperature";
+                            }
+                            if (message.activeEnergyBurned != null && message.hasOwnProperty("activeEnergyBurned")) {
+                                object.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurned.toObject(message.activeEnergyBurned, options);
+                                if (options.oneofs)
+                                    object.data = "activeEnergyBurned";
+                            }
+                            if (message.foodMeasurementUnit != null && message.hasOwnProperty("foodMeasurementUnit")) {
+                                object.foodMeasurementUnit = $root.google.devicesandservices.health.v4.FoodMeasurementUnit.toObject(message.foodMeasurementUnit, options);
+                                if (options.oneofs)
+                                    object.data = "foodMeasurementUnit";
+                            }
+                            if (message.bloodGlucose != null && message.hasOwnProperty("bloodGlucose")) {
+                                object.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucose.toObject(message.bloodGlucose, options);
+                                if (options.oneofs)
+                                    object.data = "bloodGlucose";
                             }
                             return object;
                         };
@@ -24148,6 +32857,7 @@
                          * @property {google.devicesandservices.health.v4.IActivityLevel|null} [activityLevel] ReconciledDataPoint activityLevel
                          * @property {google.devicesandservices.health.v4.IVO2Max|null} [vo2Max] ReconciledDataPoint vo2Max
                          * @property {google.devicesandservices.health.v4.IDailyVO2Max|null} [dailyVo2Max] ReconciledDataPoint dailyVo2Max
+                         * @property {google.devicesandservices.health.v4.INutritionLog|null} [nutritionLog] ReconciledDataPoint nutritionLog
                          * @property {google.devicesandservices.health.v4.IDailyHeartRateZones|null} [dailyHeartRateZones] ReconciledDataPoint dailyHeartRateZones
                          * @property {google.devicesandservices.health.v4.IHydrationLog|null} [hydrationLog] ReconciledDataPoint hydrationLog
                          * @property {google.devicesandservices.health.v4.ITimeInHeartRateZone|null} [timeInHeartRateZone] ReconciledDataPoint timeInHeartRateZone
@@ -24157,6 +32867,9 @@
                          * @property {google.devicesandservices.health.v4.ISwimLengthsData|null} [swimLengthsData] ReconciledDataPoint swimLengthsData
                          * @property {google.devicesandservices.health.v4.IHeight|null} [height] ReconciledDataPoint height
                          * @property {google.devicesandservices.health.v4.IBasalEnergyBurned|null} [basalEnergyBurned] ReconciledDataPoint basalEnergyBurned
+                         * @property {google.devicesandservices.health.v4.ICoreBodyTemperature|null} [coreBodyTemperature] ReconciledDataPoint coreBodyTemperature
+                         * @property {google.devicesandservices.health.v4.IActiveEnergyBurned|null} [activeEnergyBurned] ReconciledDataPoint activeEnergyBurned
+                         * @property {google.devicesandservices.health.v4.IBloodGlucose|null} [bloodGlucose] ReconciledDataPoint bloodGlucose
                          * @property {string|null} [dataPointName] ReconciledDataPoint dataPointName
                          */
     
@@ -24344,6 +33057,14 @@
                         ReconciledDataPoint.prototype.dailyVo2Max = null;
     
                         /**
+                         * ReconciledDataPoint nutritionLog.
+                         * @member {google.devicesandservices.health.v4.INutritionLog|null|undefined} nutritionLog
+                         * @memberof google.devicesandservices.health.v4.ReconciledDataPoint
+                         * @instance
+                         */
+                        ReconciledDataPoint.prototype.nutritionLog = null;
+    
+                        /**
                          * ReconciledDataPoint dailyHeartRateZones.
                          * @member {google.devicesandservices.health.v4.IDailyHeartRateZones|null|undefined} dailyHeartRateZones
                          * @memberof google.devicesandservices.health.v4.ReconciledDataPoint
@@ -24416,6 +33137,30 @@
                         ReconciledDataPoint.prototype.basalEnergyBurned = null;
     
                         /**
+                         * ReconciledDataPoint coreBodyTemperature.
+                         * @member {google.devicesandservices.health.v4.ICoreBodyTemperature|null|undefined} coreBodyTemperature
+                         * @memberof google.devicesandservices.health.v4.ReconciledDataPoint
+                         * @instance
+                         */
+                        ReconciledDataPoint.prototype.coreBodyTemperature = null;
+    
+                        /**
+                         * ReconciledDataPoint activeEnergyBurned.
+                         * @member {google.devicesandservices.health.v4.IActiveEnergyBurned|null|undefined} activeEnergyBurned
+                         * @memberof google.devicesandservices.health.v4.ReconciledDataPoint
+                         * @instance
+                         */
+                        ReconciledDataPoint.prototype.activeEnergyBurned = null;
+    
+                        /**
+                         * ReconciledDataPoint bloodGlucose.
+                         * @member {google.devicesandservices.health.v4.IBloodGlucose|null|undefined} bloodGlucose
+                         * @memberof google.devicesandservices.health.v4.ReconciledDataPoint
+                         * @instance
+                         */
+                        ReconciledDataPoint.prototype.bloodGlucose = null;
+    
+                        /**
                          * ReconciledDataPoint dataPointName.
                          * @member {string} dataPointName
                          * @memberof google.devicesandservices.health.v4.ReconciledDataPoint
@@ -24428,12 +33173,12 @@
     
                         /**
                          * ReconciledDataPoint data.
-                         * @member {"steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"dailyHeartRateZones"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|undefined} data
+                         * @member {"steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"nutritionLog"|"dailyHeartRateZones"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose"|undefined} data
                          * @memberof google.devicesandservices.health.v4.ReconciledDataPoint
                          * @instance
                          */
                         Object.defineProperty(ReconciledDataPoint.prototype, "data", {
-                            get: $util.oneOfGetter($oneOfFields = ["steps", "floors", "heartRate", "sleep", "dailyRestingHeartRate", "dailyHeartRateVariability", "exercise", "weight", "altitude", "distance", "bodyFat", "activeZoneMinutes", "heartRateVariability", "dailySleepTemperatureDerivations", "sedentaryPeriod", "runVo2Max", "oxygenSaturation", "dailyOxygenSaturation", "activityLevel", "vo2Max", "dailyVo2Max", "dailyHeartRateZones", "hydrationLog", "timeInHeartRateZone", "activeMinutes", "respiratoryRateSleepSummary", "dailyRespiratoryRate", "swimLengthsData", "height", "basalEnergyBurned"]),
+                            get: $util.oneOfGetter($oneOfFields = ["steps", "floors", "heartRate", "sleep", "dailyRestingHeartRate", "dailyHeartRateVariability", "exercise", "weight", "altitude", "distance", "bodyFat", "activeZoneMinutes", "heartRateVariability", "dailySleepTemperatureDerivations", "sedentaryPeriod", "runVo2Max", "oxygenSaturation", "dailyOxygenSaturation", "activityLevel", "vo2Max", "dailyVo2Max", "nutritionLog", "dailyHeartRateZones", "hydrationLog", "timeInHeartRateZone", "activeMinutes", "respiratoryRateSleepSummary", "dailyRespiratoryRate", "swimLengthsData", "height", "basalEnergyBurned", "coreBodyTemperature", "activeEnergyBurned", "bloodGlucose"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -24505,6 +33250,8 @@
                                 $root.google.devicesandservices.health.v4.VO2Max.encode(message.vo2Max, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             if (message.dailyVo2Max != null && Object.hasOwnProperty.call(message, "dailyVo2Max"))
                                 $root.google.devicesandservices.health.v4.DailyVO2Max.encode(message.dailyVo2Max, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                            if (message.nutritionLog != null && Object.hasOwnProperty.call(message, "nutritionLog"))
+                                $root.google.devicesandservices.health.v4.NutritionLog.encode(message.nutritionLog, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
                             if (message.dailyHeartRateZones != null && Object.hasOwnProperty.call(message, "dailyHeartRateZones"))
                                 $root.google.devicesandservices.health.v4.DailyHeartRateZones.encode(message.dailyHeartRateZones, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                             if (message.hydrationLog != null && Object.hasOwnProperty.call(message, "hydrationLog"))
@@ -24523,6 +33270,12 @@
                                 $root.google.devicesandservices.health.v4.Height.encode(message.height, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                             if (message.basalEnergyBurned != null && Object.hasOwnProperty.call(message, "basalEnergyBurned"))
                                 $root.google.devicesandservices.health.v4.BasalEnergyBurned.encode(message.basalEnergyBurned, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                            if (message.coreBodyTemperature != null && Object.hasOwnProperty.call(message, "coreBodyTemperature"))
+                                $root.google.devicesandservices.health.v4.CoreBodyTemperature.encode(message.coreBodyTemperature, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
+                            if (message.activeEnergyBurned != null && Object.hasOwnProperty.call(message, "activeEnergyBurned"))
+                                $root.google.devicesandservices.health.v4.ActiveEnergyBurned.encode(message.activeEnergyBurned, writer.uint32(/* id 44, wireType 2 =*/354).fork()).ldelim();
+                            if (message.bloodGlucose != null && Object.hasOwnProperty.call(message, "bloodGlucose"))
+                                $root.google.devicesandservices.health.v4.BloodGlucose.encode(message.bloodGlucose, writer.uint32(/* id 46, wireType 2 =*/370).fork()).ldelim();
                             return writer;
                         };
     
@@ -24643,6 +33396,10 @@
                                         message.dailyVo2Max = $root.google.devicesandservices.health.v4.DailyVO2Max.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 29: {
+                                        message.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLog.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 32: {
                                         message.dailyHeartRateZones = $root.google.devicesandservices.health.v4.DailyHeartRateZones.decode(reader, reader.uint32());
                                         break;
@@ -24677,6 +33434,18 @@
                                     }
                                 case 41: {
                                         message.basalEnergyBurned = $root.google.devicesandservices.health.v4.BasalEnergyBurned.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 42: {
+                                        message.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperature.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 44: {
+                                        message.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurned.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 46: {
+                                        message.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucose.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -24927,6 +33696,16 @@
                                         return "dailyVo2Max." + error;
                                 }
                             }
+                            if (message.nutritionLog != null && message.hasOwnProperty("nutritionLog")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.NutritionLog.verify(message.nutritionLog);
+                                    if (error)
+                                        return "nutritionLog." + error;
+                                }
+                            }
                             if (message.dailyHeartRateZones != null && message.hasOwnProperty("dailyHeartRateZones")) {
                                 if (properties.data === 1)
                                     return "data: multiple values";
@@ -25015,6 +33794,36 @@
                                     var error = $root.google.devicesandservices.health.v4.BasalEnergyBurned.verify(message.basalEnergyBurned);
                                     if (error)
                                         return "basalEnergyBurned." + error;
+                                }
+                            }
+                            if (message.coreBodyTemperature != null && message.hasOwnProperty("coreBodyTemperature")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.CoreBodyTemperature.verify(message.coreBodyTemperature);
+                                    if (error)
+                                        return "coreBodyTemperature." + error;
+                                }
+                            }
+                            if (message.activeEnergyBurned != null && message.hasOwnProperty("activeEnergyBurned")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.ActiveEnergyBurned.verify(message.activeEnergyBurned);
+                                    if (error)
+                                        return "activeEnergyBurned." + error;
+                                }
+                            }
+                            if (message.bloodGlucose != null && message.hasOwnProperty("bloodGlucose")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.BloodGlucose.verify(message.bloodGlucose);
+                                    if (error)
+                                        return "bloodGlucose." + error;
                                 }
                             }
                             if (message.dataPointName != null && message.hasOwnProperty("dataPointName"))
@@ -25140,6 +33949,11 @@
                                     throw TypeError(".google.devicesandservices.health.v4.ReconciledDataPoint.dailyVo2Max: object expected");
                                 message.dailyVo2Max = $root.google.devicesandservices.health.v4.DailyVO2Max.fromObject(object.dailyVo2Max);
                             }
+                            if (object.nutritionLog != null) {
+                                if (typeof object.nutritionLog !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.ReconciledDataPoint.nutritionLog: object expected");
+                                message.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLog.fromObject(object.nutritionLog);
+                            }
                             if (object.dailyHeartRateZones != null) {
                                 if (typeof object.dailyHeartRateZones !== "object")
                                     throw TypeError(".google.devicesandservices.health.v4.ReconciledDataPoint.dailyHeartRateZones: object expected");
@@ -25184,6 +33998,21 @@
                                 if (typeof object.basalEnergyBurned !== "object")
                                     throw TypeError(".google.devicesandservices.health.v4.ReconciledDataPoint.basalEnergyBurned: object expected");
                                 message.basalEnergyBurned = $root.google.devicesandservices.health.v4.BasalEnergyBurned.fromObject(object.basalEnergyBurned);
+                            }
+                            if (object.coreBodyTemperature != null) {
+                                if (typeof object.coreBodyTemperature !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.ReconciledDataPoint.coreBodyTemperature: object expected");
+                                message.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperature.fromObject(object.coreBodyTemperature);
+                            }
+                            if (object.activeEnergyBurned != null) {
+                                if (typeof object.activeEnergyBurned !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.ReconciledDataPoint.activeEnergyBurned: object expected");
+                                message.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurned.fromObject(object.activeEnergyBurned);
+                            }
+                            if (object.bloodGlucose != null) {
+                                if (typeof object.bloodGlucose !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.ReconciledDataPoint.bloodGlucose: object expected");
+                                message.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucose.fromObject(object.bloodGlucose);
                             }
                             if (object.dataPointName != null)
                                 message.dataPointName = String(object.dataPointName);
@@ -25312,6 +34141,11 @@
                                 if (options.oneofs)
                                     object.data = "dailyVo2Max";
                             }
+                            if (message.nutritionLog != null && message.hasOwnProperty("nutritionLog")) {
+                                object.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLog.toObject(message.nutritionLog, options);
+                                if (options.oneofs)
+                                    object.data = "nutritionLog";
+                            }
                             if (message.dailyHeartRateZones != null && message.hasOwnProperty("dailyHeartRateZones")) {
                                 object.dailyHeartRateZones = $root.google.devicesandservices.health.v4.DailyHeartRateZones.toObject(message.dailyHeartRateZones, options);
                                 if (options.oneofs)
@@ -25356,6 +34190,21 @@
                                 object.basalEnergyBurned = $root.google.devicesandservices.health.v4.BasalEnergyBurned.toObject(message.basalEnergyBurned, options);
                                 if (options.oneofs)
                                     object.data = "basalEnergyBurned";
+                            }
+                            if (message.coreBodyTemperature != null && message.hasOwnProperty("coreBodyTemperature")) {
+                                object.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperature.toObject(message.coreBodyTemperature, options);
+                                if (options.oneofs)
+                                    object.data = "coreBodyTemperature";
+                            }
+                            if (message.activeEnergyBurned != null && message.hasOwnProperty("activeEnergyBurned")) {
+                                object.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurned.toObject(message.activeEnergyBurned, options);
+                                if (options.oneofs)
+                                    object.data = "activeEnergyBurned";
+                            }
+                            if (message.bloodGlucose != null && message.hasOwnProperty("bloodGlucose")) {
+                                object.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucose.toObject(message.bloodGlucose, options);
+                                if (options.oneofs)
+                                    object.data = "bloodGlucose";
                             }
                             return object;
                         };
@@ -25408,10 +34257,14 @@
                          * @property {google.devicesandservices.health.v4.IRunVO2MaxRollupValue|null} [runVo2Max] RollupDataPoint runVo2Max
                          * @property {google.devicesandservices.health.v4.ICaloriesInHeartRateZoneRollupValue|null} [caloriesInHeartRateZone] RollupDataPoint caloriesInHeartRateZone
                          * @property {google.devicesandservices.health.v4.IActivityLevelRollupValue|null} [activityLevel] RollupDataPoint activityLevel
+                         * @property {google.devicesandservices.health.v4.INutritionLogRollupValue|null} [nutritionLog] RollupDataPoint nutritionLog
                          * @property {google.devicesandservices.health.v4.IHydrationLogRollupValue|null} [hydrationLog] RollupDataPoint hydrationLog
                          * @property {google.devicesandservices.health.v4.ITimeInHeartRateZoneRollupValue|null} [timeInHeartRateZone] RollupDataPoint timeInHeartRateZone
                          * @property {google.devicesandservices.health.v4.IActiveMinutesRollupValue|null} [activeMinutes] RollupDataPoint activeMinutes
                          * @property {google.devicesandservices.health.v4.ISwimLengthsDataRollupValue|null} [swimLengthsData] RollupDataPoint swimLengthsData
+                         * @property {google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue|null} [coreBodyTemperature] RollupDataPoint coreBodyTemperature
+                         * @property {google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue|null} [activeEnergyBurned] RollupDataPoint activeEnergyBurned
+                         * @property {google.devicesandservices.health.v4.IBloodGlucoseRollupValue|null} [bloodGlucose] RollupDataPoint bloodGlucose
                          * @property {google.protobuf.ITimestamp|null} [startTime] RollupDataPoint startTime
                          * @property {google.protobuf.ITimestamp|null} [endTime] RollupDataPoint endTime
                          */
@@ -25536,6 +34389,14 @@
                         RollupDataPoint.prototype.activityLevel = null;
     
                         /**
+                         * RollupDataPoint nutritionLog.
+                         * @member {google.devicesandservices.health.v4.INutritionLogRollupValue|null|undefined} nutritionLog
+                         * @memberof google.devicesandservices.health.v4.RollupDataPoint
+                         * @instance
+                         */
+                        RollupDataPoint.prototype.nutritionLog = null;
+    
+                        /**
                          * RollupDataPoint hydrationLog.
                          * @member {google.devicesandservices.health.v4.IHydrationLogRollupValue|null|undefined} hydrationLog
                          * @memberof google.devicesandservices.health.v4.RollupDataPoint
@@ -25568,6 +34429,30 @@
                         RollupDataPoint.prototype.swimLengthsData = null;
     
                         /**
+                         * RollupDataPoint coreBodyTemperature.
+                         * @member {google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue|null|undefined} coreBodyTemperature
+                         * @memberof google.devicesandservices.health.v4.RollupDataPoint
+                         * @instance
+                         */
+                        RollupDataPoint.prototype.coreBodyTemperature = null;
+    
+                        /**
+                         * RollupDataPoint activeEnergyBurned.
+                         * @member {google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue|null|undefined} activeEnergyBurned
+                         * @memberof google.devicesandservices.health.v4.RollupDataPoint
+                         * @instance
+                         */
+                        RollupDataPoint.prototype.activeEnergyBurned = null;
+    
+                        /**
+                         * RollupDataPoint bloodGlucose.
+                         * @member {google.devicesandservices.health.v4.IBloodGlucoseRollupValue|null|undefined} bloodGlucose
+                         * @memberof google.devicesandservices.health.v4.RollupDataPoint
+                         * @instance
+                         */
+                        RollupDataPoint.prototype.bloodGlucose = null;
+    
+                        /**
                          * RollupDataPoint startTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} startTime
                          * @memberof google.devicesandservices.health.v4.RollupDataPoint
@@ -25588,12 +34473,12 @@
     
                         /**
                          * RollupDataPoint value.
-                         * @member {"steps"|"floors"|"heartRate"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData"|undefined} value
+                         * @member {"steps"|"floors"|"heartRate"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"nutritionLog"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose"|undefined} value
                          * @memberof google.devicesandservices.health.v4.RollupDataPoint
                          * @instance
                          */
                         Object.defineProperty(RollupDataPoint.prototype, "value", {
-                            get: $util.oneOfGetter($oneOfFields = ["steps", "floors", "heartRate", "weight", "altitude", "distance", "bodyFat", "totalCalories", "activeZoneMinutes", "sedentaryPeriod", "runVo2Max", "caloriesInHeartRateZone", "activityLevel", "hydrationLog", "timeInHeartRateZone", "activeMinutes", "swimLengthsData"]),
+                            get: $util.oneOfGetter($oneOfFields = ["steps", "floors", "heartRate", "weight", "altitude", "distance", "bodyFat", "totalCalories", "activeZoneMinutes", "sedentaryPeriod", "runVo2Max", "caloriesInHeartRateZone", "activityLevel", "nutritionLog", "hydrationLog", "timeInHeartRateZone", "activeMinutes", "swimLengthsData", "coreBodyTemperature", "activeEnergyBurned", "bloodGlucose"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -25651,6 +34536,8 @@
                                 $root.google.devicesandservices.health.v4.CaloriesInHeartRateZoneRollupValue.encode(message.caloriesInHeartRateZone, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.activityLevel != null && Object.hasOwnProperty.call(message, "activityLevel"))
                                 $root.google.devicesandservices.health.v4.ActivityLevelRollupValue.encode(message.activityLevel, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.nutritionLog != null && Object.hasOwnProperty.call(message, "nutritionLog"))
+                                $root.google.devicesandservices.health.v4.NutritionLogRollupValue.encode(message.nutritionLog, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.hydrationLog != null && Object.hasOwnProperty.call(message, "hydrationLog"))
                                 $root.google.devicesandservices.health.v4.HydrationLogRollupValue.encode(message.hydrationLog, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.timeInHeartRateZone != null && Object.hasOwnProperty.call(message, "timeInHeartRateZone"))
@@ -25659,6 +34546,12 @@
                                 $root.google.devicesandservices.health.v4.ActiveMinutesRollupValue.encode(message.activeMinutes, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.swimLengthsData != null && Object.hasOwnProperty.call(message, "swimLengthsData"))
                                 $root.google.devicesandservices.health.v4.SwimLengthsDataRollupValue.encode(message.swimLengthsData, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.coreBodyTemperature != null && Object.hasOwnProperty.call(message, "coreBodyTemperature"))
+                                $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.encode(message.coreBodyTemperature, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.activeEnergyBurned != null && Object.hasOwnProperty.call(message, "activeEnergyBurned"))
+                                $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.encode(message.activeEnergyBurned, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                            if (message.bloodGlucose != null && Object.hasOwnProperty.call(message, "bloodGlucose"))
+                                $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue.encode(message.bloodGlucose, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             return writer;
                         };
     
@@ -25747,6 +34640,10 @@
                                         message.activityLevel = $root.google.devicesandservices.health.v4.ActivityLevelRollupValue.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 19: {
+                                        message.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 20: {
                                         message.hydrationLog = $root.google.devicesandservices.health.v4.HydrationLogRollupValue.decode(reader, reader.uint32());
                                         break;
@@ -25761,6 +34658,18 @@
                                     }
                                 case 23: {
                                         message.swimLengthsData = $root.google.devicesandservices.health.v4.SwimLengthsDataRollupValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 25: {
+                                        message.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 26: {
+                                        message.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -25935,6 +34844,16 @@
                                         return "activityLevel." + error;
                                 }
                             }
+                            if (message.nutritionLog != null && message.hasOwnProperty("nutritionLog")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.verify(message.nutritionLog);
+                                    if (error)
+                                        return "nutritionLog." + error;
+                                }
+                            }
                             if (message.hydrationLog != null && message.hasOwnProperty("hydrationLog")) {
                                 if (properties.value === 1)
                                     return "value: multiple values";
@@ -25973,6 +34892,36 @@
                                     var error = $root.google.devicesandservices.health.v4.SwimLengthsDataRollupValue.verify(message.swimLengthsData);
                                     if (error)
                                         return "swimLengthsData." + error;
+                                }
+                            }
+                            if (message.coreBodyTemperature != null && message.hasOwnProperty("coreBodyTemperature")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.verify(message.coreBodyTemperature);
+                                    if (error)
+                                        return "coreBodyTemperature." + error;
+                                }
+                            }
+                            if (message.activeEnergyBurned != null && message.hasOwnProperty("activeEnergyBurned")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.verify(message.activeEnergyBurned);
+                                    if (error)
+                                        return "activeEnergyBurned." + error;
+                                }
+                            }
+                            if (message.bloodGlucose != null && message.hasOwnProperty("bloodGlucose")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue.verify(message.bloodGlucose);
+                                    if (error)
+                                        return "bloodGlucose." + error;
                                 }
                             }
                             if (message.startTime != null && message.hasOwnProperty("startTime")) {
@@ -26065,6 +35014,11 @@
                                     throw TypeError(".google.devicesandservices.health.v4.RollupDataPoint.activityLevel: object expected");
                                 message.activityLevel = $root.google.devicesandservices.health.v4.ActivityLevelRollupValue.fromObject(object.activityLevel);
                             }
+                            if (object.nutritionLog != null) {
+                                if (typeof object.nutritionLog !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.RollupDataPoint.nutritionLog: object expected");
+                                message.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.fromObject(object.nutritionLog);
+                            }
                             if (object.hydrationLog != null) {
                                 if (typeof object.hydrationLog !== "object")
                                     throw TypeError(".google.devicesandservices.health.v4.RollupDataPoint.hydrationLog: object expected");
@@ -26084,6 +35038,21 @@
                                 if (typeof object.swimLengthsData !== "object")
                                     throw TypeError(".google.devicesandservices.health.v4.RollupDataPoint.swimLengthsData: object expected");
                                 message.swimLengthsData = $root.google.devicesandservices.health.v4.SwimLengthsDataRollupValue.fromObject(object.swimLengthsData);
+                            }
+                            if (object.coreBodyTemperature != null) {
+                                if (typeof object.coreBodyTemperature !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.RollupDataPoint.coreBodyTemperature: object expected");
+                                message.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.fromObject(object.coreBodyTemperature);
+                            }
+                            if (object.activeEnergyBurned != null) {
+                                if (typeof object.activeEnergyBurned !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.RollupDataPoint.activeEnergyBurned: object expected");
+                                message.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.fromObject(object.activeEnergyBurned);
+                            }
+                            if (object.bloodGlucose != null) {
+                                if (typeof object.bloodGlucose !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.RollupDataPoint.bloodGlucose: object expected");
+                                message.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue.fromObject(object.bloodGlucose);
                             }
                             if (object.startTime != null) {
                                 if (typeof object.startTime !== "object")
@@ -26184,6 +35153,11 @@
                                 if (options.oneofs)
                                     object.value = "activityLevel";
                             }
+                            if (message.nutritionLog != null && message.hasOwnProperty("nutritionLog")) {
+                                object.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.toObject(message.nutritionLog, options);
+                                if (options.oneofs)
+                                    object.value = "nutritionLog";
+                            }
                             if (message.hydrationLog != null && message.hasOwnProperty("hydrationLog")) {
                                 object.hydrationLog = $root.google.devicesandservices.health.v4.HydrationLogRollupValue.toObject(message.hydrationLog, options);
                                 if (options.oneofs)
@@ -26203,6 +35177,21 @@
                                 object.swimLengthsData = $root.google.devicesandservices.health.v4.SwimLengthsDataRollupValue.toObject(message.swimLengthsData, options);
                                 if (options.oneofs)
                                     object.value = "swimLengthsData";
+                            }
+                            if (message.coreBodyTemperature != null && message.hasOwnProperty("coreBodyTemperature")) {
+                                object.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.toObject(message.coreBodyTemperature, options);
+                                if (options.oneofs)
+                                    object.value = "coreBodyTemperature";
+                            }
+                            if (message.activeEnergyBurned != null && message.hasOwnProperty("activeEnergyBurned")) {
+                                object.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.toObject(message.activeEnergyBurned, options);
+                                if (options.oneofs)
+                                    object.value = "activeEnergyBurned";
+                            }
+                            if (message.bloodGlucose != null && message.hasOwnProperty("bloodGlucose")) {
+                                object.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue.toObject(message.bloodGlucose, options);
+                                if (options.oneofs)
+                                    object.value = "bloodGlucose";
                             }
                             return object;
                         };
@@ -26257,10 +35246,14 @@
                          * @property {google.devicesandservices.health.v4.IRunVO2MaxRollupValue|null} [runVo2Max] DailyRollupDataPoint runVo2Max
                          * @property {google.devicesandservices.health.v4.ICaloriesInHeartRateZoneRollupValue|null} [caloriesInHeartRateZone] DailyRollupDataPoint caloriesInHeartRateZone
                          * @property {google.devicesandservices.health.v4.IActivityLevelRollupValue|null} [activityLevel] DailyRollupDataPoint activityLevel
+                         * @property {google.devicesandservices.health.v4.INutritionLogRollupValue|null} [nutritionLog] DailyRollupDataPoint nutritionLog
                          * @property {google.devicesandservices.health.v4.IHydrationLogRollupValue|null} [hydrationLog] DailyRollupDataPoint hydrationLog
                          * @property {google.devicesandservices.health.v4.ITimeInHeartRateZoneRollupValue|null} [timeInHeartRateZone] DailyRollupDataPoint timeInHeartRateZone
                          * @property {google.devicesandservices.health.v4.IActiveMinutesRollupValue|null} [activeMinutes] DailyRollupDataPoint activeMinutes
                          * @property {google.devicesandservices.health.v4.ISwimLengthsDataRollupValue|null} [swimLengthsData] DailyRollupDataPoint swimLengthsData
+                         * @property {google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue|null} [coreBodyTemperature] DailyRollupDataPoint coreBodyTemperature
+                         * @property {google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue|null} [activeEnergyBurned] DailyRollupDataPoint activeEnergyBurned
+                         * @property {google.devicesandservices.health.v4.IBloodGlucoseRollupValue|null} [bloodGlucose] DailyRollupDataPoint bloodGlucose
                          * @property {google.devicesandservices.health.v4.ICivilDateTime|null} [civilStartTime] DailyRollupDataPoint civilStartTime
                          * @property {google.devicesandservices.health.v4.ICivilDateTime|null} [civilEndTime] DailyRollupDataPoint civilEndTime
                          */
@@ -26401,6 +35394,14 @@
                         DailyRollupDataPoint.prototype.activityLevel = null;
     
                         /**
+                         * DailyRollupDataPoint nutritionLog.
+                         * @member {google.devicesandservices.health.v4.INutritionLogRollupValue|null|undefined} nutritionLog
+                         * @memberof google.devicesandservices.health.v4.DailyRollupDataPoint
+                         * @instance
+                         */
+                        DailyRollupDataPoint.prototype.nutritionLog = null;
+    
+                        /**
                          * DailyRollupDataPoint hydrationLog.
                          * @member {google.devicesandservices.health.v4.IHydrationLogRollupValue|null|undefined} hydrationLog
                          * @memberof google.devicesandservices.health.v4.DailyRollupDataPoint
@@ -26433,6 +35434,30 @@
                         DailyRollupDataPoint.prototype.swimLengthsData = null;
     
                         /**
+                         * DailyRollupDataPoint coreBodyTemperature.
+                         * @member {google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue|null|undefined} coreBodyTemperature
+                         * @memberof google.devicesandservices.health.v4.DailyRollupDataPoint
+                         * @instance
+                         */
+                        DailyRollupDataPoint.prototype.coreBodyTemperature = null;
+    
+                        /**
+                         * DailyRollupDataPoint activeEnergyBurned.
+                         * @member {google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue|null|undefined} activeEnergyBurned
+                         * @memberof google.devicesandservices.health.v4.DailyRollupDataPoint
+                         * @instance
+                         */
+                        DailyRollupDataPoint.prototype.activeEnergyBurned = null;
+    
+                        /**
+                         * DailyRollupDataPoint bloodGlucose.
+                         * @member {google.devicesandservices.health.v4.IBloodGlucoseRollupValue|null|undefined} bloodGlucose
+                         * @memberof google.devicesandservices.health.v4.DailyRollupDataPoint
+                         * @instance
+                         */
+                        DailyRollupDataPoint.prototype.bloodGlucose = null;
+    
+                        /**
                          * DailyRollupDataPoint civilStartTime.
                          * @member {google.devicesandservices.health.v4.ICivilDateTime|null|undefined} civilStartTime
                          * @memberof google.devicesandservices.health.v4.DailyRollupDataPoint
@@ -26453,12 +35478,12 @@
     
                         /**
                          * DailyRollupDataPoint value.
-                         * @member {"steps"|"floors"|"heartRate"|"restingHeartRatePersonalRange"|"heartRateVariabilityPersonalRange"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData"|undefined} value
+                         * @member {"steps"|"floors"|"heartRate"|"restingHeartRatePersonalRange"|"heartRateVariabilityPersonalRange"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"nutritionLog"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose"|undefined} value
                          * @memberof google.devicesandservices.health.v4.DailyRollupDataPoint
                          * @instance
                          */
                         Object.defineProperty(DailyRollupDataPoint.prototype, "value", {
-                            get: $util.oneOfGetter($oneOfFields = ["steps", "floors", "heartRate", "restingHeartRatePersonalRange", "heartRateVariabilityPersonalRange", "weight", "altitude", "distance", "bodyFat", "totalCalories", "activeZoneMinutes", "sedentaryPeriod", "runVo2Max", "caloriesInHeartRateZone", "activityLevel", "hydrationLog", "timeInHeartRateZone", "activeMinutes", "swimLengthsData"]),
+                            get: $util.oneOfGetter($oneOfFields = ["steps", "floors", "heartRate", "restingHeartRatePersonalRange", "heartRateVariabilityPersonalRange", "weight", "altitude", "distance", "bodyFat", "totalCalories", "activeZoneMinutes", "sedentaryPeriod", "runVo2Max", "caloriesInHeartRateZone", "activityLevel", "nutritionLog", "hydrationLog", "timeInHeartRateZone", "activeMinutes", "swimLengthsData", "coreBodyTemperature", "activeEnergyBurned", "bloodGlucose"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -26520,6 +35545,8 @@
                                 $root.google.devicesandservices.health.v4.CaloriesInHeartRateZoneRollupValue.encode(message.caloriesInHeartRateZone, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.activityLevel != null && Object.hasOwnProperty.call(message, "activityLevel"))
                                 $root.google.devicesandservices.health.v4.ActivityLevelRollupValue.encode(message.activityLevel, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.nutritionLog != null && Object.hasOwnProperty.call(message, "nutritionLog"))
+                                $root.google.devicesandservices.health.v4.NutritionLogRollupValue.encode(message.nutritionLog, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             if (message.hydrationLog != null && Object.hasOwnProperty.call(message, "hydrationLog"))
                                 $root.google.devicesandservices.health.v4.HydrationLogRollupValue.encode(message.hydrationLog, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.timeInHeartRateZone != null && Object.hasOwnProperty.call(message, "timeInHeartRateZone"))
@@ -26528,6 +35555,12 @@
                                 $root.google.devicesandservices.health.v4.ActiveMinutesRollupValue.encode(message.activeMinutes, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             if (message.swimLengthsData != null && Object.hasOwnProperty.call(message, "swimLengthsData"))
                                 $root.google.devicesandservices.health.v4.SwimLengthsDataRollupValue.encode(message.swimLengthsData, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                            if (message.coreBodyTemperature != null && Object.hasOwnProperty.call(message, "coreBodyTemperature"))
+                                $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.encode(message.coreBodyTemperature, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                            if (message.activeEnergyBurned != null && Object.hasOwnProperty.call(message, "activeEnergyBurned"))
+                                $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.encode(message.activeEnergyBurned, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                            if (message.bloodGlucose != null && Object.hasOwnProperty.call(message, "bloodGlucose"))
+                                $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue.encode(message.bloodGlucose, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -26624,6 +35657,10 @@
                                         message.activityLevel = $root.google.devicesandservices.health.v4.ActivityLevelRollupValue.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 21: {
+                                        message.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 22: {
                                         message.hydrationLog = $root.google.devicesandservices.health.v4.HydrationLogRollupValue.decode(reader, reader.uint32());
                                         break;
@@ -26638,6 +35675,18 @@
                                     }
                                 case 25: {
                                         message.swimLengthsData = $root.google.devicesandservices.health.v4.SwimLengthsDataRollupValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 26: {
+                                        message.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 27: {
+                                        message.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 28: {
+                                        message.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -26832,6 +35881,16 @@
                                         return "activityLevel." + error;
                                 }
                             }
+                            if (message.nutritionLog != null && message.hasOwnProperty("nutritionLog")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.verify(message.nutritionLog);
+                                    if (error)
+                                        return "nutritionLog." + error;
+                                }
+                            }
                             if (message.hydrationLog != null && message.hasOwnProperty("hydrationLog")) {
                                 if (properties.value === 1)
                                     return "value: multiple values";
@@ -26870,6 +35929,36 @@
                                     var error = $root.google.devicesandservices.health.v4.SwimLengthsDataRollupValue.verify(message.swimLengthsData);
                                     if (error)
                                         return "swimLengthsData." + error;
+                                }
+                            }
+                            if (message.coreBodyTemperature != null && message.hasOwnProperty("coreBodyTemperature")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.verify(message.coreBodyTemperature);
+                                    if (error)
+                                        return "coreBodyTemperature." + error;
+                                }
+                            }
+                            if (message.activeEnergyBurned != null && message.hasOwnProperty("activeEnergyBurned")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.verify(message.activeEnergyBurned);
+                                    if (error)
+                                        return "activeEnergyBurned." + error;
+                                }
+                            }
+                            if (message.bloodGlucose != null && message.hasOwnProperty("bloodGlucose")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue.verify(message.bloodGlucose);
+                                    if (error)
+                                        return "bloodGlucose." + error;
                                 }
                             }
                             if (message.civilStartTime != null && message.hasOwnProperty("civilStartTime")) {
@@ -26972,6 +36061,11 @@
                                     throw TypeError(".google.devicesandservices.health.v4.DailyRollupDataPoint.activityLevel: object expected");
                                 message.activityLevel = $root.google.devicesandservices.health.v4.ActivityLevelRollupValue.fromObject(object.activityLevel);
                             }
+                            if (object.nutritionLog != null) {
+                                if (typeof object.nutritionLog !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DailyRollupDataPoint.nutritionLog: object expected");
+                                message.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.fromObject(object.nutritionLog);
+                            }
                             if (object.hydrationLog != null) {
                                 if (typeof object.hydrationLog !== "object")
                                     throw TypeError(".google.devicesandservices.health.v4.DailyRollupDataPoint.hydrationLog: object expected");
@@ -26991,6 +36085,21 @@
                                 if (typeof object.swimLengthsData !== "object")
                                     throw TypeError(".google.devicesandservices.health.v4.DailyRollupDataPoint.swimLengthsData: object expected");
                                 message.swimLengthsData = $root.google.devicesandservices.health.v4.SwimLengthsDataRollupValue.fromObject(object.swimLengthsData);
+                            }
+                            if (object.coreBodyTemperature != null) {
+                                if (typeof object.coreBodyTemperature !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DailyRollupDataPoint.coreBodyTemperature: object expected");
+                                message.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.fromObject(object.coreBodyTemperature);
+                            }
+                            if (object.activeEnergyBurned != null) {
+                                if (typeof object.activeEnergyBurned !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DailyRollupDataPoint.activeEnergyBurned: object expected");
+                                message.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.fromObject(object.activeEnergyBurned);
+                            }
+                            if (object.bloodGlucose != null) {
+                                if (typeof object.bloodGlucose !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.DailyRollupDataPoint.bloodGlucose: object expected");
+                                message.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue.fromObject(object.bloodGlucose);
                             }
                             if (object.civilStartTime != null) {
                                 if (typeof object.civilStartTime !== "object")
@@ -27101,6 +36210,11 @@
                                 if (options.oneofs)
                                     object.value = "activityLevel";
                             }
+                            if (message.nutritionLog != null && message.hasOwnProperty("nutritionLog")) {
+                                object.nutritionLog = $root.google.devicesandservices.health.v4.NutritionLogRollupValue.toObject(message.nutritionLog, options);
+                                if (options.oneofs)
+                                    object.value = "nutritionLog";
+                            }
                             if (message.hydrationLog != null && message.hasOwnProperty("hydrationLog")) {
                                 object.hydrationLog = $root.google.devicesandservices.health.v4.HydrationLogRollupValue.toObject(message.hydrationLog, options);
                                 if (options.oneofs)
@@ -27120,6 +36234,21 @@
                                 object.swimLengthsData = $root.google.devicesandservices.health.v4.SwimLengthsDataRollupValue.toObject(message.swimLengthsData, options);
                                 if (options.oneofs)
                                     object.value = "swimLengthsData";
+                            }
+                            if (message.coreBodyTemperature != null && message.hasOwnProperty("coreBodyTemperature")) {
+                                object.coreBodyTemperature = $root.google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.toObject(message.coreBodyTemperature, options);
+                                if (options.oneofs)
+                                    object.value = "coreBodyTemperature";
+                            }
+                            if (message.activeEnergyBurned != null && message.hasOwnProperty("activeEnergyBurned")) {
+                                object.activeEnergyBurned = $root.google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.toObject(message.activeEnergyBurned, options);
+                                if (options.oneofs)
+                                    object.value = "activeEnergyBurned";
+                            }
+                            if (message.bloodGlucose != null && message.hasOwnProperty("bloodGlucose")) {
+                                object.bloodGlucose = $root.google.devicesandservices.health.v4.BloodGlucoseRollupValue.toObject(message.bloodGlucose, options);
+                                if (options.oneofs)
+                                    object.value = "bloodGlucose";
                             }
                             return object;
                         };
@@ -32908,6 +42037,138 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|createSubscription}.
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @typedef CreateSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devicesandservices.health.v4.Subscription} [response] Subscription
+                         */
+    
+                        /**
+                         * Calls CreateSubscription.
+                         * @function createSubscription
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriptionRequest} request CreateSubscriptionRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.DataSubscriptionService.CreateSubscriptionCallback} callback Node-style callback called with the error, if any, and Subscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataSubscriptionService.prototype.createSubscription = function createSubscription(request, callback) {
+                            return this.rpcCall(createSubscription, $root.google.devicesandservices.health.v4.CreateSubscriptionRequest, $root.google.devicesandservices.health.v4.Subscription, request, callback);
+                        }, "name", { value: "CreateSubscription" });
+    
+                        /**
+                         * Calls CreateSubscription.
+                         * @function createSubscription
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriptionRequest} request CreateSubscriptionRequest message or plain object
+                         * @returns {Promise<google.devicesandservices.health.v4.Subscription>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|listSubscriptions}.
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @typedef ListSubscriptionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devicesandservices.health.v4.ListSubscriptionsResponse} [response] ListSubscriptionsResponse
+                         */
+    
+                        /**
+                         * Calls ListSubscriptions.
+                         * @function listSubscriptions
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IListSubscriptionsRequest} request ListSubscriptionsRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.DataSubscriptionService.ListSubscriptionsCallback} callback Node-style callback called with the error, if any, and ListSubscriptionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataSubscriptionService.prototype.listSubscriptions = function listSubscriptions(request, callback) {
+                            return this.rpcCall(listSubscriptions, $root.google.devicesandservices.health.v4.ListSubscriptionsRequest, $root.google.devicesandservices.health.v4.ListSubscriptionsResponse, request, callback);
+                        }, "name", { value: "ListSubscriptions" });
+    
+                        /**
+                         * Calls ListSubscriptions.
+                         * @function listSubscriptions
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IListSubscriptionsRequest} request ListSubscriptionsRequest message or plain object
+                         * @returns {Promise<google.devicesandservices.health.v4.ListSubscriptionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|updateSubscription}.
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @typedef UpdateSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devicesandservices.health.v4.Subscription} [response] Subscription
+                         */
+    
+                        /**
+                         * Calls UpdateSubscription.
+                         * @function updateSubscription
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriptionRequest} request UpdateSubscriptionRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.DataSubscriptionService.UpdateSubscriptionCallback} callback Node-style callback called with the error, if any, and Subscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataSubscriptionService.prototype.updateSubscription = function updateSubscription(request, callback) {
+                            return this.rpcCall(updateSubscription, $root.google.devicesandservices.health.v4.UpdateSubscriptionRequest, $root.google.devicesandservices.health.v4.Subscription, request, callback);
+                        }, "name", { value: "UpdateSubscription" });
+    
+                        /**
+                         * Calls UpdateSubscription.
+                         * @function updateSubscription
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriptionRequest} request UpdateSubscriptionRequest message or plain object
+                         * @returns {Promise<google.devicesandservices.health.v4.Subscription>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|deleteSubscription}.
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @typedef DeleteSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteSubscription.
+                         * @function deleteSubscription
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriptionRequest} request DeleteSubscriptionRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.DataSubscriptionService.DeleteSubscriptionCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataSubscriptionService.prototype.deleteSubscription = function deleteSubscription(request, callback) {
+                            return this.rpcCall(deleteSubscription, $root.google.devicesandservices.health.v4.DeleteSubscriptionRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteSubscription" });
+    
+                        /**
+                         * Calls DeleteSubscription.
+                         * @function deleteSubscription
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriptionRequest} request DeleteSubscriptionRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
                         return DataSubscriptionService;
                     })();
     
@@ -34162,6 +43423,1232 @@
                         return DeleteSubscriberRequest;
                     })();
     
+                    v4.CreateSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSubscriptionRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface ICreateSubscriptionRequest
+                         * @property {string|null} [parent] CreateSubscriptionRequest parent
+                         * @property {string|null} [subscriptionId] CreateSubscriptionRequest subscriptionId
+                         * @property {google.devicesandservices.health.v4.ICreateSubscriptionPayload|null} [subscription] CreateSubscriptionRequest subscription
+                         */
+    
+                        /**
+                         * Constructs a new CreateSubscriptionRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a CreateSubscriptionRequest.
+                         * @implements ICreateSubscriptionRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function CreateSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSubscriptionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @instance
+                         */
+                        CreateSubscriptionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSubscriptionRequest subscriptionId.
+                         * @member {string} subscriptionId
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @instance
+                         */
+                        CreateSubscriptionRequest.prototype.subscriptionId = "";
+    
+                        /**
+                         * CreateSubscriptionRequest subscription.
+                         * @member {google.devicesandservices.health.v4.ICreateSubscriptionPayload|null|undefined} subscription
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @instance
+                         */
+                        CreateSubscriptionRequest.prototype.subscription = null;
+    
+                        /**
+                         * Creates a new CreateSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriptionRequest} CreateSubscriptionRequest instance
+                         */
+                        CreateSubscriptionRequest.create = function create(properties) {
+                            return new CreateSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubscriptionRequest message. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriptionRequest} message CreateSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.subscriptionId != null && Object.hasOwnProperty.call(message, "subscriptionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.subscriptionId);
+                            if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
+                                $root.google.devicesandservices.health.v4.CreateSubscriptionPayload.encode(message.subscription, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubscriptionRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriptionRequest} message CreateSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriptionRequest} CreateSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubscriptionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.CreateSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.subscriptionId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.subscription = $root.google.devicesandservices.health.v4.CreateSubscriptionPayload.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriptionRequest} CreateSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSubscriptionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.subscriptionId != null && message.hasOwnProperty("subscriptionId"))
+                                if (!$util.isString(message.subscriptionId))
+                                    return "subscriptionId: string expected";
+                            if (message.subscription != null && message.hasOwnProperty("subscription")) {
+                                var error = $root.google.devicesandservices.health.v4.CreateSubscriptionPayload.verify(message.subscription);
+                                if (error)
+                                    return "subscription." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriptionRequest} CreateSubscriptionRequest
+                         */
+                        CreateSubscriptionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.CreateSubscriptionRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.CreateSubscriptionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.subscriptionId != null)
+                                message.subscriptionId = String(object.subscriptionId);
+                            if (object.subscription != null) {
+                                if (typeof object.subscription !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.CreateSubscriptionRequest.subscription: object expected");
+                                message.subscription = $root.google.devicesandservices.health.v4.CreateSubscriptionPayload.fromObject(object.subscription);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.CreateSubscriptionRequest} message CreateSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.subscriptionId = "";
+                                object.subscription = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.subscriptionId != null && message.hasOwnProperty("subscriptionId"))
+                                object.subscriptionId = message.subscriptionId;
+                            if (message.subscription != null && message.hasOwnProperty("subscription"))
+                                object.subscription = $root.google.devicesandservices.health.v4.CreateSubscriptionPayload.toObject(message.subscription, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.CreateSubscriptionRequest";
+                        };
+    
+                        return CreateSubscriptionRequest;
+                    })();
+    
+                    v4.ListSubscriptionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSubscriptionsRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IListSubscriptionsRequest
+                         * @property {string|null} [parent] ListSubscriptionsRequest parent
+                         * @property {string|null} [filter] ListSubscriptionsRequest filter
+                         * @property {number|null} [pageSize] ListSubscriptionsRequest pageSize
+                         * @property {string|null} [pageToken] ListSubscriptionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSubscriptionsRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a ListSubscriptionsRequest.
+                         * @implements IListSubscriptionsRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IListSubscriptionsRequest=} [properties] Properties to set
+                         */
+                        function ListSubscriptionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSubscriptionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSubscriptionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSubscriptionsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSubscriptionsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListSubscriptionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSubscriptionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSubscriptionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSubscriptionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSubscriptionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscriptionsRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.ListSubscriptionsRequest} ListSubscriptionsRequest instance
+                         */
+                        ListSubscriptionsRequest.create = function create(properties) {
+                            return new ListSubscriptionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscriptionsRequest message. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscriptionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscriptionsRequest} message ListSubscriptionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscriptionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscriptionsRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscriptionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscriptionsRequest} message ListSubscriptionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscriptionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSubscriptionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.ListSubscriptionsRequest} ListSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscriptionsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.ListSubscriptionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSubscriptionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.ListSubscriptionsRequest} ListSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscriptionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSubscriptionsRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSubscriptionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.ListSubscriptionsRequest} ListSubscriptionsRequest
+                         */
+                        ListSubscriptionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.ListSubscriptionsRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.ListSubscriptionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSubscriptionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ListSubscriptionsRequest} message ListSubscriptionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSubscriptionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSubscriptionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSubscriptionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSubscriptionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSubscriptionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.ListSubscriptionsRequest";
+                        };
+    
+                        return ListSubscriptionsRequest;
+                    })();
+    
+                    v4.ListSubscriptionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSubscriptionsResponse.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IListSubscriptionsResponse
+                         * @property {Array.<google.devicesandservices.health.v4.ISubscription>|null} [subscriptions] ListSubscriptionsResponse subscriptions
+                         * @property {string|null} [nextPageToken] ListSubscriptionsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSubscriptionsResponse.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a ListSubscriptionsResponse.
+                         * @implements IListSubscriptionsResponse
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IListSubscriptionsResponse=} [properties] Properties to set
+                         */
+                        function ListSubscriptionsResponse(properties) {
+                            this.subscriptions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSubscriptionsResponse subscriptions.
+                         * @member {Array.<google.devicesandservices.health.v4.ISubscription>} subscriptions
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @instance
+                         */
+                        ListSubscriptionsResponse.prototype.subscriptions = $util.emptyArray;
+    
+                        /**
+                         * ListSubscriptionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @instance
+                         */
+                        ListSubscriptionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSubscriptionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscriptionsResponse=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.ListSubscriptionsResponse} ListSubscriptionsResponse instance
+                         */
+                        ListSubscriptionsResponse.create = function create(properties) {
+                            return new ListSubscriptionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscriptionsResponse message. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscriptionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscriptionsResponse} message ListSubscriptionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscriptionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.subscriptions != null && message.subscriptions.length)
+                                for (var i = 0; i < message.subscriptions.length; ++i)
+                                    $root.google.devicesandservices.health.v4.Subscription.encode(message.subscriptions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscriptionsResponse message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscriptionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscriptionsResponse} message ListSubscriptionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscriptionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSubscriptionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.ListSubscriptionsResponse} ListSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscriptionsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.ListSubscriptionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.subscriptions && message.subscriptions.length))
+                                            message.subscriptions = [];
+                                        message.subscriptions.push($root.google.devicesandservices.health.v4.Subscription.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSubscriptionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.ListSubscriptionsResponse} ListSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscriptionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSubscriptionsResponse message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSubscriptionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.subscriptions != null && message.hasOwnProperty("subscriptions")) {
+                                if (!Array.isArray(message.subscriptions))
+                                    return "subscriptions: array expected";
+                                for (var i = 0; i < message.subscriptions.length; ++i) {
+                                    var error = $root.google.devicesandservices.health.v4.Subscription.verify(message.subscriptions[i]);
+                                    if (error)
+                                        return "subscriptions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.ListSubscriptionsResponse} ListSubscriptionsResponse
+                         */
+                        ListSubscriptionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.ListSubscriptionsResponse)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.ListSubscriptionsResponse();
+                            if (object.subscriptions) {
+                                if (!Array.isArray(object.subscriptions))
+                                    throw TypeError(".google.devicesandservices.health.v4.ListSubscriptionsResponse.subscriptions: array expected");
+                                message.subscriptions = [];
+                                for (var i = 0; i < object.subscriptions.length; ++i) {
+                                    if (typeof object.subscriptions[i] !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.ListSubscriptionsResponse.subscriptions: object expected");
+                                    message.subscriptions[i] = $root.google.devicesandservices.health.v4.Subscription.fromObject(object.subscriptions[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSubscriptionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ListSubscriptionsResponse} message ListSubscriptionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSubscriptionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.subscriptions = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.subscriptions && message.subscriptions.length) {
+                                object.subscriptions = [];
+                                for (var j = 0; j < message.subscriptions.length; ++j)
+                                    object.subscriptions[j] = $root.google.devicesandservices.health.v4.Subscription.toObject(message.subscriptions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSubscriptionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSubscriptionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSubscriptionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.ListSubscriptionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSubscriptionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.ListSubscriptionsResponse";
+                        };
+    
+                        return ListSubscriptionsResponse;
+                    })();
+    
+                    v4.UpdateSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSubscriptionRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IUpdateSubscriptionRequest
+                         * @property {google.devicesandservices.health.v4.ISubscription|null} [subscription] UpdateSubscriptionRequest subscription
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSubscriptionRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSubscriptionRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents an UpdateSubscriptionRequest.
+                         * @implements IUpdateSubscriptionRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function UpdateSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSubscriptionRequest subscription.
+                         * @member {google.devicesandservices.health.v4.ISubscription|null|undefined} subscription
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @instance
+                         */
+                        UpdateSubscriptionRequest.prototype.subscription = null;
+    
+                        /**
+                         * UpdateSubscriptionRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @instance
+                         */
+                        UpdateSubscriptionRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriptionRequest} UpdateSubscriptionRequest instance
+                         */
+                        UpdateSubscriptionRequest.create = function create(properties) {
+                            return new UpdateSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSubscriptionRequest message. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriptionRequest} message UpdateSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
+                                $root.google.devicesandservices.health.v4.Subscription.encode(message.subscription, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSubscriptionRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriptionRequest} message UpdateSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriptionRequest} UpdateSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSubscriptionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.UpdateSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.subscription = $root.google.devicesandservices.health.v4.Subscription.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriptionRequest} UpdateSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSubscriptionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.subscription != null && message.hasOwnProperty("subscription")) {
+                                var error = $root.google.devicesandservices.health.v4.Subscription.verify(message.subscription);
+                                if (error)
+                                    return "subscription." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriptionRequest} UpdateSubscriptionRequest
+                         */
+                        UpdateSubscriptionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.UpdateSubscriptionRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.UpdateSubscriptionRequest();
+                            if (object.subscription != null) {
+                                if (typeof object.subscription !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.UpdateSubscriptionRequest.subscription: object expected");
+                                message.subscription = $root.google.devicesandservices.health.v4.Subscription.fromObject(object.subscription);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.UpdateSubscriptionRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.UpdateSubscriptionRequest} message UpdateSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.subscription = null;
+                                object.updateMask = null;
+                            }
+                            if (message.subscription != null && message.hasOwnProperty("subscription"))
+                                object.subscription = $root.google.devicesandservices.health.v4.Subscription.toObject(message.subscription, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.UpdateSubscriptionRequest";
+                        };
+    
+                        return UpdateSubscriptionRequest;
+                    })();
+    
+                    v4.DeleteSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSubscriptionRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IDeleteSubscriptionRequest
+                         * @property {string|null} [name] DeleteSubscriptionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSubscriptionRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a DeleteSubscriptionRequest.
+                         * @implements IDeleteSubscriptionRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function DeleteSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSubscriptionRequest name.
+                         * @member {string} name
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @instance
+                         */
+                        DeleteSubscriptionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriptionRequest} DeleteSubscriptionRequest instance
+                         */
+                        DeleteSubscriptionRequest.create = function create(properties) {
+                            return new DeleteSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSubscriptionRequest message. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriptionRequest} message DeleteSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSubscriptionRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriptionRequest} message DeleteSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriptionRequest} DeleteSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSubscriptionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.DeleteSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriptionRequest} DeleteSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSubscriptionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriptionRequest} DeleteSubscriptionRequest
+                         */
+                        DeleteSubscriptionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.DeleteSubscriptionRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.DeleteSubscriptionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.DeleteSubscriptionRequest} message DeleteSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.DeleteSubscriptionRequest";
+                        };
+    
+                        return DeleteSubscriptionRequest;
+                    })();
+    
                     v4.Subscriber = (function() {
     
                         /**
@@ -34588,6 +45075,275 @@
                         })();
     
                         return Subscriber;
+                    })();
+    
+                    v4.Subscription = (function() {
+    
+                        /**
+                         * Properties of a Subscription.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface ISubscription
+                         * @property {string|null} [name] Subscription name
+                         * @property {Array.<string>|null} [dataTypes] Subscription dataTypes
+                         * @property {string|null} [user] Subscription user
+                         */
+    
+                        /**
+                         * Constructs a new Subscription.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a Subscription.
+                         * @implements ISubscription
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.ISubscription=} [properties] Properties to set
+                         */
+                        function Subscription(properties) {
+                            this.dataTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Subscription name.
+                         * @member {string} name
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @instance
+                         */
+                        Subscription.prototype.name = "";
+    
+                        /**
+                         * Subscription dataTypes.
+                         * @member {Array.<string>} dataTypes
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @instance
+                         */
+                        Subscription.prototype.dataTypes = $util.emptyArray;
+    
+                        /**
+                         * Subscription user.
+                         * @member {string} user
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @instance
+                         */
+                        Subscription.prototype.user = "";
+    
+                        /**
+                         * Creates a new Subscription instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ISubscription=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.Subscription} Subscription instance
+                         */
+                        Subscription.create = function create(properties) {
+                            return new Subscription(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Subscription message. Does not implicitly {@link google.devicesandservices.health.v4.Subscription.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ISubscription} message Subscription message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Subscription.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.dataTypes != null && message.dataTypes.length)
+                                for (var i = 0; i < message.dataTypes.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataTypes[i]);
+                            if (message.user != null && Object.hasOwnProperty.call(message, "user"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.user);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Subscription message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Subscription.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ISubscription} message Subscription message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Subscription.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Subscription message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.Subscription} Subscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Subscription.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.Subscription();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.dataTypes && message.dataTypes.length))
+                                            message.dataTypes = [];
+                                        message.dataTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.user = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Subscription message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.Subscription} Subscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Subscription.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Subscription message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Subscription.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.dataTypes != null && message.hasOwnProperty("dataTypes")) {
+                                if (!Array.isArray(message.dataTypes))
+                                    return "dataTypes: array expected";
+                                for (var i = 0; i < message.dataTypes.length; ++i)
+                                    if (!$util.isString(message.dataTypes[i]))
+                                        return "dataTypes: string[] expected";
+                            }
+                            if (message.user != null && message.hasOwnProperty("user"))
+                                if (!$util.isString(message.user))
+                                    return "user: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Subscription message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.Subscription} Subscription
+                         */
+                        Subscription.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.Subscription)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.Subscription();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.dataTypes) {
+                                if (!Array.isArray(object.dataTypes))
+                                    throw TypeError(".google.devicesandservices.health.v4.Subscription.dataTypes: array expected");
+                                message.dataTypes = [];
+                                for (var i = 0; i < object.dataTypes.length; ++i)
+                                    message.dataTypes[i] = String(object.dataTypes[i]);
+                            }
+                            if (object.user != null)
+                                message.user = String(object.user);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Subscription message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @static
+                         * @param {google.devicesandservices.health.v4.Subscription} message Subscription
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Subscription.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataTypes = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.user = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.dataTypes && message.dataTypes.length) {
+                                object.dataTypes = [];
+                                for (var j = 0; j < message.dataTypes.length; ++j)
+                                    object.dataTypes[j] = message.dataTypes[j];
+                            }
+                            if (message.user != null && message.hasOwnProperty("user"))
+                                object.user = message.user;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Subscription to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Subscription.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Subscription
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.Subscription
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Subscription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.Subscription";
+                        };
+    
+                        return Subscription;
                     })();
     
                     v4.SubscriberConfig = (function() {
@@ -35383,6 +46139,251 @@
                         return CreateSubscriberPayload;
                     })();
     
+                    v4.CreateSubscriptionPayload = (function() {
+    
+                        /**
+                         * Properties of a CreateSubscriptionPayload.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface ICreateSubscriptionPayload
+                         * @property {Array.<string>|null} [dataTypes] CreateSubscriptionPayload dataTypes
+                         * @property {string|null} [user] CreateSubscriptionPayload user
+                         */
+    
+                        /**
+                         * Constructs a new CreateSubscriptionPayload.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a CreateSubscriptionPayload.
+                         * @implements ICreateSubscriptionPayload
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriptionPayload=} [properties] Properties to set
+                         */
+                        function CreateSubscriptionPayload(properties) {
+                            this.dataTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSubscriptionPayload dataTypes.
+                         * @member {Array.<string>} dataTypes
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @instance
+                         */
+                        CreateSubscriptionPayload.prototype.dataTypes = $util.emptyArray;
+    
+                        /**
+                         * CreateSubscriptionPayload user.
+                         * @member {string} user
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @instance
+                         */
+                        CreateSubscriptionPayload.prototype.user = "";
+    
+                        /**
+                         * Creates a new CreateSubscriptionPayload instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriptionPayload=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriptionPayload} CreateSubscriptionPayload instance
+                         */
+                        CreateSubscriptionPayload.create = function create(properties) {
+                            return new CreateSubscriptionPayload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubscriptionPayload message. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriptionPayload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriptionPayload} message CreateSubscriptionPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubscriptionPayload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataTypes != null && message.dataTypes.length)
+                                for (var i = 0; i < message.dataTypes.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataTypes[i]);
+                            if (message.user != null && Object.hasOwnProperty.call(message, "user"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.user);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubscriptionPayload message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriptionPayload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriptionPayload} message CreateSubscriptionPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubscriptionPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSubscriptionPayload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriptionPayload} CreateSubscriptionPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubscriptionPayload.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.CreateSubscriptionPayload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dataTypes && message.dataTypes.length))
+                                            message.dataTypes = [];
+                                        message.dataTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.user = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSubscriptionPayload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriptionPayload} CreateSubscriptionPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubscriptionPayload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSubscriptionPayload message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSubscriptionPayload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataTypes != null && message.hasOwnProperty("dataTypes")) {
+                                if (!Array.isArray(message.dataTypes))
+                                    return "dataTypes: array expected";
+                                for (var i = 0; i < message.dataTypes.length; ++i)
+                                    if (!$util.isString(message.dataTypes[i]))
+                                        return "dataTypes: string[] expected";
+                            }
+                            if (message.user != null && message.hasOwnProperty("user"))
+                                if (!$util.isString(message.user))
+                                    return "user: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSubscriptionPayload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriptionPayload} CreateSubscriptionPayload
+                         */
+                        CreateSubscriptionPayload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.CreateSubscriptionPayload)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.CreateSubscriptionPayload();
+                            if (object.dataTypes) {
+                                if (!Array.isArray(object.dataTypes))
+                                    throw TypeError(".google.devicesandservices.health.v4.CreateSubscriptionPayload.dataTypes: array expected");
+                                message.dataTypes = [];
+                                for (var i = 0; i < object.dataTypes.length; ++i)
+                                    message.dataTypes[i] = String(object.dataTypes[i]);
+                            }
+                            if (object.user != null)
+                                message.user = String(object.user);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSubscriptionPayload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @static
+                         * @param {google.devicesandservices.health.v4.CreateSubscriptionPayload} message CreateSubscriptionPayload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSubscriptionPayload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataTypes = [];
+                            if (options.defaults)
+                                object.user = "";
+                            if (message.dataTypes && message.dataTypes.length) {
+                                object.dataTypes = [];
+                                for (var j = 0; j < message.dataTypes.length; ++j)
+                                    object.dataTypes[j] = message.dataTypes[j];
+                            }
+                            if (message.user != null && message.hasOwnProperty("user"))
+                                object.user = message.user;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSubscriptionPayload to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSubscriptionPayload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSubscriptionPayload
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriptionPayload
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSubscriptionPayload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.CreateSubscriptionPayload";
+                        };
+    
+                        return CreateSubscriptionPayload;
+                    })();
+    
                     v4.CreateSubscriberMetadata = (function() {
     
                         /**
@@ -36111,7 +47112,311 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.HealthProfileService|getIrnProfile}.
+                         * @memberof google.devicesandservices.health.v4.HealthProfileService
+                         * @typedef GetIrnProfileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devicesandservices.health.v4.IrnProfile} [response] IrnProfile
+                         */
+    
+                        /**
+                         * Calls GetIrnProfile.
+                         * @function getIrnProfile
+                         * @memberof google.devicesandservices.health.v4.HealthProfileService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IGetIrnProfileRequest} request GetIrnProfileRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.HealthProfileService.GetIrnProfileCallback} callback Node-style callback called with the error, if any, and IrnProfile
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HealthProfileService.prototype.getIrnProfile = function getIrnProfile(request, callback) {
+                            return this.rpcCall(getIrnProfile, $root.google.devicesandservices.health.v4.GetIrnProfileRequest, $root.google.devicesandservices.health.v4.IrnProfile, request, callback);
+                        }, "name", { value: "GetIrnProfile" });
+    
+                        /**
+                         * Calls GetIrnProfile.
+                         * @function getIrnProfile
+                         * @memberof google.devicesandservices.health.v4.HealthProfileService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IGetIrnProfileRequest} request GetIrnProfileRequest message or plain object
+                         * @returns {Promise<google.devicesandservices.health.v4.IrnProfile>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.HealthProfileService|getPairedDevice}.
+                         * @memberof google.devicesandservices.health.v4.HealthProfileService
+                         * @typedef GetPairedDeviceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devicesandservices.health.v4.PairedDevice} [response] PairedDevice
+                         */
+    
+                        /**
+                         * Calls GetPairedDevice.
+                         * @function getPairedDevice
+                         * @memberof google.devicesandservices.health.v4.HealthProfileService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IGetPairedDeviceRequest} request GetPairedDeviceRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.HealthProfileService.GetPairedDeviceCallback} callback Node-style callback called with the error, if any, and PairedDevice
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HealthProfileService.prototype.getPairedDevice = function getPairedDevice(request, callback) {
+                            return this.rpcCall(getPairedDevice, $root.google.devicesandservices.health.v4.GetPairedDeviceRequest, $root.google.devicesandservices.health.v4.PairedDevice, request, callback);
+                        }, "name", { value: "GetPairedDevice" });
+    
+                        /**
+                         * Calls GetPairedDevice.
+                         * @function getPairedDevice
+                         * @memberof google.devicesandservices.health.v4.HealthProfileService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IGetPairedDeviceRequest} request GetPairedDeviceRequest message or plain object
+                         * @returns {Promise<google.devicesandservices.health.v4.PairedDevice>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.HealthProfileService|listPairedDevices}.
+                         * @memberof google.devicesandservices.health.v4.HealthProfileService
+                         * @typedef ListPairedDevicesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devicesandservices.health.v4.ListPairedDevicesResponse} [response] ListPairedDevicesResponse
+                         */
+    
+                        /**
+                         * Calls ListPairedDevices.
+                         * @function listPairedDevices
+                         * @memberof google.devicesandservices.health.v4.HealthProfileService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IListPairedDevicesRequest} request ListPairedDevicesRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.HealthProfileService.ListPairedDevicesCallback} callback Node-style callback called with the error, if any, and ListPairedDevicesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HealthProfileService.prototype.listPairedDevices = function listPairedDevices(request, callback) {
+                            return this.rpcCall(listPairedDevices, $root.google.devicesandservices.health.v4.ListPairedDevicesRequest, $root.google.devicesandservices.health.v4.ListPairedDevicesResponse, request, callback);
+                        }, "name", { value: "ListPairedDevices" });
+    
+                        /**
+                         * Calls ListPairedDevices.
+                         * @function listPairedDevices
+                         * @memberof google.devicesandservices.health.v4.HealthProfileService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IListPairedDevicesRequest} request ListPairedDevicesRequest message or plain object
+                         * @returns {Promise<google.devicesandservices.health.v4.ListPairedDevicesResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return HealthProfileService;
+                    })();
+    
+                    v4.User = (function() {
+    
+                        /**
+                         * Properties of a User.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IUser
+                         * @property {string|null} [name] User name
+                         */
+    
+                        /**
+                         * Constructs a new User.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a User.
+                         * @implements IUser
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IUser=} [properties] Properties to set
+                         */
+                        function User(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * User name.
+                         * @member {string} name
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @instance
+                         */
+                        User.prototype.name = "";
+    
+                        /**
+                         * Creates a new User instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUser=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.User} User instance
+                         */
+                        User.create = function create(properties) {
+                            return new User(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified User message. Does not implicitly {@link google.devicesandservices.health.v4.User.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUser} message User message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        User.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified User message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.User.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUser} message User message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        User.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a User message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.User} User
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        User.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.User();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a User message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.User} User
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        User.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a User message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        User.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a User message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.User} User
+                         */
+                        User.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.User)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.User();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a User message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @static
+                         * @param {google.devicesandservices.health.v4.User} message User
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        User.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this User to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        User.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for User
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.User
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        User.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.User";
+                        };
+    
+                        return User;
                     })();
     
                     v4.Profile = (function() {
@@ -36507,6 +47812,715 @@
                         return Profile;
                     })();
     
+                    v4.PairedDevice = (function() {
+    
+                        /**
+                         * Properties of a PairedDevice.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IPairedDevice
+                         * @property {string|null} [name] PairedDevice name
+                         * @property {google.devicesandservices.health.v4.PairedDevice.DeviceType|null} [deviceType] PairedDevice deviceType
+                         * @property {string|null} [batteryStatus] PairedDevice batteryStatus
+                         * @property {number|null} [batteryLevel] PairedDevice batteryLevel
+                         * @property {google.protobuf.ITimestamp|null} [lastSyncTime] PairedDevice lastSyncTime
+                         * @property {string|null} [deviceVersion] PairedDevice deviceVersion
+                         * @property {string|null} [macAddress] PairedDevice macAddress
+                         * @property {Array.<string>|null} [features] PairedDevice features
+                         */
+    
+                        /**
+                         * Constructs a new PairedDevice.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a PairedDevice.
+                         * @implements IPairedDevice
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IPairedDevice=} [properties] Properties to set
+                         */
+                        function PairedDevice(properties) {
+                            this.features = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PairedDevice name.
+                         * @member {string} name
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @instance
+                         */
+                        PairedDevice.prototype.name = "";
+    
+                        /**
+                         * PairedDevice deviceType.
+                         * @member {google.devicesandservices.health.v4.PairedDevice.DeviceType} deviceType
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @instance
+                         */
+                        PairedDevice.prototype.deviceType = 0;
+    
+                        /**
+                         * PairedDevice batteryStatus.
+                         * @member {string} batteryStatus
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @instance
+                         */
+                        PairedDevice.prototype.batteryStatus = "";
+    
+                        /**
+                         * PairedDevice batteryLevel.
+                         * @member {number} batteryLevel
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @instance
+                         */
+                        PairedDevice.prototype.batteryLevel = 0;
+    
+                        /**
+                         * PairedDevice lastSyncTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastSyncTime
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @instance
+                         */
+                        PairedDevice.prototype.lastSyncTime = null;
+    
+                        /**
+                         * PairedDevice deviceVersion.
+                         * @member {string} deviceVersion
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @instance
+                         */
+                        PairedDevice.prototype.deviceVersion = "";
+    
+                        /**
+                         * PairedDevice macAddress.
+                         * @member {string} macAddress
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @instance
+                         */
+                        PairedDevice.prototype.macAddress = "";
+    
+                        /**
+                         * PairedDevice features.
+                         * @member {Array.<string>} features
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @instance
+                         */
+                        PairedDevice.prototype.features = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PairedDevice instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IPairedDevice=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.PairedDevice} PairedDevice instance
+                         */
+                        PairedDevice.create = function create(properties) {
+                            return new PairedDevice(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PairedDevice message. Does not implicitly {@link google.devicesandservices.health.v4.PairedDevice.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IPairedDevice} message PairedDevice message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PairedDevice.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.deviceType != null && Object.hasOwnProperty.call(message, "deviceType"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.deviceType);
+                            if (message.batteryStatus != null && Object.hasOwnProperty.call(message, "batteryStatus"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.batteryStatus);
+                            if (message.batteryLevel != null && Object.hasOwnProperty.call(message, "batteryLevel"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.batteryLevel);
+                            if (message.lastSyncTime != null && Object.hasOwnProperty.call(message, "lastSyncTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastSyncTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.deviceVersion != null && Object.hasOwnProperty.call(message, "deviceVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.deviceVersion);
+                            if (message.macAddress != null && Object.hasOwnProperty.call(message, "macAddress"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.macAddress);
+                            if (message.features != null && message.features.length)
+                                for (var i = 0; i < message.features.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.features[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PairedDevice message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.PairedDevice.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IPairedDevice} message PairedDevice message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PairedDevice.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PairedDevice message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.PairedDevice} PairedDevice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PairedDevice.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.PairedDevice();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.deviceType = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.batteryStatus = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.batteryLevel = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.lastSyncTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.deviceVersion = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.macAddress = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.features && message.features.length))
+                                            message.features = [];
+                                        message.features.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PairedDevice message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.PairedDevice} PairedDevice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PairedDevice.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PairedDevice message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PairedDevice.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.deviceType != null && message.hasOwnProperty("deviceType"))
+                                switch (message.deviceType) {
+                                default:
+                                    return "deviceType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.batteryStatus != null && message.hasOwnProperty("batteryStatus"))
+                                if (!$util.isString(message.batteryStatus))
+                                    return "batteryStatus: string expected";
+                            if (message.batteryLevel != null && message.hasOwnProperty("batteryLevel"))
+                                if (!$util.isInteger(message.batteryLevel))
+                                    return "batteryLevel: integer expected";
+                            if (message.lastSyncTime != null && message.hasOwnProperty("lastSyncTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastSyncTime);
+                                if (error)
+                                    return "lastSyncTime." + error;
+                            }
+                            if (message.deviceVersion != null && message.hasOwnProperty("deviceVersion"))
+                                if (!$util.isString(message.deviceVersion))
+                                    return "deviceVersion: string expected";
+                            if (message.macAddress != null && message.hasOwnProperty("macAddress"))
+                                if (!$util.isString(message.macAddress))
+                                    return "macAddress: string expected";
+                            if (message.features != null && message.hasOwnProperty("features")) {
+                                if (!Array.isArray(message.features))
+                                    return "features: array expected";
+                                for (var i = 0; i < message.features.length; ++i)
+                                    if (!$util.isString(message.features[i]))
+                                        return "features: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PairedDevice message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.PairedDevice} PairedDevice
+                         */
+                        PairedDevice.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.PairedDevice)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.PairedDevice();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.deviceType) {
+                            default:
+                                if (typeof object.deviceType === "number") {
+                                    message.deviceType = object.deviceType;
+                                    break;
+                                }
+                                break;
+                            case "DEVICE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.deviceType = 0;
+                                break;
+                            case "TRACKER":
+                            case 1:
+                                message.deviceType = 1;
+                                break;
+                            case "SCALE":
+                            case 2:
+                                message.deviceType = 2;
+                                break;
+                            }
+                            if (object.batteryStatus != null)
+                                message.batteryStatus = String(object.batteryStatus);
+                            if (object.batteryLevel != null)
+                                message.batteryLevel = object.batteryLevel | 0;
+                            if (object.lastSyncTime != null) {
+                                if (typeof object.lastSyncTime !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.PairedDevice.lastSyncTime: object expected");
+                                message.lastSyncTime = $root.google.protobuf.Timestamp.fromObject(object.lastSyncTime);
+                            }
+                            if (object.deviceVersion != null)
+                                message.deviceVersion = String(object.deviceVersion);
+                            if (object.macAddress != null)
+                                message.macAddress = String(object.macAddress);
+                            if (object.features) {
+                                if (!Array.isArray(object.features))
+                                    throw TypeError(".google.devicesandservices.health.v4.PairedDevice.features: array expected");
+                                message.features = [];
+                                for (var i = 0; i < object.features.length; ++i)
+                                    message.features[i] = String(object.features[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PairedDevice message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @static
+                         * @param {google.devicesandservices.health.v4.PairedDevice} message PairedDevice
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PairedDevice.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.features = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.deviceType = options.enums === String ? "DEVICE_TYPE_UNSPECIFIED" : 0;
+                                object.batteryStatus = "";
+                                object.batteryLevel = 0;
+                                object.lastSyncTime = null;
+                                object.deviceVersion = "";
+                                object.macAddress = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.deviceType != null && message.hasOwnProperty("deviceType"))
+                                object.deviceType = options.enums === String ? $root.google.devicesandservices.health.v4.PairedDevice.DeviceType[message.deviceType] === undefined ? message.deviceType : $root.google.devicesandservices.health.v4.PairedDevice.DeviceType[message.deviceType] : message.deviceType;
+                            if (message.batteryStatus != null && message.hasOwnProperty("batteryStatus"))
+                                object.batteryStatus = message.batteryStatus;
+                            if (message.batteryLevel != null && message.hasOwnProperty("batteryLevel"))
+                                object.batteryLevel = message.batteryLevel;
+                            if (message.lastSyncTime != null && message.hasOwnProperty("lastSyncTime"))
+                                object.lastSyncTime = $root.google.protobuf.Timestamp.toObject(message.lastSyncTime, options);
+                            if (message.deviceVersion != null && message.hasOwnProperty("deviceVersion"))
+                                object.deviceVersion = message.deviceVersion;
+                            if (message.macAddress != null && message.hasOwnProperty("macAddress"))
+                                object.macAddress = message.macAddress;
+                            if (message.features && message.features.length) {
+                                object.features = [];
+                                for (var j = 0; j < message.features.length; ++j)
+                                    object.features[j] = message.features[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PairedDevice to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PairedDevice.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PairedDevice
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.PairedDevice
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PairedDevice.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.PairedDevice";
+                        };
+    
+                        /**
+                         * DeviceType enum.
+                         * @name google.devicesandservices.health.v4.PairedDevice.DeviceType
+                         * @enum {number}
+                         * @property {number} DEVICE_TYPE_UNSPECIFIED=0 DEVICE_TYPE_UNSPECIFIED value
+                         * @property {number} TRACKER=1 TRACKER value
+                         * @property {number} SCALE=2 SCALE value
+                         */
+                        PairedDevice.DeviceType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DEVICE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TRACKER"] = 1;
+                            values[valuesById[2] = "SCALE"] = 2;
+                            return values;
+                        })();
+    
+                        return PairedDevice;
+                    })();
+    
+                    v4.IrnProfile = (function() {
+    
+                        /**
+                         * Properties of an IrnProfile.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IIrnProfile
+                         * @property {string|null} [name] IrnProfile name
+                         * @property {boolean|null} [onboardingStatus] IrnProfile onboardingStatus
+                         * @property {boolean|null} [enrollmentStatus] IrnProfile enrollmentStatus
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] IrnProfile updateTime
+                         */
+    
+                        /**
+                         * Constructs a new IrnProfile.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents an IrnProfile.
+                         * @implements IIrnProfile
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IIrnProfile=} [properties] Properties to set
+                         */
+                        function IrnProfile(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IrnProfile name.
+                         * @member {string} name
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @instance
+                         */
+                        IrnProfile.prototype.name = "";
+    
+                        /**
+                         * IrnProfile onboardingStatus.
+                         * @member {boolean} onboardingStatus
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @instance
+                         */
+                        IrnProfile.prototype.onboardingStatus = false;
+    
+                        /**
+                         * IrnProfile enrollmentStatus.
+                         * @member {boolean} enrollmentStatus
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @instance
+                         */
+                        IrnProfile.prototype.enrollmentStatus = false;
+    
+                        /**
+                         * IrnProfile updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @instance
+                         */
+                        IrnProfile.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new IrnProfile instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IIrnProfile=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.IrnProfile} IrnProfile instance
+                         */
+                        IrnProfile.create = function create(properties) {
+                            return new IrnProfile(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IrnProfile message. Does not implicitly {@link google.devicesandservices.health.v4.IrnProfile.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IIrnProfile} message IrnProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IrnProfile.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.onboardingStatus != null && Object.hasOwnProperty.call(message, "onboardingStatus"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.onboardingStatus);
+                            if (message.enrollmentStatus != null && Object.hasOwnProperty.call(message, "enrollmentStatus"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enrollmentStatus);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IrnProfile message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.IrnProfile.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IIrnProfile} message IrnProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IrnProfile.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IrnProfile message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.IrnProfile} IrnProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IrnProfile.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.IrnProfile();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.onboardingStatus = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.enrollmentStatus = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IrnProfile message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.IrnProfile} IrnProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IrnProfile.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IrnProfile message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IrnProfile.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.onboardingStatus != null && message.hasOwnProperty("onboardingStatus"))
+                                if (typeof message.onboardingStatus !== "boolean")
+                                    return "onboardingStatus: boolean expected";
+                            if (message.enrollmentStatus != null && message.hasOwnProperty("enrollmentStatus"))
+                                if (typeof message.enrollmentStatus !== "boolean")
+                                    return "enrollmentStatus: boolean expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IrnProfile message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.IrnProfile} IrnProfile
+                         */
+                        IrnProfile.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.IrnProfile)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.IrnProfile();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.onboardingStatus != null)
+                                message.onboardingStatus = Boolean(object.onboardingStatus);
+                            if (object.enrollmentStatus != null)
+                                message.enrollmentStatus = Boolean(object.enrollmentStatus);
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.IrnProfile.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IrnProfile message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IrnProfile} message IrnProfile
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IrnProfile.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.onboardingStatus = false;
+                                object.enrollmentStatus = false;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.onboardingStatus != null && message.hasOwnProperty("onboardingStatus"))
+                                object.onboardingStatus = message.onboardingStatus;
+                            if (message.enrollmentStatus != null && message.hasOwnProperty("enrollmentStatus"))
+                                object.enrollmentStatus = message.enrollmentStatus;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IrnProfile to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IrnProfile.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IrnProfile
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.IrnProfile
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IrnProfile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.IrnProfile";
+                        };
+    
+                        return IrnProfile;
+                    })();
+    
                     v4.Settings = (function() {
     
                         /**
@@ -36527,6 +48541,7 @@
                          * @property {string|null} [timeZone] Settings timeZone
                          * @property {google.devicesandservices.health.v4.Settings.WeightUnit|null} [weightUnit] Settings weightUnit
                          * @property {google.devicesandservices.health.v4.Settings.WaterUnit|null} [waterUnit] Settings waterUnit
+                         * @property {string|null} [foodLanguageCode] Settings foodLanguageCode
                          */
     
                         /**
@@ -36657,6 +48672,14 @@
                         Settings.prototype.waterUnit = 0;
     
                         /**
+                         * Settings foodLanguageCode.
+                         * @member {string} foodLanguageCode
+                         * @memberof google.devicesandservices.health.v4.Settings
+                         * @instance
+                         */
+                        Settings.prototype.foodLanguageCode = "";
+    
+                        /**
                          * Creates a new Settings instance using the specified properties.
                          * @function create
                          * @memberof google.devicesandservices.health.v4.Settings
@@ -36708,6 +48731,8 @@
                                 writer.uint32(/* id 18, wireType 0 =*/144).int32(message.weightUnit);
                             if (message.waterUnit != null && Object.hasOwnProperty.call(message, "waterUnit"))
                                 writer.uint32(/* id 19, wireType 0 =*/152).int32(message.waterUnit);
+                            if (message.foodLanguageCode != null && Object.hasOwnProperty.call(message, "foodLanguageCode"))
+                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.foodLanguageCode);
                             return writer;
                         };
     
@@ -36798,6 +48823,10 @@
                                     }
                                 case 19: {
                                         message.waterUnit = reader.int32();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.foodLanguageCode = reader.string();
                                         break;
                                     }
                                 default:
@@ -36937,6 +48966,9 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.foodLanguageCode != null && message.hasOwnProperty("foodLanguageCode"))
+                                if (!$util.isString(message.foodLanguageCode))
+                                    return "foodLanguageCode: string expected";
                             return null;
                         };
     
@@ -37161,6 +49193,8 @@
                                 message.waterUnit = 3;
                                 break;
                             }
+                            if (object.foodLanguageCode != null)
+                                message.foodLanguageCode = String(object.foodLanguageCode);
                             return message;
                         };
     
@@ -37192,6 +49226,7 @@
                                 object.timeZone = "";
                                 object.weightUnit = options.enums === String ? "WEIGHT_UNIT_UNSPECIFIED" : 0;
                                 object.waterUnit = options.enums === String ? "WATER_UNIT_UNSPECIFIED" : 0;
+                                object.foodLanguageCode = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -37221,6 +49256,8 @@
                                 object.weightUnit = options.enums === String ? $root.google.devicesandservices.health.v4.Settings.WeightUnit[message.weightUnit] === undefined ? message.weightUnit : $root.google.devicesandservices.health.v4.Settings.WeightUnit[message.weightUnit] : message.weightUnit;
                             if (message.waterUnit != null && message.hasOwnProperty("waterUnit"))
                                 object.waterUnit = options.enums === String ? $root.google.devicesandservices.health.v4.Settings.WaterUnit[message.waterUnit] === undefined ? message.waterUnit : $root.google.devicesandservices.health.v4.Settings.WaterUnit[message.waterUnit] : message.waterUnit;
+                            if (message.foodLanguageCode != null && message.hasOwnProperty("foodLanguageCode"))
+                                object.foodLanguageCode = message.foodLanguageCode;
                             return object;
                         };
     
@@ -37842,6 +49879,211 @@
                         };
     
                         return GetProfileRequest;
+                    })();
+    
+                    v4.GetIrnProfileRequest = (function() {
+    
+                        /**
+                         * Properties of a GetIrnProfileRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IGetIrnProfileRequest
+                         * @property {string|null} [name] GetIrnProfileRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetIrnProfileRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a GetIrnProfileRequest.
+                         * @implements IGetIrnProfileRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IGetIrnProfileRequest=} [properties] Properties to set
+                         */
+                        function GetIrnProfileRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetIrnProfileRequest name.
+                         * @member {string} name
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @instance
+                         */
+                        GetIrnProfileRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetIrnProfileRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IGetIrnProfileRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.GetIrnProfileRequest} GetIrnProfileRequest instance
+                         */
+                        GetIrnProfileRequest.create = function create(properties) {
+                            return new GetIrnProfileRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetIrnProfileRequest message. Does not implicitly {@link google.devicesandservices.health.v4.GetIrnProfileRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IGetIrnProfileRequest} message GetIrnProfileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetIrnProfileRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetIrnProfileRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.GetIrnProfileRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IGetIrnProfileRequest} message GetIrnProfileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetIrnProfileRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetIrnProfileRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.GetIrnProfileRequest} GetIrnProfileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetIrnProfileRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.GetIrnProfileRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetIrnProfileRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.GetIrnProfileRequest} GetIrnProfileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetIrnProfileRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetIrnProfileRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetIrnProfileRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetIrnProfileRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.GetIrnProfileRequest} GetIrnProfileRequest
+                         */
+                        GetIrnProfileRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.GetIrnProfileRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.GetIrnProfileRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetIrnProfileRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.GetIrnProfileRequest} message GetIrnProfileRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetIrnProfileRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetIrnProfileRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetIrnProfileRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetIrnProfileRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.GetIrnProfileRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetIrnProfileRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.GetIrnProfileRequest";
+                        };
+    
+                        return GetIrnProfileRequest;
                     })();
     
                     v4.UpdateProfileRequest = (function() {
@@ -38730,6 +50972,713 @@
                         };
     
                         return GetIdentityRequest;
+                    })();
+    
+                    v4.GetPairedDeviceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPairedDeviceRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IGetPairedDeviceRequest
+                         * @property {string|null} [name] GetPairedDeviceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetPairedDeviceRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a GetPairedDeviceRequest.
+                         * @implements IGetPairedDeviceRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IGetPairedDeviceRequest=} [properties] Properties to set
+                         */
+                        function GetPairedDeviceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPairedDeviceRequest name.
+                         * @member {string} name
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @instance
+                         */
+                        GetPairedDeviceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetPairedDeviceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IGetPairedDeviceRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.GetPairedDeviceRequest} GetPairedDeviceRequest instance
+                         */
+                        GetPairedDeviceRequest.create = function create(properties) {
+                            return new GetPairedDeviceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPairedDeviceRequest message. Does not implicitly {@link google.devicesandservices.health.v4.GetPairedDeviceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IGetPairedDeviceRequest} message GetPairedDeviceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPairedDeviceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPairedDeviceRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.GetPairedDeviceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IGetPairedDeviceRequest} message GetPairedDeviceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPairedDeviceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPairedDeviceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.GetPairedDeviceRequest} GetPairedDeviceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPairedDeviceRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.GetPairedDeviceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPairedDeviceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.GetPairedDeviceRequest} GetPairedDeviceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPairedDeviceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPairedDeviceRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPairedDeviceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPairedDeviceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.GetPairedDeviceRequest} GetPairedDeviceRequest
+                         */
+                        GetPairedDeviceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.GetPairedDeviceRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.GetPairedDeviceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPairedDeviceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.GetPairedDeviceRequest} message GetPairedDeviceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPairedDeviceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPairedDeviceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPairedDeviceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetPairedDeviceRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.GetPairedDeviceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetPairedDeviceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.GetPairedDeviceRequest";
+                        };
+    
+                        return GetPairedDeviceRequest;
+                    })();
+    
+                    v4.ListPairedDevicesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListPairedDevicesRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IListPairedDevicesRequest
+                         * @property {string|null} [parent] ListPairedDevicesRequest parent
+                         * @property {number|null} [pageSize] ListPairedDevicesRequest pageSize
+                         * @property {string|null} [pageToken] ListPairedDevicesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListPairedDevicesRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a ListPairedDevicesRequest.
+                         * @implements IListPairedDevicesRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IListPairedDevicesRequest=} [properties] Properties to set
+                         */
+                        function ListPairedDevicesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPairedDevicesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @instance
+                         */
+                        ListPairedDevicesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListPairedDevicesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @instance
+                         */
+                        ListPairedDevicesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListPairedDevicesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @instance
+                         */
+                        ListPairedDevicesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListPairedDevicesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListPairedDevicesRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.ListPairedDevicesRequest} ListPairedDevicesRequest instance
+                         */
+                        ListPairedDevicesRequest.create = function create(properties) {
+                            return new ListPairedDevicesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPairedDevicesRequest message. Does not implicitly {@link google.devicesandservices.health.v4.ListPairedDevicesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListPairedDevicesRequest} message ListPairedDevicesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPairedDevicesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPairedDevicesRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListPairedDevicesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListPairedDevicesRequest} message ListPairedDevicesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPairedDevicesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPairedDevicesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.ListPairedDevicesRequest} ListPairedDevicesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPairedDevicesRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.ListPairedDevicesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPairedDevicesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.ListPairedDevicesRequest} ListPairedDevicesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPairedDevicesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPairedDevicesRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPairedDevicesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPairedDevicesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.ListPairedDevicesRequest} ListPairedDevicesRequest
+                         */
+                        ListPairedDevicesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.ListPairedDevicesRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.ListPairedDevicesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPairedDevicesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ListPairedDevicesRequest} message ListPairedDevicesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPairedDevicesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPairedDevicesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPairedDevicesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListPairedDevicesRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListPairedDevicesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.ListPairedDevicesRequest";
+                        };
+    
+                        return ListPairedDevicesRequest;
+                    })();
+    
+                    v4.ListPairedDevicesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListPairedDevicesResponse.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IListPairedDevicesResponse
+                         * @property {Array.<google.devicesandservices.health.v4.IPairedDevice>|null} [pairedDevices] ListPairedDevicesResponse pairedDevices
+                         * @property {string|null} [nextPageToken] ListPairedDevicesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListPairedDevicesResponse.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a ListPairedDevicesResponse.
+                         * @implements IListPairedDevicesResponse
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IListPairedDevicesResponse=} [properties] Properties to set
+                         */
+                        function ListPairedDevicesResponse(properties) {
+                            this.pairedDevices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPairedDevicesResponse pairedDevices.
+                         * @member {Array.<google.devicesandservices.health.v4.IPairedDevice>} pairedDevices
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @instance
+                         */
+                        ListPairedDevicesResponse.prototype.pairedDevices = $util.emptyArray;
+    
+                        /**
+                         * ListPairedDevicesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @instance
+                         */
+                        ListPairedDevicesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListPairedDevicesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListPairedDevicesResponse=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.ListPairedDevicesResponse} ListPairedDevicesResponse instance
+                         */
+                        ListPairedDevicesResponse.create = function create(properties) {
+                            return new ListPairedDevicesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPairedDevicesResponse message. Does not implicitly {@link google.devicesandservices.health.v4.ListPairedDevicesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListPairedDevicesResponse} message ListPairedDevicesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPairedDevicesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pairedDevices != null && message.pairedDevices.length)
+                                for (var i = 0; i < message.pairedDevices.length; ++i)
+                                    $root.google.devicesandservices.health.v4.PairedDevice.encode(message.pairedDevices[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPairedDevicesResponse message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListPairedDevicesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListPairedDevicesResponse} message ListPairedDevicesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPairedDevicesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPairedDevicesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.ListPairedDevicesResponse} ListPairedDevicesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPairedDevicesResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.ListPairedDevicesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.pairedDevices && message.pairedDevices.length))
+                                            message.pairedDevices = [];
+                                        message.pairedDevices.push($root.google.devicesandservices.health.v4.PairedDevice.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPairedDevicesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.ListPairedDevicesResponse} ListPairedDevicesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPairedDevicesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPairedDevicesResponse message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPairedDevicesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pairedDevices != null && message.hasOwnProperty("pairedDevices")) {
+                                if (!Array.isArray(message.pairedDevices))
+                                    return "pairedDevices: array expected";
+                                for (var i = 0; i < message.pairedDevices.length; ++i) {
+                                    var error = $root.google.devicesandservices.health.v4.PairedDevice.verify(message.pairedDevices[i]);
+                                    if (error)
+                                        return "pairedDevices." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPairedDevicesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.ListPairedDevicesResponse} ListPairedDevicesResponse
+                         */
+                        ListPairedDevicesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.ListPairedDevicesResponse)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.ListPairedDevicesResponse();
+                            if (object.pairedDevices) {
+                                if (!Array.isArray(object.pairedDevices))
+                                    throw TypeError(".google.devicesandservices.health.v4.ListPairedDevicesResponse.pairedDevices: array expected");
+                                message.pairedDevices = [];
+                                for (var i = 0; i < object.pairedDevices.length; ++i) {
+                                    if (typeof object.pairedDevices[i] !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.ListPairedDevicesResponse.pairedDevices: object expected");
+                                    message.pairedDevices[i] = $root.google.devicesandservices.health.v4.PairedDevice.fromObject(object.pairedDevices[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPairedDevicesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ListPairedDevicesResponse} message ListPairedDevicesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPairedDevicesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.pairedDevices = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.pairedDevices && message.pairedDevices.length) {
+                                object.pairedDevices = [];
+                                for (var j = 0; j < message.pairedDevices.length; ++j)
+                                    object.pairedDevices[j] = $root.google.devicesandservices.health.v4.PairedDevice.toObject(message.pairedDevices[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPairedDevicesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPairedDevicesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListPairedDevicesResponse
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.ListPairedDevicesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListPairedDevicesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.ListPairedDevicesResponse";
+                        };
+    
+                        return ListPairedDevicesResponse;
                     })();
     
                     v4.WebhookNotificationCloudLog = (function() {
