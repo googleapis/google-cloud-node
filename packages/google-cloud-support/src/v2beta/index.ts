@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CaseAttachmentServiceClient} from './case_attachment_service_client';
-export {CaseServiceClient} from './case_service_client';
-export {CommentServiceClient} from './comment_service_client';
-export {FeedServiceClient} from './feed_service_client';
+export { CaseAttachmentServiceClient } from './case_attachment_service_client';
+export { CaseServiceClient } from './case_service_client';
+export { CommentServiceClient } from './comment_service_client';
+export { FeedServiceClient } from './feed_service_client';
