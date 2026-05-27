@@ -119,6 +119,67 @@ function ensureInitialContextManagerSet() {
 
 export {ensureInitialContextManagerSet};
 
+let globalTracingEnabled: boolean | undefined = undefined;
+let lastCheckTime = 0;
+const CACHE_TTL_MS = 10000; // 10 seconds TTL
+
+/**
+ * isGlobalTracingEnabled returns true if tracing is enabled globally,
+ * respecting cached status and active recording spans.
+ *
+ * @returns {boolean} True if global tracing is enabled.
+ */
+function isGlobalTracingEnabled(): boolean {
+  const now = Date.now();
+  if (
+    globalTracingEnabled !== undefined &&
+    (globalTracingEnabled || now - lastCheckTime < CACHE_TTL_MS)
+  ) {
+    return globalTracingEnabled;
+  }
+
+  lastCheckTime = now;
+  const globalProvider = trace.getTracerProvider();
+  if (globalProvider) {
+    let delegate = globalProvider;
+    if (typeof (globalProvider as any).getDelegate === 'function') {
+      delegate = (globalProvider as any).getDelegate();
+    }
+    if (delegate) {
+      const name = delegate.constructor.name;
+      // Exclude the dummy NoopTracerProvider and uninitialized ProxyTracerProvider
+      if (name !== 'NoopTracerProvider' && name !== 'ProxyTracerProvider') {
+        globalTracingEnabled = true;
+        ensureInitialContextManagerSet();
+        return true;
+      }
+    }
+  }
+  globalTracingEnabled = false;
+  return false;
+}
+
+/**
+ * isTracingEnabled returns true if tracing is enabled for the given options
+ * or globally.
+ *
+ * @param {ObservabilityOptions} [opts] The observability options.
+ * @returns {boolean} True if tracing is enabled.
+ */
+export function isTracingEnabled(opts?: ObservabilityOptions): boolean {
+  if (opts?.tracerProvider) {
+    return true;
+  }
+
+  return isGlobalTracingEnabled();
+}
+
+/** Only exported for resetting state in unit tests. */
+export function _resetTracingEnabledForTest(): void {
+  globalTracingEnabled = undefined;
+  lastCheckTime = 0;
+}
+
 /**
  * startTrace begins an active span in the current active context
  * and passes it back to the set callback function. Each span will
@@ -132,6 +193,10 @@ export function startTrace<T>(
   config: traceConfig | undefined,
   cb: (span: Span) => T,
 ): T {
+  if (!isTracingEnabled(config?.opts)) {
+    return cb(new noopSpan());
+  }
+
   if (!config) {
     config = {} as traceConfig;
   }
