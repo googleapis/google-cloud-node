@@ -8376,6 +8376,330 @@
       }
     },
     {
+      "regionTag": "compute_v1_generated_GlobalVmExtensionPolicies_AggregatedList_async",
+      "title": "AcceleratorTypes aggregatedList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the list of all VM Extension Policy resources available to the specified project. To prevent failure, it's recommended that you set the `returnPartialSuccess` parameter to `true`.",
+      "canonical": true,
+      "file": "global_vm_extension_policies.aggregated_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 155,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AggregatedList",
+        "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.AggregatedList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "include_all_scopes",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "service_project_number",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.VmExtensionPolicyAggregatedListResponse",
+        "client": {
+          "shortName": "GlobalVmExtensionPoliciesClient",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPoliciesClient"
+        },
+        "method": {
+          "shortName": "AggregatedList",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.AggregatedList",
+          "service": {
+            "shortName": "GlobalVmExtensionPolicies",
+            "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_GlobalVmExtensionPolicies_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Purge scoped resources (zonal policies) from a global VM extension policy, and then delete the global VM extension policy. Purge of the scoped resources is a pre-condition of the global VM extension policy deletion. The deletion of the global VM extension policy happens after the purge rollout is done, so it's not a part of the LRO. It's an automatic process that triggers in the backend.",
+      "canonical": true,
+      "file": "global_vm_extension_policies.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_vm_extension_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "global_vm_extension_policy_rollout_operation_rollout_input_resource",
+            "type": ".google.cloud.compute.v1.GlobalVmExtensionPolicyRolloutOperationRolloutInput"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "GlobalVmExtensionPoliciesClient",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPoliciesClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.Delete",
+          "service": {
+            "shortName": "GlobalVmExtensionPolicies",
+            "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_GlobalVmExtensionPolicies_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a global VM extension policy.",
+      "canonical": true,
+      "file": "global_vm_extension_policies.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_vm_extension_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.GlobalVmExtensionPolicy",
+        "client": {
+          "shortName": "GlobalVmExtensionPoliciesClient",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPoliciesClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.Get",
+          "service": {
+            "shortName": "GlobalVmExtensionPolicies",
+            "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_GlobalVmExtensionPolicies_Insert_async",
+      "title": "AcceleratorTypes insert Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new project level GlobalVmExtensionPolicy.",
+      "canonical": true,
+      "file": "global_vm_extension_policies.insert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Insert",
+        "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.Insert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_vm_extension_policy_resource",
+            "type": ".google.cloud.compute.v1.GlobalVmExtensionPolicy"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "GlobalVmExtensionPoliciesClient",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPoliciesClient"
+        },
+        "method": {
+          "shortName": "Insert",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.Insert",
+          "service": {
+            "shortName": "GlobalVmExtensionPolicies",
+            "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_GlobalVmExtensionPolicies_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists global VM extension policies.",
+      "canonical": true,
+      "file": "global_vm_extension_policies.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 140,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.GlobalVmExtensionPolicyList",
+        "client": {
+          "shortName": "GlobalVmExtensionPoliciesClient",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPoliciesClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.List",
+          "service": {
+            "shortName": "GlobalVmExtensionPolicies",
+            "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_GlobalVmExtensionPolicies_Update_async",
+      "title": "AcceleratorTypes update Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a global VM extension policy.",
+      "canonical": true,
+      "file": "global_vm_extension_policies.update.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Update",
+        "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.Update",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_vm_extension_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "global_vm_extension_policy_resource",
+            "type": ".google.cloud.compute.v1.GlobalVmExtensionPolicy"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "GlobalVmExtensionPoliciesClient",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPoliciesClient"
+        },
+        "method": {
+          "shortName": "Update",
+          "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies.Update",
+          "service": {
+            "shortName": "GlobalVmExtensionPolicies",
+            "fullName": "google.cloud.compute.v1.GlobalVmExtensionPolicies"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1_generated_HealthChecks_AggregatedList_async",
       "title": "AcceleratorTypes aggregatedList Sample",
       "origin": "API_DEFINITION",
@@ -17844,6 +18168,102 @@
       }
     },
     {
+      "regionTag": "compute_v1_generated_LicenseCodes_GetIamPolicy_async",
+      "title": "AcceleratorTypes getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.  *Caution* This resource is intended for use only by third-party partners who are creatingCloud Marketplace images.",
+      "canonical": true,
+      "file": "license_codes.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.compute.v1.LicenseCodes.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "options_requested_policy_version",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Policy",
+        "client": {
+          "shortName": "LicenseCodesClient",
+          "fullName": "google.cloud.compute.v1.LicenseCodesClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.compute.v1.LicenseCodes.GetIamPolicy",
+          "service": {
+            "shortName": "LicenseCodes",
+            "fullName": "google.cloud.compute.v1.LicenseCodes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_LicenseCodes_SetIamPolicy_async",
+      "title": "AcceleratorTypes setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy on the specified resource. Replaces any existing policy.  *Caution* This resource is intended for use only by third-party partners who are creatingCloud Marketplace images.",
+      "canonical": true,
+      "file": "license_codes.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.compute.v1.LicenseCodes.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_set_policy_request_resource",
+            "type": ".google.cloud.compute.v1.GlobalSetPolicyRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Policy",
+        "client": {
+          "shortName": "LicenseCodesClient",
+          "fullName": "google.cloud.compute.v1.LicenseCodesClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.compute.v1.LicenseCodes.SetIamPolicy",
+          "service": {
+            "shortName": "LicenseCodes",
+            "fullName": "google.cloud.compute.v1.LicenseCodes"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1_generated_LicenseCodes_TestIamPermissions_async",
       "title": "AcceleratorTypes testIamPermissions Sample",
       "origin": "API_DEFINITION",
@@ -21424,6 +21844,58 @@
         "method": {
           "shortName": "AddPeering",
           "fullName": "google.cloud.compute.v1.Networks.AddPeering",
+          "service": {
+            "shortName": "Networks",
+            "fullName": "google.cloud.compute.v1.Networks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_Networks_CancelRequestRemovePeering_async",
+      "title": "AcceleratorTypes cancelRequestRemovePeering Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancel requests to remove a peering from the specified network. Applicable only for PeeringConnection with update_strategy=CONSENSUS.  Cancels a request to remove a peering from the specified network.",
+      "canonical": true,
+      "file": "networks.cancel_request_remove_peering.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelRequestRemovePeering",
+        "fullName": "google.cloud.compute.v1.Networks.CancelRequestRemovePeering",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "networks_cancel_request_remove_peering_request_resource",
+            "type": ".google.cloud.compute.v1.NetworksCancelRequestRemovePeeringRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "NetworksClient",
+          "fullName": "google.cloud.compute.v1.NetworksClient"
+        },
+        "method": {
+          "shortName": "CancelRequestRemovePeering",
+          "fullName": "google.cloud.compute.v1.Networks.CancelRequestRemovePeering",
           "service": {
             "shortName": "Networks",
             "fullName": "google.cloud.compute.v1.Networks"
@@ -41356,6 +41828,410 @@
       }
     },
     {
+      "regionTag": "compute_v1_generated_RolloutPlans_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a RolloutPlan.",
+      "canonical": true,
+      "file": "rollout_plans.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1.RolloutPlans.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout_plan",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "RolloutPlansClient",
+          "fullName": "google.cloud.compute.v1.RolloutPlansClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1.RolloutPlans.Delete",
+          "service": {
+            "shortName": "RolloutPlans",
+            "fullName": "google.cloud.compute.v1.RolloutPlans"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RolloutPlans_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single project-scoped RolloutPlan.",
+      "canonical": true,
+      "file": "rollout_plans.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1.RolloutPlans.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout_plan",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.RolloutPlan",
+        "client": {
+          "shortName": "RolloutPlansClient",
+          "fullName": "google.cloud.compute.v1.RolloutPlansClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1.RolloutPlans.Get",
+          "service": {
+            "shortName": "RolloutPlans",
+            "fullName": "google.cloud.compute.v1.RolloutPlans"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RolloutPlans_Insert_async",
+      "title": "AcceleratorTypes insert Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new RolloutPlan in a given project and location.",
+      "canonical": true,
+      "file": "rollout_plans.insert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Insert",
+        "fullName": "google.cloud.compute.v1.RolloutPlans.Insert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout_plan_resource",
+            "type": ".google.cloud.compute.v1.RolloutPlan"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "RolloutPlansClient",
+          "fullName": "google.cloud.compute.v1.RolloutPlansClient"
+        },
+        "method": {
+          "shortName": "Insert",
+          "fullName": "google.cloud.compute.v1.RolloutPlans.Insert",
+          "service": {
+            "shortName": "RolloutPlans",
+            "fullName": "google.cloud.compute.v1.RolloutPlans"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RolloutPlans_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists RolloutPlans in a given project and location.",
+      "canonical": true,
+      "file": "rollout_plans.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 140,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1.RolloutPlans.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.RolloutPlansListResponse",
+        "client": {
+          "shortName": "RolloutPlansClient",
+          "fullName": "google.cloud.compute.v1.RolloutPlansClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1.RolloutPlans.List",
+          "service": {
+            "shortName": "RolloutPlans",
+            "fullName": "google.cloud.compute.v1.RolloutPlans"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_Rollouts_Cancel_async",
+      "title": "AcceleratorTypes cancel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancels a Rollout.",
+      "canonical": true,
+      "file": "rollouts.cancel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Cancel",
+        "fullName": "google.cloud.compute.v1.Rollouts.Cancel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollback",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "rollout",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "RolloutsClient",
+          "fullName": "google.cloud.compute.v1.RolloutsClient"
+        },
+        "method": {
+          "shortName": "Cancel",
+          "fullName": "google.cloud.compute.v1.Rollouts.Cancel",
+          "service": {
+            "shortName": "Rollouts",
+            "fullName": "google.cloud.compute.v1.Rollouts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_Rollouts_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Rollout.",
+      "canonical": true,
+      "file": "rollouts.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1.Rollouts.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "RolloutsClient",
+          "fullName": "google.cloud.compute.v1.RolloutsClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1.Rollouts.Delete",
+          "service": {
+            "shortName": "Rollouts",
+            "fullName": "google.cloud.compute.v1.Rollouts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_Rollouts_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single project-scoped Rollout.",
+      "canonical": true,
+      "file": "rollouts.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1.Rollouts.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Rollout",
+        "client": {
+          "shortName": "RolloutsClient",
+          "fullName": "google.cloud.compute.v1.RolloutsClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1.Rollouts.Get",
+          "service": {
+            "shortName": "Rollouts",
+            "fullName": "google.cloud.compute.v1.Rollouts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_Rollouts_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Rollouts in a given project and location.",
+      "canonical": true,
+      "file": "rollouts.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 140,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1.Rollouts.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.RolloutsListResponse",
+        "client": {
+          "shortName": "RolloutsClient",
+          "fullName": "google.cloud.compute.v1.RolloutsClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1.Rollouts.List",
+          "service": {
+            "shortName": "Rollouts",
+            "fullName": "google.cloud.compute.v1.Rollouts"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1_generated_Routers_AggregatedList_async",
       "title": "AcceleratorTypes aggregatedList Sample",
       "origin": "API_DEFINITION",
@@ -51855,7 +52731,7 @@
       "regionTag": "compute_v1_generated_ZoneVmExtensionPolicies_Delete_async",
       "title": "AcceleratorTypes delete Sample",
       "origin": "API_DEFINITION",
-      "description": " Deletes a specified zone VM extension policy.",
+      "description": " Deletes a specified zone VM extension policy within a project.",
       "canonical": true,
       "file": "zone_vm_extension_policies.delete.js",
       "language": "JAVASCRIPT",
@@ -51907,7 +52783,7 @@
       "regionTag": "compute_v1_generated_ZoneVmExtensionPolicies_Get_async",
       "title": "AcceleratorTypes get Sample",
       "origin": "API_DEFINITION",
-      "description": " Retrieves details of a specific zone VM extension policy.",
+      "description": " Retrieves details of a specific zone VM extension policy within a project.",
       "canonical": true,
       "file": "zone_vm_extension_policies.get.js",
       "language": "JAVASCRIPT",
@@ -52071,7 +52947,7 @@
       "regionTag": "compute_v1_generated_ZoneVmExtensionPolicies_Update_async",
       "title": "AcceleratorTypes update Sample",
       "origin": "API_DEFINITION",
-      "description": " Modifies an existing zone VM extension policy.",
+      "description": " Modifies an existing zone VM extension policy within a project.",
       "canonical": true,
       "file": "zone_vm_extension_policies.update.js",
       "language": "JAVASCRIPT",

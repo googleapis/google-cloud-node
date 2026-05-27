@@ -562,12 +562,15 @@ describe('Transfer Manager', () => {
 
   describe('downloadFileInChunks', () => {
     let file: File;
+    let fromFileStub: sinon.SinonStub;
 
     beforeEach(() => {
       sandbox.stub(fsp, 'open').resolves({
         close: () => Promise.resolve(),
         write: (buffer: unknown) => Promise.resolve({buffer}),
       } as fsp.FileHandle);
+
+      fromFileStub = sandbox.stub(CRC32C, 'fromFile').resolves(new CRC32C(0));
 
       file = new File(bucket, 'some-large-file');
       sandbox.stub(file, 'get').resolves([
@@ -612,26 +615,41 @@ describe('Transfer Manager', () => {
     });
 
     it('should call fromFile when validation is set to crc32c', async () => {
-      let callCount = 0;
-      file.download = () => {
-        return Promise.resolve([Buffer.alloc(0)]) as Promise<DownloadResponse>;
-      };
-      CRC32C.fromFile = () => {
-        callCount++;
-        return Promise.resolve(new CRC32C(0));
-      };
+      sandbox.stub(file, 'download').resolves([Buffer.alloc(0)]);
 
       await transferManager.downloadFileInChunks(file, {validation: 'crc32c'});
-      assert.strictEqual(callCount, 1);
+      assert.strictEqual(fromFileStub.callCount, 1);
+    });
+
+    it('should perform CRC32C validation by default', async () => {
+      sandbox.stub(file, 'download').resolves([Buffer.alloc(0)]);
+
+      await transferManager.downloadFileInChunks(file);
+      assert.strictEqual(fromFileStub.callCount, 1);
+    });
+
+    it('should not perform validation when validation is false', async () => {
+      sandbox.stub(file, 'download').resolves([Buffer.alloc(0)]);
+
+      await transferManager.downloadFileInChunks(file, {validation: false});
+      assert.strictEqual(fromFileStub.callCount, 0);
+    });
+
+    it('should disable individual sharded chunk validation in download calls', async () => {
+      let shardedValidationOption: any = undefined;
+      sandbox.stub(file, 'download').callsFake(async options => {
+        shardedValidationOption = (options as DownloadOptions).validation;
+        return [Buffer.alloc(100)];
+      });
+
+      await transferManager.downloadFileInChunks(file);
+      assert.strictEqual(shardedValidationOption, false);
     });
 
     it('should throw an error if crc32c validation fails', async () => {
-      file.download = () => {
-        return Promise.resolve([Buffer.alloc(0)]) as Promise<DownloadResponse>;
-      };
-      CRC32C.fromFile = () => {
-        return Promise.resolve(new CRC32C(1)); // Set non-expected initial value
-      };
+      sandbox.stub(file, 'download').resolves([Buffer.alloc(0)]);
+
+      fromFileStub.resolves(new CRC32C(1)); // Set non-expected initial value
 
       await assert.rejects(
         transferManager.downloadFileInChunks(file, {validation: 'crc32c'}),
