@@ -600,6 +600,9 @@ export namespace google {
                         /** CaPool publishingOptions */
                         publishingOptions?: (google.cloud.security.privateca.v1.CaPool.IPublishingOptions|null);
 
+                        /** CaPool encryptionSpec */
+                        encryptionSpec?: (google.cloud.security.privateca.v1.IEncryptionSpec|null);
+
                         /** CaPool labels */
                         labels?: ({ [k: string]: string }|null);
                     }
@@ -624,6 +627,9 @@ export namespace google {
 
                         /** CaPool publishingOptions. */
                         public publishingOptions?: (google.cloud.security.privateca.v1.CaPool.IPublishingOptions|null);
+
+                        /** CaPool encryptionSpec. */
+                        public encryptionSpec?: (google.cloud.security.privateca.v1.IEncryptionSpec|null);
 
                         /** CaPool labels. */
                         public labels: { [k: string]: string };
@@ -843,6 +849,9 @@ export namespace google {
                             /** IssuancePolicy backdateDuration */
                             backdateDuration?: (google.protobuf.IDuration|null);
 
+                            /** IssuancePolicy allowRequesterSpecifiedNotBeforeTime */
+                            allowRequesterSpecifiedNotBeforeTime?: (boolean|null);
+
                             /** IssuancePolicy maximumLifetime */
                             maximumLifetime?: (google.protobuf.IDuration|null);
 
@@ -873,6 +882,9 @@ export namespace google {
 
                             /** IssuancePolicy backdateDuration. */
                             public backdateDuration?: (google.protobuf.IDuration|null);
+
+                            /** IssuancePolicy allowRequesterSpecifiedNotBeforeTime. */
+                            public allowRequesterSpecifiedNotBeforeTime: boolean;
 
                             /** IssuancePolicy maximumLifetime. */
                             public maximumLifetime?: (google.protobuf.IDuration|null);
@@ -1394,6 +1406,103 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of an EncryptionSpec. */
+                    interface IEncryptionSpec {
+
+                        /** EncryptionSpec cloudKmsKey */
+                        cloudKmsKey?: (string|null);
+                    }
+
+                    /** Represents an EncryptionSpec. */
+                    class EncryptionSpec implements IEncryptionSpec {
+
+                        /**
+                         * Constructs a new EncryptionSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IEncryptionSpec);
+
+                        /** EncryptionSpec cloudKmsKey. */
+                        public cloudKmsKey: string;
+
+                        /**
+                         * Creates a new EncryptionSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EncryptionSpec instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IEncryptionSpec): google.cloud.security.privateca.v1.EncryptionSpec;
+
+                        /**
+                         * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.security.privateca.v1.EncryptionSpec.verify|verify} messages.
+                         * @param message EncryptionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.EncryptionSpec.verify|verify} messages.
+                         * @param message EncryptionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EncryptionSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EncryptionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.EncryptionSpec;
+
+                        /**
+                         * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EncryptionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.EncryptionSpec;
+
+                        /**
+                         * Verifies an EncryptionSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EncryptionSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.EncryptionSpec;
+
+                        /**
+                         * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                         * @param message EncryptionSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.EncryptionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EncryptionSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EncryptionSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a CertificateRevocationList. */
                     interface ICertificateRevocationList {
 
@@ -1708,6 +1817,9 @@ export namespace google {
 
                         /** Certificate labels */
                         labels?: ({ [k: string]: string }|null);
+
+                        /** Certificate requestedNotBeforeTime */
+                        requestedNotBeforeTime?: (google.protobuf.ITimestamp|null);
                     }
 
                     /** Represents a Certificate. */
@@ -1760,6 +1872,9 @@ export namespace google {
 
                         /** Certificate labels. */
                         public labels: { [k: string]: string };
+
+                        /** Certificate requestedNotBeforeTime. */
+                        public requestedNotBeforeTime?: (google.protobuf.ITimestamp|null);
 
                         /** Certificate certificateConfig. */
                         public certificateConfig?: ("pemCsr"|"config");
