@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, anywhereCache) {
-  // [START storage_v2_generated_StorageControl_CreateAnywhereCache_async]
+function main(parent) {
+  // [START storage_v2_generated_StorageControl_ListIntelligenceFindingRevisions_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,45 +29,46 @@ function main(parent, anywhereCache) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The bucket to which this cache belongs.
-   *  Format: `projects/{project}/buckets/{bucket}`
+   *  Required. The parent of the `IntelligenceFindingRevision` resource.
+   *  ## Format:
+   *  `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. Properties of the Anywhere Cache instance being created.
-   *  The parent bucket name is specified in the `parent` field. Server uses the
-   *  default value of `ttl` or `admission_policy` if not specified in
-   *  request.
+   *  Optional. The maximum number of `IntelligenceFindingRevision` resources to
+   *  return.
+   *  The maximum value is `100`; values above `100` will be coerced to `100`.
+   *  The default value is `100`.
    */
-  // const anywhereCache = {}
+  // const pageSize = 1234
   /**
-   *  Optional. A unique identifier for this request. UUID is the recommended
-   *  format, but other formats are still accepted. This request is only
-   *  idempotent if a `request_id` is provided.
+   *  Optional. A page token, received from a previous
+   *  `ListIntelligenceFindingRevisions` call. Provide this to retrieve the
+   *  subsequent page.
    */
-  // const requestId = 'abc123'
+  // const pageToken = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
-  async function callCreateAnywhereCache() {
+  async function callListIntelligenceFindingRevisions() {
     // Construct request
     const request = {
       parent,
-      anywhereCache,
     };
 
     // Run request
-    const [operation] = await controlClient.createAnywhereCache(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = storageControlClient.listIntelligenceFindingRevisionsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callCreateAnywhereCache();
-  // [END storage_v2_generated_StorageControl_CreateAnywhereCache_async]
+  callListIntelligenceFindingRevisions();
+  // [END storage_v2_generated_StorageControl_ListIntelligenceFindingRevisions_async]
 }
 
 process.on('unhandledRejection', err => {

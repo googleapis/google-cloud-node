@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START storage_v2_generated_StorageControl_DisableAnywhereCache_async]
+  // [START storage_v2_generated_StorageControl_GetIntelligenceFinding_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,31 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name field in the request should be:
-   *  `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+   *  Required. The name of the `IntelligenceFinding` resource.
+   *  Format:
+   *  `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
    */
   // const name = 'abc123'
-  /**
-   *  Optional. A unique identifier for this request. UUID is the recommended
-   *  format, but other formats are still accepted. This request is only
-   *  idempotent if a `request_id` is provided.
-   */
-  // const requestId = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
-  async function callDisableAnywhereCache() {
+  async function callGetIntelligenceFinding() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await controlClient.disableAnywhereCache(request);
+    const response = await storageControlClient.getIntelligenceFinding(request);
     console.log(response);
   }
 
-  callDisableAnywhereCache();
-  // [END storage_v2_generated_StorageControl_DisableAnywhereCache_async]
+  callGetIntelligenceFinding();
+  // [END storage_v2_generated_StorageControl_GetIntelligenceFinding_async]
 }
 
 process.on('unhandledRejection', err => {

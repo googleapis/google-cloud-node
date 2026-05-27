@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START storage_v2_generated_StorageControl_DeleteManagedFolder_async]
+function main(parent) {
+  // [START storage_v2_generated_StorageControl_ListIntelligenceFindings_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,53 +29,51 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the managed folder.
-   *  Format:
-   *  `projects/{project}/buckets/{bucket}/managedFolders/{managedFolder}`
+   *  Required. The parent of the `IntelligenceFinding` resource.
+   *  Format: `projects/{project}/locations/{location}`
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  The operation succeeds conditional on the managed folder's current
-   *  metageneration matching the value here specified.
+   *  Optional. The filter expression to be applied.
+   *  Supports filtering by `type` and `associated_resources`.
    */
-  // const ifMetagenerationMatch = 1234
+  // const filter = 'abc123'
   /**
-   *  The operation succeeds conditional on the managed folder's current
-   *  metageneration NOT matching the value here specified.
+   *  Optional. The maximum number of `IntelligenceFinding` resources to return.
+   *  The maximum value is `100`; values above `100` will be coerced to `100`.
+   *  The default value is `100`.
    */
-  // const ifMetagenerationNotMatch = 1234
+  // const pageSize = 1234
   /**
-   *  Allows deletion of a managed folder even if it is not empty.
-   *  A managed folder is empty if it manages no child managed folders or
-   *  objects. Caller must have permission for
-   *  storage.managedFolders.setIamPolicy.
+   *  Optional. A page token, received from a previous `ListIntelligenceFindings`
+   *  call. Provide this to retrieve the subsequent page.
+   *  When paginating, all other parameters provided to
+   *  `ListIntelligenceFindings` must match the call that provided the page
+   *  token.
    */
-  // const allowNonEmpty = true
-  /**
-   *  Optional. A unique identifier for this request. UUID is the recommended
-   *  format, but other formats are still accepted.
-   */
-  // const requestId = 'abc123'
+  // const pageToken = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
-  async function callDeleteManagedFolder() {
+  async function callListIntelligenceFindings() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const response = await controlClient.deleteManagedFolder(request);
-    console.log(response);
+    const iterable = storageControlClient.listIntelligenceFindingsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteManagedFolder();
-  // [END storage_v2_generated_StorageControl_DeleteManagedFolder_async]
+  callListIntelligenceFindings();
+  // [END storage_v2_generated_StorageControl_ListIntelligenceFindings_async]
 }
 
 process.on('unhandledRejection', err => {
