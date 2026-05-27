@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -43,7 +52,7 @@ export class SqlBackupsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('sql');
@@ -56,10 +65,10 @@ export class SqlBackupsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  sqlBackupsServiceStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  sqlBackupsServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of SqlBackupsServiceClient.
@@ -100,21 +109,42 @@ export class SqlBackupsServiceClient {
    *     const client = new SqlBackupsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SqlBackupsServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'sqladmin.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +169,7 @@ export class SqlBackupsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,15 +183,11 @@ export class SqlBackupsServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -183,10 +209,10 @@ export class SqlBackupsServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       backupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/backups/{backup}'
+        'projects/{project}/backups/{backup}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
     };
 
@@ -194,14 +220,20 @@ export class SqlBackupsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listBackups:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'backups')
+      listBackups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'backups',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.sql.v1.SqlBackupsService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.sql.v1.SqlBackupsService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -232,37 +264,46 @@ export class SqlBackupsServiceClient {
     // Put together the "service stub" for
     // google.cloud.sql.v1.SqlBackupsService.
     this.sqlBackupsServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.sql.v1.SqlBackupsService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.sql.v1.SqlBackupsService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.sql.v1.SqlBackupsService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const sqlBackupsServiceStubMethods =
-        ['createBackup', 'getBackup', 'listBackups', 'updateBackup', 'deleteBackup'];
+    const sqlBackupsServiceStubMethods = [
+      'createBackup',
+      'getBackup',
+      'listBackups',
+      'updateBackup',
+      'deleteBackup',
+    ];
     for (const methodName of sqlBackupsServiceStubMethods) {
       const callPromise = this.sqlBackupsServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -277,8 +318,14 @@ export class SqlBackupsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'sqladmin.googleapis.com';
   }
@@ -289,8 +336,14 @@ export class SqlBackupsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'sqladmin.googleapis.com';
   }
@@ -323,7 +376,7 @@ export class SqlBackupsServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/sqlservice.admin'
+      'https://www.googleapis.com/auth/sqlservice.admin',
     ];
   }
 
@@ -333,8 +386,9 @@ export class SqlBackupsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -345,490 +399,625 @@ export class SqlBackupsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a backup for a Cloud SQL instance. This API can be used only to
- * create on-demand backups.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this backup is created.
- *   Format: projects/{project}
- * @param {google.cloud.sql.v1.Backup} request.backup
- *   Required. The Backup to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/sql_backups_service.create_backup.js</caption>
- * region_tag:sqladmin_v1_generated_SqlBackupsService_CreateBackup_async
- */
+  /**
+   * Creates a backup for a Cloud SQL instance. This API can be used only to
+   * create on-demand backups.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this backup is created.
+   *   Format: projects/{project}
+   * @param {google.cloud.sql.v1.Backup} request.backup
+   *   Required. The Backup to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/sql_backups_service.create_backup.js</caption>
+   * region_tag:sqladmin_v1_generated_SqlBackupsService_CreateBackup_async
+   */
   createBackup(
-      request?: protos.google.cloud.sql.v1.ICreateBackupRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.ICreateBackupRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.sql.v1.ICreateBackupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.ICreateBackupRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createBackup(
-      request: protos.google.cloud.sql.v1.ICreateBackupRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.ICreateBackupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.sql.v1.ICreateBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.ICreateBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createBackup(
-      request: protos.google.cloud.sql.v1.ICreateBackupRequest,
-      callback: Callback<
-          protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.ICreateBackupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.sql.v1.ICreateBackupRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.ICreateBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createBackup(
-      request?: protos.google.cloud.sql.v1.ICreateBackupRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.sql.v1.ICreateBackupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.ICreateBackupRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.ICreateBackupRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.ICreateBackupRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.sql.v1.ICreateBackupRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.ICreateBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.ICreateBackupRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createBackup request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.ICreateBackupRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ICreateBackupRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createBackup(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.ICreateBackupRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createBackup response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ICreateBackupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBackup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves a resource containing information about a backup.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the backup to retrieve.
- *   Format: projects/{project}/backups/{backup}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Backup|Backup}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/sql_backups_service.get_backup.js</caption>
- * region_tag:sqladmin_v1_generated_SqlBackupsService_GetBackup_async
- */
+  /**
+   * Retrieves a resource containing information about a backup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the backup to retrieve.
+   *   Format: projects/{project}/backups/{backup}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Backup|Backup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/sql_backups_service.get_backup.js</caption>
+   * region_tag:sqladmin_v1_generated_SqlBackupsService_GetBackup_async
+   */
   getBackup(
-      request?: protos.google.cloud.sql.v1.IGetBackupRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.sql.v1.IBackup,
-        protos.google.cloud.sql.v1.IGetBackupRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.sql.v1.IGetBackupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IBackup,
+      protos.google.cloud.sql.v1.IGetBackupRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getBackup(
-      request: protos.google.cloud.sql.v1.IGetBackupRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.sql.v1.IBackup,
-          protos.google.cloud.sql.v1.IGetBackupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.sql.v1.IGetBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IBackup,
+      protos.google.cloud.sql.v1.IGetBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getBackup(
-      request: protos.google.cloud.sql.v1.IGetBackupRequest,
-      callback: Callback<
-          protos.google.cloud.sql.v1.IBackup,
-          protos.google.cloud.sql.v1.IGetBackupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.sql.v1.IGetBackupRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IBackup,
+      protos.google.cloud.sql.v1.IGetBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getBackup(
-      request?: protos.google.cloud.sql.v1.IGetBackupRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.sql.v1.IGetBackupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.sql.v1.IBackup,
-          protos.google.cloud.sql.v1.IGetBackupRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.sql.v1.IBackup,
-          protos.google.cloud.sql.v1.IGetBackupRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.sql.v1.IBackup,
-        protos.google.cloud.sql.v1.IGetBackupRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.sql.v1.IGetBackupRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1.IBackup,
+      protos.google.cloud.sql.v1.IGetBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IBackup,
+      protos.google.cloud.sql.v1.IGetBackupRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getBackup request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.sql.v1.IBackup,
-        protos.google.cloud.sql.v1.IGetBackupRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IBackup,
+          protos.google.cloud.sql.v1.IGetBackupRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getBackup(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.sql.v1.IBackup,
-        protos.google.cloud.sql.v1.IGetBackupRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getBackup response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IBackup,
+          protos.google.cloud.sql.v1.IGetBackupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBackup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the retention period and description of the backup. You can use
- * this API to update final backups only.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.sql.v1.Backup} request.backup
- *   Required. The backup to update.
- *   The backup’s `name` field is used to identify the backup to update.
- *   Format: projects/{project}/backups/{backup}
- * @param {google.protobuf.FieldMask} request.updateMask
- *   The list of fields that you can update. You can update only the description
- *   and retention period of the final backup.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/sql_backups_service.update_backup.js</caption>
- * region_tag:sqladmin_v1_generated_SqlBackupsService_UpdateBackup_async
- */
+  /**
+   * Updates the retention period and description of the backup. You can use
+   * this API to update final backups only.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.sql.v1.Backup} request.backup
+   *   Required. The backup to update.
+   *   The backup’s `name` field is used to identify the backup to update.
+   *   Format: projects/{project}/backups/{backup}
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields that you can update. You can update only the description
+   *   and retention period of the final backup.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/sql_backups_service.update_backup.js</caption>
+   * region_tag:sqladmin_v1_generated_SqlBackupsService_UpdateBackup_async
+   */
   updateBackup(
-      request?: protos.google.cloud.sql.v1.IUpdateBackupRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.IUpdateBackupRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.sql.v1.IUpdateBackupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.IUpdateBackupRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateBackup(
-      request: protos.google.cloud.sql.v1.IUpdateBackupRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.IUpdateBackupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.sql.v1.IUpdateBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.IUpdateBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateBackup(
-      request: protos.google.cloud.sql.v1.IUpdateBackupRequest,
-      callback: Callback<
-          protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.IUpdateBackupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.sql.v1.IUpdateBackupRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.IUpdateBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateBackup(
-      request?: protos.google.cloud.sql.v1.IUpdateBackupRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.sql.v1.IUpdateBackupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.IUpdateBackupRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.IUpdateBackupRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.IUpdateBackupRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.sql.v1.IUpdateBackupRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.IUpdateBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.IUpdateBackupRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'backup.name': request.backup!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'backup.name': request.backup!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateBackup request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.IUpdateBackupRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.IUpdateBackupRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateBackup(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.IUpdateBackupRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateBackup response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.IUpdateBackupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBackup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the backup.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the backup to delete.
- *   Format: projects/{project}/backups/{backup}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/sql_backups_service.delete_backup.js</caption>
- * region_tag:sqladmin_v1_generated_SqlBackupsService_DeleteBackup_async
- */
+  /**
+   * Deletes the backup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the backup to delete.
+   *   Format: projects/{project}/backups/{backup}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/sql_backups_service.delete_backup.js</caption>
+   * region_tag:sqladmin_v1_generated_SqlBackupsService_DeleteBackup_async
+   */
   deleteBackup(
-      request?: protos.google.cloud.sql.v1.IDeleteBackupRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.IDeleteBackupRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.sql.v1.IDeleteBackupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.IDeleteBackupRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteBackup(
-      request: protos.google.cloud.sql.v1.IDeleteBackupRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.IDeleteBackupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.sql.v1.IDeleteBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.IDeleteBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteBackup(
-      request: protos.google.cloud.sql.v1.IDeleteBackupRequest,
-      callback: Callback<
-          protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.IDeleteBackupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.sql.v1.IDeleteBackupRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.IDeleteBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteBackup(
-      request?: protos.google.cloud.sql.v1.IDeleteBackupRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.sql.v1.IDeleteBackupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.IDeleteBackupRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.IDeleteBackupRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.IDeleteBackupRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.sql.v1.IDeleteBackupRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.IDeleteBackupRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.IDeleteBackupRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteBackup request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.IDeleteBackupRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.IDeleteBackupRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteBackup(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.sql.v1.IOperation,
-        protos.google.cloud.sql.v1.IDeleteBackupRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteBackup response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.IDeleteBackupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBackup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists all backups associated with the project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent that owns this collection of backups.
- *   Format: projects/{project}
- * @param {number} request.pageSize
- *   The maximum number of backups to return per response. The service might
- *   return fewer backups than this value. If a value for this parameter isn't
- *   specified, then, at most, 500 backups are returned. The maximum value is
- *   2,000. Any values that you set, which are greater than 2,000, are changed
- *   to 2,000.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListBackups` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListBackups` must match
- *   the call that provided the page token.
- * @param {string} request.filter
- *   Multiple filter queries are separated by spaces. For example,
- *   'instance:abc AND type:FINAL, 'location:us',
- *   'backupInterval.startTime>=1950-01-01T01:01:25.771Z'. You can filter by
- *   type, instance, backupInterval.startTime (creation time), or location.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.sql.v1.Backup|Backup}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listBackupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all backups associated with the project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns this collection of backups.
+   *   Format: projects/{project}
+   * @param {number} request.pageSize
+   *   The maximum number of backups to return per response. The service might
+   *   return fewer backups than this value. If a value for this parameter isn't
+   *   specified, then, at most, 500 backups are returned. The maximum value is
+   *   2,000. Any values that you set, which are greater than 2,000, are changed
+   *   to 2,000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListBackups` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListBackups` must match
+   *   the call that provided the page token.
+   * @param {string} request.filter
+   *   Multiple filter queries are separated by spaces. For example,
+   *   'instance:abc AND type:FINAL, 'location:us',
+   *   'backupInterval.startTime>=1950-01-01T01:01:25.771Z'. You can filter by
+   *   type, instance, backupInterval.startTime (creation time), or location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.sql.v1.Backup|Backup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBackupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBackups(
-      request?: protos.google.cloud.sql.v1.IListBackupsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.sql.v1.IBackup[],
-        protos.google.cloud.sql.v1.IListBackupsRequest|null,
-        protos.google.cloud.sql.v1.IListBackupsResponse
-      ]>;
+    request?: protos.google.cloud.sql.v1.IListBackupsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IBackup[],
+      protos.google.cloud.sql.v1.IListBackupsRequest | null,
+      protos.google.cloud.sql.v1.IListBackupsResponse,
+    ]
+  >;
   listBackups(
-      request: protos.google.cloud.sql.v1.IListBackupsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.sql.v1.IListBackupsRequest,
-          protos.google.cloud.sql.v1.IListBackupsResponse|null|undefined,
-          protos.google.cloud.sql.v1.IBackup>): void;
+    request: protos.google.cloud.sql.v1.IListBackupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.sql.v1.IListBackupsRequest,
+      protos.google.cloud.sql.v1.IListBackupsResponse | null | undefined,
+      protos.google.cloud.sql.v1.IBackup
+    >,
+  ): void;
   listBackups(
-      request: protos.google.cloud.sql.v1.IListBackupsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.sql.v1.IListBackupsRequest,
-          protos.google.cloud.sql.v1.IListBackupsResponse|null|undefined,
-          protos.google.cloud.sql.v1.IBackup>): void;
+    request: protos.google.cloud.sql.v1.IListBackupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.sql.v1.IListBackupsRequest,
+      protos.google.cloud.sql.v1.IListBackupsResponse | null | undefined,
+      protos.google.cloud.sql.v1.IBackup
+    >,
+  ): void;
   listBackups(
-      request?: protos.google.cloud.sql.v1.IListBackupsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.sql.v1.IListBackupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.sql.v1.IListBackupsRequest,
-          protos.google.cloud.sql.v1.IListBackupsResponse|null|undefined,
-          protos.google.cloud.sql.v1.IBackup>,
-      callback?: PaginationCallback<
-          protos.google.cloud.sql.v1.IListBackupsRequest,
-          protos.google.cloud.sql.v1.IListBackupsResponse|null|undefined,
-          protos.google.cloud.sql.v1.IBackup>):
-      Promise<[
-        protos.google.cloud.sql.v1.IBackup[],
-        protos.google.cloud.sql.v1.IListBackupsRequest|null,
-        protos.google.cloud.sql.v1.IListBackupsResponse
-      ]>|void {
+          protos.google.cloud.sql.v1.IListBackupsResponse | null | undefined,
+          protos.google.cloud.sql.v1.IBackup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.sql.v1.IListBackupsRequest,
+      protos.google.cloud.sql.v1.IListBackupsResponse | null | undefined,
+      protos.google.cloud.sql.v1.IBackup
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IBackup[],
+      protos.google.cloud.sql.v1.IListBackupsRequest | null,
+      protos.google.cloud.sql.v1.IListBackupsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.sql.v1.IListBackupsRequest,
-      protos.google.cloud.sql.v1.IListBackupsResponse|null|undefined,
-      protos.google.cloud.sql.v1.IBackup>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.sql.v1.IListBackupsRequest,
+          protos.google.cloud.sql.v1.IListBackupsResponse | null | undefined,
+          protos.google.cloud.sql.v1.IBackup
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBackups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -837,137 +1026,142 @@ export class SqlBackupsServiceClient {
     this._log.info('listBackups request %j', request);
     return this.innerApiCalls
       .listBackups(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.sql.v1.IBackup[],
-        protos.google.cloud.sql.v1.IListBackupsRequest|null,
-        protos.google.cloud.sql.v1.IListBackupsResponse
-      ]) => {
-        this._log.info('listBackups values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.sql.v1.IBackup[],
+          protos.google.cloud.sql.v1.IListBackupsRequest | null,
+          protos.google.cloud.sql.v1.IListBackupsResponse,
+        ]) => {
+          this._log.info('listBackups values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listBackups`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent that owns this collection of backups.
- *   Format: projects/{project}
- * @param {number} request.pageSize
- *   The maximum number of backups to return per response. The service might
- *   return fewer backups than this value. If a value for this parameter isn't
- *   specified, then, at most, 500 backups are returned. The maximum value is
- *   2,000. Any values that you set, which are greater than 2,000, are changed
- *   to 2,000.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListBackups` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListBackups` must match
- *   the call that provided the page token.
- * @param {string} request.filter
- *   Multiple filter queries are separated by spaces. For example,
- *   'instance:abc AND type:FINAL, 'location:us',
- *   'backupInterval.startTime>=1950-01-01T01:01:25.771Z'. You can filter by
- *   type, instance, backupInterval.startTime (creation time), or location.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.sql.v1.Backup|Backup} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listBackupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listBackups`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns this collection of backups.
+   *   Format: projects/{project}
+   * @param {number} request.pageSize
+   *   The maximum number of backups to return per response. The service might
+   *   return fewer backups than this value. If a value for this parameter isn't
+   *   specified, then, at most, 500 backups are returned. The maximum value is
+   *   2,000. Any values that you set, which are greater than 2,000, are changed
+   *   to 2,000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListBackups` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListBackups` must match
+   *   the call that provided the page token.
+   * @param {string} request.filter
+   *   Multiple filter queries are separated by spaces. For example,
+   *   'instance:abc AND type:FINAL, 'location:us',
+   *   'backupInterval.startTime>=1950-01-01T01:01:25.771Z'. You can filter by
+   *   type, instance, backupInterval.startTime (creation time), or location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.sql.v1.Backup|Backup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBackupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBackupsStream(
-      request?: protos.google.cloud.sql.v1.IListBackupsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.sql.v1.IListBackupsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listBackups`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent that owns this collection of backups.
- *   Format: projects/{project}
- * @param {number} request.pageSize
- *   The maximum number of backups to return per response. The service might
- *   return fewer backups than this value. If a value for this parameter isn't
- *   specified, then, at most, 500 backups are returned. The maximum value is
- *   2,000. Any values that you set, which are greater than 2,000, are changed
- *   to 2,000.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListBackups` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListBackups` must match
- *   the call that provided the page token.
- * @param {string} request.filter
- *   Multiple filter queries are separated by spaces. For example,
- *   'instance:abc AND type:FINAL, 'location:us',
- *   'backupInterval.startTime>=1950-01-01T01:01:25.771Z'. You can filter by
- *   type, instance, backupInterval.startTime (creation time), or location.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.sql.v1.Backup|Backup}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/sql_backups_service.list_backups.js</caption>
- * region_tag:sqladmin_v1_generated_SqlBackupsService_ListBackups_async
- */
+  /**
+   * Equivalent to `listBackups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns this collection of backups.
+   *   Format: projects/{project}
+   * @param {number} request.pageSize
+   *   The maximum number of backups to return per response. The service might
+   *   return fewer backups than this value. If a value for this parameter isn't
+   *   specified, then, at most, 500 backups are returned. The maximum value is
+   *   2,000. Any values that you set, which are greater than 2,000, are changed
+   *   to 2,000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListBackups` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListBackups` must match
+   *   the call that provided the page token.
+   * @param {string} request.filter
+   *   Multiple filter queries are separated by spaces. For example,
+   *   'instance:abc AND type:FINAL, 'location:us',
+   *   'backupInterval.startTime>=1950-01-01T01:01:25.771Z'. You can filter by
+   *   type, instance, backupInterval.startTime (creation time), or location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.sql.v1.Backup|Backup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/sql_backups_service.list_backups.js</caption>
+   * region_tag:sqladmin_v1_generated_SqlBackupsService_ListBackups_async
+   */
   listBackupsAsync(
-      request?: protos.google.cloud.sql.v1.IListBackupsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.sql.v1.IBackup>{
+    request?: protos.google.cloud.sql.v1.IListBackupsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.sql.v1.IBackup> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.sql.v1.IBackup>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1002,12 +1196,11 @@ export class SqlBackupsServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1040,7 +1233,7 @@ export class SqlBackupsServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1056,7 +1249,7 @@ export class SqlBackupsServiceClient {
    * @param {string} backup
    * @returns {string} Resource name string.
    */
-  backupPath(project:string,backup:string) {
+  backupPath(project: string, backup: string) {
     return this.pathTemplates.backupPathTemplate.render({
       project: project,
       backup: backup,
@@ -1091,7 +1284,7 @@ export class SqlBackupsServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1116,11 +1309,13 @@ export class SqlBackupsServiceClient {
    */
   close(): Promise<void> {
     if (this.sqlBackupsServiceStub && !this._terminated) {
-      return this.sqlBackupsServiceStub.then(stub => {
+      return this.sqlBackupsServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();
