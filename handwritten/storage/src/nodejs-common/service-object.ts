@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {promisifyAll} from '@google-cloud/promisify';
-import {EventEmitter} from 'events';
-import {util} from './util.js';
-import {StorageRequestOptions, StorageTransport} from '../storage-transport.js';
+import { promisifyAll } from '@google-cloud/promisify';
+import { EventEmitter } from 'events';
+import { util } from './util.js';
+import { StorageRequestOptions, StorageTransport } from '../storage-transport.js';
 import {
   GaxiosError,
   GaxiosInterceptor,
@@ -25,6 +25,8 @@ import {
 } from 'gaxios';
 
 function isBucket(parent: any): boolean {
+  // TODO: remove any suppression during follow up PR to improve type safety.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return parent && typeof (parent as any).getFiles === 'function';
 }
 
@@ -88,7 +90,7 @@ export interface ServiceObjectConfig {
 }
 
 export interface Methods {
-  [methodName: string]: {reqOpts?: StorageRequestOptions} | boolean;
+  [methodName: string]: { reqOpts?: StorageRequestOptions } | boolean;
 }
 
 export interface InstanceResponseCallback<T> {
@@ -100,7 +102,7 @@ export interface InstanceResponseCallback<T> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface CreateOptions {}
+export interface CreateOptions { }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 export type CreateResponse<T> = any[];
 export interface CreateCallback<T> {
@@ -210,8 +212,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
             // The ServiceObject didn't redefine the method.
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (this as any)[methodName] ===
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (ServiceObject.prototype as any)[methodName] &&
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (ServiceObject.prototype as any)[methodName] &&
             // This method isn't wanted.
             !config.methods![methodName]
           );
@@ -297,6 +299,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     let url = `${this.baseUrl}/${this.id}`;
     if (isBucket(this.parent)) {
+      // TODO: remove any suppression during follow up PR to improve type safety.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       url = `${this.parent.baseUrl}/${(this.parent as any).id}${url}`;
     }
 
@@ -444,21 +448,25 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     let url = `${this.baseUrl}/${this.id}`;
     if (isBucket(this.parent)) {
+      // TODO: remove any suppression during follow up PR to improve type safety.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       url = `${this.parent.baseUrl}/${(this.parent as any).id}${url}`;
     }
 
+    // TODO: remove any suppression during follow up PR to improve type safety.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const encryptionHeaders = (this as any).encryptionKeyHeaders || {};
 
     const headers = {
       ...encryptionHeaders,
       ...methodConfig.reqOpts?.headers,
+      // TODO: remove any suppression during follow up PR to improve type safety.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ...(options as any).headers,
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const query = {...options} as any;
+    const query = { ...options } as any;
     delete query.headers;
 
     this.storageTransport
@@ -517,6 +525,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     let url = `${this.baseUrl}/${this.name}`;
     if (isBucket(this.parent)) {
+      // TODO: remove any suppression during follow up PR to improve type safety.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       url = `${this.parent.baseUrl}/${(this.parent as any).name}${url}`;
     }
 
@@ -547,6 +557,6 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   }
 }
 
-promisifyAll(ServiceObject, {exclude: ['getRequestInterceptors']});
+promisifyAll(ServiceObject, { exclude: ['getRequestInterceptors'] });
 
-export {ServiceObject};
+export { ServiceObject };

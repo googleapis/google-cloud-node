@@ -4605,7 +4605,10 @@ class File extends ServiceObject<File, FileMetadata> {
       headers['x-goog-encryption-key'] = this.encryptionKeyBase64!;
       headers['x-goog-encryption-key-sha256'] = this.encryptionKeyHash!;
     }
-    reqOpts.headers = headers;
+    reqOpts.headers = {
+      ...reqOpts.headers,
+      ...headers,
+    };
 
     this.storageTransport
       .makeRequest(reqOpts as StorageRequestOptions, (err, body, resp) => {
