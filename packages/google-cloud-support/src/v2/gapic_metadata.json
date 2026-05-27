@@ -10,6 +10,11 @@
         "grpc": {
           "libraryClient": "CaseAttachmentServiceClient",
           "rpcs": {
+            "GetAttachment": {
+              "methods": [
+                "getAttachment"
+              ]
+            },
             "ListAttachments": {
               "methods": [
                 "listAttachments",
@@ -22,6 +27,11 @@
         "grpc-fallback": {
           "libraryClient": "CaseAttachmentServiceClient",
           "rpcs": {
+            "GetAttachment": {
+              "methods": [
+                "getAttachment"
+              ]
+            },
             "ListAttachments": {
               "methods": [
                 "listAttachments",
@@ -149,6 +159,11 @@
                 "createComment"
               ]
             },
+            "GetComment": {
+              "methods": [
+                "getComment"
+              ]
+            },
             "ListComments": {
               "methods": [
                 "listComments",
@@ -164,6 +179,11 @@
             "CreateComment": {
               "methods": [
                 "createComment"
+              ]
+            },
+            "GetComment": {
+              "methods": [
+                "getComment"
               ]
             },
             "ListComments": {

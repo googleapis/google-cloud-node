@@ -89,6 +89,7 @@ import * as v1 from './v1';
 import {
   ObservabilityOptions,
   ensureInitialContextManagerSet,
+  isTracingEnabled,
 } from './instrument';
 import {
   attributeXGoogSpannerRequestIdToActiveSpan,
@@ -496,12 +497,14 @@ class Spanner extends GrpcService {
     this.directedReadOptions = directedReadOptions;
     this.defaultTransactionOptions = defaultTransactionOptions;
     this._observabilityOptions = options.observabilityOptions;
+    if (isTracingEnabled(this._observabilityOptions)) {
+      ensureInitialContextManagerSet();
+    }
     this.sessionLabels = options.sessionLabels || null;
     this.commonHeaders_ = getCommonHeaders(
       this.projectFormattedName_,
       this._observabilityOptions?.enableEndToEndTracing,
     );
-    ensureInitialContextManagerSet();
     this._nthClientId = nextSpannerClientId();
     this._universeDomain = universeEndpoint;
     this.projectId_ = options.projectId;
@@ -1721,14 +1724,16 @@ class Spanner extends GrpcService {
         config.headers[CLOUD_RESOURCE_HEADER],
         projectId!,
       );
-      // Do context propagation
-      propagation.inject(context.active(), config.headers, {
-        set: (carrier, key, value) => {
-          carrier[key] = value; // Set the span context (trace and span ID)
-        },
-      });
-      // Attach the x-goog-spanner-request-id to the currently active span.
-      attributeXGoogSpannerRequestIdToActiveSpan(config);
+      if (isTracingEnabled(this._observabilityOptions)) {
+        // Do context propagation
+        propagation.inject(context.active(), config.headers, {
+          set: (carrier, key, value) => {
+            carrier[key] = value; // Set the span context (trace and span ID)
+          },
+        });
+        // Attach the x-goog-spanner-request-id to the currently active span.
+        attributeXGoogSpannerRequestIdToActiveSpan(config);
+      }
       const interceptors: any[] = [];
       if (this._metricsEnabled) {
         interceptors.push(MetricInterceptor);
