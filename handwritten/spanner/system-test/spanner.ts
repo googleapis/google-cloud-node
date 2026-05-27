@@ -1196,7 +1196,7 @@ describe('Spanner', () => {
             ? assert.ok(
                 err.code === grpc.status.FAILED_PRECONDITION ||
                   err.code === grpc.status.OUT_OF_RANGE,
-                `Expected FAILED_PRECONDITION (9) or OUT_OF_RANGE (11), got ${err.code}`
+                `Expected FAILED_PRECONDITION (9) or OUT_OF_RANGE (11), got ${err.code}`,
               )
             : assert.strictEqual(err.code, grpc.status.INVALID_ARGUMENT);
         }

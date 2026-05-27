@@ -7318,7 +7318,6 @@ describe('Spanner with mock server', () => {
         }
       });
     });
-
   });
 
   describe('Tracing cache TTL', () => {
@@ -7329,7 +7328,9 @@ describe('Spanner with mock server', () => {
       _resetTracingEnabledForTest();
       warpOffset = 0;
       const originalNow = Date.now;
-      ttlSandbox.stub(Date, 'now').callsFake(() => originalNow.call(Date) + warpOffset);
+      ttlSandbox
+        .stub(Date, 'now')
+        .callsFake(() => originalNow.call(Date) + warpOffset);
     });
 
     afterEach(() => {
@@ -7340,10 +7341,11 @@ describe('Spanner with mock server', () => {
       // 1. Initially no global tracer is configured, returns false
       const getTracerProviderStub = ttlSandbox.stub(trace, 'getTracerProvider');
       getTracerProviderStub.returns({
-        constructor: { name: 'ProxyTracerProvider' },
-        getDelegate: () => ({ constructor: { name: 'NoopTracerProvider' } }),
+        constructor: {name: 'ProxyTracerProvider'},
+        getDelegate: () => ({constructor: {name: 'NoopTracerProvider'}}),
         getTracer: () => ({
-          startActiveSpan: (name, options, cb) => cb({ setAttribute: () => {}, end: () => {} } as any),
+          startActiveSpan: (name, options, cb) =>
+            cb({setAttribute: () => {}, end: () => {}} as any),
         }),
       } as any);
 
@@ -7352,10 +7354,11 @@ describe('Spanner with mock server', () => {
 
       // 2. Even if OpenTelemetry is registered immediately after, it should hit the cache and return false
       getTracerProviderStub.returns({
-        constructor: { name: 'ProxyTracerProvider' },
-        getDelegate: () => ({ constructor: { name: 'NodeTracerProvider' } }),
+        constructor: {name: 'ProxyTracerProvider'},
+        getDelegate: () => ({constructor: {name: 'NodeTracerProvider'}}),
         getTracer: () => ({
-          startActiveSpan: (name, options, cb) => cb({ setAttribute: () => {}, end: () => {} } as any),
+          startActiveSpan: (name, options, cb) =>
+            cb({setAttribute: () => {}, end: () => {}} as any),
         }),
       } as any);
 
@@ -7397,20 +7400,20 @@ describe('Spanner with mock server', () => {
       // We delegate getTracer to provider so that if getTracer is ever called, it works perfectly,
       // but name is 'ProxyTracerProvider' so it is detected as unconfigured!
       getTracerProviderStub.returns({
-        constructor: { name: 'ProxyTracerProvider' },
-        getDelegate: () => ({ constructor: { name: 'NoopTracerProvider' } }),
+        constructor: {name: 'ProxyTracerProvider'},
+        getDelegate: () => ({constructor: {name: 'NoopTracerProvider'}}),
         getTracer: (name, version) => provider.getTracer(name, version),
       } as any);
 
       const localDatabase = newTestDatabase();
 
       // First call: it shouldn't generate any spans!
-      const [rows1] = await localDatabase.run({ sql: selectSql });
+      const [rows1] = await localDatabase.run({sql: selectSql});
       assert.strictEqual(rows1.length, 3);
       assert.strictEqual(exporter.getFinishedSpans().length, 0);
 
       // Second call immediately: because 10s TTL cache is still active, it should still NOT trace!
-      const [rows2] = await localDatabase.run({ sql: selectSql });
+      const [rows2] = await localDatabase.run({sql: selectSql});
       assert.strictEqual(rows2.length, 3);
       assert.strictEqual(exporter.getFinishedSpans().length, 0);
 
@@ -7421,7 +7424,7 @@ describe('Spanner with mock server', () => {
       warpOffset += 10100;
 
       // Third call: cache has expired, so it auto-detects OTel and traces successfully!
-      const [rows3] = await localDatabase.run({ sql: selectSql });
+      const [rows3] = await localDatabase.run({sql: selectSql});
       assert.strictEqual(rows3.length, 3);
 
       // Verify that we successfully captured spans!
@@ -7454,10 +7457,12 @@ describe('Spanner with mock server', () => {
         sslCreds: grpc.credentials.createInsecure(),
       });
       const localInstance = localSpanner.instance('instance');
-      const localDatabase = localInstance.database(`database-pre-${dbCounter++}`);
+      const localDatabase = localInstance.database(
+        `database-pre-${dbCounter++}`,
+      );
 
       // Verify the query traces successfully without any issue or crash
-      const [rows] = await localDatabase.run({ sql: selectSql });
+      const [rows] = await localDatabase.run({sql: selectSql});
       assert.strictEqual(rows.length, 3);
 
       const finishedSpans = exporter.getFinishedSpans();
