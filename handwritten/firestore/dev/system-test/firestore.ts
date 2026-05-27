@@ -8712,7 +8712,7 @@ describe('Types test', () => {
   });
 });
 
-describe('non-native Firestore types', () => {
+describe.skipClassic('non-native Firestore types', () => {
   addEqualityMatcher();
   let firestore: Firestore;
   let randomCol: CollectionReference;

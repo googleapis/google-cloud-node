@@ -522,6 +522,28 @@ describe('non-native types', () => {
       .true;
   });
 
+  it('BSON binary data with subtype 0 acts as native bytes', () => {
+    const bson = new BsonBinaryData(0, Uint8Array.from([1, 2, 3]));
+    const native = Uint8Array.from([1, 2, 3]);
+    const otherNative = Uint8Array.from([1, 2, 4]);
+
+    expect(bson.isEqual(native)).to.be.true;
+    expect(bson.isEqual(otherNative)).to.be.false;
+
+    // Serializing BsonBinaryData with subtype 0 returns bytesValue
+    const proto = (bson as any)._toProto(null as any);
+    expect(proto).to.deep.equal({
+      bytesValue: Uint8Array.from([1, 2, 3]),
+    });
+  });
+
+  it('BSON binary data with subtype > 0 does not act as native bytes', () => {
+    const bson = new BsonBinaryData(1, Uint8Array.from([1, 2, 3]));
+    const native = Uint8Array.from([1, 2, 3]);
+
+    expect(bson.isEqual(native)).to.be.false;
+  });
+
   it('can create BSON timestamp using new', () => {
     const value1 = new BsonTimestamp(57, 4);
     const value2 = new BsonTimestamp(57, 4);

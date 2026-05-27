@@ -2842,10 +2842,10 @@ declare namespace FirebaseFirestore {
     /**
      * Returns true if this `BsonBinaryData` is equal to the provided one.
      *
-     * @param other The `BsonBinaryData` to compare against.
+     * @param other The `BsonBinaryData` or `Uint8Array` to compare against.
      * @return 'true' if this `BsonBinaryData` is equal to the provided one.
      */
-    isEqual(other: BsonBinaryData): boolean;
+    isEqual(other: BsonBinaryData | Uint8Array): boolean;
   }
   /**
    * Sentinel values that can be used when writing document fields with set(),

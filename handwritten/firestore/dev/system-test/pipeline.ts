@@ -173,6 +173,7 @@ import {
   CollectionReference,
   FieldPath,
   Firestore,
+  BsonBinaryData,
 } from '../src';
 
 import {expect, use} from 'chai';
@@ -941,6 +942,29 @@ describe.skipClassic('Pipeline class', () => {
             string: 'b string',
           },
         ],
+      });
+    });
+
+    describe.skipClassic('extended BSON types', () => {
+      it('accepts and returns BsonBinaryData in pipelines', async () => {
+        const bsonSubtype0 = new BsonBinaryData(0, new Uint8Array([7, 8, 9]));
+        const bsonSubtype1 = new BsonBinaryData(128, new Uint8Array([7, 8, 9]));
+
+        const ppl = firestore
+          .pipeline()
+          .collection(randomCol.path)
+          .limit(1)
+          .select(
+            constant(bsonSubtype0).as('bsonSubtype0'),
+            constant(bsonSubtype1).as('bsonSubtype1'),
+          );
+
+        const snapshot = await ppl.execute();
+
+        expectResults(snapshot, {
+          bsonSubtype0: new Uint8Array([7, 8, 9]),
+          bsonSubtype1: bsonSubtype1,
+        });
       });
     });
 

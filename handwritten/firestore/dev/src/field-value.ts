@@ -441,6 +441,11 @@ export class BsonBinaryData implements firestore.BsonBinaryData {
    * @internal
    */
   _toProto(serializer: Serializer): api.IValue {
+    if (this.subtype === 0) {
+      return {
+        bytesValue: this.data,
+      };
+    }
     return serializer.encodeBsonBinaryData(this.subtype, this.data);
   }
 
@@ -468,11 +473,17 @@ export class BsonBinaryData implements firestore.BsonBinaryData {
    * @param other The `BsonBinaryData` to compare against.
    * @return 'true' if this `BsonBinaryData` is equal to the provided one.
    */
-  isEqual(other: BsonBinaryData): boolean {
-    return (
-      this.subtype === other.subtype &&
-      Buffer.from(this.data).equals(other.data)
-    );
+  isEqual(other: any): boolean {
+    if (other instanceof BsonBinaryData) {
+      return (
+        this.subtype === other.subtype &&
+        Buffer.from(this.data).equals(other.data)
+      );
+    }
+    if (other instanceof Uint8Array) {
+      return this.subtype === 0 && Buffer.from(this.data).equals(other);
+    }
+    return false;
   }
 }
 

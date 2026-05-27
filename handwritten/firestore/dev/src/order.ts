@@ -50,15 +50,14 @@ enum TypeOrder {
   BSON_TIMESTAMP = 5,
   STRING = 6,
   BLOB = 7,
-  BSON_BINARY = 8,
-  REF = 9,
-  BSON_OBJECT_ID = 10,
-  GEO_POINT = 11,
-  REGEX = 12,
-  ARRAY = 13,
-  VECTOR = 14,
-  OBJECT = 15,
-  MAX_KEY = 16,
+  REF = 8,
+  BSON_OBJECT_ID = 9,
+  GEO_POINT = 10,
+  REGEX = 11,
+  ARRAY = 12,
+  VECTOR = 13,
+  OBJECT = 14,
+  MAX_KEY = 15,
 }
 
 /*!
@@ -95,9 +94,8 @@ function typeOrder(val: api.IValue): TypeOrder {
     case 'bsonObjectIdValue':
       return TypeOrder.BSON_OBJECT_ID;
     case 'bytesValue':
-      return TypeOrder.BLOB;
     case 'bsonBinaryValue':
-      return TypeOrder.BSON_BINARY;
+      return TypeOrder.BLOB;
     case 'referenceValue':
       return TypeOrder.REF;
     case 'mapValue':
@@ -274,26 +272,45 @@ function compareBsonTimestamps(left: api.IValue, right: api.IValue): number {
  * @private
  * @internal
  */
-function compareBsonBinaryData(left: api.IValue, right: api.IValue): number {
-  const leftBytes =
-    left.mapValue!.fields?.[RESERVED_BSON_BINARY_KEY]?.bytesValue;
-  const rightBytes =
-    right.mapValue!.fields?.[RESERVED_BSON_BINARY_KEY]?.bytesValue;
-  if (!rightBytes || !leftBytes) {
-    throw new Error('Received incorrect bytesValue for BsonBinaryData');
+function getSubtype(value: api.IValue): number {
+  if (value.bytesValue !== undefined) {
+    return 0;
   }
-  return Buffer.compare(Buffer.from(leftBytes), Buffer.from(rightBytes));
+  const bsonBinaryFields = value.mapValue?.fields?.[RESERVED_BSON_BINARY_KEY];
+  if (bsonBinaryFields && bsonBinaryFields.bytesValue) {
+    return bsonBinaryFields.bytesValue[0];
+  }
+  throw new Error('Cannot get subtype for non-blob value: ' + JSON.stringify(value));
+}
+
+function getData(value: api.IValue): Uint8Array {
+  if (value.bytesValue !== undefined) {
+    return value.bytesValue || new Uint8Array();
+  }
+  const bsonBinaryFields = value.mapValue?.fields?.[RESERVED_BSON_BINARY_KEY];
+  if (bsonBinaryFields && bsonBinaryFields.bytesValue) {
+    return bsonBinaryFields.bytesValue.slice(1);
+  }
+  throw new Error('Cannot get data for non-blob value: ' + JSON.stringify(value));
 }
 
 /*!
  * @private
  * @internal
  */
-function compareBlobs(left: Uint8Array, right: Uint8Array): number {
-  if (!(left instanceof Buffer) || !(right instanceof Buffer)) {
+function compareBlobs(left: api.IValue, right: api.IValue): number {
+  if (left.bytesValue !== undefined && !(left.bytesValue instanceof Buffer)) {
     throw new Error('Blobs can only be compared if they are Buffers.');
   }
-  return Buffer.compare(left, right);
+  if (right.bytesValue !== undefined && !(right.bytesValue instanceof Buffer)) {
+    throw new Error('Blobs can only be compared if they are Buffers.');
+  }
+  const leftSubtype = getSubtype(left);
+  const rightSubtype = getSubtype(right);
+  if (leftSubtype !== rightSubtype) {
+    return primitiveComparator(leftSubtype, rightSubtype);
+  }
+  return Buffer.compare(Buffer.from(getData(left)), Buffer.from(getData(right)));
 }
 
 /*!
@@ -526,9 +543,7 @@ export function compare(left: api.IValue, right: api.IValue): number {
     case TypeOrder.BSON_TIMESTAMP:
       return compareBsonTimestamps(left, right);
     case TypeOrder.BLOB:
-      return compareBlobs(left.bytesValue!, right.bytesValue!);
-    case TypeOrder.BSON_BINARY:
-      return compareBsonBinaryData(left, right);
+      return compareBlobs(left, right);
     case TypeOrder.REF:
       return compareReferenceProtos(left, right);
     case TypeOrder.GEO_POINT:

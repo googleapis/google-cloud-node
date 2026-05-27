@@ -263,7 +263,10 @@ describe('Order', () => {
       // blobs
       [blob([])],
       [blob([0])],
-      [blob([0, 1, 2, 3, 4])],
+      [
+        blob([0, 1, 2, 3, 4]),
+        wrap(new BsonBinaryData(0, Buffer.from([0, 1, 2, 3, 4]))),
+      ],
       [blob([0, 1, 2, 4, 3])],
       [blob([255])],
 
