@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.8.0...container-v6.9.0) (2026-05-27)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+
 ## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.7.1...container-v6.8.0) (2026-05-14)
 
 

@@ -24,6 +24,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CancelRequestRemovePeering": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Delete": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
