@@ -26,7 +26,7 @@
     "@aws-sdk/client-sts": "^3.58.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "^6.0.0",
     "mocha": "^10.0.0"
   }
 }
