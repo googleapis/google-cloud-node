@@ -27,7 +27,7 @@ extern crate napi_derive;
 use once_cell::sync::{Lazy, OnceCell};
 use napi::bindgen_prelude::*;
 use napi::{Env, Result, JsObject, JsFunction, JsUnknown};
-use napi::threadsafe_function::{ThreadsafeFunction, ThreadSafeFunctionCallMode, ErrorStrategy, ThreadSafeCallContext};
+use napi::threadsafe_function::{ThreadsafeFunction, ThreadsafeFunctionCallMode, ErrorStrategy, ThreadSafeCallContext};
 use tokio::runtime::Runtime;
 use tonic::transport::{Channel, ClientTlsConfig};
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -273,7 +273,7 @@ pub fn execute_sql_native(
                 let rows = decode_result_set(response.into_inner());
                 tsfn.call(
                     Ok(rows),
-                    ThreadSafeFunctionCallMode::NonBlocking
+                    ThreadsafeFunctionCallMode::NonBlocking
                 );
             }
             Err(status) => {
@@ -283,7 +283,7 @@ pub fn execute_sql_native(
                         status.code(),
                         status.message()
                     ))),
-                    ThreadSafeFunctionCallMode::NonBlocking
+                    ThreadsafeFunctionCallMode::NonBlocking
                 );
             }
         }
