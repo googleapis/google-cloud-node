@@ -60,6 +60,8 @@ export class GdchClient extends OAuth2Client {
   private gdchOptions: GdchClientOptions;
   private caAgentPromise?: Promise<https.Agent>;
   private cachedCaCertPath?: string;
+  private lastCaCertReadTime = 0;
+  private readonly CA_CERT_TTL_MS = 5 * 60 * 1000;
 
   constructor(options: GdchClientOptions = {}) {
     super(options);
@@ -211,7 +213,20 @@ export class GdchClient extends OAuth2Client {
 
       this.emit('tokens', tokens);
       return {res, tokens};
-    } catch (e) {
+    } catch (e: any) {
+      if (e && e.config && e.config.data) {
+        try {
+          if (typeof e.config.data === 'string') {
+            const parsedData = JSON.parse(e.config.data);
+            if (parsedData.subject_token) {
+              parsedData.subject_token = '***REDACTED***';
+              e.config.data = JSON.stringify(parsedData);
+            }
+          } else if (typeof e.config.data === 'object' && e.config.data.subject_token) {
+            e.config.data.subject_token = '***REDACTED***';
+          }
+        } catch {}
+      }
       if (e instanceof Error) {
         e.message = `Error getting access token for GDCH service account: ${e.message}, iss: ${this.serviceIdentityName}`;
       }
@@ -253,28 +268,28 @@ export class GdchClient extends OAuth2Client {
     return `${signingInput}.${encodedSignature}`;
   }
 
-  override async requestAsync<T>(
-    opts: GaxiosOptions,
-    retry = false
-  ): Promise<GaxiosResponse<T>> {
-    if (this.caCertPath && !opts.agent) {
-      opts.agent = await this.getCaAgent();
-    }
-    return super.requestAsync(opts, retry);
-  }
 
   private getCaAgent(): Promise<https.Agent> | undefined {
     if (!this.caCertPath) {
       this.caAgentPromise = undefined;
       this.cachedCaCertPath = undefined;
+      this.lastCaCertReadTime = 0;
       return undefined;
     }
 
-    if (this.caAgentPromise && this.caCertPath === this.cachedCaCertPath) {
+    const now = Date.now();
+    const isCacheExpired = now - this.lastCaCertReadTime > this.CA_CERT_TTL_MS;
+
+    if (
+      this.caAgentPromise &&
+      this.caCertPath === this.cachedCaCertPath &&
+      !isCacheExpired
+    ) {
       return this.caAgentPromise;
     }
 
     this.cachedCaCertPath = this.caCertPath;
+    this.lastCaCertReadTime = now;
     const currentPath = this.caCertPath;
     this.caAgentPromise = (async () => {
       try {
@@ -284,6 +299,7 @@ export class GdchClient extends OAuth2Client {
         if (this.cachedCaCertPath === currentPath) {
           this.caAgentPromise = undefined;
           this.cachedCaCertPath = undefined;
+          this.lastCaCertReadTime = 0;
         }
         if (err instanceof Error) {
           err.message = `Error reading certificate file from CA cert path, value '${currentPath}': ${err.message}`;

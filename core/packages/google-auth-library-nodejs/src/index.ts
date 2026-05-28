@@ -95,6 +95,8 @@ export {PassThroughClient} from './auth/passthrough';
 export {
   GdchClient,
   GdchClientOptions,
+  GdchCredentialsInput,
+  GDCH_SERVICE_ACCOUNT_TYPE,
 } from './auth/gdchclient';
 export * from './gtoken/googleToken';
 

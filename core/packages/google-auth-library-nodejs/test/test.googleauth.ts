@@ -3008,4 +3008,81 @@ describe('googleauth', () => {
       (jwt as JWT).gtoken!.googleTokenOptions.scope,
     );
   });
+
+  describe('GdchClient automatic audience resolution in getClient()', () => {
+    const gdchJson = {
+      type: 'gdch_service_account',
+      format_version: '1',
+      project: 'test-project',
+      private_key_id: 'key-id-123',
+      private_key: 'private-key-pem-content',
+      name: 'sa-name',
+      token_uri: 'https://token-server.local/token',
+    };
+
+    it('should dynamically resolve audience using apiEndpoint in clientOptions if missing', async () => {
+      const auth = new GoogleAuth({
+        credentials: gdchJson,
+        clientOptions: {
+          apiEndpoint: 'hardwaremanagement.us-west1.gdch.google.com',
+        } as any,
+      });
+
+      const client = await auth.getClient();
+      assert.ok(client instanceof GdchClient);
+      assert.strictEqual(
+        (client as GdchClient).apiAudience,
+        'https://hardwaremanagement.us-west1.gdch.google.com/'
+      );
+    });
+
+    it('should dynamically resolve audience using servicePath in clientOptions if missing', async () => {
+      const auth = new GoogleAuth({
+        credentials: gdchJson,
+        clientOptions: {
+          servicePath: 'hardwaremanagement.us-west1.gdch.google.com',
+        } as any,
+      });
+
+      const client = await auth.getClient();
+      assert.ok(client instanceof GdchClient);
+      assert.strictEqual(
+        (client as GdchClient).apiAudience,
+        'https://hardwaremanagement.us-west1.gdch.google.com/'
+      );
+    });
+
+    it('should format audience url correctly if it has http/https scheme or trailing slashes', async () => {
+      const auth = new GoogleAuth({
+        credentials: gdchJson,
+        clientOptions: {
+          apiEndpoint: 'http://hardwaremanagement.us-west1.gdch.google.com///',
+        } as any,
+      });
+
+      const client = await auth.getClient();
+      assert.ok(client instanceof GdchClient);
+      assert.strictEqual(
+        (client as GdchClient).apiAudience,
+        'http://hardwaremanagement.us-west1.gdch.google.com/'
+      );
+    });
+
+    it('should keep explicit apiAudience if already provided', async () => {
+      const auth = new GoogleAuth({
+        credentials: gdchJson,
+        clientOptions: {
+          apiAudience: 'https://explicit-audience.local/',
+          apiEndpoint: 'hardwaremanagement.us-west1.gdch.google.com',
+        } as any,
+      });
+
+      const client = await auth.getClient();
+      assert.ok(client instanceof GdchClient);
+      assert.strictEqual(
+        (client as GdchClient).apiAudience,
+        'https://explicit-audience.local/'
+      );
+    });
+  });
 });

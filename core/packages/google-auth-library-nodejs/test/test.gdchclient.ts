@@ -366,7 +366,7 @@ describe('GdchClient', () => {
     assert.strictEqual(res.token, 'ca-verified-token');
   });
 
-  it('should cache the CA cert agent and not reread the file or recreate the agent for subsequent requests', async () => {
+  it('should cache the CA cert agent and not reread the file or recreate the agent for subsequent token refreshes', async () => {
     const caCertPath = '/path/to/custom-ca.pem';
     const client = new GdchClient({
       projectId: 'test-project',
@@ -383,34 +383,35 @@ describe('GdchClient', () => {
       return Buffer.from('mock-ca-cert-content');
     });
 
-    const tokenScope = nock('https://token-server.local')
+    const tokenScope1 = nock('https://token-server.local')
       .post('/token')
       .reply(200, {
-        access_token: 'ca-verified-token',
+        access_token: 'ca-verified-token-1',
+        expires_in: 3600,
       });
 
-    const apiScope = nock('https://api-server.local')
-      .get('/data')
+    const tokenScope2 = nock('https://token-server.local')
+      .post('/token')
       .reply(200, {
-        data: 'foo',
+        access_token: 'ca-verified-token-2',
+        expires_in: 3600,
       });
 
-    // 1. First request - Token exchange (which reads caCertPath and sets agent)
-    const res = await client.getAccessToken();
-    assert.strictEqual(res.token, 'ca-verified-token');
-    tokenScope.done();
+    // 1. First token exchange
+    const res1 = await client.getAccessToken();
+    assert.strictEqual(res1.token, 'ca-verified-token-1');
+    tokenScope1.done();
 
-    const opts: any = {
-      url: 'https://api-server.local/data',
-      method: 'GET',
-    };
-    const apiRes = await client.requestAsync(opts);
-    assert.strictEqual(apiRes.status, 200);
-    apiScope.done();
+    // Force expiry to trigger second refresh
+    client.credentials.expiry_date = 1;
 
-    // fs.promises.readFile should only be called once
+    // 2. Second token exchange
+    const res2 = await client.getAccessToken();
+    assert.strictEqual(res2.token, 'ca-verified-token-2');
+    tokenScope2.done();
+
+    // fs.promises.readFile should only be called once because the agent was cached!
     assert.ok(readFileStub.calledOnce);
-    assert.ok(opts.agent);
   });
 
   it('should reload the CA cert if caCertPath changes', async () => {
@@ -424,7 +425,7 @@ describe('GdchClient', () => {
       caCertPath: '/path/to/first-ca.pem',
     });
 
-    const tokenScope = nock('https://token-server.local')
+    const tokenScope1 = nock('https://token-server.local')
       .post('/token')
       .reply(200, {
         access_token: 'exchange-token-abc123',
@@ -435,33 +436,87 @@ describe('GdchClient', () => {
       return Buffer.from(`content-for-${path}`);
     });
 
-    const apiScope1 = nock('https://api-server.local')
-      .get('/data1')
-      .reply(200, {});
-    const apiScope2 = nock('https://api-server.local')
-      .get('/data2')
-      .reply(200, {});
+    const tokenScope2 = nock('https://token-server.local')
+      .post('/token')
+      .reply(200, {
+        access_token: 'exchange-token-xyz789',
+        expires_in: 3600,
+      });
 
-    const opts1: any = {
-      url: 'https://api-server.local/data1',
-    };
-    await client.requestAsync(opts1);
-    apiScope1.done();
-    tokenScope.done();
-    const agent1 = opts1.agent;
+    // 1. First refresh
+    const res1 = await client.getAccessToken();
+    assert.strictEqual(res1.token, 'exchange-token-abc123');
+    tokenScope1.done();
 
-    // Change the path
+    // Change the path and force expiry
     client.caCertPath = '/path/to/second-ca.pem';
+    client.credentials.expiry_date = 1;
 
-    const opts2: any = {
-      url: 'https://api-server.local/data2',
-    };
-    await client.requestAsync(opts2);
-    apiScope2.done();
-    const agent2 = opts2.agent;
+    // 2. Second refresh
+    const res2 = await client.getAccessToken();
+    assert.strictEqual(res2.token, 'exchange-token-xyz789');
+    tokenScope2.done();
 
     assert.ok(readFileStub.calledTwice);
-    assert.notStrictEqual(agent1, agent2);
+  });
+
+  it('should reread the CA cert file if CA_CERT_TTL_MS has expired', async () => {
+    const caCertPath = '/path/to/custom-ca.pem';
+    const client = new GdchClient({
+      projectId: 'test-project',
+      privateKeyId: 'key-id-123',
+      privateKey: privateKeyPemSec1,
+      serviceIdentityName: 'sa-name',
+      tokenServerUri: 'https://token-server.local/token',
+      apiAudience: 'target-audience',
+      caCertPath,
+    });
+
+    const readFileStub = sinon.stub(fs.promises, 'readFile').callsFake(async (path) => {
+      assert.strictEqual(path, caCertPath);
+      return Buffer.from('mock-ca-cert-content');
+    });
+
+    const tokenScope1 = nock('https://token-server.local')
+      .post('/token')
+      .reply(200, {
+        access_token: 'token-1',
+        expires_in: 3600,
+      });
+
+    const tokenScope2 = nock('https://token-server.local')
+      .post('/token')
+      .reply(200, {
+        access_token: 'token-2',
+        expires_in: 3600,
+      });
+
+    let nowTime = Date.now();
+    const dateNowStub = sinon.stub(Date, 'now').callsFake(() => nowTime);
+
+    try {
+      // 1. First token exchange
+      const res1 = await client.getAccessToken();
+      assert.strictEqual(res1.token, 'token-1');
+      tokenScope1.done();
+      assert.ok(readFileStub.calledOnce);
+
+      // Force token expiry
+      client.credentials.expiry_date = 1;
+
+      // Fast-forward time by 5 minutes and 1 second (300001 ms) to expire the cert cache
+      nowTime += 5 * 60 * 1000 + 1;
+
+      // 2. Second token exchange after cert cache expiration
+      const res2 = await client.getAccessToken();
+      assert.strictEqual(res2.token, 'token-2');
+      tokenScope2.done();
+
+      // File should be read a second time!
+      assert.ok(readFileStub.calledTwice);
+    } finally {
+      dateNowStub.restore();
+    }
   });
 
   it('should raise helpful error message if CA cert file is unreadable', async () => {
@@ -534,6 +589,33 @@ describe('GdchClient', () => {
     await assert.rejects(client.getAccessToken(), (err: Error) => {
       assert.ok(err.message.includes('Error getting access token for GDCH service account'));
       assert.ok(err.message.includes('iss: sa-name'));
+      return true;
+    });
+    scope.done();
+  });
+
+  it('should redact subject_token in error response on token exchange failure', async () => {
+    const client = new GdchClient({
+      projectId: 'test-project',
+      privateKeyId: 'key-id-123',
+      privateKey: privateKeyPemSec1,
+      serviceIdentityName: 'sa-name',
+      tokenServerUri: 'https://token-server.local/token',
+      apiAudience: 'target-audience',
+    });
+
+    const scope = nock('https://token-server.local')
+      .post('/token')
+      .reply(400, 'Bad Request');
+
+    await assert.rejects(client.getAccessToken(), (err: any) => {
+      assert.ok(err.message.includes('Error getting access token for GDCH service account'));
+      assert.ok(err.config !== undefined);
+      assert.ok(err.config.data !== undefined);
+      const parsedData = typeof err.config.data === 'string'
+        ? JSON.parse(err.config.data)
+        : err.config.data;
+      assert.strictEqual(parsedData.subject_token, '***REDACTED***');
       return true;
     });
     scope.done();
