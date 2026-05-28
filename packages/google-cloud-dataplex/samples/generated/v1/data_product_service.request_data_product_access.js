@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, dataScan) {
-  // [START dataplex_v1_generated_DataScanService_CreateDataScan_async]
+function main(parent, changeRequest) {
+  // [START dataplex_v1_generated_DataProductService_RequestDataProductAccess_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,53 +29,41 @@ function main(parent, dataScan) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the parent location:
-   *  `projects/{project}/locations/{location_id}`
-   *  where `project` refers to a *project_id* or *project_number* and
-   *  `location_id` refers to a Google Cloud region.
+   *  Required. The resource name of the data product.
+   *  Format:
+   *  projects/{project_number}/locations/{location_id}/dataProducts/{data_product_id}
    */
   // const parent = 'abc123'
   /**
-   *  Required. DataScan resource.
+   *  Required. The change request for the data product access request.
    */
-  // const dataScan = {}
+  // const changeRequest = {}
   /**
-   *  Optional. DataScan identifier. If not provided, a unique ID will be
-   *  generated with the prefix "data-scan-".
-   *  * Must contain only lowercase letters, numbers and hyphens.
-   *  * Must start with a letter.
-   *  * Must end with a number or a letter.
-   *  * Must be between 1-63 characters.
-   *  * Must be unique within the customer project / location.
-   */
-  // const dataScanId = 'abc123'
-  /**
-   *  Optional. Only validate the request, but do not perform mutations.
-   *  The default is `false`.
+   *  Optional. Validates the request without actually creating the access change
+   *  request. Defaults to false.
    */
   // const validateOnly = true
 
   // Imports the Dataplex library
-  const {DataScanServiceClient} = require('@google-cloud/dataplex').v1;
+  const {DataProductServiceClient} = require('@google-cloud/dataplex').v1;
 
   // Instantiates a client
-  const dataplexClient = new DataScanServiceClient();
+  const dataplexClient = new DataProductServiceClient();
 
-  async function callCreateDataScan() {
+  async function callRequestDataProductAccess() {
     // Construct request
     const request = {
       parent,
-      dataScan,
+      changeRequest,
     };
 
     // Run request
-    const [operation] = await dataplexClient.createDataScan(request);
-    const [response] = await operation.promise();
+    const response = await dataplexClient.requestDataProductAccess(request);
     console.log(response);
   }
 
-  callCreateDataScan();
-  // [END dataplex_v1_generated_DataScanService_CreateDataScan_async]
+  callRequestDataProductAccess();
+  // [END dataplex_v1_generated_DataProductService_RequestDataProductAccess_async]
 }
 
 process.on('unhandledRejection', err => {

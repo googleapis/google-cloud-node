@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, dataScan) {
-  // [START dataplex_v1_generated_DataScanService_CreateDataScan_async]
+function main(name) {
+  // [START dataplex_v1_generated_DataScanService_CancelDataScanJob_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,12 @@ function main(parent, dataScan) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the parent location:
-   *  `projects/{project}/locations/{location_id}`
-   *  where `project` refers to a *project_id* or *project_number* and
-   *  `location_id` refers to a Google Cloud region.
+   *  Required. The resource name of the DataScanJob:
+   *  `projects/{project_id_or_number}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
+   *  where `project_id_or_number` refers to a *project_id* or *project_number*
+   *  and `location_id` refers to a Google Cloud region.
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. DataScan resource.
-   */
-  // const dataScan = {}
-  /**
-   *  Optional. DataScan identifier. If not provided, a unique ID will be
-   *  generated with the prefix "data-scan-".
-   *  * Must contain only lowercase letters, numbers and hyphens.
-   *  * Must start with a letter.
-   *  * Must end with a number or a letter.
-   *  * Must be between 1-63 characters.
-   *  * Must be unique within the customer project / location.
-   */
-  // const dataScanId = 'abc123'
-  /**
-   *  Optional. Only validate the request, but do not perform mutations.
-   *  The default is `false`.
-   */
-  // const validateOnly = true
+  // const name = 'abc123'
 
   // Imports the Dataplex library
   const {DataScanServiceClient} = require('@google-cloud/dataplex').v1;
@@ -61,21 +42,19 @@ function main(parent, dataScan) {
   // Instantiates a client
   const dataplexClient = new DataScanServiceClient();
 
-  async function callCreateDataScan() {
+  async function callCancelDataScanJob() {
     // Construct request
     const request = {
-      parent,
-      dataScan,
+      name,
     };
 
     // Run request
-    const [operation] = await dataplexClient.createDataScan(request);
-    const [response] = await operation.promise();
+    const response = await dataplexClient.cancelDataScanJob(request);
     console.log(response);
   }
 
-  callCreateDataScan();
-  // [END dataplex_v1_generated_DataScanService_CreateDataScan_async]
+  callCancelDataScanJob();
+  // [END dataplex_v1_generated_DataScanService_CancelDataScanJob_async]
 }
 
 process.on('unhandledRejection', err => {

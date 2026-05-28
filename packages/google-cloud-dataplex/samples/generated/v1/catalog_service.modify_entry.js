@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name, resources) {
-  // [START dataplex_v1_generated_CatalogService_LookupContext_async]
+function main(name, entry) {
+  // [START dataplex_v1_generated_CatalogService_ModifyEntry_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -34,27 +34,39 @@ function main(name, resources) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The entry names to look up the context for. The maximum number of
-   *  resources for a request is limited to 10.
-   *  ## Examples:
-   *  `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`
+   *  Required. The entry to modify.
    */
-  // const resources = ['abc','def']
+  // const entry = {}
   /**
-   *  Optional. The text representing contextual information for which metadata
-   *  context is being requested.
+   *  Optional. Mask of fields to update. To update Aspects, the update_mask must
+   *  contain the value "aspects".
+   *  If the update_mask is empty, the service will update all modifiable fields
+   *  present in the request.
    */
-  // const context = 'abc123'
+  // const updateMask = {}
   /**
-   *  Optional. Allows to configure the context.
-   *  Supported options:
-   *  - `format` - The format of the context (one of `yaml`,
-   *  `xml`, `json`, default is `yaml`).
-   *  - `context_budget` - If provided, the output will be intelligently
-   *  truncated on a best-effort basis to contain approximately the desired
-   *  amount of characters. There is no guarantee to achieve the specific amount.
+   *  Optional. If set to true, any aspects not specified in the request will be
+   *  deleted. The default is false.
    */
-  // const options = [1,2,3,4]
+  // const deleteMissingAspects = true
+  /**
+   *  Optional. The aspect keys which the service should modify. It supports
+   *  the following syntaxes:
+   *  * `<aspect_type_reference>` - matches an aspect of the given type and empty
+   *  path.
+   *  * `<aspect_type_reference>@path` - matches an aspect of the given type and
+   *  specified path. For example, to attach an aspect to a field that is
+   *  specified by the `schema` aspect, the path should have the format
+   *  `Schema.<field_name>`.
+   *  * `<aspect_type_reference>@*` - matches aspects of the given type for all
+   *  paths.
+   *  * `*@path` - matches aspects of all types on the given path.
+   *  The service will not remove existing aspects matching the syntax unless
+   *  `delete_missing_aspects` is set to true.
+   *  If this field is left empty, the service treats it as specifying
+   *  exactly those Aspects present in the request.
+   */
+  // const aspectKeys = ['abc','def']
 
   // Imports the Dataplex library
   const {CatalogServiceClient} = require('@google-cloud/dataplex').v1;
@@ -62,20 +74,20 @@ function main(name, resources) {
   // Instantiates a client
   const dataplexClient = new CatalogServiceClient();
 
-  async function callLookupContext() {
+  async function callModifyEntry() {
     // Construct request
     const request = {
       name,
-      resources,
+      entry,
     };
 
     // Run request
-    const response = await dataplexClient.lookupContext(request);
+    const response = await dataplexClient.modifyEntry(request);
     console.log(response);
   }
 
-  callLookupContext();
-  // [END dataplex_v1_generated_CatalogService_LookupContext_async]
+  callModifyEntry();
+  // [END dataplex_v1_generated_CatalogService_ModifyEntry_async]
 }
 
 process.on('unhandledRejection', err => {
