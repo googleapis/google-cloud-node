@@ -276,3 +276,12 @@ export function isError(value: any): boolean {
     Object.prototype.toString.call(value) === '[object Error]'
   );
 }
+
+/**
+ * Checks if a value is a UUID.
+ * @param {*} value The value to check.
+ * @returns {Boolean} `true` if the value is a UUID, otherwise `false`.
+ */
+export function isUuid(value: any): boolean {
+  return typeof value === 'string' && /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/i.test(value);
+}
