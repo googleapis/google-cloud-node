@@ -190,7 +190,40 @@ describe('GdchClient', () => {
     }, /Audience cannot be null or empty/);
   });
 
-  it('should perform token exchange successfully with valid assertion signature (SEC1 key)', async () => {
+  it('should request token correctly', async () => {
+    const client = new GdchClient({
+      projectId: 'test-project',
+      privateKeyId: 'key-id-123',
+      privateKey: privateKeyPemSec1,
+      serviceIdentityName: 'sa-name',
+      tokenServerUri: 'https://token-server.local/token',
+      apiAudience: 'target-audience',
+      lifetime: 1800,
+    });
+
+    const scope = nock('https://token-server.local')
+      .post('/token', (body) => {
+        assert.strictEqual(body.audience, 'target-audience');
+        assert.strictEqual(body.grant_type, 'urn:ietf:params:oauth:token-type:token-exchange');
+        assert.strictEqual(body.requested_token_type, 'urn:ietf:params:oauth:token-type:access_token');
+        assert.strictEqual(body.subject_token_type, 'urn:k8s:params:oauth:token-type:serviceaccount');
+        assert.ok(body.subject_token);
+        return true;
+      })
+      .reply(200, {
+        access_token: 'exchange-token-abc123',
+        expires_in: 3600,
+      });
+
+    const res = await client.getAccessToken();
+    scope.done();
+
+    assert.strictEqual(res.token, 'exchange-token-abc123');
+    assert.strictEqual(client.credentials.access_token, 'exchange-token-abc123');
+    assert.ok(client.credentials.expiry_date);
+  });
+
+  it('should generate assertion signature with correct header and payload properties', async () => {
     const client = new GdchClient({
       projectId: 'test-project',
       privateKeyId: 'key-id-123',
@@ -205,11 +238,6 @@ describe('GdchClient', () => {
 
     const scope = nock('https://token-server.local')
       .post('/token', (body) => {
-        assert.strictEqual(body.audience, 'target-audience');
-        assert.strictEqual(body.grant_type, 'urn:ietf:params:oauth:token-type:token-exchange');
-        assert.strictEqual(body.requested_token_type, 'urn:ietf:params:oauth:token-type:access_token');
-        assert.strictEqual(body.subject_token_type, 'urn:k8s:params:oauth:token-type:serviceaccount');
-        assert.ok(body.subject_token);
         interceptedAssertion = body.subject_token;
         return true;
       })
@@ -218,12 +246,8 @@ describe('GdchClient', () => {
         expires_in: 3600,
       });
 
-    const res = await client.getAccessToken();
+    await client.getAccessToken();
     scope.done();
-
-    assert.strictEqual(res.token, 'exchange-token-abc123');
-    assert.strictEqual(client.credentials.access_token, 'exchange-token-abc123');
-    assert.ok(client.credentials.expiry_date);
 
     // Validate assertion signature
     const parts = interceptedAssertion.split('.');
@@ -241,6 +265,36 @@ describe('GdchClient', () => {
     assert.strictEqual(payload.aud, 'https://token-server.local/token');
     assert.ok(payload.iat);
     assert.strictEqual(payload.exp, payload.iat + 1800);
+  });
+
+  it('should generate assertion signature that can be verified with the public key', async () => {
+    const client = new GdchClient({
+      projectId: 'test-project',
+      privateKeyId: 'key-id-123',
+      privateKey: privateKeyPemSec1,
+      serviceIdentityName: 'sa-name',
+      tokenServerUri: 'https://token-server.local/token',
+      apiAudience: 'target-audience',
+      lifetime: 1800,
+    });
+
+    let interceptedAssertion = '';
+
+    const scope = nock('https://token-server.local')
+      .post('/token', (body) => {
+        interceptedAssertion = body.subject_token;
+        return true;
+      })
+      .reply(200, {
+        access_token: 'exchange-token-abc123',
+        expires_in: 3600,
+      });
+
+    await client.getAccessToken();
+    scope.done();
+
+    const parts = interceptedAssertion.split('.');
+    assert.strictEqual(parts.length, 3);
 
     // Verify Signature using the Public Key
     const signingInput = `${parts[0]}.${parts[1]}`;
