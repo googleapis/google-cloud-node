@@ -190,6 +190,13 @@ export class GdchClient extends OAuth2Client {
       },
       data,
       responseType: 'json',
+      timeout: 10000,
+      retry: true,
+      retryConfig: {
+        httpMethodsToRetry: ['POST'],
+        statusCodesToRetry: [[500, 599]],
+        noResponseRetries: 3,
+      },
     };
 
     if (this.caCertPath) {
@@ -322,6 +329,22 @@ export class GdchClient extends OAuth2Client {
     })();
 
     return this.caAgentPromise;
+  }
+
+  toJSON(): Record<string, any> {
+    return {
+      ...this,
+      privateKey: this.privateKey ? '***REDACTED***' : undefined,
+      credentials: {
+        ...this.credentials,
+        access_token: this.credentials?.access_token ? '***REDACTED***' : undefined,
+        refresh_token: this.credentials?.refresh_token ? '***REDACTED***' : undefined,
+      },
+    };
+  }
+
+  [Symbol.for('nodejs.util.inspect.custom')]() {
+    return this.toJSON();
   }
 
   private base64UrlEncode(str: string | Buffer): string {

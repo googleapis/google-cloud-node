@@ -223,6 +223,40 @@ describe('GdchClient', () => {
     assert.ok(client.credentials.expiry_date);
   });
 
+  it('should request token with configured timeout and retry settings', async () => {
+    const client = new GdchClient({
+      projectId: 'test-project',
+      privateKeyId: 'key-id-123',
+      privateKey: privateKeyPemSec1,
+      serviceIdentityName: 'sa-name',
+      tokenServerUri: 'https://token-server.local/token',
+      apiAudience: 'target-audience',
+    });
+
+    const requestStub = sinon.stub(client.transporter, 'request').resolves({
+      data: {
+        access_token: 'mocked-token',
+        expires_in: 3600,
+      },
+      status: 200,
+      statusText: 'OK',
+      headers: {},
+      config: {},
+    } as any);
+
+    await client.getAccessToken();
+
+    assert.ok(requestStub.calledOnce);
+    const requestOpts = requestStub.firstCall.args[0] as any;
+    assert.strictEqual(requestOpts.timeout, 10000);
+    assert.strictEqual(requestOpts.retry, true);
+    assert.deepStrictEqual(requestOpts.retryConfig, {
+      httpMethodsToRetry: ['POST'],
+      statusCodesToRetry: [[500, 599]],
+      noResponseRetries: 3,
+    });
+  });
+
   it('should generate assertion signature with correct header and payload properties', async () => {
     const client = new GdchClient({
       projectId: 'test-project',
@@ -699,6 +733,52 @@ describe('GdchClient', () => {
 
       assert.ok(readFileStub.notCalled);
       assert.strictEqual(opts.agent, undefined);
+    });
+  });
+
+  describe('serialization and logging safety', () => {
+    it('should redact private key and credentials in toJSON() serialization', () => {
+      const client = new GdchClient({
+        projectId: 'test-project',
+        privateKeyId: 'key-id-123',
+        privateKey: 'raw-secret-private-key',
+        serviceIdentityName: 'sa-name',
+      });
+
+      client.credentials = {
+        access_token: 'secret-access-token-abc123',
+        refresh_token: 'secret-refresh-token-xyz789',
+      };
+
+      const serialized = client.toJSON();
+
+      assert.strictEqual(serialized.projectId, 'test-project');
+      assert.strictEqual(serialized.privateKeyId, 'key-id-123');
+      assert.strictEqual(serialized.privateKey, '***REDACTED***');
+      assert.strictEqual(serialized.credentials.access_token, '***REDACTED***');
+      assert.strictEqual(serialized.credentials.refresh_token, '***REDACTED***');
+    });
+
+    it('should redact private key and credentials in custom inspect console output', () => {
+      const client = new GdchClient({
+        projectId: 'test-project',
+        privateKeyId: 'key-id-123',
+        privateKey: 'raw-secret-private-key',
+        serviceIdentityName: 'sa-name',
+      });
+
+      client.credentials = {
+        access_token: 'secret-access-token-abc123',
+        refresh_token: 'secret-refresh-token-xyz789',
+      };
+
+      const customInspectSymbol = Symbol.for('nodejs.util.inspect.custom');
+      const inspected = (client as any)[customInspectSymbol]();
+
+      assert.strictEqual(inspected.projectId, 'test-project');
+      assert.strictEqual(inspected.privateKey, '***REDACTED***');
+      assert.strictEqual(inspected.credentials.access_token, '***REDACTED***');
+      assert.strictEqual(inspected.credentials.refresh_token, '***REDACTED***');
     });
   });
 
