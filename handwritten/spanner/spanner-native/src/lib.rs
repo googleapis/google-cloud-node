@@ -228,7 +228,7 @@ pub fn execute_sql_native(
             None => {
                 tsfn.call(
                     Err(napi::Error::from_reason("GCP Authentication Provider was not initialized at startup")),
-                    ThreadSafeFunctionCallMode::NonBlocking
+                    ThreadsafeFunctionCallMode::NonBlocking
                 );
                 return;
             }
@@ -239,7 +239,7 @@ pub fn execute_sql_native(
             Err(e) => {
                 tsfn.call(
                     Err(napi::Error::from_reason(format!("Failed to fetch GCP token in Rust: {}", e))),
-                    ThreadSafeFunctionCallMode::NonBlocking
+                    ThreadsafeFunctionCallMode::NonBlocking
                 );
                 return;
             }
