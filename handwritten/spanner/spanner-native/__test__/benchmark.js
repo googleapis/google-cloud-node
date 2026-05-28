@@ -265,6 +265,109 @@ async function runFixedCountBenchmark(executeFn, concurrency, totalRequests) {
   });
 }
 
+/**
+ * Runs advanced verification plan tests (Test 1 to Test 4) under multiplexed sessions.
+ */
+async function runVerificationPlanTests(db) {
+  console.log('\n' + '='.repeat(100));
+  console.log('STARTING ADVANCED SYSTEMS VERIFICATION PLAN SUITE');
+  console.log('='.repeat(100));
+
+  // ------------------------------------------------------------------
+  // TEST 1: Varying Result Set Size (Read Volume Scaling)
+  // ------------------------------------------------------------------
+  console.log('\n[TEST 1: Varying Result Set Size (Read Volume Scaling)]');
+  console.log('Goal: Profile V8 N-API object allocation limits under growing payloads.');
+  
+  const t1Queries = [
+    { label: 'Small (LIMIT 1, ~100B)', sql: `SELECT * FROM ${TABLE} LIMIT 1` },
+    { label: 'Medium (LIMIT 100, ~10KB)', sql: `SELECT * FROM ${TABLE} LIMIT 100` },
+    { label: 'Large (LIMIT 1000, ~100KB)', sql: `SELECT * FROM ${TABLE} LIMIT 1000` }
+  ];
+
+  for (const q of t1Queries) {
+    console.log(`  Executing: ${q.label}...`);
+    const js = await runBenchmark(() => db.executeSqlJs(q.sql), 16, 5000); // 16 concurrency, 5s duration
+    const rust = await runBenchmark(() => db.executeSqlNative(q.sql, 16), 16, 5000);
+    console.log(`    JavaScript QPS / Lag: ${js.qps.toFixed(1)} QPS / ${js.avgLagMs.toFixed(2)}ms`);
+    console.log(`    Rust (16 Ch) QPS / Lag: ${rust.qps.toFixed(1)} QPS / ${rust.avgLagMs.toFixed(2)}ms`);
+    console.log(`    Speedup / Lat Imp   : ${(rust.qps / js.qps).toFixed(2)}x / ${(((js.p95 - rust.p95) / js.p95) * 100).toFixed(1)}%`);
+  }
+
+  // ------------------------------------------------------------------
+  // TEST 2: Wide Rows with Mixed Spanner Types
+  // ------------------------------------------------------------------
+  console.log('\n[TEST 2: Wide Rows with Mixed Spanner Types]');
+  console.log('Goal: Verify correctness and performance of Spanner-specific primitive types.');
+  
+  const typeQuery = `
+    SELECT 
+      CAST(9223372036854775807 AS INT64) AS max_int64,
+      CAST(123.456 AS FLOAT64) AS float_col,
+      'hello spanner string' AS string_col,
+      true AS bool_col,
+      CURRENT_TIMESTAMP() AS timestamp_col,
+      CURRENT_DATE() AS date_col,
+      CAST('base64bytes' AS BYTES) AS bytes_col,
+      JSON '{"spanner_key": "spanner_val"}' AS json_col,
+      CAST(123456789.123456789 AS NUMERIC) AS numeric_col,
+      ['arr1', 'arr2', 'arr3'] AS array_col
+  `;
+
+  console.log('  Verifying data type correctness...');
+  const [jsRows] = await db.database.run({ sql: typeQuery });
+  const jsMapped = jsRows.map(row => {
+    const json = row.toJSON();
+    return Object.values(json).map(v => String(v ?? 'null'));
+  });
+  const rustMapped = await db.executeSqlNative(typeQuery, 4);
+  
+  console.log('    JavaScript returned:', JSON.stringify(jsMapped[0]));
+  console.log('    Rust Native returned:', JSON.stringify(rustMapped[0]));
+  
+  const isCorrect = JSON.stringify(jsMapped[0]) === JSON.stringify(rustMapped[0]);
+  console.log(`    Correctness Verification: ${isCorrect ? '\x1b[32mPASS (Identical Output)\x1b[0m' : '\x1b[31mFAIL (Type Mismatch)\x1b[0m'}`);
+
+  // ------------------------------------------------------------------
+  // TEST 3: Read with Parameters (Parameterized Queries)
+  // ------------------------------------------------------------------
+  console.log('\n[TEST 3: Read with Parameters (Parameterized Queries)]');
+  console.log('Goal: Profile request parameter encoding path.');
+  console.log('  Current Status: Bypassed. Parameter serialization requires a dedicated Rust napi layer.');
+  console.log('  Verification Status: \x1b[33mSKIPPED (Planned for Production)\x1b[0m');
+
+  // ------------------------------------------------------------------
+  // TEST 4: High Concurrency with Session Pool Pressure
+  // ------------------------------------------------------------------
+  console.log('\n[TEST 4: High Concurrency with Session Pool Pressure]');
+  console.log('Goal: Compare standard session pool locks against lock-free cached multiplexed sessions.');
+  
+  const stressConcurrency = 64;
+
+  // Scenario 4a: Standard Session Pool (Disabled Multiplexing)
+  console.log('  Running Scenario 4a: Standard Session Pool (Multiplexing: OFF)...');
+  process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
+  // Force connection/pool reset to recreate standard pool
+  const standardDb = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE);
+  // Small warmup
+  await runBenchmark(() => standardDb.executeSqlJs(SQL), 4, 3000);
+  const poolJs = await runBenchmark(() => standardDb.executeSqlJs(SQL), stressConcurrency, 5000);
+  const poolRust = await runBenchmark(() => standardDb.executeSqlNative(SQL, 16), stressConcurrency, 5000);
+  await standardDb.database.close(); // close the standard db
+
+  // Scenario 4b: Multiplexed Session (Enabled Multiplexing)
+  console.log('  Running Scenario 4b: Multiplexed Session (Multiplexing: ON)...');
+  process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
+  const multiJs = await runBenchmark(() => db.executeSqlJs(SQL), stressConcurrency, 5000);
+  const multiRust = await runBenchmark(() => db.executeSqlNative(SQL, 16), stressConcurrency, 5000);
+
+  console.log('\n  [Test 4 Results Comparison]');
+  console.log(`    Standard Pool (OFF) QPS: JS ${poolJs.qps.toFixed(1)} / Rust ${poolRust.qps.toFixed(1)} (Error Rate: ${poolJs.errorRate * 100}%)`);
+  console.log(`    Multiplexed (ON) QPS   : JS ${multiJs.qps.toFixed(1)} / Rust ${multiRust.qps.toFixed(1)} (Error Rate: ${multiJs.errorRate * 100}%)`);
+  
+  console.log('='.repeat(100) + '\n');
+}
+
 async function main() {
   // Validate placeholder values
   if (
@@ -298,7 +401,12 @@ async function main() {
   await runBenchmark(() => db.executeSqlNative(SQL, 16), 4, WARMUP_MS);
   await runBenchmark(() => db.executeSqlNative(SQL, 32), 4, WARMUP_MS);
   await runBenchmark(() => db.executeSqlNative(SQL, 50), 4, WARMUP_MS);
-  console.log('Warmup complete. Executing customer replication benchmark cases (110 Concurrency, 1000 Total Requests)...');
+  console.log('Warmup complete.');
+
+  // Run Advanced Systems Verification Plan tests (Test 1 to 4)
+  await runVerificationPlanTests(db);
+
+  console.log('Executing customer replication benchmark cases (110 Concurrency, 1000 Total Requests)...');
   console.log('='.repeat(100));
 
   // 1. JS Baseline Customer Case
