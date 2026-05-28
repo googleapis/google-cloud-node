@@ -195,6 +195,9 @@ pub fn execute_sql_native(
     channel_count: i32,
     callback: JsFunction,
 ) -> napi::Result<()> {
+    // Force eager evaluation of connection channels pool and authentication static
+    let _ = &*CHANNELS;
+
     // Create a ThreadsafeFunction from the JS callback.
     // Closure executes back on the V8 thread to translate results to JS Array.
     let tsfn: ThreadsafeFunction<
