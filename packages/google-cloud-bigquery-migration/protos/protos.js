@@ -75,6 +75,542 @@
                          */
                         var v2 = {};
     
+                        v2.AssessmentTaskDetails = (function() {
+    
+                            /**
+                             * Properties of an AssessmentTaskDetails.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface IAssessmentTaskDetails
+                             * @property {string|null} [inputPath] AssessmentTaskDetails inputPath
+                             * @property {string|null} [outputDataset] AssessmentTaskDetails outputDataset
+                             * @property {string|null} [querylogsPath] AssessmentTaskDetails querylogsPath
+                             * @property {string|null} [dataSource] AssessmentTaskDetails dataSource
+                             * @property {google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle|null} [featureHandle] AssessmentTaskDetails featureHandle
+                             */
+    
+                            /**
+                             * Constructs a new AssessmentTaskDetails.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents an AssessmentTaskDetails.
+                             * @implements IAssessmentTaskDetails
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.IAssessmentTaskDetails=} [properties] Properties to set
+                             */
+                            function AssessmentTaskDetails(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AssessmentTaskDetails inputPath.
+                             * @member {string} inputPath
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @instance
+                             */
+                            AssessmentTaskDetails.prototype.inputPath = "";
+    
+                            /**
+                             * AssessmentTaskDetails outputDataset.
+                             * @member {string} outputDataset
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @instance
+                             */
+                            AssessmentTaskDetails.prototype.outputDataset = "";
+    
+                            /**
+                             * AssessmentTaskDetails querylogsPath.
+                             * @member {string} querylogsPath
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @instance
+                             */
+                            AssessmentTaskDetails.prototype.querylogsPath = "";
+    
+                            /**
+                             * AssessmentTaskDetails dataSource.
+                             * @member {string} dataSource
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @instance
+                             */
+                            AssessmentTaskDetails.prototype.dataSource = "";
+    
+                            /**
+                             * AssessmentTaskDetails featureHandle.
+                             * @member {google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle|null|undefined} featureHandle
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @instance
+                             */
+                            AssessmentTaskDetails.prototype.featureHandle = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(AssessmentTaskDetails.prototype, "_featureHandle", {
+                                get: $util.oneOfGetter($oneOfFields = ["featureHandle"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new AssessmentTaskDetails instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IAssessmentTaskDetails=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.AssessmentTaskDetails} AssessmentTaskDetails instance
+                             */
+                            AssessmentTaskDetails.create = function create(properties) {
+                                return new AssessmentTaskDetails(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AssessmentTaskDetails message. Does not implicitly {@link google.cloud.bigquery.migration.v2.AssessmentTaskDetails.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IAssessmentTaskDetails} message AssessmentTaskDetails message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AssessmentTaskDetails.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.inputPath != null && Object.hasOwnProperty.call(message, "inputPath"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.inputPath);
+                                if (message.outputDataset != null && Object.hasOwnProperty.call(message, "outputDataset"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.outputDataset);
+                                if (message.querylogsPath != null && Object.hasOwnProperty.call(message, "querylogsPath"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.querylogsPath);
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.dataSource);
+                                if (message.featureHandle != null && Object.hasOwnProperty.call(message, "featureHandle"))
+                                    $root.google.cloud.bigquery.migration.v2.AssessmentFeatureHandle.encode(message.featureHandle, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AssessmentTaskDetails message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.AssessmentTaskDetails.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IAssessmentTaskDetails} message AssessmentTaskDetails message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AssessmentTaskDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AssessmentTaskDetails message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.AssessmentTaskDetails} AssessmentTaskDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AssessmentTaskDetails.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.AssessmentTaskDetails();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.inputPath = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.outputDataset = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.querylogsPath = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.dataSource = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.featureHandle = $root.google.cloud.bigquery.migration.v2.AssessmentFeatureHandle.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AssessmentTaskDetails message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.AssessmentTaskDetails} AssessmentTaskDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AssessmentTaskDetails.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AssessmentTaskDetails message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AssessmentTaskDetails.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.inputPath != null && message.hasOwnProperty("inputPath"))
+                                    if (!$util.isString(message.inputPath))
+                                        return "inputPath: string expected";
+                                if (message.outputDataset != null && message.hasOwnProperty("outputDataset"))
+                                    if (!$util.isString(message.outputDataset))
+                                        return "outputDataset: string expected";
+                                if (message.querylogsPath != null && message.hasOwnProperty("querylogsPath"))
+                                    if (!$util.isString(message.querylogsPath))
+                                        return "querylogsPath: string expected";
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                    if (!$util.isString(message.dataSource))
+                                        return "dataSource: string expected";
+                                if (message.featureHandle != null && message.hasOwnProperty("featureHandle")) {
+                                    properties._featureHandle = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.AssessmentFeatureHandle.verify(message.featureHandle);
+                                        if (error)
+                                            return "featureHandle." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AssessmentTaskDetails message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.AssessmentTaskDetails} AssessmentTaskDetails
+                             */
+                            AssessmentTaskDetails.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.AssessmentTaskDetails)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.AssessmentTaskDetails();
+                                if (object.inputPath != null)
+                                    message.inputPath = String(object.inputPath);
+                                if (object.outputDataset != null)
+                                    message.outputDataset = String(object.outputDataset);
+                                if (object.querylogsPath != null)
+                                    message.querylogsPath = String(object.querylogsPath);
+                                if (object.dataSource != null)
+                                    message.dataSource = String(object.dataSource);
+                                if (object.featureHandle != null) {
+                                    if (typeof object.featureHandle !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.AssessmentTaskDetails.featureHandle: object expected");
+                                    message.featureHandle = $root.google.cloud.bigquery.migration.v2.AssessmentFeatureHandle.fromObject(object.featureHandle);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AssessmentTaskDetails message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.AssessmentTaskDetails} message AssessmentTaskDetails
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AssessmentTaskDetails.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.inputPath = "";
+                                    object.outputDataset = "";
+                                    object.querylogsPath = "";
+                                    object.dataSource = "";
+                                }
+                                if (message.inputPath != null && message.hasOwnProperty("inputPath"))
+                                    object.inputPath = message.inputPath;
+                                if (message.outputDataset != null && message.hasOwnProperty("outputDataset"))
+                                    object.outputDataset = message.outputDataset;
+                                if (message.querylogsPath != null && message.hasOwnProperty("querylogsPath"))
+                                    object.querylogsPath = message.querylogsPath;
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                    object.dataSource = message.dataSource;
+                                if (message.featureHandle != null && message.hasOwnProperty("featureHandle")) {
+                                    object.featureHandle = $root.google.cloud.bigquery.migration.v2.AssessmentFeatureHandle.toObject(message.featureHandle, options);
+                                    if (options.oneofs)
+                                        object._featureHandle = "featureHandle";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AssessmentTaskDetails to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AssessmentTaskDetails.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AssessmentTaskDetails
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentTaskDetails
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AssessmentTaskDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.AssessmentTaskDetails";
+                            };
+    
+                            return AssessmentTaskDetails;
+                        })();
+    
+                        v2.AssessmentFeatureHandle = (function() {
+    
+                            /**
+                             * Properties of an AssessmentFeatureHandle.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface IAssessmentFeatureHandle
+                             * @property {boolean|null} [addShareableDataset] AssessmentFeatureHandle addShareableDataset
+                             */
+    
+                            /**
+                             * Constructs a new AssessmentFeatureHandle.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents an AssessmentFeatureHandle.
+                             * @implements IAssessmentFeatureHandle
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle=} [properties] Properties to set
+                             */
+                            function AssessmentFeatureHandle(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AssessmentFeatureHandle addShareableDataset.
+                             * @member {boolean|null|undefined} addShareableDataset
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @instance
+                             */
+                            AssessmentFeatureHandle.prototype.addShareableDataset = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(AssessmentFeatureHandle.prototype, "_addShareableDataset", {
+                                get: $util.oneOfGetter($oneOfFields = ["addShareableDataset"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new AssessmentFeatureHandle instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.AssessmentFeatureHandle} AssessmentFeatureHandle instance
+                             */
+                            AssessmentFeatureHandle.create = function create(properties) {
+                                return new AssessmentFeatureHandle(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AssessmentFeatureHandle message. Does not implicitly {@link google.cloud.bigquery.migration.v2.AssessmentFeatureHandle.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle} message AssessmentFeatureHandle message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AssessmentFeatureHandle.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.addShareableDataset != null && Object.hasOwnProperty.call(message, "addShareableDataset"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.addShareableDataset);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AssessmentFeatureHandle message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.AssessmentFeatureHandle.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle} message AssessmentFeatureHandle message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AssessmentFeatureHandle.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AssessmentFeatureHandle message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.AssessmentFeatureHandle} AssessmentFeatureHandle
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AssessmentFeatureHandle.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.AssessmentFeatureHandle();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.addShareableDataset = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AssessmentFeatureHandle message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.AssessmentFeatureHandle} AssessmentFeatureHandle
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AssessmentFeatureHandle.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AssessmentFeatureHandle message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AssessmentFeatureHandle.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.addShareableDataset != null && message.hasOwnProperty("addShareableDataset")) {
+                                    properties._addShareableDataset = 1;
+                                    if (typeof message.addShareableDataset !== "boolean")
+                                        return "addShareableDataset: boolean expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AssessmentFeatureHandle message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.AssessmentFeatureHandle} AssessmentFeatureHandle
+                             */
+                            AssessmentFeatureHandle.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.AssessmentFeatureHandle)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.AssessmentFeatureHandle();
+                                if (object.addShareableDataset != null)
+                                    message.addShareableDataset = Boolean(object.addShareableDataset);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AssessmentFeatureHandle message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.AssessmentFeatureHandle} message AssessmentFeatureHandle
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AssessmentFeatureHandle.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.addShareableDataset != null && message.hasOwnProperty("addShareableDataset")) {
+                                    object.addShareableDataset = message.addShareableDataset;
+                                    if (options.oneofs)
+                                        object._addShareableDataset = "addShareableDataset";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AssessmentFeatureHandle to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AssessmentFeatureHandle.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AssessmentFeatureHandle
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.AssessmentFeatureHandle
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AssessmentFeatureHandle.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.AssessmentFeatureHandle";
+                            };
+    
+                            return AssessmentFeatureHandle;
+                        })();
+    
                         v2.MigrationWorkflow = (function() {
     
                             /**
@@ -509,6 +1045,7 @@
                              * Properties of a MigrationTask.
                              * @memberof google.cloud.bigquery.migration.v2
                              * @interface IMigrationTask
+                             * @property {google.cloud.bigquery.migration.v2.IAssessmentTaskDetails|null} [assessmentTaskDetails] MigrationTask assessmentTaskDetails
                              * @property {google.cloud.bigquery.migration.v2.ITranslationConfigDetails|null} [translationConfigDetails] MigrationTask translationConfigDetails
                              * @property {google.cloud.bigquery.migration.v2.ITranslationDetails|null} [translationDetails] MigrationTask translationDetails
                              * @property {string|null} [id] MigrationTask id
@@ -541,6 +1078,14 @@
                                         if (properties[keys[i]] != null)
                                             this[keys[i]] = properties[keys[i]];
                             }
+    
+                            /**
+                             * MigrationTask assessmentTaskDetails.
+                             * @member {google.cloud.bigquery.migration.v2.IAssessmentTaskDetails|null|undefined} assessmentTaskDetails
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTask
+                             * @instance
+                             */
+                            MigrationTask.prototype.assessmentTaskDetails = null;
     
                             /**
                              * MigrationTask translationConfigDetails.
@@ -659,12 +1204,12 @@
     
                             /**
                              * MigrationTask taskDetails.
-                             * @member {"translationConfigDetails"|"translationDetails"|undefined} taskDetails
+                             * @member {"assessmentTaskDetails"|"translationConfigDetails"|"translationDetails"|undefined} taskDetails
                              * @memberof google.cloud.bigquery.migration.v2.MigrationTask
                              * @instance
                              */
                             Object.defineProperty(MigrationTask.prototype, "taskDetails", {
-                                get: $util.oneOfGetter($oneOfFields = ["translationConfigDetails", "translationDetails"]),
+                                get: $util.oneOfGetter($oneOfFields = ["assessmentTaskDetails", "translationConfigDetails", "translationDetails"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -704,6 +1249,8 @@
                                     $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 if (message.lastUpdateTime != null && Object.hasOwnProperty.call(message, "lastUpdateTime"))
                                     $root.google.protobuf.Timestamp.encode(message.lastUpdateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.assessmentTaskDetails != null && Object.hasOwnProperty.call(message, "assessmentTaskDetails"))
+                                    $root.google.cloud.bigquery.migration.v2.AssessmentTaskDetails.encode(message.assessmentTaskDetails, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                                 if (message.translationConfigDetails != null && Object.hasOwnProperty.call(message, "translationConfigDetails"))
                                     $root.google.cloud.bigquery.migration.v2.TranslationConfigDetails.encode(message.translationConfigDetails, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                                 if (message.translationDetails != null && Object.hasOwnProperty.call(message, "translationDetails"))
@@ -758,6 +1305,10 @@
                                     if (tag === error)
                                         break;
                                     switch (tag >>> 3) {
+                                    case 12: {
+                                            message.assessmentTaskDetails = $root.google.cloud.bigquery.migration.v2.AssessmentTaskDetails.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 14: {
                                             message.translationConfigDetails = $root.google.cloud.bigquery.migration.v2.TranslationConfigDetails.decode(reader, reader.uint32());
                                             break;
@@ -854,7 +1405,17 @@
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
                                 var properties = {};
+                                if (message.assessmentTaskDetails != null && message.hasOwnProperty("assessmentTaskDetails")) {
+                                    properties.taskDetails = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.AssessmentTaskDetails.verify(message.assessmentTaskDetails);
+                                        if (error)
+                                            return "assessmentTaskDetails." + error;
+                                    }
+                                }
                                 if (message.translationConfigDetails != null && message.hasOwnProperty("translationConfigDetails")) {
+                                    if (properties.taskDetails === 1)
+                                        return "taskDetails: multiple values";
                                     properties.taskDetails = 1;
                                     {
                                         var error = $root.google.cloud.bigquery.migration.v2.TranslationConfigDetails.verify(message.translationConfigDetails);
@@ -953,6 +1514,11 @@
                                 if (object instanceof $root.google.cloud.bigquery.migration.v2.MigrationTask)
                                     return object;
                                 var message = new $root.google.cloud.bigquery.migration.v2.MigrationTask();
+                                if (object.assessmentTaskDetails != null) {
+                                    if (typeof object.assessmentTaskDetails !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTask.assessmentTaskDetails: object expected");
+                                    message.assessmentTaskDetails = $root.google.cloud.bigquery.migration.v2.AssessmentTaskDetails.fromObject(object.assessmentTaskDetails);
+                                }
                                 if (object.translationConfigDetails != null) {
                                     if (typeof object.translationConfigDetails !== "object")
                                         throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTask.translationConfigDetails: object expected");
@@ -1093,6 +1659,11 @@
                                     object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                                 if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime"))
                                     object.lastUpdateTime = $root.google.protobuf.Timestamp.toObject(message.lastUpdateTime, options);
+                                if (message.assessmentTaskDetails != null && message.hasOwnProperty("assessmentTaskDetails")) {
+                                    object.assessmentTaskDetails = $root.google.cloud.bigquery.migration.v2.AssessmentTaskDetails.toObject(message.assessmentTaskDetails, options);
+                                    if (options.oneofs)
+                                        object.taskDetails = "assessmentTaskDetails";
+                                }
                                 if (message.translationConfigDetails != null && message.hasOwnProperty("translationConfigDetails")) {
                                     object.translationConfigDetails = $root.google.cloud.bigquery.migration.v2.TranslationConfigDetails.toObject(message.translationConfigDetails, options);
                                     if (options.oneofs)
@@ -1954,6 +2525,7 @@
                              * @interface ITranslationTaskResult
                              * @property {Array.<google.cloud.bigquery.migration.v2.ILiteral>|null} [translatedLiterals] TranslationTaskResult translatedLiterals
                              * @property {Array.<google.cloud.bigquery.migration.v2.IGcsReportLogMessage>|null} [reportLogMessages] TranslationTaskResult reportLogMessages
+                             * @property {string|null} [consoleUri] TranslationTaskResult consoleUri
                              */
     
                             /**
@@ -1990,6 +2562,14 @@
                             TranslationTaskResult.prototype.reportLogMessages = $util.emptyArray;
     
                             /**
+                             * TranslationTaskResult consoleUri.
+                             * @member {string} consoleUri
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @instance
+                             */
+                            TranslationTaskResult.prototype.consoleUri = "";
+    
+                            /**
                              * Creates a new TranslationTaskResult instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
@@ -2019,6 +2599,8 @@
                                 if (message.reportLogMessages != null && message.reportLogMessages.length)
                                     for (var i = 0; i < message.reportLogMessages.length; ++i)
                                         $root.google.cloud.bigquery.migration.v2.GcsReportLogMessage.encode(message.reportLogMessages[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.consoleUri != null && Object.hasOwnProperty.call(message, "consoleUri"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.consoleUri);
                                 return writer;
                             };
     
@@ -2065,6 +2647,10 @@
                                             if (!(message.reportLogMessages && message.reportLogMessages.length))
                                                 message.reportLogMessages = [];
                                             message.reportLogMessages.push($root.google.cloud.bigquery.migration.v2.GcsReportLogMessage.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.consoleUri = reader.string();
                                             break;
                                         }
                                     default:
@@ -2120,6 +2706,9 @@
                                             return "reportLogMessages." + error;
                                     }
                                 }
+                                if (message.consoleUri != null && message.hasOwnProperty("consoleUri"))
+                                    if (!$util.isString(message.consoleUri))
+                                        return "consoleUri: string expected";
                                 return null;
                             };
     
@@ -2155,6 +2744,8 @@
                                         message.reportLogMessages[i] = $root.google.cloud.bigquery.migration.v2.GcsReportLogMessage.fromObject(object.reportLogMessages[i]);
                                     }
                                 }
+                                if (object.consoleUri != null)
+                                    message.consoleUri = String(object.consoleUri);
                                 return message;
                             };
     
@@ -2175,6 +2766,8 @@
                                     object.translatedLiterals = [];
                                     object.reportLogMessages = [];
                                 }
+                                if (options.defaults)
+                                    object.consoleUri = "";
                                 if (message.translatedLiterals && message.translatedLiterals.length) {
                                     object.translatedLiterals = [];
                                     for (var j = 0; j < message.translatedLiterals.length; ++j)
@@ -2185,6 +2778,8 @@
                                     for (var j = 0; j < message.reportLogMessages.length; ++j)
                                         object.reportLogMessages[j] = $root.google.cloud.bigquery.migration.v2.GcsReportLogMessage.toObject(message.reportLogMessages[j], options);
                                 }
+                                if (message.consoleUri != null && message.hasOwnProperty("consoleUri"))
+                                    object.consoleUri = message.consoleUri;
                                 return object;
                             };
     
@@ -9880,6 +10475,7 @@
                              * @property {google.cloud.bigquery.migration.v2.ISourceEnvironment|null} [sourceEnvironment] TranslationDetails sourceEnvironment
                              * @property {Array.<string>|null} [targetReturnLiterals] TranslationDetails targetReturnLiterals
                              * @property {Array.<string>|null} [targetTypes] TranslationDetails targetTypes
+                             * @property {google.cloud.bigquery.migration.v2.ISuggestionConfig|null} [suggestionConfig] TranslationDetails suggestionConfig
                              */
     
                             /**
@@ -9941,6 +10537,14 @@
                             TranslationDetails.prototype.targetTypes = $util.emptyArray;
     
                             /**
+                             * TranslationDetails suggestionConfig.
+                             * @member {google.cloud.bigquery.migration.v2.ISuggestionConfig|null|undefined} suggestionConfig
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @instance
+                             */
+                            TranslationDetails.prototype.suggestionConfig = null;
+    
+                            /**
                              * Creates a new TranslationDetails instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
@@ -9977,6 +10581,8 @@
                                 if (message.targetTypes != null && message.targetTypes.length)
                                     for (var i = 0; i < message.targetTypes.length; ++i)
                                         writer.uint32(/* id 5, wireType 2 =*/42).string(message.targetTypes[i]);
+                                if (message.suggestionConfig != null && Object.hasOwnProperty.call(message, "suggestionConfig"))
+                                    $root.google.cloud.bigquery.migration.v2.SuggestionConfig.encode(message.suggestionConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -10037,6 +10643,10 @@
                                             if (!(message.targetTypes && message.targetTypes.length))
                                                 message.targetTypes = [];
                                             message.targetTypes.push(reader.string());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.suggestionConfig = $root.google.cloud.bigquery.migration.v2.SuggestionConfig.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -10105,6 +10715,11 @@
                                         if (!$util.isString(message.targetTypes[i]))
                                             return "targetTypes: string[] expected";
                                 }
+                                if (message.suggestionConfig != null && message.hasOwnProperty("suggestionConfig")) {
+                                    var error = $root.google.cloud.bigquery.migration.v2.SuggestionConfig.verify(message.suggestionConfig);
+                                    if (error)
+                                        return "suggestionConfig." + error;
+                                }
                                 return null;
                             };
     
@@ -10151,6 +10766,11 @@
                                     for (var i = 0; i < object.targetTypes.length; ++i)
                                         message.targetTypes[i] = String(object.targetTypes[i]);
                                 }
+                                if (object.suggestionConfig != null) {
+                                    if (typeof object.suggestionConfig !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.TranslationDetails.suggestionConfig: object expected");
+                                    message.suggestionConfig = $root.google.cloud.bigquery.migration.v2.SuggestionConfig.fromObject(object.suggestionConfig);
+                                }
                                 return message;
                             };
     
@@ -10175,6 +10795,7 @@
                                 if (options.defaults) {
                                     object.targetBaseUri = "";
                                     object.sourceEnvironment = null;
+                                    object.suggestionConfig = null;
                                 }
                                 if (message.sourceTargetMapping && message.sourceTargetMapping.length) {
                                     object.sourceTargetMapping = [];
@@ -10195,6 +10816,8 @@
                                     for (var j = 0; j < message.targetTypes.length; ++j)
                                         object.targetTypes[j] = message.targetTypes[j];
                                 }
+                                if (message.suggestionConfig != null && message.hasOwnProperty("suggestionConfig"))
+                                    object.suggestionConfig = $root.google.cloud.bigquery.migration.v2.SuggestionConfig.toObject(message.suggestionConfig, options);
                                 return object;
                             };
     
@@ -10225,6 +10848,541 @@
                             };
     
                             return TranslationDetails;
+                        })();
+    
+                        v2.SuggestionConfig = (function() {
+    
+                            /**
+                             * Properties of a SuggestionConfig.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ISuggestionConfig
+                             * @property {Array.<google.cloud.bigquery.migration.v2.ISuggestionStep>|null} [skipSuggestionSteps] SuggestionConfig skipSuggestionSteps
+                             */
+    
+                            /**
+                             * Constructs a new SuggestionConfig.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a SuggestionConfig.
+                             * @implements ISuggestionConfig
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ISuggestionConfig=} [properties] Properties to set
+                             */
+                            function SuggestionConfig(properties) {
+                                this.skipSuggestionSteps = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SuggestionConfig skipSuggestionSteps.
+                             * @member {Array.<google.cloud.bigquery.migration.v2.ISuggestionStep>} skipSuggestionSteps
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @instance
+                             */
+                            SuggestionConfig.prototype.skipSuggestionSteps = $util.emptyArray;
+    
+                            /**
+                             * Creates a new SuggestionConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISuggestionConfig=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.SuggestionConfig} SuggestionConfig instance
+                             */
+                            SuggestionConfig.create = function create(properties) {
+                                return new SuggestionConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SuggestionConfig message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SuggestionConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISuggestionConfig} message SuggestionConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SuggestionConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.skipSuggestionSteps != null && message.skipSuggestionSteps.length)
+                                    for (var i = 0; i < message.skipSuggestionSteps.length; ++i)
+                                        $root.google.cloud.bigquery.migration.v2.SuggestionStep.encode(message.skipSuggestionSteps[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SuggestionConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SuggestionConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISuggestionConfig} message SuggestionConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SuggestionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SuggestionConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.SuggestionConfig} SuggestionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SuggestionConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.SuggestionConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.skipSuggestionSteps && message.skipSuggestionSteps.length))
+                                                message.skipSuggestionSteps = [];
+                                            message.skipSuggestionSteps.push($root.google.cloud.bigquery.migration.v2.SuggestionStep.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SuggestionConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.SuggestionConfig} SuggestionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SuggestionConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SuggestionConfig message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SuggestionConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.skipSuggestionSteps != null && message.hasOwnProperty("skipSuggestionSteps")) {
+                                    if (!Array.isArray(message.skipSuggestionSteps))
+                                        return "skipSuggestionSteps: array expected";
+                                    for (var i = 0; i < message.skipSuggestionSteps.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.migration.v2.SuggestionStep.verify(message.skipSuggestionSteps[i]);
+                                        if (error)
+                                            return "skipSuggestionSteps." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SuggestionConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.SuggestionConfig} SuggestionConfig
+                             */
+                            SuggestionConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.SuggestionConfig)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.SuggestionConfig();
+                                if (object.skipSuggestionSteps) {
+                                    if (!Array.isArray(object.skipSuggestionSteps))
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.SuggestionConfig.skipSuggestionSteps: array expected");
+                                    message.skipSuggestionSteps = [];
+                                    for (var i = 0; i < object.skipSuggestionSteps.length; ++i) {
+                                        if (typeof object.skipSuggestionSteps[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.migration.v2.SuggestionConfig.skipSuggestionSteps: object expected");
+                                        message.skipSuggestionSteps[i] = $root.google.cloud.bigquery.migration.v2.SuggestionStep.fromObject(object.skipSuggestionSteps[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SuggestionConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.SuggestionConfig} message SuggestionConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SuggestionConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.skipSuggestionSteps = [];
+                                if (message.skipSuggestionSteps && message.skipSuggestionSteps.length) {
+                                    object.skipSuggestionSteps = [];
+                                    for (var j = 0; j < message.skipSuggestionSteps.length; ++j)
+                                        object.skipSuggestionSteps[j] = $root.google.cloud.bigquery.migration.v2.SuggestionStep.toObject(message.skipSuggestionSteps[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SuggestionConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SuggestionConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SuggestionConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SuggestionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.SuggestionConfig";
+                            };
+    
+                            return SuggestionConfig;
+                        })();
+    
+                        v2.SuggestionStep = (function() {
+    
+                            /**
+                             * Properties of a SuggestionStep.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ISuggestionStep
+                             * @property {google.cloud.bigquery.migration.v2.SuggestionStep.SuggestionType|null} [suggestionType] SuggestionStep suggestionType
+                             * @property {google.cloud.bigquery.migration.v2.SuggestionStep.RewriteTarget|null} [rewriteTarget] SuggestionStep rewriteTarget
+                             */
+    
+                            /**
+                             * Constructs a new SuggestionStep.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a SuggestionStep.
+                             * @implements ISuggestionStep
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ISuggestionStep=} [properties] Properties to set
+                             */
+                            function SuggestionStep(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SuggestionStep suggestionType.
+                             * @member {google.cloud.bigquery.migration.v2.SuggestionStep.SuggestionType} suggestionType
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @instance
+                             */
+                            SuggestionStep.prototype.suggestionType = 0;
+    
+                            /**
+                             * SuggestionStep rewriteTarget.
+                             * @member {google.cloud.bigquery.migration.v2.SuggestionStep.RewriteTarget} rewriteTarget
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @instance
+                             */
+                            SuggestionStep.prototype.rewriteTarget = 0;
+    
+                            /**
+                             * Creates a new SuggestionStep instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISuggestionStep=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.SuggestionStep} SuggestionStep instance
+                             */
+                            SuggestionStep.create = function create(properties) {
+                                return new SuggestionStep(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SuggestionStep message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SuggestionStep.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISuggestionStep} message SuggestionStep message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SuggestionStep.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.suggestionType != null && Object.hasOwnProperty.call(message, "suggestionType"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.suggestionType);
+                                if (message.rewriteTarget != null && Object.hasOwnProperty.call(message, "rewriteTarget"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rewriteTarget);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SuggestionStep message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SuggestionStep.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISuggestionStep} message SuggestionStep message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SuggestionStep.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SuggestionStep message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.SuggestionStep} SuggestionStep
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SuggestionStep.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.SuggestionStep();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.suggestionType = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rewriteTarget = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SuggestionStep message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.SuggestionStep} SuggestionStep
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SuggestionStep.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SuggestionStep message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SuggestionStep.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.suggestionType != null && message.hasOwnProperty("suggestionType"))
+                                    switch (message.suggestionType) {
+                                    default:
+                                        return "suggestionType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.rewriteTarget != null && message.hasOwnProperty("rewriteTarget"))
+                                    switch (message.rewriteTarget) {
+                                    default:
+                                        return "rewriteTarget: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SuggestionStep message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.SuggestionStep} SuggestionStep
+                             */
+                            SuggestionStep.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.SuggestionStep)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.SuggestionStep();
+                                switch (object.suggestionType) {
+                                default:
+                                    if (typeof object.suggestionType === "number") {
+                                        message.suggestionType = object.suggestionType;
+                                        break;
+                                    }
+                                    break;
+                                case "SUGGESTION_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.suggestionType = 0;
+                                    break;
+                                case "QUERY_CUSTOMIZATION":
+                                case 1:
+                                    message.suggestionType = 1;
+                                    break;
+                                case "TRANSLATION_EXPLANATION":
+                                case 2:
+                                    message.suggestionType = 2;
+                                    break;
+                                }
+                                switch (object.rewriteTarget) {
+                                default:
+                                    if (typeof object.rewriteTarget === "number") {
+                                        message.rewriteTarget = object.rewriteTarget;
+                                        break;
+                                    }
+                                    break;
+                                case "REWRITE_TARGET_UNSPECIFIED":
+                                case 0:
+                                    message.rewriteTarget = 0;
+                                    break;
+                                case "SOURCE_SQL":
+                                case 1:
+                                    message.rewriteTarget = 1;
+                                    break;
+                                case "TARGET_SQL":
+                                case 2:
+                                    message.rewriteTarget = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SuggestionStep message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.SuggestionStep} message SuggestionStep
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SuggestionStep.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.suggestionType = options.enums === String ? "SUGGESTION_TYPE_UNSPECIFIED" : 0;
+                                    object.rewriteTarget = options.enums === String ? "REWRITE_TARGET_UNSPECIFIED" : 0;
+                                }
+                                if (message.suggestionType != null && message.hasOwnProperty("suggestionType"))
+                                    object.suggestionType = options.enums === String ? $root.google.cloud.bigquery.migration.v2.SuggestionStep.SuggestionType[message.suggestionType] === undefined ? message.suggestionType : $root.google.cloud.bigquery.migration.v2.SuggestionStep.SuggestionType[message.suggestionType] : message.suggestionType;
+                                if (message.rewriteTarget != null && message.hasOwnProperty("rewriteTarget"))
+                                    object.rewriteTarget = options.enums === String ? $root.google.cloud.bigquery.migration.v2.SuggestionStep.RewriteTarget[message.rewriteTarget] === undefined ? message.rewriteTarget : $root.google.cloud.bigquery.migration.v2.SuggestionStep.RewriteTarget[message.rewriteTarget] : message.rewriteTarget;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SuggestionStep to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SuggestionStep.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SuggestionStep
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.SuggestionStep
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SuggestionStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.SuggestionStep";
+                            };
+    
+                            /**
+                             * SuggestionType enum.
+                             * @name google.cloud.bigquery.migration.v2.SuggestionStep.SuggestionType
+                             * @enum {number}
+                             * @property {number} SUGGESTION_TYPE_UNSPECIFIED=0 SUGGESTION_TYPE_UNSPECIFIED value
+                             * @property {number} QUERY_CUSTOMIZATION=1 QUERY_CUSTOMIZATION value
+                             * @property {number} TRANSLATION_EXPLANATION=2 TRANSLATION_EXPLANATION value
+                             */
+                            SuggestionStep.SuggestionType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SUGGESTION_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "QUERY_CUSTOMIZATION"] = 1;
+                                values[valuesById[2] = "TRANSLATION_EXPLANATION"] = 2;
+                                return values;
+                            })();
+    
+                            /**
+                             * RewriteTarget enum.
+                             * @name google.cloud.bigquery.migration.v2.SuggestionStep.RewriteTarget
+                             * @enum {number}
+                             * @property {number} REWRITE_TARGET_UNSPECIFIED=0 REWRITE_TARGET_UNSPECIFIED value
+                             * @property {number} SOURCE_SQL=1 SOURCE_SQL value
+                             * @property {number} TARGET_SQL=2 TARGET_SQL value
+                             */
+                            SuggestionStep.RewriteTarget = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "REWRITE_TARGET_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SOURCE_SQL"] = 1;
+                                values[valuesById[2] = "TARGET_SQL"] = 2;
+                                return values;
+                            })();
+    
+                            return SuggestionStep;
                         })();
     
                         v2.SourceTargetMapping = (function() {
@@ -10474,6 +11632,7 @@
                              * @interface ISourceSpec
                              * @property {string|null} [baseUri] SourceSpec baseUri
                              * @property {google.cloud.bigquery.migration.v2.ILiteral|null} [literal] SourceSpec literal
+                             * @property {string|null} [gcsFilePath] SourceSpec gcsFilePath
                              * @property {string|null} [encoding] SourceSpec encoding
                              */
     
@@ -10509,6 +11668,14 @@
                             SourceSpec.prototype.literal = null;
     
                             /**
+                             * SourceSpec gcsFilePath.
+                             * @member {string|null|undefined} gcsFilePath
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @instance
+                             */
+                            SourceSpec.prototype.gcsFilePath = null;
+    
+                            /**
                              * SourceSpec encoding.
                              * @member {string} encoding
                              * @memberof google.cloud.bigquery.migration.v2.SourceSpec
@@ -10521,12 +11688,12 @@
     
                             /**
                              * SourceSpec source.
-                             * @member {"baseUri"|"literal"|undefined} source
+                             * @member {"baseUri"|"literal"|"gcsFilePath"|undefined} source
                              * @memberof google.cloud.bigquery.migration.v2.SourceSpec
                              * @instance
                              */
                             Object.defineProperty(SourceSpec.prototype, "source", {
-                                get: $util.oneOfGetter($oneOfFields = ["baseUri", "literal"]),
+                                get: $util.oneOfGetter($oneOfFields = ["baseUri", "literal", "gcsFilePath"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -10560,6 +11727,8 @@
                                     $root.google.cloud.bigquery.migration.v2.Literal.encode(message.literal, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 if (message.encoding != null && Object.hasOwnProperty.call(message, "encoding"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.encoding);
+                                if (message.gcsFilePath != null && Object.hasOwnProperty.call(message, "gcsFilePath"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.gcsFilePath);
                                 return writer;
                             };
     
@@ -10602,6 +11771,10 @@
                                         }
                                     case 2: {
                                             message.literal = $root.google.cloud.bigquery.migration.v2.Literal.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.gcsFilePath = reader.string();
                                             break;
                                         }
                                     case 3: {
@@ -10659,6 +11832,13 @@
                                             return "literal." + error;
                                     }
                                 }
+                                if (message.gcsFilePath != null && message.hasOwnProperty("gcsFilePath")) {
+                                    if (properties.source === 1)
+                                        return "source: multiple values";
+                                    properties.source = 1;
+                                    if (!$util.isString(message.gcsFilePath))
+                                        return "gcsFilePath: string expected";
+                                }
                                 if (message.encoding != null && message.hasOwnProperty("encoding"))
                                     if (!$util.isString(message.encoding))
                                         return "encoding: string expected";
@@ -10684,6 +11864,8 @@
                                         throw TypeError(".google.cloud.bigquery.migration.v2.SourceSpec.literal: object expected");
                                     message.literal = $root.google.cloud.bigquery.migration.v2.Literal.fromObject(object.literal);
                                 }
+                                if (object.gcsFilePath != null)
+                                    message.gcsFilePath = String(object.gcsFilePath);
                                 if (object.encoding != null)
                                     message.encoding = String(object.encoding);
                                 return message;
@@ -10716,6 +11898,11 @@
                                 }
                                 if (message.encoding != null && message.hasOwnProperty("encoding"))
                                     object.encoding = message.encoding;
+                                if (message.gcsFilePath != null && message.hasOwnProperty("gcsFilePath")) {
+                                    object.gcsFilePath = message.gcsFilePath;
+                                    if (options.oneofs)
+                                        object.source = "gcsFilePath";
+                                }
                                 return object;
                             };
     

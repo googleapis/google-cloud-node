@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/bigquery/migration/v2/assessment_task.proto",
   "../../protos/google/cloud/bigquery/migration/v2/migration_entities.proto",
   "../../protos/google/cloud/bigquery/migration/v2/migration_error_details.proto",
   "../../protos/google/cloud/bigquery/migration/v2/migration_metrics.proto",

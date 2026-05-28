@@ -16,12 +16,12 @@
 
 const assert = require('assert');
 const cp = require('child_process');
-const {v4} = require('uuid');
+const crypto = require('crypto');
 const {before, it, describe} = require('mocha');
 const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 const client = new SecretManagerServiceClient();
 
-const secretId = v4();
+const secretId = crypto.randomUUID();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 

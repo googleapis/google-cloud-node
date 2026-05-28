@@ -19,7 +19,7 @@ import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import {CoreOptions, OptionsWithUri, Response} from 'request';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 
 import {Change, CreateChangeRequest} from '../src/change';
 import {Record, RecordObject, RecordMetadata} from '../src/record';
@@ -211,9 +211,9 @@ describe('Zone', () => {
     function generateRecord(recordJson?: {}) {
       recordJson = Object.assign(
         {
-          name: uuid.v1(),
-          type: uuid.v1(),
-          rrdatas: [uuid.v1(), uuid.v1()],
+          name: crypto.randomUUID(),
+          type: crypto.randomUUID(),
+          rrdatas: [crypto.randomUUID(), crypto.randomUUID()],
         },
         recordJson
       );

@@ -1,10 +1,10 @@
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#      http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,19 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-deep-remove-regex:
-  - /owl-bot-staging
-
 deep-copy-regex:
-  - source: /google/spanner/(v.*)/.*-nodejs
-    dest: /owl-bot-staging/spanner/$1
-  - source: /google/spanner/(admin/database/v.*)/.*-nodejs
-    dest: /owl-bot-staging/spanner/$1
-  - source: /google/spanner/(admin/instance/v.*)/.*-nodejs
-    dest: /owl-bot-staging/spanner/$1
-  - source: /google/spanner/(executor/v.*)/.*-nodejs
-    dest: /owl-bot-staging/spanner/$1
+    - source: /google/spanner/executor/google-spanner-executor-nodejs
+      dest: /owl-bot-staging/google-spanner-executor
 
-begin-after-commit-hash: 46f25fb1121747b994ff5818963fda84b5e6bfd3
-
+api-name: executor
