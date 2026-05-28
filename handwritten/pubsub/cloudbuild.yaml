@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    npm ci
+    npm install
   dir: 'handwritten/pubsub'
   id: 'install-dependencies'
 
