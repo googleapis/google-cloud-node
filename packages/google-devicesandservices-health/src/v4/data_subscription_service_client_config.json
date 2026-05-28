@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.devicesandservices.health.v4.DataPointsService": {
+    "google.devicesandservices.health.v4.DataSubscriptionService": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [
@@ -32,47 +32,42 @@
         }
       },
       "methods": {
-        "GetDataPoint": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
-        },
-        "ListDataPoints": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
-        },
-        "CreateDataPoint": {
+        "CreateSubscriber": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "UpdateDataPoint": {
+        "ListSubscribers": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "UpdateSubscriber": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "BatchDeleteDataPoints": {
+        "DeleteSubscriber": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
-        "ReconcileDataPoints": {
+        "CreateSubscription": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListSubscriptions": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
-        "RollUpDataPoints": {
+        "UpdateSubscription": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         },
-        "DailyRollUpDataPoints": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
-        },
-        "ExportExerciseTcx": {
+        "DeleteSubscription": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
