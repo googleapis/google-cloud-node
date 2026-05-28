@@ -26,7 +26,8 @@ extern crate napi_derive;
 
 use once_cell::sync::{Lazy, OnceCell};
 use napi::bindgen_prelude::*;
-use napi::{Task, Env, Result, JsObject};
+use napi::{Env, Result, JsObject, JsFunction, JsUnknown};
+use napi::threadsafe_function::{ThreadsafeFunction, ThreadSafeFunctionCallMode, ErrorStrategy, ThreadSafeCallContext};
 use tokio::runtime::Runtime;
 use tonic::transport::{Channel, ClientTlsConfig};
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -148,80 +149,6 @@ impl tonic::service::Interceptor for AuthInterceptor {
     }
 }
 
-/// Asynchronous task representing one SQL query execution.
-pub struct SpannerTask {
-    session: String,
-    sql: String,
-    channel_count: i32,
-}
-
-impl Task for SpannerTask {
-    type Output = Vec<Vec<String>>;
-    type JsValue = JsObject;
-
-    /// Runs on a background thread managed by libuv pool. Safe to block.
-    fn compute(&mut self) -> Result<Self::Output> {
-        // Select dynamic pool subset round-robin
-        let count = self.channel_count.max(1) as usize;
-        let idx = REQUEST_COUNTER.fetch_add(1, Ordering::Relaxed) % count.min(CHANNELS.len());
-        let channel = CHANNELS[idx].clone();
-
-        let session_clone = self.session.clone();
-        let sql_clone = self.sql.clone();
-
-        let result: std::result::Result<ResultSet, tonic::Status> = RUNTIME.block_on(async move {
-            // 1. Retrieve pre-initialized Provider from OnceCell and fetch access token
-            let provider = AUTH_PROVIDER
-                .get()
-                .ok_or_else(|| tonic::Status::internal("GCP Authentication Provider was not initialized at startup"))?;
-            let token_struct = provider
-                .token(&["https://www.googleapis.com/auth/spanner.data"])
-                .await
-                .map_err(|e| tonic::Status::internal(format!("Failed to fetch GCP token in Rust: {}", e)))?;
-            let token_str = token_struct.as_str().to_string();
-
-            // 2. Build AuthInterceptor using the retrieved token
-            let interceptor = AuthInterceptor {
-                token: token_str,
-                session_name: session_clone.clone(),
-            };
-            let mut client = SpannerClient::with_interceptor(channel, interceptor);
-
-            let request = ExecuteSqlRequest {
-                session: session_clone,
-                sql: sql_clone,
-                ..Default::default()
-            };
-
-            let response = client.execute_sql(request).await?;
-            Ok(response.into_inner())
-        });
-
-        match result {
-            Ok(rs) => Ok(decode_result_set(rs)),
-            Err(status) => Err(napi::Error::from_reason(format!(
-                "gRPC execute_sql failed: status = {:?}, msg = {}",
-                status.code(),
-                status.message()
-            ))),
-        }
-    }
-
-    /// Runs back on V8's main thread. Safe to allocate and construct JS Objects.
-    fn resolve(&mut self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
-        let mut outer_array = env.create_array_with_length(output.len())?;
-        for (i, row) in output.into_iter().enumerate() {
-            let mut inner_array = env.create_array_with_length(row.len())?;
-            for (j, cell) in row.into_iter().enumerate() {
-                let js_string = env.create_string(&cell)?;
-                inner_array.set_element(j as u32, js_string)?;
-            }
-            outer_array.set_element(i as u32, inner_array)?;
-        }
-        Ok(outer_array)
-    }
-}
-
 /// Helper to convert Proto ResultSet rows to native string vectors
 fn decode_result_set(rs: ResultSet) -> Vec<Vec<String>> {
     let mut rows = Vec::new();
@@ -258,17 +185,109 @@ fn proto_value_to_string(value: &prost_types::Value) -> String {
     }
 }
 
-/// Asynchronously executes Spanner SQL, returning a JavaScript Promise.
-/// Releases the V8 thread immediately while offloading CPU & I/O to Tokio.
+/// Asynchronously executes Spanner SQL query, returning results via a JavaScript callback.
+/// Bypasses libuv thread pool completely by spawning task directly to static Tokio RUNTIME.
 #[napi]
 pub fn execute_sql_native(
+    env: Env,
     session_name: String,
     sql: String,
     channel_count: i32,
-) -> AsyncTask<SpannerTask> {
-    AsyncTask::new(SpannerTask {
-        session: session_name,
-        sql,
-        channel_count,
-    })
+    callback: JsFunction,
+) -> napi::Result<()> {
+    // Create a ThreadsafeFunction from the JS callback.
+    // Closure executes back on the V8 thread to translate results to JS Array.
+    let tsfn: ThreadsafeFunction<
+        Vec<Vec<String>>,
+        ErrorStrategy::CalleeHandled
+    > = callback.create_threadsafe_function(
+        0,
+        |ctx: ThreadSafeCallContext<Vec<Vec<String>>>| {
+            let rows = ctx.value;
+            let mut outer = ctx.env.create_array_with_length(rows.len())?;
+            for (i, row) in rows.into_iter().enumerate() {
+                let mut inner = ctx.env.create_array_with_length(row.len())?;
+                for (j, cell) in row.into_iter().enumerate() {
+                    let js_str = ctx.env.create_string(&cell)?;
+                    inner.set_element(j as u32, js_str)?;
+                }
+                outer.set_element(i as u32, inner)?;
+            }
+            Ok(vec![outer])
+        }
+    )?;
+
+    let session_clone = session_name.clone();
+    let sql_clone = sql.clone();
+
+    // Spawn task DIRECTLY onto the multi-threaded static Tokio runtime
+    RUNTIME.spawn(async move {
+        // 1. Retrieve pre-initialized provider from OnceCell and fetch access token
+        let provider = match AUTH_PROVIDER.get() {
+            Some(p) => p,
+            None => {
+                tsfn.call(
+                    Err(napi::Error::from_reason("GCP Authentication Provider was not initialized at startup")),
+                    ThreadSafeFunctionCallMode::NonBlocking
+                );
+                return;
+            }
+        };
+
+        let token_struct = match provider.token(&["https://www.googleapis.com/auth/spanner.data"]).await {
+            Ok(t) => t,
+            Err(e) => {
+                tsfn.call(
+                    Err(napi::Error::from_reason(format!("Failed to fetch GCP token in Rust: {}", e))),
+                    ThreadSafeFunctionCallMode::NonBlocking
+                );
+                return;
+            }
+        };
+        let token_str = token_struct.as_str().to_string();
+
+        // 2. Channel selection round-robin
+        let count = channel_count.max(1) as usize;
+        let idx = REQUEST_COUNTER.fetch_add(1, Ordering::Relaxed) % count.min(CHANNELS.len());
+        let channel = CHANNELS[idx].clone();
+
+        // 3. Build AuthInterceptor and Client
+        let interceptor = AuthInterceptor {
+            token: token_str,
+            session_name: session_clone.clone(),
+        };
+        let mut client = SpannerClient::with_interceptor(channel, interceptor);
+
+        let request = ExecuteSqlRequest {
+            session: session_clone,
+            sql: sql_clone,
+            ..Default::default()
+        };
+
+        // 4. Execute gRPC call on Tokio thread pool asynchronously
+        let result = client.execute_sql(request).await;
+
+        // 5. Call back to V8 thread with decoded results via ThreadsafeFunction
+        match result {
+            Ok(response) => {
+                let rows = decode_result_set(response.into_inner());
+                tsfn.call(
+                    Ok(rows),
+                    ThreadSafeFunctionCallMode::NonBlocking
+                );
+            }
+            Err(status) => {
+                tsfn.call(
+                    Err(napi::Error::from_reason(format!(
+                        "gRPC execute_sql failed: status = {:?}, msg = {}",
+                        status.code(),
+                        status.message()
+                    ))),
+                    ThreadSafeFunctionCallMode::NonBlocking
+                );
+            }
+        }
+    });
+
+    Ok(())
 }
