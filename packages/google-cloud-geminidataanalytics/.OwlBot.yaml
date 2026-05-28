@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/geminidataanalytics/google-cloud-geminidataanalytics-nodejs
+    - source: /google/cloud/geminidataanalytics/v1/geminidataanalytics-v1-nodejs
       dest: /owl-bot-staging/google-cloud-geminidataanalytics
 
 api-name: geminidataanalytics
