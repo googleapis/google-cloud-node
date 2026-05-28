@@ -3,6 +3,6 @@ node_modules
 build
 package-lock.json
 docs/
-.coverage
+coverage/
 __pycache__
 .DS_Store
