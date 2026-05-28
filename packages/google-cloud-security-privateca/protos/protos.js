@@ -1818,6 +1818,7 @@
                              * @property {google.cloud.security.privateca.v1.CaPool.Tier|null} [tier] CaPool tier
                              * @property {google.cloud.security.privateca.v1.CaPool.IIssuancePolicy|null} [issuancePolicy] CaPool issuancePolicy
                              * @property {google.cloud.security.privateca.v1.CaPool.IPublishingOptions|null} [publishingOptions] CaPool publishingOptions
+                             * @property {google.cloud.security.privateca.v1.IEncryptionSpec|null} [encryptionSpec] CaPool encryptionSpec
                              * @property {Object.<string,string>|null} [labels] CaPool labels
                              */
     
@@ -1870,6 +1871,14 @@
                             CaPool.prototype.publishingOptions = null;
     
                             /**
+                             * CaPool encryptionSpec.
+                             * @member {google.cloud.security.privateca.v1.IEncryptionSpec|null|undefined} encryptionSpec
+                             * @memberof google.cloud.security.privateca.v1.CaPool
+                             * @instance
+                             */
+                            CaPool.prototype.encryptionSpec = null;
+    
+                            /**
                              * CaPool labels.
                              * @member {Object.<string,string>} labels
                              * @memberof google.cloud.security.privateca.v1.CaPool
@@ -1912,6 +1921,8 @@
                                 if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                     for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                         writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.encryptionSpec != null && Object.hasOwnProperty.call(message, "encryptionSpec"))
+                                    $root.google.cloud.security.privateca.v1.EncryptionSpec.encode(message.encryptionSpec, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1962,6 +1973,10 @@
                                         }
                                     case 4: {
                                             message.publishingOptions = $root.google.cloud.security.privateca.v1.CaPool.PublishingOptions.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.encryptionSpec = $root.google.cloud.security.privateca.v1.EncryptionSpec.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 5: {
@@ -2044,6 +2059,11 @@
                                     if (error)
                                         return "publishingOptions." + error;
                                 }
+                                if (message.encryptionSpec != null && message.hasOwnProperty("encryptionSpec")) {
+                                    var error = $root.google.cloud.security.privateca.v1.EncryptionSpec.verify(message.encryptionSpec);
+                                    if (error)
+                                        return "encryptionSpec." + error;
+                                }
                                 if (message.labels != null && message.hasOwnProperty("labels")) {
                                     if (!$util.isObject(message.labels))
                                         return "labels: object expected";
@@ -2099,6 +2119,11 @@
                                         throw TypeError(".google.cloud.security.privateca.v1.CaPool.publishingOptions: object expected");
                                     message.publishingOptions = $root.google.cloud.security.privateca.v1.CaPool.PublishingOptions.fromObject(object.publishingOptions);
                                 }
+                                if (object.encryptionSpec != null) {
+                                    if (typeof object.encryptionSpec !== "object")
+                                        throw TypeError(".google.cloud.security.privateca.v1.CaPool.encryptionSpec: object expected");
+                                    message.encryptionSpec = $root.google.cloud.security.privateca.v1.EncryptionSpec.fromObject(object.encryptionSpec);
+                                }
                                 if (object.labels) {
                                     if (typeof object.labels !== "object")
                                         throw TypeError(".google.cloud.security.privateca.v1.CaPool.labels: object expected");
@@ -2129,6 +2154,7 @@
                                     object.tier = options.enums === String ? "TIER_UNSPECIFIED" : 0;
                                     object.issuancePolicy = null;
                                     object.publishingOptions = null;
+                                    object.encryptionSpec = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -2144,6 +2170,8 @@
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.labels[keys2[j]] = message.labels[keys2[j]];
                                 }
+                                if (message.encryptionSpec != null && message.hasOwnProperty("encryptionSpec"))
+                                    object.encryptionSpec = $root.google.cloud.security.privateca.v1.EncryptionSpec.toObject(message.encryptionSpec, options);
                                 return object;
                             };
     
@@ -2489,6 +2517,7 @@
                                  * @interface IIssuancePolicy
                                  * @property {Array.<google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IAllowedKeyType>|null} [allowedKeyTypes] IssuancePolicy allowedKeyTypes
                                  * @property {google.protobuf.IDuration|null} [backdateDuration] IssuancePolicy backdateDuration
+                                 * @property {boolean|null} [allowRequesterSpecifiedNotBeforeTime] IssuancePolicy allowRequesterSpecifiedNotBeforeTime
                                  * @property {google.protobuf.IDuration|null} [maximumLifetime] IssuancePolicy maximumLifetime
                                  * @property {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IIssuanceModes|null} [allowedIssuanceModes] IssuancePolicy allowedIssuanceModes
                                  * @property {google.cloud.security.privateca.v1.IX509Parameters|null} [baselineValues] IssuancePolicy baselineValues
@@ -2527,6 +2556,14 @@
                                  * @instance
                                  */
                                 IssuancePolicy.prototype.backdateDuration = null;
+    
+                                /**
+                                 * IssuancePolicy allowRequesterSpecifiedNotBeforeTime.
+                                 * @member {boolean} allowRequesterSpecifiedNotBeforeTime
+                                 * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy
+                                 * @instance
+                                 */
+                                IssuancePolicy.prototype.allowRequesterSpecifiedNotBeforeTime = false;
     
                                 /**
                                  * IssuancePolicy maximumLifetime.
@@ -2607,6 +2644,8 @@
                                         $root.google.cloud.security.privateca.v1.CertificateExtensionConstraints.encode(message.passthroughExtensions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                     if (message.backdateDuration != null && Object.hasOwnProperty.call(message, "backdateDuration"))
                                         $root.google.protobuf.Duration.encode(message.backdateDuration, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    if (message.allowRequesterSpecifiedNotBeforeTime != null && Object.hasOwnProperty.call(message, "allowRequesterSpecifiedNotBeforeTime"))
+                                        writer.uint32(/* id 8, wireType 0 =*/64).bool(message.allowRequesterSpecifiedNotBeforeTime);
                                     return writer;
                                 };
     
@@ -2651,6 +2690,10 @@
                                             }
                                         case 7: {
                                                 message.backdateDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.allowRequesterSpecifiedNotBeforeTime = reader.bool();
                                                 break;
                                             }
                                         case 2: {
@@ -2722,6 +2765,9 @@
                                         if (error)
                                             return "backdateDuration." + error;
                                     }
+                                    if (message.allowRequesterSpecifiedNotBeforeTime != null && message.hasOwnProperty("allowRequesterSpecifiedNotBeforeTime"))
+                                        if (typeof message.allowRequesterSpecifiedNotBeforeTime !== "boolean")
+                                            return "allowRequesterSpecifiedNotBeforeTime: boolean expected";
                                     if (message.maximumLifetime != null && message.hasOwnProperty("maximumLifetime")) {
                                         var error = $root.google.protobuf.Duration.verify(message.maximumLifetime);
                                         if (error)
@@ -2777,6 +2823,8 @@
                                             throw TypeError(".google.cloud.security.privateca.v1.CaPool.IssuancePolicy.backdateDuration: object expected");
                                         message.backdateDuration = $root.google.protobuf.Duration.fromObject(object.backdateDuration);
                                     }
+                                    if (object.allowRequesterSpecifiedNotBeforeTime != null)
+                                        message.allowRequesterSpecifiedNotBeforeTime = Boolean(object.allowRequesterSpecifiedNotBeforeTime);
                                     if (object.maximumLifetime != null) {
                                         if (typeof object.maximumLifetime !== "object")
                                             throw TypeError(".google.cloud.security.privateca.v1.CaPool.IssuancePolicy.maximumLifetime: object expected");
@@ -2827,6 +2875,7 @@
                                         object.identityConstraints = null;
                                         object.passthroughExtensions = null;
                                         object.backdateDuration = null;
+                                        object.allowRequesterSpecifiedNotBeforeTime = false;
                                     }
                                     if (message.allowedKeyTypes && message.allowedKeyTypes.length) {
                                         object.allowedKeyTypes = [];
@@ -2845,6 +2894,8 @@
                                         object.passthroughExtensions = $root.google.cloud.security.privateca.v1.CertificateExtensionConstraints.toObject(message.passthroughExtensions, options);
                                     if (message.backdateDuration != null && message.hasOwnProperty("backdateDuration"))
                                         object.backdateDuration = $root.google.protobuf.Duration.toObject(message.backdateDuration, options);
+                                    if (message.allowRequesterSpecifiedNotBeforeTime != null && message.hasOwnProperty("allowRequesterSpecifiedNotBeforeTime"))
+                                        object.allowRequesterSpecifiedNotBeforeTime = message.allowRequesterSpecifiedNotBeforeTime;
                                     return object;
                                 };
     
@@ -3882,6 +3933,211 @@
                             return CaPool;
                         })();
     
+                        v1.EncryptionSpec = (function() {
+    
+                            /**
+                             * Properties of an EncryptionSpec.
+                             * @memberof google.cloud.security.privateca.v1
+                             * @interface IEncryptionSpec
+                             * @property {string|null} [cloudKmsKey] EncryptionSpec cloudKmsKey
+                             */
+    
+                            /**
+                             * Constructs a new EncryptionSpec.
+                             * @memberof google.cloud.security.privateca.v1
+                             * @classdesc Represents an EncryptionSpec.
+                             * @implements IEncryptionSpec
+                             * @constructor
+                             * @param {google.cloud.security.privateca.v1.IEncryptionSpec=} [properties] Properties to set
+                             */
+                            function EncryptionSpec(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EncryptionSpec cloudKmsKey.
+                             * @member {string} cloudKmsKey
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @instance
+                             */
+                            EncryptionSpec.prototype.cloudKmsKey = "";
+    
+                            /**
+                             * Creates a new EncryptionSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.IEncryptionSpec=} [properties] Properties to set
+                             * @returns {google.cloud.security.privateca.v1.EncryptionSpec} EncryptionSpec instance
+                             */
+                            EncryptionSpec.create = function create(properties) {
+                                return new EncryptionSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.security.privateca.v1.EncryptionSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.IEncryptionSpec} message EncryptionSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EncryptionSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.cloudKmsKey != null && Object.hasOwnProperty.call(message, "cloudKmsKey"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.cloudKmsKey);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.EncryptionSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.IEncryptionSpec} message EncryptionSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EncryptionSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EncryptionSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.security.privateca.v1.EncryptionSpec} EncryptionSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EncryptionSpec.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.EncryptionSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.cloudKmsKey = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.security.privateca.v1.EncryptionSpec} EncryptionSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EncryptionSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EncryptionSpec message.
+                             * @function verify
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EncryptionSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.cloudKmsKey != null && message.hasOwnProperty("cloudKmsKey"))
+                                    if (!$util.isString(message.cloudKmsKey))
+                                        return "cloudKmsKey: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.security.privateca.v1.EncryptionSpec} EncryptionSpec
+                             */
+                            EncryptionSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.security.privateca.v1.EncryptionSpec)
+                                    return object;
+                                var message = new $root.google.cloud.security.privateca.v1.EncryptionSpec();
+                                if (object.cloudKmsKey != null)
+                                    message.cloudKmsKey = String(object.cloudKmsKey);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.EncryptionSpec} message EncryptionSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EncryptionSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.cloudKmsKey = "";
+                                if (message.cloudKmsKey != null && message.hasOwnProperty("cloudKmsKey"))
+                                    object.cloudKmsKey = message.cloudKmsKey;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EncryptionSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EncryptionSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EncryptionSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.security.privateca.v1.EncryptionSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EncryptionSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.security.privateca.v1.EncryptionSpec";
+                            };
+    
+                            return EncryptionSpec;
+                        })();
+    
                         v1.CertificateRevocationList = (function() {
     
                             /**
@@ -4743,6 +4999,7 @@
                              * @property {google.protobuf.ITimestamp|null} [createTime] Certificate createTime
                              * @property {google.protobuf.ITimestamp|null} [updateTime] Certificate updateTime
                              * @property {Object.<string,string>|null} [labels] Certificate labels
+                             * @property {google.protobuf.ITimestamp|null} [requestedNotBeforeTime] Certificate requestedNotBeforeTime
                              */
     
                             /**
@@ -4874,6 +5131,14 @@
                              */
                             Certificate.prototype.labels = $util.emptyObject;
     
+                            /**
+                             * Certificate requestedNotBeforeTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} requestedNotBeforeTime
+                             * @memberof google.cloud.security.privateca.v1.Certificate
+                             * @instance
+                             */
+                            Certificate.prototype.requestedNotBeforeTime = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -4942,6 +5207,8 @@
                                 if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                     for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                         writer.uint32(/* id 14, wireType 2 =*/114).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.requestedNotBeforeTime != null && Object.hasOwnProperty.call(message, "requestedNotBeforeTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.requestedNotBeforeTime, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                                 return writer;
                             };
     
@@ -5053,6 +5320,10 @@
                                                 }
                                             }
                                             message.labels[key] = value;
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.requestedNotBeforeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -5168,6 +5439,11 @@
                                         if (!$util.isString(message.labels[key[i]]))
                                             return "labels: string{k:string} expected";
                                 }
+                                if (message.requestedNotBeforeTime != null && message.hasOwnProperty("requestedNotBeforeTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.requestedNotBeforeTime);
+                                    if (error)
+                                        return "requestedNotBeforeTime." + error;
+                                }
                                 return null;
                             };
     
@@ -5261,6 +5537,11 @@
                                     for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                         message.labels[keys[i]] = String(object.labels[keys[i]]);
                                 }
+                                if (object.requestedNotBeforeTime != null) {
+                                    if (typeof object.requestedNotBeforeTime !== "object")
+                                        throw TypeError(".google.cloud.security.privateca.v1.Certificate.requestedNotBeforeTime: object expected");
+                                    message.requestedNotBeforeTime = $root.google.protobuf.Timestamp.fromObject(object.requestedNotBeforeTime);
+                                }
                                 return message;
                             };
     
@@ -5292,6 +5573,7 @@
                                     object.certificateDescription = null;
                                     object.createTime = null;
                                     object.updateTime = null;
+                                    object.requestedNotBeforeTime = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -5334,6 +5616,8 @@
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.labels[keys2[j]] = message.labels[keys2[j]];
                                 }
+                                if (message.requestedNotBeforeTime != null && message.hasOwnProperty("requestedNotBeforeTime"))
+                                    object.requestedNotBeforeTime = $root.google.protobuf.Timestamp.toObject(message.requestedNotBeforeTime, options);
                                 return object;
                             };
     
