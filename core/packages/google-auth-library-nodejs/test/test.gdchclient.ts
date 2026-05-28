@@ -621,6 +621,87 @@ describe('GdchClient', () => {
     scope.done();
   });
 
+  describe('requestAsync', () => {
+    it('should inject the CA agent for private/local GDCH API requests', async () => {
+      const caCertPath = '/path/to/custom-ca.pem';
+      const client = new GdchClient({
+        projectId: 'test-project',
+        privateKeyId: 'key-id-123',
+        privateKey: privateKeyPemSec1,
+        serviceIdentityName: 'sa-name',
+        tokenServerUri: 'https://token-server.local/token',
+        apiAudience: 'target-audience',
+        caCertPath,
+      });
+
+      // Set active mock token to prevent refresh request
+      client.credentials = {
+        access_token: 'valid-active-mock-token',
+        expiry_date: Date.now() + 1000000,
+      };
+
+      const readFileStub = sinon.stub(fs.promises, 'readFile').callsFake(async (path) => {
+        assert.strictEqual(path, caCertPath);
+        return Buffer.from('mock-ca-cert-content');
+      });
+
+      const apiScope = nock('https://api-server.local')
+        .get('/data')
+        .reply(200, {});
+
+      const opts: any = {
+        url: 'https://api-server.local/data',
+        method: 'GET',
+      };
+
+      const res = await (client as any).requestAsync(opts);
+      assert.strictEqual(res.status, 200);
+      apiScope.done();
+
+      assert.ok(readFileStub.calledOnce);
+      assert.ok(opts.agent !== undefined);
+    });
+
+    it('should NOT inject the CA agent for standard public Google API requests', async () => {
+      const caCertPath = '/path/to/custom-ca.pem';
+      const client = new GdchClient({
+        projectId: 'test-project',
+        privateKeyId: 'key-id-123',
+        privateKey: privateKeyPemSec1,
+        serviceIdentityName: 'sa-name',
+        tokenServerUri: 'https://token-server.local/token',
+        apiAudience: 'target-audience',
+        caCertPath,
+      });
+
+      // Set active mock token to prevent refresh request
+      client.credentials = {
+        access_token: 'valid-active-mock-token',
+        expiry_date: Date.now() + 1000000,
+      };
+
+      const readFileStub = sinon.stub(fs.promises, 'readFile').callsFake(async (path) => {
+        return Buffer.from('mock-ca-cert-content');
+      });
+
+      const googleScope = nock('https://storage.googleapis.com')
+        .get('/bucket/data')
+        .reply(200, {});
+
+      const opts: any = {
+        url: 'https://storage.googleapis.com/bucket/data',
+        method: 'GET',
+      };
+
+      const res = await (client as any).requestAsync(opts);
+      assert.strictEqual(res.status, 200);
+      googleScope.done();
+
+      assert.ok(readFileStub.notCalled);
+      assert.strictEqual(opts.agent, undefined);
+    });
+  });
+
   describe('base64UrlEncode', () => {
     it('should correctly encode strings and buffers in base64url format', () => {
       const client = new GdchClient();

@@ -269,6 +269,19 @@ export class GdchClient extends OAuth2Client {
   }
 
 
+  override async requestAsync<T>(
+    opts: GaxiosOptions,
+    retry = false
+  ): Promise<GaxiosResponse<T>> {
+    if (this.caCertPath && !opts.agent) {
+      const url = (opts.url || '').toString();
+      if (!url.includes('googleapis.com') && !url.includes('google.com')) {
+        opts.agent = await this.getCaAgent();
+      }
+    }
+    return super.requestAsync(opts, retry);
+  }
+
   private getCaAgent(): Promise<https.Agent> | undefined {
     if (!this.caCertPath) {
       this.caAgentPromise = undefined;
