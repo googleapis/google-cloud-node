@@ -58,7 +58,7 @@ applications that interact with individual Google Cloud services:
 | [Discovery Engine API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-discoveryengine) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/discoveryengine)](https://npm.im/@google-cloud/discoveryengine) |
 | [Distributed Cloud Edge Container API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-edgecontainer) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/edgecontainer)](https://npm.im/@google-cloud/edgecontainer) |
 | [Distributed Cloud Edge Network API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-edgenetwork) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/edgenetwork)](https://npm.im/@google-cloud/edgenetwork) |
-| [DNS](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dns) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dns)](https://npm.im/@google-cloud/dns) |
+| [DNS](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/google-cloud-dns) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dns)](https://npm.im/@google-cloud/dns) |
 | [Document AI](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-documentai) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/documentai)](https://npm.im/@google-cloud/documentai) |
 | [Document AI Warehouse](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-contentwarehouse) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/contentwarehouse)](https://npm.im/@google-cloud/contentwarehouse) |
 | [Domains](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-domains) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/domains)](https://npm.im/@google-cloud/domains) |
@@ -255,7 +255,7 @@ Once downloaded, store the path to this file in the `GOOGLE_APPLICATION_CREDENTI
 
 ### Other Authentication Methods
 
-Other authentication methods are outlined in the README for [google-auth-library-nodejs](https://github.com/googleapis/google-auth-library-nodejs),
+Other authentication methods are outlined in the README for [google-auth-library-nodejs](https://github.com/googleapis/google-cloud-node/tree/main/core/packages/google-auth-library-nodejs),
 which is the authentication library used by all Google Cloud Node.js clients.
 
 ## Example Applications

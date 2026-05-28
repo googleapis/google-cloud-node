@@ -31,11 +31,11 @@ import {Spanner} from '..';
  * by MetricsTracer to monitor and report metrics for each individual gRPC call attempt.
  */
 class MetricAttemptTracer {
-  private _startTime: Date;
+  private _startTime: number;
   public status: string;
 
   constructor() {
-    this._startTime = new Date(Date.now());
+    this._startTime = performance.now();
     this.status = Status[Status.UNKNOWN];
   }
 
@@ -67,12 +67,12 @@ class MetricAttemptTracer {
  */
 class MetricOperationTracer {
   private _attemptCount: number;
-  private _startTime: Date;
+  private _startTime: number;
   private _currentAttempt: MetricAttemptTracer | null;
 
   constructor() {
     this._attemptCount = 0;
-    this._startTime = new Date(Date.now());
+    this._startTime = performance.now();
     this._currentAttempt = null;
   }
 
@@ -173,13 +173,13 @@ export class MetricsTracer {
   }
 
   /**
-   * Returns the difference in milliseconds between two Date objects.
+   * Returns the difference in milliseconds between two times.
    * @param start The start time.
    * @param end The end time.
    * @returns The time difference in milliseconds.
    */
-  private _getMillisecondTimeDifference(start: Date, end: Date): number {
-    return end.valueOf() - start.valueOf();
+  private _getMillisecondTimeDifference(start: number, end: number): number {
+    return end - start;
   }
 
   /**
@@ -235,7 +235,7 @@ export class MetricsTracer {
     if (!this.enabled) return;
     this.currentOperation!.currentAttempt!.status = Status[statusCode];
     const attemptAttributes = this._createAttemptOtelAttributes();
-    const endTime = new Date(Date.now());
+    const endTime = performance.now();
     const attemptLatencyMilliseconds = this._getMillisecondTimeDifference(
       this.currentOperation!.currentAttempt!.startTime,
       endTime,
@@ -265,7 +265,7 @@ export class MetricsTracer {
    */
   public recordOperationCompletion() {
     if (!this.enabled || !this.currentOperation) return;
-    const endTime = new Date(Date.now());
+    const endTime = performance.now();
     const operationAttributes = this._createOperationOtelAttributes();
     const operationLatencyMilliseconds = this._getMillisecondTimeDifference(
       this.currentOperation!.startTime,

@@ -1073,6 +1073,21 @@
                           "oneof": [
                             "totalBytesFound"
                           ]
+                        },
+                        "_objectCustomContextsCreated": {
+                          "oneof": [
+                            "objectCustomContextsCreated"
+                          ]
+                        },
+                        "_objectCustomContextsDeleted": {
+                          "oneof": [
+                            "objectCustomContextsDeleted"
+                          ]
+                        },
+                        "_objectCustomContextsUpdated": {
+                          "oneof": [
+                            "objectCustomContextsUpdated"
+                          ]
                         }
                       },
                       "fields": {
@@ -1100,6 +1115,30 @@
                         "totalBytesFound": {
                           "type": "int64",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "objectCustomContextsCreated": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "objectCustomContextsDeleted": {
+                          "type": "int64",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "objectCustomContextsUpdated": {
+                          "type": "int64",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true

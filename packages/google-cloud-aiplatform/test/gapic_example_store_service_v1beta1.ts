@@ -4408,6 +4408,52 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
             });
         });
 
+        describe('onlineEvaluator', async () => {
+            const fakePath = "/rendered/path/onlineEvaluator";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                online_evaluator: "onlineEvaluatorValue",
+            };
+            const client = new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.onlineEvaluatorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.onlineEvaluatorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('onlineEvaluatorPath', () => {
+                const result = client.onlineEvaluatorPath("projectValue", "locationValue", "onlineEvaluatorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromOnlineEvaluatorName', () => {
+                const result = client.matchProjectFromOnlineEvaluatorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOnlineEvaluatorName', () => {
+                const result = client.matchLocationFromOnlineEvaluatorName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOnlineEvaluatorFromOnlineEvaluatorName', () => {
+                const result = client.matchOnlineEvaluatorFromOnlineEvaluatorName(fakePath);
+                assert.strictEqual(result, "onlineEvaluatorValue");
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('persistentResource', async () => {
             const fakePath = "/rendered/path/persistentResource";
             const expectedParameters = {
@@ -5050,6 +5096,60 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
                 const result = client.matchReasoningEngineFromReasoningEngineName(fakePath);
                 assert.strictEqual(result, "reasoningEngineValue");
                 assert((client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('reasoningEngineRuntimeRevision', async () => {
+            const fakePath = "/rendered/path/reasoningEngineRuntimeRevision";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reasoning_engine: "reasoningEngineValue",
+                runtime_revision: "runtimeRevisionValue",
+            };
+            const client = new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('reasoningEngineRuntimeRevisionPath', () => {
+                const result = client.reasoningEngineRuntimeRevisionPath("projectValue", "locationValue", "reasoningEngineValue", "runtimeRevisionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchProjectFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchLocationFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReasoningEngineFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchReasoningEngineFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "reasoningEngineValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRuntimeRevisionFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchRuntimeRevisionFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "runtimeRevisionValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

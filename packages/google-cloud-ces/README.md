@@ -174,6 +174,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete evaluation result | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_evaluation_result.js) |
 | delete evaluation run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_evaluation_run.js) |
 | delete scheduled evaluation run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_scheduled_evaluation_run.js) |
+| export evaluations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.export_evaluations.js) |
 | generate evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.generate_evaluation.js) |
 | get evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.get_evaluation.js) |
 | get evaluation dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.get_evaluation_dataset.js) |
@@ -236,7 +237,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -246,7 +247,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

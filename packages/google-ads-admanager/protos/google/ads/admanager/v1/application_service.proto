@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
+import "google/protobuf/field_mask.proto";
 
 option csharp_namespace = "Google.Ads.AdManager.V1";
 option go_package = "google.golang.org/genproto/googleapis/ads/admanager/v1;admanager";
@@ -34,7 +35,8 @@ option ruby_package = "Google::Ads::AdManager::V1";
 service ApplicationService {
   option (google.api.default_host) = "admanager.googleapis.com";
   option (google.api.oauth_scopes) =
-      "https://www.googleapis.com/auth/admanager";
+      "https://www.googleapis.com/auth/admanager,"
+      "https://www.googleapis.com/auth/admanager.readonly";
 
   // API to retrieve a `Application` object.
   rpc GetApplication(GetApplicationRequest) returns (Application) {
@@ -51,6 +53,64 @@ service ApplicationService {
       get: "/v1/{parent=networks/*}/applications"
     };
     option (google.api.method_signature) = "parent";
+  }
+
+  // API to create a `Application` object.
+  rpc CreateApplication(CreateApplicationRequest) returns (Application) {
+    option (google.api.http) = {
+      post: "/v1/{parent=networks/*}/applications"
+      body: "application"
+    };
+    option (google.api.method_signature) = "parent,application";
+  }
+
+  // API to batch create `Application` objects.
+  rpc BatchCreateApplications(BatchCreateApplicationsRequest)
+      returns (BatchCreateApplicationsResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=networks/*}/applications:batchCreate"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,requests";
+  }
+
+  // API to update a `Application` object.
+  rpc UpdateApplication(UpdateApplicationRequest) returns (Application) {
+    option (google.api.http) = {
+      patch: "/v1/{application.name=networks/*/applications/*}"
+      body: "application"
+    };
+    option (google.api.method_signature) = "application,update_mask";
+  }
+
+  // API to batch update `Application` objects.
+  rpc BatchUpdateApplications(BatchUpdateApplicationsRequest)
+      returns (BatchUpdateApplicationsResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=networks/*}/applications:batchUpdate"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,requests";
+  }
+
+  // / API to batch archive `Application` objects.
+  rpc BatchArchiveApplications(BatchArchiveApplicationsRequest)
+      returns (BatchArchiveApplicationsResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=networks/*}/applications:batchArchive"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,names";
+  }
+
+  // / API to batch unarchive `Application` objects.
+  rpc BatchUnarchiveApplications(BatchUnarchiveApplicationsRequest)
+      returns (BatchUnarchiveApplicationsResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=networks/*}/applications:batchUnarchive"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,names";
   }
 }
 
@@ -91,8 +151,21 @@ message ListApplicationsRequest {
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to filter the response.
-  // See syntax details at
-  // https://developers.google.com/ad-manager/api/beta/filters
+  //  See syntax details at
+  //  https://developers.google.com/ad-manager/api/beta/filters
+  //
+  // <b>Filterable fields:</b>
+  // <ul style="list-style-type:none">
+  //   <li><code>appStoreId</code></li>
+  //   <li><code>appStores</code></li>
+  //   <li><code>applicationCode</code></li>
+  //   <li><code>approvalStatus</code></li>
+  //   <li><code>archived</code></li>
+  //   <li><code>displayName</code></li>
+  //   <li><code>name</code></li>
+  //   <li><code>platform</code></li>
+  //   <li><code>webviewClaimingStatus</code></li>
+  // </ul>
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.
@@ -127,3 +200,124 @@ message ListApplicationsResponse {
   // https://developers.google.com/ad-manager/api/beta/field-masks
   int32 total_size = 3;
 }
+
+// Request object for `CreateApplication` method.
+message CreateApplicationRequest {
+  // Required. The parent resource where this `Application` will be created.
+  // Format: `networks/{network_code}`
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Required. The `Application` to create.
+  Application application = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Request object for `BatchCreateApplications` method.
+message BatchCreateApplicationsRequest {
+  // Required. The parent resource where `Applications` will be created.
+  // Format: `networks/{network_code}`
+  // The parent field in the CreateApplicationRequest must match this
+  // field.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Required. The `Application` objects to create.
+  repeated CreateApplicationRequest requests = 2
+      [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response object for `BatchCreateApplications` method.
+message BatchCreateApplicationsResponse {
+  // The `Application` objects created.
+  repeated Application applications = 1;
+}
+
+// Request object for `UpdateApplication` method.
+message UpdateApplicationRequest {
+  // Required. The `Application` to update.
+  //
+  // The `Application`'s `name` is used to identify the `Application` to update.
+  Application application = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The list of fields to update.
+  google.protobuf.FieldMask update_mask = 2
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Request object for `BatchUpdateApplications` method.
+message BatchUpdateApplicationsRequest {
+  // Required. The parent resource where `Applications` will be updated.
+  // Format: `networks/{network_code}`
+  // The parent field in the UpdateApplicationRequest must match this
+  // field.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Required. The `Application` objects to update.
+  repeated UpdateApplicationRequest requests = 2
+      [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response object for `BatchUpdateApplications` method.
+message BatchUpdateApplicationsResponse {
+  // The `Application` objects updated.
+  repeated Application applications = 1;
+}
+
+// Request object for `BatchArchiveApplications` method.
+message BatchArchiveApplicationsRequest {
+  // Required. The parent resource shared by all `Applications` to archive.
+  // Format: `networks/{network_code}`
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Required. The `Application` objects to archive.
+  repeated string names = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Application"
+    }
+  ];
+}
+
+// Response object for `BatchArchiveApplications` method.
+message BatchArchiveApplicationsResponse {}
+
+// Request object for `BatchUnarchiveApplications` method.
+message BatchUnarchiveApplicationsRequest {
+  // Required. The parent resource shared by all `Applications` to Unarchive.
+  // Format: `networks/{network_code}`
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Required. The `Application` objects to unarchive.
+  repeated string names = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Application"
+    }
+  ];
+}
+
+// Response object for `BatchUnarchiveApplications` method.
+message BatchUnarchiveApplicationsResponse {}

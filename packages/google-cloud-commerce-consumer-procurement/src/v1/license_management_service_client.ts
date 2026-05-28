@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class LicenseManagementServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('procurement');
@@ -57,9 +64,9 @@ export class LicenseManagementServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  licenseManagementServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  licenseManagementServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of LicenseManagementServiceClient.
@@ -100,21 +107,44 @@ export class LicenseManagementServiceClient {
    *     const client = new LicenseManagementServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof LicenseManagementServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof LicenseManagementServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
-    this._servicePath = 'cloudcommerceconsumerprocurement.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath =
+      'cloudcommerceconsumerprocurement.' + this._universeDomain;
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +169,7 @@ export class LicenseManagementServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +183,7 @@ export class LicenseManagementServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,10 +205,10 @@ export class LicenseManagementServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       licensePoolPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/orders/{order}/licensePool'
+        'billingAccounts/{billing_account}/orders/{order}/licensePool',
       ),
       orderPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/orders/{order}'
+        'billingAccounts/{billing_account}/orders/{order}',
       ),
     };
 
@@ -189,14 +216,20 @@ export class LicenseManagementServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      enumerateLicensedUsers:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'licensedUsers')
+      enumerateLicensedUsers: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'licensedUsers',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.commerce.consumer.procurement.v1.LicenseManagementService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.commerce.consumer.procurement.v1.LicenseManagementService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -227,37 +260,47 @@ export class LicenseManagementServiceClient {
     // Put together the "service stub" for
     // google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.
     this.licenseManagementServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.commerce.consumer.procurement.v1.LicenseManagementService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.commerce.consumer.procurement.v1.LicenseManagementService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.commerce.consumer.procurement.v1.LicenseManagementService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.commerce.consumer.procurement.v1
+            .LicenseManagementService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const licenseManagementServiceStubMethods =
-        ['getLicensePool', 'updateLicensePool', 'assign', 'unassign', 'enumerateLicensedUsers'];
+    const licenseManagementServiceStubMethods = [
+      'getLicensePool',
+      'updateLicensePool',
+      'assign',
+      'unassign',
+      'enumerateLicensedUsers',
+    ];
     for (const methodName of licenseManagementServiceStubMethods) {
       const callPromise = this.licenseManagementServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -272,8 +315,14 @@ export class LicenseManagementServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudcommerceconsumerprocurement.googleapis.com';
   }
@@ -284,8 +333,14 @@ export class LicenseManagementServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudcommerceconsumerprocurement.googleapis.com';
   }
@@ -316,9 +371,7 @@ export class LicenseManagementServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -327,8 +380,9 @@ export class LicenseManagementServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -339,479 +393,700 @@ export class LicenseManagementServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets the license pool.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the license pool to get.
- *   Format: `billingAccounts/{billing_account}/orders/{order}/licensePool`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1.LicensePool|LicensePool}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_management_service.get_license_pool.js</caption>
- * region_tag:cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_GetLicensePool_async
- */
+  /**
+   * Gets the license pool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the license pool to get.
+   *   Format: `billingAccounts/{billing_account}/orders/{order}/licensePool`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1.LicensePool|LicensePool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_management_service.get_license_pool.js</caption>
+   * region_tag:cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_GetLicensePool_async
+   */
   getLicensePool(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-        protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+      (
+        | protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getLicensePool(
-      request: protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-          protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getLicensePool(
-      request: protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest,
-      callback: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-          protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest,
+    callback: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getLicensePool(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-          protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-          protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-        protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+      (
+        | protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getLicensePool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-        protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+          | protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getLicensePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getLicensePool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-        protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getLicensePool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getLicensePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+          (
+            | protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLicensePool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the license pool if one exists for this Order.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.commerce.consumer.procurement.v1.LicensePool} request.licensePool
- *   Required. The license pool to update.
- *
- *   The license pool's name field is used to identify the license pool to
- *   update. Format:
- *   `billingAccounts/{billing_account}/orders/{order}/licensePool`.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The list of fields to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1.LicensePool|LicensePool}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_management_service.update_license_pool.js</caption>
- * region_tag:cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_UpdateLicensePool_async
- */
+  /**
+   * Updates the license pool if one exists for this Order.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.commerce.consumer.procurement.v1.LicensePool} request.licensePool
+   *   Required. The license pool to update.
+   *
+   *   The license pool's name field is used to identify the license pool to
+   *   update. Format:
+   *   `billingAccounts/{billing_account}/orders/{order}/licensePool`.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1.LicensePool|LicensePool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_management_service.update_license_pool.js</caption>
+   * region_tag:cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_UpdateLicensePool_async
+   */
   updateLicensePool(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-        protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+      (
+        | protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateLicensePool(
-      request: protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-          protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateLicensePool(
-      request: protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest,
-      callback: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-          protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest,
+    callback: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateLicensePool(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-          protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-          protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-        protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+      (
+        | protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'license_pool.name': request.licensePool!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'license_pool.name': request.licensePool!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateLicensePool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-        protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+          | protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateLicensePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateLicensePool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
-        protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateLicensePool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateLicensePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+          (
+            | protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLicensePool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Assigns a license to a user.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. License pool name.
- * @param {string[]} request.usernames
- *   Required. Username.
- *   Format: `name@domain.com`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1.AssignResponse|AssignResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_management_service.assign.js</caption>
- * region_tag:cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_Assign_async
- */
+  /**
+   * Assigns a license to a user.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. License pool name.
+   * @param {string[]} request.usernames
+   *   Required. Username.
+   *   Format: `name@domain.com`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1.AssignResponse|AssignResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_management_service.assign.js</caption>
+   * region_tag:cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_Assign_async
+   */
   assign(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
-        protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
+      (
+        | protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   assign(
-      request: protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
-          protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   assign(
-      request: protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest,
-      callback: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
-          protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest,
+    callback: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   assign(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
-          protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
-          protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
-        protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
+      (
+        | protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('assign request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
-        protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
+          | protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('assign response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.assign(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
-        protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('assign response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .assign(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
+          (
+            | protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('assign response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Unassigns a license from a user.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. License pool name.
- * @param {string[]} request.usernames
- *   Required. Username.
- *   Format: `name@domain.com`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1.UnassignResponse|UnassignResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_management_service.unassign.js</caption>
- * region_tag:cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_Unassign_async
- */
+  /**
+   * Unassigns a license from a user.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. License pool name.
+   * @param {string[]} request.usernames
+   *   Required. Username.
+   *   Format: `name@domain.com`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1.UnassignResponse|UnassignResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_management_service.unassign.js</caption>
+   * region_tag:cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_Unassign_async
+   */
   unassign(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
-        protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
+      (
+        | protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   unassign(
-      request: protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
-          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   unassign(
-      request: protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest,
-      callback: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
-          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest,
+    callback: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   unassign(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
-          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
-          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
-        protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
+      (
+        | protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('unassign request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
-        protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
+          | protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('unassign response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.unassign(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
-        protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('unassign response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .unassign(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
+          (
+            | protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('unassign response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Enumerates all users assigned a license.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. License pool name.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of users to return. The service may return
- *   fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `EnumerateLicensedUsers`
- *   call. Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser|LicensedUser}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `enumerateLicensedUsersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Enumerates all users assigned a license.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. License pool name.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of users to return. The service may return
+   *   fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `EnumerateLicensedUsers`
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser|LicensedUser}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `enumerateLicensedUsersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   enumerateLicensedUsers(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser[],
-        protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest|null,
-        protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse
-      ]>;
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser[],
+      protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest | null,
+      protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse,
+    ]
+  >;
   enumerateLicensedUsers(
-      request: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse|null|undefined,
-          protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser>): void;
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse
+      | null
+      | undefined,
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser
+    >,
+  ): void;
   enumerateLicensedUsers(
-      request: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse|null|undefined,
-          protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser>): void;
+    request: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse
+      | null
+      | undefined,
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser
+    >,
+  ): void;
   enumerateLicensedUsers(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse|null|undefined,
-          protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser>,
-      callback?: PaginationCallback<
-          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse|null|undefined,
-          protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser>):
-      Promise<[
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser[],
-        protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest|null,
-        protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse
-      ]>|void {
+          | protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse
+          | null
+          | undefined,
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+      | protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse
+      | null
+      | undefined,
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser[],
+      protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest | null,
+      protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-      protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse|null|undefined,
-      protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+          | protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse
+          | null
+          | undefined,
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('enumerateLicensedUsers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -820,110 +1095,114 @@ export class LicenseManagementServiceClient {
     this._log.info('enumerateLicensedUsers request %j', request);
     return this.innerApiCalls
       .enumerateLicensedUsers(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser[],
-        protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest|null,
-        protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse
-      ]) => {
-        this._log.info('enumerateLicensedUsers values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser[],
+          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest | null,
+          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse,
+        ]) => {
+          this._log.info('enumerateLicensedUsers values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `enumerateLicensedUsers`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. License pool name.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of users to return. The service may return
- *   fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `EnumerateLicensedUsers`
- *   call. Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser|LicensedUser} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `enumerateLicensedUsersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `enumerateLicensedUsers`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. License pool name.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of users to return. The service may return
+   *   fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `EnumerateLicensedUsers`
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser|LicensedUser} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `enumerateLicensedUsersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   enumerateLicensedUsersStream(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['enumerateLicensedUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('enumerateLicensedUsers stream %j', request);
     return this.descriptors.page.enumerateLicensedUsers.createStream(
       this.innerApiCalls.enumerateLicensedUsers as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `enumerateLicensedUsers`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. License pool name.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of users to return. The service may return
- *   fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `EnumerateLicensedUsers`
- *   call. Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser|LicensedUser}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_management_service.enumerate_licensed_users.js</caption>
- * region_tag:cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_EnumerateLicensedUsers_async
- */
+  /**
+   * Equivalent to `enumerateLicensedUsers`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. License pool name.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of users to return. The service may return
+   *   fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `EnumerateLicensedUsers`
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser|LicensedUser}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_management_service.enumerate_licensed_users.js</caption>
+   * region_tag:cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_EnumerateLicensedUsers_async
+   */
   enumerateLicensedUsersAsync(
-      request?: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser>{
+    request?: protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['enumerateLicensedUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('enumerateLicensedUsers iterate %j', request);
     return this.descriptors.page.enumerateLicensedUsers.asyncIterate(
       this.innerApiCalls['enumerateLicensedUsers'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser>;
   }
   // --------------------
@@ -937,7 +1216,7 @@ export class LicenseManagementServiceClient {
    * @param {string} order
    * @returns {string} Resource name string.
    */
-  licensePoolPath(billingAccount:string,order:string) {
+  licensePoolPath(billingAccount: string, order: string) {
     return this.pathTemplates.licensePoolPathTemplate.render({
       billing_account: billingAccount,
       order: order,
@@ -952,7 +1231,8 @@ export class LicenseManagementServiceClient {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromLicensePoolName(licensePoolName: string) {
-    return this.pathTemplates.licensePoolPathTemplate.match(licensePoolName).billing_account;
+    return this.pathTemplates.licensePoolPathTemplate.match(licensePoolName)
+      .billing_account;
   }
 
   /**
@@ -963,7 +1243,8 @@ export class LicenseManagementServiceClient {
    * @returns {string} A string representing the order.
    */
   matchOrderFromLicensePoolName(licensePoolName: string) {
-    return this.pathTemplates.licensePoolPathTemplate.match(licensePoolName).order;
+    return this.pathTemplates.licensePoolPathTemplate.match(licensePoolName)
+      .order;
   }
 
   /**
@@ -973,7 +1254,7 @@ export class LicenseManagementServiceClient {
    * @param {string} order
    * @returns {string} Resource name string.
    */
-  orderPath(billingAccount:string,order:string) {
+  orderPath(billingAccount: string, order: string) {
     return this.pathTemplates.orderPathTemplate.render({
       billing_account: billingAccount,
       order: order,
@@ -988,7 +1269,8 @@ export class LicenseManagementServiceClient {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromOrderName(orderName: string) {
-    return this.pathTemplates.orderPathTemplate.match(orderName).billing_account;
+    return this.pathTemplates.orderPathTemplate.match(orderName)
+      .billing_account;
   }
 
   /**
@@ -1010,7 +1292,7 @@ export class LicenseManagementServiceClient {
    */
   close(): Promise<void> {
     if (this.licenseManagementServiceStub && !this._terminated) {
-      return this.licenseManagementServiceStub.then(stub => {
+      return this.licenseManagementServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

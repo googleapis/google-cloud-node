@@ -8533,6 +8533,9 @@
                          * @property {number|Long|null} [succeededObjectCount] Counters succeededObjectCount
                          * @property {number|Long|null} [failedObjectCount] Counters failedObjectCount
                          * @property {number|Long|null} [totalBytesFound] Counters totalBytesFound
+                         * @property {number|Long|null} [objectCustomContextsCreated] Counters objectCustomContextsCreated
+                         * @property {number|Long|null} [objectCustomContextsDeleted] Counters objectCustomContextsDeleted
+                         * @property {number|Long|null} [objectCustomContextsUpdated] Counters objectCustomContextsUpdated
                          */
     
                         /**
@@ -8582,12 +8585,54 @@
                          */
                         Counters.prototype.totalBytesFound = null;
     
+                        /**
+                         * Counters objectCustomContextsCreated.
+                         * @member {number|Long|null|undefined} objectCustomContextsCreated
+                         * @memberof google.cloud.storagebatchoperations.v1.Counters
+                         * @instance
+                         */
+                        Counters.prototype.objectCustomContextsCreated = null;
+    
+                        /**
+                         * Counters objectCustomContextsDeleted.
+                         * @member {number|Long|null|undefined} objectCustomContextsDeleted
+                         * @memberof google.cloud.storagebatchoperations.v1.Counters
+                         * @instance
+                         */
+                        Counters.prototype.objectCustomContextsDeleted = null;
+    
+                        /**
+                         * Counters objectCustomContextsUpdated.
+                         * @member {number|Long|null|undefined} objectCustomContextsUpdated
+                         * @memberof google.cloud.storagebatchoperations.v1.Counters
+                         * @instance
+                         */
+                        Counters.prototype.objectCustomContextsUpdated = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Counters.prototype, "_totalBytesFound", {
                             get: $util.oneOfGetter($oneOfFields = ["totalBytesFound"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Counters.prototype, "_objectCustomContextsCreated", {
+                            get: $util.oneOfGetter($oneOfFields = ["objectCustomContextsCreated"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Counters.prototype, "_objectCustomContextsDeleted", {
+                            get: $util.oneOfGetter($oneOfFields = ["objectCustomContextsDeleted"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Counters.prototype, "_objectCustomContextsUpdated", {
+                            get: $util.oneOfGetter($oneOfFields = ["objectCustomContextsUpdated"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -8623,6 +8668,12 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.failedObjectCount);
                             if (message.totalBytesFound != null && Object.hasOwnProperty.call(message, "totalBytesFound"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int64(message.totalBytesFound);
+                            if (message.objectCustomContextsCreated != null && Object.hasOwnProperty.call(message, "objectCustomContextsCreated"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.objectCustomContextsCreated);
+                            if (message.objectCustomContextsDeleted != null && Object.hasOwnProperty.call(message, "objectCustomContextsDeleted"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.objectCustomContextsDeleted);
+                            if (message.objectCustomContextsUpdated != null && Object.hasOwnProperty.call(message, "objectCustomContextsUpdated"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.objectCustomContextsUpdated);
                             return writer;
                         };
     
@@ -8675,6 +8726,18 @@
                                         message.totalBytesFound = reader.int64();
                                         break;
                                     }
+                                case 5: {
+                                        message.objectCustomContextsCreated = reader.int64();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.objectCustomContextsDeleted = reader.int64();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.objectCustomContextsUpdated = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8724,6 +8787,21 @@
                                 properties._totalBytesFound = 1;
                                 if (!$util.isInteger(message.totalBytesFound) && !(message.totalBytesFound && $util.isInteger(message.totalBytesFound.low) && $util.isInteger(message.totalBytesFound.high)))
                                     return "totalBytesFound: integer|Long expected";
+                            }
+                            if (message.objectCustomContextsCreated != null && message.hasOwnProperty("objectCustomContextsCreated")) {
+                                properties._objectCustomContextsCreated = 1;
+                                if (!$util.isInteger(message.objectCustomContextsCreated) && !(message.objectCustomContextsCreated && $util.isInteger(message.objectCustomContextsCreated.low) && $util.isInteger(message.objectCustomContextsCreated.high)))
+                                    return "objectCustomContextsCreated: integer|Long expected";
+                            }
+                            if (message.objectCustomContextsDeleted != null && message.hasOwnProperty("objectCustomContextsDeleted")) {
+                                properties._objectCustomContextsDeleted = 1;
+                                if (!$util.isInteger(message.objectCustomContextsDeleted) && !(message.objectCustomContextsDeleted && $util.isInteger(message.objectCustomContextsDeleted.low) && $util.isInteger(message.objectCustomContextsDeleted.high)))
+                                    return "objectCustomContextsDeleted: integer|Long expected";
+                            }
+                            if (message.objectCustomContextsUpdated != null && message.hasOwnProperty("objectCustomContextsUpdated")) {
+                                properties._objectCustomContextsUpdated = 1;
+                                if (!$util.isInteger(message.objectCustomContextsUpdated) && !(message.objectCustomContextsUpdated && $util.isInteger(message.objectCustomContextsUpdated.low) && $util.isInteger(message.objectCustomContextsUpdated.high)))
+                                    return "objectCustomContextsUpdated: integer|Long expected";
                             }
                             return null;
                         };
@@ -8776,6 +8854,33 @@
                                     message.totalBytesFound = object.totalBytesFound;
                                 else if (typeof object.totalBytesFound === "object")
                                     message.totalBytesFound = new $util.LongBits(object.totalBytesFound.low >>> 0, object.totalBytesFound.high >>> 0).toNumber();
+                            if (object.objectCustomContextsCreated != null)
+                                if ($util.Long)
+                                    (message.objectCustomContextsCreated = $util.Long.fromValue(object.objectCustomContextsCreated)).unsigned = false;
+                                else if (typeof object.objectCustomContextsCreated === "string")
+                                    message.objectCustomContextsCreated = parseInt(object.objectCustomContextsCreated, 10);
+                                else if (typeof object.objectCustomContextsCreated === "number")
+                                    message.objectCustomContextsCreated = object.objectCustomContextsCreated;
+                                else if (typeof object.objectCustomContextsCreated === "object")
+                                    message.objectCustomContextsCreated = new $util.LongBits(object.objectCustomContextsCreated.low >>> 0, object.objectCustomContextsCreated.high >>> 0).toNumber();
+                            if (object.objectCustomContextsDeleted != null)
+                                if ($util.Long)
+                                    (message.objectCustomContextsDeleted = $util.Long.fromValue(object.objectCustomContextsDeleted)).unsigned = false;
+                                else if (typeof object.objectCustomContextsDeleted === "string")
+                                    message.objectCustomContextsDeleted = parseInt(object.objectCustomContextsDeleted, 10);
+                                else if (typeof object.objectCustomContextsDeleted === "number")
+                                    message.objectCustomContextsDeleted = object.objectCustomContextsDeleted;
+                                else if (typeof object.objectCustomContextsDeleted === "object")
+                                    message.objectCustomContextsDeleted = new $util.LongBits(object.objectCustomContextsDeleted.low >>> 0, object.objectCustomContextsDeleted.high >>> 0).toNumber();
+                            if (object.objectCustomContextsUpdated != null)
+                                if ($util.Long)
+                                    (message.objectCustomContextsUpdated = $util.Long.fromValue(object.objectCustomContextsUpdated)).unsigned = false;
+                                else if (typeof object.objectCustomContextsUpdated === "string")
+                                    message.objectCustomContextsUpdated = parseInt(object.objectCustomContextsUpdated, 10);
+                                else if (typeof object.objectCustomContextsUpdated === "number")
+                                    message.objectCustomContextsUpdated = object.objectCustomContextsUpdated;
+                                else if (typeof object.objectCustomContextsUpdated === "object")
+                                    message.objectCustomContextsUpdated = new $util.LongBits(object.objectCustomContextsUpdated.low >>> 0, object.objectCustomContextsUpdated.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -8831,6 +8936,30 @@
                                     object.totalBytesFound = options.longs === String ? $util.Long.prototype.toString.call(message.totalBytesFound) : options.longs === Number ? new $util.LongBits(message.totalBytesFound.low >>> 0, message.totalBytesFound.high >>> 0).toNumber() : message.totalBytesFound;
                                 if (options.oneofs)
                                     object._totalBytesFound = "totalBytesFound";
+                            }
+                            if (message.objectCustomContextsCreated != null && message.hasOwnProperty("objectCustomContextsCreated")) {
+                                if (typeof message.objectCustomContextsCreated === "number")
+                                    object.objectCustomContextsCreated = options.longs === String ? String(message.objectCustomContextsCreated) : message.objectCustomContextsCreated;
+                                else
+                                    object.objectCustomContextsCreated = options.longs === String ? $util.Long.prototype.toString.call(message.objectCustomContextsCreated) : options.longs === Number ? new $util.LongBits(message.objectCustomContextsCreated.low >>> 0, message.objectCustomContextsCreated.high >>> 0).toNumber() : message.objectCustomContextsCreated;
+                                if (options.oneofs)
+                                    object._objectCustomContextsCreated = "objectCustomContextsCreated";
+                            }
+                            if (message.objectCustomContextsDeleted != null && message.hasOwnProperty("objectCustomContextsDeleted")) {
+                                if (typeof message.objectCustomContextsDeleted === "number")
+                                    object.objectCustomContextsDeleted = options.longs === String ? String(message.objectCustomContextsDeleted) : message.objectCustomContextsDeleted;
+                                else
+                                    object.objectCustomContextsDeleted = options.longs === String ? $util.Long.prototype.toString.call(message.objectCustomContextsDeleted) : options.longs === Number ? new $util.LongBits(message.objectCustomContextsDeleted.low >>> 0, message.objectCustomContextsDeleted.high >>> 0).toNumber() : message.objectCustomContextsDeleted;
+                                if (options.oneofs)
+                                    object._objectCustomContextsDeleted = "objectCustomContextsDeleted";
+                            }
+                            if (message.objectCustomContextsUpdated != null && message.hasOwnProperty("objectCustomContextsUpdated")) {
+                                if (typeof message.objectCustomContextsUpdated === "number")
+                                    object.objectCustomContextsUpdated = options.longs === String ? String(message.objectCustomContextsUpdated) : message.objectCustomContextsUpdated;
+                                else
+                                    object.objectCustomContextsUpdated = options.longs === String ? $util.Long.prototype.toString.call(message.objectCustomContextsUpdated) : options.longs === Number ? new $util.LongBits(message.objectCustomContextsUpdated.low >>> 0, message.objectCustomContextsUpdated.high >>> 0).toNumber() : message.objectCustomContextsUpdated;
+                                if (options.oneofs)
+                                    object._objectCustomContextsUpdated = "objectCustomContextsUpdated";
                             }
                             return object;
                         };

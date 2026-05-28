@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudSchedulerClient} from './cloud_scheduler_client';
+export { CloudSchedulerClient } from './cloud_scheduler_client';

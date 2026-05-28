@@ -1,5 +1,32 @@
 # Changelog
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/data-v6.0.0...data-v6.1.0) (2026-05-27)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/data-v5.2.2...data-v6.0.0) (2026-05-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* [analytics-data] remove SheetExportAudienceList method, associated resources, and OAuth scopes from v1 alpha ([#8131](https://github.com/googleapis/google-cloud-node/issues/8131))
+
+### Bug Fixes
+
+* [analytics-data] remove SheetExportAudienceList method, associated resources, and OAuth scopes from v1 alpha ([#8131](https://github.com/googleapis/google-cloud-node/issues/8131)) ([7495561](https://github.com/googleapis/google-cloud-node/commit/74955618ec87f34d9af132b9b97b47287975c4cd))
+
+## [5.2.2](https://github.com/googleapis/google-cloud-node/compare/data-v5.2.1...data-v5.2.2) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [5.2.1](https://github.com/googleapis/google-cloud-node/compare/data-v5.2.0...data-v5.2.1) (2025-10-13)
 
 

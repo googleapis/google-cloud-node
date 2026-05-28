@@ -1,8 +1,16 @@
 # Changelog
 
+
 [npm history][1]
 
 [1]: https://www.npmjs.com/package/@google-cloud/common?activeTab=versions
+
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/common-v6.0.0...common-v6.0.1) (2026-05-11)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
 
 ## [6.0.0](https://github.com/googleapis/nodejs-common/compare/v5.0.2...v6.0.0) (2025-03-03)
 

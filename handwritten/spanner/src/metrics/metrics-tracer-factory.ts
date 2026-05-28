@@ -15,7 +15,6 @@
 import * as crypto from 'crypto';
 import * as os from 'os';
 import * as process from 'process';
-import {v4 as uuidv4} from 'uuid';
 import {MeterProvider, MetricReader} from '@opentelemetry/sdk-metrics';
 import {Counter, Histogram} from '@opentelemetry/api';
 import {detectResources, Resource} from '@opentelemetry/resources';
@@ -305,7 +304,8 @@ export class MetricsTracerFactory {
    * @param requestId The request id of the gRPC call set under 'x-goog-spanner-request-id'.
    */
   public clearCurrentTracer(requestId: string) {
-    const operationRequest = this._extractOperationRequest(requestId);
+    const operationRequest =
+      this._extractOperationRequest(requestId) || requestId;
     if (!this._currentOperationTracers.has(operationRequest)) {
       return;
     }
@@ -410,7 +410,7 @@ export class MetricsTracerFactory {
    * @returns A unique string identifier for the client.
    */
   private static _generateClientUId(): string {
-    const identifier = uuidv4();
+    const identifier = crypto.randomUUID();
     const pid = process.pid.toString();
     let hostname = 'localhost';
 

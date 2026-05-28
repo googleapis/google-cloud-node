@@ -1,8 +1,16 @@
 # Changelog
 
+
 [npm history][1]
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
+
+## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/logging-bunyan-v5.1.1...logging-bunyan-v5.1.2) (2026-05-11)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
 
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/logging-bunyan-v5.1.0...logging-bunyan-v5.1.1) (2026-02-19)
 

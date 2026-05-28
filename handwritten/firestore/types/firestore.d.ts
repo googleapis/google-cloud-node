@@ -2747,6 +2747,68 @@ declare namespace FirebaseFirestore {
      */
     static increment(n: number): FieldValue;
     /**
+     * Returns a special value that can be used with `set()`, `create()` or `update()`
+     * that tells the server to set the field to the numeric minimum of the
+     * field's current and the given value.
+     *
+     * If the current field value is not of type 'number', or if the field does
+     * not yet exist, the transformation will set the field to the given value.
+     *
+     * If the existing value and the operand are equivalent, then the field does
+     * not change. For example, `0`, `0.0`, and `-0.0` are all equivalent. If the
+     * operand is `NaN` then the result is always `NaN`.
+     *
+     * @param {number} n The value to compare to the exiting field value.
+     * @return {FieldValue} The `FieldValue` for use in a call to `set()`, `create()` or
+     * `update()`.
+     *
+     * @example
+     * ```typescript
+     * let documentRef = firestore.doc('col/doc');
+     *
+     * documentRef.update(
+     *   'counter', Firestore.FieldValue.minimum(1)
+     * ).then(() => {
+     *   return documentRef.get();
+     * }).then(doc => {
+     *   // doc.get('counter') is the minimum of either the existing value or 1
+     * });
+     * ```
+     */
+    static minimum(n: number): FieldValue;
+
+    /**
+     * Returns a special value that can be used with `set()`, `create()` or `update()`
+     * that tells the server to set the field to the numeric maximum of the
+     * field's current and the given value.
+     *
+     * If the current field value is not of type 'number', or if the field does
+     * not yet exist, the transformation will set the field to the given value.
+     *
+     * If the existing value and the operand are equivalent, then the field does
+     * not change. For example, `0`, `0.0`, and `-0.0` are all equivalent. If the
+     * operand is `NaN` then the result is always `NaN`.
+     *
+     * @param {number} n The value to compare to the exiting field value.
+     * @return {FieldValue} The `FieldValue` for use in a call to `set()`, `create()` or
+     * `update()`.
+     *
+     * @example
+     * ```typescript
+     * let documentRef = firestore.doc('col/doc');
+     *
+     * documentRef.update(
+     *   'counter', Firestore.FieldValue.maximum(1)
+     * ).then(() => {
+     *   return documentRef.get();
+     * }).then(doc => {
+     *   // doc.get('counter') is the maximum of either the existing value or 1
+     * });
+     * ```
+     */
+    static maximum(n: number): FieldValue;
+
+    /**
      * Returns a special value that can be used with set(), create() or update()
      * that tells the server to union the given elements with any array value
      * that already exists on the server. Each specified element that doesn't
@@ -5720,7 +5782,7 @@ declare namespace FirebaseFirestore {
       //  * Evaluates to an HTML-formatted text snippet that renders terms matching
       //  * the search query in `<b>bold</b>`.
       //  *
-      //  * @remarks This Expression can only be used within a `Search` stage.
+      //  * @remarks This Expression can only be used within a `search` stage.
       //  *
       //  * @param rquery Define the search query using the search domain-specific language (DSL).
       //  * @returns An `Expression` representing the snippet function.
@@ -5731,7 +5793,7 @@ declare namespace FirebaseFirestore {
       //  * Evaluates to an HTML-formatted text snippet that renders terms matching
       //  * the search query in `<b>bold</b>`.
       //  *
-      //  * @remarks This Expression can only be used within a `Search` stage.
+      //  * @remarks This Expression can only be used within a `search` stage.
       //  *
       //  * @param options Define how snippeting behaves.
       //  * @returns An `Expression` representing the snippet function.
@@ -5959,7 +6021,7 @@ declare namespace FirebaseFirestore {
       // /**
       //  * Perform a full-text search on this field.
       //  *
-      //  * @remarks This Expression can only be used within a `Search` stage.
+      //  * @remarks This Expression can only be used within a `search` stage.
       //  *
       //  * @param rquery Define the search query using the search domain-specific language (DSL).
       //  * @returns A `BooleanExpression` representing the matches function.
@@ -5970,7 +6032,7 @@ declare namespace FirebaseFirestore {
        * Evaluates to the distance in meters between the location specified
        * by this field and the query location.
        *
-       * @remarks This Expression can only be used within a `Search` stage.
+       * @remarks This Expression can only be used within a `search` stage.
        *
        * @example
        * ```typescript
@@ -11854,7 +11916,7 @@ declare namespace FirebaseFirestore {
     //  * @beta
     //  * Perform a full-text search on the specified field.
     //  *
-    //  * @remarks This Expression can only be used within a `Search` stage.
+    //  * @remarks This Expression can only be used within a `search` stage.
     //  *
     //  * @param searchField Search the specified field.
     //  * @param rquery Define the search query using the search domain-specific language (DSL).
@@ -11868,7 +11930,7 @@ declare namespace FirebaseFirestore {
     /**
      * Perform a full-text search on all indexed search fields in the document.
      *
-     * @remarks This Expression can only be used within a `Search` stage.
+     * @remarks This Expression can only be used within a `search` stage.
      *
      * @example
      * ```typescript
@@ -11900,7 +11962,7 @@ declare namespace FirebaseFirestore {
      * })
      * ```
      *
-     * @remarks This Expression can only be used within a `Search` stage.
+     * @remarks This Expression can only be used within a `search` stage.
      * @returns An `Expression` representing the score function.
      */
     export function score(): Expression;
@@ -11918,7 +11980,7 @@ declare namespace FirebaseFirestore {
     //  * })
     //  * ```
     //  *
-    //  * @remarks This Expression can only be used within a `Search` stage.
+    //  * @remarks This Expression can only be used within a `search` stage.
     //  *
     //  * @param searchField Search the specified field for matching terms.
     //  * @param rquery Define the search query using the search domain-specific language (DSL).
@@ -11933,7 +11995,7 @@ declare namespace FirebaseFirestore {
     //  * Evaluates to an HTML-formatted text snippet that highlights terms matching
     //  * the search query in `<b>bold</b>`.
     //  *
-    //  * @remarks This Expression can only be used within a `Search` stage.
+    //  * @remarks This Expression can only be used within a `search` stage.
     //  *
     //  * @param searchField Search the specified field for matching terms.
     //  * @param options Define the search query using the search domain-specific language (DSL).
@@ -11958,7 +12020,7 @@ declare namespace FirebaseFirestore {
      * })
      * ```
      *
-     * @remarks This Expression can only be used within a `Search` stage.
+     * @remarks This Expression can only be used within a `search` stage.
      *
      * @param fieldName - Specifies the field in the document which contains
      * the first GeoPoint for distance computation.
@@ -13737,7 +13799,7 @@ declare namespace FirebaseFirestore {
        *
        * The query can be expressed as an `Expression`, which will be used to score
        * and filter the results. Not all expressions supported by Pipelines
-       * are supported in the Search query.
+       * are supported in the search query.
        *
        * @example
        * ```typescript
@@ -13757,20 +13819,19 @@ declare namespace FirebaseFirestore {
        */
       query: BooleanExpression | string;
 
-      ///**
-      // * The BCP-47 language code of text in the search query, such as, “en-US” or “sr-Latn”
-      // */
-      // TODO(search) enable with backend support
-      //languageCode?: string;
+      /**
+       * The BCP-47 language code of text in the search query, such as “en” or “sr”.
+       */
+      languageCode?: string;
 
       // TODO(search) add indexPartition after languageCode
 
-      ///**
-      // * The maximum number of documents to retrieve. Documents will be retrieved in the
-      // * pre-sort order specified by the search index.
-      // */
-      // TODO(search) enable with backend support
-      //retrievalDepth?: number;
+      /**
+       * The maximum number of documents to retrieve from the search index. Documents will be retrieved in the
+       * pre-sort order specified by the search index. The `retrievalDepth` is a limit applied before documents
+       * are scored and sorted, which can reduce costs of expensive scoring and sorting operations.
+       */
+      retrievalDepth?: number;
 
       /**
        * Orderings specify how the input documents are sorted.
@@ -13778,17 +13839,16 @@ declare namespace FirebaseFirestore {
        */
       sort?: Ordering | Ordering[];
 
-      // /**
-      //  * The number of documents to skip.
-      //  */
-      // TODO(search) enable with backend support
-      // offset?: number;
+      /**
+       * The number of documents to skip from the beginning of the search result set.
+       */
+      offset?: number;
 
-      // /**
-      //  * The maximum number of documents to return from the Search stage.
-      //  */
-      // TODO(search) enable with backend support
-      // limit?: number;
+      /**
+       * The maximum number of documents to return from the `search` stage. The `limit` is applied after documents
+       * are scored and sorted.
+       */
+      limit?: number;
 
       // /**
       //  * The fields to keep or add to each document,

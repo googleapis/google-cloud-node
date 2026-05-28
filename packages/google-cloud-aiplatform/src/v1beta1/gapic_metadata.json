@@ -473,6 +473,11 @@
                 "evaluateInstances"
               ]
             },
+            "GenerateInstanceRubrics": {
+              "methods": [
+                "generateInstanceRubrics"
+              ]
+            },
             "EvaluateDataset": {
               "methods": [
                 "evaluateDataset"
@@ -486,6 +491,11 @@
             "EvaluateInstances": {
               "methods": [
                 "evaluateInstances"
+              ]
+            },
+            "GenerateInstanceRubrics": {
+              "methods": [
+                "generateInstanceRubrics"
               ]
             },
             "EvaluateDataset": {
@@ -3334,6 +3344,94 @@
         }
       }
     },
+    "OnlineEvaluatorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OnlineEvaluatorServiceClient",
+          "rpcs": {
+            "GetOnlineEvaluator": {
+              "methods": [
+                "getOnlineEvaluator"
+              ]
+            },
+            "CreateOnlineEvaluator": {
+              "methods": [
+                "createOnlineEvaluator"
+              ]
+            },
+            "UpdateOnlineEvaluator": {
+              "methods": [
+                "updateOnlineEvaluator"
+              ]
+            },
+            "DeleteOnlineEvaluator": {
+              "methods": [
+                "deleteOnlineEvaluator"
+              ]
+            },
+            "ActivateOnlineEvaluator": {
+              "methods": [
+                "activateOnlineEvaluator"
+              ]
+            },
+            "SuspendOnlineEvaluator": {
+              "methods": [
+                "suspendOnlineEvaluator"
+              ]
+            },
+            "ListOnlineEvaluators": {
+              "methods": [
+                "listOnlineEvaluators",
+                "listOnlineEvaluatorsStream",
+                "listOnlineEvaluatorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OnlineEvaluatorServiceClient",
+          "rpcs": {
+            "GetOnlineEvaluator": {
+              "methods": [
+                "getOnlineEvaluator"
+              ]
+            },
+            "CreateOnlineEvaluator": {
+              "methods": [
+                "createOnlineEvaluator"
+              ]
+            },
+            "UpdateOnlineEvaluator": {
+              "methods": [
+                "updateOnlineEvaluator"
+              ]
+            },
+            "DeleteOnlineEvaluator": {
+              "methods": [
+                "deleteOnlineEvaluator"
+              ]
+            },
+            "ActivateOnlineEvaluator": {
+              "methods": [
+                "activateOnlineEvaluator"
+              ]
+            },
+            "SuspendOnlineEvaluator": {
+              "methods": [
+                "suspendOnlineEvaluator"
+              ]
+            },
+            "ListOnlineEvaluators": {
+              "methods": [
+                "listOnlineEvaluators",
+                "listOnlineEvaluatorsStream",
+                "listOnlineEvaluatorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PersistentResourceService": {
       "clients": {
         "grpc": {
@@ -3698,9 +3796,19 @@
                 "queryReasoningEngine"
               ]
             },
+            "CancelAsyncQueryReasoningEngine": {
+              "methods": [
+                "cancelAsyncQueryReasoningEngine"
+              ]
+            },
             "StreamQueryReasoningEngine": {
               "methods": [
                 "streamQueryReasoningEngine"
+              ]
+            },
+            "AsyncQueryReasoningEngine": {
+              "methods": [
+                "asyncQueryReasoningEngine"
               ]
             }
           }
@@ -3711,6 +3819,64 @@
             "QueryReasoningEngine": {
               "methods": [
                 "queryReasoningEngine"
+              ]
+            },
+            "CancelAsyncQueryReasoningEngine": {
+              "methods": [
+                "cancelAsyncQueryReasoningEngine"
+              ]
+            },
+            "AsyncQueryReasoningEngine": {
+              "methods": [
+                "asyncQueryReasoningEngine"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ReasoningEngineRuntimeRevisionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReasoningEngineRuntimeRevisionServiceClient",
+          "rpcs": {
+            "GetReasoningEngineRuntimeRevision": {
+              "methods": [
+                "getReasoningEngineRuntimeRevision"
+              ]
+            },
+            "DeleteReasoningEngineRuntimeRevision": {
+              "methods": [
+                "deleteReasoningEngineRuntimeRevision"
+              ]
+            },
+            "ListReasoningEngineRuntimeRevisions": {
+              "methods": [
+                "listReasoningEngineRuntimeRevisions",
+                "listReasoningEngineRuntimeRevisionsStream",
+                "listReasoningEngineRuntimeRevisionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReasoningEngineRuntimeRevisionServiceClient",
+          "rpcs": {
+            "GetReasoningEngineRuntimeRevision": {
+              "methods": [
+                "getReasoningEngineRuntimeRevision"
+              ]
+            },
+            "DeleteReasoningEngineRuntimeRevision": {
+              "methods": [
+                "deleteReasoningEngineRuntimeRevision"
+              ]
+            },
+            "ListReasoningEngineRuntimeRevisions": {
+              "methods": [
+                "listReasoningEngineRuntimeRevisions",
+                "listReasoningEngineRuntimeRevisionsStream",
+                "listReasoningEngineRuntimeRevisionsAsync"
               ]
             }
           }

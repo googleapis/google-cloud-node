@@ -24,6 +24,14 @@ describe('Baseline tests: ESM', () => {
     format: 'esm',
   });
   runBaselineTest({
+    baselineName: 'duplicate_methods_test-esm',
+    outputDir: '.test-out-duplicate_methods_test-esm',
+    protoPath: 'google/duplicatemethodstest/v1/duplicate_methods_test_v1.proto',
+    serviceYaml: 'google/duplicatemethodstest/v1/duplicate_methods_test_v1.yaml',
+    useCommonProto: true,
+    format: 'esm',
+  });
+  runBaselineTest({
     baselineName: 'dlp-esm',
     outputDir: '.test-out-dlp-esm',
     protoPath: 'google/privacy/dlp/v2/*.proto',

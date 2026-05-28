@@ -306,6 +306,9 @@ export class LlmUtilityServiceClient {
       notebookRuntimeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}'
       ),
+      onlineEvaluatorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/onlineEvaluators/{online_evaluator}'
+      ),
       persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
       ),
@@ -344,6 +347,9 @@ export class LlmUtilityServiceClient {
       ),
       reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
+      ),
+      reasoningEngineRuntimeRevisionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/runtimeRevisions/{runtime_revision}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
@@ -3091,6 +3097,55 @@ export class LlmUtilityServiceClient {
   }
 
   /**
+   * Return a fully-qualified onlineEvaluator resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} online_evaluator
+   * @returns {string} Resource name string.
+   */
+  onlineEvaluatorPath(project:string,location:string,onlineEvaluator:string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.render({
+      project: project,
+      location: location,
+      online_evaluator: onlineEvaluator,
+    });
+  }
+
+  /**
+   * Parse the project from OnlineEvaluator resource.
+   *
+   * @param {string} onlineEvaluatorName
+   *   A fully-qualified path representing OnlineEvaluator resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromOnlineEvaluatorName(onlineEvaluatorName: string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.match(onlineEvaluatorName).project;
+  }
+
+  /**
+   * Parse the location from OnlineEvaluator resource.
+   *
+   * @param {string} onlineEvaluatorName
+   *   A fully-qualified path representing OnlineEvaluator resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOnlineEvaluatorName(onlineEvaluatorName: string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.match(onlineEvaluatorName).location;
+  }
+
+  /**
+   * Parse the online_evaluator from OnlineEvaluator resource.
+   *
+   * @param {string} onlineEvaluatorName
+   *   A fully-qualified path representing OnlineEvaluator resource.
+   * @returns {string} A string representing the online_evaluator.
+   */
+  matchOnlineEvaluatorFromOnlineEvaluatorName(onlineEvaluatorName: string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.match(onlineEvaluatorName).online_evaluator;
+  }
+
+  /**
    * Return a fully-qualified persistentResource resource name string.
    *
    * @param {string} project
@@ -3803,6 +3858,68 @@ export class LlmUtilityServiceClient {
    */
   matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
     return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).reasoning_engine;
+  }
+
+  /**
+   * Return a fully-qualified reasoningEngineRuntimeRevision resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} runtime_revision
+   * @returns {string} Resource name string.
+   */
+  reasoningEngineRuntimeRevisionPath(project:string,location:string,reasoningEngine:string,runtimeRevision:string) {
+    return this.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      runtime_revision: runtimeRevision,
+    });
+  }
+
+  /**
+   * Parse the project from ReasoningEngineRuntimeRevision resource.
+   *
+   * @param {string} reasoningEngineRuntimeRevisionName
+   *   A fully-qualified path representing ReasoningEngineRuntimeRevision resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromReasoningEngineRuntimeRevisionName(reasoningEngineRuntimeRevisionName: string) {
+    return this.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match(reasoningEngineRuntimeRevisionName).project;
+  }
+
+  /**
+   * Parse the location from ReasoningEngineRuntimeRevision resource.
+   *
+   * @param {string} reasoningEngineRuntimeRevisionName
+   *   A fully-qualified path representing ReasoningEngineRuntimeRevision resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromReasoningEngineRuntimeRevisionName(reasoningEngineRuntimeRevisionName: string) {
+    return this.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match(reasoningEngineRuntimeRevisionName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ReasoningEngineRuntimeRevision resource.
+   *
+   * @param {string} reasoningEngineRuntimeRevisionName
+   *   A fully-qualified path representing ReasoningEngineRuntimeRevision resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromReasoningEngineRuntimeRevisionName(reasoningEngineRuntimeRevisionName: string) {
+    return this.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match(reasoningEngineRuntimeRevisionName).reasoning_engine;
+  }
+
+  /**
+   * Parse the runtime_revision from ReasoningEngineRuntimeRevision resource.
+   *
+   * @param {string} reasoningEngineRuntimeRevisionName
+   *   A fully-qualified path representing ReasoningEngineRuntimeRevision resource.
+   * @returns {string} A string representing the runtime_revision.
+   */
+  matchRuntimeRevisionFromReasoningEngineRuntimeRevisionName(reasoningEngineRuntimeRevisionName: string) {
+    return this.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match(reasoningEngineRuntimeRevisionName).runtime_revision;
   }
 
   /**

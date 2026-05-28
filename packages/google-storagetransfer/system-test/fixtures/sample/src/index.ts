@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {StorageTransferServiceClient} from '@google-cloud/storage-transfer';
+import { StorageTransferServiceClient } from '@google-cloud/storage-transfer';
 
 // check that the client class type name can be used
-function doStuffWithStorageTransferServiceClient(client: StorageTransferServiceClient) {
+function doStuffWithStorageTransferServiceClient(
+  client: StorageTransferServiceClient,
+) {
   client.close();
 }
 

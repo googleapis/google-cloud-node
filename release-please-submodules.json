@@ -1,5 +1,5 @@
 {
-  "commit-batch-size": 1,
+  "commit-batch-size": 10,
   "include-component-in-tag": true,
   "packages": {
     "core/common": {
@@ -16,6 +16,9 @@
     },
     "core/generator/gapic-generator-typescript": {
       "component": "gapic-generator"
+    },
+    "core/packages/gapic-node-processing": {
+      "component": "gapic-node-processing"
     },
     "core/packages/gax": {
       "component": "google-gax"
@@ -50,6 +53,9 @@
     "core/packages/tools": {
       "component": "gapic-tools"
     },
+    "core/packages/typeless-sample-bot": {
+      "component": "typeless-sample-bot"
+    },
     "core/paginator": {
       "component": "paginator"
     },
@@ -82,6 +88,9 @@
     },
     "handwritten/firestore": {
       "component": "firestore"
+    },
+    "handwritten/google-cloud-dns": {
+      "component": "dns"
     },
     "handwritten/logging": {
       "component": "logging"
