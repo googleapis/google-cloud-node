@@ -7988,6 +7988,7 @@
                          * @property {google.maps.places.v1.Place.IConsumerAlert|null} [consumerAlert] Place consumerAlert
                          * @property {string|null} [movedPlace] Place movedPlace
                          * @property {string|null} [movedPlaceId] Place movedPlaceId
+                         * @property {google.maps.places.v1.ITransitStation|null} [transitStation] Place transitStation
                          */
     
                         /**
@@ -8630,6 +8631,14 @@
                          */
                         Place.prototype.movedPlaceId = "";
     
+                        /**
+                         * Place transitStation.
+                         * @member {google.maps.places.v1.ITransitStation|null|undefined} transitStation
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.transitStation = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -8982,6 +8991,8 @@
                                 $root.google.type.Date.encode(message.openingDate, writer.uint32(/* id 95, wireType 2 =*/762).fork()).ldelim();
                             if (message.googleMapsTypeLabel != null && Object.hasOwnProperty.call(message, "googleMapsTypeLabel"))
                                 $root.google.type.LocalizedText.encode(message.googleMapsTypeLabel, writer.uint32(/* id 96, wireType 2 =*/770).fork()).ldelim();
+                            if (message.transitStation != null && Object.hasOwnProperty.call(message, "transitStation"))
+                                $root.google.maps.places.v1.TransitStation.encode(message.transitStation, writer.uint32(/* id 98, wireType 2 =*/786).fork()).ldelim();
                             return writer;
                         };
     
@@ -9342,6 +9353,10 @@
                                     }
                                 case 94: {
                                         message.movedPlaceId = reader.string();
+                                        break;
+                                    }
+                                case 98: {
+                                        message.transitStation = $root.google.maps.places.v1.TransitStation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -9785,6 +9800,11 @@
                             if (message.movedPlaceId != null && message.hasOwnProperty("movedPlaceId"))
                                 if (!$util.isString(message.movedPlaceId))
                                     return "movedPlaceId: string expected";
+                            if (message.transitStation != null && message.hasOwnProperty("transitStation")) {
+                                var error = $root.google.maps.places.v1.TransitStation.verify(message.transitStation);
+                                if (error)
+                                    return "transitStation." + error;
+                            }
                             return null;
                         };
     
@@ -10154,6 +10174,11 @@
                                 message.movedPlace = String(object.movedPlace);
                             if (object.movedPlaceId != null)
                                 message.movedPlaceId = String(object.movedPlaceId);
+                            if (object.transitStation != null) {
+                                if (typeof object.transitStation !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.transitStation: object expected");
+                                message.transitStation = $root.google.maps.places.v1.TransitStation.fromObject(object.transitStation);
+                            }
                             return message;
                         };
     
@@ -10223,6 +10248,7 @@
                                 object.movedPlaceId = "";
                                 object.openingDate = null;
                                 object.googleMapsTypeLabel = null;
+                                object.transitStation = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10486,6 +10512,8 @@
                                 object.openingDate = $root.google.type.Date.toObject(message.openingDate, options);
                             if (message.googleMapsTypeLabel != null && message.hasOwnProperty("googleMapsTypeLabel"))
                                 object.googleMapsTypeLabel = $root.google.type.LocalizedText.toObject(message.googleMapsTypeLabel, options);
+                            if (message.transitStation != null && message.hasOwnProperty("transitStation"))
+                                object.transitStation = $root.google.maps.places.v1.TransitStation.toObject(message.transitStation, options);
                             return object;
                         };
     
@@ -16610,6 +16638,1831 @@
                         };
     
                         return PriceRange;
+                    })();
+    
+                    v1.TransitStation = (function() {
+    
+                        /**
+                         * Properties of a TransitStation.
+                         * @memberof google.maps.places.v1
+                         * @interface ITransitStation
+                         * @property {google.type.ILocalizedText|null} [displayName] TransitStation displayName
+                         * @property {Array.<google.maps.places.v1.ITransitAgency>|null} [agencies] TransitStation agencies
+                         * @property {Array.<google.maps.places.v1.ITransitStop>|null} [stops] TransitStation stops
+                         */
+    
+                        /**
+                         * Constructs a new TransitStation.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a TransitStation.
+                         * @implements ITransitStation
+                         * @constructor
+                         * @param {google.maps.places.v1.ITransitStation=} [properties] Properties to set
+                         */
+                        function TransitStation(properties) {
+                            this.agencies = [];
+                            this.stops = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransitStation displayName.
+                         * @member {google.type.ILocalizedText|null|undefined} displayName
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @instance
+                         */
+                        TransitStation.prototype.displayName = null;
+    
+                        /**
+                         * TransitStation agencies.
+                         * @member {Array.<google.maps.places.v1.ITransitAgency>} agencies
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @instance
+                         */
+                        TransitStation.prototype.agencies = $util.emptyArray;
+    
+                        /**
+                         * TransitStation stops.
+                         * @member {Array.<google.maps.places.v1.ITransitStop>} stops
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @instance
+                         */
+                        TransitStation.prototype.stops = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TransitStation instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @static
+                         * @param {google.maps.places.v1.ITransitStation=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.TransitStation} TransitStation instance
+                         */
+                        TransitStation.create = function create(properties) {
+                            return new TransitStation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransitStation message. Does not implicitly {@link google.maps.places.v1.TransitStation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @static
+                         * @param {google.maps.places.v1.ITransitStation} message TransitStation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransitStation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                $root.google.type.LocalizedText.encode(message.displayName, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.agencies != null && message.agencies.length)
+                                for (var i = 0; i < message.agencies.length; ++i)
+                                    $root.google.maps.places.v1.TransitAgency.encode(message.agencies[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.stops != null && message.stops.length)
+                                for (var i = 0; i < message.stops.length; ++i)
+                                    $root.google.maps.places.v1.TransitStop.encode(message.stops[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransitStation message, length delimited. Does not implicitly {@link google.maps.places.v1.TransitStation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @static
+                         * @param {google.maps.places.v1.ITransitStation} message TransitStation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransitStation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransitStation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.TransitStation} TransitStation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransitStation.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.TransitStation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.agencies && message.agencies.length))
+                                            message.agencies = [];
+                                        message.agencies.push($root.google.maps.places.v1.TransitAgency.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.stops && message.stops.length))
+                                            message.stops = [];
+                                        message.stops.push($root.google.maps.places.v1.TransitStop.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransitStation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.TransitStation} TransitStation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransitStation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransitStation message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransitStation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName")) {
+                                var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                if (error)
+                                    return "displayName." + error;
+                            }
+                            if (message.agencies != null && message.hasOwnProperty("agencies")) {
+                                if (!Array.isArray(message.agencies))
+                                    return "agencies: array expected";
+                                for (var i = 0; i < message.agencies.length; ++i) {
+                                    var error = $root.google.maps.places.v1.TransitAgency.verify(message.agencies[i]);
+                                    if (error)
+                                        return "agencies." + error;
+                                }
+                            }
+                            if (message.stops != null && message.hasOwnProperty("stops")) {
+                                if (!Array.isArray(message.stops))
+                                    return "stops: array expected";
+                                for (var i = 0; i < message.stops.length; ++i) {
+                                    var error = $root.google.maps.places.v1.TransitStop.verify(message.stops[i]);
+                                    if (error)
+                                        return "stops." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransitStation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.TransitStation} TransitStation
+                         */
+                        TransitStation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.TransitStation)
+                                return object;
+                            var message = new $root.google.maps.places.v1.TransitStation();
+                            if (object.displayName != null) {
+                                if (typeof object.displayName !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitStation.displayName: object expected");
+                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                            }
+                            if (object.agencies) {
+                                if (!Array.isArray(object.agencies))
+                                    throw TypeError(".google.maps.places.v1.TransitStation.agencies: array expected");
+                                message.agencies = [];
+                                for (var i = 0; i < object.agencies.length; ++i) {
+                                    if (typeof object.agencies[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.TransitStation.agencies: object expected");
+                                    message.agencies[i] = $root.google.maps.places.v1.TransitAgency.fromObject(object.agencies[i]);
+                                }
+                            }
+                            if (object.stops) {
+                                if (!Array.isArray(object.stops))
+                                    throw TypeError(".google.maps.places.v1.TransitStation.stops: array expected");
+                                message.stops = [];
+                                for (var i = 0; i < object.stops.length; ++i) {
+                                    if (typeof object.stops[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.TransitStation.stops: object expected");
+                                    message.stops[i] = $root.google.maps.places.v1.TransitStop.fromObject(object.stops[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransitStation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @static
+                         * @param {google.maps.places.v1.TransitStation} message TransitStation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransitStation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.agencies = [];
+                                object.stops = [];
+                            }
+                            if (options.defaults)
+                                object.displayName = null;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = $root.google.type.LocalizedText.toObject(message.displayName, options);
+                            if (message.agencies && message.agencies.length) {
+                                object.agencies = [];
+                                for (var j = 0; j < message.agencies.length; ++j)
+                                    object.agencies[j] = $root.google.maps.places.v1.TransitAgency.toObject(message.agencies[j], options);
+                            }
+                            if (message.stops && message.stops.length) {
+                                object.stops = [];
+                                for (var j = 0; j < message.stops.length; ++j)
+                                    object.stops[j] = $root.google.maps.places.v1.TransitStop.toObject(message.stops[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransitStation to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransitStation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransitStation
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.TransitStation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransitStation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.TransitStation";
+                        };
+    
+                        return TransitStation;
+                    })();
+    
+                    v1.TransitAgency = (function() {
+    
+                        /**
+                         * Properties of a TransitAgency.
+                         * @memberof google.maps.places.v1
+                         * @interface ITransitAgency
+                         * @property {google.type.ILocalizedText|null} [displayName] TransitAgency displayName
+                         * @property {string|null} [url] TransitAgency url
+                         * @property {string|null} [fareUrl] TransitAgency fareUrl
+                         * @property {google.maps.places.v1.ITransitIcon|null} [icon] TransitAgency icon
+                         * @property {Array.<google.maps.places.v1.ITransitLine>|null} [lines] TransitAgency lines
+                         */
+    
+                        /**
+                         * Constructs a new TransitAgency.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a TransitAgency.
+                         * @implements ITransitAgency
+                         * @constructor
+                         * @param {google.maps.places.v1.ITransitAgency=} [properties] Properties to set
+                         */
+                        function TransitAgency(properties) {
+                            this.lines = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransitAgency displayName.
+                         * @member {google.type.ILocalizedText|null|undefined} displayName
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @instance
+                         */
+                        TransitAgency.prototype.displayName = null;
+    
+                        /**
+                         * TransitAgency url.
+                         * @member {string} url
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @instance
+                         */
+                        TransitAgency.prototype.url = "";
+    
+                        /**
+                         * TransitAgency fareUrl.
+                         * @member {string} fareUrl
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @instance
+                         */
+                        TransitAgency.prototype.fareUrl = "";
+    
+                        /**
+                         * TransitAgency icon.
+                         * @member {google.maps.places.v1.ITransitIcon|null|undefined} icon
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @instance
+                         */
+                        TransitAgency.prototype.icon = null;
+    
+                        /**
+                         * TransitAgency lines.
+                         * @member {Array.<google.maps.places.v1.ITransitLine>} lines
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @instance
+                         */
+                        TransitAgency.prototype.lines = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TransitAgency instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @static
+                         * @param {google.maps.places.v1.ITransitAgency=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.TransitAgency} TransitAgency instance
+                         */
+                        TransitAgency.create = function create(properties) {
+                            return new TransitAgency(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransitAgency message. Does not implicitly {@link google.maps.places.v1.TransitAgency.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @static
+                         * @param {google.maps.places.v1.ITransitAgency} message TransitAgency message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransitAgency.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                $root.google.type.LocalizedText.encode(message.displayName, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
+                            if (message.fareUrl != null && Object.hasOwnProperty.call(message, "fareUrl"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.fareUrl);
+                            if (message.icon != null && Object.hasOwnProperty.call(message, "icon"))
+                                $root.google.maps.places.v1.TransitIcon.encode(message.icon, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.lines != null && message.lines.length)
+                                for (var i = 0; i < message.lines.length; ++i)
+                                    $root.google.maps.places.v1.TransitLine.encode(message.lines[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransitAgency message, length delimited. Does not implicitly {@link google.maps.places.v1.TransitAgency.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @static
+                         * @param {google.maps.places.v1.ITransitAgency} message TransitAgency message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransitAgency.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransitAgency message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.TransitAgency} TransitAgency
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransitAgency.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.TransitAgency();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.url = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.fareUrl = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.icon = $root.google.maps.places.v1.TransitIcon.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.lines && message.lines.length))
+                                            message.lines = [];
+                                        message.lines.push($root.google.maps.places.v1.TransitLine.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransitAgency message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.TransitAgency} TransitAgency
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransitAgency.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransitAgency message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransitAgency.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName")) {
+                                var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                if (error)
+                                    return "displayName." + error;
+                            }
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            if (message.fareUrl != null && message.hasOwnProperty("fareUrl"))
+                                if (!$util.isString(message.fareUrl))
+                                    return "fareUrl: string expected";
+                            if (message.icon != null && message.hasOwnProperty("icon")) {
+                                var error = $root.google.maps.places.v1.TransitIcon.verify(message.icon);
+                                if (error)
+                                    return "icon." + error;
+                            }
+                            if (message.lines != null && message.hasOwnProperty("lines")) {
+                                if (!Array.isArray(message.lines))
+                                    return "lines: array expected";
+                                for (var i = 0; i < message.lines.length; ++i) {
+                                    var error = $root.google.maps.places.v1.TransitLine.verify(message.lines[i]);
+                                    if (error)
+                                        return "lines." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransitAgency message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.TransitAgency} TransitAgency
+                         */
+                        TransitAgency.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.TransitAgency)
+                                return object;
+                            var message = new $root.google.maps.places.v1.TransitAgency();
+                            if (object.displayName != null) {
+                                if (typeof object.displayName !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitAgency.displayName: object expected");
+                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                            }
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            if (object.fareUrl != null)
+                                message.fareUrl = String(object.fareUrl);
+                            if (object.icon != null) {
+                                if (typeof object.icon !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitAgency.icon: object expected");
+                                message.icon = $root.google.maps.places.v1.TransitIcon.fromObject(object.icon);
+                            }
+                            if (object.lines) {
+                                if (!Array.isArray(object.lines))
+                                    throw TypeError(".google.maps.places.v1.TransitAgency.lines: array expected");
+                                message.lines = [];
+                                for (var i = 0; i < object.lines.length; ++i) {
+                                    if (typeof object.lines[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.TransitAgency.lines: object expected");
+                                    message.lines[i] = $root.google.maps.places.v1.TransitLine.fromObject(object.lines[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransitAgency message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @static
+                         * @param {google.maps.places.v1.TransitAgency} message TransitAgency
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransitAgency.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.lines = [];
+                            if (options.defaults) {
+                                object.displayName = null;
+                                object.url = "";
+                                object.fareUrl = "";
+                                object.icon = null;
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = $root.google.type.LocalizedText.toObject(message.displayName, options);
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            if (message.fareUrl != null && message.hasOwnProperty("fareUrl"))
+                                object.fareUrl = message.fareUrl;
+                            if (message.icon != null && message.hasOwnProperty("icon"))
+                                object.icon = $root.google.maps.places.v1.TransitIcon.toObject(message.icon, options);
+                            if (message.lines && message.lines.length) {
+                                object.lines = [];
+                                for (var j = 0; j < message.lines.length; ++j)
+                                    object.lines[j] = $root.google.maps.places.v1.TransitLine.toObject(message.lines[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransitAgency to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransitAgency.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransitAgency
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.TransitAgency
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransitAgency.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.TransitAgency";
+                        };
+    
+                        return TransitAgency;
+                    })();
+    
+                    v1.TransitLine = (function() {
+    
+                        /**
+                         * Properties of a TransitLine.
+                         * @memberof google.maps.places.v1
+                         * @interface ITransitLine
+                         * @property {string|null} [id] TransitLine id
+                         * @property {google.maps.places.v1.TransitLine.VehicleType|null} [vehicleType] TransitLine vehicleType
+                         * @property {google.type.ILocalizedText|null} [displayName] TransitLine displayName
+                         * @property {google.type.ILocalizedText|null} [shortDisplayName] TransitLine shortDisplayName
+                         * @property {string|null} [textColor] TransitLine textColor
+                         * @property {string|null} [backgroundColor] TransitLine backgroundColor
+                         * @property {string|null} [url] TransitLine url
+                         * @property {google.maps.places.v1.ITransitIcon|null} [icon] TransitLine icon
+                         * @property {google.maps.places.v1.ITransitIcon|null} [vehicleIcon] TransitLine vehicleIcon
+                         */
+    
+                        /**
+                         * Constructs a new TransitLine.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a TransitLine.
+                         * @implements ITransitLine
+                         * @constructor
+                         * @param {google.maps.places.v1.ITransitLine=} [properties] Properties to set
+                         */
+                        function TransitLine(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransitLine id.
+                         * @member {string} id
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @instance
+                         */
+                        TransitLine.prototype.id = "";
+    
+                        /**
+                         * TransitLine vehicleType.
+                         * @member {google.maps.places.v1.TransitLine.VehicleType} vehicleType
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @instance
+                         */
+                        TransitLine.prototype.vehicleType = 0;
+    
+                        /**
+                         * TransitLine displayName.
+                         * @member {google.type.ILocalizedText|null|undefined} displayName
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @instance
+                         */
+                        TransitLine.prototype.displayName = null;
+    
+                        /**
+                         * TransitLine shortDisplayName.
+                         * @member {google.type.ILocalizedText|null|undefined} shortDisplayName
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @instance
+                         */
+                        TransitLine.prototype.shortDisplayName = null;
+    
+                        /**
+                         * TransitLine textColor.
+                         * @member {string} textColor
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @instance
+                         */
+                        TransitLine.prototype.textColor = "";
+    
+                        /**
+                         * TransitLine backgroundColor.
+                         * @member {string} backgroundColor
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @instance
+                         */
+                        TransitLine.prototype.backgroundColor = "";
+    
+                        /**
+                         * TransitLine url.
+                         * @member {string} url
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @instance
+                         */
+                        TransitLine.prototype.url = "";
+    
+                        /**
+                         * TransitLine icon.
+                         * @member {google.maps.places.v1.ITransitIcon|null|undefined} icon
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @instance
+                         */
+                        TransitLine.prototype.icon = null;
+    
+                        /**
+                         * TransitLine vehicleIcon.
+                         * @member {google.maps.places.v1.ITransitIcon|null|undefined} vehicleIcon
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @instance
+                         */
+                        TransitLine.prototype.vehicleIcon = null;
+    
+                        /**
+                         * Creates a new TransitLine instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @static
+                         * @param {google.maps.places.v1.ITransitLine=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.TransitLine} TransitLine instance
+                         */
+                        TransitLine.create = function create(properties) {
+                            return new TransitLine(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransitLine message. Does not implicitly {@link google.maps.places.v1.TransitLine.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @static
+                         * @param {google.maps.places.v1.ITransitLine} message TransitLine message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransitLine.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.vehicleType != null && Object.hasOwnProperty.call(message, "vehicleType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.vehicleType);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                $root.google.type.LocalizedText.encode(message.displayName, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.shortDisplayName != null && Object.hasOwnProperty.call(message, "shortDisplayName"))
+                                $root.google.type.LocalizedText.encode(message.shortDisplayName, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.textColor != null && Object.hasOwnProperty.call(message, "textColor"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.textColor);
+                            if (message.backgroundColor != null && Object.hasOwnProperty.call(message, "backgroundColor"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.backgroundColor);
+                            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.url);
+                            if (message.icon != null && Object.hasOwnProperty.call(message, "icon"))
+                                $root.google.maps.places.v1.TransitIcon.encode(message.icon, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.vehicleIcon != null && Object.hasOwnProperty.call(message, "vehicleIcon"))
+                                $root.google.maps.places.v1.TransitIcon.encode(message.vehicleIcon, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransitLine message, length delimited. Does not implicitly {@link google.maps.places.v1.TransitLine.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @static
+                         * @param {google.maps.places.v1.ITransitLine} message TransitLine message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransitLine.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransitLine message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.TransitLine} TransitLine
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransitLine.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.TransitLine();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vehicleType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.shortDisplayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.textColor = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.backgroundColor = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.url = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.icon = $root.google.maps.places.v1.TransitIcon.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.vehicleIcon = $root.google.maps.places.v1.TransitIcon.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransitLine message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.TransitLine} TransitLine
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransitLine.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransitLine message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransitLine.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.vehicleType != null && message.hasOwnProperty("vehicleType"))
+                                switch (message.vehicleType) {
+                                default:
+                                    return "vehicleType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                    break;
+                                }
+                            if (message.displayName != null && message.hasOwnProperty("displayName")) {
+                                var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                if (error)
+                                    return "displayName." + error;
+                            }
+                            if (message.shortDisplayName != null && message.hasOwnProperty("shortDisplayName")) {
+                                var error = $root.google.type.LocalizedText.verify(message.shortDisplayName);
+                                if (error)
+                                    return "shortDisplayName." + error;
+                            }
+                            if (message.textColor != null && message.hasOwnProperty("textColor"))
+                                if (!$util.isString(message.textColor))
+                                    return "textColor: string expected";
+                            if (message.backgroundColor != null && message.hasOwnProperty("backgroundColor"))
+                                if (!$util.isString(message.backgroundColor))
+                                    return "backgroundColor: string expected";
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            if (message.icon != null && message.hasOwnProperty("icon")) {
+                                var error = $root.google.maps.places.v1.TransitIcon.verify(message.icon);
+                                if (error)
+                                    return "icon." + error;
+                            }
+                            if (message.vehicleIcon != null && message.hasOwnProperty("vehicleIcon")) {
+                                var error = $root.google.maps.places.v1.TransitIcon.verify(message.vehicleIcon);
+                                if (error)
+                                    return "vehicleIcon." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransitLine message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.TransitLine} TransitLine
+                         */
+                        TransitLine.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.TransitLine)
+                                return object;
+                            var message = new $root.google.maps.places.v1.TransitLine();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            switch (object.vehicleType) {
+                            default:
+                                if (typeof object.vehicleType === "number") {
+                                    message.vehicleType = object.vehicleType;
+                                    break;
+                                }
+                                break;
+                            case "VEHICLE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.vehicleType = 0;
+                                break;
+                            case "RAIL":
+                            case 1:
+                                message.vehicleType = 1;
+                                break;
+                            case "METRO_RAIL":
+                            case 2:
+                                message.vehicleType = 2;
+                                break;
+                            case "SUBWAY":
+                            case 3:
+                                message.vehicleType = 3;
+                                break;
+                            case "TRAM":
+                            case 4:
+                                message.vehicleType = 4;
+                                break;
+                            case "MONORAIL":
+                            case 5:
+                                message.vehicleType = 5;
+                                break;
+                            case "HEAVY_RAIL":
+                            case 6:
+                                message.vehicleType = 6;
+                                break;
+                            case "COMMUTER_TRAIN":
+                            case 7:
+                                message.vehicleType = 7;
+                                break;
+                            case "HIGH_SPEED_TRAIN":
+                            case 8:
+                                message.vehicleType = 8;
+                                break;
+                            case "LONG_DISTANCE_TRAIN":
+                            case 9:
+                                message.vehicleType = 9;
+                                break;
+                            case "BUS":
+                            case 10:
+                                message.vehicleType = 10;
+                                break;
+                            case "INTERCITY_BUS":
+                            case 11:
+                                message.vehicleType = 11;
+                                break;
+                            case "TROLLEYBUS":
+                            case 12:
+                                message.vehicleType = 12;
+                                break;
+                            case "SHARE_TAXI":
+                            case 13:
+                                message.vehicleType = 13;
+                                break;
+                            case "COACH":
+                            case 14:
+                                message.vehicleType = 14;
+                                break;
+                            case "FERRY":
+                            case 15:
+                                message.vehicleType = 15;
+                                break;
+                            case "CABLE_CAR":
+                            case 16:
+                                message.vehicleType = 16;
+                                break;
+                            case "GONDOLA_LIFT":
+                            case 17:
+                                message.vehicleType = 17;
+                                break;
+                            case "FUNICULAR":
+                            case 18:
+                                message.vehicleType = 18;
+                                break;
+                            case "SPECIAL":
+                            case 19:
+                                message.vehicleType = 19;
+                                break;
+                            case "HORSE_CARRIAGE":
+                            case 20:
+                                message.vehicleType = 20;
+                                break;
+                            case "AIRPLANE":
+                            case 21:
+                                message.vehicleType = 21;
+                                break;
+                            }
+                            if (object.displayName != null) {
+                                if (typeof object.displayName !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitLine.displayName: object expected");
+                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                            }
+                            if (object.shortDisplayName != null) {
+                                if (typeof object.shortDisplayName !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitLine.shortDisplayName: object expected");
+                                message.shortDisplayName = $root.google.type.LocalizedText.fromObject(object.shortDisplayName);
+                            }
+                            if (object.textColor != null)
+                                message.textColor = String(object.textColor);
+                            if (object.backgroundColor != null)
+                                message.backgroundColor = String(object.backgroundColor);
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            if (object.icon != null) {
+                                if (typeof object.icon !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitLine.icon: object expected");
+                                message.icon = $root.google.maps.places.v1.TransitIcon.fromObject(object.icon);
+                            }
+                            if (object.vehicleIcon != null) {
+                                if (typeof object.vehicleIcon !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitLine.vehicleIcon: object expected");
+                                message.vehicleIcon = $root.google.maps.places.v1.TransitIcon.fromObject(object.vehicleIcon);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransitLine message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @static
+                         * @param {google.maps.places.v1.TransitLine} message TransitLine
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransitLine.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.id = "";
+                                object.vehicleType = options.enums === String ? "VEHICLE_TYPE_UNSPECIFIED" : 0;
+                                object.displayName = null;
+                                object.shortDisplayName = null;
+                                object.textColor = "";
+                                object.backgroundColor = "";
+                                object.url = "";
+                                object.icon = null;
+                                object.vehicleIcon = null;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.vehicleType != null && message.hasOwnProperty("vehicleType"))
+                                object.vehicleType = options.enums === String ? $root.google.maps.places.v1.TransitLine.VehicleType[message.vehicleType] === undefined ? message.vehicleType : $root.google.maps.places.v1.TransitLine.VehicleType[message.vehicleType] : message.vehicleType;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = $root.google.type.LocalizedText.toObject(message.displayName, options);
+                            if (message.shortDisplayName != null && message.hasOwnProperty("shortDisplayName"))
+                                object.shortDisplayName = $root.google.type.LocalizedText.toObject(message.shortDisplayName, options);
+                            if (message.textColor != null && message.hasOwnProperty("textColor"))
+                                object.textColor = message.textColor;
+                            if (message.backgroundColor != null && message.hasOwnProperty("backgroundColor"))
+                                object.backgroundColor = message.backgroundColor;
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            if (message.icon != null && message.hasOwnProperty("icon"))
+                                object.icon = $root.google.maps.places.v1.TransitIcon.toObject(message.icon, options);
+                            if (message.vehicleIcon != null && message.hasOwnProperty("vehicleIcon"))
+                                object.vehicleIcon = $root.google.maps.places.v1.TransitIcon.toObject(message.vehicleIcon, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransitLine to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransitLine.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransitLine
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.TransitLine
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransitLine.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.TransitLine";
+                        };
+    
+                        /**
+                         * VehicleType enum.
+                         * @name google.maps.places.v1.TransitLine.VehicleType
+                         * @enum {number}
+                         * @property {number} VEHICLE_TYPE_UNSPECIFIED=0 VEHICLE_TYPE_UNSPECIFIED value
+                         * @property {number} RAIL=1 RAIL value
+                         * @property {number} METRO_RAIL=2 METRO_RAIL value
+                         * @property {number} SUBWAY=3 SUBWAY value
+                         * @property {number} TRAM=4 TRAM value
+                         * @property {number} MONORAIL=5 MONORAIL value
+                         * @property {number} HEAVY_RAIL=6 HEAVY_RAIL value
+                         * @property {number} COMMUTER_TRAIN=7 COMMUTER_TRAIN value
+                         * @property {number} HIGH_SPEED_TRAIN=8 HIGH_SPEED_TRAIN value
+                         * @property {number} LONG_DISTANCE_TRAIN=9 LONG_DISTANCE_TRAIN value
+                         * @property {number} BUS=10 BUS value
+                         * @property {number} INTERCITY_BUS=11 INTERCITY_BUS value
+                         * @property {number} TROLLEYBUS=12 TROLLEYBUS value
+                         * @property {number} SHARE_TAXI=13 SHARE_TAXI value
+                         * @property {number} COACH=14 COACH value
+                         * @property {number} FERRY=15 FERRY value
+                         * @property {number} CABLE_CAR=16 CABLE_CAR value
+                         * @property {number} GONDOLA_LIFT=17 GONDOLA_LIFT value
+                         * @property {number} FUNICULAR=18 FUNICULAR value
+                         * @property {number} SPECIAL=19 SPECIAL value
+                         * @property {number} HORSE_CARRIAGE=20 HORSE_CARRIAGE value
+                         * @property {number} AIRPLANE=21 AIRPLANE value
+                         */
+                        TransitLine.VehicleType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "VEHICLE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RAIL"] = 1;
+                            values[valuesById[2] = "METRO_RAIL"] = 2;
+                            values[valuesById[3] = "SUBWAY"] = 3;
+                            values[valuesById[4] = "TRAM"] = 4;
+                            values[valuesById[5] = "MONORAIL"] = 5;
+                            values[valuesById[6] = "HEAVY_RAIL"] = 6;
+                            values[valuesById[7] = "COMMUTER_TRAIN"] = 7;
+                            values[valuesById[8] = "HIGH_SPEED_TRAIN"] = 8;
+                            values[valuesById[9] = "LONG_DISTANCE_TRAIN"] = 9;
+                            values[valuesById[10] = "BUS"] = 10;
+                            values[valuesById[11] = "INTERCITY_BUS"] = 11;
+                            values[valuesById[12] = "TROLLEYBUS"] = 12;
+                            values[valuesById[13] = "SHARE_TAXI"] = 13;
+                            values[valuesById[14] = "COACH"] = 14;
+                            values[valuesById[15] = "FERRY"] = 15;
+                            values[valuesById[16] = "CABLE_CAR"] = 16;
+                            values[valuesById[17] = "GONDOLA_LIFT"] = 17;
+                            values[valuesById[18] = "FUNICULAR"] = 18;
+                            values[valuesById[19] = "SPECIAL"] = 19;
+                            values[valuesById[20] = "HORSE_CARRIAGE"] = 20;
+                            values[valuesById[21] = "AIRPLANE"] = 21;
+                            return values;
+                        })();
+    
+                        return TransitLine;
+                    })();
+    
+                    v1.TransitStop = (function() {
+    
+                        /**
+                         * Properties of a TransitStop.
+                         * @memberof google.maps.places.v1
+                         * @interface ITransitStop
+                         * @property {string|null} [id] TransitStop id
+                         * @property {google.type.ILocalizedText|null} [displayName] TransitStop displayName
+                         * @property {google.type.ILocalizedText|null} [platformCode] TransitStop platformCode
+                         * @property {google.type.ILocalizedText|null} [signageText] TransitStop signageText
+                         * @property {google.type.ILocalizedText|null} [stopCode] TransitStop stopCode
+                         * @property {google.type.ILatLng|null} [location] TransitStop location
+                         * @property {boolean|null} [wheelchairAccessibleEntrance] TransitStop wheelchairAccessibleEntrance
+                         */
+    
+                        /**
+                         * Constructs a new TransitStop.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a TransitStop.
+                         * @implements ITransitStop
+                         * @constructor
+                         * @param {google.maps.places.v1.ITransitStop=} [properties] Properties to set
+                         */
+                        function TransitStop(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransitStop id.
+                         * @member {string} id
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @instance
+                         */
+                        TransitStop.prototype.id = "";
+    
+                        /**
+                         * TransitStop displayName.
+                         * @member {google.type.ILocalizedText|null|undefined} displayName
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @instance
+                         */
+                        TransitStop.prototype.displayName = null;
+    
+                        /**
+                         * TransitStop platformCode.
+                         * @member {google.type.ILocalizedText|null|undefined} platformCode
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @instance
+                         */
+                        TransitStop.prototype.platformCode = null;
+    
+                        /**
+                         * TransitStop signageText.
+                         * @member {google.type.ILocalizedText|null|undefined} signageText
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @instance
+                         */
+                        TransitStop.prototype.signageText = null;
+    
+                        /**
+                         * TransitStop stopCode.
+                         * @member {google.type.ILocalizedText|null|undefined} stopCode
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @instance
+                         */
+                        TransitStop.prototype.stopCode = null;
+    
+                        /**
+                         * TransitStop location.
+                         * @member {google.type.ILatLng|null|undefined} location
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @instance
+                         */
+                        TransitStop.prototype.location = null;
+    
+                        /**
+                         * TransitStop wheelchairAccessibleEntrance.
+                         * @member {boolean|null|undefined} wheelchairAccessibleEntrance
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @instance
+                         */
+                        TransitStop.prototype.wheelchairAccessibleEntrance = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(TransitStop.prototype, "_wheelchairAccessibleEntrance", {
+                            get: $util.oneOfGetter($oneOfFields = ["wheelchairAccessibleEntrance"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new TransitStop instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @static
+                         * @param {google.maps.places.v1.ITransitStop=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.TransitStop} TransitStop instance
+                         */
+                        TransitStop.create = function create(properties) {
+                            return new TransitStop(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransitStop message. Does not implicitly {@link google.maps.places.v1.TransitStop.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @static
+                         * @param {google.maps.places.v1.ITransitStop} message TransitStop message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransitStop.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                $root.google.type.LocalizedText.encode(message.displayName, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.platformCode != null && Object.hasOwnProperty.call(message, "platformCode"))
+                                $root.google.type.LocalizedText.encode(message.platformCode, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.signageText != null && Object.hasOwnProperty.call(message, "signageText"))
+                                $root.google.type.LocalizedText.encode(message.signageText, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.stopCode != null && Object.hasOwnProperty.call(message, "stopCode"))
+                                $root.google.type.LocalizedText.encode(message.stopCode, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                $root.google.type.LatLng.encode(message.location, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.wheelchairAccessibleEntrance != null && Object.hasOwnProperty.call(message, "wheelchairAccessibleEntrance"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.wheelchairAccessibleEntrance);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransitStop message, length delimited. Does not implicitly {@link google.maps.places.v1.TransitStop.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @static
+                         * @param {google.maps.places.v1.ITransitStop} message TransitStop message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransitStop.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransitStop message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.TransitStop} TransitStop
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransitStop.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.TransitStop();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.platformCode = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.signageText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.stopCode = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.location = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.wheelchairAccessibleEntrance = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransitStop message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.TransitStop} TransitStop
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransitStop.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransitStop message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransitStop.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName")) {
+                                var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                if (error)
+                                    return "displayName." + error;
+                            }
+                            if (message.platformCode != null && message.hasOwnProperty("platformCode")) {
+                                var error = $root.google.type.LocalizedText.verify(message.platformCode);
+                                if (error)
+                                    return "platformCode." + error;
+                            }
+                            if (message.signageText != null && message.hasOwnProperty("signageText")) {
+                                var error = $root.google.type.LocalizedText.verify(message.signageText);
+                                if (error)
+                                    return "signageText." + error;
+                            }
+                            if (message.stopCode != null && message.hasOwnProperty("stopCode")) {
+                                var error = $root.google.type.LocalizedText.verify(message.stopCode);
+                                if (error)
+                                    return "stopCode." + error;
+                            }
+                            if (message.location != null && message.hasOwnProperty("location")) {
+                                var error = $root.google.type.LatLng.verify(message.location);
+                                if (error)
+                                    return "location." + error;
+                            }
+                            if (message.wheelchairAccessibleEntrance != null && message.hasOwnProperty("wheelchairAccessibleEntrance")) {
+                                properties._wheelchairAccessibleEntrance = 1;
+                                if (typeof message.wheelchairAccessibleEntrance !== "boolean")
+                                    return "wheelchairAccessibleEntrance: boolean expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransitStop message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.TransitStop} TransitStop
+                         */
+                        TransitStop.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.TransitStop)
+                                return object;
+                            var message = new $root.google.maps.places.v1.TransitStop();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.displayName != null) {
+                                if (typeof object.displayName !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitStop.displayName: object expected");
+                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                            }
+                            if (object.platformCode != null) {
+                                if (typeof object.platformCode !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitStop.platformCode: object expected");
+                                message.platformCode = $root.google.type.LocalizedText.fromObject(object.platformCode);
+                            }
+                            if (object.signageText != null) {
+                                if (typeof object.signageText !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitStop.signageText: object expected");
+                                message.signageText = $root.google.type.LocalizedText.fromObject(object.signageText);
+                            }
+                            if (object.stopCode != null) {
+                                if (typeof object.stopCode !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitStop.stopCode: object expected");
+                                message.stopCode = $root.google.type.LocalizedText.fromObject(object.stopCode);
+                            }
+                            if (object.location != null) {
+                                if (typeof object.location !== "object")
+                                    throw TypeError(".google.maps.places.v1.TransitStop.location: object expected");
+                                message.location = $root.google.type.LatLng.fromObject(object.location);
+                            }
+                            if (object.wheelchairAccessibleEntrance != null)
+                                message.wheelchairAccessibleEntrance = Boolean(object.wheelchairAccessibleEntrance);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransitStop message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @static
+                         * @param {google.maps.places.v1.TransitStop} message TransitStop
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransitStop.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.id = "";
+                                object.displayName = null;
+                                object.platformCode = null;
+                                object.signageText = null;
+                                object.stopCode = null;
+                                object.location = null;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = $root.google.type.LocalizedText.toObject(message.displayName, options);
+                            if (message.platformCode != null && message.hasOwnProperty("platformCode"))
+                                object.platformCode = $root.google.type.LocalizedText.toObject(message.platformCode, options);
+                            if (message.signageText != null && message.hasOwnProperty("signageText"))
+                                object.signageText = $root.google.type.LocalizedText.toObject(message.signageText, options);
+                            if (message.stopCode != null && message.hasOwnProperty("stopCode"))
+                                object.stopCode = $root.google.type.LocalizedText.toObject(message.stopCode, options);
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = $root.google.type.LatLng.toObject(message.location, options);
+                            if (message.wheelchairAccessibleEntrance != null && message.hasOwnProperty("wheelchairAccessibleEntrance")) {
+                                object.wheelchairAccessibleEntrance = message.wheelchairAccessibleEntrance;
+                                if (options.oneofs)
+                                    object._wheelchairAccessibleEntrance = "wheelchairAccessibleEntrance";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransitStop to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransitStop.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransitStop
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.TransitStop
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransitStop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.TransitStop";
+                        };
+    
+                        return TransitStop;
+                    })();
+    
+                    v1.TransitIcon = (function() {
+    
+                        /**
+                         * Properties of a TransitIcon.
+                         * @memberof google.maps.places.v1
+                         * @interface ITransitIcon
+                         * @property {string|null} [url] TransitIcon url
+                         * @property {boolean|null} [nameIncluded] TransitIcon nameIncluded
+                         */
+    
+                        /**
+                         * Constructs a new TransitIcon.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a TransitIcon.
+                         * @implements ITransitIcon
+                         * @constructor
+                         * @param {google.maps.places.v1.ITransitIcon=} [properties] Properties to set
+                         */
+                        function TransitIcon(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransitIcon url.
+                         * @member {string} url
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @instance
+                         */
+                        TransitIcon.prototype.url = "";
+    
+                        /**
+                         * TransitIcon nameIncluded.
+                         * @member {boolean} nameIncluded
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @instance
+                         */
+                        TransitIcon.prototype.nameIncluded = false;
+    
+                        /**
+                         * Creates a new TransitIcon instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @static
+                         * @param {google.maps.places.v1.ITransitIcon=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.TransitIcon} TransitIcon instance
+                         */
+                        TransitIcon.create = function create(properties) {
+                            return new TransitIcon(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransitIcon message. Does not implicitly {@link google.maps.places.v1.TransitIcon.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @static
+                         * @param {google.maps.places.v1.ITransitIcon} message TransitIcon message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransitIcon.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                            if (message.nameIncluded != null && Object.hasOwnProperty.call(message, "nameIncluded"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.nameIncluded);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransitIcon message, length delimited. Does not implicitly {@link google.maps.places.v1.TransitIcon.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @static
+                         * @param {google.maps.places.v1.ITransitIcon} message TransitIcon message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransitIcon.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransitIcon message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.TransitIcon} TransitIcon
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransitIcon.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.TransitIcon();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.url = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nameIncluded = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransitIcon message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.TransitIcon} TransitIcon
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransitIcon.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransitIcon message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransitIcon.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            if (message.nameIncluded != null && message.hasOwnProperty("nameIncluded"))
+                                if (typeof message.nameIncluded !== "boolean")
+                                    return "nameIncluded: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransitIcon message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.TransitIcon} TransitIcon
+                         */
+                        TransitIcon.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.TransitIcon)
+                                return object;
+                            var message = new $root.google.maps.places.v1.TransitIcon();
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            if (object.nameIncluded != null)
+                                message.nameIncluded = Boolean(object.nameIncluded);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransitIcon message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @static
+                         * @param {google.maps.places.v1.TransitIcon} message TransitIcon
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransitIcon.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.url = "";
+                                object.nameIncluded = false;
+                            }
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            if (message.nameIncluded != null && message.hasOwnProperty("nameIncluded"))
+                                object.nameIncluded = message.nameIncluded;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransitIcon to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransitIcon.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransitIcon
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.TransitIcon
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransitIcon.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.TransitIcon";
+                        };
+    
+                        return TransitIcon;
                     })();
     
                     v1.Places = (function() {
