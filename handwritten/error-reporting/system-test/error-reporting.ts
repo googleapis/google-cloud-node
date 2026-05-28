@@ -28,7 +28,7 @@ import {
   ErrorsApiTransport,
 } from '../utils/errors-api-transport';
 
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import * as util from 'util';
 import * as path from 'path';
 
@@ -446,7 +446,7 @@ describe('Expected Behavior', () => {
 
 describe('error-reporting', () => {
   const SRC_ROOT = path.join(__dirname, '..', 'src');
-  const UUID = uuid.v4();
+  const UUID = crypto.randomUUID();
   const BASE_NAME = 'error-reporting-system-test';
   function buildName(suffix: string) {
     return [UUID, BASE_NAME, suffix].join('_');
