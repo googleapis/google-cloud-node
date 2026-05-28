@@ -3111,6 +3111,284 @@ describe('v2.StorageControlClient', () => {
     });
   });
 
+  describe('getIntelligenceFinding', () => {
+    it('invokes getIntelligenceFinding without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetIntelligenceFindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetIntelligenceFindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceFinding(),
+      );
+      client.innerApiCalls.getIntelligenceFinding =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getIntelligenceFinding(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIntelligenceFinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIntelligenceFinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIntelligenceFinding without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetIntelligenceFindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetIntelligenceFindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceFinding(),
+      );
+      client.innerApiCalls.getIntelligenceFinding =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getIntelligenceFinding(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IIntelligenceFinding | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIntelligenceFinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIntelligenceFinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIntelligenceFinding with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetIntelligenceFindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetIntelligenceFindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getIntelligenceFinding = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getIntelligenceFinding(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getIntelligenceFinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIntelligenceFinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIntelligenceFinding with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetIntelligenceFindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetIntelligenceFindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getIntelligenceFinding(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getIntelligenceFindingRevision', () => {
+    it('invokes getIntelligenceFindingRevision without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetIntelligenceFindingRevisionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetIntelligenceFindingRevisionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+      );
+      client.innerApiCalls.getIntelligenceFindingRevision =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getIntelligenceFindingRevision(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIntelligenceFindingRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIntelligenceFindingRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIntelligenceFindingRevision without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetIntelligenceFindingRevisionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetIntelligenceFindingRevisionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+      );
+      client.innerApiCalls.getIntelligenceFindingRevision =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getIntelligenceFindingRevision(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IIntelligenceFindingRevision | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIntelligenceFindingRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIntelligenceFindingRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIntelligenceFindingRevision with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetIntelligenceFindingRevisionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetIntelligenceFindingRevisionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getIntelligenceFindingRevision = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getIntelligenceFindingRevision(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getIntelligenceFindingRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIntelligenceFindingRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIntelligenceFindingRevision with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetIntelligenceFindingRevisionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetIntelligenceFindingRevisionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getIntelligenceFindingRevision(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('renameFolder', () => {
     it('invokes renameFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
@@ -4881,6 +5159,1082 @@ describe('v2.StorageControlClient', () => {
       );
     });
   });
+
+  describe('listIntelligenceFindings', () => {
+    it('invokes listIntelligenceFindings without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+      ];
+      client.innerApiCalls.listIntelligenceFindings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listIntelligenceFindings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listIntelligenceFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIntelligenceFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listIntelligenceFindings without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+      ];
+      client.innerApiCalls.listIntelligenceFindings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listIntelligenceFindings(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.storage.control.v2.IIntelligenceFinding[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listIntelligenceFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIntelligenceFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listIntelligenceFindings with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listIntelligenceFindings = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listIntelligenceFindings(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listIntelligenceFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIntelligenceFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listIntelligenceFindingsStream without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+      ];
+      client.descriptors.page.listIntelligenceFindings.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listIntelligenceFindingsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.IntelligenceFinding[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.storage.control.v2.IntelligenceFinding) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listIntelligenceFindings, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listIntelligenceFindingsStream with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listIntelligenceFindings.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listIntelligenceFindingsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.IntelligenceFinding[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.storage.control.v2.IntelligenceFinding) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listIntelligenceFindings, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listIntelligenceFindings without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFinding(),
+        ),
+      ];
+      client.descriptors.page.listIntelligenceFindings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.storage.control.v2.IIntelligenceFinding[] =
+        [];
+      const iterable = client.listIntelligenceFindingsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listIntelligenceFindings
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindings
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listIntelligenceFindings with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listIntelligenceFindings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listIntelligenceFindingsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.storage.control.v2.IIntelligenceFinding[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listIntelligenceFindings
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindings
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('summarizeIntelligenceFindings', () => {
+    it('invokes summarizeIntelligenceFindings without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.SummarizeIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.SummarizeIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+      ];
+      client.innerApiCalls.summarizeIntelligenceFindings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.summarizeIntelligenceFindings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.summarizeIntelligenceFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.summarizeIntelligenceFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes summarizeIntelligenceFindings without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.SummarizeIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.SummarizeIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+      ];
+      client.innerApiCalls.summarizeIntelligenceFindings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.summarizeIntelligenceFindings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IFindingSummary[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.summarizeIntelligenceFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.summarizeIntelligenceFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes summarizeIntelligenceFindings with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.SummarizeIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.SummarizeIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.summarizeIntelligenceFindings = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.summarizeIntelligenceFindings(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.summarizeIntelligenceFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.summarizeIntelligenceFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes summarizeIntelligenceFindingsStream without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.SummarizeIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.SummarizeIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+      ];
+      client.descriptors.page.summarizeIntelligenceFindings.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.summarizeIntelligenceFindingsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.FindingSummary[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.storage.control.v2.FindingSummary) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.summarizeIntelligenceFindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.summarizeIntelligenceFindings,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.summarizeIntelligenceFindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes summarizeIntelligenceFindingsStream with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.SummarizeIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.SummarizeIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.summarizeIntelligenceFindings.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.summarizeIntelligenceFindingsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.FindingSummary[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.storage.control.v2.FindingSummary) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.summarizeIntelligenceFindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.summarizeIntelligenceFindings,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.summarizeIntelligenceFindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with summarizeIntelligenceFindings without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.SummarizeIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.SummarizeIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.FindingSummary(),
+        ),
+      ];
+      client.descriptors.page.summarizeIntelligenceFindings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.storage.control.v2.IFindingSummary[] = [];
+      const iterable = client.summarizeIntelligenceFindingsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.summarizeIntelligenceFindings
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.summarizeIntelligenceFindings
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with summarizeIntelligenceFindings with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.SummarizeIntelligenceFindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.SummarizeIntelligenceFindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.summarizeIntelligenceFindings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.summarizeIntelligenceFindingsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.storage.control.v2.IFindingSummary[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.summarizeIntelligenceFindings
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.summarizeIntelligenceFindings
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listIntelligenceFindingRevisions', () => {
+    it('invokes listIntelligenceFindingRevisions without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+      ];
+      client.innerApiCalls.listIntelligenceFindingRevisions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listIntelligenceFindingRevisions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listIntelligenceFindingRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIntelligenceFindingRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listIntelligenceFindingRevisions without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+      ];
+      client.innerApiCalls.listIntelligenceFindingRevisions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listIntelligenceFindingRevisions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.storage.control.v2.IIntelligenceFindingRevision[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listIntelligenceFindingRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIntelligenceFindingRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listIntelligenceFindingRevisions with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listIntelligenceFindingRevisions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listIntelligenceFindingRevisions(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listIntelligenceFindingRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIntelligenceFindingRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listIntelligenceFindingRevisionsStream without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+      ];
+      client.descriptors.page.listIntelligenceFindingRevisions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listIntelligenceFindingRevisionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.IntelligenceFindingRevision[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.storage.control.v2.IntelligenceFindingRevision,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindingRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listIntelligenceFindingRevisions,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindingRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listIntelligenceFindingRevisionsStream with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listIntelligenceFindingRevisions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listIntelligenceFindingRevisionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.IntelligenceFindingRevision[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.storage.control.v2.IntelligenceFindingRevision,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindingRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listIntelligenceFindingRevisions,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindingRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listIntelligenceFindingRevisions without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.IntelligenceFindingRevision(),
+        ),
+      ];
+      client.descriptors.page.listIntelligenceFindingRevisions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.storage.control.v2.IIntelligenceFindingRevision[] =
+        [];
+      const iterable = client.listIntelligenceFindingRevisionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listIntelligenceFindingRevisions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindingRevisions
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listIntelligenceFindingRevisions with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listIntelligenceFindingRevisions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listIntelligenceFindingRevisionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.storage.control.v2.IIntelligenceFindingRevision[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listIntelligenceFindingRevisions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listIntelligenceFindingRevisions
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
@@ -5432,6 +6786,229 @@ describe('v2.StorageControlClient', () => {
             client.pathTemplates.folderLocationIntelligenceConfigPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('intelligenceFinding', async () => {
+      const fakePath = '/rendered/path/intelligenceFinding';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        intelligence_finding: 'intelligenceFindingValue',
+      };
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.intelligenceFindingPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.intelligenceFindingPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('intelligenceFindingPath', () => {
+        const result = client.intelligenceFindingPath(
+          'projectValue',
+          'locationValue',
+          'intelligenceFindingValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.intelligenceFindingPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromIntelligenceFindingName', () => {
+        const result = client.matchProjectFromIntelligenceFindingName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.intelligenceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromIntelligenceFindingName', () => {
+        const result =
+          client.matchLocationFromIntelligenceFindingName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.intelligenceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchIntelligenceFindingFromIntelligenceFindingName', () => {
+        const result =
+          client.matchIntelligenceFindingFromIntelligenceFindingName(fakePath);
+        assert.strictEqual(result, 'intelligenceFindingValue');
+        assert(
+          (
+            client.pathTemplates.intelligenceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('intelligenceFindingRevision', async () => {
+      const fakePath = '/rendered/path/intelligenceFindingRevision';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        intelligence_finding: 'intelligenceFindingValue',
+        revision: 'revisionValue',
+      };
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.intelligenceFindingRevisionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.intelligenceFindingRevisionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('intelligenceFindingRevisionPath', () => {
+        const result = client.intelligenceFindingRevisionPath(
+          'projectValue',
+          'locationValue',
+          'intelligenceFindingValue',
+          'revisionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.intelligenceFindingRevisionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromIntelligenceFindingRevisionName', () => {
+        const result =
+          client.matchProjectFromIntelligenceFindingRevisionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.intelligenceFindingRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromIntelligenceFindingRevisionName', () => {
+        const result =
+          client.matchLocationFromIntelligenceFindingRevisionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.intelligenceFindingRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchIntelligenceFindingFromIntelligenceFindingRevisionName', () => {
+        const result =
+          client.matchIntelligenceFindingFromIntelligenceFindingRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'intelligenceFindingValue');
+        assert(
+          (
+            client.pathTemplates.intelligenceFindingRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRevisionFromIntelligenceFindingRevisionName', () => {
+        const result =
+          client.matchRevisionFromIntelligenceFindingRevisionName(fakePath);
+        assert.strictEqual(result, 'revisionValue');
+        assert(
+          (
+            client.pathTemplates.intelligenceFindingRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('location', async () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

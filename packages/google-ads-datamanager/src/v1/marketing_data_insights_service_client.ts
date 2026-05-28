@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +51,7 @@ export class MarketingDataInsightsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('datamanager');
@@ -59,9 +64,9 @@ export class MarketingDataInsightsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  marketingDataInsightsServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  marketingDataInsightsServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of MarketingDataInsightsServiceClient.
@@ -102,21 +107,43 @@ export class MarketingDataInsightsServiceClient {
    *     const client = new MarketingDataInsightsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof MarketingDataInsightsServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof MarketingDataInsightsServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'datamanager.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +168,7 @@ export class MarketingDataInsightsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,10 +182,7 @@ export class MarketingDataInsightsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -180,26 +204,30 @@ export class MarketingDataInsightsServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       partnerLinkPathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}/partnerLinks/{partner_link}'
+        'accountTypes/{account_type}/accounts/{account}/partnerLinks/{partner_link}',
       ),
       userListPathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}/userLists/{user_list}'
+        'accountTypes/{account_type}/accounts/{account}/userLists/{user_list}',
       ),
       userListDirectLicensePathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}/userListDirectLicenses/{user_list_direct_license}'
+        'accountTypes/{account_type}/accounts/{account}/userListDirectLicenses/{user_list_direct_license}',
       ),
       userListGlobalLicensePathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}'
+        'accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}',
       ),
-      userListGlobalLicenseCustomerInfoPathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}/customerInfos/{license_customer_info}'
-      ),
+      userListGlobalLicenseCustomerInfoPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}/customerInfos/{license_customer_info}',
+        ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.ads.datamanager.v1.MarketingDataInsightsService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.ads.datamanager.v1.MarketingDataInsightsService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -230,36 +258,41 @@ export class MarketingDataInsightsServiceClient {
     // Put together the "service stub" for
     // google.ads.datamanager.v1.MarketingDataInsightsService.
     this.marketingDataInsightsServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.ads.datamanager.v1.MarketingDataInsightsService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ads.datamanager.v1.MarketingDataInsightsService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.ads.datamanager.v1.MarketingDataInsightsService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ads.datamanager.v1
+            .MarketingDataInsightsService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const marketingDataInsightsServiceStubMethods =
-        ['retrieveInsights'];
+    const marketingDataInsightsServiceStubMethods = ['retrieveInsights'];
     for (const methodName of marketingDataInsightsServiceStubMethods) {
       const callPromise = this.marketingDataInsightsServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -274,8 +307,14 @@ export class MarketingDataInsightsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'datamanager.googleapis.com';
   }
@@ -286,8 +325,14 @@ export class MarketingDataInsightsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'datamanager.googleapis.com';
   }
@@ -318,9 +363,7 @@ export class MarketingDataInsightsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/datamanager'
-    ];
+    return ['https://www.googleapis.com/auth/datamanager'];
   }
 
   getProjectId(): Promise<string>;
@@ -329,8 +372,9 @@ export class MarketingDataInsightsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -341,116 +385,156 @@ export class MarketingDataInsightsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieves marketing data insights for a given user list.
- *
- * This feature is only available to data partners.
- *
- * Authorization Headers:
- *
- * This method supports the following optional headers to define how the API
- * authorizes access for the request:
- *
- * * `login-account`: (Optional) The resource name of the account where the
- *   Google Account of the credentials is a user. If not set, defaults to the
- *   account of the request. Format:
- *   `accountTypes/{loginAccountType}/accounts/{loginAccountId}`
- * * `linked-account`: (Optional) The resource name of the account with an
- *    established product link to the `login-account`. Format:
- *    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent account that owns the user list.
- *   Format: `accountTypes/{account_type}/accounts/{account}`
- * @param {google.ads.datamanager.v1.Baseline} request.baseline
- *   Required. Baseline for the insights requested.
- * @param {string} request.userListId
- *   Required. The user list ID for which insights are requested.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.datamanager.v1.RetrieveInsightsResponse|RetrieveInsightsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/marketing_data_insights_service.retrieve_insights.js</caption>
- * region_tag:datamanager_v1_generated_MarketingDataInsightsService_RetrieveInsights_async
- */
+  /**
+   * Retrieves marketing data insights for a given user list.
+   *
+   * This feature is only available to data partners.
+   *
+   * Authorization Headers:
+   *
+   * This method supports the following optional headers to define how the API
+   * authorizes access for the request:
+   *
+   * * `login-account`: (Optional) The resource name of the account where the
+   *   Google Account of the credentials is a user. If not set, defaults to the
+   *   account of the request. Format:
+   *   `accountTypes/{loginAccountType}/accounts/{loginAccountId}`
+   * * `linked-account`: (Optional) The resource name of the account with an
+   *    established product link to the `login-account`. Format:
+   *    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent account that owns the user list.
+   *   Format: `accountTypes/{account_type}/accounts/{account}`
+   * @param {google.ads.datamanager.v1.Baseline} request.baseline
+   *   Required. Baseline for the insights requested.
+   * @param {string} request.userListId
+   *   Required. The user list ID for which insights are requested.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.datamanager.v1.RetrieveInsightsResponse|RetrieveInsightsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/marketing_data_insights_service.retrieve_insights.js</caption>
+   * region_tag:datamanager_v1_generated_MarketingDataInsightsService_RetrieveInsights_async
+   */
   retrieveInsights(
-      request?: protos.google.ads.datamanager.v1.IRetrieveInsightsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
-        protos.google.ads.datamanager.v1.IRetrieveInsightsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.datamanager.v1.IRetrieveInsightsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
+      protos.google.ads.datamanager.v1.IRetrieveInsightsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   retrieveInsights(
-      request: protos.google.ads.datamanager.v1.IRetrieveInsightsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
-          protos.google.ads.datamanager.v1.IRetrieveInsightsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.datamanager.v1.IRetrieveInsightsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
+      | protos.google.ads.datamanager.v1.IRetrieveInsightsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   retrieveInsights(
-      request: protos.google.ads.datamanager.v1.IRetrieveInsightsRequest,
-      callback: Callback<
-          protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
-          protos.google.ads.datamanager.v1.IRetrieveInsightsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.datamanager.v1.IRetrieveInsightsRequest,
+    callback: Callback<
+      protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
+      | protos.google.ads.datamanager.v1.IRetrieveInsightsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   retrieveInsights(
-      request?: protos.google.ads.datamanager.v1.IRetrieveInsightsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.datamanager.v1.IRetrieveInsightsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
-          protos.google.ads.datamanager.v1.IRetrieveInsightsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
-          protos.google.ads.datamanager.v1.IRetrieveInsightsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
-        protos.google.ads.datamanager.v1.IRetrieveInsightsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.datamanager.v1.IRetrieveInsightsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
+      | protos.google.ads.datamanager.v1.IRetrieveInsightsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
+      protos.google.ads.datamanager.v1.IRetrieveInsightsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('retrieveInsights request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
-        protos.google.ads.datamanager.v1.IRetrieveInsightsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
+          | protos.google.ads.datamanager.v1.IRetrieveInsightsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('retrieveInsights response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.retrieveInsights(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
-        protos.google.ads.datamanager.v1.IRetrieveInsightsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('retrieveInsights response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .retrieveInsights(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
+          protos.google.ads.datamanager.v1.IRetrieveInsightsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('retrieveInsights response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
@@ -468,7 +552,7 @@ export class MarketingDataInsightsServiceClient {
    * @param {string} partner_link
    * @returns {string} Resource name string.
    */
-  partnerLinkPath(accountType:string,account:string,partnerLink:string) {
+  partnerLinkPath(accountType: string, account: string, partnerLink: string) {
     return this.pathTemplates.partnerLinkPathTemplate.render({
       account_type: accountType,
       account: account,
@@ -484,7 +568,8 @@ export class MarketingDataInsightsServiceClient {
    * @returns {string} A string representing the account_type.
    */
   matchAccountTypeFromPartnerLinkName(partnerLinkName: string) {
-    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName).account_type;
+    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName)
+      .account_type;
   }
 
   /**
@@ -495,7 +580,8 @@ export class MarketingDataInsightsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromPartnerLinkName(partnerLinkName: string) {
-    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName).account;
+    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName)
+      .account;
   }
 
   /**
@@ -506,7 +592,8 @@ export class MarketingDataInsightsServiceClient {
    * @returns {string} A string representing the partner_link.
    */
   matchPartnerLinkFromPartnerLinkName(partnerLinkName: string) {
-    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName).partner_link;
+    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName)
+      .partner_link;
   }
 
   /**
@@ -517,7 +604,7 @@ export class MarketingDataInsightsServiceClient {
    * @param {string} user_list
    * @returns {string} Resource name string.
    */
-  userListPath(accountType:string,account:string,userList:string) {
+  userListPath(accountType: string, account: string, userList: string) {
     return this.pathTemplates.userListPathTemplate.render({
       account_type: accountType,
       account: account,
@@ -533,7 +620,8 @@ export class MarketingDataInsightsServiceClient {
    * @returns {string} A string representing the account_type.
    */
   matchAccountTypeFromUserListName(userListName: string) {
-    return this.pathTemplates.userListPathTemplate.match(userListName).account_type;
+    return this.pathTemplates.userListPathTemplate.match(userListName)
+      .account_type;
   }
 
   /**
@@ -555,7 +643,8 @@ export class MarketingDataInsightsServiceClient {
    * @returns {string} A string representing the user_list.
    */
   matchUserListFromUserListName(userListName: string) {
-    return this.pathTemplates.userListPathTemplate.match(userListName).user_list;
+    return this.pathTemplates.userListPathTemplate.match(userListName)
+      .user_list;
   }
 
   /**
@@ -566,7 +655,11 @@ export class MarketingDataInsightsServiceClient {
    * @param {string} user_list_direct_license
    * @returns {string} Resource name string.
    */
-  userListDirectLicensePath(accountType:string,account:string,userListDirectLicense:string) {
+  userListDirectLicensePath(
+    accountType: string,
+    account: string,
+    userListDirectLicense: string,
+  ) {
     return this.pathTemplates.userListDirectLicensePathTemplate.render({
       account_type: accountType,
       account: account,
@@ -581,8 +674,12 @@ export class MarketingDataInsightsServiceClient {
    *   A fully-qualified path representing UserListDirectLicense resource.
    * @returns {string} A string representing the account_type.
    */
-  matchAccountTypeFromUserListDirectLicenseName(userListDirectLicenseName: string) {
-    return this.pathTemplates.userListDirectLicensePathTemplate.match(userListDirectLicenseName).account_type;
+  matchAccountTypeFromUserListDirectLicenseName(
+    userListDirectLicenseName: string,
+  ) {
+    return this.pathTemplates.userListDirectLicensePathTemplate.match(
+      userListDirectLicenseName,
+    ).account_type;
   }
 
   /**
@@ -593,7 +690,9 @@ export class MarketingDataInsightsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromUserListDirectLicenseName(userListDirectLicenseName: string) {
-    return this.pathTemplates.userListDirectLicensePathTemplate.match(userListDirectLicenseName).account;
+    return this.pathTemplates.userListDirectLicensePathTemplate.match(
+      userListDirectLicenseName,
+    ).account;
   }
 
   /**
@@ -603,8 +702,12 @@ export class MarketingDataInsightsServiceClient {
    *   A fully-qualified path representing UserListDirectLicense resource.
    * @returns {string} A string representing the user_list_direct_license.
    */
-  matchUserListDirectLicenseFromUserListDirectLicenseName(userListDirectLicenseName: string) {
-    return this.pathTemplates.userListDirectLicensePathTemplate.match(userListDirectLicenseName).user_list_direct_license;
+  matchUserListDirectLicenseFromUserListDirectLicenseName(
+    userListDirectLicenseName: string,
+  ) {
+    return this.pathTemplates.userListDirectLicensePathTemplate.match(
+      userListDirectLicenseName,
+    ).user_list_direct_license;
   }
 
   /**
@@ -615,7 +718,11 @@ export class MarketingDataInsightsServiceClient {
    * @param {string} user_list_global_license
    * @returns {string} Resource name string.
    */
-  userListGlobalLicensePath(accountType:string,account:string,userListGlobalLicense:string) {
+  userListGlobalLicensePath(
+    accountType: string,
+    account: string,
+    userListGlobalLicense: string,
+  ) {
     return this.pathTemplates.userListGlobalLicensePathTemplate.render({
       account_type: accountType,
       account: account,
@@ -630,8 +737,12 @@ export class MarketingDataInsightsServiceClient {
    *   A fully-qualified path representing UserListGlobalLicense resource.
    * @returns {string} A string representing the account_type.
    */
-  matchAccountTypeFromUserListGlobalLicenseName(userListGlobalLicenseName: string) {
-    return this.pathTemplates.userListGlobalLicensePathTemplate.match(userListGlobalLicenseName).account_type;
+  matchAccountTypeFromUserListGlobalLicenseName(
+    userListGlobalLicenseName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicensePathTemplate.match(
+      userListGlobalLicenseName,
+    ).account_type;
   }
 
   /**
@@ -642,7 +753,9 @@ export class MarketingDataInsightsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromUserListGlobalLicenseName(userListGlobalLicenseName: string) {
-    return this.pathTemplates.userListGlobalLicensePathTemplate.match(userListGlobalLicenseName).account;
+    return this.pathTemplates.userListGlobalLicensePathTemplate.match(
+      userListGlobalLicenseName,
+    ).account;
   }
 
   /**
@@ -652,8 +765,12 @@ export class MarketingDataInsightsServiceClient {
    *   A fully-qualified path representing UserListGlobalLicense resource.
    * @returns {string} A string representing the user_list_global_license.
    */
-  matchUserListGlobalLicenseFromUserListGlobalLicenseName(userListGlobalLicenseName: string) {
-    return this.pathTemplates.userListGlobalLicensePathTemplate.match(userListGlobalLicenseName).user_list_global_license;
+  matchUserListGlobalLicenseFromUserListGlobalLicenseName(
+    userListGlobalLicenseName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicensePathTemplate.match(
+      userListGlobalLicenseName,
+    ).user_list_global_license;
   }
 
   /**
@@ -665,13 +782,20 @@ export class MarketingDataInsightsServiceClient {
    * @param {string} license_customer_info
    * @returns {string} Resource name string.
    */
-  userListGlobalLicenseCustomerInfoPath(accountType:string,account:string,userListGlobalLicense:string,licenseCustomerInfo:string) {
-    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.render({
-      account_type: accountType,
-      account: account,
-      user_list_global_license: userListGlobalLicense,
-      license_customer_info: licenseCustomerInfo,
-    });
+  userListGlobalLicenseCustomerInfoPath(
+    accountType: string,
+    account: string,
+    userListGlobalLicense: string,
+    licenseCustomerInfo: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.render(
+      {
+        account_type: accountType,
+        account: account,
+        user_list_global_license: userListGlobalLicense,
+        license_customer_info: licenseCustomerInfo,
+      },
+    );
   }
 
   /**
@@ -681,8 +805,12 @@ export class MarketingDataInsightsServiceClient {
    *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
    * @returns {string} A string representing the account_type.
    */
-  matchAccountTypeFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
-    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).account_type;
+  matchAccountTypeFromUserListGlobalLicenseCustomerInfoName(
+    userListGlobalLicenseCustomerInfoName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(
+      userListGlobalLicenseCustomerInfoName,
+    ).account_type;
   }
 
   /**
@@ -692,8 +820,12 @@ export class MarketingDataInsightsServiceClient {
    *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
    * @returns {string} A string representing the account.
    */
-  matchAccountFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
-    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).account;
+  matchAccountFromUserListGlobalLicenseCustomerInfoName(
+    userListGlobalLicenseCustomerInfoName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(
+      userListGlobalLicenseCustomerInfoName,
+    ).account;
   }
 
   /**
@@ -703,8 +835,12 @@ export class MarketingDataInsightsServiceClient {
    *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
    * @returns {string} A string representing the user_list_global_license.
    */
-  matchUserListGlobalLicenseFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
-    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).user_list_global_license;
+  matchUserListGlobalLicenseFromUserListGlobalLicenseCustomerInfoName(
+    userListGlobalLicenseCustomerInfoName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(
+      userListGlobalLicenseCustomerInfoName,
+    ).user_list_global_license;
   }
 
   /**
@@ -714,8 +850,12 @@ export class MarketingDataInsightsServiceClient {
    *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
    * @returns {string} A string representing the license_customer_info.
    */
-  matchLicenseCustomerInfoFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
-    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).license_customer_info;
+  matchLicenseCustomerInfoFromUserListGlobalLicenseCustomerInfoName(
+    userListGlobalLicenseCustomerInfoName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(
+      userListGlobalLicenseCustomerInfoName,
+    ).license_customer_info;
   }
 
   /**
@@ -726,7 +866,7 @@ export class MarketingDataInsightsServiceClient {
    */
   close(): Promise<void> {
     if (this.marketingDataInsightsServiceStub && !this._terminated) {
-      return this.marketingDataInsightsServiceStub.then(stub => {
+      return this.marketingDataInsightsServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

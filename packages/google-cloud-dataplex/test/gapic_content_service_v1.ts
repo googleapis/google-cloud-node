@@ -934,6 +934,70 @@ describe('v1.ContentServiceClient', () => {
       });
     });
 
+    describe('changeRequest', async () => {
+      const fakePath = '/rendered/path/changeRequest';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        change_request: 'changeRequestValue',
+      };
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.changeRequestPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.changeRequestPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('changeRequestPath', () => {
+        const result = client.changeRequestPath(
+          'projectValue',
+          'locationValue',
+          'changeRequestValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromChangeRequestName', () => {
+        const result = client.matchProjectFromChangeRequestName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromChangeRequestName', () => {
+        const result = client.matchLocationFromChangeRequestName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchChangeRequestFromChangeRequestName', () => {
+        const result = client.matchChangeRequestFromChangeRequestName(fakePath);
+        assert.strictEqual(result, 'changeRequestValue');
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('content', async () => {
       const fakePath = '/rendered/path/content';
       const expectedParameters = {
