@@ -317,7 +317,7 @@ async function runVerificationPlanTests(db) {
   console.log('  Verifying data type correctness...');
   const [jsRows] = await db.database.run({ sql: typeQuery });
   const jsMapped = jsRows.map(row => {
-    const json = row.toJSON();
+    const json = row.toJSON({ wrapNumbers: true });
     return Object.values(json).map(v => String(v ?? 'null'));
   });
   const rustMapped = await db.executeSqlNative(typeQuery, 4);
