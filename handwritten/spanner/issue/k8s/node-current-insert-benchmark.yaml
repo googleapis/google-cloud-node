@@ -24,10 +24,10 @@ spec:
               sleep 3600
           resources:
             requests:
-              cpu: "3"
+              cpu: "1"
               memory: "2Gi"
             limits:
-              cpu: "3"
+              cpu: "1"
               memory: "2Gi"
           env:
             - name: SAMPLE_SIZE
@@ -50,7 +50,3 @@ spec:
               value: "jack_henry_db"
             - name: DB_SCHEMA
               value: "tracking"
-            - name: SPANNER_DISABLE_BUILTIN_METRICS
-              value: "true"
-            - name: GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS
-              value: "false"
