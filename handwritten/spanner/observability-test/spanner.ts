@@ -18,6 +18,7 @@ import * as assert from 'assert';
 import {grpc} from 'google-gax';
 import {google} from '../protos/protos';
 import {Database, Instance, Spanner} from '../src';
+import {MultiplexedSession} from '../src/multiplexed-session';
 import {MutationSet} from '../src/transaction';
 import protobuf = google.spanner.v1;
 import v1 = google.spanner.v1;
@@ -2022,6 +2023,51 @@ describe('End to end tracing headers', () => {
       assert.ifError(err);
     } finally {
       txn.end();
+    }
+  });
+
+  it('should schedule background timers in ROOT_CONTEXT to prevent trace/memory leaks', async () => {
+    const originalSetInterval = global.setInterval;
+    let capturedSchedulingContext: any;
+    
+    // Create an active user span context
+    const otelApi = require('@opentelemetry/api');
+    const userTracer = otelApi.trace.getTracer('test-tracer');
+    const userSpan = userTracer.startSpan('User.API.Request');
+    
+    try {
+      await otelApi.context.with(otelApi.trace.setSpan(otelApi.ROOT_CONTEXT, userSpan), async () => {
+        // Monkey-patch setInterval to capture context exactly at scheduling time
+        (global as any).setInterval = function (callback: any, ms: any) {
+          capturedSchedulingContext = otelApi.context.active();
+          // Return a mock handle
+          return {
+            unref: () => {},
+          };
+        };
+
+        // Trigger the MultiplexedSession _maintain() schedule method
+        // (Accessing private method for targeted unit verification)
+        const mux = new MultiplexedSession({} as any);
+        (mux as any)._maintain();
+      });
+
+      // Verify that scheduling DID NOT capture the active user span context,
+      // but instead securely captured ROOT_CONTEXT
+      assert.strictEqual(
+        otelApi.trace.getSpan(capturedSchedulingContext),
+        undefined,
+        'setInterval MUST be scheduled under ROOT_CONTEXT'
+      );
+      assert.strictEqual(
+        capturedSchedulingContext,
+        otelApi.ROOT_CONTEXT,
+        'setInterval context did not match ROOT_CONTEXT'
+      );
+    } finally {
+      // Clean up global state
+      global.setInterval = originalSetInterval;
+      userSpan.end();
     }
   });
 });
