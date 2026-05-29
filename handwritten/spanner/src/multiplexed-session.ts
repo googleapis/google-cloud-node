@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import {EventEmitter} from 'events';
-import {context, ROOT_CONTEXT} from '@opentelemetry/api';
-import {Database} from './database';
-import {Session} from './session';
-import {GetSessionCallback} from './session-factory';
+import { EventEmitter } from 'events';
+import { context, ROOT_CONTEXT } from '@opentelemetry/api';
+import { Database } from './database';
+import { Session } from './session';
+import { GetSessionCallback } from './session-factory';
 import {
   ObservabilityOptions,
   getActiveOrNoopSpan,
@@ -64,8 +64,7 @@ export interface MultiplexedSessionInterface extends EventEmitter {
  */
 export class MultiplexedSession
   extends EventEmitter
-  implements MultiplexedSessionInterface
-{
+  implements MultiplexedSessionInterface {
   database: Database;
   // frequency to create new mux session
   refreshRate: number;
@@ -98,7 +97,7 @@ export class MultiplexedSession
       })
       // Ignore errors here. If this fails, the next user request will
       // automatically trigger a retry via `_getSession`.
-      .catch(err => {});
+      .catch(err => { });
   }
 
   /**
@@ -178,11 +177,11 @@ export class MultiplexedSession
       clearInterval(this._refreshHandle);
     }
     const refreshRate = this.refreshRate! * 24 * 60 * 60000;
-    this._refreshHandle = setInterval(() => {
-      context.with(ROOT_CONTEXT, () => {
-        this._createSession().catch(() => {});
-      });
-    }, refreshRate);
+    this._refreshHandle = context.with(ROOT_CONTEXT, () =>
+      setInterval(() => {
+        this._createSession().catch(() => { });
+      }, refreshRate)
+    );
 
     // Unreference the timer so it does not prevent the Node.js process from exiting.
     // If the application has finished all other work, this background timer shouldn't
