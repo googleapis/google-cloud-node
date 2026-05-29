@@ -118,7 +118,7 @@ describe('projectId placeholder', () => {
     );
   });
 
-  it('should return values without placeholder as-is', () => {
+  it('should not modify primitives without placeholder', () => {
     assert.strictEqual(
       replaceProjectIdToken('no-placeholder', PROJECT_ID),
       'no-placeholder',
@@ -127,19 +127,25 @@ describe('projectId placeholder', () => {
     assert.strictEqual(replaceProjectIdToken(true, PROJECT_ID), true);
     assert.strictEqual(replaceProjectIdToken(null, PROJECT_ID), null);
     assert.strictEqual(replaceProjectIdToken(undefined, PROJECT_ID), undefined);
+  });
 
+  it('should not modify arrays without placeholder', () => {
     const array = [1, 2, 3];
     assert.strictEqual(replaceProjectIdToken(array, PROJECT_ID), array);
+  });
 
+  it('should not modify objects without placeholder', () => {
     const object = {a: 1, b: 2};
     assert.strictEqual(replaceProjectIdToken(object, PROJECT_ID), object);
   });
 
-  it('should handle frozen arrays and objects without placeholders correctly without throwing', () => {
+  it('should traverse frozen arrays without placeholder safely', () => {
     const frozenArray = Object.freeze(['no-placeholder', 123, true]);
     const replacedArray = replaceProjectIdToken(frozenArray, PROJECT_ID);
     assert.strictEqual(frozenArray, replacedArray);
+  });
 
+  it('should traverse frozen objects without placeholder safely', () => {
     const frozenObject = Object.freeze({
       prop: 'no-placeholder',
       other: 123,
