@@ -13,7 +13,9 @@ are addressed with the highest priority
 
 Cloud Natural Language API client for Node.js
 
-[//]: # "partials.introduction"
+[Cloud Natural Language API](https://cloud.google.com/natural-language/docs) provides natural
+language understanding technologies to developers, including sentiment analysis, entity
+analysis, and syntax analysis. This API is part of the larger Cloud Machine Learning API family.
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
@@ -113,7 +115,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -123,7 +125,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
