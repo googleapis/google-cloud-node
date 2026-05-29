@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {before, describe, it} from 'mocha';
-import * as assert from 'assert';
 import * as http from 'http';
 
 import * as common from '../src';
@@ -25,7 +23,7 @@ describe('Common', () => {
   describe('Service', () => {
     let service: common.Service;
 
-    before(() => {
+    beforeAll(() => {
       service = new common.Service({
         baseUrl: MOCK_HOST,
         apiEndpoint: MOCK_HOST,
@@ -47,16 +45,14 @@ describe('Common', () => {
           uri: '/mock-endpoint',
         },
         (err, resp) => {
-          assert.ifError(err);
-          assert.strictEqual(resp, mockResponse);
+          expect(err).toBeNull();
+          expect(resp).toBe(mockResponse);
           mockServer.close(done);
         },
       );
     });
 
-    it('should retry a request', function (done) {
-      this.timeout(60 * 1000);
-
+    it('should retry a request', done => {
       let numRequestAttempts = 0;
 
       const mockServer = new http.Server((req, res) => {
@@ -72,16 +68,14 @@ describe('Common', () => {
           uri: '/mock-endpoint-retry',
         },
         err => {
-          assert.strictEqual((err! as common.ApiError).code, 408);
-          assert.strictEqual(numRequestAttempts, 4);
+          expect((err! as common.ApiError).code).toBe(408);
+          expect(numRequestAttempts).toBe(4);
           mockServer.close(done);
         },
       );
-    });
+    }, 60000);
 
-    it('should retry non-responsive hosts', function (done) {
-      this.timeout(60 * 1000);
-
+    it('should retry non-responsive hosts', done => {
       function getMinimumRetryDelay(retryNumber: number) {
         return Math.pow(2, retryNumber) * 1000;
       }
@@ -100,12 +94,12 @@ describe('Common', () => {
           uri: '/mock-endpoint-no-response',
         },
         err => {
-          assert(err?.message.includes('ECONNREFUSED'));
+          expect(err?.message).toContain('ECONNREFUSED');
           const timeResponse = Date.now();
-          assert(timeResponse - timeRequest > minExpectedResponseTime);
+          expect(timeResponse - timeRequest).toBeGreaterThan(minExpectedResponseTime);
           done();
         },
       );
-    });
+    }, 60000);
   });
 });

@@ -14,11 +14,9 @@
 
 import {
   MissingProjectIdError,
-  replaceProjectIdToken,
 } from '@google-cloud/projectify';
-import * as assert from 'assert';
-import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import * as extend from 'extend';
+import * as authLib from 'google-auth-library';
 import {
   AuthClient,
   GoogleAuth,
@@ -26,12 +24,8 @@ import {
   OAuth2Client,
 } from 'google-auth-library';
 import * as nock from 'nock';
-import * as proxyquire from 'proxyquire';
 import * as r from 'teeny-request';
-import * as retryRequest from 'retry-request';
-import * as sinon from 'sinon';
 import * as stream from 'stream';
-import {teenyRequest} from 'teeny-request';
 
 import {
   Abortable,
@@ -44,15 +38,77 @@ import {
   MakeAuthenticatedRequestFactoryConfig,
   MakeRequestConfig,
   ParsedHttpRespMessage,
-  ParsedHttpResponseBody,
   Util,
 } from '../src/util';
+import {util} from '../src/util';
 import {DEFAULT_PROJECT_ID_TOKEN} from '../src/service';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const duplexify: DuplexifyConstructor = require('duplexify');
 
 nock.disableNetConnect();
+
+(global as any).requestOverride = null;
+(global as any).retryRequestOverride = null;
+(global as any).replaceProjectIdTokenOverride = null;
+
+jest.mock('google-auth-library', () => {
+  const original = jest.requireActual('google-auth-library');
+  return {
+    ...original,
+    AuthClient: class CustomAuthClient extends original.AuthClient {
+      async getAccessToken() {
+        return {token: '', res: undefined};
+      }
+      async getRequestHeaders() {
+        return {} as Headers;
+      }
+      request = original.OAuth2Client.prototype.request.bind(this);
+    },
+    GoogleAuth: class {
+      constructor(config?: any) {
+        return new original.GoogleAuth(config);
+      }
+    },
+  };
+});
+
+jest.mock('retry-request', () => {
+  const original = jest.requireActual('retry-request');
+  const mockRetryRequest = function (...args: any[]) {
+    if ((global as any).retryRequestOverride) {
+      return (global as any).retryRequestOverride(...args);
+    }
+    return original(...args);
+  };
+  return mockRetryRequest;
+});
+
+jest.mock('teeny-request', () => {
+  const original = jest.requireActual('teeny-request');
+  const mockTeenyRequest = function (...args: any[]) {
+    if ((global as any).requestOverride) {
+      return (global as any).requestOverride(...args);
+    }
+    return original.teenyRequest(...args);
+  };
+  mockTeenyRequest.defaults = () => mockTeenyRequest;
+  mockTeenyRequest.teenyRequest = mockTeenyRequest;
+  return mockTeenyRequest;
+});
+
+jest.mock('@google-cloud/projectify', () => {
+  const original = jest.requireActual('@google-cloud/projectify');
+  return {
+    ...original,
+    replaceProjectIdToken(...args: any[]) {
+      if ((global as any).replaceProjectIdTokenOverride) {
+        return (global as any).replaceProjectIdTokenOverride(...args);
+      }
+      return original.replaceProjectIdToken(...args);
+    },
+  };
+});
 
 const fakeResponse = {
   statusCode: 200,
@@ -71,41 +127,10 @@ const fakeReqOpts: DecorateRequestOptions = {
 
 const fakeError = new Error('this error is like so fake');
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let requestOverride: any;
-function fakeRequest() {
-  // eslint-disable-next-line prefer-spread, prefer-rest-params
-  return (requestOverride || teenyRequest).apply(null, arguments);
-}
-
-fakeRequest.defaults = () => {
-  // Ignore the default values, so we don't have to test for them in every API
-  // call.
-  return fakeRequest;
-};
-
-let retryRequestOverride: Function | null;
-function fakeRetryRequest() {
-  // eslint-disable-next-line prefer-spread, prefer-rest-params
-  return (retryRequestOverride || retryRequest).apply(null, arguments);
-}
-
-let replaceProjectIdTokenOverride: Function | null;
-function fakeReplaceProjectIdToken() {
-  // eslint-disable-next-line prefer-spread, prefer-rest-params
-  return (replaceProjectIdTokenOverride || replaceProjectIdToken).apply(
-    null,
-    // eslint-disable-next-line prefer-spread, prefer-rest-params
-    arguments,
-  );
-}
-
 describe('common/util', () => {
-  let util: Util & {[index: string]: Function};
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function stub(method: keyof Util, meth: (...args: any[]) => any) {
-    return sandbox.stub(util, method).callsFake(meth);
+    return jest.spyOn(util as any, method as any).mockImplementation(meth);
   }
 
   function createExpectedErrorMessage(errors: string[]): string {
@@ -123,7 +148,6 @@ describe('common/util', () => {
   }
 
   const fakeGoogleAuth = {
-    // Using a custom `AuthClient` to ensure any `AuthClient` would work
     AuthClient: class CustomAuthClient extends AuthClient {
       async getAccessToken() {
         return {token: '', res: undefined};
@@ -142,26 +166,14 @@ describe('common/util', () => {
     },
   };
 
-  before(() => {
-    util = proxyquire('../src/util', {
-      'google-auth-library': fakeGoogleAuth,
-      'retry-request': fakeRetryRequest,
-      'teeny-request': {teenyRequest: fakeRequest},
-      '@google-cloud/projectify': {
-        replaceProjectIdToken: fakeReplaceProjectIdToken,
-      },
-    }).util;
+  beforeEach(() => {
+    (global as any).requestOverride = null;
+    (global as any).retryRequestOverride = null;
+    (global as any).replaceProjectIdTokenOverride = null;
   });
 
-  let sandbox: sinon.SinonSandbox;
-  beforeEach(() => {
-    sandbox = sinon.createSandbox();
-    requestOverride = null;
-    retryRequestOverride = null;
-    replaceProjectIdTokenOverride = null;
-  });
   afterEach(() => {
-    sandbox.restore();
+    jest.restoreAllMocks();
   });
 
   describe('ApiError', () => {
@@ -169,13 +181,13 @@ describe('common/util', () => {
       const expectedMessage = 'Hi, I am an error message!';
       const apiError = new ApiError(expectedMessage);
 
-      assert.strictEqual(apiError.message, expectedMessage);
+      expect(apiError.message).toBe(expectedMessage);
     });
 
     it('should use message in stack', () => {
       const expectedMessage = 'Message is in the stack too!';
       const apiError = new ApiError(expectedMessage);
-      assert(apiError.stack?.includes(expectedMessage));
+      expect(apiError.stack?.includes(expectedMessage)).toBe(true);
     });
 
     it('should build correct ApiError', () => {
@@ -189,16 +201,18 @@ describe('common/util', () => {
         response: fakeResponse,
       };
 
-      sandbox
-        .stub(ApiError, 'createMultiErrorMessage')
-        .withArgs(error, errors)
-        .returns(fakeMessage);
+      jest.spyOn(ApiError, 'createMultiErrorMessage')
+        .mockImplementation((err: any, errs?: any) => {
+          expect(err).toEqual(error);
+          expect(errs).toEqual(errors);
+          return fakeMessage;
+        });
 
       const apiError = new ApiError(error);
-      assert.strictEqual(apiError.errors, error.errors);
-      assert.strictEqual(apiError.code, error.code);
-      assert.strictEqual(apiError.response, error.response);
-      assert.strictEqual(apiError.message, fakeMessage);
+      expect(apiError.errors).toEqual(error.errors);
+      expect(apiError.code).toBe(error.code);
+      expect(apiError.response).toBe(error.response);
+      expect(apiError.message).toBe(fakeMessage);
     });
 
     it('should parse the response body for errors', () => {
@@ -217,13 +231,15 @@ describe('common/util', () => {
         } as r.Response,
       };
 
-      sandbox
-        .stub(ApiError, 'createMultiErrorMessage')
-        .withArgs(errorBody, errors)
-        .returns(fakeMessage);
+      jest.spyOn(ApiError, 'createMultiErrorMessage')
+        .mockImplementation((err: any, errs?: any) => {
+          expect(err).toEqual(errorBody);
+          expect(errs).toEqual(errors);
+          return fakeMessage;
+        });
 
       const apiError = new ApiError(errorBody);
-      assert.strictEqual(apiError.message, fakeMessage);
+      expect(apiError.message).toBe(fakeMessage);
     });
 
     describe('createMultiErrorMessage', () => {
@@ -243,7 +259,7 @@ describe('common/util', () => {
           errorMessage,
         ]);
         const multiError = ApiError.createMultiErrorMessage(error, errors);
-        assert.strictEqual(multiError, expectedErrorMessage);
+        expect(multiError).toBe(expectedErrorMessage);
       });
 
       it('should use any inner errors', () => {
@@ -256,7 +272,7 @@ describe('common/util', () => {
 
         const expectedErrorMessage = createExpectedErrorMessage(messages);
         const multiError = ApiError.createMultiErrorMessage(error, errors);
-        assert.strictEqual(multiError, expectedErrorMessage);
+        expect(multiError).toBe(expectedErrorMessage);
       });
 
       it('should parse and append the decoded response body', () => {
@@ -276,7 +292,7 @@ describe('common/util', () => {
           'Response body message <',
         ]);
         const multiError = ApiError.createMultiErrorMessage(error);
-        assert.strictEqual(multiError, expectedErrorMessage);
+        expect(multiError).toBe(expectedErrorMessage);
       });
 
       it('should use default message if there are no errors', () => {
@@ -288,7 +304,7 @@ describe('common/util', () => {
         };
 
         const multiError = ApiError.createMultiErrorMessage(error);
-        assert.strictEqual(multiError, expectedErrorMessage);
+        expect(multiError).toBe(expectedErrorMessage);
       });
 
       it('should filter out duplicate errors', () => {
@@ -302,7 +318,7 @@ describe('common/util', () => {
         };
 
         const multiError = ApiError.createMultiErrorMessage(error);
-        assert.strictEqual(multiError, expectedErrorMessage);
+        expect(multiError).toBe(expectedErrorMessage);
       });
     });
   });
@@ -318,17 +334,19 @@ describe('common/util', () => {
         message: 'Partial failure occurred',
       };
 
-      sandbox
-        .stub(util.ApiError, 'createMultiErrorMessage')
-        .withArgs(error, errors)
-        .returns(fakeMessage);
+      jest.spyOn(util.ApiError, 'createMultiErrorMessage')
+        .mockImplementation((err: any, errs?: any) => {
+          expect(err).toEqual(error);
+          expect(errs).toEqual(errors);
+          return fakeMessage;
+        });
 
       const partialFailureError = new util.PartialFailureError(error);
 
-      assert.strictEqual(partialFailureError.errors, error.errors);
-      assert.strictEqual(partialFailureError.name, 'PartialFailureError');
-      assert.strictEqual(partialFailureError.response, error.response);
-      assert.strictEqual(partialFailureError.message, fakeMessage);
+      expect(partialFailureError.errors).toEqual(error.errors);
+      expect(partialFailureError.name).toBe('PartialFailureError');
+      expect(partialFailureError.response).toBe(error.response);
+      expect(partialFailureError.message).toBe(fakeMessage);
     });
   });
 
@@ -337,7 +355,7 @@ describe('common/util', () => {
       const error = new Error('Error.');
 
       util.handleResp(error, fakeResponse, null, err => {
-        assert.strictEqual(err, error);
+        expect(err).toBe(error);
         done();
       });
     });
@@ -348,14 +366,14 @@ describe('common/util', () => {
 
     it('should parse response', done => {
       stub('parseHttpRespMessage', resp_ => {
-        assert.deepStrictEqual(resp_, fakeResponse);
+        expect(resp_).toEqual(fakeResponse);
         return {
           resp: fakeResponse,
         };
       });
 
       stub('parseHttpRespBody', body_ => {
-        assert.strictEqual(body_, fakeResponse.body);
+        expect(body_).toBe(fakeResponse.body);
         return {
           body: fakeResponse.body,
         };
@@ -366,9 +384,9 @@ describe('common/util', () => {
         fakeResponse,
         fakeResponse.body,
         (err, body, resp) => {
-          assert.deepStrictEqual(err, fakeError);
-          assert.deepStrictEqual(body, fakeResponse.body);
-          assert.deepStrictEqual(resp, fakeResponse);
+          expect(err).toEqual(fakeError);
+          expect(body).toEqual(fakeResponse.body);
+          expect(resp).toEqual(fakeResponse);
           done();
         },
       );
@@ -377,12 +395,12 @@ describe('common/util', () => {
     it('should parse response for error', done => {
       const error = new Error('Error.');
 
-      sandbox.stub(util, 'parseHttpRespMessage').callsFake(() => {
+      jest.spyOn(util, 'parseHttpRespMessage').mockImplementation(() => {
         return {err: error} as ParsedHttpRespMessage;
       });
 
       util.handleResp(null, fakeResponse, {}, err => {
-        assert.deepStrictEqual(err, error);
+        expect(err).toEqual(error);
         done();
       });
     });
@@ -395,18 +413,24 @@ describe('common/util', () => {
       });
 
       util.handleResp(null, fakeResponse, {}, err => {
-        assert.deepStrictEqual(err, error);
+        expect(err).toEqual(error);
         done();
       });
     });
 
     it('should not parse undefined response', done => {
-      stub('parseHttpRespMessage', () => done()); // Will throw.
+      stub('parseHttpRespMessage', () => {
+        done();
+        return {} as any;
+      }); // Will throw.
       util.handleResp(null, null, null, done);
     });
 
     it('should not parse undefined body', done => {
-      stub('parseHttpRespBody', () => done()); // Will throw.
+      stub('parseHttpRespBody', () => {
+        done();
+        return {} as any;
+      }); // Will throw.
       util.handleResp(null, null, null, done);
     });
 
@@ -414,7 +438,7 @@ describe('common/util', () => {
       const unparseableBody = '<html>Unparseable body.</html>';
 
       util.handleResp(null, null, unparseableBody, (err, body) => {
-        assert(body.includes(unparseableBody));
+        expect(body.includes(unparseableBody)).toBe(true);
         done();
       });
     });
@@ -428,15 +452,15 @@ describe('common/util', () => {
         {body: unparseableBody, statusCode} as r.Response,
         unparseableBody,
         err => {
-          assert(err, 'there should be an error');
+          expect(err).toBeTruthy();
           const apiError = err! as ApiError;
-          assert.strictEqual(apiError.code, statusCode);
+          expect(apiError.code).toBe(statusCode);
 
           const response = apiError.response;
           if (!response) {
-            assert.fail('there should be a response property on the error');
+            fail('there should be a response property on the error');
           } else {
-            assert.strictEqual(response.body, unparseableBody);
+            expect(response.body).toBe(unparseableBody);
           }
 
           done();
@@ -449,14 +473,14 @@ describe('common/util', () => {
     it('should build ApiError with non-200 status and message', () => {
       const res = util.parseHttpRespMessage(fakeBadResp);
       const error_ = res.err!;
-      assert.strictEqual(error_.code, fakeBadResp.statusCode);
-      assert.strictEqual(error_.message, fakeBadResp.statusMessage);
-      assert.strictEqual(error_.response, fakeBadResp);
+      expect(error_.code).toBe(fakeBadResp.statusCode);
+      expect(error_.message).toBe(fakeBadResp.statusMessage);
+      expect(error_.response).toBe(fakeBadResp);
     });
 
     it('should return the original response message', () => {
       const parsedHttpRespMessage = util.parseHttpRespMessage(fakeBadResp);
-      assert.strictEqual(parsedHttpRespMessage.resp, fakeBadResp);
+      expect(parsedHttpRespMessage.resp).toBe(fakeBadResp);
     });
   });
 
@@ -475,22 +499,22 @@ describe('common/util', () => {
       ]);
 
       const err = parsedHttpRespBody.err as ApiError;
-      assert.deepStrictEqual(err.errors, apiErr.errors);
-      assert.strictEqual(err.code, apiErr.code);
-      assert.deepStrictEqual(err.message, expectedErrorMessage);
+      expect(err.errors).toEqual(apiErr.errors);
+      expect(err.code).toBe(apiErr.code);
+      expect(err.message).toEqual(expectedErrorMessage);
     });
 
     it('should try to parse JSON if body is string', () => {
       const httpRespBody = '{ "foo": "bar" }';
       const parsedHttpRespBody = util.parseHttpRespBody(httpRespBody);
 
-      assert.strictEqual(parsedHttpRespBody.body.foo, 'bar');
+      expect(parsedHttpRespBody.body.foo).toBe('bar');
     });
 
     it('should return the original body', () => {
       const httpRespBody = {};
       const parsedHttpRespBody = util.parseHttpRespBody(httpRespBody);
-      assert.strictEqual(parsedHttpRespBody.body, httpRespBody);
+      expect(parsedHttpRespBody.body).toBe(httpRespBody);
     });
   });
 
@@ -502,33 +526,30 @@ describe('common/util', () => {
       util.makeWritableStream(dup, {
         metadata,
         makeAuthenticatedRequest(request: DecorateRequestOptions) {
-          assert.strictEqual(request.method, 'POST');
-          assert.strictEqual(request.qs.uploadType, 'multipart');
-          assert.strictEqual(request.timeout, 0);
-          assert.strictEqual(request.maxRetries, 0);
+          expect(request.method).toBe('POST');
+          expect(request.qs.uploadType).toBe('multipart');
+          expect(request.timeout).toBe(0);
+          expect(request.maxRetries).toBe(0);
 
-          assert.strictEqual(Array.isArray(request.multipart), true);
+          expect(Array.isArray(request.multipart)).toBe(true);
 
           const mp = request.multipart as r.RequestPart[];
 
-          assert.strictEqual(
+          expect(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (mp[0] as any)['Content-Type'],
-            'application/json',
-          );
-          assert.strictEqual(mp[0].body, JSON.stringify(metadata));
+            (mp[0] as any)['Content-Type']
+          ).toBe('application/json');
+          expect(mp[0].body).toBe(JSON.stringify(metadata));
 
-          assert.strictEqual(
+          expect(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (mp[1] as any)['Content-Type'],
-            'application/octet-stream',
-          );
+            (mp[1] as any)['Content-Type']
+          ).toBe('application/octet-stream');
           // (is a writable stream:)
-          assert.strictEqual(
+          expect(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            typeof (mp[1].body as any)._writableState,
-            'object',
-          );
+            typeof (mp[1].body as any)._writableState
+          ).toBe('object');
 
           done();
         },
@@ -551,13 +572,13 @@ describe('common/util', () => {
           contentType: 'application/json',
         },
         makeAuthenticatedRequest(request) {
-          assert.strictEqual(request.method, req.method);
-          assert.deepStrictEqual(request.qs, req.qs);
-          assert.strictEqual(request.uri, req.uri);
+          expect(request.method).toBe(req.method);
+          expect(request.qs).toEqual(req.qs);
+          expect(request.uri).toBe(req.uri);
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const mp = request.multipart as any[];
-          assert.strictEqual(mp[1]['Content-Type'], 'application/json');
+          expect(mp[1]['Content-Type']).toBe('application/json');
 
           done();
         },
@@ -571,7 +592,7 @@ describe('common/util', () => {
 
       const ws = duplexify();
       ws.on('error', err => {
-        assert.strictEqual(err, error);
+        expect(err).toBe(error);
         done();
       });
 
@@ -594,7 +615,6 @@ describe('common/util', () => {
 
     it('dup should emit a progress event with the bytes written', done => {
       let happened = false;
-
       const dup = duplexify();
       dup.on('progress', () => {
         happened = true;
@@ -603,7 +623,7 @@ describe('common/util', () => {
       util.makeWritableStream(dup, {makeAuthenticatedRequest() {}}, util.noop);
       dup.write(Buffer.from('abcdefghijklmnopqrstuvwxyz'), 'utf-8', util.noop);
 
-      assert.strictEqual(happened, true);
+      expect(happened).toBe(true);
       done();
     });
 
@@ -618,17 +638,15 @@ describe('common/util', () => {
         callback(error);
       });
 
-      requestOverride = (
+      (global as any).requestOverride = (
         reqOpts: DecorateRequestOptions,
         callback: (err: Error) => void,
       ) => {
         callback(error);
       };
 
-      requestOverride.defaults = () => requestOverride;
-
       dup.on('error', err => {
-        assert.strictEqual(err, error);
+        expect(err).toBe(error);
         done();
       });
 
@@ -653,14 +671,13 @@ describe('common/util', () => {
         callback();
       });
 
-      requestOverride = (
+      (global as any).requestOverride = (
         reqOpts: DecorateRequestOptions,
         callback: (err: Error | null, res: r.Response) => void,
       ) => {
         callback(null, fakeResponse);
       };
 
-      requestOverride.defaults = () => requestOverride;
       const options = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         makeAuthenticatedRequest(request: DecorateRequestOptions, opts: any) {
@@ -669,7 +686,7 @@ describe('common/util', () => {
       };
 
       dup.on('response', resp => {
-        assert.strictEqual(resp, fakeResponse);
+        expect(resp).toBe(fakeResponse);
         done();
       });
 
@@ -688,14 +705,11 @@ describe('common/util', () => {
         callback(null, fakeResponse);
       });
 
-      requestOverride = (
+      (global as any).requestOverride = (
         reqOpts: DecorateRequestOptions,
         callback: () => void,
       ) => {
         callback();
-      };
-      requestOverride.defaults = () => {
-        return requestOverride;
       };
 
       const options = {
@@ -706,7 +720,7 @@ describe('common/util', () => {
       };
 
       util.makeWritableStream(dup, options, (data: {}) => {
-        assert.strictEqual(data, fakeResponse);
+        expect(data).toBe(fakeResponse);
         done();
       });
 
@@ -727,10 +741,9 @@ describe('common/util', () => {
     it('should create an authClient', done => {
       const config = {test: true} as MakeAuthenticatedRequestFactoryConfig;
 
-      sandbox
-        .stub(fakeGoogleAuth, 'GoogleAuth')
-        .callsFake((config_: GoogleAuthOptions) => {
-          assert.deepStrictEqual(config_, {...config, authClient: undefined});
+      jest.spyOn(authLib, 'GoogleAuth')
+        .mockImplementation((config_: any) => {
+          expect(config_).toEqual({...config, authClient: undefined});
           setImmediate(done);
           return authClient;
         });
@@ -745,10 +758,9 @@ describe('common/util', () => {
         authClient: customAuthClient,
       };
 
-      sandbox
-        .stub(fakeGoogleAuth, 'GoogleAuth')
-        .callsFake((config_: GoogleAuthOptions) => {
-          assert.deepStrictEqual(config_, config);
+      jest.spyOn(authLib, 'GoogleAuth')
+        .mockImplementation((config_: any) => {
+          expect(config_).toEqual(config);
           setImmediate(done);
           return authClient;
         });
@@ -759,8 +771,8 @@ describe('common/util', () => {
     it('should not pass projectId token to google-auth-library', done => {
       const config = {projectId: DEFAULT_PROJECT_ID_TOKEN};
 
-      sandbox.stub(fakeGoogleAuth, 'GoogleAuth').callsFake(config_ => {
-        assert.strictEqual(config_.projectId, undefined);
+      jest.spyOn(authLib, 'GoogleAuth').mockImplementation((config_: any) => {
+        expect(config_.projectId).toBeUndefined();
         setImmediate(done);
         return authClient;
       });
@@ -771,8 +783,8 @@ describe('common/util', () => {
     it('should not remove projectId from config object', done => {
       const config = {projectId: DEFAULT_PROJECT_ID_TOKEN};
 
-      sandbox.stub(fakeGoogleAuth, 'GoogleAuth').callsFake(() => {
-        assert.strictEqual(config.projectId, DEFAULT_PROJECT_ID_TOKEN);
+      jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => {
+        expect(config.projectId).toBe(DEFAULT_PROJECT_ID_TOKEN);
         setImmediate(done);
         return authClient;
       });
@@ -781,10 +793,7 @@ describe('common/util', () => {
     });
 
     it('should return a function', () => {
-      assert.strictEqual(
-        typeof util.makeAuthenticatedRequestFactory({}),
-        'function',
-      );
+      expect(typeof util.makeAuthenticatedRequestFactory({})).toBe('function');
     });
 
     it('should return a getCredentials method', done => {
@@ -792,8 +801,8 @@ describe('common/util', () => {
         done();
       }
 
-      sandbox.stub(fakeGoogleAuth, 'GoogleAuth').callsFake(() => {
-        return {getCredentials};
+      jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => {
+        return {getCredentials} as any;
       });
 
       const makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({});
@@ -802,9 +811,9 @@ describe('common/util', () => {
 
     it('should return the authClient', () => {
       const authClient = {getCredentials() {}};
-      sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+      jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
       const mar = util.makeAuthenticatedRequestFactory({});
-      assert.strictEqual(mar.authClient, authClient);
+      expect(mar.authClient).toBe(authClient);
     });
 
     describe('customEndpoint (no authentication attempted)', () => {
@@ -813,14 +822,14 @@ describe('common/util', () => {
       const config = {customEndpoint: true};
 
       beforeEach(() => {
-        sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+        jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
         makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(config);
       });
 
       it('should decorate the request', done => {
         const decoratedRequest = {};
         stub('decorateRequest', reqOpts_ => {
-          assert.strictEqual(reqOpts_, fakeReqOpts);
+          expect(reqOpts_).toBe(fakeReqOpts);
           return decoratedRequest;
         });
 
@@ -829,8 +838,8 @@ describe('common/util', () => {
             err: Error,
             authenticatedReqOpts: DecorateRequestOptions,
           ) {
-            assert.ifError(err);
-            assert.strictEqual(authenticatedReqOpts, decoratedRequest);
+            expect(err).toBeNull();
+            expect(authenticatedReqOpts).toBe(decoratedRequest);
             done();
           },
         });
@@ -843,7 +852,7 @@ describe('common/util', () => {
         });
         makeAuthenticatedRequest(fakeReqOpts, {
           onAuthenticated(err: Error) {
-            assert.strictEqual(err, error);
+            expect(err).toBe(error);
             done();
           },
         });
@@ -856,8 +865,8 @@ describe('common/util', () => {
             err: Error,
             authenticatedReqOpts: DecorateRequestOptions,
           ) {
-            assert.ifError(err);
-            assert.deepStrictEqual(reqOpts, authenticatedReqOpts);
+            expect(err).toBeNull();
+            expect(reqOpts).toEqual(authenticatedReqOpts);
             done();
           },
         });
@@ -867,11 +876,11 @@ describe('common/util', () => {
         const reqOpts = {a: 'b', c: 'd'};
 
         stub('makeRequest', rOpts => {
-          assert.deepStrictEqual(rOpts, reqOpts);
+          expect(rOpts).toEqual(reqOpts);
           done();
         });
 
-        makeAuthenticatedRequest(reqOpts, assert.ifError);
+        makeAuthenticatedRequest(reqOpts, () => {});
       });
     });
 
@@ -881,7 +890,7 @@ describe('common/util', () => {
       const config = {customEndpoint: true, useAuthWithCustomEndpoint: true};
 
       beforeEach(() => {
-        sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+        jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
         makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(config);
       });
 
@@ -889,16 +898,16 @@ describe('common/util', () => {
         const reqOpts = {a: 'b', c: 'd'};
 
         stub('makeRequest', rOpts => {
-          assert.deepStrictEqual(rOpts, reqOpts);
+          expect(rOpts).toEqual(reqOpts);
           done();
         });
 
         authClient.authorizeRequest = async (opts: {}) => {
-          assert.strictEqual(opts, reqOpts);
-          done();
+          expect(opts).toBe(reqOpts);
+          return reqOpts;
         };
 
-        makeAuthenticatedRequest(reqOpts, assert.ifError);
+        makeAuthenticatedRequest(reqOpts, () => {});
       });
     });
 
@@ -906,42 +915,42 @@ describe('common/util', () => {
       it('should pass correct args to authorizeRequest', done => {
         const fake = extend(true, authClient, {
           authorizeRequest: async (rOpts: {}) => {
-            assert.deepStrictEqual(rOpts, fakeReqOpts);
+            expect(rOpts).toEqual(fakeReqOpts);
             setImmediate(done);
             return rOpts;
           },
         });
-        retryRequestOverride = () => {
+        (global as any).retryRequestOverride = () => {
           return new stream.PassThrough();
         };
-        sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(fake);
+        jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => fake as any);
         const mar = util.makeAuthenticatedRequestFactory({});
         mar(fakeReqOpts);
       });
 
       it('should return a stream if callback is missing', () => {
-        sandbox.stub(fakeGoogleAuth, 'GoogleAuth').callsFake(() => {
+        jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => {
           return extend(true, authClient, {
             authorizeRequest: async (rOpts: {}) => {
               return rOpts;
             },
-          });
+          }) as any;
         });
-        retryRequestOverride = () => {
+        (global as any).retryRequestOverride = () => {
           return new stream.PassThrough();
         };
         const mar = util.makeAuthenticatedRequestFactory({});
         const s = mar(fakeReqOpts);
-        assert(s instanceof stream.Stream);
+        expect(s instanceof stream.Stream).toBe(true);
       });
 
       describe('projectId', () => {
         const reqOpts = {} as DecorateRequestOptions;
 
         it('should default to authClient projectId', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           stub('decorateRequest', (reqOpts, projectId) => {
-            assert.strictEqual(projectId, AUTH_CLIENT_PROJECT_ID);
+            expect(projectId).toBe(AUTH_CLIENT_PROJECT_ID);
             setImmediate(done);
           });
 
@@ -950,12 +959,12 @@ describe('common/util', () => {
           );
 
           makeAuthenticatedRequest(reqOpts, {
-            onAuthenticated: assert.ifError,
+            onAuthenticated: () => {},
           });
         });
 
         it('should prefer user-provided projectId', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
 
           const config = {
             customEndpoint: true,
@@ -963,7 +972,7 @@ describe('common/util', () => {
           };
 
           stub('decorateRequest', (reqOpts, projectId) => {
-            assert.strictEqual(projectId, config.projectId);
+            expect(projectId).toBe(config.projectId);
             setImmediate(done);
           });
 
@@ -971,14 +980,13 @@ describe('common/util', () => {
             util.makeAuthenticatedRequestFactory(config);
 
           makeAuthenticatedRequest(reqOpts, {
-            onAuthenticated: assert.ifError,
+            onAuthenticated: () => {},
           });
         });
 
         it('should use default `projectId` and not call `authClient#getProjectId` when !`projectIdRequired`', done => {
-          const getProjectIdSpy = sandbox.spy(authClient, 'getProjectId');
-
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          const getProjectIdSpy = jest.spyOn(authClient, 'getProjectId');
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
 
           const config = {
             customEndpoint: true,
@@ -986,7 +994,7 @@ describe('common/util', () => {
           };
 
           stub('decorateRequest', (reqOpts, projectId) => {
-            assert.strictEqual(projectId, DEFAULT_PROJECT_ID_TOKEN);
+            expect(projectId).toBe(DEFAULT_PROJECT_ID_TOKEN);
           });
 
           const makeAuthenticatedRequest =
@@ -994,41 +1002,38 @@ describe('common/util', () => {
 
           makeAuthenticatedRequest(reqOpts, {
             onAuthenticated: e => {
-              assert.ifError(e);
-              assert(getProjectIdSpy.notCalled);
+              expect(e).toBeNull();
+              expect(getProjectIdSpy).not.toHaveBeenCalled();
               done(e);
             },
           });
         });
 
         it('should fallback to checking for a `projectId` on when missing a `projectId` when !`projectIdRequired`', done => {
-          const getProjectIdSpy = sandbox.spy(authClient, 'getProjectId');
-
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          const getProjectIdSpy = jest.spyOn(authClient, 'getProjectId');
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
 
           const config = {
             customEndpoint: true,
             projectIdRequired: false,
           };
 
-          const decorateRequestStub = sandbox.stub(util, 'decorateRequest');
-
-          decorateRequestStub.onFirstCall().callsFake(() => {
-            throw new MissingProjectIdError();
-          });
-
-          decorateRequestStub.onSecondCall().callsFake((reqOpts, projectId) => {
-            assert.strictEqual(projectId, AUTH_CLIENT_PROJECT_ID);
-            return reqOpts;
-          });
+          const decorateRequestSpy = jest.spyOn(util, 'decorateRequest')
+            .mockImplementationOnce(() => {
+              throw new MissingProjectIdError();
+            })
+            .mockImplementationOnce((reqOpts, projectId) => {
+              expect(projectId).toBe(AUTH_CLIENT_PROJECT_ID);
+              return reqOpts as any;
+            });
 
           const makeAuthenticatedRequest =
             util.makeAuthenticatedRequestFactory(config);
 
           makeAuthenticatedRequest(reqOpts, {
             onAuthenticated: e => {
-              assert.ifError(e);
-              assert(getProjectIdSpy.calledOnce);
+              expect(e).toBeNull();
+              expect(getProjectIdSpy).toHaveBeenCalledTimes(1);
               done(e);
             },
           });
@@ -1045,7 +1050,7 @@ describe('common/util', () => {
         });
 
         it('should attempt request anyway', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           const makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(
             {},
           );
@@ -1059,9 +1064,9 @@ describe('common/util', () => {
 
           makeAuthenticatedRequest(correctReqOpts, {
             onAuthenticated(err, reqOpts) {
-              assert.ifError(err);
-              assert.strictEqual(reqOpts, correctReqOpts);
-              assert.notStrictEqual(reqOpts, incorrectReqOpts);
+              expect(err).toBeNull();
+              expect(reqOpts).toBe(correctReqOpts);
+              expect(reqOpts).not.toBe(incorrectReqOpts);
               done();
             },
           });
@@ -1074,14 +1079,14 @@ describe('common/util', () => {
           authClient.authorizeRequest = async () => {
             throw authClientError;
           };
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
 
           const makeRequestArg1 = new Error('API 401 Error.') as ApiError;
           makeRequestArg1.code = 401;
           const makeRequestArg2 = {};
           const makeRequestArg3 = {};
           stub('makeRequest', (authenticatedReqOpts, cfg, callback) => {
-            callback(makeRequestArg1, makeRequestArg2, makeRequestArg3);
+            callback!(makeRequestArg1, makeRequestArg2, makeRequestArg3);
           });
 
           const makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(
@@ -1090,9 +1095,9 @@ describe('common/util', () => {
           makeAuthenticatedRequest(
             {} as DecorateRequestOptions,
             (arg1, arg2, arg3) => {
-              assert.strictEqual(arg1, authClientError);
-              assert.strictEqual(arg2, makeRequestArg2);
-              assert.strictEqual(arg3, makeRequestArg3);
+              expect(arg1).toBe(authClientError);
+              expect(arg2).toBe(makeRequestArg2);
+              expect(arg3).toBe(makeRequestArg3);
               done();
             },
           );
@@ -1102,14 +1107,14 @@ describe('common/util', () => {
           authClient.authorizeRequest = async () => {
             return {};
           };
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
 
           const makeRequestArg1 = new Error('API 401 Error.') as ApiError;
           makeRequestArg1.code = 401;
           const makeRequestArg2 = {};
           const makeRequestArg3 = {};
           stub('makeRequest', (authenticatedReqOpts, cfg, callback) => {
-            callback(makeRequestArg1, makeRequestArg2, makeRequestArg3);
+            callback!(makeRequestArg1, makeRequestArg2, makeRequestArg3);
           });
 
           const makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(
@@ -1118,9 +1123,9 @@ describe('common/util', () => {
           makeAuthenticatedRequest(
             {} as DecorateRequestOptions,
             (arg1, arg2, arg3) => {
-              assert.strictEqual(arg1, makeRequestArg1);
-              assert.strictEqual(arg2, makeRequestArg2);
-              assert.strictEqual(arg3, makeRequestArg3);
+              expect(arg1).toBe(makeRequestArg1);
+              expect(arg2).toBe(makeRequestArg2);
+              expect(arg3).toBe(makeRequestArg3);
               done();
             },
           );
@@ -1128,7 +1133,7 @@ describe('common/util', () => {
 
         it('should block decorateRequest error', done => {
           const decorateRequestError = new Error('Error.');
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           stub('decorateRequest', () => {
             throw decorateRequestError;
           });
@@ -1138,42 +1143,42 @@ describe('common/util', () => {
           );
           makeAuthenticatedRequest(fakeReqOpts, {
             onAuthenticated(err) {
-              assert.notStrictEqual(err, decorateRequestError);
-              assert.strictEqual(err, error);
+              expect(err).not.toBe(decorateRequestError);
+              expect(err).toBe(error);
               done();
             },
           });
         });
 
         it('should invoke the callback with error', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           const mar = util.makeAuthenticatedRequestFactory({});
           mar(fakeReqOpts, err => {
-            assert.strictEqual(err, error);
+            expect(err).toBe(error);
             done();
           });
         });
 
         it('should exec onAuthenticated callback with error', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           const mar = util.makeAuthenticatedRequestFactory({});
           mar(fakeReqOpts, {
             onAuthenticated(err) {
-              assert.strictEqual(err, error);
+              expect(err).toBe(error);
               done();
             },
           });
         });
 
         it('should emit an error and end the stream', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           const mar = util.makeAuthenticatedRequestFactory({});
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const stream = mar(fakeReqOpts) as any;
           stream.on('error', (err: Error) => {
-            assert.strictEqual(err, error);
+            expect(err).toBe(error);
             setImmediate(() => {
-              assert.strictEqual(stream.destroyed, true);
+              expect(stream.destroyed).toBe(true);
               done();
             });
           });
@@ -1187,61 +1192,61 @@ describe('common/util', () => {
         });
 
         it('should return authenticated request to callback', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           stub('decorateRequest', reqOpts_ => {
-            assert.deepStrictEqual(reqOpts_, reqOpts);
+            expect(reqOpts_).toEqual(reqOpts);
             return reqOpts;
           });
 
           const mar = util.makeAuthenticatedRequestFactory({});
           mar(reqOpts, {
             onAuthenticated(err, authenticatedReqOpts) {
-              assert.strictEqual(authenticatedReqOpts, reqOpts);
+              expect(authenticatedReqOpts).toBe(reqOpts);
               done();
             },
           });
         });
 
         it('should make request with correct options', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           const config = {keyFile: 'foo'};
           stub('decorateRequest', reqOpts_ => {
-            assert.deepStrictEqual(reqOpts_, reqOpts);
+            expect(reqOpts_).toEqual(reqOpts);
             return reqOpts;
           });
           stub('makeRequest', (authenticatedReqOpts, cfg, cb) => {
-            assert.deepStrictEqual(authenticatedReqOpts, reqOpts);
-            assert.deepStrictEqual(cfg, config);
-            cb();
+            expect(authenticatedReqOpts).toEqual(reqOpts);
+            expect(cfg).toEqual(config);
+            cb!();
           });
           const mar = util.makeAuthenticatedRequestFactory(config);
           mar(reqOpts, done);
         });
 
         it('should return abort() from the active request', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           const retryRequest = {
             abort: done,
           };
-          sandbox.stub(util, 'makeRequest').returns(retryRequest);
+          jest.spyOn(util, 'makeRequest').mockImplementation(() => retryRequest as any);
           const mar = util.makeAuthenticatedRequestFactory({});
-          const req = mar(reqOpts, assert.ifError) as Abortable;
+          const req = mar(reqOpts, () => {}) as Abortable;
           req.abort();
         });
 
         it('should only abort() once', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           const retryRequest = {
             abort: done, // Will throw if called more than once.
           };
           stub('makeRequest', () => {
-            return retryRequest;
+            return retryRequest as any;
           });
 
           const mar = util.makeAuthenticatedRequestFactory({});
           const authenticatedRequest = mar(
             reqOpts,
-            assert.ifError,
+            () => {},
           ) as Abortable;
 
           authenticatedRequest.abort(); // done()
@@ -1249,12 +1254,13 @@ describe('common/util', () => {
         });
 
         it('should provide stream to makeRequest', done => {
-          sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
+          jest.spyOn(authLib, 'GoogleAuth').mockImplementation(() => authClient as any);
           stub('makeRequest', (authenticatedReqOpts, cfg) => {
             setImmediate(() => {
-              assert.strictEqual(cfg.stream, stream);
+              expect(cfg.stream).toBe(stream);
               done();
             });
+            return {} as any;
           });
           const mar = util.makeAuthenticatedRequestFactory({});
           const stream = mar(reqOpts);
@@ -1265,60 +1271,60 @@ describe('common/util', () => {
 
   describe('shouldRetryRequest', () => {
     it('should return false if there is no error', () => {
-      assert.strictEqual(util.shouldRetryRequest(), false);
+      expect(util.shouldRetryRequest()).toBe(false);
     });
 
     it('should return false from generic error', () => {
       const error = new ApiError('Generic error with no code');
-      assert.strictEqual(util.shouldRetryRequest(error), false);
+      expect(util.shouldRetryRequest(error)).toBe(false);
     });
 
     it('should return true with error code 408', () => {
       const error = new ApiError('408');
       error.code = 408;
-      assert.strictEqual(util.shouldRetryRequest(error), true);
+      expect(util.shouldRetryRequest(error)).toBe(true);
     });
 
     it('should return true with error code 429', () => {
       const error = new ApiError('429');
       error.code = 429;
-      assert.strictEqual(util.shouldRetryRequest(error), true);
+      expect(util.shouldRetryRequest(error)).toBe(true);
     });
 
     it('should return true with error code 500', () => {
       const error = new ApiError('500');
       error.code = 500;
-      assert.strictEqual(util.shouldRetryRequest(error), true);
+      expect(util.shouldRetryRequest(error)).toBe(true);
     });
 
     it('should return true with error code 502', () => {
       const error = new ApiError('502');
       error.code = 502;
-      assert.strictEqual(util.shouldRetryRequest(error), true);
+      expect(util.shouldRetryRequest(error)).toBe(true);
     });
 
     it('should return true with error code 503', () => {
       const error = new ApiError('503');
       error.code = 503;
-      assert.strictEqual(util.shouldRetryRequest(error), true);
+      expect(util.shouldRetryRequest(error)).toBe(true);
     });
 
     it('should return true with error code 504', () => {
       const error = new ApiError('504');
       error.code = 504;
-      assert.strictEqual(util.shouldRetryRequest(error), true);
+      expect(util.shouldRetryRequest(error)).toBe(true);
     });
 
     it('should detect rateLimitExceeded reason', () => {
       const rateLimitError = new ApiError('Rate limit error without code.');
       rateLimitError.errors = [{reason: 'rateLimitExceeded'}];
-      assert.strictEqual(util.shouldRetryRequest(rateLimitError), true);
+      expect(util.shouldRetryRequest(rateLimitError)).toBe(true);
     });
 
     it('should detect userRateLimitExceeded reason', () => {
       const rateLimitError = new ApiError('Rate limit error without code.');
       rateLimitError.errors = [{reason: 'userRateLimitExceeded'}];
-      assert.strictEqual(util.shouldRetryRequest(rateLimitError), true);
+      expect(util.shouldRetryRequest(rateLimitError)).toBe(true);
     });
 
     it('should retry on EAI_AGAIN error code', () => {
@@ -1326,7 +1332,7 @@ describe('common/util', () => {
       eaiAgainError.errors = [
         {reason: 'getaddrinfo EAI_AGAIN pubsub.googleapis.com'},
       ];
-      assert.strictEqual(util.shouldRetryRequest(eaiAgainError), true);
+      expect(util.shouldRetryRequest(eaiAgainError)).toBe(true);
     });
   });
 
@@ -1337,16 +1343,17 @@ describe('common/util', () => {
 
     function testDefaultRetryRequestConfig(done: () => void) {
       return (reqOpts_: DecorateRequestOptions, config: MakeRequestConfig) => {
-        assert.strictEqual(reqOpts_, reqOpts);
-        assert.strictEqual(config.retries, 3);
+        expect(reqOpts_).toBe(reqOpts);
+        expect(config.retries).toBe(3);
 
         const error = new Error('Error.');
         stub('parseHttpRespMessage', () => {
           return {err: error};
         });
         stub('shouldRetryRequest', err => {
-          assert.strictEqual(err, error);
+          expect(err).toBe(error);
           done();
+          return true;
         });
 
         config.shouldRetryFn!();
@@ -1362,8 +1369,8 @@ describe('common/util', () => {
     };
     function testCustomFunctionRetryRequestConfig(done: () => void) {
       return (reqOpts_: DecorateRequestOptions, config: MakeRequestConfig) => {
-        assert.strictEqual(reqOpts_, reqOpts);
-        assert.strictEqual(config.retries, 3);
+        expect(reqOpts_).toBe(reqOpts);
+        expect(config.retries).toBe(3);
         extend({}, config, customRetryRequestFunctionConfig);
 
         const error = new Error(errorMessage);
@@ -1371,11 +1378,12 @@ describe('common/util', () => {
           return {err: error};
         });
         stub('shouldRetryRequest', err => {
-          assert.strictEqual(err, error);
+          expect(err).toBe(error);
           done();
+          return true;
         });
 
-        assert.strictEqual(config.shouldRetryFn!(), true);
+        expect(config.shouldRetryFn!()).toBe(true);
         done();
       };
     }
@@ -1384,9 +1392,9 @@ describe('common/util', () => {
     function testNoRetryRequestConfig(done: () => void) {
       return (
         reqOpts: DecorateRequestOptions,
-        config: retryRequest.Options,
+        config: any,
       ) => {
-        assert.strictEqual(config.retries, 0);
+        expect(config.retries).toBe(0);
         done();
       };
     }
@@ -1417,28 +1425,13 @@ describe('common/util', () => {
     function testRetryOptions(done: () => void) {
       return (
         reqOpts: DecorateRequestOptions,
-        config: retryRequest.Options,
+        config: any,
       ) => {
-        assert.strictEqual(
-          config.retries,
-          0, //autoRetry was set to false, so shouldn't retry
-        );
-        assert.strictEqual(
-          config.noResponseRetries,
-          0, //autoRetry was set to false, so shouldn't retry
-        );
-        assert.strictEqual(
-          config.retryDelayMultiplier,
-          retryOptionsConfig.retryOptions.retryDelayMultiplier,
-        );
-        assert.strictEqual(
-          config.totalTimeout,
-          retryOptionsConfig.retryOptions.totalTimeout,
-        );
-        assert.strictEqual(
-          config.maxRetryDelay,
-          retryOptionsConfig.retryOptions.maxRetryDelay,
-        );
+        expect(config.retries).toBe(0); //autoRetry was set to false, so shouldn't retry
+        expect(config.noResponseRetries).toBe(0); //autoRetry was set to false, so shouldn't retry
+        expect(config.retryDelayMultiplier).toBe(retryOptionsConfig.retryOptions.retryDelayMultiplier);
+        expect(config.totalTimeout).toBe(retryOptionsConfig.retryOptions.totalTimeout);
+        expect(config.maxRetryDelay).toBe(retryOptionsConfig.retryOptions.maxRetryDelay);
         done();
       };
     }
@@ -1446,7 +1439,7 @@ describe('common/util', () => {
     const customRetryRequestConfig = {maxRetries: 10};
     function testCustomRetryRequestConfig(done: () => void) {
       return (reqOpts: DecorateRequestOptions, config: MakeRequestConfig) => {
-        assert.strictEqual(config.retries, customRetryRequestConfig.maxRetries);
+        expect(config.retries).toBe(customRetryRequestConfig.maxRetries);
         done();
       };
     }
@@ -1462,19 +1455,19 @@ describe('common/util', () => {
 
         userStream
           .on('error', error_ => {
-            assert.strictEqual(error_, error);
+            expect(error_).toBe(error);
             requestStream.emit('response', response);
           })
           .on('response', response_ => {
-            assert.strictEqual(response_, response);
+            expect(response_).toBe(response);
             requestStream.emit('complete', complete);
           })
           .on('complete', complete_ => {
-            assert.strictEqual(complete_, complete);
+            expect(complete_).toBe(complete);
             done();
           });
 
-        retryRequestOverride = () => {
+        (global as any).retryRequestOverride = () => {
           setImmediate(() => {
             requestStream.emit('error', error);
           });
@@ -1488,8 +1481,8 @@ describe('common/util', () => {
       describe('GET requests', () => {
         it('should use retryRequest', done => {
           const userStream = duplexify();
-          retryRequestOverride = (reqOpts_: DecorateRequestOptions) => {
-            assert.strictEqual(reqOpts_, reqOpts);
+          (global as any).retryRequestOverride = (reqOpts_: DecorateRequestOptions) => {
+            expect(reqOpts_).toBe(reqOpts);
             setImmediate(done);
             return new stream.Stream();
           };
@@ -1499,11 +1492,11 @@ describe('common/util', () => {
         it('should set the readable stream', done => {
           const userStream = duplexify();
           const retryRequestStream = new stream.Stream();
-          retryRequestOverride = () => {
+          (global as any).retryRequestOverride = () => {
             return retryRequestStream;
           };
           userStream.setReadable = stream => {
-            assert.strictEqual(stream, retryRequestStream);
+            expect(stream).toBe(retryRequestStream);
             done();
           };
           util.makeRequest(reqOpts, {stream: userStream}, util.noop);
@@ -1512,7 +1505,7 @@ describe('common/util', () => {
         it('should expose the abort method from retryRequest', done => {
           const userStream = duplexify() as Duplexify & Abortable;
 
-          retryRequestOverride = () => {
+          (global as any).retryRequestOverride = () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const requestStream: any = new stream.Stream();
             requestStream.abort = done;
@@ -1531,23 +1524,23 @@ describe('common/util', () => {
             method: 'POST',
           } as DecorateRequestOptions;
 
-          retryRequestOverride = done; // will throw.
-          requestOverride = (reqOpts_: DecorateRequestOptions) => {
-            assert.strictEqual(reqOpts_, reqOpts);
+          (global as any).retryRequestOverride = () => {
+            throw new Error('should not use retryRequest');
+          };
+          (global as any).requestOverride = (reqOpts_: DecorateRequestOptions) => {
+            expect(reqOpts_).toBe(reqOpts);
             setImmediate(done);
             return userStream;
           };
-          requestOverride.defaults = () => requestOverride;
           util.makeRequest(reqOpts, {stream: userStream}, util.noop);
         });
 
         it('should set the writable stream', done => {
           const userStream = duplexify();
           const requestStream = new stream.Stream();
-          requestOverride = () => requestStream;
-          requestOverride.defaults = () => requestOverride;
+          (global as any).requestOverride = () => requestStream;
           userStream.setWritable = stream => {
-            assert.strictEqual(stream, requestStream);
+            expect(stream).toBe(requestStream);
             done();
           };
           util.makeRequest(
@@ -1560,14 +1553,11 @@ describe('common/util', () => {
         it('should expose the abort method from request', done => {
           const userStream = duplexify() as Duplexify & Abortable;
 
-          requestOverride = Object.assign(
-            () => {
-              const requestStream = duplexify() as Duplexify & Abortable;
-              requestStream.abort = done;
-              return requestStream;
-            },
-            {defaults: () => requestOverride},
-          );
+          (global as any).requestOverride = () => {
+            const requestStream = duplexify() as Duplexify & Abortable;
+            requestStream.abort = done;
+            return requestStream;
+          };
 
           util.makeRequest(reqOpts, {stream: userStream}, util.noop);
           userStream.abort();
@@ -1577,55 +1567,54 @@ describe('common/util', () => {
 
     describe('callback mode', () => {
       it('should pass the default options to retryRequest', done => {
-        retryRequestOverride = testDefaultRetryRequestConfig(done);
+        (global as any).retryRequestOverride = testDefaultRetryRequestConfig(done);
         util.makeRequest(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           reqOpts,
           {},
-          assert.ifError,
+          () => {},
         );
       });
 
       it('should allow setting a custom retry function', done => {
-        retryRequestOverride = testCustomFunctionRetryRequestConfig(done);
+        (global as any).retryRequestOverride = testCustomFunctionRetryRequestConfig(done);
         util.makeRequest(
           reqOpts,
           customRetryRequestFunctionConfig,
-          assert.ifError,
+          () => {},
         );
       });
 
       it('should allow turning off retries to retryRequest', done => {
-        retryRequestOverride = testNoRetryRequestConfig(done);
-        util.makeRequest(reqOpts, noRetryRequestConfig, assert.ifError);
+        (global as any).retryRequestOverride = testNoRetryRequestConfig(done);
+        util.makeRequest(reqOpts, noRetryRequestConfig, () => {});
       });
 
       it('should override number of retries to retryRequest', done => {
-        retryRequestOverride = testCustomRetryRequestConfig(done);
-        util.makeRequest(reqOpts, customRetryRequestConfig, assert.ifError);
+        (global as any).retryRequestOverride = testCustomRetryRequestConfig(done);
+        util.makeRequest(reqOpts, customRetryRequestConfig, () => {});
       });
 
       it('should use retryOptions if provided', done => {
-        retryRequestOverride = testRetryOptions(done);
-        util.makeRequest(reqOpts, retryOptionsConfig, assert.ifError);
+        (global as any).retryRequestOverride = testRetryOptions(done);
+        util.makeRequest(reqOpts, retryOptionsConfig, () => {});
       });
 
       it('should throw if autoRetry is specified twice', done => {
-        assert.throws(() => {
+        expect(() => {
           util.makeRequest(reqOpts, retryOptionsTwoAutoRetry, util.noop);
-        }, /autoRetry is deprecated. Use retryOptions.autoRetry instead\./);
+        }).toThrow(/autoRetry is deprecated. Use retryOptions.autoRetry instead\./);
         done();
       });
 
       it('should throw if maxRetries is specified twice', done => {
-        assert.throws(() => {
+        expect(() => {
           util.makeRequest(reqOpts, retryOptionsTwoMaxRetries, util.noop);
-        }, /maxRetries is deprecated. Use retryOptions.maxRetries instead\./);
+        }).toThrow(/maxRetries is deprecated. Use retryOptions.maxRetries instead\./);
         done();
       });
 
       it('should allow request options to control retry setting', done => {
-        retryRequestOverride = testCustomRetryRequestConfig(done);
+        (global as any).retryRequestOverride = testCustomRetryRequestConfig(done);
         const reqOptsWithRetrySettings = extend(
           {},
           reqOpts,
@@ -1634,24 +1623,24 @@ describe('common/util', () => {
         util.makeRequest(
           reqOptsWithRetrySettings,
           noRetryRequestConfig,
-          assert.ifError,
+          () => {},
         );
       });
 
       it('should return the instance of retryRequest', () => {
         const requestInstance = {};
-        retryRequestOverride = () => {
+        (global as any).retryRequestOverride = () => {
           return requestInstance;
         };
-        const res = util.makeRequest(reqOpts, {}, assert.ifError);
-        assert.strictEqual(res, requestInstance);
+        const res = util.makeRequest(reqOpts, {}, () => {});
+        expect(res).toBe(requestInstance);
       });
 
       it('should let handleResp handle the response', done => {
         const error = new Error('Error.');
         const body = fakeResponse.body;
 
-        retryRequestOverride = (
+        (global as any).retryRequestOverride = (
           rOpts: DecorateRequestOptions,
           opts: MakeRequestConfig,
           callback: r.RequestCallback,
@@ -1660,13 +1649,13 @@ describe('common/util', () => {
         };
 
         stub('handleResp', (err, resp, body_) => {
-          assert.strictEqual(err, error);
-          assert.strictEqual(resp, fakeResponse);
-          assert.strictEqual(body_, body);
+          expect(err).toBe(error);
+          expect(resp).toBe(fakeResponse);
+          expect(body_).toBe(body);
           done();
         });
 
-        util.makeRequest(fakeReqOpts, {}, assert.ifError);
+        util.makeRequest(fakeReqOpts, {}, () => {});
       });
     });
   });
@@ -1681,7 +1670,7 @@ describe('common/util', () => {
         projectId,
       );
 
-      assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
+      expect(decoratedReqOpts.autoPaginate).toBeUndefined();
     });
 
     it('should delete qs.autoPaginateVal', () => {
@@ -1692,7 +1681,7 @@ describe('common/util', () => {
         projectId,
       );
 
-      assert.strictEqual(decoratedReqOpts.autoPaginateVal, undefined);
+      expect(decoratedReqOpts.autoPaginateVal).toBeUndefined();
     });
 
     it('should delete objectMode', () => {
@@ -1703,7 +1692,7 @@ describe('common/util', () => {
         projectId,
       );
 
-      assert.strictEqual(decoratedReqOpts.objectMode, undefined);
+      expect(decoratedReqOpts.objectMode).toBeUndefined();
     });
 
     it('should delete qs.autoPaginate', () => {
@@ -1716,7 +1705,7 @@ describe('common/util', () => {
         projectId,
       );
 
-      assert.strictEqual(decoratedReqOpts.qs.autoPaginate, undefined);
+      expect(decoratedReqOpts.qs.autoPaginate).toBeUndefined();
     });
 
     it('should delete qs.autoPaginateVal', () => {
@@ -1729,7 +1718,7 @@ describe('common/util', () => {
         projectId,
       );
 
-      assert.strictEqual(decoratedReqOpts.qs.autoPaginateVal, undefined);
+      expect(decoratedReqOpts.qs.autoPaginateVal).toBeUndefined();
     });
 
     it('should delete json.autoPaginate', () => {
@@ -1742,7 +1731,7 @@ describe('common/util', () => {
         projectId,
       );
 
-      assert.strictEqual(decoratedReqOpts.json.autoPaginate, undefined);
+      expect(decoratedReqOpts.json.autoPaginate).toBeUndefined();
     });
 
     it('should delete json.autoPaginateVal', () => {
@@ -1755,7 +1744,7 @@ describe('common/util', () => {
         projectId,
       );
 
-      assert.strictEqual(decoratedReqOpts.json.autoPaginateVal, undefined);
+      expect(decoratedReqOpts.json.autoPaginateVal).toBeUndefined();
     });
 
     it('should replace project ID tokens for qs object', () => {
@@ -1766,17 +1755,17 @@ describe('common/util', () => {
       };
       const decoratedQs = {};
 
-      replaceProjectIdTokenOverride = (qs: {}, projectId_: string) => {
+      (global as any).replaceProjectIdTokenOverride = (qs: {}, projectId_: string) => {
         if (qs === reqOpts.uri) {
           return;
         }
-        assert.deepStrictEqual(qs, reqOpts.qs);
-        assert.strictEqual(projectId_, projectId);
+        expect(qs).toEqual(reqOpts.qs);
+        expect(projectId_).toBe(projectId);
         return decoratedQs;
       };
 
       const decoratedRequest = util.decorateRequest(reqOpts, projectId);
-      assert.deepStrictEqual(decoratedRequest.qs, decoratedQs);
+      expect(decoratedRequest.qs).toEqual(decoratedQs);
     });
 
     it('should replace project ID tokens for multipart array', () => {
@@ -1792,17 +1781,17 @@ describe('common/util', () => {
       };
       const decoratedPart = {};
 
-      replaceProjectIdTokenOverride = (part: {}, projectId_: string) => {
+      (global as any).replaceProjectIdTokenOverride = (part: {}, projectId_: string) => {
         if (part === reqOpts.uri) {
           return;
         }
-        assert.deepStrictEqual(part, reqOpts.multipart[0]);
-        assert.strictEqual(projectId_, projectId);
+        expect(part).toEqual(reqOpts.multipart[0]);
+        expect(projectId_).toBe(projectId);
         return decoratedPart;
       };
 
       const decoratedRequest = util.decorateRequest(reqOpts, projectId);
-      assert.deepStrictEqual(decoratedRequest.multipart, [decoratedPart]);
+      expect(decoratedRequest.multipart).toEqual([decoratedPart]);
     });
 
     it('should replace project ID tokens for json object', () => {
@@ -1813,17 +1802,17 @@ describe('common/util', () => {
       };
       const decoratedJson = {};
 
-      replaceProjectIdTokenOverride = (json: {}, projectId_: string) => {
+      (global as any).replaceProjectIdTokenOverride = (json: {}, projectId_: string) => {
         if (json === reqOpts.uri) {
           return;
         }
-        assert.strictEqual(reqOpts.json, json);
-        assert.strictEqual(projectId_, projectId);
+        expect(reqOpts.json).toBe(json);
+        expect(projectId_).toBe(projectId);
         return decoratedJson;
       };
 
       const decoratedRequest = util.decorateRequest(reqOpts, projectId);
-      assert.deepStrictEqual(decoratedRequest.json, decoratedJson);
+      expect(decoratedRequest.json).toEqual(decoratedJson);
     });
 
     it('should decorate the request', () => {
@@ -1833,13 +1822,13 @@ describe('common/util', () => {
       };
       const decoratedUri = 'http://decorated';
 
-      replaceProjectIdTokenOverride = (uri: string, projectId_: string) => {
-        assert.strictEqual(uri, reqOpts.uri);
-        assert.strictEqual(projectId_, projectId);
+      (global as any).replaceProjectIdTokenOverride = (uri: string, projectId_: string) => {
+        expect(uri).toBe(reqOpts.uri);
+        expect(projectId_).toBe(projectId);
         return decoratedUri;
       };
 
-      assert.deepStrictEqual(util.decorateRequest(reqOpts, projectId), {
+      expect(util.decorateRequest(reqOpts, projectId)).toEqual({
         uri: decoratedUri,
       });
     });
@@ -1861,33 +1850,33 @@ describe('common/util', () => {
 
     describe('Service objects', () => {
       it('should match by constructor name', () => {
-        assert(util.isCustomType(pubsub, 'pubsub'));
+        expect(util.isCustomType(pubsub, 'pubsub')).toBe(true);
       });
 
       it('should support any casing', () => {
-        assert(util.isCustomType(pubsub, 'PubSub'));
+        expect(util.isCustomType(pubsub, 'PubSub')).toBe(true);
       });
 
       it('should not match if the wrong Service', () => {
-        assert(!util.isCustomType(subscription, 'BigQuery'));
+        expect(util.isCustomType(subscription, 'BigQuery')).toBe(false);
       });
     });
 
     describe('ServiceObject objects', () => {
       it('should match by constructor names', () => {
-        assert(util.isCustomType(subscription, 'pubsub'));
-        assert(util.isCustomType(subscription, 'pubsub/subscription'));
+        expect(util.isCustomType(subscription, 'pubsub')).toBe(true);
+        expect(util.isCustomType(subscription, 'pubsub/subscription')).toBe(true);
 
-        assert(util.isCustomType(subscription, 'middlelayer'));
-        assert(util.isCustomType(subscription, 'middlelayer/subscription'));
+        expect(util.isCustomType(subscription, 'middlelayer')).toBe(true);
+        expect(util.isCustomType(subscription, 'middlelayer/subscription')).toBe(true);
       });
 
       it('should support any casing', () => {
-        assert(util.isCustomType(subscription, 'PubSub/Subscription'));
+        expect(util.isCustomType(subscription, 'PubSub/Subscription')).toBe(true);
       });
 
       it('should not match if the wrong ServiceObject', () => {
-        assert(!util.isCustomType(subscription, 'pubsub/topic'));
+        expect(util.isCustomType(subscription, 'pubsub/topic')).toBe(false);
       });
     });
   });
@@ -1899,7 +1888,7 @@ describe('common/util', () => {
         version: '0.1.0',
       });
 
-      assert.strictEqual(userAgent, 'gcloud-node-storage/0.1.0');
+      expect(userAgent).toBe('gcloud-node-storage/0.1.0');
     });
   });
 
@@ -1907,8 +1896,8 @@ describe('common/util', () => {
     it('should allow passing just a callback', () => {
       const optionsOrCallback = () => {};
       const [opts, cb] = util.maybeOptionsOrCallback(optionsOrCallback);
-      assert.strictEqual(optionsOrCallback, cb);
-      assert.deepStrictEqual(opts, {});
+      expect(cb).toBe(optionsOrCallback);
+      expect(opts).toEqual({});
     });
 
     it('should allow passing both opts and callback', () => {
@@ -1918,8 +1907,8 @@ describe('common/util', () => {
         optionsOrCallback,
         callback,
       );
-      assert.strictEqual(opts, optionsOrCallback);
-      assert.strictEqual(cb, callback);
+      expect(opts).toBe(optionsOrCallback);
+      expect(cb).toBe(callback);
     });
   });
 });
