@@ -11353,10 +11353,6 @@
                       "type": "string",
                       "id": 1
                     },
-                    "imageFamily": {
-                      "type": "string",
-                      "id": 2
-                    },
                     "imageProject": {
                       "type": "string",
                       "id": 3

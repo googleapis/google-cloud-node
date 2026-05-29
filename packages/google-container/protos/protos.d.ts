@@ -36068,9 +36068,6 @@ export namespace google {
                 /** CustomImageConfig image */
                 image?: (string|null);
 
-                /** CustomImageConfig imageFamily */
-                imageFamily?: (string|null);
-
                 /** CustomImageConfig imageProject */
                 imageProject?: (string|null);
             }
@@ -36086,9 +36083,6 @@ export namespace google {
 
                 /** CustomImageConfig image. */
                 public image: string;
-
-                /** CustomImageConfig imageFamily. */
-                public imageFamily: string;
 
                 /** CustomImageConfig imageProject. */
                 public imageProject: string;

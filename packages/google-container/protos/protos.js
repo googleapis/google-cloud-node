@@ -94139,7 +94139,6 @@
                      * @memberof google.container.v1beta1
                      * @interface ICustomImageConfig
                      * @property {string|null} [image] CustomImageConfig image
-                     * @property {string|null} [imageFamily] CustomImageConfig imageFamily
                      * @property {string|null} [imageProject] CustomImageConfig imageProject
                      */
     
@@ -94165,14 +94164,6 @@
                      * @instance
                      */
                     CustomImageConfig.prototype.image = "";
-    
-                    /**
-                     * CustomImageConfig imageFamily.
-                     * @member {string} imageFamily
-                     * @memberof google.container.v1beta1.CustomImageConfig
-                     * @instance
-                     */
-                    CustomImageConfig.prototype.imageFamily = "";
     
                     /**
                      * CustomImageConfig imageProject.
@@ -94208,8 +94199,6 @@
                             writer = $Writer.create();
                         if (message.image != null && Object.hasOwnProperty.call(message, "image"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.image);
-                        if (message.imageFamily != null && Object.hasOwnProperty.call(message, "imageFamily"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.imageFamily);
                         if (message.imageProject != null && Object.hasOwnProperty.call(message, "imageProject"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.imageProject);
                         return writer;
@@ -94250,10 +94239,6 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.image = reader.string();
-                                    break;
-                                }
-                            case 2: {
-                                    message.imageFamily = reader.string();
                                     break;
                                 }
                             case 3: {
@@ -94298,9 +94283,6 @@
                         if (message.image != null && message.hasOwnProperty("image"))
                             if (!$util.isString(message.image))
                                 return "image: string expected";
-                        if (message.imageFamily != null && message.hasOwnProperty("imageFamily"))
-                            if (!$util.isString(message.imageFamily))
-                                return "imageFamily: string expected";
                         if (message.imageProject != null && message.hasOwnProperty("imageProject"))
                             if (!$util.isString(message.imageProject))
                                 return "imageProject: string expected";
@@ -94321,8 +94303,6 @@
                         var message = new $root.google.container.v1beta1.CustomImageConfig();
                         if (object.image != null)
                             message.image = String(object.image);
-                        if (object.imageFamily != null)
-                            message.imageFamily = String(object.imageFamily);
                         if (object.imageProject != null)
                             message.imageProject = String(object.imageProject);
                         return message;
@@ -94343,13 +94323,10 @@
                         var object = {};
                         if (options.defaults) {
                             object.image = "";
-                            object.imageFamily = "";
                             object.imageProject = "";
                         }
                         if (message.image != null && message.hasOwnProperty("image"))
                             object.image = message.image;
-                        if (message.imageFamily != null && message.hasOwnProperty("imageFamily"))
-                            object.imageFamily = message.imageFamily;
                         if (message.imageProject != null && message.hasOwnProperty("imageProject"))
                             object.imageProject = message.imageProject;
                         return object;
