@@ -1,0 +1,169 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.licensemanager.v1",
+  "libraryPackage": "@google-cloud/licensemanager",
+  "services": {
+    "LicenseManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LicenseManagerClient",
+          "rpcs": {
+            "GetConfiguration": {
+              "methods": [
+                "getConfiguration"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "QueryConfigurationLicenseUsage": {
+              "methods": [
+                "queryConfigurationLicenseUsage"
+              ]
+            },
+            "GetProduct": {
+              "methods": [
+                "getProduct"
+              ]
+            },
+            "CreateConfiguration": {
+              "methods": [
+                "createConfiguration"
+              ]
+            },
+            "UpdateConfiguration": {
+              "methods": [
+                "updateConfiguration"
+              ]
+            },
+            "DeleteConfiguration": {
+              "methods": [
+                "deleteConfiguration"
+              ]
+            },
+            "DeactivateConfiguration": {
+              "methods": [
+                "deactivateConfiguration"
+              ]
+            },
+            "ReactivateConfiguration": {
+              "methods": [
+                "reactivateConfiguration"
+              ]
+            },
+            "ListConfigurations": {
+              "methods": [
+                "listConfigurations",
+                "listConfigurationsStream",
+                "listConfigurationsAsync"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "AggregateUsage": {
+              "methods": [
+                "aggregateUsage",
+                "aggregateUsageStream",
+                "aggregateUsageAsync"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "listProducts",
+                "listProductsStream",
+                "listProductsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LicenseManagerClient",
+          "rpcs": {
+            "GetConfiguration": {
+              "methods": [
+                "getConfiguration"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "QueryConfigurationLicenseUsage": {
+              "methods": [
+                "queryConfigurationLicenseUsage"
+              ]
+            },
+            "GetProduct": {
+              "methods": [
+                "getProduct"
+              ]
+            },
+            "CreateConfiguration": {
+              "methods": [
+                "createConfiguration"
+              ]
+            },
+            "UpdateConfiguration": {
+              "methods": [
+                "updateConfiguration"
+              ]
+            },
+            "DeleteConfiguration": {
+              "methods": [
+                "deleteConfiguration"
+              ]
+            },
+            "DeactivateConfiguration": {
+              "methods": [
+                "deactivateConfiguration"
+              ]
+            },
+            "ReactivateConfiguration": {
+              "methods": [
+                "reactivateConfiguration"
+              ]
+            },
+            "ListConfigurations": {
+              "methods": [
+                "listConfigurations",
+                "listConfigurationsStream",
+                "listConfigurationsAsync"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "AggregateUsage": {
+              "methods": [
+                "aggregateUsage",
+                "aggregateUsageStream",
+                "aggregateUsageAsync"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "listProducts",
+                "listProductsStream",
+                "listProductsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

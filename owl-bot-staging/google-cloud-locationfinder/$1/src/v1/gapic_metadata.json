@@ -1,0 +1,61 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.locationfinder.v1",
+  "libraryPackage": "@google-cloud/locationfinder",
+  "services": {
+    "CloudLocationFinder": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudLocationFinderClient",
+          "rpcs": {
+            "GetCloudLocation": {
+              "methods": [
+                "getCloudLocation"
+              ]
+            },
+            "ListCloudLocations": {
+              "methods": [
+                "listCloudLocations",
+                "listCloudLocationsStream",
+                "listCloudLocationsAsync"
+              ]
+            },
+            "SearchCloudLocations": {
+              "methods": [
+                "searchCloudLocations",
+                "searchCloudLocationsStream",
+                "searchCloudLocationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudLocationFinderClient",
+          "rpcs": {
+            "GetCloudLocation": {
+              "methods": [
+                "getCloudLocation"
+              ]
+            },
+            "ListCloudLocations": {
+              "methods": [
+                "listCloudLocations",
+                "listCloudLocationsStream",
+                "listCloudLocationsAsync"
+              ]
+            },
+            "SearchCloudLocations": {
+              "methods": [
+                "searchCloudLocations",
+                "searchCloudLocationsStream",
+                "searchCloudLocationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
