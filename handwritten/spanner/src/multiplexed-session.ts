@@ -179,8 +179,8 @@ export class MultiplexedSession
     }
     const refreshRate = this.refreshRate! * 24 * 60 * 60000;
     this._refreshHandle = setInterval(() => {
-      context.with(ROOT_CONTEXT, async () => {
-        await this._createSession().catch(() => {});
+      context.with(ROOT_CONTEXT, () => {
+        this._createSession().catch(() => { });
       });
     }, refreshRate);
 
