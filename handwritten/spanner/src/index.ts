@@ -1694,36 +1694,44 @@ class Spanner extends GrpcService {
         callback(err, null);
       }
       const gaxClient = this.clients_.get(clientName)!;
-      let reqOpts = extend(true, {}, config.reqOpts);
-      reqOpts = replaceProjectIdToken(reqOpts, projectId!);
-      // It would have been preferable to replace the projectId already in the
-      // constructor of Spanner, but that is not possible as auth.getProjectId
-      // is an async method. This is therefore the first place where we have
-      // access to the value that should be used instead of the placeholder.
-      if (!this.projectIdReplaced_) {
-        this.projectId = replaceProjectIdToken(this.projectId, projectId!);
-        this.projectFormattedName_ = replaceProjectIdToken(
-          this.projectFormattedName_,
+
+      let reqOpts;
+      if (clientName !== 'SpannerClient') {
+        reqOpts = extend(true, {}, config.reqOpts);
+        reqOpts = replaceProjectIdToken(reqOpts, projectId!);
+        config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
+          config.headers[CLOUD_RESOURCE_HEADER],
           projectId!,
         );
-        this.instances_.forEach(instance => {
-          instance.formattedName_ = replaceProjectIdToken(
-            instance.formattedName_,
+      } else {
+        if (!this.projectIdReplaced_) {
+          reqOpts = extend(true, {}, config.reqOpts);
+          reqOpts = replaceProjectIdToken(reqOpts, projectId!);
+          this.projectId = replaceProjectIdToken(this.projectId, projectId!);
+          this.projectFormattedName_ = replaceProjectIdToken(
+            this.projectFormattedName_,
             projectId!,
           );
-          instance.databases_.forEach(database => {
-            database.formattedName_ = replaceProjectIdToken(
-              database.formattedName_,
+          this.instances_.forEach(instance => {
+            instance.formattedName_ = replaceProjectIdToken(
+              instance.formattedName_,
               projectId!,
             );
+            instance.databases_.forEach(database => {
+              database.formattedName_ = replaceProjectIdToken(
+                database.formattedName_,
+                projectId!,
+              );
+            });
           });
-        });
-        this.projectIdReplaced_ = true;
-      }
-      config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
-        config.headers[CLOUD_RESOURCE_HEADER],
-        projectId!,
-      );
+          config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
+            config.headers[CLOUD_RESOURCE_HEADER],
+            projectId!,
+          );
+          this.projectIdReplaced_ = true;
+        }
+      } 
+
       if (isTracingEnabled(this._observabilityOptions)) {
         // Do context propagation
         propagation.inject(context.active(), config.headers, {
@@ -1740,7 +1748,7 @@ class Spanner extends GrpcService {
       }
       const requestFn = gaxClient[config.method].bind(
         gaxClient,
-        reqOpts,
+        reqOpts || config.reqOpts,
         // Add headers to `gaxOpts`
         extend(true, {}, config.gaxOpts, {
           otherArgs: {
