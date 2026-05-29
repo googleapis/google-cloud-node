@@ -1063,14 +1063,14 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
     const evictRate = this.options.idlesAfter! * 60000;
 
     this._evictHandle = context.with(ROOT_CONTEXT, () =>
-      setInterval(() => this._evictIdleSessions(), evictRate)
+      setInterval(() => this._evictIdleSessions(), evictRate),
     );
     this._evictHandle.unref();
 
     const pingRate = this.options.keepAlive! * 60000;
 
     this._pingHandle = context.with(ROOT_CONTEXT, () =>
-      setInterval(() => this._pingIdleSessions(), pingRate)
+      setInterval(() => this._pingIdleSessions(), pingRate),
     );
     this._pingHandle.unref();
   }
