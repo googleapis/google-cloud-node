@@ -15,6 +15,7 @@
  */
 
 import {EventEmitter} from 'events';
+import {context, ROOT_CONTEXT} from '@opentelemetry/api';
 import {Database} from './database';
 import {Session} from './session';
 import {GetSessionCallback} from './session-factory';
@@ -177,8 +178,10 @@ export class MultiplexedSession
       clearInterval(this._refreshHandle);
     }
     const refreshRate = this.refreshRate! * 24 * 60 * 60000;
-    this._refreshHandle = setInterval(async () => {
-      await this._createSession().catch(() => {});
+    this._refreshHandle = setInterval(() => {
+      context.with(ROOT_CONTEXT, async () => {
+        await this._createSession().catch(() => {});
+      });
     }, refreshRate);
 
     // Unreference the timer so it does not prevent the Node.js process from exiting.
