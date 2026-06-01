@@ -25,7 +25,7 @@ import {
   Notification,
   Storage,
 } from '../src';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import * as assert from 'assert';
 import {
   StorageRequestOptions,
@@ -287,5 +287,5 @@ async function getTestBenchRetryTest(
 }
 
 function shortUUID() {
-  return uuid.v1().split('-').shift();
+  return crypto.randomUUID().split('-').shift();
 }
