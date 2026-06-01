@@ -36579,6 +36579,8 @@
                          * @property {google.cloud.dataproc.v1.YarnApplication.State|null} [state] YarnApplication state
                          * @property {number|null} [progress] YarnApplication progress
                          * @property {string|null} [trackingUrl] YarnApplication trackingUrl
+                         * @property {number|Long|null} [vcoreSeconds] YarnApplication vcoreSeconds
+                         * @property {number|Long|null} [memoryMbSeconds] YarnApplication memoryMbSeconds
                          */
     
                         /**
@@ -36629,6 +36631,22 @@
                         YarnApplication.prototype.trackingUrl = "";
     
                         /**
+                         * YarnApplication vcoreSeconds.
+                         * @member {number|Long} vcoreSeconds
+                         * @memberof google.cloud.dataproc.v1.YarnApplication
+                         * @instance
+                         */
+                        YarnApplication.prototype.vcoreSeconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * YarnApplication memoryMbSeconds.
+                         * @member {number|Long} memoryMbSeconds
+                         * @memberof google.cloud.dataproc.v1.YarnApplication
+                         * @instance
+                         */
+                        YarnApplication.prototype.memoryMbSeconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new YarnApplication instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.YarnApplication
@@ -36660,6 +36678,10 @@
                                 writer.uint32(/* id 3, wireType 5 =*/29).float(message.progress);
                             if (message.trackingUrl != null && Object.hasOwnProperty.call(message, "trackingUrl"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.trackingUrl);
+                            if (message.vcoreSeconds != null && Object.hasOwnProperty.call(message, "vcoreSeconds"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.vcoreSeconds);
+                            if (message.memoryMbSeconds != null && Object.hasOwnProperty.call(message, "memoryMbSeconds"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.memoryMbSeconds);
                             return writer;
                         };
     
@@ -36710,6 +36732,14 @@
                                     }
                                 case 4: {
                                         message.trackingUrl = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.vcoreSeconds = reader.int64();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.memoryMbSeconds = reader.int64();
                                         break;
                                     }
                                 default:
@@ -36771,6 +36801,12 @@
                             if (message.trackingUrl != null && message.hasOwnProperty("trackingUrl"))
                                 if (!$util.isString(message.trackingUrl))
                                     return "trackingUrl: string expected";
+                            if (message.vcoreSeconds != null && message.hasOwnProperty("vcoreSeconds"))
+                                if (!$util.isInteger(message.vcoreSeconds) && !(message.vcoreSeconds && $util.isInteger(message.vcoreSeconds.low) && $util.isInteger(message.vcoreSeconds.high)))
+                                    return "vcoreSeconds: integer|Long expected";
+                            if (message.memoryMbSeconds != null && message.hasOwnProperty("memoryMbSeconds"))
+                                if (!$util.isInteger(message.memoryMbSeconds) && !(message.memoryMbSeconds && $util.isInteger(message.memoryMbSeconds.low) && $util.isInteger(message.memoryMbSeconds.high)))
+                                    return "memoryMbSeconds: integer|Long expected";
                             return null;
                         };
     
@@ -36836,6 +36872,24 @@
                                 message.progress = Number(object.progress);
                             if (object.trackingUrl != null)
                                 message.trackingUrl = String(object.trackingUrl);
+                            if (object.vcoreSeconds != null)
+                                if ($util.Long)
+                                    (message.vcoreSeconds = $util.Long.fromValue(object.vcoreSeconds)).unsigned = false;
+                                else if (typeof object.vcoreSeconds === "string")
+                                    message.vcoreSeconds = parseInt(object.vcoreSeconds, 10);
+                                else if (typeof object.vcoreSeconds === "number")
+                                    message.vcoreSeconds = object.vcoreSeconds;
+                                else if (typeof object.vcoreSeconds === "object")
+                                    message.vcoreSeconds = new $util.LongBits(object.vcoreSeconds.low >>> 0, object.vcoreSeconds.high >>> 0).toNumber();
+                            if (object.memoryMbSeconds != null)
+                                if ($util.Long)
+                                    (message.memoryMbSeconds = $util.Long.fromValue(object.memoryMbSeconds)).unsigned = false;
+                                else if (typeof object.memoryMbSeconds === "string")
+                                    message.memoryMbSeconds = parseInt(object.memoryMbSeconds, 10);
+                                else if (typeof object.memoryMbSeconds === "number")
+                                    message.memoryMbSeconds = object.memoryMbSeconds;
+                                else if (typeof object.memoryMbSeconds === "object")
+                                    message.memoryMbSeconds = new $util.LongBits(object.memoryMbSeconds.low >>> 0, object.memoryMbSeconds.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -36857,6 +36911,16 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.progress = 0;
                                 object.trackingUrl = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.vcoreSeconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.vcoreSeconds = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.memoryMbSeconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.memoryMbSeconds = options.longs === String ? "0" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -36866,6 +36930,16 @@
                                 object.progress = options.json && !isFinite(message.progress) ? String(message.progress) : message.progress;
                             if (message.trackingUrl != null && message.hasOwnProperty("trackingUrl"))
                                 object.trackingUrl = message.trackingUrl;
+                            if (message.vcoreSeconds != null && message.hasOwnProperty("vcoreSeconds"))
+                                if (typeof message.vcoreSeconds === "number")
+                                    object.vcoreSeconds = options.longs === String ? String(message.vcoreSeconds) : message.vcoreSeconds;
+                                else
+                                    object.vcoreSeconds = options.longs === String ? $util.Long.prototype.toString.call(message.vcoreSeconds) : options.longs === Number ? new $util.LongBits(message.vcoreSeconds.low >>> 0, message.vcoreSeconds.high >>> 0).toNumber() : message.vcoreSeconds;
+                            if (message.memoryMbSeconds != null && message.hasOwnProperty("memoryMbSeconds"))
+                                if (typeof message.memoryMbSeconds === "number")
+                                    object.memoryMbSeconds = options.longs === String ? String(message.memoryMbSeconds) : message.memoryMbSeconds;
+                                else
+                                    object.memoryMbSeconds = options.longs === String ? $util.Long.prototype.toString.call(message.memoryMbSeconds) : options.longs === Number ? new $util.LongBits(message.memoryMbSeconds.low >>> 0, message.memoryMbSeconds.high >>> 0).toNumber() : message.memoryMbSeconds;
                             return object;
                         };
     
