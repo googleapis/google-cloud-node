@@ -39,7 +39,8 @@
                             "pairData",
                             "mobileData",
                             "userIdData",
-                            "ppidData"
+                            "ppidData",
+                            "compositeData"
                           ]
                         }
                       },
@@ -71,6 +72,10 @@
                         "ppidData": {
                           "type": "PpidData",
                           "id": 7
+                        },
+                        "compositeData": {
+                          "type": "CompositeData",
+                          "id": 8
                         },
                         "consent": {
                           "type": "Consent",
@@ -124,6 +129,51 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CompositeData": {
+                      "fields": {
+                        "userData": {
+                          "type": "UserData",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ipData": {
+                          "rule": "repeated",
+                          "type": "IpData",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "IpData": {
+                      "fields": {
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6",
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "observeStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "observeEndTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -470,7 +520,8 @@
                             "DISPLAY_VIDEO_ADVERTISER": 3,
                             "DATA_PARTNER": 4,
                             "GOOGLE_ANALYTICS_PROPERTY": 5,
-                            "GOOGLE_AD_MANAGER_AUDIENCE_LINK": 6
+                            "GOOGLE_AD_MANAGER_AUDIENCE_LINK": 6,
+                            "FLOODLIGHT_CONFIG": 7
                           }
                         }
                       }
@@ -571,6 +622,58 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "EncryptedUserId": {
+                      "fields": {
+                        "encryptedId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entityType": {
+                          "type": "EncryptionEntityType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entityId": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "source": {
+                          "type": "EncryptionSource",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EncryptionEntityType": {
+                          "values": {
+                            "ENCRYPTION_ENTITY_TYPE_UNSPECIFIED": 0,
+                            "CAMPAIGN_MANAGER_ACCOUNT": 1,
+                            "CAMPAIGN_MANAGER_ADVERTISER": 2,
+                            "DISPLAY_VIDEO_PARTNER": 3,
+                            "DISPLAY_VIDEO_ADVERTISER": 4,
+                            "GOOGLE_ADS_CUSTOMER": 5,
+                            "GOOGLE_AD_MANAGER_NETWORK_CODE": 6
+                          }
+                        },
+                        "EncryptionSource": {
+                          "values": {
+                            "ENCRYPTION_SOURCE_UNSPECIFIED": 0,
+                            "AD_SERVING": 1,
+                            "DATA_TRANSFER": 2
                           }
                         }
                       }
@@ -733,7 +836,9 @@
                         "INVALID_REQUEST_ID": 48,
                         "MULTIPLE_DESTINATIONS_FOR_GOOGLE_ANALYTICS_EVENT": 49,
                         "FIELD_VALUE_TOO_LONG": 50,
+                        "FIELD_VALUE_TOO_SHORT": 106,
                         "TOO_MANY_ELEMENTS": 51,
+                        "TOO_FEW_ELEMENTS": 105,
                         "ALREADY_EXISTS": 52,
                         "IMMUTABLE_FIELD_FOR_UPDATE": 53,
                         "INVALID_RESOURCE_NAME": 54,
@@ -800,7 +905,9 @@
                         "CUSTOM_VARIABLE_VALUE_CONTAINS_PII": 117,
                         "CUSTOM_VARIABLE_NOT_ENABLED": 118,
                         "INVALID_CUSTOM_VARIABLE_VALUE": 119,
-                        "CUSTOM_VARIABLE_NOT_FOUND": 120
+                        "CUSTOM_VARIABLE_NOT_FOUND": 120,
+                        "BASELINE_LOCATION_AUTO_DETECTION_FAILED": 122,
+                        "INSIGHTS_MISSING_FOR_DIMENSION": 123
                       }
                     },
                     "Event": {
@@ -808,6 +915,11 @@
                         "_conversionValue": {
                           "oneof": [
                             "conversionValue"
+                          ]
+                        },
+                        "_conversionCount": {
+                          "oneof": [
+                            "conversionCount"
                           ]
                         }
                       },
@@ -872,6 +984,14 @@
                         "conversionValue": {
                           "type": "double",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "conversionCount": {
+                          "type": "double",
+                          "id": 23,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -1013,6 +1133,35 @@
                         "mobileDeviceId": {
                           "type": "string",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dclid": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "impressionId": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "matchId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptedUserIds": {
+                          "rule": "repeated",
+                          "type": "EncryptedUserId",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1529,7 +1678,8 @@
                                 "mobileDataIngestionStatus",
                                 "pairDataIngestionStatus",
                                 "userIdDataIngestionStatus",
-                                "ppidDataIngestionStatus"
+                                "ppidDataIngestionStatus",
+                                "compositeDataIngestionStatus"
                               ]
                             }
                           },
@@ -1553,6 +1703,10 @@
                             "ppidDataIngestionStatus": {
                               "type": "IngestPpidDataStatus",
                               "id": 5
+                            },
+                            "compositeDataIngestionStatus": {
+                              "type": "IngestCompositeDataStatus",
+                              "id": 6
                             }
                           }
                         },
@@ -1564,7 +1718,8 @@
                                 "mobileDataRemovalStatus",
                                 "pairDataRemovalStatus",
                                 "userIdDataRemovalStatus",
-                                "ppidDataRemovalStatus"
+                                "ppidDataRemovalStatus",
+                                "compositeDataRemovalStatus"
                               ]
                             }
                           },
@@ -1588,6 +1743,10 @@
                             "ppidDataRemovalStatus": {
                               "type": "RemovePpidDataStatus",
                               "id": 5
+                            },
+                            "compositeDataRemovalStatus": {
+                              "type": "RemoveCompositeDataStatus",
+                              "id": 6
                             }
                           }
                         },
@@ -1722,6 +1881,57 @@
                               "id": 2
                             }
                           }
+                        },
+                        "IngestCompositeDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "dataTypeCounts": {
+                              "rule": "repeated",
+                              "type": "DataTypeCount",
+                              "id": 2
+                            },
+                            "uploadMatchRateRange": {
+                              "type": "MatchRateRange",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "RemoveCompositeDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "dataTypeCounts": {
+                              "rule": "repeated",
+                              "type": "DataTypeCount",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DataTypeCount": {
+                          "fields": {
+                            "type": {
+                              "type": "DataType",
+                              "id": 1
+                            },
+                            "count": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DataType": {
+                          "values": {
+                            "DATA_TYPE_UNSPECIFIED": 0,
+                            "EMAIL": 1,
+                            "PHONE_NUMBER": 2,
+                            "ADDRESS": 3,
+                            "IP_ADDRESS": 4
+                          }
                         }
                       }
                     },
@@ -1812,7 +2022,22 @@
                         "PROCESSING_ERROR_REASON_AWS_AUTH_FAILED": 27,
                         "PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 25,
                         "PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER": 26,
-                        "PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID": 28
+                        "PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID": 28,
+                        "PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND": 29,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID": 30,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID": 31,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID": 32,
+                        "PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS": 33,
+                        "PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT": 34,
+                        "PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND": 35,
+                        "PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR": 36,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID": 37,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND": 38,
+                        "PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK": 39,
+                        "PROCESSING_ERROR_REASON_TOO_RECENT_CLICK": 40,
+                        "PROCESSING_ERROR_REASON_INVALID_CLICK": 41,
+                        "PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK": 42,
+                        "PROCESSING_ERROR_REASON_CLICK_NOT_FOUND": 43
                       }
                     },
                     "ProcessingWarningReason": {
@@ -3903,6 +4128,43 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                },
+                "referencedTypes": {
+                  "rule": "repeated",
+                  "type": "TypeReference",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
+              }
+            },
+            "TypeReference": {
+              "fields": {
+                "typeName": {
+                  "type": "string",
+                  "id": 1
+                }
               }
             },
             "resourceReference": {
