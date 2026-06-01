@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.5.1...dataplex-v5.6.0) (2026-06-01)
+
+
+### Features
+
+* **dataplex:** [dataplex] Add `RequestDataProductAccess` method to request access to `DataAssets` with in a `DataProduct` ([#8353](https://github.com/googleapis/google-cloud-node/issues/8353)) ([1b66ad2](https://github.com/googleapis/google-cloud-node/commit/1b66ad2342685ff12a7f90e5b99e971f51f19e44))
+
 ## [5.5.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.5.0...dataplex-v5.5.1) (2026-05-01)
 
 
