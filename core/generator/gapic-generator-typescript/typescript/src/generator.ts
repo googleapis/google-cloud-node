@@ -86,6 +86,7 @@ export class Generator {
   restNumericEnums?: boolean;
   mixinsOverride?: string[];
   format?: string | string[];
+  compatibilityResources?: string[];
 
   private root: protobuf.Root;
 
@@ -245,6 +246,12 @@ export class Generator {
     }
   }
 
+  private readCompatibilityResources() {
+    if (this.paramMap['compatibility-resources']) {
+      this.compatibilityResources = this.paramMap['compatibility-resources'].split(';');
+    }
+  }
+
   async initializeFromStdin() {
     const inputBuffer = await getStdin();
     const CodeGeneratorRequest = this.root.lookupType('CodeGeneratorRequest');
@@ -274,6 +281,7 @@ export class Generator {
       this.readLegacyProtoLoad();
       this.readRestNumericEnums();
       this.readFormat();
+      this.readCompatibilityResources();
     }
   }
 
@@ -334,6 +342,7 @@ export class Generator {
       legacyProtoLoad: this.legacyProtoLoad,
       restNumericEnums: this.restNumericEnums,
       mixinsOverridden: this.mixinsOverride !== undefined,
+      compatibilityResources: this.compatibilityResources,
     });
     return api;
   }

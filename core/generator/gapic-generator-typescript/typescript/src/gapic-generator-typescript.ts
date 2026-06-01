@@ -136,6 +136,11 @@ async function main(processArgv: string[]) {
       'Override the list of mixins to use. Semicolon-separated list of API names to mixin, e.g. google.longrunning.Operations. Use "none" to disable all mixins.',
     )
     .string('mixins')
+    .describe(
+      'compatibility-resources',
+      'A list of multi-pattern resources names which should also generate old single-pattern functions. Semicolon-separated list of resource names, e.g. secretmanager.googleapis.com/Secret;secretmanager.googleapis.com/SecretVersion',
+    )
+    .string('compatibility-resources')
     .describe('protoc', 'Path to protoc binary')
     .usage('Usage: $0 -I /path/to/googleapis')
     .usage('  --output_dir /path/to/output_directory')
@@ -158,6 +163,7 @@ async function main(processArgv: string[]) {
   const legacyProtoLoad = argv.legacyProtoLoad as boolean | undefined;
   const restNumericEnums = argv.restNumericEnums as boolean | undefined;
   const mixins = argv.mixins as string | undefined;
+  const compatibilityResources = argv.compatibilityResources as string | undefined;
 
   // --protoc can be taken from environment or from the command line
   let protocParameter = argv.protoc as string | string[] | undefined;
@@ -246,6 +252,9 @@ async function main(processArgv: string[]) {
   }
   if (mixins) {
     protocCommand.push(`--typescript_gapic_opt="mixins=${mixins}"`);
+  }
+  if (compatibilityResources) {
+    protocCommand.push(`--typescript_gapic_opt="compatibility-resources=${compatibilityResources}"`);
   }
   protocCommand.push(...protoDirsArg);
   protocCommand.push(...protoFiles);

@@ -24,10 +24,12 @@ export interface ResourceDescriptor
 export class ResourceDatabase {
   patterns: {[pattern: string]: ResourceDescriptor};
   types: {[type: string]: ResourceDescriptor};
+  compatibilityResources: {[type: string]: ResourceDescriptor}
 
   constructor() {
     this.patterns = {};
     this.types = {};
+    this.compatibilityResources = {};
   }
 
   registerResource(
@@ -104,6 +106,18 @@ export class ResourceDatabase {
           this.types[resource.type] = resourceDescriptor;
         }
       }
+      // Create the pattern we *would* have generated if it were single. Whether
+      // this is actually generated depends on the compatibility-resources
+      // option.
+      const pattern = patterns![0]
+      const name = arr![1];
+      const params = this.getParams(pattern);
+      let compatibilityResourceDescriptor = this.getResourceDescriptor(
+        name,
+        params,
+        resource,
+      );
+      this.compatibilityResources[resource.type] = compatibilityResourceDescriptor
     }
   }
 
@@ -178,6 +192,12 @@ export class ResourceDatabase {
     }
 
     return result;
+  }
+
+  getCompatibilityResourceByType(
+    type: string,
+  ): ResourceDescriptor | undefined {
+    return this.compatibilityResources[type];
   }
 
   private getParams(pattern: string): string[] {

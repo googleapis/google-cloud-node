@@ -1193,6 +1193,16 @@ export function augmentService(parameters: AugmentServiceParameters) {
       }
     }
   }
+  if (parameters.options.compatibilityResources) {
+    for (const type of parameters.options.compatibilityResources) {
+      const compatibilityResource = parameters.allResourceDatabase.getCompatibilityResourceByType(type)
+      if (compatibilityResource) {
+        uniqueResources[compatibilityResource.name] = compatibilityResource;
+      } else {
+        throw new Error('Resource "${type} has no compatibility pattern')
+      }
+    }
+  }
   augmentedService.pathTemplates = Object.values(uniqueResources).sort(
     (resourceA, resourceB) => {
       // Path templates names can be cased differently
