@@ -1,9 +1,17 @@
 # Changelog
 
+
 [npm history][1]
 
 [1]: https://www.npmjs.com/package/nodejs-logging?activeTab=versions
 
+
+## [11.2.2](https://github.com/googleapis/google-cloud-node/compare/logging-v11.2.1...logging-v11.2.2) (2026-05-11)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
 
 ## [11.2.1](https://github.com/googleapis/nodejs-logging/compare/v11.2.0...v11.2.1) (2025-09-03)
 

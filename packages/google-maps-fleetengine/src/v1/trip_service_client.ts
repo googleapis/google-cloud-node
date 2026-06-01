@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class TripServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('fleetengine');
@@ -57,9 +64,9 @@ export class TripServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  tripServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  tripServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of TripServiceClient.
@@ -100,21 +107,42 @@ export class TripServiceClient {
    *     const client = new TripServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TripServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'fleetengine.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +167,7 @@ export class TripServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +181,7 @@ export class TripServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,10 +203,10 @@ export class TripServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       tripPathTemplate: new this._gaxModule.PathTemplate(
-        'providers/{provider}/trips/{trip}'
+        'providers/{provider}/trips/{trip}',
       ),
       vehiclePathTemplate: new this._gaxModule.PathTemplate(
-        'providers/{provider}/vehicles/{vehicle}'
+        'providers/{provider}/vehicles/{vehicle}',
       ),
     };
 
@@ -189,14 +214,20 @@ export class TripServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      searchTrips:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'trips')
+      searchTrips: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'trips',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'maps.fleetengine.v1.TripService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'maps.fleetengine.v1.TripService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -227,37 +258,47 @@ export class TripServiceClient {
     // Put together the "service stub" for
     // maps.fleetengine.v1.TripService.
     this.tripServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('maps.fleetengine.v1.TripService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'maps.fleetengine.v1.TripService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).maps.fleetengine.v1.TripService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const tripServiceStubMethods =
-        ['createTrip', 'getTrip', 'deleteTrip', 'reportBillableTrip', 'searchTrips', 'updateTrip'];
+    const tripServiceStubMethods = [
+      'createTrip',
+      'getTrip',
+      'deleteTrip',
+      'reportBillableTrip',
+      'searchTrips',
+      'updateTrip',
+    ];
     for (const methodName of tripServiceStubMethods) {
       const callPromise = this.tripServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -272,8 +313,14 @@ export class TripServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'fleetengine.googleapis.com';
   }
@@ -284,8 +331,14 @@ export class TripServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'fleetengine.googleapis.com';
   }
@@ -316,9 +369,7 @@ export class TripServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -327,8 +378,9 @@ export class TripServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -339,114 +391,127 @@ export class TripServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a trip in the Fleet Engine and returns the new trip.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {string} request.tripId
- *   Required. Unique Trip ID.
- *   Subject to the following restrictions:
- *
- *   * Must be a valid Unicode string.
- *   * Limited to a maximum length of 64 characters.
- *   * Normalized according to [Unicode Normalization Form C]
- *   (http://www.unicode.org/reports/tr15/).
- *   * May not contain any of the following ASCII characters: '/', ':', '?',
- *   ',', or '#'.
- * @param {maps.fleetengine.v1.Trip} request.trip
- *   Required. Trip entity to create.
- *
- *   When creating a Trip, the following fields are required:
- *
- *   * `trip_type`
- *   * `pickup_point`
- *
- *   The following fields are used if you provide them:
- *
- *   * `number_of_passengers`
- *   * `vehicle_id`
- *   * `dropoff_point`
- *   * `intermediate_destinations`
- *   * `vehicle_waypoints`
- *
- *   All other Trip fields are ignored. For example, all trips start with a
- *   `trip_status` of `NEW` even if you pass in a `trip_status` of `CANCELED` in
- *   the creation request.
- *
- *   Only `EXCLUSIVE` trips support `intermediate_destinations`.
- *
- *   When `vehicle_id` is set for a shared trip, you must supply
- *   the list of `Trip.vehicle_waypoints` to specify the order of the remaining
- *   waypoints for the vehicle, otherwise the waypoint order will be
- *   undetermined.
- *
- *   When you specify `Trip.vehicle_waypoints`, the list must contain all
- *   the remaining waypoints of the vehicle's trips, with no extra waypoints.
- *   You must order these waypoints such that for a given trip, the pickup
- *   point is before intermediate destinations, and all intermediate
- *   destinations come before the drop-off point. An `EXCLUSIVE` trip's
- *   waypoints must not interleave with any other trips.
- *
- *   The `trip_id`, `waypoint_type` and `location` fields are used, and all
- *   other TripWaypoint fields in `vehicle_waypoints` are ignored.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Trip|Trip}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/trip_service.create_trip.js</caption>
- * region_tag:fleetengine_v1_generated_TripService_CreateTrip_async
- */
+  /**
+   * Creates a trip in the Fleet Engine and returns the new trip.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.parent
+   *   Required. Must be in the format `providers/{provider}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {string} request.tripId
+   *   Required. Unique Trip ID.
+   *   Subject to the following restrictions:
+   *
+   *   * Must be a valid Unicode string.
+   *   * Limited to a maximum length of 64 characters.
+   *   * Normalized according to [Unicode Normalization Form C]
+   *   (http://www.unicode.org/reports/tr15/).
+   *   * May not contain any of the following ASCII characters: '/', ':', '?',
+   *   ',', or '#'.
+   * @param {maps.fleetengine.v1.Trip} request.trip
+   *   Required. Trip entity to create.
+   *
+   *   When creating a Trip, the following fields are required:
+   *
+   *   * `trip_type`
+   *   * `pickup_point`
+   *
+   *   The following fields are used if you provide them:
+   *
+   *   * `number_of_passengers`
+   *   * `vehicle_id`
+   *   * `dropoff_point`
+   *   * `intermediate_destinations`
+   *   * `vehicle_waypoints`
+   *
+   *   All other Trip fields are ignored. For example, all trips start with a
+   *   `trip_status` of `NEW` even if you pass in a `trip_status` of `CANCELED` in
+   *   the creation request.
+   *
+   *   Only `EXCLUSIVE` trips support `intermediate_destinations`.
+   *
+   *   When `vehicle_id` is set for a shared trip, you must supply
+   *   the list of `Trip.vehicle_waypoints` to specify the order of the remaining
+   *   waypoints for the vehicle, otherwise the waypoint order will be
+   *   undetermined.
+   *
+   *   When you specify `Trip.vehicle_waypoints`, the list must contain all
+   *   the remaining waypoints of the vehicle's trips, with no extra waypoints.
+   *   You must order these waypoints such that for a given trip, the pickup
+   *   point is before intermediate destinations, and all intermediate
+   *   destinations come before the drop-off point. An `EXCLUSIVE` trip's
+   *   waypoints must not interleave with any other trips.
+   *
+   *   The `trip_id`, `waypoint_type` and `location` fields are used, and all
+   *   other TripWaypoint fields in `vehicle_waypoints` are ignored.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Trip|Trip}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/trip_service.create_trip.js</caption>
+   * region_tag:fleetengine_v1_generated_TripService_CreateTrip_async
+   */
   createTrip(
-      request?: protos.maps.fleetengine.v1.ICreateTripRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.ICreateTripRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.ICreateTripRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.ICreateTripRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createTrip(
-      request: protos.maps.fleetengine.v1.ICreateTripRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.ICreateTripRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.ICreateTripRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.ICreateTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createTrip(
-      request: protos.maps.fleetengine.v1.ICreateTripRequest,
-      callback: Callback<
-          protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.ICreateTripRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.ICreateTripRequest,
+    callback: Callback<
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.ICreateTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createTrip(
-      request?: protos.maps.fleetengine.v1.ICreateTripRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.ICreateTripRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.ICreateTripRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.ICreateTripRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.ICreateTripRequest|undefined, {}|undefined
-      ]>|void {
+          protos.maps.fleetengine.v1.ICreateTripRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.ICreateTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.ICreateTripRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -456,137 +521,167 @@ export class TripServiceClient {
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('createTrip request %j', request);
-    const wrappedCallback: Callback<
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.ICreateTripRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.maps.fleetengine.v1.ITrip,
+          protos.maps.fleetengine.v1.ICreateTripRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createTrip response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createTrip(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.ICreateTripRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createTrip response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createTrip(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.maps.fleetengine.v1.ITrip,
+          protos.maps.fleetengine.v1.ICreateTripRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTrip response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get information about a single trip.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.name
- *   Required. Must be in the format `providers/{provider}/trips/{trip}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {maps.fleetengine.v1.TripView} request.view
- *   The subset of Trip fields that should be returned and their interpretation.
- * @param {google.protobuf.Timestamp} request.currentRouteSegmentVersion
- *   Indicates the minimum timestamp (exclusive) for which `Trip.route` or
- *   `Trip.current_route_segment` data are retrieved. If route data are
- *   unchanged since this timestamp, the route field is not set in the response.
- *   If a minimum is unspecified, the route data are always retrieved.
- * @param {google.protobuf.Timestamp} request.remainingWaypointsVersion
- *   Deprecated: `Trip.remaining_waypoints` are always retrieved. Use
- *   `remaining_waypoints_route_version` to control when
- *   `Trip.remaining_waypoints.traffic_to_waypoint` and
- *   `Trip.remaining_waypoints.path_to_waypoint` data are retrieved.
- * @param {maps.fleetengine.v1.PolylineFormatType} request.routeFormatType
- *   The returned current route format, `LAT_LNG_LIST_TYPE` (in `Trip.route`),
- *   or `ENCODED_POLYLINE_TYPE` (in `Trip.current_route_segment`). The default
- *   is `LAT_LNG_LIST_TYPE`.
- * @param {google.protobuf.Timestamp} request.currentRouteSegmentTrafficVersion
- *   Indicates the minimum timestamp (exclusive) for which
- *   `Trip.current_route_segment_traffic` is retrieved. If traffic data are
- *   unchanged since this timestamp, the `current_route_segment_traffic` field
- *   is not set in the response. If a minimum is unspecified, the traffic data
- *   are always retrieved. Note that traffic is only available for On-Demand
- *   Rides and Deliveries Solution customers.
- * @param {google.protobuf.Timestamp} request.remainingWaypointsRouteVersion
- *   Indicates the minimum timestamp (exclusive) for which
- *   `Trip.remaining_waypoints.traffic_to_waypoint` and
- *   `Trip.remaining_waypoints.path_to_waypoint` data are retrieved. If data are
- *   unchanged since this timestamp, the fields above are
- *   not set in the response. If `remaining_waypoints_route_version` is
- *   unspecified, traffic and path are always retrieved.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Trip|Trip}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/trip_service.get_trip.js</caption>
- * region_tag:fleetengine_v1_generated_TripService_GetTrip_async
- */
+  /**
+   * Get information about a single trip.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.name
+   *   Required. Must be in the format `providers/{provider}/trips/{trip}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {maps.fleetengine.v1.TripView} request.view
+   *   The subset of Trip fields that should be returned and their interpretation.
+   * @param {google.protobuf.Timestamp} request.currentRouteSegmentVersion
+   *   Indicates the minimum timestamp (exclusive) for which `Trip.route` or
+   *   `Trip.current_route_segment` data are retrieved. If route data are
+   *   unchanged since this timestamp, the route field is not set in the response.
+   *   If a minimum is unspecified, the route data are always retrieved.
+   * @param {google.protobuf.Timestamp} request.remainingWaypointsVersion
+   *   Deprecated: `Trip.remaining_waypoints` are always retrieved. Use
+   *   `remaining_waypoints_route_version` to control when
+   *   `Trip.remaining_waypoints.traffic_to_waypoint` and
+   *   `Trip.remaining_waypoints.path_to_waypoint` data are retrieved.
+   * @param {maps.fleetengine.v1.PolylineFormatType} request.routeFormatType
+   *   The returned current route format, `LAT_LNG_LIST_TYPE` (in `Trip.route`),
+   *   or `ENCODED_POLYLINE_TYPE` (in `Trip.current_route_segment`). The default
+   *   is `LAT_LNG_LIST_TYPE`.
+   * @param {google.protobuf.Timestamp} request.currentRouteSegmentTrafficVersion
+   *   Indicates the minimum timestamp (exclusive) for which
+   *   `Trip.current_route_segment_traffic` is retrieved. If traffic data are
+   *   unchanged since this timestamp, the `current_route_segment_traffic` field
+   *   is not set in the response. If a minimum is unspecified, the traffic data
+   *   are always retrieved. Note that traffic is only available for On-Demand
+   *   Rides and Deliveries Solution customers.
+   * @param {google.protobuf.Timestamp} request.remainingWaypointsRouteVersion
+   *   Indicates the minimum timestamp (exclusive) for which
+   *   `Trip.remaining_waypoints.traffic_to_waypoint` and
+   *   `Trip.remaining_waypoints.path_to_waypoint` data are retrieved. If data are
+   *   unchanged since this timestamp, the fields above are
+   *   not set in the response. If `remaining_waypoints_route_version` is
+   *   unspecified, traffic and path are always retrieved.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Trip|Trip}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/trip_service.get_trip.js</caption>
+   * region_tag:fleetengine_v1_generated_TripService_GetTrip_async
+   */
   getTrip(
-      request?: protos.maps.fleetengine.v1.IGetTripRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.IGetTripRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.IGetTripRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.IGetTripRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getTrip(
-      request: protos.maps.fleetengine.v1.IGetTripRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.IGetTripRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IGetTripRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.IGetTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTrip(
-      request: protos.maps.fleetengine.v1.IGetTripRequest,
-      callback: Callback<
-          protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.IGetTripRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IGetTripRequest,
+    callback: Callback<
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.IGetTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTrip(
-      request?: protos.maps.fleetengine.v1.IGetTripRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.IGetTripRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.IGetTripRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.IGetTripRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.IGetTripRequest|undefined, {}|undefined
-      ]>|void {
+          protos.maps.fleetengine.v1.IGetTripRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.IGetTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.IGetTripRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -596,110 +691,140 @@ export class TripServiceClient {
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('getTrip request %j', request);
-    const wrappedCallback: Callback<
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.IGetTripRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.maps.fleetengine.v1.ITrip,
+          protos.maps.fleetengine.v1.IGetTripRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTrip response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getTrip(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.IGetTripRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getTrip response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getTrip(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.maps.fleetengine.v1.ITrip,
+          protos.maps.fleetengine.v1.IGetTripRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTrip response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a single Trip.
- *
- * Returns FAILED_PRECONDITION if the Trip is active and assigned to a
- * vehicle.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} [request.header]
- *   Optional. The standard Fleet Engine request header.
- * @param {string} request.name
- *   Required. Must be in the format `providers/{provider}/trips/{trip}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/trip_service.delete_trip.js</caption>
- * region_tag:fleetengine_v1_generated_TripService_DeleteTrip_async
- */
+  /**
+   * Deletes a single Trip.
+   *
+   * Returns FAILED_PRECONDITION if the Trip is active and assigned to a
+   * vehicle.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} [request.header]
+   *   Optional. The standard Fleet Engine request header.
+   * @param {string} request.name
+   *   Required. Must be in the format `providers/{provider}/trips/{trip}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/trip_service.delete_trip.js</caption>
+   * region_tag:fleetengine_v1_generated_TripService_DeleteTrip_async
+   */
   deleteTrip(
-      request?: protos.maps.fleetengine.v1.IDeleteTripRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IDeleteTripRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.IDeleteTripRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IDeleteTripRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteTrip(
-      request: protos.maps.fleetengine.v1.IDeleteTripRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IDeleteTripRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IDeleteTripRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IDeleteTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTrip(
-      request: protos.maps.fleetengine.v1.IDeleteTripRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IDeleteTripRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IDeleteTripRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IDeleteTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTrip(
-      request?: protos.maps.fleetengine.v1.IDeleteTripRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.IDeleteTripRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IDeleteTripRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IDeleteTripRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IDeleteTripRequest|undefined, {}|undefined
-      ]>|void {
+          protos.maps.fleetengine.v1.IDeleteTripRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IDeleteTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IDeleteTripRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -709,119 +834,151 @@ export class TripServiceClient {
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('deleteTrip request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IDeleteTripRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteTripRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteTrip response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteTrip(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IDeleteTripRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteTrip response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteTrip(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteTripRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTrip response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Report billable trip usage.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Must be in the format
- *   `providers/{provider}/billableTrips/{billable_trip}`. The
- *   provider must be the Project ID (for example, `sample-cloud-project`) of
- *   the Google Cloud Project of which the service account making this call is a
- *   member.
- * @param {string} request.countryCode
- *   Required. Two letter country code of the country where the trip takes
- *   place. Price is defined according to country code.
- * @param {maps.fleetengine.v1.BillingPlatformIdentifier} request.platform
- *   The platform upon which the request was issued.
- * @param {string[]} request.relatedIds
- *   The identifiers that are directly related to the trip being reported. These
- *   are usually IDs (for example, session IDs) of pre-booking operations done
- *   before the trip ID is available. The number of `related_ids` is
- *   limited to 50.
- * @param {maps.fleetengine.v1.ReportBillableTripRequest.SolutionType} request.solutionType
- *   The type of GMP product solution (for example,
- *   `ON_DEMAND_RIDESHARING_AND_DELIVERIES`) used for the reported trip.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/trip_service.report_billable_trip.js</caption>
- * region_tag:fleetengine_v1_generated_TripService_ReportBillableTrip_async
- */
+  /**
+   * Report billable trip usage.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Must be in the format
+   *   `providers/{provider}/billableTrips/{billable_trip}`. The
+   *   provider must be the Project ID (for example, `sample-cloud-project`) of
+   *   the Google Cloud Project of which the service account making this call is a
+   *   member.
+   * @param {string} request.countryCode
+   *   Required. Two letter country code of the country where the trip takes
+   *   place. Price is defined according to country code.
+   * @param {maps.fleetengine.v1.BillingPlatformIdentifier} request.platform
+   *   The platform upon which the request was issued.
+   * @param {string[]} request.relatedIds
+   *   The identifiers that are directly related to the trip being reported. These
+   *   are usually IDs (for example, session IDs) of pre-booking operations done
+   *   before the trip ID is available. The number of `related_ids` is
+   *   limited to 50.
+   * @param {maps.fleetengine.v1.ReportBillableTripRequest.SolutionType} request.solutionType
+   *   The type of GMP product solution (for example,
+   *   `ON_DEMAND_RIDESHARING_AND_DELIVERIES`) used for the reported trip.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/trip_service.report_billable_trip.js</caption>
+   * region_tag:fleetengine_v1_generated_TripService_ReportBillableTrip_async
+   */
   reportBillableTrip(
-      request?: protos.maps.fleetengine.v1.IReportBillableTripRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IReportBillableTripRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.IReportBillableTripRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IReportBillableTripRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   reportBillableTrip(
-      request: protos.maps.fleetengine.v1.IReportBillableTripRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IReportBillableTripRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IReportBillableTripRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IReportBillableTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   reportBillableTrip(
-      request: protos.maps.fleetengine.v1.IReportBillableTripRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IReportBillableTripRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IReportBillableTripRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IReportBillableTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   reportBillableTrip(
-      request?: protos.maps.fleetengine.v1.IReportBillableTripRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.IReportBillableTripRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IReportBillableTripRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IReportBillableTripRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IReportBillableTripRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.maps.fleetengine.v1.IReportBillableTripRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IReportBillableTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IReportBillableTripRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -831,152 +988,184 @@ export class TripServiceClient {
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('reportBillableTrip request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IReportBillableTripRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.maps.fleetengine.v1.IReportBillableTripRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('reportBillableTrip response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.reportBillableTrip(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IReportBillableTripRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('reportBillableTrip response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .reportBillableTrip(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IReportBillableTripRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('reportBillableTrip response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates trip data.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.name
- *   Required. Must be in the format
- *   `providers/{provider}/trips/{trip}`. The provider must
- *   be the Project ID (for example, `sample-consumer-project`) of the Google
- *   Cloud Project of which the service account making this call is a member.
- * @param {maps.fleetengine.v1.Trip} request.trip
- *   Required. The Trip associated with the update.
- *
- *   The following fields are maintained by the Fleet Engine. Do not update
- *   them using Trip.update.
- *
- *   * `current_route_segment`
- *   * `current_route_segment_end_point`
- *   * `current_route_segment_traffic`
- *   * `current_route_segment_traffic_version`
- *   * `current_route_segment_version`
- *   * `dropoff_time`
- *   * `eta_to_next_waypoint`
- *   * `intermediate_destinations_version`
- *   * `last_location`
- *   * `name`
- *   * `number_of_passengers`
- *   * `pickup_time`
- *   * `remaining_distance_meters`
- *   * `remaining_time_to_first_waypoint`
- *   * `remaining_waypoints`
- *   * `remaining_waypoints_version`
- *   * `route`
- *
- *   When you update the `Trip.vehicle_id` for a shared trip, you must supply
- *   the list of `Trip.vehicle_waypoints` to specify the order of the remaining
- *   waypoints, otherwise the order will be undetermined.
- *
- *   When you specify `Trip.vehicle_waypoints`, the list must contain all
- *   the remaining waypoints of the vehicle's trips, with no extra waypoints.
- *   You must order these waypoints such that for a given trip, the pickup
- *   point is before intermediate destinations, and all intermediate
- *   destinations come before the drop-off point. An `EXCLUSIVE` trip's
- *   waypoints must not interleave with any other trips.
- *   The `trip_id`, `waypoint_type` and `location` fields are used, and all
- *   other TripWaypoint fields in `vehicle_waypoints` are ignored.
- *
- *   To avoid a race condition for trips with multiple destinations, you
- *   should provide `Trip.intermediate_destinations_version` when updating
- *   the trip status to `ENROUTE_TO_INTERMEDIATE_DESTINATION`. The
- *   `Trip.intermediate_destinations_version` passed must be consistent with
- *   Fleet Engine's version. If it isn't, the request fails.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The field mask indicating which fields in Trip to update.
- *   The `update_mask` must contain at least one field.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Trip|Trip}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/trip_service.update_trip.js</caption>
- * region_tag:fleetengine_v1_generated_TripService_UpdateTrip_async
- */
+  /**
+   * Updates trip data.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.name
+   *   Required. Must be in the format
+   *   `providers/{provider}/trips/{trip}`. The provider must
+   *   be the Project ID (for example, `sample-consumer-project`) of the Google
+   *   Cloud Project of which the service account making this call is a member.
+   * @param {maps.fleetengine.v1.Trip} request.trip
+   *   Required. The Trip associated with the update.
+   *
+   *   The following fields are maintained by the Fleet Engine. Do not update
+   *   them using Trip.update.
+   *
+   *   * `current_route_segment`
+   *   * `current_route_segment_end_point`
+   *   * `current_route_segment_traffic`
+   *   * `current_route_segment_traffic_version`
+   *   * `current_route_segment_version`
+   *   * `dropoff_time`
+   *   * `eta_to_next_waypoint`
+   *   * `intermediate_destinations_version`
+   *   * `last_location`
+   *   * `name`
+   *   * `number_of_passengers`
+   *   * `pickup_time`
+   *   * `remaining_distance_meters`
+   *   * `remaining_time_to_first_waypoint`
+   *   * `remaining_waypoints`
+   *   * `remaining_waypoints_version`
+   *   * `route`
+   *
+   *   When you update the `Trip.vehicle_id` for a shared trip, you must supply
+   *   the list of `Trip.vehicle_waypoints` to specify the order of the remaining
+   *   waypoints, otherwise the order will be undetermined.
+   *
+   *   When you specify `Trip.vehicle_waypoints`, the list must contain all
+   *   the remaining waypoints of the vehicle's trips, with no extra waypoints.
+   *   You must order these waypoints such that for a given trip, the pickup
+   *   point is before intermediate destinations, and all intermediate
+   *   destinations come before the drop-off point. An `EXCLUSIVE` trip's
+   *   waypoints must not interleave with any other trips.
+   *   The `trip_id`, `waypoint_type` and `location` fields are used, and all
+   *   other TripWaypoint fields in `vehicle_waypoints` are ignored.
+   *
+   *   To avoid a race condition for trips with multiple destinations, you
+   *   should provide `Trip.intermediate_destinations_version` when updating
+   *   the trip status to `ENROUTE_TO_INTERMEDIATE_DESTINATION`. The
+   *   `Trip.intermediate_destinations_version` passed must be consistent with
+   *   Fleet Engine's version. If it isn't, the request fails.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The field mask indicating which fields in Trip to update.
+   *   The `update_mask` must contain at least one field.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Trip|Trip}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/trip_service.update_trip.js</caption>
+   * region_tag:fleetengine_v1_generated_TripService_UpdateTrip_async
+   */
   updateTrip(
-      request?: protos.maps.fleetengine.v1.IUpdateTripRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.IUpdateTripRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.IUpdateTripRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.IUpdateTripRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateTrip(
-      request: protos.maps.fleetengine.v1.IUpdateTripRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.IUpdateTripRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IUpdateTripRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.IUpdateTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateTrip(
-      request: protos.maps.fleetengine.v1.IUpdateTripRequest,
-      callback: Callback<
-          protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.IUpdateTripRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IUpdateTripRequest,
+    callback: Callback<
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.IUpdateTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateTrip(
-      request?: protos.maps.fleetengine.v1.IUpdateTripRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.IUpdateTripRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.IUpdateTripRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.maps.fleetengine.v1.ITrip,
-          protos.maps.fleetengine.v1.IUpdateTripRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.IUpdateTripRequest|undefined, {}|undefined
-      ]>|void {
+          protos.maps.fleetengine.v1.IUpdateTripRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.IUpdateTripRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.ITrip,
+      protos.maps.fleetengine.v1.IUpdateTripRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -986,132 +1175,160 @@ export class TripServiceClient {
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('updateTrip request %j', request);
-    const wrappedCallback: Callback<
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.IUpdateTripRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.maps.fleetengine.v1.ITrip,
+          protos.maps.fleetengine.v1.IUpdateTripRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateTrip response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateTrip(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.maps.fleetengine.v1.ITrip,
-        protos.maps.fleetengine.v1.IUpdateTripRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateTrip response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateTrip(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.maps.fleetengine.v1.ITrip,
+          protos.maps.fleetengine.v1.IUpdateTripRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTrip response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Get all the trips for a specific vehicle.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {string} request.vehicleId
- *   The vehicle associated with the trips in the request. If unspecified, the
- *   returned trips do not contain:
- *
- *   * `current_route_segment`
- *   * `remaining_waypoints`
- *   * `remaining_distance_meters`
- *   * `eta_to_first_waypoint`
- * @param {boolean} request.activeTripsOnly
- *   If set to true, the response includes Trips that influence a driver's
- *   route.
- * @param {number} request.pageSize
- *   If not set, the server decides the number of results to return.
- * @param {string} request.pageToken
- *   Set this to a value previously returned in the `SearchTripsResponse` to
- *   continue from previous results.
- * @param {google.protobuf.Duration} request.minimumStaleness
- *   If specified, returns the trips that have not been updated after the time
- *   `(current - minimum_staleness)`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.maps.fleetengine.v1.Trip|Trip}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `searchTripsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Get all the trips for a specific vehicle.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.parent
+   *   Required. Must be in the format `providers/{provider}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {string} request.vehicleId
+   *   The vehicle associated with the trips in the request. If unspecified, the
+   *   returned trips do not contain:
+   *
+   *   * `current_route_segment`
+   *   * `remaining_waypoints`
+   *   * `remaining_distance_meters`
+   *   * `eta_to_first_waypoint`
+   * @param {boolean} request.activeTripsOnly
+   *   If set to true, the response includes Trips that influence a driver's
+   *   route.
+   * @param {number} request.pageSize
+   *   If not set, the server decides the number of results to return.
+   * @param {string} request.pageToken
+   *   Set this to a value previously returned in the `SearchTripsResponse` to
+   *   continue from previous results.
+   * @param {google.protobuf.Duration} request.minimumStaleness
+   *   If specified, returns the trips that have not been updated after the time
+   *   `(current - minimum_staleness)`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.maps.fleetengine.v1.Trip|Trip}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchTripsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchTrips(
-      request?: protos.maps.fleetengine.v1.ISearchTripsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.v1.ITrip[],
-        protos.maps.fleetengine.v1.ISearchTripsRequest|null,
-        protos.maps.fleetengine.v1.ISearchTripsResponse
-      ]>;
+    request?: protos.maps.fleetengine.v1.ISearchTripsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.ITrip[],
+      protos.maps.fleetengine.v1.ISearchTripsRequest | null,
+      protos.maps.fleetengine.v1.ISearchTripsResponse,
+    ]
+  >;
   searchTrips(
-      request: protos.maps.fleetengine.v1.ISearchTripsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.maps.fleetengine.v1.ISearchTripsRequest,
-          protos.maps.fleetengine.v1.ISearchTripsResponse|null|undefined,
-          protos.maps.fleetengine.v1.ITrip>): void;
+    request: protos.maps.fleetengine.v1.ISearchTripsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.maps.fleetengine.v1.ISearchTripsRequest,
+      protos.maps.fleetengine.v1.ISearchTripsResponse | null | undefined,
+      protos.maps.fleetengine.v1.ITrip
+    >,
+  ): void;
   searchTrips(
-      request: protos.maps.fleetengine.v1.ISearchTripsRequest,
-      callback: PaginationCallback<
-          protos.maps.fleetengine.v1.ISearchTripsRequest,
-          protos.maps.fleetengine.v1.ISearchTripsResponse|null|undefined,
-          protos.maps.fleetengine.v1.ITrip>): void;
+    request: protos.maps.fleetengine.v1.ISearchTripsRequest,
+    callback: PaginationCallback<
+      protos.maps.fleetengine.v1.ISearchTripsRequest,
+      protos.maps.fleetengine.v1.ISearchTripsResponse | null | undefined,
+      protos.maps.fleetengine.v1.ITrip
+    >,
+  ): void;
   searchTrips(
-      request?: protos.maps.fleetengine.v1.ISearchTripsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.maps.fleetengine.v1.ISearchTripsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.maps.fleetengine.v1.ISearchTripsRequest,
-          protos.maps.fleetengine.v1.ISearchTripsResponse|null|undefined,
-          protos.maps.fleetengine.v1.ITrip>,
-      callback?: PaginationCallback<
-          protos.maps.fleetengine.v1.ISearchTripsRequest,
-          protos.maps.fleetengine.v1.ISearchTripsResponse|null|undefined,
-          protos.maps.fleetengine.v1.ITrip>):
-      Promise<[
-        protos.maps.fleetengine.v1.ITrip[],
-        protos.maps.fleetengine.v1.ISearchTripsRequest|null,
-        protos.maps.fleetengine.v1.ISearchTripsResponse
-      ]>|void {
+          protos.maps.fleetengine.v1.ISearchTripsResponse | null | undefined,
+          protos.maps.fleetengine.v1.ITrip
+        >,
+    callback?: PaginationCallback<
+      protos.maps.fleetengine.v1.ISearchTripsRequest,
+      protos.maps.fleetengine.v1.ISearchTripsResponse | null | undefined,
+      protos.maps.fleetengine.v1.ITrip
+    >,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.ITrip[],
+      protos.maps.fleetengine.v1.ISearchTripsRequest | null,
+      protos.maps.fleetengine.v1.ISearchTripsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -1121,23 +1338,27 @@ export class TripServiceClient {
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.maps.fleetengine.v1.ISearchTripsRequest,
-      protos.maps.fleetengine.v1.ISearchTripsResponse|null|undefined,
-      protos.maps.fleetengine.v1.ITrip>|undefined = callback
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.maps.fleetengine.v1.ISearchTripsRequest,
+          protos.maps.fleetengine.v1.ISearchTripsResponse | null | undefined,
+          protos.maps.fleetengine.v1.ITrip
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchTrips values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1146,61 +1367,63 @@ export class TripServiceClient {
     this._log.info('searchTrips request %j', request);
     return this.innerApiCalls
       .searchTrips(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.maps.fleetengine.v1.ITrip[],
-        protos.maps.fleetengine.v1.ISearchTripsRequest|null,
-        protos.maps.fleetengine.v1.ISearchTripsResponse
-      ]) => {
-        this._log.info('searchTrips values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.maps.fleetengine.v1.ITrip[],
+          protos.maps.fleetengine.v1.ISearchTripsRequest | null,
+          protos.maps.fleetengine.v1.ISearchTripsResponse,
+        ]) => {
+          this._log.info('searchTrips values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `searchTrips`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {string} request.vehicleId
- *   The vehicle associated with the trips in the request. If unspecified, the
- *   returned trips do not contain:
- *
- *   * `current_route_segment`
- *   * `remaining_waypoints`
- *   * `remaining_distance_meters`
- *   * `eta_to_first_waypoint`
- * @param {boolean} request.activeTripsOnly
- *   If set to true, the response includes Trips that influence a driver's
- *   route.
- * @param {number} request.pageSize
- *   If not set, the server decides the number of results to return.
- * @param {string} request.pageToken
- *   Set this to a value previously returned in the `SearchTripsResponse` to
- *   continue from previous results.
- * @param {google.protobuf.Duration} request.minimumStaleness
- *   If specified, returns the trips that have not been updated after the time
- *   `(current - minimum_staleness)`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.maps.fleetengine.v1.Trip|Trip} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `searchTripsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `searchTrips`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.parent
+   *   Required. Must be in the format `providers/{provider}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {string} request.vehicleId
+   *   The vehicle associated with the trips in the request. If unspecified, the
+   *   returned trips do not contain:
+   *
+   *   * `current_route_segment`
+   *   * `remaining_waypoints`
+   *   * `remaining_distance_meters`
+   *   * `eta_to_first_waypoint`
+   * @param {boolean} request.activeTripsOnly
+   *   If set to true, the response includes Trips that influence a driver's
+   *   route.
+   * @param {number} request.pageSize
+   *   If not set, the server decides the number of results to return.
+   * @param {string} request.pageToken
+   *   Set this to a value previously returned in the `SearchTripsResponse` to
+   *   continue from previous results.
+   * @param {google.protobuf.Duration} request.minimumStaleness
+   *   If specified, returns the trips that have not been updated after the time
+   *   `(current - minimum_staleness)`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.maps.fleetengine.v1.Trip|Trip} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchTripsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchTripsStream(
-      request?: protos.maps.fleetengine.v1.ISearchTripsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.maps.fleetengine.v1.ISearchTripsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1209,77 +1432,78 @@ export class TripServiceClient {
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['searchTrips'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchTrips stream %j', request);
     return this.descriptors.page.searchTrips.createStream(
       this.innerApiCalls.searchTrips as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `searchTrips`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {string} request.vehicleId
- *   The vehicle associated with the trips in the request. If unspecified, the
- *   returned trips do not contain:
- *
- *   * `current_route_segment`
- *   * `remaining_waypoints`
- *   * `remaining_distance_meters`
- *   * `eta_to_first_waypoint`
- * @param {boolean} request.activeTripsOnly
- *   If set to true, the response includes Trips that influence a driver's
- *   route.
- * @param {number} request.pageSize
- *   If not set, the server decides the number of results to return.
- * @param {string} request.pageToken
- *   Set this to a value previously returned in the `SearchTripsResponse` to
- *   continue from previous results.
- * @param {google.protobuf.Duration} request.minimumStaleness
- *   If specified, returns the trips that have not been updated after the time
- *   `(current - minimum_staleness)`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.maps.fleetengine.v1.Trip|Trip}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/trip_service.search_trips.js</caption>
- * region_tag:fleetengine_v1_generated_TripService_SearchTrips_async
- */
+  /**
+   * Equivalent to `searchTrips`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.parent
+   *   Required. Must be in the format `providers/{provider}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {string} request.vehicleId
+   *   The vehicle associated with the trips in the request. If unspecified, the
+   *   returned trips do not contain:
+   *
+   *   * `current_route_segment`
+   *   * `remaining_waypoints`
+   *   * `remaining_distance_meters`
+   *   * `eta_to_first_waypoint`
+   * @param {boolean} request.activeTripsOnly
+   *   If set to true, the response includes Trips that influence a driver's
+   *   route.
+   * @param {number} request.pageSize
+   *   If not set, the server decides the number of results to return.
+   * @param {string} request.pageToken
+   *   Set this to a value previously returned in the `SearchTripsResponse` to
+   *   continue from previous results.
+   * @param {google.protobuf.Duration} request.minimumStaleness
+   *   If specified, returns the trips that have not been updated after the time
+   *   `(current - minimum_staleness)`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.maps.fleetengine.v1.Trip|Trip}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/trip_service.search_trips.js</caption>
+   * region_tag:fleetengine_v1_generated_TripService_SearchTrips_async
+   */
   searchTripsAsync(
-      request?: protos.maps.fleetengine.v1.ISearchTripsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.maps.fleetengine.v1.ITrip>{
+    request?: protos.maps.fleetengine.v1.ISearchTripsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.maps.fleetengine.v1.ITrip> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1288,26 +1512,27 @@ export class TripServiceClient {
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['searchTrips'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchTrips iterate %j', request);
     return this.descriptors.page.searchTrips.asyncIterate(
       this.innerApiCalls['searchTrips'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.maps.fleetengine.v1.ITrip>;
   }
   // --------------------
@@ -1321,7 +1546,7 @@ export class TripServiceClient {
    * @param {string} trip
    * @returns {string} Resource name string.
    */
-  tripPath(provider:string,trip:string) {
+  tripPath(provider: string, trip: string) {
     return this.pathTemplates.tripPathTemplate.render({
       provider: provider,
       trip: trip,
@@ -1357,7 +1582,7 @@ export class TripServiceClient {
    * @param {string} vehicle
    * @returns {string} Resource name string.
    */
-  vehiclePath(provider:string,vehicle:string) {
+  vehiclePath(provider: string, vehicle: string) {
     return this.pathTemplates.vehiclePathTemplate.render({
       provider: provider,
       vehicle: vehicle,
@@ -1394,7 +1619,7 @@ export class TripServiceClient {
    */
   close(): Promise<void> {
     if (this.tripServiceStub && !this._terminated) {
-      return this.tripServiceStub.then(stub => {
+      return this.tripServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

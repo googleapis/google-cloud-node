@@ -257,11 +257,11 @@ describe('stage option serialization', () => {
           .database()
           .search({
             query: 'foo',
-            // limit: 1,
-            // retrievalDepth: 2,
-            // offset: 3,
+            limit: 1,
+            retrievalDepth: 2,
+            offset: 3,
             // queryEnhancement: 'required',
-            // languageCode: 'en-US',
+            languageCode: 'en-US',
             sort: [field('foo').ascending()],
             addFields: [constant(true).as('bar')],
             // select: [field('id')],
@@ -281,15 +281,15 @@ describe('stage option serialization', () => {
         foo: {
           stringValue: 'bar1',
         },
-        // language_code: {
-        //   stringValue: 'en-US',
-        // },
-        // limit: {
-        //   integerValue: '1',
-        // },
-        // offset: {
-        //   integerValue: '3',
-        // },
+        language_code: {
+          stringValue: 'en-US',
+        },
+        limit: {
+          integerValue: '1',
+        },
+        offset: {
+          integerValue: '3',
+        },
         query: {
           functionValue: {
             args: [
@@ -303,9 +303,9 @@ describe('stage option serialization', () => {
         // query_enhancement: {
         //   stringValue: 'required',
         // },
-        // retrieval_depth: {
-        //   integerValue: '2',
-        // },
+        retrieval_depth: {
+          integerValue: '2',
+        },
         // select: {
         //   mapValue: {
         //     fields: {

@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.8.0...container-v6.9.0) (2026-05-27)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.7.1...container-v6.8.0) (2026-05-14)
+
+
+### Features
+
+* [container] add confidential instance type and hyperdisk support to GKE API ([#8257](https://github.com/googleapis/google-cloud-node/issues/8257)) ([d67ad56](https://github.com/googleapis/google-cloud-node/commit/d67ad568b13e6b12c4d16b9b34dbde41b6eac4a5))
+
+## [6.7.1](https://github.com/googleapis/google-cloud-node/compare/container-v6.7.0...container-v6.7.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.6.0...container-v6.7.0) (2026-01-31)
 
 

@@ -180,7 +180,7 @@ import * as chaiAsPromised from 'chai-as-promised';
 
 import {afterEach, describe, it} from 'mocha';
 import '../test/util/mocha_extensions';
-import {verifyInstance} from '../test/util/helpers';
+import {verifyInstance, isRest} from '../test/util/helpers';
 import {getTestDb, getTestRoot} from './firestore';
 
 import {Firestore as InternalFirestore} from '../src';
@@ -395,9 +395,9 @@ describe.skipClassic('Pipeline class', () => {
           expectResults(deleteRes, {documents_modified: 1});
         });
 
-        await promise;
-        const docSnap = await dmlCol.doc('book2').get();
-        expect(docSnap.exists).to.be.false;
+        await expect(promise).to.be.rejectedWith(
+          /Transactional DML operations are not yet supported/,
+        );
       });
 
       it('can execute update stage with addFields', async () => {
@@ -616,7 +616,10 @@ describe.skipClassic('Pipeline class', () => {
   });
 
   describe('pipeline explain', () => {
-    it('mode: analyze, format: text', async () => {
+    it('mode: analyze, format: text', async function () {
+      if (isRest(firestore)) {
+        this.skip();
+      }
       const ppl = firestore
         .pipeline()
         .collection(randomCol.path)
@@ -656,7 +659,10 @@ describe.skipClassic('Pipeline class', () => {
       );
     });
 
-    it('mode: analyze, format: unspecified', async () => {
+    it('mode: analyze, format: unspecified', async function () {
+      if (isRest(firestore)) {
+        this.skip();
+      }
       const ppl = firestore
         .pipeline()
         .collection(randomCol.path)
@@ -1862,15 +1868,18 @@ describe.skipClassic('Pipeline class', () => {
         } catch (e: unknown) {
           expect(e instanceof Error).to.be.true;
           const err = e as ServiceError;
-          expect(err['code']).to.equal(3);
+          const isRestTest = isRest(firestore);
+          const expectedCode = isRestTest ? 400 : 3;
+          expect(err['code']).to.equal(expectedCode);
           expect(typeof err['message']).to.equal('string');
-          expect(typeof err['details']).to.equal('string');
+          if (!isRestTest) {
+            expect(typeof err['details']).to.equal('string');
+            expect(err['message']).to.equal(
+              `${err.code} INVALID_ARGUMENT: ${err.details}`,
+            );
+            expect(err['metadata'] instanceof Object).to.be.true;
+          }
           expect(typeof err['stack']).to.equal('string');
-          expect(err['metadata'] instanceof Object).to.be.true;
-
-          expect(err['message']).to.equal(
-            `${err.code} INVALID_ARGUMENT: ${err.details}`,
-          );
         }
       });
 
@@ -1894,29 +1903,32 @@ describe.skipClassic('Pipeline class', () => {
           const err = e as {[k: string]: unknown};
           expect(err instanceof Error).to.be.true;
 
-          expect(err['code']).to.equal(8);
+          const isRestTest = isRest(firestore);
+          const expectedCode = isRestTest ? 429 : 8;
+          expect(err['code']).to.equal(expectedCode);
           expect(typeof err['message']).to.equal('string');
-          expect(typeof err['details']).to.equal('string');
-          expect(typeof err['stack']).to.equal('string');
-          expect(err['metadata'] instanceof Object).to.be.true;
-
-          expect(err['message']).to.equal(
-            `${err.code} RESOURCE_EXHAUSTED: ${err.details}`,
-          );
-
-          expect('statusDetails' in err).to.be.true;
-          expect(Array.isArray(err['statusDetails'])).to.be.true;
-
-          const statusDetails = err['statusDetails'] as Array<object>;
-
-          const foundExplainStats = statusDetails.find(x => {
-            return (
-              'type_url' in x &&
-              x['type_url'] ===
-                'type.googleapis.com/google.firestore.v1.ExplainStats'
+          if (!isRestTest) {
+            expect(typeof err['details']).to.equal('string');
+            expect(err['message']).to.equal(
+              `${err.code} RESOURCE_EXHAUSTED: ${err.details}`,
             );
-          });
-          expect(foundExplainStats).to.not.be.undefined;
+
+            expect('statusDetails' in err).to.be.true;
+            expect(Array.isArray(err['statusDetails'])).to.be.true;
+
+            const statusDetails = err['statusDetails'] as Array<object>;
+
+            const foundExplainStats = statusDetails.find(x => {
+              return (
+                'type_url' in x &&
+                x['type_url'] ===
+                  'type.googleapis.com/google.firestore.v1.ExplainStats'
+              );
+            });
+            expect(foundExplainStats).to.not.be.undefined;
+            expect(err['metadata'] instanceof Object).to.be.true;
+          }
+          expect(typeof err['stack']).to.equal('string');
         }
       });
     });
@@ -7365,68 +7377,105 @@ describe.skipClassic('Pipeline search', () => {
         // });
       });
 
-      // TODO(search) enable with backend support
-      // describe('limit', () => {
-      // it('limits the number of documents returned', async () => {
-      //   const ppl = firestore
-      //       .pipeline()
-      //       .collection(COLLECTION_NAME)
-      //       .search({
-      //         query: constant(true),
-      //         sort: field('location')
-      //             .geoDistance(new GeoPoint(39.6985, -105.024))
-      //             .ascending(),
-      //         limit: 5,
-      //         queryEnhancement: 'disabled',
-      //       });
-      //
-      //   const snapshot = await ppl.execute();
-      //   expectResults(
-      //       snapshot,
-      //       'solTacos',
-      //       'lotusBlossomThai',
-      //       'goldenWaffle',
-      //   );
-      // });
-      // it('limits the number of documents scored', async () => {
-      //   const ppl = firestore
-      //       .pipeline()
-      //       .collection(COLLECTION_NAME)
-      //       .search({
-      //         query: field('menu').matches(
-      //             'chicken OR tacos OR fish OR waffles',
-      //         ),
-      //         retrievalDepth: 6,
-      //         queryEnhancement: 'disabled',
-      //       });
-      //
-      //   const snapshot = await ppl.execute();
-      //   expectResults(
-      //       snapshot,
-      //       'eastsideChicken',
-      //       'eastsideTacos',
-      //       'solTacos',
-      //       'mileHighCatch',
-      //   );
-      // });
-      // });
+      describe('languageCode', () => {
+        const rquery = 'al pastor';
+        it('en', async () => {
+          const ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({
+              query: documentMatches(rquery),
+              sort: score().descending(),
+              languageCode: 'en',
+              // queryEnhancement: 'disabled'
+            });
 
-      // TODO(search) enable with backend support
-      // describe('offset', () => {
-      // it('skips N documents', async () => {
-      //   const ppl = firestore
-      //       .pipeline()
-      //       .collection(COLLECTION_NAME)
-      //       .search({
-      //         query: constant(true),
-      //         limit: 2,
-      //         offset: 2,
-      //         queryEnhancement: 'disabled',
-      //       });
-      //
-      //   const snapshot = await ppl.execute();
-      //   expectResults(snapshot, 'eastsideChicken', 'eastsideTacos');
-      // });
+          const snapshot = await ppl.execute();
+          expectResults(snapshot, 'solTacos');
+        });
+
+        it('unknown', async () => {
+          const ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({
+              query: documentMatches(rquery),
+              sort: score().descending(),
+              languageCode: 'unknown',
+              // queryEnhancement: 'disabled'
+            });
+
+          const isRestTest = isRest(firestore);
+          const expectedErrorPattern = isRestTest ? /"code": 400/ : /3 INVALID_ARGUMENT.*/;
+          await expect(ppl.execute()).to.be.rejectedWith(expectedErrorPattern);
+        });
+      });
+
+      describe('limit', () => {
+        it('limits the number of documents returned', async () => {
+          const ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({
+              query: field('location')
+                .geoDistance(new GeoPoint(39.6985, -105.024))
+                .lessThanOrEqual(100000000),
+              sort: field('location')
+                .geoDistance(new GeoPoint(39.6985, -105.024))
+                .ascending(),
+              limit: 3,
+              // queryEnhancement: 'disabled'
+            });
+
+          const snapshot = await ppl.execute();
+          expectResults(
+            snapshot,
+            'solTacos',
+            'lotusBlossomThai',
+            'mileHighCatch',
+          );
+        });
+
+        it('limits the number of documents scored via retrievalDepth', async () => {
+          const commonSearchParams = {
+            query: documentMatches('taco'),
+            addFields: [score().as('score')],
+            sort: score().descending(),
+            // queryEnhancement: 'disabled' as QueryEnhancement
+          };
+
+          let ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({...commonSearchParams, retrievalDepth: 2});
+
+          let snapshot = await ppl.execute();
+          expectResults(snapshot, 'solTacos', 'eastsideTacos');
+
+          ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({...commonSearchParams, retrievalDepth: 1});
+
+          snapshot = await ppl.execute();
+          expect(snapshot.results.length).to.equal(1);
+          expect(['solTacos', 'eastsideTacos']).to.include(snapshot.results[0].id);
+        });
+      });
+
+      describe('offset', () => {
+        it('skips N documents', async () => {
+          const ppl = firestore.pipeline().collection(COLLECTION_NAME).search({
+            query: 'chicken',
+            limit: 2,
+            offset: 2,
+            // queryEnhancement: 'disabled'
+          });
+
+          const snapshot = await ppl.execute();
+          expectResults(snapshot, 'goldenWaffle');
+        });
+      });
       // });
     });
 

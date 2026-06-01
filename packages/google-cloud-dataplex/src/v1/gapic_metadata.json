@@ -226,6 +226,11 @@
                 "lookupEntry"
               ]
             },
+            "ModifyEntry": {
+              "methods": [
+                "modifyEntry"
+              ]
+            },
             "GetMetadataJob": {
               "methods": [
                 "getMetadataJob"
@@ -430,6 +435,11 @@
             "LookupEntry": {
               "methods": [
                 "lookupEntry"
+              ]
+            },
+            "ModifyEntry": {
+              "methods": [
+                "modifyEntry"
               ]
             },
             "GetMetadataJob": {
@@ -1003,6 +1013,11 @@
                 "getDataProduct"
               ]
             },
+            "RequestDataProductAccess": {
+              "methods": [
+                "requestDataProductAccess"
+              ]
+            },
             "GetDataAsset": {
               "methods": [
                 "getDataAsset"
@@ -1060,6 +1075,11 @@
             "GetDataProduct": {
               "methods": [
                 "getDataProduct"
+              ]
+            },
+            "RequestDataProductAccess": {
+              "methods": [
+                "requestDataProductAccess"
               ]
             },
             "GetDataAsset": {
@@ -1135,6 +1155,11 @@
                 "getDataScanJob"
               ]
             },
+            "CancelDataScanJob": {
+              "methods": [
+                "cancelDataScanJob"
+              ]
+            },
             "GenerateDataQualityRules": {
               "methods": [
                 "generateDataQualityRules"
@@ -1187,6 +1212,11 @@
             "GetDataScanJob": {
               "methods": [
                 "getDataScanJob"
+              ]
+            },
+            "CancelDataScanJob": {
+              "methods": [
+                "cancelDataScanJob"
               ]
             },
             "GenerateDataQualityRules": {

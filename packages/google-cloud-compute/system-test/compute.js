@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 const assert = require('assert');
 const expect = require('chai').expect;
-const uuid = require('uuid');
+const crypto = require('crypto');
 const compute = require('../');
 
 const DiskType = compute.protos.google.cloud.compute.v1.AttachedDisk.Type;
@@ -556,7 +556,7 @@ describe('Compute', () => {
 
   function generateName(customPrefix) {
     const TESTS_PREFIX = 'tsgapic';
-    const resourceId = uuid.v4().split('-')[0];
+    const resourceId = crypto.randomUUID().split('-')[0];
     return `${TESTS_PREFIX}-${customPrefix}-${resourceId}`;
   }
 });

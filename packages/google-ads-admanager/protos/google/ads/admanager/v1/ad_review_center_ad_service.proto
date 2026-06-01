@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,8 @@ option ruby_package = "Google::Ads::AdManager::V1";
 service AdReviewCenterAdService {
   option (google.api.default_host) = "admanager.googleapis.com";
   option (google.api.oauth_scopes) =
-      "https://www.googleapis.com/auth/admanager";
+      "https://www.googleapis.com/auth/admanager,"
+      "https://www.googleapis.com/auth/admanager.readonly";
 
   // API to search for AdReviewCenterAds.
   rpc SearchAdReviewCenterAds(SearchAdReviewCenterAdsRequest)
@@ -86,6 +87,20 @@ service AdReviewCenterAdService {
 
 // Request object for `SearchAdReviewCenterAds` method.
 message SearchAdReviewCenterAdsRequest {
+  // The status of the AdReviewCenterAds to return.
+  oneof ad_review_status {
+    // Optional. Only return ads with the given status.
+    AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus status = 4
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Only return ads with the given manual review status. Only
+    // available for networks with Manual Creative Review enabled. For more
+    // information, see
+    // https://support.google.com/admanager/answer/2586531#manual-creative-review.
+    ManualAdReviewCenterAdStatusEnum.ManualAdReviewCenterAdStatus
+        manual_review_status = 9 [(google.api.field_behavior) = OPTIONAL];
+  }
+
   // Required. The parent, which owns this collection of AdReviewCenterAds.
   // Format: networks/{network_code}/webProperties/{web_property_code}
   //
@@ -117,10 +132,6 @@ message SearchAdReviewCenterAdsRequest {
   // is the value returned from a previous Search request, or empty.
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. Only return ads with the given status.
-  AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus status = 4
-      [(google.api.field_behavior) = OPTIONAL];
-
   // Optional. Only return ads with the given AdReviewCenterAd IDs. If provided,
   // no other filter can be set (other than page size and page token).
   repeated string ad_review_center_ad_id = 5
@@ -128,7 +139,8 @@ message SearchAdReviewCenterAdsRequest {
 
   // Optional. If provided, only return ads that served within the given date
   // range (inclusive). The  date range must be within the last 30 days. If not
-  // provided, the date range will be the last 30 days.
+  // provided, the date range will be the last 30 days. This filter does not
+  // apply to the PENDING manual review status.
   google.type.Interval date_time_range = 6
       [(google.api.field_behavior) = OPTIONAL];
 
@@ -141,7 +153,7 @@ message SearchAdReviewCenterAdsRequest {
 
   // Optional. If provided, restrict the search to creatives belonging to one of
   // the given Adx buyer account IDs. Only applicable to RTB creatives. Adx
-  // buyer account IDs can be found via the ProgrammaticBuyerService.
+  // buyer account IDs can be found using the `ProgrammaticBuyerService`.
   repeated int64 buyer_account_id = 8 [(google.api.field_behavior) = OPTIONAL];
 }
 

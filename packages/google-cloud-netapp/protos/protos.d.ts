@@ -5977,6 +5977,13 @@ export namespace google {
                     UNIFIED = 2
                 }
 
+                /** ScaleType enum. */
+                enum ScaleType {
+                    SCALE_TYPE_UNSPECIFIED = 0,
+                    SCALE_TYPE_DEFAULT = 1,
+                    SCALE_TYPE_SCALEOUT = 2
+                }
+
                 /** HybridReplicationSchedule enum. */
                 enum HybridReplicationSchedule {
                     HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED = 0,
@@ -11621,6 +11628,9 @@ export namespace google {
                     /** Volume blockDevices */
                     blockDevices?: (google.cloud.netapp.v1.IBlockDevice[]|null);
 
+                    /** Volume largeCapacityConfig */
+                    largeCapacityConfig?: (google.cloud.netapp.v1.ILargeCapacityConfig|null);
+
                     /** Volume cloneDetails */
                     cloneDetails?: (google.cloud.netapp.v1.Volume.ICloneDetails|null);
                 }
@@ -11759,6 +11769,9 @@ export namespace google {
 
                     /** Volume blockDevices. */
                     public blockDevices: google.cloud.netapp.v1.IBlockDevice[];
+
+                    /** Volume largeCapacityConfig. */
+                    public largeCapacityConfig?: (google.cloud.netapp.v1.ILargeCapacityConfig|null);
 
                     /** Volume cloneDetails. */
                     public cloneDetails?: (google.cloud.netapp.v1.Volume.ICloneDetails|null);
@@ -11965,6 +11978,103 @@ export namespace google {
                         PREPARING = 8,
                         READ_ONLY = 9
                     }
+                }
+
+                /** Properties of a LargeCapacityConfig. */
+                interface ILargeCapacityConfig {
+
+                    /** LargeCapacityConfig constituentCount */
+                    constituentCount?: (number|null);
+                }
+
+                /** Represents a LargeCapacityConfig. */
+                class LargeCapacityConfig implements ILargeCapacityConfig {
+
+                    /**
+                     * Constructs a new LargeCapacityConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.ILargeCapacityConfig);
+
+                    /** LargeCapacityConfig constituentCount. */
+                    public constituentCount: number;
+
+                    /**
+                     * Creates a new LargeCapacityConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LargeCapacityConfig instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.ILargeCapacityConfig): google.cloud.netapp.v1.LargeCapacityConfig;
+
+                    /**
+                     * Encodes the specified LargeCapacityConfig message. Does not implicitly {@link google.cloud.netapp.v1.LargeCapacityConfig.verify|verify} messages.
+                     * @param message LargeCapacityConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.ILargeCapacityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LargeCapacityConfig message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.LargeCapacityConfig.verify|verify} messages.
+                     * @param message LargeCapacityConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.ILargeCapacityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LargeCapacityConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LargeCapacityConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.LargeCapacityConfig;
+
+                    /**
+                     * Decodes a LargeCapacityConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LargeCapacityConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.LargeCapacityConfig;
+
+                    /**
+                     * Verifies a LargeCapacityConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LargeCapacityConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LargeCapacityConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.LargeCapacityConfig;
+
+                    /**
+                     * Creates a plain object from a LargeCapacityConfig message. Also converts values to other types if specified.
+                     * @param message LargeCapacityConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.LargeCapacityConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LargeCapacityConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LargeCapacityConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an ExportPolicy. */
@@ -15914,6 +16024,9 @@ export namespace google {
 
                     /** StoragePool mode */
                     mode?: (google.cloud.netapp.v1.Mode|keyof typeof google.cloud.netapp.v1.Mode|null);
+
+                    /** StoragePool scaleType */
+                    scaleType?: (google.cloud.netapp.v1.ScaleType|keyof typeof google.cloud.netapp.v1.ScaleType|null);
                 }
 
                 /** Represents a StoragePool. */
@@ -16023,6 +16136,9 @@ export namespace google {
 
                     /** StoragePool mode. */
                     public mode?: (google.cloud.netapp.v1.Mode|keyof typeof google.cloud.netapp.v1.Mode|null);
+
+                    /** StoragePool scaleType. */
+                    public scaleType: (google.cloud.netapp.v1.ScaleType|keyof typeof google.cloud.netapp.v1.ScaleType);
 
                     /**
                      * Creates a new StoragePool instance using the specified properties.

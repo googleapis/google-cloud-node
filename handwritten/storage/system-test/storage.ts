@@ -22,7 +22,6 @@ import pLimit from 'p-limit';
 import {promisify} from 'util';
 import * as path from 'path';
 import * as tmp from 'tmp';
-import * as uuid from 'uuid';
 import {ApiError} from '../src/nodejs-common/index.js';
 import {
   AccessControlObject,
@@ -1100,7 +1099,7 @@ describe('storage', function () {
 
       it('can be written to the bucket by project owner w/o configuration', async () => {
         await setUniformBucketLevelAccess(bucket, true);
-        const file = bucket.file(`file-${uuid.v4()}`);
+        const file = bucket.file(`file-${crypto.randomUUID()}`);
         return assert.doesNotReject(() => file.save('data'));
       });
     });
@@ -1117,7 +1116,7 @@ describe('storage', function () {
         await createBucket();
         await setUniformBucketLevelAccess(bucket, true);
 
-        file = bucket.file(`file-${uuid.v4()}`);
+        file = bucket.file(`file-${crypto.randomUUID()}`);
         await file.save('data', {resumable: false});
       });
 
@@ -1175,7 +1174,7 @@ describe('storage', function () {
       }).timeout(UNIFORM_ACCESS_TIMEOUT);
 
       it('should preserve file ACL', async () => {
-        const file = bucket.file(`file-${uuid.v4()}`);
+        const file = bucket.file(`file-${crypto.randomUUID()}`);
         await file.save('data', {resumable: false});
 
         await file.acl.update(customAcl);
@@ -3005,7 +3004,7 @@ describe('storage', function () {
             });
 
             await new Promise(res =>
-              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
             );
 
             const encryptionKey = crypto.randomBytes(32);
@@ -3019,7 +3018,7 @@ describe('storage', function () {
                 assert.strictEqual(err.code, 412);
                 assert.ok(err.message.includes(failureMessage));
                 return true;
-              }
+              },
             );
           });
 
@@ -3047,7 +3046,7 @@ describe('storage', function () {
             });
 
             await new Promise(res =>
-              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
             );
 
             await bucket.setMetadata({
@@ -3059,19 +3058,19 @@ describe('storage', function () {
             });
 
             await new Promise(res =>
-              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
             );
 
             const [metadata] = await bucket.getMetadata();
             assert.strictEqual(
               metadata.encryption?.defaultKmsKeyName,
-              kmsKeyName
+              kmsKeyName,
             );
 
             assert.strictEqual(
               metadata.encryption?.googleManagedEncryptionEnforcementConfig
                 ?.restrictionMode,
-              'FullyRestricted'
+              'FullyRestricted',
             );
           });
         });
@@ -3643,7 +3642,7 @@ describe('storage', function () {
       assert.ok(metadata.contexts?.custom);
       assert.strictEqual(
         metadata.contexts.custom['team-owner']?.value,
-        'storage-team'
+        'storage-team',
       );
       assert.ok(metadata.contexts.custom['team-owner'].createTime);
 
@@ -3768,7 +3767,7 @@ describe('storage', function () {
         const [metadata] = await combined.getMetadata();
         assert.strictEqual(
           metadata.contexts?.custom?.status?.value,
-          'composed'
+          'composed',
         );
       });
     });
@@ -4537,7 +4536,7 @@ describe('storage', function () {
   }
 
   function shortUUID() {
-    return uuid.v1().split('-').shift();
+    return crypto.randomUUID().split('-').shift();
   }
 
   function generateName() {

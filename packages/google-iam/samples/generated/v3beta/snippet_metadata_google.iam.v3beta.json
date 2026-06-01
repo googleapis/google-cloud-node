@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-iam",
-    "version": "0.1.0",
+    "version": "2.3.1",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -12,10 +12,294 @@
   },
   "snippets": [
     {
-      "regionTag": "iam_v3beta_generated_PolicyBindings_CreatePolicyBinding_async",
-      "title": "PolicyBindings createPolicyBinding Sample",
+      "regionTag": "iam_v3beta_generated_AccessPolicies_CreateAccessPolicy_async",
+      "title": "AccessPolicies createAccessPolicy Sample",
       "origin": "API_DEFINITION",
-      "description": " Creates a policy binding and returns a long-running operation. Callers will need the IAM permissions on both the policy and target. Once the binding is created, the policy is applied to the target.",
+      "description": " Creates an access policy, and returns a long running operation.",
+      "canonical": true,
+      "file": "access_policies.create_access_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAccessPolicy",
+        "fullName": "google.iam.v3beta.AccessPolicies.CreateAccessPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "access_policy_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "access_policy",
+            "type": ".google.iam.v3beta.AccessPolicy"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AccessPoliciesClient",
+          "fullName": "google.iam.v3beta.AccessPoliciesClient"
+        },
+        "method": {
+          "shortName": "CreateAccessPolicy",
+          "fullName": "google.iam.v3beta.AccessPolicies.CreateAccessPolicy",
+          "service": {
+            "shortName": "AccessPolicies",
+            "fullName": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iam_v3beta_generated_AccessPolicies_GetAccessPolicy_async",
+      "title": "AccessPolicies getAccessPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an access policy.",
+      "canonical": true,
+      "file": "access_policies.get_access_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAccessPolicy",
+        "fullName": "google.iam.v3beta.AccessPolicies.GetAccessPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.iam.v3beta.AccessPolicy",
+        "client": {
+          "shortName": "AccessPoliciesClient",
+          "fullName": "google.iam.v3beta.AccessPoliciesClient"
+        },
+        "method": {
+          "shortName": "GetAccessPolicy",
+          "fullName": "google.iam.v3beta.AccessPolicies.GetAccessPolicy",
+          "service": {
+            "shortName": "AccessPolicies",
+            "fullName": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iam_v3beta_generated_AccessPolicies_UpdateAccessPolicy_async",
+      "title": "AccessPolicies updateAccessPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an access policy.",
+      "canonical": true,
+      "file": "access_policies.update_access_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAccessPolicy",
+        "fullName": "google.iam.v3beta.AccessPolicies.UpdateAccessPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "access_policy",
+            "type": ".google.iam.v3beta.AccessPolicy"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AccessPoliciesClient",
+          "fullName": "google.iam.v3beta.AccessPoliciesClient"
+        },
+        "method": {
+          "shortName": "UpdateAccessPolicy",
+          "fullName": "google.iam.v3beta.AccessPolicies.UpdateAccessPolicy",
+          "service": {
+            "shortName": "AccessPolicies",
+            "fullName": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iam_v3beta_generated_AccessPolicies_DeleteAccessPolicy_async",
+      "title": "AccessPolicies deleteAccessPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an access policy.",
+      "canonical": true,
+      "file": "access_policies.delete_access_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAccessPolicy",
+        "fullName": "google.iam.v3beta.AccessPolicies.DeleteAccessPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AccessPoliciesClient",
+          "fullName": "google.iam.v3beta.AccessPoliciesClient"
+        },
+        "method": {
+          "shortName": "DeleteAccessPolicy",
+          "fullName": "google.iam.v3beta.AccessPolicies.DeleteAccessPolicy",
+          "service": {
+            "shortName": "AccessPolicies",
+            "fullName": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iam_v3beta_generated_AccessPolicies_ListAccessPolicies_async",
+      "title": "AccessPolicies listAccessPolicies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists access policies.",
+      "canonical": true,
+      "file": "access_policies.list_access_policies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAccessPolicies",
+        "fullName": "google.iam.v3beta.AccessPolicies.ListAccessPolicies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.iam.v3beta.ListAccessPoliciesResponse",
+        "client": {
+          "shortName": "AccessPoliciesClient",
+          "fullName": "google.iam.v3beta.AccessPoliciesClient"
+        },
+        "method": {
+          "shortName": "ListAccessPolicies",
+          "fullName": "google.iam.v3beta.AccessPolicies.ListAccessPolicies",
+          "service": {
+            "shortName": "AccessPolicies",
+            "fullName": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iam_v3beta_generated_AccessPolicies_SearchAccessPolicyBindings_async",
+      "title": "AccessPolicies searchAccessPolicyBindings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns all policy bindings that bind a specific policy if a user has searchPolicyBindings permission on that policy.",
+      "canonical": true,
+      "file": "access_policies.search_access_policy_bindings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchAccessPolicyBindings",
+        "fullName": "google.iam.v3beta.AccessPolicies.SearchAccessPolicyBindings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.iam.v3beta.SearchAccessPolicyBindingsResponse",
+        "client": {
+          "shortName": "AccessPoliciesClient",
+          "fullName": "google.iam.v3beta.AccessPoliciesClient"
+        },
+        "method": {
+          "shortName": "SearchAccessPolicyBindings",
+          "fullName": "google.iam.v3beta.AccessPolicies.SearchAccessPolicyBindings",
+          "service": {
+            "shortName": "AccessPolicies",
+            "fullName": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iam_v3beta_generated_PolicyBindings_CreatePolicyBinding_async",
+      "title": "AccessPolicies createPolicyBinding Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a policy binding and returns a long-running operation. Callers will need the IAM permissions on both the policy and target. After the binding is created, the policy is applied to the target.",
       "canonical": true,
       "file": "policy_bindings.create_policy_binding.js",
       "language": "JAVASCRIPT",
@@ -65,7 +349,7 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PolicyBindings_GetPolicyBinding_async",
-      "title": "PolicyBindings getPolicyBinding Sample",
+      "title": "AccessPolicies getPolicyBinding Sample",
       "origin": "API_DEFINITION",
       "description": " Gets a policy binding.",
       "canonical": true,
@@ -105,9 +389,9 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PolicyBindings_UpdatePolicyBinding_async",
-      "title": "PolicyBindings updatePolicyBinding Sample",
+      "title": "AccessPolicies updatePolicyBinding Sample",
       "origin": "API_DEFINITION",
-      "description": " Updates a policy binding and returns a long-running operation. Callers will need the IAM permissions on the policy and target in the binding to update, and the IAM permission to remove the existing policy from the binding. Target is immutable and cannot be updated. Once the binding is updated, the new policy is applied to the target.",
+      "description": " Updates a policy binding and returns a long-running operation. Callers will need the IAM permissions on the policy and target in the binding to update. Target and policy are immutable and cannot be updated.",
       "canonical": true,
       "file": "policy_bindings.update_policy_binding.js",
       "language": "JAVASCRIPT",
@@ -153,9 +437,9 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PolicyBindings_DeletePolicyBinding_async",
-      "title": "PolicyBindings deletePolicyBinding Sample",
+      "title": "AccessPolicies deletePolicyBinding Sample",
       "origin": "API_DEFINITION",
-      "description": " Deletes a policy binding and returns a long-running operation. Callers will need the IAM permissions on both the policy and target. Once the binding is deleted, the policy no longer applies to the target.",
+      "description": " Deletes a policy binding and returns a long-running operation. Callers will need the IAM permissions on both the policy and target. After the binding is deleted, the policy no longer applies to the target.",
       "canonical": true,
       "file": "policy_bindings.delete_policy_binding.js",
       "language": "JAVASCRIPT",
@@ -201,7 +485,7 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PolicyBindings_ListPolicyBindings_async",
-      "title": "PolicyBindings listPolicyBindings Sample",
+      "title": "AccessPolicies listPolicyBindings Sample",
       "origin": "API_DEFINITION",
       "description": " Lists policy bindings.",
       "canonical": true,
@@ -253,7 +537,7 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PolicyBindings_SearchTargetPolicyBindings_async",
-      "title": "PolicyBindings searchTargetPolicyBindings Sample",
+      "title": "AccessPolicies searchTargetPolicyBindings Sample",
       "origin": "API_DEFINITION",
       "description": " Search policy bindings by target. Returns all policy binding objects bound directly to target.",
       "canonical": true,
@@ -262,7 +546,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 90,
+          "end": 99,
           "type": "FULL"
         }
       ],
@@ -286,6 +570,10 @@
           {
             "name": "parent",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.iam.v3beta.SearchTargetPolicyBindingsResponse",
@@ -305,7 +593,7 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_CreatePrincipalAccessBoundaryPolicy_async",
-      "title": "PolicyBindings createPrincipalAccessBoundaryPolicy Sample",
+      "title": "AccessPolicies createPrincipalAccessBoundaryPolicy Sample",
       "origin": "API_DEFINITION",
       "description": " Creates a principal access boundary policy, and returns a long running operation.",
       "canonical": true,
@@ -357,7 +645,7 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_GetPrincipalAccessBoundaryPolicy_async",
-      "title": "PolicyBindings getPrincipalAccessBoundaryPolicy Sample",
+      "title": "AccessPolicies getPrincipalAccessBoundaryPolicy Sample",
       "origin": "API_DEFINITION",
       "description": " Gets a principal access boundary policy.",
       "canonical": true,
@@ -397,7 +685,7 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_UpdatePrincipalAccessBoundaryPolicy_async",
-      "title": "PolicyBindings updatePrincipalAccessBoundaryPolicy Sample",
+      "title": "AccessPolicies updatePrincipalAccessBoundaryPolicy Sample",
       "origin": "API_DEFINITION",
       "description": " Updates a principal access boundary policy.",
       "canonical": true,
@@ -445,7 +733,7 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_DeletePrincipalAccessBoundaryPolicy_async",
-      "title": "PolicyBindings deletePrincipalAccessBoundaryPolicy Sample",
+      "title": "AccessPolicies deletePrincipalAccessBoundaryPolicy Sample",
       "origin": "API_DEFINITION",
       "description": " Deletes a principal access boundary policy.",
       "canonical": true,
@@ -497,7 +785,7 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_ListPrincipalAccessBoundaryPolicies_async",
-      "title": "PolicyBindings listPrincipalAccessBoundaryPolicies Sample",
+      "title": "AccessPolicies listPrincipalAccessBoundaryPolicies Sample",
       "origin": "API_DEFINITION",
       "description": " Lists principal access boundary policies.",
       "canonical": true,
@@ -545,7 +833,7 @@
     },
     {
       "regionTag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_SearchPrincipalAccessBoundaryPolicyBindings_async",
-      "title": "PolicyBindings searchPrincipalAccessBoundaryPolicyBindings Sample",
+      "title": "AccessPolicies searchPrincipalAccessBoundaryPolicyBindings Sample",
       "origin": "API_DEFINITION",
       "description": " Returns all policy bindings that bind a specific policy if a user has searchPolicyBindings permission on that policy.",
       "canonical": true,

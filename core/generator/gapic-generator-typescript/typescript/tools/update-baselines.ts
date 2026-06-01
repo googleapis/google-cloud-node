@@ -18,24 +18,17 @@
 // needs to be propagated to all baselines.
 // Usage: node build/tools/update-baselines.js
 
-import {exec} from 'child_process';
+import { exec } from 'child_process';
 import * as path from 'path';
-import {promisify} from 'util';
-import {existsSync} from 'fs';
+import { promisify } from 'util';
+import { existsSync } from 'fs';
 import * as fsp from 'fs/promises';
-import {readdir, stat, symlink} from 'fs/promises';
+import { readdir, stat, symlink } from 'fs/promises';
 
 const execp = promisify(exec);
 
 const root = process.cwd();
 const resultPrefix = /^\.test-out-(.*)$/;
-const baselineZip = path.join(
-  root,
-  'bazel-testlogs',
-  'unit_tests',
-  'test.outputs',
-  'outputs.zip',
-);
 
 function getBaselineDirectory(library: string): string {
   return path.join(root, 'baselines', library);
@@ -50,7 +43,7 @@ async function copyBaseline(library: string, root: string, directory = '.') {
   const start = path.join(root, directory);
   const targetDirectory = path.join(getBaselineDirectory(library), directory);
   if (!existsSync(targetDirectory)) {
-    await fsp.mkdir(targetDirectory, {recursive: true});
+    await fsp.mkdir(targetDirectory, { recursive: true });
   }
   const files = await readdir(start);
   for (const file of files) {
@@ -65,13 +58,13 @@ async function copyBaseline(library: string, root: string, directory = '.') {
       // (package.json.baseline is a symlink to package.json to make renovate bot happy)
       if (relativePath.endsWith(`${path.sep}package.json`)) {
         const packageJson = baseline.substring(0, baseline.lastIndexOf('.'));
-        await fsp.cp(absolutePath, packageJson, {recursive: true});
+        await fsp.cp(absolutePath, packageJson, { recursive: true });
         const dirname = path.dirname(packageJson);
         process.chdir(dirname);
         await symlink('package.json', 'package.json.baseline');
         process.chdir(cwd);
       } else {
-        await fsp.cp(absolutePath, baseline, {recursive: true});
+        await fsp.cp(absolutePath, baseline, { recursive: true });
       }
       console.log(`    - ${relativePath}`);
     }
@@ -79,6 +72,14 @@ async function copyBaseline(library: string, root: string, directory = '.') {
 }
 
 async function main() {
+  // remove old test out folders
+  const oldFolders = (await readdir(root)).filter(file =>
+    file.match(resultPrefix),
+  );
+  for (const oldFolder of oldFolders) {
+    await fsp.rm(oldFolder, { recursive: true });
+  }
+
   // generate test output
   try {
     console.log('Running npm test...');
@@ -89,15 +90,6 @@ async function main() {
     console.log("Tests failed - that's OK, will update baselines.");
   }
 
-  // remove old test out folders
-  const oldFolders = (await readdir(root)).filter(file =>
-    file.match(resultPrefix),
-  );
-  for (const oldFolder of oldFolders) {
-    await fsp.rm(oldFolder, {recursive: true});
-  }
-  // unzip baselines
-  await execp(`unzip -o "${baselineZip}" -d .`);
 
   // get a list of baselines
   const files = await readdir(root);
@@ -115,7 +107,7 @@ async function main() {
     console.log(`Updating baseline for ${library}...`);
     console.log(`  - rm -rf "${baselineDir}"...`);
     try {
-      await fsp.rm(baselineDir, {recursive: true});
+      await fsp.rm(baselineDir, { recursive: true });
     } catch (err) {
       console.log(
         `Not removing baseline ${baselineDir} because it does not exist`,

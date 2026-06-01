@@ -12,6 +12,698 @@
   },
   "snippets": [
     {
+      "regionTag": "dataform_v1_generated_Dataform_GetTeamFolder_async",
+      "title": "Dataform getTeamFolder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a single TeamFolder.",
+      "canonical": true,
+      "file": "dataform.get_team_folder.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTeamFolder",
+        "fullName": "google.cloud.dataform.v1.Dataform.GetTeamFolder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1.TeamFolder",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "GetTeamFolder",
+          "fullName": "google.cloud.dataform.v1.Dataform.GetTeamFolder",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_CreateTeamFolder_async",
+      "title": "Dataform createTeamFolder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new TeamFolder in a given project and location.",
+      "canonical": true,
+      "file": "dataform.create_team_folder.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTeamFolder",
+        "fullName": "google.cloud.dataform.v1.Dataform.CreateTeamFolder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "team_folder",
+            "type": ".google.cloud.dataform.v1.TeamFolder"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1.TeamFolder",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "CreateTeamFolder",
+          "fullName": "google.cloud.dataform.v1.Dataform.CreateTeamFolder",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_UpdateTeamFolder_async",
+      "title": "Dataform updateTeamFolder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a single TeamFolder.",
+      "canonical": true,
+      "file": "dataform.update_team_folder.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTeamFolder",
+        "fullName": "google.cloud.dataform.v1.Dataform.UpdateTeamFolder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "team_folder",
+            "type": ".google.cloud.dataform.v1.TeamFolder"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1.TeamFolder",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "UpdateTeamFolder",
+          "fullName": "google.cloud.dataform.v1.Dataform.UpdateTeamFolder",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_DeleteTeamFolder_async",
+      "title": "Dataform deleteTeamFolder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single TeamFolder.",
+      "canonical": true,
+      "file": "dataform.delete_team_folder.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTeamFolder",
+        "fullName": "google.cloud.dataform.v1.Dataform.DeleteTeamFolder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "DeleteTeamFolder",
+          "fullName": "google.cloud.dataform.v1.Dataform.DeleteTeamFolder",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_DeleteTeamFolderTree_async",
+      "title": "Dataform deleteTeamFolderTree Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a TeamFolder with its contents (Folders, Repositories, Workspaces, ReleaseConfigs, and WorkflowConfigs).",
+      "canonical": true,
+      "file": "dataform.delete_team_folder_tree.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTeamFolderTree",
+        "fullName": "google.cloud.dataform.v1.Dataform.DeleteTeamFolderTree",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "DeleteTeamFolderTree",
+          "fullName": "google.cloud.dataform.v1.Dataform.DeleteTeamFolderTree",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_QueryTeamFolderContents_async",
+      "title": "Dataform queryTeamFolderContents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the contents of a given TeamFolder.",
+      "canonical": true,
+      "file": "dataform.query_team_folder_contents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 87,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryTeamFolderContents",
+        "fullName": "google.cloud.dataform.v1.Dataform.QueryTeamFolderContents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "team_folder",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1.QueryTeamFolderContentsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "QueryTeamFolderContents",
+          "fullName": "google.cloud.dataform.v1.Dataform.QueryTeamFolderContents",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_SearchTeamFolders_async",
+      "title": "Dataform searchTeamFolders Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns all TeamFolders in a given location that the caller has access to and match the provided filter.",
+      "canonical": true,
+      "file": "dataform.search_team_folders.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchTeamFolders",
+        "fullName": "google.cloud.dataform.v1.Dataform.SearchTeamFolders",
+        "async": true,
+        "parameters": [
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1.SearchTeamFoldersResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "SearchTeamFolders",
+          "fullName": "google.cloud.dataform.v1.Dataform.SearchTeamFolders",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_GetFolder_async",
+      "title": "Dataform getFolder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a single Folder.",
+      "canonical": true,
+      "file": "dataform.get_folder.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetFolder",
+        "fullName": "google.cloud.dataform.v1.Dataform.GetFolder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1.Folder",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "GetFolder",
+          "fullName": "google.cloud.dataform.v1.Dataform.GetFolder",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_CreateFolder_async",
+      "title": "Dataform createFolder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Folder in a given project and location.",
+      "canonical": true,
+      "file": "dataform.create_folder.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateFolder",
+        "fullName": "google.cloud.dataform.v1.Dataform.CreateFolder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "folder",
+            "type": ".google.cloud.dataform.v1.Folder"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1.Folder",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "CreateFolder",
+          "fullName": "google.cloud.dataform.v1.Dataform.CreateFolder",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_UpdateFolder_async",
+      "title": "Dataform updateFolder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a single Folder.",
+      "canonical": true,
+      "file": "dataform.update_folder.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateFolder",
+        "fullName": "google.cloud.dataform.v1.Dataform.UpdateFolder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "folder",
+            "type": ".google.cloud.dataform.v1.Folder"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1.Folder",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "UpdateFolder",
+          "fullName": "google.cloud.dataform.v1.Dataform.UpdateFolder",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_DeleteFolder_async",
+      "title": "Dataform deleteFolder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Folder.",
+      "canonical": true,
+      "file": "dataform.delete_folder.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteFolder",
+        "fullName": "google.cloud.dataform.v1.Dataform.DeleteFolder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "DeleteFolder",
+          "fullName": "google.cloud.dataform.v1.Dataform.DeleteFolder",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_DeleteFolderTree_async",
+      "title": "Dataform deleteFolderTree Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Folder with its contents (Folders, Repositories, Workspaces, ReleaseConfigs, and WorkflowConfigs).",
+      "canonical": true,
+      "file": "dataform.delete_folder_tree.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteFolderTree",
+        "fullName": "google.cloud.dataform.v1.Dataform.DeleteFolderTree",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "DeleteFolderTree",
+          "fullName": "google.cloud.dataform.v1.Dataform.DeleteFolderTree",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_QueryFolderContents_async",
+      "title": "Dataform queryFolderContents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the contents of a given Folder.",
+      "canonical": true,
+      "file": "dataform.query_folder_contents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 87,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryFolderContents",
+        "fullName": "google.cloud.dataform.v1.Dataform.QueryFolderContents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "folder",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1.QueryFolderContentsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "QueryFolderContents",
+          "fullName": "google.cloud.dataform.v1.Dataform.QueryFolderContents",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_QueryUserRootContents_async",
+      "title": "Dataform queryUserRootContents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the contents of a caller's root folder in a given location. The root folder contains all resources that are created by the user and not contained in any other folder.",
+      "canonical": true,
+      "file": "dataform.query_user_root_contents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 86,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryUserRootContents",
+        "fullName": "google.cloud.dataform.v1.Dataform.QueryUserRootContents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1.QueryUserRootContentsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "QueryUserRootContents",
+          "fullName": "google.cloud.dataform.v1.Dataform.QueryUserRootContents",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_MoveFolder_async",
+      "title": "Dataform moveFolder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Moves a Folder to a new Folder, TeamFolder, or the root location.",
+      "canonical": true,
+      "file": "dataform.move_folder.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MoveFolder",
+        "fullName": "google.cloud.dataform.v1.Dataform.MoveFolder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "destination_containing_folder",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "MoveFolder",
+          "fullName": "google.cloud.dataform.v1.Dataform.MoveFolder",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "dataform_v1_generated_Dataform_ListRepositories_async",
       "title": "Dataform listRepositories Sample",
       "origin": "API_DEFINITION",
@@ -210,7 +902,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 62,
           "type": "FULL"
         }
       ],
@@ -236,6 +928,50 @@
         "method": {
           "shortName": "DeleteRepository",
           "fullName": "google.cloud.dataform.v1.Dataform.DeleteRepository",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_MoveRepository_async",
+      "title": "Dataform moveRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Moves a Repository to a new location.",
+      "canonical": true,
+      "file": "dataform.move_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MoveRepository",
+        "fullName": "google.cloud.dataform.v1.Dataform.MoveRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "destination_containing_folder",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "MoveRepository",
+          "fullName": "google.cloud.dataform.v1.Dataform.MoveRepository",
           "service": {
             "shortName": "Dataform",
             "fullName": "google.cloud.dataform.v1.Dataform"
@@ -1082,7 +1818,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 74,
+          "end": 81,
           "type": "FULL"
         }
       ],
@@ -1106,6 +1842,10 @@
           {
             "name": "page_token",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.dataform.v1.DirectoryContentsView"
           }
         ],
         "resultType": ".google.cloud.dataform.v1.QueryDirectoryContentsResponse",
@@ -2476,6 +3216,142 @@
         "method": {
           "shortName": "UpdateConfig",
           "fullName": "google.cloud.dataform.v1.Dataform.UpdateConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_GetIamPolicy_async",
+      "title": "Dataform getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.",
+      "canonical": true,
+      "file": "dataform.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.dataform.v1.Dataform.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.dataform.v1.Dataform.GetIamPolicy",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_SetIamPolicy_async",
+      "title": "Dataform setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.",
+      "canonical": true,
+      "file": "dataform.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.dataform.v1.Dataform.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.dataform.v1.Dataform.SetIamPolicy",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1_generated_Dataform_TestIamPermissions_async",
+      "title": "Dataform testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
+      "canonical": true,
+      "file": "dataform.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.dataform.v1.Dataform.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1.DataformClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.dataform.v1.Dataform.TestIamPermissions",
           "service": {
             "shortName": "Dataform",
             "fullName": "google.cloud.dataform.v1.Dataform"

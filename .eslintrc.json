@@ -1,0 +1,13 @@
+{
+  "extends": "./node_modules/gts",
+  "root": true,
+  "ignorePatterns": [
+    "**/node_modules",
+    "**/build",
+    "**/system-test",
+    "**/test/fixtures",
+    "**/samples/generated",
+    "**/.coverage",
+    "**/coverage"
+  ]
+}

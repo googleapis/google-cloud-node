@@ -7739,6 +7739,7 @@
                          * @property {Object.<string,string>|null} [labels] AuthzPolicy labels
                          * @property {google.cloud.networksecurity.v1.AuthzPolicy.ITarget|null} [target] AuthzPolicy target
                          * @property {Array.<google.cloud.networksecurity.v1.AuthzPolicy.IAuthzRule>|null} [httpRules] AuthzPolicy httpRules
+                         * @property {Array.<google.cloud.networksecurity.v1.AuthzPolicy.IAuthzRule>|null} [networkRules] AuthzPolicy networkRules
                          * @property {google.cloud.networksecurity.v1.AuthzPolicy.AuthzAction|null} [action] AuthzPolicy action
                          * @property {google.cloud.networksecurity.v1.AuthzPolicy.ICustomProvider|null} [customProvider] AuthzPolicy customProvider
                          * @property {google.cloud.networksecurity.v1.AuthzPolicy.PolicyProfile|null} [policyProfile] AuthzPolicy policyProfile
@@ -7755,6 +7756,7 @@
                         function AuthzPolicy(properties) {
                             this.labels = {};
                             this.httpRules = [];
+                            this.networkRules = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -7816,6 +7818,14 @@
                          * @instance
                          */
                         AuthzPolicy.prototype.httpRules = $util.emptyArray;
+    
+                        /**
+                         * AuthzPolicy networkRules.
+                         * @member {Array.<google.cloud.networksecurity.v1.AuthzPolicy.IAuthzRule>} networkRules
+                         * @memberof google.cloud.networksecurity.v1.AuthzPolicy
+                         * @instance
+                         */
+                        AuthzPolicy.prototype.networkRules = $util.emptyArray;
     
                         /**
                          * AuthzPolicy action.
@@ -7887,6 +7897,9 @@
                                 $root.google.cloud.networksecurity.v1.AuthzPolicy.CustomProvider.encode(message.customProvider, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.policyProfile != null && Object.hasOwnProperty.call(message, "policyProfile"))
                                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.policyProfile);
+                            if (message.networkRules != null && message.networkRules.length)
+                                for (var i = 0; i < message.networkRules.length; ++i)
+                                    $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.encode(message.networkRules[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -7970,6 +7983,12 @@
                                         if (!(message.httpRules && message.httpRules.length))
                                             message.httpRules = [];
                                         message.httpRules.push($root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.networkRules && message.networkRules.length))
+                                            message.networkRules = [];
+                                        message.networkRules.push($root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 8: {
@@ -8057,6 +8076,15 @@
                                         return "httpRules." + error;
                                 }
                             }
+                            if (message.networkRules != null && message.hasOwnProperty("networkRules")) {
+                                if (!Array.isArray(message.networkRules))
+                                    return "networkRules: array expected";
+                                for (var i = 0; i < message.networkRules.length; ++i) {
+                                    var error = $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.verify(message.networkRules[i]);
+                                    if (error)
+                                        return "networkRules." + error;
+                                }
+                            }
                             if (message.action != null && message.hasOwnProperty("action"))
                                 switch (message.action) {
                                 default:
@@ -8132,6 +8160,16 @@
                                     message.httpRules[i] = $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.fromObject(object.httpRules[i]);
                                 }
                             }
+                            if (object.networkRules) {
+                                if (!Array.isArray(object.networkRules))
+                                    throw TypeError(".google.cloud.networksecurity.v1.AuthzPolicy.networkRules: array expected");
+                                message.networkRules = [];
+                                for (var i = 0; i < object.networkRules.length; ++i) {
+                                    if (typeof object.networkRules[i] !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.AuthzPolicy.networkRules: object expected");
+                                    message.networkRules[i] = $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.fromObject(object.networkRules[i]);
+                                }
+                            }
                             switch (object.action) {
                             default:
                                 if (typeof object.action === "number") {
@@ -8197,8 +8235,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.httpRules = [];
+                                object.networkRules = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -8238,6 +8278,11 @@
                                 object.customProvider = $root.google.cloud.networksecurity.v1.AuthzPolicy.CustomProvider.toObject(message.customProvider, options);
                             if (message.policyProfile != null && message.hasOwnProperty("policyProfile"))
                                 object.policyProfile = options.enums === String ? $root.google.cloud.networksecurity.v1.AuthzPolicy.PolicyProfile[message.policyProfile] === undefined ? message.policyProfile : $root.google.cloud.networksecurity.v1.AuthzPolicy.PolicyProfile[message.policyProfile] : message.policyProfile;
+                            if (message.networkRules && message.networkRules.length) {
+                                object.networkRules = [];
+                                for (var j = 0; j < message.networkRules.length; ++j)
+                                    object.networkRules[j] = $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.toObject(message.networkRules[j], options);
+                            }
                             return object;
                         };
     
@@ -11221,6 +11266,7 @@
                                      * @property {Array.<google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.IStringMatch>|null} [paths] RequestOperation paths
                                      * @property {Array.<string>|null} [methods] RequestOperation methods
                                      * @property {google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.IMCP|null} [mcp] RequestOperation mcp
+                                     * @property {Array.<google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.IStringMatch>|null} [snis] RequestOperation snis
                                      */
     
                                     /**
@@ -11235,6 +11281,7 @@
                                         this.hosts = [];
                                         this.paths = [];
                                         this.methods = [];
+                                        this.snis = [];
                                         if (properties)
                                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                                 if (properties[keys[i]] != null)
@@ -11282,6 +11329,14 @@
                                     RequestOperation.prototype.mcp = null;
     
                                     /**
+                                     * RequestOperation snis.
+                                     * @member {Array.<google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.IStringMatch>} snis
+                                     * @memberof google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation
+                                     * @instance
+                                     */
+                                    RequestOperation.prototype.snis = $util.emptyArray;
+    
+                                    /**
                                      * Creates a new RequestOperation instance using the specified properties.
                                      * @function create
                                      * @memberof google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation
@@ -11318,6 +11373,9 @@
                                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.methods[i]);
                                         if (message.mcp != null && Object.hasOwnProperty.call(message, "mcp"))
                                             $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.MCP.encode(message.mcp, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                        if (message.snis != null && message.snis.length)
+                                            for (var i = 0; i < message.snis.length; ++i)
+                                                $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.StringMatch.encode(message.snis[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                         return writer;
                                     };
     
@@ -11378,6 +11436,12 @@
                                                 }
                                             case 5: {
                                                     message.mcp = $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.MCP.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            case 7: {
+                                                    if (!(message.snis && message.snis.length))
+                                                        message.snis = [];
+                                                    message.snis.push($root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.StringMatch.decode(reader, reader.uint32()));
                                                     break;
                                                 }
                                             default:
@@ -11450,6 +11514,15 @@
                                             if (error)
                                                 return "mcp." + error;
                                         }
+                                        if (message.snis != null && message.hasOwnProperty("snis")) {
+                                            if (!Array.isArray(message.snis))
+                                                return "snis: array expected";
+                                            for (var i = 0; i < message.snis.length; ++i) {
+                                                var error = $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.StringMatch.verify(message.snis[i]);
+                                                if (error)
+                                                    return "snis." + error;
+                                            }
+                                        }
                                         return null;
                                     };
     
@@ -11502,6 +11575,16 @@
                                                 throw TypeError(".google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.mcp: object expected");
                                             message.mcp = $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.MCP.fromObject(object.mcp);
                                         }
+                                        if (object.snis) {
+                                            if (!Array.isArray(object.snis))
+                                                throw TypeError(".google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.snis: array expected");
+                                            message.snis = [];
+                                            for (var i = 0; i < object.snis.length; ++i) {
+                                                if (typeof object.snis[i] !== "object")
+                                                    throw TypeError(".google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.snis: object expected");
+                                                message.snis[i] = $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.StringMatch.fromObject(object.snis[i]);
+                                            }
+                                        }
                                         return message;
                                     };
     
@@ -11522,6 +11605,7 @@
                                             object.hosts = [];
                                             object.paths = [];
                                             object.methods = [];
+                                            object.snis = [];
                                         }
                                         if (options.defaults) {
                                             object.headerSet = null;
@@ -11546,6 +11630,11 @@
                                         }
                                         if (message.mcp != null && message.hasOwnProperty("mcp"))
                                             object.mcp = $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.MCP.toObject(message.mcp, options);
+                                        if (message.snis && message.snis.length) {
+                                            object.snis = [];
+                                            for (var j = 0; j < message.snis.length; ++j)
+                                                object.snis[j] = $root.google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.StringMatch.toObject(message.snis[j], options);
+                                        }
                                         return object;
                                     };
     
@@ -21471,6 +21560,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|listProjectFirewallEndpoints}.
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @typedef ListProjectFirewallEndpointsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListFirewallEndpointsResponse} [response] ListFirewallEndpointsResponse
+                         */
+    
+                        /**
+                         * Calls ListProjectFirewallEndpoints.
+                         * @function listProjectFirewallEndpoints
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListFirewallEndpointsRequest} request ListFirewallEndpointsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.FirewallActivation.ListProjectFirewallEndpointsCallback} callback Node-style callback called with the error, if any, and ListFirewallEndpointsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FirewallActivation.prototype.listProjectFirewallEndpoints = function listProjectFirewallEndpoints(request, callback) {
+                            return this.rpcCall(listProjectFirewallEndpoints, $root.google.cloud.networksecurity.v1.ListFirewallEndpointsRequest, $root.google.cloud.networksecurity.v1.ListFirewallEndpointsResponse, request, callback);
+                        }, "name", { value: "ListProjectFirewallEndpoints" });
+    
+                        /**
+                         * Calls ListProjectFirewallEndpoints.
+                         * @function listProjectFirewallEndpoints
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListFirewallEndpointsRequest} request ListFirewallEndpointsRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListFirewallEndpointsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|getFirewallEndpoint}.
                          * @memberof google.cloud.networksecurity.v1.FirewallActivation
                          * @typedef GetFirewallEndpointCallback
@@ -21496,6 +21618,39 @@
                         /**
                          * Calls GetFirewallEndpoint.
                          * @function getFirewallEndpoint
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetFirewallEndpointRequest} request GetFirewallEndpointRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.FirewallEndpoint>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|getProjectFirewallEndpoint}.
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @typedef GetProjectFirewallEndpointCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.FirewallEndpoint} [response] FirewallEndpoint
+                         */
+    
+                        /**
+                         * Calls GetProjectFirewallEndpoint.
+                         * @function getProjectFirewallEndpoint
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetFirewallEndpointRequest} request GetFirewallEndpointRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.FirewallActivation.GetProjectFirewallEndpointCallback} callback Node-style callback called with the error, if any, and FirewallEndpoint
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FirewallActivation.prototype.getProjectFirewallEndpoint = function getProjectFirewallEndpoint(request, callback) {
+                            return this.rpcCall(getProjectFirewallEndpoint, $root.google.cloud.networksecurity.v1.GetFirewallEndpointRequest, $root.google.cloud.networksecurity.v1.FirewallEndpoint, request, callback);
+                        }, "name", { value: "GetProjectFirewallEndpoint" });
+    
+                        /**
+                         * Calls GetProjectFirewallEndpoint.
+                         * @function getProjectFirewallEndpoint
                          * @memberof google.cloud.networksecurity.v1.FirewallActivation
                          * @instance
                          * @param {google.cloud.networksecurity.v1.IGetFirewallEndpointRequest} request GetFirewallEndpointRequest message or plain object
@@ -21537,6 +21692,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|createProjectFirewallEndpoint}.
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @typedef CreateProjectFirewallEndpointCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateProjectFirewallEndpoint.
+                         * @function createProjectFirewallEndpoint
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateFirewallEndpointRequest} request CreateFirewallEndpointRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.FirewallActivation.CreateProjectFirewallEndpointCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FirewallActivation.prototype.createProjectFirewallEndpoint = function createProjectFirewallEndpoint(request, callback) {
+                            return this.rpcCall(createProjectFirewallEndpoint, $root.google.cloud.networksecurity.v1.CreateFirewallEndpointRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateProjectFirewallEndpoint" });
+    
+                        /**
+                         * Calls CreateProjectFirewallEndpoint.
+                         * @function createProjectFirewallEndpoint
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateFirewallEndpointRequest} request CreateFirewallEndpointRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|deleteFirewallEndpoint}.
                          * @memberof google.cloud.networksecurity.v1.FirewallActivation
                          * @typedef DeleteFirewallEndpointCallback
@@ -21570,6 +21758,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|deleteProjectFirewallEndpoint}.
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @typedef DeleteProjectFirewallEndpointCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteProjectFirewallEndpoint.
+                         * @function deleteProjectFirewallEndpoint
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteFirewallEndpointRequest} request DeleteFirewallEndpointRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.FirewallActivation.DeleteProjectFirewallEndpointCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FirewallActivation.prototype.deleteProjectFirewallEndpoint = function deleteProjectFirewallEndpoint(request, callback) {
+                            return this.rpcCall(deleteProjectFirewallEndpoint, $root.google.cloud.networksecurity.v1.DeleteFirewallEndpointRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteProjectFirewallEndpoint" });
+    
+                        /**
+                         * Calls DeleteProjectFirewallEndpoint.
+                         * @function deleteProjectFirewallEndpoint
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteFirewallEndpointRequest} request DeleteFirewallEndpointRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|updateFirewallEndpoint}.
                          * @memberof google.cloud.networksecurity.v1.FirewallActivation
                          * @typedef UpdateFirewallEndpointCallback
@@ -21595,6 +21816,39 @@
                         /**
                          * Calls UpdateFirewallEndpoint.
                          * @function updateFirewallEndpoint
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateFirewallEndpointRequest} request UpdateFirewallEndpointRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|updateProjectFirewallEndpoint}.
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @typedef UpdateProjectFirewallEndpointCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateProjectFirewallEndpoint.
+                         * @function updateProjectFirewallEndpoint
+                         * @memberof google.cloud.networksecurity.v1.FirewallActivation
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateFirewallEndpointRequest} request UpdateFirewallEndpointRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.FirewallActivation.UpdateProjectFirewallEndpointCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FirewallActivation.prototype.updateProjectFirewallEndpoint = function updateProjectFirewallEndpoint(request, callback) {
+                            return this.rpcCall(updateProjectFirewallEndpoint, $root.google.cloud.networksecurity.v1.UpdateFirewallEndpointRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateProjectFirewallEndpoint" });
+    
+                        /**
+                         * Calls UpdateProjectFirewallEndpoint.
+                         * @function updateProjectFirewallEndpoint
                          * @memberof google.cloud.networksecurity.v1.FirewallActivation
                          * @instance
                          * @param {google.cloud.networksecurity.v1.IUpdateFirewallEndpointRequest} request UpdateFirewallEndpointRequest message or plain object
@@ -62429,6 +62683,371 @@
                         return UrlFilter;
                     })();
     
+                    v1.SecurityProfileGroupService = (function() {
+    
+                        /**
+                         * Constructs a new SecurityProfileGroupService service.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a SecurityProfileGroupService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SecurityProfileGroupService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SecurityProfileGroupService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SecurityProfileGroupService;
+    
+                        /**
+                         * Creates new SecurityProfileGroupService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SecurityProfileGroupService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SecurityProfileGroupService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|listSecurityProfileGroups}.
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @typedef ListSecurityProfileGroupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListSecurityProfileGroupsResponse} [response] ListSecurityProfileGroupsResponse
+                         */
+    
+                        /**
+                         * Calls ListSecurityProfileGroups.
+                         * @function listSecurityProfileGroups
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest} request ListSecurityProfileGroupsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroupService.ListSecurityProfileGroupsCallback} callback Node-style callback called with the error, if any, and ListSecurityProfileGroupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityProfileGroupService.prototype.listSecurityProfileGroups = function listSecurityProfileGroups(request, callback) {
+                            return this.rpcCall(listSecurityProfileGroups, $root.google.cloud.networksecurity.v1.ListSecurityProfileGroupsRequest, $root.google.cloud.networksecurity.v1.ListSecurityProfileGroupsResponse, request, callback);
+                        }, "name", { value: "ListSecurityProfileGroups" });
+    
+                        /**
+                         * Calls ListSecurityProfileGroups.
+                         * @function listSecurityProfileGroups
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest} request ListSecurityProfileGroupsRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListSecurityProfileGroupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|getSecurityProfileGroup}.
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @typedef GetSecurityProfileGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroup} [response] SecurityProfileGroup
+                         */
+    
+                        /**
+                         * Calls GetSecurityProfileGroup.
+                         * @function getSecurityProfileGroup
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest} request GetSecurityProfileGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroupService.GetSecurityProfileGroupCallback} callback Node-style callback called with the error, if any, and SecurityProfileGroup
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityProfileGroupService.prototype.getSecurityProfileGroup = function getSecurityProfileGroup(request, callback) {
+                            return this.rpcCall(getSecurityProfileGroup, $root.google.cloud.networksecurity.v1.GetSecurityProfileGroupRequest, $root.google.cloud.networksecurity.v1.SecurityProfileGroup, request, callback);
+                        }, "name", { value: "GetSecurityProfileGroup" });
+    
+                        /**
+                         * Calls GetSecurityProfileGroup.
+                         * @function getSecurityProfileGroup
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest} request GetSecurityProfileGroupRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.SecurityProfileGroup>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|createSecurityProfileGroup}.
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @typedef CreateSecurityProfileGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateSecurityProfileGroup.
+                         * @function createSecurityProfileGroup
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest} request CreateSecurityProfileGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroupService.CreateSecurityProfileGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityProfileGroupService.prototype.createSecurityProfileGroup = function createSecurityProfileGroup(request, callback) {
+                            return this.rpcCall(createSecurityProfileGroup, $root.google.cloud.networksecurity.v1.CreateSecurityProfileGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateSecurityProfileGroup" });
+    
+                        /**
+                         * Calls CreateSecurityProfileGroup.
+                         * @function createSecurityProfileGroup
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest} request CreateSecurityProfileGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|updateSecurityProfileGroup}.
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @typedef UpdateSecurityProfileGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateSecurityProfileGroup.
+                         * @function updateSecurityProfileGroup
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest} request UpdateSecurityProfileGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroupService.UpdateSecurityProfileGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityProfileGroupService.prototype.updateSecurityProfileGroup = function updateSecurityProfileGroup(request, callback) {
+                            return this.rpcCall(updateSecurityProfileGroup, $root.google.cloud.networksecurity.v1.UpdateSecurityProfileGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateSecurityProfileGroup" });
+    
+                        /**
+                         * Calls UpdateSecurityProfileGroup.
+                         * @function updateSecurityProfileGroup
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest} request UpdateSecurityProfileGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|deleteSecurityProfileGroup}.
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @typedef DeleteSecurityProfileGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteSecurityProfileGroup.
+                         * @function deleteSecurityProfileGroup
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest} request DeleteSecurityProfileGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroupService.DeleteSecurityProfileGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityProfileGroupService.prototype.deleteSecurityProfileGroup = function deleteSecurityProfileGroup(request, callback) {
+                            return this.rpcCall(deleteSecurityProfileGroup, $root.google.cloud.networksecurity.v1.DeleteSecurityProfileGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteSecurityProfileGroup" });
+    
+                        /**
+                         * Calls DeleteSecurityProfileGroup.
+                         * @function deleteSecurityProfileGroup
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest} request DeleteSecurityProfileGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|listSecurityProfiles}.
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @typedef ListSecurityProfilesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListSecurityProfilesResponse} [response] ListSecurityProfilesResponse
+                         */
+    
+                        /**
+                         * Calls ListSecurityProfiles.
+                         * @function listSecurityProfiles
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListSecurityProfilesRequest} request ListSecurityProfilesRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroupService.ListSecurityProfilesCallback} callback Node-style callback called with the error, if any, and ListSecurityProfilesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityProfileGroupService.prototype.listSecurityProfiles = function listSecurityProfiles(request, callback) {
+                            return this.rpcCall(listSecurityProfiles, $root.google.cloud.networksecurity.v1.ListSecurityProfilesRequest, $root.google.cloud.networksecurity.v1.ListSecurityProfilesResponse, request, callback);
+                        }, "name", { value: "ListSecurityProfiles" });
+    
+                        /**
+                         * Calls ListSecurityProfiles.
+                         * @function listSecurityProfiles
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListSecurityProfilesRequest} request ListSecurityProfilesRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListSecurityProfilesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|getSecurityProfile}.
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @typedef GetSecurityProfileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.SecurityProfile} [response] SecurityProfile
+                         */
+    
+                        /**
+                         * Calls GetSecurityProfile.
+                         * @function getSecurityProfile
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetSecurityProfileRequest} request GetSecurityProfileRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroupService.GetSecurityProfileCallback} callback Node-style callback called with the error, if any, and SecurityProfile
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityProfileGroupService.prototype.getSecurityProfile = function getSecurityProfile(request, callback) {
+                            return this.rpcCall(getSecurityProfile, $root.google.cloud.networksecurity.v1.GetSecurityProfileRequest, $root.google.cloud.networksecurity.v1.SecurityProfile, request, callback);
+                        }, "name", { value: "GetSecurityProfile" });
+    
+                        /**
+                         * Calls GetSecurityProfile.
+                         * @function getSecurityProfile
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetSecurityProfileRequest} request GetSecurityProfileRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.SecurityProfile>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|createSecurityProfile}.
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @typedef CreateSecurityProfileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateSecurityProfile.
+                         * @function createSecurityProfile
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateSecurityProfileRequest} request CreateSecurityProfileRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroupService.CreateSecurityProfileCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityProfileGroupService.prototype.createSecurityProfile = function createSecurityProfile(request, callback) {
+                            return this.rpcCall(createSecurityProfile, $root.google.cloud.networksecurity.v1.CreateSecurityProfileRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateSecurityProfile" });
+    
+                        /**
+                         * Calls CreateSecurityProfile.
+                         * @function createSecurityProfile
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateSecurityProfileRequest} request CreateSecurityProfileRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|updateSecurityProfile}.
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @typedef UpdateSecurityProfileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateSecurityProfile.
+                         * @function updateSecurityProfile
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest} request UpdateSecurityProfileRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroupService.UpdateSecurityProfileCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityProfileGroupService.prototype.updateSecurityProfile = function updateSecurityProfile(request, callback) {
+                            return this.rpcCall(updateSecurityProfile, $root.google.cloud.networksecurity.v1.UpdateSecurityProfileRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateSecurityProfile" });
+    
+                        /**
+                         * Calls UpdateSecurityProfile.
+                         * @function updateSecurityProfile
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest} request UpdateSecurityProfileRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|deleteSecurityProfile}.
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @typedef DeleteSecurityProfileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteSecurityProfile.
+                         * @function deleteSecurityProfile
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest} request DeleteSecurityProfileRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SecurityProfileGroupService.DeleteSecurityProfileCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityProfileGroupService.prototype.deleteSecurityProfile = function deleteSecurityProfile(request, callback) {
+                            return this.rpcCall(deleteSecurityProfile, $root.google.cloud.networksecurity.v1.DeleteSecurityProfileRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteSecurityProfile" });
+    
+                        /**
+                         * Calls DeleteSecurityProfile.
+                         * @function deleteSecurityProfile
+                         * @memberof google.cloud.networksecurity.v1.SecurityProfileGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest} request DeleteSecurityProfileRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return SecurityProfileGroupService;
+                    })();
+    
                     v1.OrganizationSecurityProfileGroupService = (function() {
     
                         /**
@@ -65656,6 +66275,4062 @@
                         };
     
                         return DeleteSecurityProfileRequest;
+                    })();
+    
+                    v1.SSERealmService = (function() {
+    
+                        /**
+                         * Constructs a new SSERealmService service.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a SSERealmService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SSERealmService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SSERealmService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SSERealmService;
+    
+                        /**
+                         * Creates new SSERealmService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SSERealmService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SSERealmService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|listSACRealms}.
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @typedef ListSACRealmsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListSACRealmsResponse} [response] ListSACRealmsResponse
+                         */
+    
+                        /**
+                         * Calls ListSACRealms.
+                         * @function listSACRealms
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListSACRealmsRequest} request ListSACRealmsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SSERealmService.ListSACRealmsCallback} callback Node-style callback called with the error, if any, and ListSACRealmsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SSERealmService.prototype.listSACRealms = function listSACRealms(request, callback) {
+                            return this.rpcCall(listSACRealms, $root.google.cloud.networksecurity.v1.ListSACRealmsRequest, $root.google.cloud.networksecurity.v1.ListSACRealmsResponse, request, callback);
+                        }, "name", { value: "ListSACRealms" });
+    
+                        /**
+                         * Calls ListSACRealms.
+                         * @function listSACRealms
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListSACRealmsRequest} request ListSACRealmsRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListSACRealmsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|getSACRealm}.
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @typedef GetSACRealmCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.SACRealm} [response] SACRealm
+                         */
+    
+                        /**
+                         * Calls GetSACRealm.
+                         * @function getSACRealm
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetSACRealmRequest} request GetSACRealmRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SSERealmService.GetSACRealmCallback} callback Node-style callback called with the error, if any, and SACRealm
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SSERealmService.prototype.getSACRealm = function getSACRealm(request, callback) {
+                            return this.rpcCall(getSACRealm, $root.google.cloud.networksecurity.v1.GetSACRealmRequest, $root.google.cloud.networksecurity.v1.SACRealm, request, callback);
+                        }, "name", { value: "GetSACRealm" });
+    
+                        /**
+                         * Calls GetSACRealm.
+                         * @function getSACRealm
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetSACRealmRequest} request GetSACRealmRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.SACRealm>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|createSACRealm}.
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @typedef CreateSACRealmCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateSACRealm.
+                         * @function createSACRealm
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateSACRealmRequest} request CreateSACRealmRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SSERealmService.CreateSACRealmCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SSERealmService.prototype.createSACRealm = function createSACRealm(request, callback) {
+                            return this.rpcCall(createSACRealm, $root.google.cloud.networksecurity.v1.CreateSACRealmRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateSACRealm" });
+    
+                        /**
+                         * Calls CreateSACRealm.
+                         * @function createSACRealm
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateSACRealmRequest} request CreateSACRealmRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|deleteSACRealm}.
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @typedef DeleteSACRealmCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteSACRealm.
+                         * @function deleteSACRealm
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACRealmRequest} request DeleteSACRealmRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SSERealmService.DeleteSACRealmCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SSERealmService.prototype.deleteSACRealm = function deleteSACRealm(request, callback) {
+                            return this.rpcCall(deleteSACRealm, $root.google.cloud.networksecurity.v1.DeleteSACRealmRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteSACRealm" });
+    
+                        /**
+                         * Calls DeleteSACRealm.
+                         * @function deleteSACRealm
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACRealmRequest} request DeleteSACRealmRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|listSACAttachments}.
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @typedef ListSACAttachmentsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListSACAttachmentsResponse} [response] ListSACAttachmentsResponse
+                         */
+    
+                        /**
+                         * Calls ListSACAttachments.
+                         * @function listSACAttachments
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListSACAttachmentsRequest} request ListSACAttachmentsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SSERealmService.ListSACAttachmentsCallback} callback Node-style callback called with the error, if any, and ListSACAttachmentsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SSERealmService.prototype.listSACAttachments = function listSACAttachments(request, callback) {
+                            return this.rpcCall(listSACAttachments, $root.google.cloud.networksecurity.v1.ListSACAttachmentsRequest, $root.google.cloud.networksecurity.v1.ListSACAttachmentsResponse, request, callback);
+                        }, "name", { value: "ListSACAttachments" });
+    
+                        /**
+                         * Calls ListSACAttachments.
+                         * @function listSACAttachments
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListSACAttachmentsRequest} request ListSACAttachmentsRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListSACAttachmentsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|getSACAttachment}.
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @typedef GetSACAttachmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.SACAttachment} [response] SACAttachment
+                         */
+    
+                        /**
+                         * Calls GetSACAttachment.
+                         * @function getSACAttachment
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetSACAttachmentRequest} request GetSACAttachmentRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SSERealmService.GetSACAttachmentCallback} callback Node-style callback called with the error, if any, and SACAttachment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SSERealmService.prototype.getSACAttachment = function getSACAttachment(request, callback) {
+                            return this.rpcCall(getSACAttachment, $root.google.cloud.networksecurity.v1.GetSACAttachmentRequest, $root.google.cloud.networksecurity.v1.SACAttachment, request, callback);
+                        }, "name", { value: "GetSACAttachment" });
+    
+                        /**
+                         * Calls GetSACAttachment.
+                         * @function getSACAttachment
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetSACAttachmentRequest} request GetSACAttachmentRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.SACAttachment>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|createSACAttachment}.
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @typedef CreateSACAttachmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateSACAttachment.
+                         * @function createSACAttachment
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateSACAttachmentRequest} request CreateSACAttachmentRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SSERealmService.CreateSACAttachmentCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SSERealmService.prototype.createSACAttachment = function createSACAttachment(request, callback) {
+                            return this.rpcCall(createSACAttachment, $root.google.cloud.networksecurity.v1.CreateSACAttachmentRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateSACAttachment" });
+    
+                        /**
+                         * Calls CreateSACAttachment.
+                         * @function createSACAttachment
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateSACAttachmentRequest} request CreateSACAttachmentRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|deleteSACAttachment}.
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @typedef DeleteSACAttachmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteSACAttachment.
+                         * @function deleteSACAttachment
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest} request DeleteSACAttachmentRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.SSERealmService.DeleteSACAttachmentCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SSERealmService.prototype.deleteSACAttachment = function deleteSACAttachment(request, callback) {
+                            return this.rpcCall(deleteSACAttachment, $root.google.cloud.networksecurity.v1.DeleteSACAttachmentRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteSACAttachment" });
+    
+                        /**
+                         * Calls DeleteSACAttachment.
+                         * @function deleteSACAttachment
+                         * @memberof google.cloud.networksecurity.v1.SSERealmService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest} request DeleteSACAttachmentRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return SSERealmService;
+                    })();
+    
+                    v1.SACRealm = (function() {
+    
+                        /**
+                         * Properties of a SACRealm.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ISACRealm
+                         * @property {string|null} [name] SACRealm name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SACRealm createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] SACRealm updateTime
+                         * @property {Object.<string,string>|null} [labels] SACRealm labels
+                         * @property {google.cloud.networksecurity.v1.SACRealm.SecurityService|null} [securityService] SACRealm securityService
+                         * @property {google.cloud.networksecurity.v1.SACRealm.IPairingKey|null} [pairingKey] SACRealm pairingKey
+                         * @property {google.cloud.networksecurity.v1.SACRealm.State|null} [state] SACRealm state
+                         */
+    
+                        /**
+                         * Constructs a new SACRealm.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a SACRealm.
+                         * @implements ISACRealm
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ISACRealm=} [properties] Properties to set
+                         */
+                        function SACRealm(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SACRealm name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @instance
+                         */
+                        SACRealm.prototype.name = "";
+    
+                        /**
+                         * SACRealm createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @instance
+                         */
+                        SACRealm.prototype.createTime = null;
+    
+                        /**
+                         * SACRealm updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @instance
+                         */
+                        SACRealm.prototype.updateTime = null;
+    
+                        /**
+                         * SACRealm labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @instance
+                         */
+                        SACRealm.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * SACRealm securityService.
+                         * @member {google.cloud.networksecurity.v1.SACRealm.SecurityService} securityService
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @instance
+                         */
+                        SACRealm.prototype.securityService = 0;
+    
+                        /**
+                         * SACRealm pairingKey.
+                         * @member {google.cloud.networksecurity.v1.SACRealm.IPairingKey|null|undefined} pairingKey
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @instance
+                         */
+                        SACRealm.prototype.pairingKey = null;
+    
+                        /**
+                         * SACRealm state.
+                         * @member {google.cloud.networksecurity.v1.SACRealm.State} state
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @instance
+                         */
+                        SACRealm.prototype.state = 0;
+    
+                        /**
+                         * Creates a new SACRealm instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ISACRealm=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.SACRealm} SACRealm instance
+                         */
+                        SACRealm.create = function create(properties) {
+                            return new SACRealm(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SACRealm message. Does not implicitly {@link google.cloud.networksecurity.v1.SACRealm.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ISACRealm} message SACRealm message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SACRealm.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.securityService != null && Object.hasOwnProperty.call(message, "securityService"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.securityService);
+                            if (message.pairingKey != null && Object.hasOwnProperty.call(message, "pairingKey"))
+                                $root.google.cloud.networksecurity.v1.SACRealm.PairingKey.encode(message.pairingKey, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SACRealm message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.SACRealm.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ISACRealm} message SACRealm message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SACRealm.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SACRealm message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.SACRealm} SACRealm
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SACRealm.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.SACRealm(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.securityService = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.pairingKey = $root.google.cloud.networksecurity.v1.SACRealm.PairingKey.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SACRealm message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.SACRealm} SACRealm
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SACRealm.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SACRealm message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SACRealm.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.securityService != null && message.hasOwnProperty("securityService"))
+                                switch (message.securityService) {
+                                default:
+                                    return "securityService: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.pairingKey != null && message.hasOwnProperty("pairingKey")) {
+                                var error = $root.google.cloud.networksecurity.v1.SACRealm.PairingKey.verify(message.pairingKey);
+                                if (error)
+                                    return "pairingKey." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 7:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SACRealm message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.SACRealm} SACRealm
+                         */
+                        SACRealm.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.SACRealm)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.SACRealm();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.SACRealm.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.SACRealm.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.SACRealm.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            switch (object.securityService) {
+                            default:
+                                if (typeof object.securityService === "number") {
+                                    message.securityService = object.securityService;
+                                    break;
+                                }
+                                break;
+                            case "SECURITY_SERVICE_UNSPECIFIED":
+                            case 0:
+                                message.securityService = 0;
+                                break;
+                            case "PALO_ALTO_PRISMA_ACCESS":
+                            case 1:
+                                message.securityService = 1;
+                                break;
+                            }
+                            if (object.pairingKey != null) {
+                                if (typeof object.pairingKey !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.SACRealm.pairingKey: object expected");
+                                message.pairingKey = $root.google.cloud.networksecurity.v1.SACRealm.PairingKey.fromObject(object.pairingKey);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "PENDING_PARTNER_ATTACHMENT":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "PARTNER_ATTACHED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "PARTNER_DETACHED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "KEY_EXPIRED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SACRealm message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.SACRealm} message SACRealm
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SACRealm.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.securityService = options.enums === String ? "SECURITY_SERVICE_UNSPECIFIED" : 0;
+                                object.pairingKey = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.securityService != null && message.hasOwnProperty("securityService"))
+                                object.securityService = options.enums === String ? $root.google.cloud.networksecurity.v1.SACRealm.SecurityService[message.securityService] === undefined ? message.securityService : $root.google.cloud.networksecurity.v1.SACRealm.SecurityService[message.securityService] : message.securityService;
+                            if (message.pairingKey != null && message.hasOwnProperty("pairingKey"))
+                                object.pairingKey = $root.google.cloud.networksecurity.v1.SACRealm.PairingKey.toObject(message.pairingKey, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.networksecurity.v1.SACRealm.State[message.state] === undefined ? message.state : $root.google.cloud.networksecurity.v1.SACRealm.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SACRealm to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SACRealm.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SACRealm
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.SACRealm
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SACRealm.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.SACRealm";
+                        };
+    
+                        SACRealm.PairingKey = (function() {
+    
+                            /**
+                             * Properties of a PairingKey.
+                             * @memberof google.cloud.networksecurity.v1.SACRealm
+                             * @interface IPairingKey
+                             * @property {string|null} [key] PairingKey key
+                             * @property {google.protobuf.ITimestamp|null} [expireTime] PairingKey expireTime
+                             */
+    
+                            /**
+                             * Constructs a new PairingKey.
+                             * @memberof google.cloud.networksecurity.v1.SACRealm
+                             * @classdesc Represents a PairingKey.
+                             * @implements IPairingKey
+                             * @constructor
+                             * @param {google.cloud.networksecurity.v1.SACRealm.IPairingKey=} [properties] Properties to set
+                             */
+                            function PairingKey(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PairingKey key.
+                             * @member {string} key
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @instance
+                             */
+                            PairingKey.prototype.key = "";
+    
+                            /**
+                             * PairingKey expireTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @instance
+                             */
+                            PairingKey.prototype.expireTime = null;
+    
+                            /**
+                             * Creates a new PairingKey instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.SACRealm.IPairingKey=} [properties] Properties to set
+                             * @returns {google.cloud.networksecurity.v1.SACRealm.PairingKey} PairingKey instance
+                             */
+                            PairingKey.create = function create(properties) {
+                                return new PairingKey(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PairingKey message. Does not implicitly {@link google.cloud.networksecurity.v1.SACRealm.PairingKey.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.SACRealm.IPairingKey} message PairingKey message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PairingKey.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PairingKey message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.SACRealm.PairingKey.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.SACRealm.IPairingKey} message PairingKey message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PairingKey.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PairingKey message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networksecurity.v1.SACRealm.PairingKey} PairingKey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PairingKey.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.SACRealm.PairingKey();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.key = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PairingKey message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networksecurity.v1.SACRealm.PairingKey} PairingKey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PairingKey.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PairingKey message.
+                             * @function verify
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PairingKey.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    if (!$util.isString(message.key))
+                                        return "key: string expected";
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                    if (error)
+                                        return "expireTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PairingKey message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networksecurity.v1.SACRealm.PairingKey} PairingKey
+                             */
+                            PairingKey.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networksecurity.v1.SACRealm.PairingKey)
+                                    return object;
+                                var message = new $root.google.cloud.networksecurity.v1.SACRealm.PairingKey();
+                                if (object.key != null)
+                                    message.key = String(object.key);
+                                if (object.expireTime != null) {
+                                    if (typeof object.expireTime !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.SACRealm.PairingKey.expireTime: object expected");
+                                    message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PairingKey message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.SACRealm.PairingKey} message PairingKey
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PairingKey.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.key = "";
+                                    object.expireTime = null;
+                                }
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    object.key = message.key;
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                    object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PairingKey to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PairingKey.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PairingKey
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networksecurity.v1.SACRealm.PairingKey
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PairingKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networksecurity.v1.SACRealm.PairingKey";
+                            };
+    
+                            return PairingKey;
+                        })();
+    
+                        /**
+                         * SecurityService enum.
+                         * @name google.cloud.networksecurity.v1.SACRealm.SecurityService
+                         * @enum {number}
+                         * @property {number} SECURITY_SERVICE_UNSPECIFIED=0 SECURITY_SERVICE_UNSPECIFIED value
+                         * @property {number} PALO_ALTO_PRISMA_ACCESS=1 PALO_ALTO_PRISMA_ACCESS value
+                         */
+                        SACRealm.SecurityService = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SECURITY_SERVICE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PALO_ALTO_PRISMA_ACCESS"] = 1;
+                            return values;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.networksecurity.v1.SACRealm.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} PENDING_PARTNER_ATTACHMENT=7 PENDING_PARTNER_ATTACHMENT value
+                         * @property {number} PARTNER_ATTACHED=1 PARTNER_ATTACHED value
+                         * @property {number} PARTNER_DETACHED=2 PARTNER_DETACHED value
+                         * @property {number} KEY_EXPIRED=3 KEY_EXPIRED value
+                         */
+                        SACRealm.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[7] = "PENDING_PARTNER_ATTACHMENT"] = 7;
+                            values[valuesById[1] = "PARTNER_ATTACHED"] = 1;
+                            values[valuesById[2] = "PARTNER_DETACHED"] = 2;
+                            values[valuesById[3] = "KEY_EXPIRED"] = 3;
+                            return values;
+                        })();
+    
+                        return SACRealm;
+                    })();
+    
+                    v1.ListSACRealmsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSACRealmsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListSACRealmsRequest
+                         * @property {string|null} [parent] ListSACRealmsRequest parent
+                         * @property {number|null} [pageSize] ListSACRealmsRequest pageSize
+                         * @property {string|null} [pageToken] ListSACRealmsRequest pageToken
+                         * @property {string|null} [filter] ListSACRealmsRequest filter
+                         * @property {string|null} [orderBy] ListSACRealmsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListSACRealmsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListSACRealmsRequest.
+                         * @implements IListSACRealmsRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListSACRealmsRequest=} [properties] Properties to set
+                         */
+                        function ListSACRealmsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSACRealmsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @instance
+                         */
+                        ListSACRealmsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSACRealmsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @instance
+                         */
+                        ListSACRealmsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSACRealmsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @instance
+                         */
+                        ListSACRealmsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListSACRealmsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @instance
+                         */
+                        ListSACRealmsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListSACRealmsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @instance
+                         */
+                        ListSACRealmsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListSACRealmsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACRealmsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListSACRealmsRequest} ListSACRealmsRequest instance
+                         */
+                        ListSACRealmsRequest.create = function create(properties) {
+                            return new ListSACRealmsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSACRealmsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACRealmsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACRealmsRequest} message ListSACRealmsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSACRealmsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSACRealmsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACRealmsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACRealmsRequest} message ListSACRealmsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSACRealmsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSACRealmsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListSACRealmsRequest} ListSACRealmsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSACRealmsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListSACRealmsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSACRealmsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListSACRealmsRequest} ListSACRealmsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSACRealmsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSACRealmsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSACRealmsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSACRealmsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListSACRealmsRequest} ListSACRealmsRequest
+                         */
+                        ListSACRealmsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListSACRealmsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListSACRealmsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSACRealmsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListSACRealmsRequest} message ListSACRealmsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSACRealmsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSACRealmsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSACRealmsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSACRealmsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSACRealmsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.ListSACRealmsRequest";
+                        };
+    
+                        return ListSACRealmsRequest;
+                    })();
+    
+                    v1.ListSACRealmsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSACRealmsResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListSACRealmsResponse
+                         * @property {Array.<google.cloud.networksecurity.v1.ISACRealm>|null} [sacRealms] ListSACRealmsResponse sacRealms
+                         * @property {string|null} [nextPageToken] ListSACRealmsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListSACRealmsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListSACRealmsResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListSACRealmsResponse.
+                         * @implements IListSACRealmsResponse
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListSACRealmsResponse=} [properties] Properties to set
+                         */
+                        function ListSACRealmsResponse(properties) {
+                            this.sacRealms = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSACRealmsResponse sacRealms.
+                         * @member {Array.<google.cloud.networksecurity.v1.ISACRealm>} sacRealms
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @instance
+                         */
+                        ListSACRealmsResponse.prototype.sacRealms = $util.emptyArray;
+    
+                        /**
+                         * ListSACRealmsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @instance
+                         */
+                        ListSACRealmsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListSACRealmsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @instance
+                         */
+                        ListSACRealmsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListSACRealmsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACRealmsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListSACRealmsResponse} ListSACRealmsResponse instance
+                         */
+                        ListSACRealmsResponse.create = function create(properties) {
+                            return new ListSACRealmsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSACRealmsResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACRealmsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACRealmsResponse} message ListSACRealmsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSACRealmsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sacRealms != null && message.sacRealms.length)
+                                for (var i = 0; i < message.sacRealms.length; ++i)
+                                    $root.google.cloud.networksecurity.v1.SACRealm.encode(message.sacRealms[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSACRealmsResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACRealmsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACRealmsResponse} message ListSACRealmsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSACRealmsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSACRealmsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListSACRealmsResponse} ListSACRealmsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSACRealmsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListSACRealmsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.sacRealms && message.sacRealms.length))
+                                            message.sacRealms = [];
+                                        message.sacRealms.push($root.google.cloud.networksecurity.v1.SACRealm.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSACRealmsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListSACRealmsResponse} ListSACRealmsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSACRealmsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSACRealmsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSACRealmsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sacRealms != null && message.hasOwnProperty("sacRealms")) {
+                                if (!Array.isArray(message.sacRealms))
+                                    return "sacRealms: array expected";
+                                for (var i = 0; i < message.sacRealms.length; ++i) {
+                                    var error = $root.google.cloud.networksecurity.v1.SACRealm.verify(message.sacRealms[i]);
+                                    if (error)
+                                        return "sacRealms." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSACRealmsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListSACRealmsResponse} ListSACRealmsResponse
+                         */
+                        ListSACRealmsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListSACRealmsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListSACRealmsResponse();
+                            if (object.sacRealms) {
+                                if (!Array.isArray(object.sacRealms))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ListSACRealmsResponse.sacRealms: array expected");
+                                message.sacRealms = [];
+                                for (var i = 0; i < object.sacRealms.length; ++i) {
+                                    if (typeof object.sacRealms[i] !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.ListSACRealmsResponse.sacRealms: object expected");
+                                    message.sacRealms[i] = $root.google.cloud.networksecurity.v1.SACRealm.fromObject(object.sacRealms[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ListSACRealmsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSACRealmsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListSACRealmsResponse} message ListSACRealmsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSACRealmsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.sacRealms = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.sacRealms && message.sacRealms.length) {
+                                object.sacRealms = [];
+                                for (var j = 0; j < message.sacRealms.length; ++j)
+                                    object.sacRealms[j] = $root.google.cloud.networksecurity.v1.SACRealm.toObject(message.sacRealms[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSACRealmsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSACRealmsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSACRealmsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.ListSACRealmsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSACRealmsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.ListSACRealmsResponse";
+                        };
+    
+                        return ListSACRealmsResponse;
+                    })();
+    
+                    v1.GetSACRealmRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSACRealmRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IGetSACRealmRequest
+                         * @property {string|null} [name] GetSACRealmRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSACRealmRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a GetSACRealmRequest.
+                         * @implements IGetSACRealmRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IGetSACRealmRequest=} [properties] Properties to set
+                         */
+                        function GetSACRealmRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSACRealmRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @instance
+                         */
+                        GetSACRealmRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSACRealmRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetSACRealmRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.GetSACRealmRequest} GetSACRealmRequest instance
+                         */
+                        GetSACRealmRequest.create = function create(properties) {
+                            return new GetSACRealmRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSACRealmRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetSACRealmRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetSACRealmRequest} message GetSACRealmRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSACRealmRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSACRealmRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetSACRealmRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetSACRealmRequest} message GetSACRealmRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSACRealmRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSACRealmRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.GetSACRealmRequest} GetSACRealmRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSACRealmRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.GetSACRealmRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSACRealmRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.GetSACRealmRequest} GetSACRealmRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSACRealmRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSACRealmRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSACRealmRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSACRealmRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.GetSACRealmRequest} GetSACRealmRequest
+                         */
+                        GetSACRealmRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.GetSACRealmRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.GetSACRealmRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSACRealmRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.GetSACRealmRequest} message GetSACRealmRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSACRealmRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSACRealmRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSACRealmRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSACRealmRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.GetSACRealmRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSACRealmRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.GetSACRealmRequest";
+                        };
+    
+                        return GetSACRealmRequest;
+                    })();
+    
+                    v1.CreateSACRealmRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSACRealmRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ICreateSACRealmRequest
+                         * @property {string|null} [parent] CreateSACRealmRequest parent
+                         * @property {string|null} [sacRealmId] CreateSACRealmRequest sacRealmId
+                         * @property {google.cloud.networksecurity.v1.ISACRealm|null} [sacRealm] CreateSACRealmRequest sacRealm
+                         * @property {string|null} [requestId] CreateSACRealmRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateSACRealmRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a CreateSACRealmRequest.
+                         * @implements ICreateSACRealmRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ICreateSACRealmRequest=} [properties] Properties to set
+                         */
+                        function CreateSACRealmRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSACRealmRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @instance
+                         */
+                        CreateSACRealmRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSACRealmRequest sacRealmId.
+                         * @member {string} sacRealmId
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @instance
+                         */
+                        CreateSACRealmRequest.prototype.sacRealmId = "";
+    
+                        /**
+                         * CreateSACRealmRequest sacRealm.
+                         * @member {google.cloud.networksecurity.v1.ISACRealm|null|undefined} sacRealm
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @instance
+                         */
+                        CreateSACRealmRequest.prototype.sacRealm = null;
+    
+                        /**
+                         * CreateSACRealmRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @instance
+                         */
+                        CreateSACRealmRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateSACRealmRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateSACRealmRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.CreateSACRealmRequest} CreateSACRealmRequest instance
+                         */
+                        CreateSACRealmRequest.create = function create(properties) {
+                            return new CreateSACRealmRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSACRealmRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateSACRealmRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateSACRealmRequest} message CreateSACRealmRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSACRealmRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.sacRealmId != null && Object.hasOwnProperty.call(message, "sacRealmId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sacRealmId);
+                            if (message.sacRealm != null && Object.hasOwnProperty.call(message, "sacRealm"))
+                                $root.google.cloud.networksecurity.v1.SACRealm.encode(message.sacRealm, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSACRealmRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateSACRealmRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateSACRealmRequest} message CreateSACRealmRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSACRealmRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSACRealmRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.CreateSACRealmRequest} CreateSACRealmRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSACRealmRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.CreateSACRealmRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sacRealmId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sacRealm = $root.google.cloud.networksecurity.v1.SACRealm.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSACRealmRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.CreateSACRealmRequest} CreateSACRealmRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSACRealmRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSACRealmRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSACRealmRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.sacRealmId != null && message.hasOwnProperty("sacRealmId"))
+                                if (!$util.isString(message.sacRealmId))
+                                    return "sacRealmId: string expected";
+                            if (message.sacRealm != null && message.hasOwnProperty("sacRealm")) {
+                                var error = $root.google.cloud.networksecurity.v1.SACRealm.verify(message.sacRealm);
+                                if (error)
+                                    return "sacRealm." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSACRealmRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.CreateSACRealmRequest} CreateSACRealmRequest
+                         */
+                        CreateSACRealmRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.CreateSACRealmRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.CreateSACRealmRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.sacRealmId != null)
+                                message.sacRealmId = String(object.sacRealmId);
+                            if (object.sacRealm != null) {
+                                if (typeof object.sacRealm !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.CreateSACRealmRequest.sacRealm: object expected");
+                                message.sacRealm = $root.google.cloud.networksecurity.v1.SACRealm.fromObject(object.sacRealm);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSACRealmRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.CreateSACRealmRequest} message CreateSACRealmRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSACRealmRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.sacRealmId = "";
+                                object.sacRealm = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.sacRealmId != null && message.hasOwnProperty("sacRealmId"))
+                                object.sacRealmId = message.sacRealmId;
+                            if (message.sacRealm != null && message.hasOwnProperty("sacRealm"))
+                                object.sacRealm = $root.google.cloud.networksecurity.v1.SACRealm.toObject(message.sacRealm, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSACRealmRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSACRealmRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSACRealmRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.CreateSACRealmRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSACRealmRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.CreateSACRealmRequest";
+                        };
+    
+                        return CreateSACRealmRequest;
+                    })();
+    
+                    v1.DeleteSACRealmRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSACRealmRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IDeleteSACRealmRequest
+                         * @property {string|null} [name] DeleteSACRealmRequest name
+                         * @property {string|null} [requestId] DeleteSACRealmRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSACRealmRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a DeleteSACRealmRequest.
+                         * @implements IDeleteSACRealmRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACRealmRequest=} [properties] Properties to set
+                         */
+                        function DeleteSACRealmRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSACRealmRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @instance
+                         */
+                        DeleteSACRealmRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteSACRealmRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @instance
+                         */
+                        DeleteSACRealmRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteSACRealmRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACRealmRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.DeleteSACRealmRequest} DeleteSACRealmRequest instance
+                         */
+                        DeleteSACRealmRequest.create = function create(properties) {
+                            return new DeleteSACRealmRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSACRealmRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteSACRealmRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACRealmRequest} message DeleteSACRealmRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSACRealmRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSACRealmRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteSACRealmRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACRealmRequest} message DeleteSACRealmRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSACRealmRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSACRealmRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.DeleteSACRealmRequest} DeleteSACRealmRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSACRealmRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.DeleteSACRealmRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSACRealmRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.DeleteSACRealmRequest} DeleteSACRealmRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSACRealmRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSACRealmRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSACRealmRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSACRealmRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.DeleteSACRealmRequest} DeleteSACRealmRequest
+                         */
+                        DeleteSACRealmRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.DeleteSACRealmRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.DeleteSACRealmRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSACRealmRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.DeleteSACRealmRequest} message DeleteSACRealmRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSACRealmRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSACRealmRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSACRealmRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSACRealmRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACRealmRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSACRealmRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.DeleteSACRealmRequest";
+                        };
+    
+                        return DeleteSACRealmRequest;
+                    })();
+    
+                    v1.SACAttachment = (function() {
+    
+                        /**
+                         * Properties of a SACAttachment.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ISACAttachment
+                         * @property {string|null} [name] SACAttachment name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SACAttachment createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] SACAttachment updateTime
+                         * @property {Object.<string,string>|null} [labels] SACAttachment labels
+                         * @property {string|null} [sacRealm] SACAttachment sacRealm
+                         * @property {string|null} [nccGateway] SACAttachment nccGateway
+                         * @property {google.cloud.networksecurity.v1.SACAttachment.State|null} [state] SACAttachment state
+                         */
+    
+                        /**
+                         * Constructs a new SACAttachment.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a SACAttachment.
+                         * @implements ISACAttachment
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ISACAttachment=} [properties] Properties to set
+                         */
+                        function SACAttachment(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SACAttachment name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @instance
+                         */
+                        SACAttachment.prototype.name = "";
+    
+                        /**
+                         * SACAttachment createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @instance
+                         */
+                        SACAttachment.prototype.createTime = null;
+    
+                        /**
+                         * SACAttachment updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @instance
+                         */
+                        SACAttachment.prototype.updateTime = null;
+    
+                        /**
+                         * SACAttachment labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @instance
+                         */
+                        SACAttachment.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * SACAttachment sacRealm.
+                         * @member {string} sacRealm
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @instance
+                         */
+                        SACAttachment.prototype.sacRealm = "";
+    
+                        /**
+                         * SACAttachment nccGateway.
+                         * @member {string} nccGateway
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @instance
+                         */
+                        SACAttachment.prototype.nccGateway = "";
+    
+                        /**
+                         * SACAttachment state.
+                         * @member {google.cloud.networksecurity.v1.SACAttachment.State} state
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @instance
+                         */
+                        SACAttachment.prototype.state = 0;
+    
+                        /**
+                         * Creates a new SACAttachment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ISACAttachment=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.SACAttachment} SACAttachment instance
+                         */
+                        SACAttachment.create = function create(properties) {
+                            return new SACAttachment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SACAttachment message. Does not implicitly {@link google.cloud.networksecurity.v1.SACAttachment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ISACAttachment} message SACAttachment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SACAttachment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.sacRealm != null && Object.hasOwnProperty.call(message, "sacRealm"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.sacRealm);
+                            if (message.nccGateway != null && Object.hasOwnProperty.call(message, "nccGateway"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.nccGateway);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SACAttachment message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.SACAttachment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ISACAttachment} message SACAttachment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SACAttachment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SACAttachment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.SACAttachment} SACAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SACAttachment.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.SACAttachment(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.sacRealm = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.nccGateway = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SACAttachment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.SACAttachment} SACAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SACAttachment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SACAttachment message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SACAttachment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.sacRealm != null && message.hasOwnProperty("sacRealm"))
+                                if (!$util.isString(message.sacRealm))
+                                    return "sacRealm: string expected";
+                            if (message.nccGateway != null && message.hasOwnProperty("nccGateway"))
+                                if (!$util.isString(message.nccGateway))
+                                    return "nccGateway: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SACAttachment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.SACAttachment} SACAttachment
+                         */
+                        SACAttachment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.SACAttachment)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.SACAttachment();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.SACAttachment.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.SACAttachment.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.SACAttachment.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.sacRealm != null)
+                                message.sacRealm = String(object.sacRealm);
+                            if (object.nccGateway != null)
+                                message.nccGateway = String(object.nccGateway);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "PENDING_PARTNER_ATTACHMENT":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "PARTNER_ATTACHED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "PARTNER_DETACHED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SACAttachment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.SACAttachment} message SACAttachment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SACAttachment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.sacRealm = "";
+                                object.nccGateway = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.sacRealm != null && message.hasOwnProperty("sacRealm"))
+                                object.sacRealm = message.sacRealm;
+                            if (message.nccGateway != null && message.hasOwnProperty("nccGateway"))
+                                object.nccGateway = message.nccGateway;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.networksecurity.v1.SACAttachment.State[message.state] === undefined ? message.state : $root.google.cloud.networksecurity.v1.SACAttachment.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SACAttachment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SACAttachment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SACAttachment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.SACAttachment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SACAttachment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.SACAttachment";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.networksecurity.v1.SACAttachment.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} PENDING_PARTNER_ATTACHMENT=1 PENDING_PARTNER_ATTACHMENT value
+                         * @property {number} PARTNER_ATTACHED=2 PARTNER_ATTACHED value
+                         * @property {number} PARTNER_DETACHED=3 PARTNER_DETACHED value
+                         */
+                        SACAttachment.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PENDING_PARTNER_ATTACHMENT"] = 1;
+                            values[valuesById[2] = "PARTNER_ATTACHED"] = 2;
+                            values[valuesById[3] = "PARTNER_DETACHED"] = 3;
+                            return values;
+                        })();
+    
+                        return SACAttachment;
+                    })();
+    
+                    v1.ListSACAttachmentsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSACAttachmentsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListSACAttachmentsRequest
+                         * @property {string|null} [parent] ListSACAttachmentsRequest parent
+                         * @property {number|null} [pageSize] ListSACAttachmentsRequest pageSize
+                         * @property {string|null} [pageToken] ListSACAttachmentsRequest pageToken
+                         * @property {string|null} [filter] ListSACAttachmentsRequest filter
+                         * @property {string|null} [orderBy] ListSACAttachmentsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListSACAttachmentsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListSACAttachmentsRequest.
+                         * @implements IListSACAttachmentsRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListSACAttachmentsRequest=} [properties] Properties to set
+                         */
+                        function ListSACAttachmentsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSACAttachmentsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @instance
+                         */
+                        ListSACAttachmentsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSACAttachmentsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @instance
+                         */
+                        ListSACAttachmentsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSACAttachmentsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @instance
+                         */
+                        ListSACAttachmentsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListSACAttachmentsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @instance
+                         */
+                        ListSACAttachmentsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListSACAttachmentsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @instance
+                         */
+                        ListSACAttachmentsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListSACAttachmentsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACAttachmentsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListSACAttachmentsRequest} ListSACAttachmentsRequest instance
+                         */
+                        ListSACAttachmentsRequest.create = function create(properties) {
+                            return new ListSACAttachmentsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSACAttachmentsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACAttachmentsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACAttachmentsRequest} message ListSACAttachmentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSACAttachmentsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSACAttachmentsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACAttachmentsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACAttachmentsRequest} message ListSACAttachmentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSACAttachmentsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSACAttachmentsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListSACAttachmentsRequest} ListSACAttachmentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSACAttachmentsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListSACAttachmentsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSACAttachmentsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListSACAttachmentsRequest} ListSACAttachmentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSACAttachmentsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSACAttachmentsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSACAttachmentsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSACAttachmentsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListSACAttachmentsRequest} ListSACAttachmentsRequest
+                         */
+                        ListSACAttachmentsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListSACAttachmentsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListSACAttachmentsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSACAttachmentsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListSACAttachmentsRequest} message ListSACAttachmentsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSACAttachmentsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSACAttachmentsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSACAttachmentsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSACAttachmentsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSACAttachmentsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.ListSACAttachmentsRequest";
+                        };
+    
+                        return ListSACAttachmentsRequest;
+                    })();
+    
+                    v1.ListSACAttachmentsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSACAttachmentsResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListSACAttachmentsResponse
+                         * @property {Array.<google.cloud.networksecurity.v1.ISACAttachment>|null} [sacAttachments] ListSACAttachmentsResponse sacAttachments
+                         * @property {string|null} [nextPageToken] ListSACAttachmentsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListSACAttachmentsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListSACAttachmentsResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListSACAttachmentsResponse.
+                         * @implements IListSACAttachmentsResponse
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListSACAttachmentsResponse=} [properties] Properties to set
+                         */
+                        function ListSACAttachmentsResponse(properties) {
+                            this.sacAttachments = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSACAttachmentsResponse sacAttachments.
+                         * @member {Array.<google.cloud.networksecurity.v1.ISACAttachment>} sacAttachments
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @instance
+                         */
+                        ListSACAttachmentsResponse.prototype.sacAttachments = $util.emptyArray;
+    
+                        /**
+                         * ListSACAttachmentsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @instance
+                         */
+                        ListSACAttachmentsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListSACAttachmentsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @instance
+                         */
+                        ListSACAttachmentsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListSACAttachmentsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACAttachmentsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListSACAttachmentsResponse} ListSACAttachmentsResponse instance
+                         */
+                        ListSACAttachmentsResponse.create = function create(properties) {
+                            return new ListSACAttachmentsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSACAttachmentsResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACAttachmentsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACAttachmentsResponse} message ListSACAttachmentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSACAttachmentsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sacAttachments != null && message.sacAttachments.length)
+                                for (var i = 0; i < message.sacAttachments.length; ++i)
+                                    $root.google.cloud.networksecurity.v1.SACAttachment.encode(message.sacAttachments[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSACAttachmentsResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACAttachmentsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListSACAttachmentsResponse} message ListSACAttachmentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSACAttachmentsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSACAttachmentsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListSACAttachmentsResponse} ListSACAttachmentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSACAttachmentsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListSACAttachmentsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.sacAttachments && message.sacAttachments.length))
+                                            message.sacAttachments = [];
+                                        message.sacAttachments.push($root.google.cloud.networksecurity.v1.SACAttachment.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSACAttachmentsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListSACAttachmentsResponse} ListSACAttachmentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSACAttachmentsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSACAttachmentsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSACAttachmentsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sacAttachments != null && message.hasOwnProperty("sacAttachments")) {
+                                if (!Array.isArray(message.sacAttachments))
+                                    return "sacAttachments: array expected";
+                                for (var i = 0; i < message.sacAttachments.length; ++i) {
+                                    var error = $root.google.cloud.networksecurity.v1.SACAttachment.verify(message.sacAttachments[i]);
+                                    if (error)
+                                        return "sacAttachments." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSACAttachmentsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListSACAttachmentsResponse} ListSACAttachmentsResponse
+                         */
+                        ListSACAttachmentsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListSACAttachmentsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListSACAttachmentsResponse();
+                            if (object.sacAttachments) {
+                                if (!Array.isArray(object.sacAttachments))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ListSACAttachmentsResponse.sacAttachments: array expected");
+                                message.sacAttachments = [];
+                                for (var i = 0; i < object.sacAttachments.length; ++i) {
+                                    if (typeof object.sacAttachments[i] !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.ListSACAttachmentsResponse.sacAttachments: object expected");
+                                    message.sacAttachments[i] = $root.google.cloud.networksecurity.v1.SACAttachment.fromObject(object.sacAttachments[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ListSACAttachmentsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSACAttachmentsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListSACAttachmentsResponse} message ListSACAttachmentsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSACAttachmentsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.sacAttachments = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.sacAttachments && message.sacAttachments.length) {
+                                object.sacAttachments = [];
+                                for (var j = 0; j < message.sacAttachments.length; ++j)
+                                    object.sacAttachments[j] = $root.google.cloud.networksecurity.v1.SACAttachment.toObject(message.sacAttachments[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSACAttachmentsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSACAttachmentsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSACAttachmentsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.ListSACAttachmentsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSACAttachmentsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.ListSACAttachmentsResponse";
+                        };
+    
+                        return ListSACAttachmentsResponse;
+                    })();
+    
+                    v1.GetSACAttachmentRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSACAttachmentRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IGetSACAttachmentRequest
+                         * @property {string|null} [name] GetSACAttachmentRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSACAttachmentRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a GetSACAttachmentRequest.
+                         * @implements IGetSACAttachmentRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IGetSACAttachmentRequest=} [properties] Properties to set
+                         */
+                        function GetSACAttachmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSACAttachmentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @instance
+                         */
+                        GetSACAttachmentRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSACAttachmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetSACAttachmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.GetSACAttachmentRequest} GetSACAttachmentRequest instance
+                         */
+                        GetSACAttachmentRequest.create = function create(properties) {
+                            return new GetSACAttachmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSACAttachmentRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetSACAttachmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetSACAttachmentRequest} message GetSACAttachmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSACAttachmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSACAttachmentRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetSACAttachmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetSACAttachmentRequest} message GetSACAttachmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSACAttachmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSACAttachmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.GetSACAttachmentRequest} GetSACAttachmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSACAttachmentRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.GetSACAttachmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSACAttachmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.GetSACAttachmentRequest} GetSACAttachmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSACAttachmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSACAttachmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSACAttachmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSACAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.GetSACAttachmentRequest} GetSACAttachmentRequest
+                         */
+                        GetSACAttachmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.GetSACAttachmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.GetSACAttachmentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSACAttachmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.GetSACAttachmentRequest} message GetSACAttachmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSACAttachmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSACAttachmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSACAttachmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSACAttachmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.GetSACAttachmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSACAttachmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.GetSACAttachmentRequest";
+                        };
+    
+                        return GetSACAttachmentRequest;
+                    })();
+    
+                    v1.CreateSACAttachmentRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSACAttachmentRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ICreateSACAttachmentRequest
+                         * @property {string|null} [parent] CreateSACAttachmentRequest parent
+                         * @property {string|null} [sacAttachmentId] CreateSACAttachmentRequest sacAttachmentId
+                         * @property {google.cloud.networksecurity.v1.ISACAttachment|null} [sacAttachment] CreateSACAttachmentRequest sacAttachment
+                         * @property {string|null} [requestId] CreateSACAttachmentRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateSACAttachmentRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a CreateSACAttachmentRequest.
+                         * @implements ICreateSACAttachmentRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ICreateSACAttachmentRequest=} [properties] Properties to set
+                         */
+                        function CreateSACAttachmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSACAttachmentRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @instance
+                         */
+                        CreateSACAttachmentRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSACAttachmentRequest sacAttachmentId.
+                         * @member {string} sacAttachmentId
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @instance
+                         */
+                        CreateSACAttachmentRequest.prototype.sacAttachmentId = "";
+    
+                        /**
+                         * CreateSACAttachmentRequest sacAttachment.
+                         * @member {google.cloud.networksecurity.v1.ISACAttachment|null|undefined} sacAttachment
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @instance
+                         */
+                        CreateSACAttachmentRequest.prototype.sacAttachment = null;
+    
+                        /**
+                         * CreateSACAttachmentRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @instance
+                         */
+                        CreateSACAttachmentRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateSACAttachmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateSACAttachmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.CreateSACAttachmentRequest} CreateSACAttachmentRequest instance
+                         */
+                        CreateSACAttachmentRequest.create = function create(properties) {
+                            return new CreateSACAttachmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSACAttachmentRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateSACAttachmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateSACAttachmentRequest} message CreateSACAttachmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSACAttachmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.sacAttachmentId != null && Object.hasOwnProperty.call(message, "sacAttachmentId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sacAttachmentId);
+                            if (message.sacAttachment != null && Object.hasOwnProperty.call(message, "sacAttachment"))
+                                $root.google.cloud.networksecurity.v1.SACAttachment.encode(message.sacAttachment, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSACAttachmentRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateSACAttachmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateSACAttachmentRequest} message CreateSACAttachmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSACAttachmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSACAttachmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.CreateSACAttachmentRequest} CreateSACAttachmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSACAttachmentRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.CreateSACAttachmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sacAttachmentId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sacAttachment = $root.google.cloud.networksecurity.v1.SACAttachment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSACAttachmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.CreateSACAttachmentRequest} CreateSACAttachmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSACAttachmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSACAttachmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSACAttachmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.sacAttachmentId != null && message.hasOwnProperty("sacAttachmentId"))
+                                if (!$util.isString(message.sacAttachmentId))
+                                    return "sacAttachmentId: string expected";
+                            if (message.sacAttachment != null && message.hasOwnProperty("sacAttachment")) {
+                                var error = $root.google.cloud.networksecurity.v1.SACAttachment.verify(message.sacAttachment);
+                                if (error)
+                                    return "sacAttachment." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSACAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.CreateSACAttachmentRequest} CreateSACAttachmentRequest
+                         */
+                        CreateSACAttachmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.CreateSACAttachmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.CreateSACAttachmentRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.sacAttachmentId != null)
+                                message.sacAttachmentId = String(object.sacAttachmentId);
+                            if (object.sacAttachment != null) {
+                                if (typeof object.sacAttachment !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.CreateSACAttachmentRequest.sacAttachment: object expected");
+                                message.sacAttachment = $root.google.cloud.networksecurity.v1.SACAttachment.fromObject(object.sacAttachment);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSACAttachmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.CreateSACAttachmentRequest} message CreateSACAttachmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSACAttachmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.sacAttachmentId = "";
+                                object.sacAttachment = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.sacAttachmentId != null && message.hasOwnProperty("sacAttachmentId"))
+                                object.sacAttachmentId = message.sacAttachmentId;
+                            if (message.sacAttachment != null && message.hasOwnProperty("sacAttachment"))
+                                object.sacAttachment = $root.google.cloud.networksecurity.v1.SACAttachment.toObject(message.sacAttachment, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSACAttachmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSACAttachmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSACAttachmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.CreateSACAttachmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSACAttachmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.CreateSACAttachmentRequest";
+                        };
+    
+                        return CreateSACAttachmentRequest;
+                    })();
+    
+                    v1.DeleteSACAttachmentRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSACAttachmentRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IDeleteSACAttachmentRequest
+                         * @property {string|null} [name] DeleteSACAttachmentRequest name
+                         * @property {string|null} [requestId] DeleteSACAttachmentRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSACAttachmentRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a DeleteSACAttachmentRequest.
+                         * @implements IDeleteSACAttachmentRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest=} [properties] Properties to set
+                         */
+                        function DeleteSACAttachmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSACAttachmentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @instance
+                         */
+                        DeleteSACAttachmentRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteSACAttachmentRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @instance
+                         */
+                        DeleteSACAttachmentRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteSACAttachmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.DeleteSACAttachmentRequest} DeleteSACAttachmentRequest instance
+                         */
+                        DeleteSACAttachmentRequest.create = function create(properties) {
+                            return new DeleteSACAttachmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSACAttachmentRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteSACAttachmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest} message DeleteSACAttachmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSACAttachmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSACAttachmentRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteSACAttachmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest} message DeleteSACAttachmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSACAttachmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSACAttachmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.DeleteSACAttachmentRequest} DeleteSACAttachmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSACAttachmentRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.DeleteSACAttachmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSACAttachmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.DeleteSACAttachmentRequest} DeleteSACAttachmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSACAttachmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSACAttachmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSACAttachmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSACAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.DeleteSACAttachmentRequest} DeleteSACAttachmentRequest
+                         */
+                        DeleteSACAttachmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.DeleteSACAttachmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.DeleteSACAttachmentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSACAttachmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.DeleteSACAttachmentRequest} message DeleteSACAttachmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSACAttachmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSACAttachmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSACAttachmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSACAttachmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.DeleteSACAttachmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSACAttachmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.DeleteSACAttachmentRequest";
+                        };
+    
+                        return DeleteSACAttachmentRequest;
                     })();
     
                     return v1;
@@ -149438,6 +154113,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -149473,6 +154149,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -149504,6 +154188,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -149553,6 +154239,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -149606,6 +154296,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -149648,6 +154343,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -149666,8 +154366,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -149675,6 +154377,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -151497,6 +156201,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -151521,6 +156226,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -151548,6 +156261,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -151586,6 +156301,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -151628,6 +156347,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -151648,6 +156372,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -151664,10 +156393,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -151696,6 +156429,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -152573,6 +157558,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -152584,6 +157570,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -152597,6 +157584,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -152624,6 +157619,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -152654,7 +157652,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -152662,6 +157660,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -152704,6 +157725,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -152724,6 +157753,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -152740,10 +157776,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -153382,6 +158426,251 @@
                 return values;
             })();
     
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
+            })();
+    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -153443,6 +158732,7 @@
                  * @memberof google.api
                  * @interface IFieldInfo
                  * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 * @property {Array.<google.api.ITypeReference>|null} [referencedTypes] FieldInfo referencedTypes
                  */
     
                 /**
@@ -153454,6 +158744,7 @@
                  * @param {google.api.IFieldInfo=} [properties] Properties to set
                  */
                 function FieldInfo(properties) {
+                    this.referencedTypes = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -153467,6 +158758,14 @@
                  * @instance
                  */
                 FieldInfo.prototype.format = 0;
+    
+                /**
+                 * FieldInfo referencedTypes.
+                 * @member {Array.<google.api.ITypeReference>} referencedTypes
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.referencedTypes = $util.emptyArray;
     
                 /**
                  * Creates a new FieldInfo instance using the specified properties.
@@ -153494,6 +158793,9 @@
                         writer = $Writer.create();
                     if (message.format != null && Object.hasOwnProperty.call(message, "format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    if (message.referencedTypes != null && message.referencedTypes.length)
+                        for (var i = 0; i < message.referencedTypes.length; ++i)
+                            $root.google.api.TypeReference.encode(message.referencedTypes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -153532,6 +158834,12 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.referencedTypes && message.referencedTypes.length))
+                                    message.referencedTypes = [];
+                                message.referencedTypes.push($root.google.api.TypeReference.decode(reader, reader.uint32()));
                                 break;
                             }
                         default:
@@ -153580,6 +158888,15 @@
                         case 4:
                             break;
                         }
+                    if (message.referencedTypes != null && message.hasOwnProperty("referencedTypes")) {
+                        if (!Array.isArray(message.referencedTypes))
+                            return "referencedTypes: array expected";
+                        for (var i = 0; i < message.referencedTypes.length; ++i) {
+                            var error = $root.google.api.TypeReference.verify(message.referencedTypes[i]);
+                            if (error)
+                                return "referencedTypes." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -153623,6 +158940,16 @@
                         message.format = 4;
                         break;
                     }
+                    if (object.referencedTypes) {
+                        if (!Array.isArray(object.referencedTypes))
+                            throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
+                        message.referencedTypes = [];
+                        for (var i = 0; i < object.referencedTypes.length; ++i) {
+                            if (typeof object.referencedTypes[i] !== "object")
+                                throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
+                            message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -153639,10 +158966,17 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.referencedTypes = [];
                     if (options.defaults)
                         object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
                     if (message.format != null && message.hasOwnProperty("format"))
                         object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    if (message.referencedTypes && message.referencedTypes.length) {
+                        object.referencedTypes = [];
+                        for (var j = 0; j < message.referencedTypes.length; ++j)
+                            object.referencedTypes[j] = $root.google.api.TypeReference.toObject(message.referencedTypes[j], options);
+                    }
                     return object;
                 };
     
@@ -153693,6 +159027,211 @@
                 })();
     
                 return FieldInfo;
+            })();
+    
+            api.TypeReference = (function() {
+    
+                /**
+                 * Properties of a TypeReference.
+                 * @memberof google.api
+                 * @interface ITypeReference
+                 * @property {string|null} [typeName] TypeReference typeName
+                 */
+    
+                /**
+                 * Constructs a new TypeReference.
+                 * @memberof google.api
+                 * @classdesc Represents a TypeReference.
+                 * @implements ITypeReference
+                 * @constructor
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 */
+                function TypeReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TypeReference typeName.
+                 * @member {string} typeName
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 */
+                TypeReference.prototype.typeName = "";
+    
+                /**
+                 * Creates a new TypeReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 * @returns {google.api.TypeReference} TypeReference instance
+                 */
+                TypeReference.create = function create(properties) {
+                    return new TypeReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.typeName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TypeReference message.
+                 * @function verify
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TypeReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        if (!$util.isString(message.typeName))
+                            return "typeName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.TypeReference} TypeReference
+                 */
+                TypeReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.TypeReference)
+                        return object;
+                    var message = new $root.google.api.TypeReference();
+                    if (object.typeName != null)
+                        message.typeName = String(object.typeName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.TypeReference} message TypeReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TypeReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.typeName = "";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        object.typeName = message.typeName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TypeReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TypeReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TypeReference
+                 * @function getTypeUrl
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TypeReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.TypeReference";
+                };
+    
+                return TypeReference;
             })();
     
             api.ResourceDescriptor = (function() {
@@ -154626,6 +160165,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -154640,6 +160180,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -154664,6 +160205,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -154686,6 +160228,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -154735,6 +160278,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -154857,6 +160408,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -154927,6 +160481,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -155031,6 +160591,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -155085,6 +160652,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -155136,6 +160704,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -155199,6 +160774,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -155265,6 +160844,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -155321,6 +160901,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -155369,6 +160954,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -155475,6 +161061,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -155526,6 +161120,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -155616,6 +161212,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -155731,6 +161331,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -155830,6 +161439,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -155859,6 +161488,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -155904,6 +161534,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -157948,6 +163580,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -158009,6 +163642,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -158045,6 +163686,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -158105,6 +163748,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -158175,6 +163822,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -158224,6 +163880,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -158248,6 +163924,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -158268,6 +163945,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -160586,6 +166265,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
@@ -160708,6 +166388,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -160789,6 +166477,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -160890,6 +166580,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -161030,6 +166724,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -161224,6 +166923,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -161326,6 +167030,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                         object[".google.api.fieldInfo"] = null;
                     }
@@ -161359,6 +167064,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -161633,6 +167340,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -161673,6 +167381,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -161771,6 +167483,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -162365,6 +168559,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -162409,6 +168604,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -162446,6 +168649,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -162495,6 +168700,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -162549,6 +168758,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -162582,6 +168796,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -162614,6 +168833,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -162621,6 +168841,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -164088,6 +170310,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -164154,6 +170378,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -164189,6 +170429,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -164247,6 +170491,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -164337,6 +170589,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -164478,6 +170750,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -164501,6 +170821,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -164514,6 +170836,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -164639,6 +170965,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -164825,6 +171364,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -164842,6 +171382,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -164889,6 +171430,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -164941,6 +171486,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -165050,7 +171599,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -165077,12 +171627,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -165108,10 +171666,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -165152,8 +171712,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -165196,6 +171760,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -165208,10 +171773,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -165238,6 +171808,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -165280,10 +171854,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -165302,13 +171881,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -166521,6 +173103,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {

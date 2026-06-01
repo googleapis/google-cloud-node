@@ -38483,6 +38483,39 @@
                      */
     
                     /**
+                     * Callback as used by {@link google.chat.v1.ChatService|findGroupChats}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef FindGroupChatsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.FindGroupChatsResponse} [response] FindGroupChatsResponse
+                     */
+    
+                    /**
+                     * Calls FindGroupChats.
+                     * @function findGroupChats
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IFindGroupChatsRequest} request FindGroupChatsRequest message or plain object
+                     * @param {google.chat.v1.ChatService.FindGroupChatsCallback} callback Node-style callback called with the error, if any, and FindGroupChatsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.findGroupChats = function findGroupChats(request, callback) {
+                        return this.rpcCall(findGroupChats, $root.google.chat.v1.FindGroupChatsRequest, $root.google.chat.v1.FindGroupChatsResponse, request, callback);
+                    }, "name", { value: "FindGroupChats" });
+    
+                    /**
+                     * Calls FindGroupChats.
+                     * @function findGroupChats
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IFindGroupChatsRequest} request FindGroupChatsRequest message or plain object
+                     * @returns {Promise<google.chat.v1.FindGroupChatsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
                      * Callback as used by {@link google.chat.v1.ChatService|createMembership}.
                      * @memberof google.chat.v1.ChatService
                      * @typedef CreateMembershipCallback
@@ -41563,6 +41596,7 @@
                      * @property {Array.<google.chat.v1.IAttachment>|null} [attachment] Message attachment
                      * @property {google.chat.v1.IMatchedUrl|null} [matchedUrl] Message matchedUrl
                      * @property {boolean|null} [threadReply] Message threadReply
+                     * @property {boolean|null} [silent] Message silent
                      * @property {string|null} [clientAssignedMessageId] Message clientAssignedMessageId
                      * @property {Array.<google.chat.v1.IEmojiReactionSummary>|null} [emojiReactionSummaries] Message emojiReactionSummaries
                      * @property {google.chat.v1.IUser|null} [privateMessageViewer] Message privateMessageViewer
@@ -41747,6 +41781,14 @@
                     Message.prototype.threadReply = false;
     
                     /**
+                     * Message silent.
+                     * @member {boolean} silent
+                     * @memberof google.chat.v1.Message
+                     * @instance
+                     */
+                    Message.prototype.silent = false;
+    
+                    /**
                      * Message clientAssignedMessageId.
                      * @member {string} clientAssignedMessageId
                      * @memberof google.chat.v1.Message
@@ -41885,6 +41927,8 @@
                         if (message.accessoryWidgets != null && message.accessoryWidgets.length)
                             for (var i = 0; i < message.accessoryWidgets.length; ++i)
                                 $root.google.chat.v1.AccessoryWidget.encode(message.accessoryWidgets[i], writer.uint32(/* id 44, wireType 2 =*/354).fork()).ldelim();
+                        if (message.silent != null && Object.hasOwnProperty.call(message, "silent"))
+                            writer.uint32(/* id 46, wireType 0 =*/368).bool(message.silent);
                         return writer;
                     };
     
@@ -42003,6 +42047,10 @@
                                 }
                             case 25: {
                                     message.threadReply = reader.bool();
+                                    break;
+                                }
+                            case 46: {
+                                    message.silent = reader.bool();
                                     break;
                                 }
                             case 32: {
@@ -42173,6 +42221,9 @@
                         if (message.threadReply != null && message.hasOwnProperty("threadReply"))
                             if (typeof message.threadReply !== "boolean")
                                 return "threadReply: boolean expected";
+                        if (message.silent != null && message.hasOwnProperty("silent"))
+                            if (typeof message.silent !== "boolean")
+                                return "silent: boolean expected";
                         if (message.clientAssignedMessageId != null && message.hasOwnProperty("clientAssignedMessageId"))
                             if (!$util.isString(message.clientAssignedMessageId))
                                 return "clientAssignedMessageId: string expected";
@@ -42330,6 +42381,8 @@
                         }
                         if (object.threadReply != null)
                             message.threadReply = Boolean(object.threadReply);
+                        if (object.silent != null)
+                            message.silent = Boolean(object.silent);
                         if (object.clientAssignedMessageId != null)
                             message.clientAssignedMessageId = String(object.clientAssignedMessageId);
                         if (object.emojiReactionSummaries) {
@@ -42422,6 +42475,7 @@
                             object.deletionMetadata = null;
                             object.quotedMessageMetadata = null;
                             object.formattedText = "";
+                            object.silent = false;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -42496,6 +42550,8 @@
                             for (var j = 0; j < message.accessoryWidgets.length; ++j)
                                 object.accessoryWidgets[j] = $root.google.chat.v1.AccessoryWidget.toObject(message.accessoryWidgets[j], options);
                         }
+                        if (message.silent != null && message.hasOwnProperty("silent"))
+                            object.silent = message.silent;
                         return object;
                     };
     
@@ -45648,6 +45704,7 @@
                      * @property {string|null} [requestId] CreateMessageRequest requestId
                      * @property {google.chat.v1.CreateMessageRequest.MessageReplyOption|null} [messageReplyOption] CreateMessageRequest messageReplyOption
                      * @property {string|null} [messageId] CreateMessageRequest messageId
+                     * @property {google.chat.v1.ICreateMessageNotificationOptions|null} [createMessageNotificationOptions] CreateMessageRequest createMessageNotificationOptions
                      */
     
                     /**
@@ -45714,6 +45771,14 @@
                     CreateMessageRequest.prototype.messageId = "";
     
                     /**
+                     * CreateMessageRequest createMessageNotificationOptions.
+                     * @member {google.chat.v1.ICreateMessageNotificationOptions|null|undefined} createMessageNotificationOptions
+                     * @memberof google.chat.v1.CreateMessageRequest
+                     * @instance
+                     */
+                    CreateMessageRequest.prototype.createMessageNotificationOptions = null;
+    
+                    /**
                      * Creates a new CreateMessageRequest instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.CreateMessageRequest
@@ -45749,6 +45814,8 @@
                             writer.uint32(/* id 8, wireType 0 =*/64).int32(message.messageReplyOption);
                         if (message.messageId != null && Object.hasOwnProperty.call(message, "messageId"))
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.messageId);
+                        if (message.createMessageNotificationOptions != null && Object.hasOwnProperty.call(message, "createMessageNotificationOptions"))
+                            $root.google.chat.v1.CreateMessageNotificationOptions.encode(message.createMessageNotificationOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         return writer;
                     };
     
@@ -45807,6 +45874,10 @@
                                 }
                             case 9: {
                                     message.messageId = reader.string();
+                                    break;
+                                }
+                            case 10: {
+                                    message.createMessageNotificationOptions = $root.google.chat.v1.CreateMessageNotificationOptions.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -45870,6 +45941,11 @@
                         if (message.messageId != null && message.hasOwnProperty("messageId"))
                             if (!$util.isString(message.messageId))
                                 return "messageId: string expected";
+                        if (message.createMessageNotificationOptions != null && message.hasOwnProperty("createMessageNotificationOptions")) {
+                            var error = $root.google.chat.v1.CreateMessageNotificationOptions.verify(message.createMessageNotificationOptions);
+                            if (error)
+                                return "createMessageNotificationOptions." + error;
+                        }
                         return null;
                     };
     
@@ -45918,6 +45994,11 @@
                         }
                         if (object.messageId != null)
                             message.messageId = String(object.messageId);
+                        if (object.createMessageNotificationOptions != null) {
+                            if (typeof object.createMessageNotificationOptions !== "object")
+                                throw TypeError(".google.chat.v1.CreateMessageRequest.createMessageNotificationOptions: object expected");
+                            message.createMessageNotificationOptions = $root.google.chat.v1.CreateMessageNotificationOptions.fromObject(object.createMessageNotificationOptions);
+                        }
                         return message;
                     };
     
@@ -45941,6 +46022,7 @@
                             object.requestId = "";
                             object.messageReplyOption = options.enums === String ? "MESSAGE_REPLY_OPTION_UNSPECIFIED" : 0;
                             object.messageId = "";
+                            object.createMessageNotificationOptions = null;
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
@@ -45954,6 +46036,8 @@
                             object.messageReplyOption = options.enums === String ? $root.google.chat.v1.CreateMessageRequest.MessageReplyOption[message.messageReplyOption] === undefined ? message.messageReplyOption : $root.google.chat.v1.CreateMessageRequest.MessageReplyOption[message.messageReplyOption] : message.messageReplyOption;
                         if (message.messageId != null && message.hasOwnProperty("messageId"))
                             object.messageId = message.messageId;
+                        if (message.createMessageNotificationOptions != null && message.hasOwnProperty("createMessageNotificationOptions"))
+                            object.createMessageNotificationOptions = $root.google.chat.v1.CreateMessageNotificationOptions.toObject(message.createMessageNotificationOptions, options);
                         return object;
                     };
     
@@ -46000,6 +46084,251 @@
                     })();
     
                     return CreateMessageRequest;
+                })();
+    
+                v1.CreateMessageNotificationOptions = (function() {
+    
+                    /**
+                     * Properties of a CreateMessageNotificationOptions.
+                     * @memberof google.chat.v1
+                     * @interface ICreateMessageNotificationOptions
+                     * @property {google.chat.v1.CreateMessageNotificationOptions.NotificationType|null} [notificationType] CreateMessageNotificationOptions notificationType
+                     */
+    
+                    /**
+                     * Constructs a new CreateMessageNotificationOptions.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a CreateMessageNotificationOptions.
+                     * @implements ICreateMessageNotificationOptions
+                     * @constructor
+                     * @param {google.chat.v1.ICreateMessageNotificationOptions=} [properties] Properties to set
+                     */
+                    function CreateMessageNotificationOptions(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateMessageNotificationOptions notificationType.
+                     * @member {google.chat.v1.CreateMessageNotificationOptions.NotificationType} notificationType
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @instance
+                     */
+                    CreateMessageNotificationOptions.prototype.notificationType = 0;
+    
+                    /**
+                     * Creates a new CreateMessageNotificationOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {google.chat.v1.ICreateMessageNotificationOptions=} [properties] Properties to set
+                     * @returns {google.chat.v1.CreateMessageNotificationOptions} CreateMessageNotificationOptions instance
+                     */
+                    CreateMessageNotificationOptions.create = function create(properties) {
+                        return new CreateMessageNotificationOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateMessageNotificationOptions message. Does not implicitly {@link google.chat.v1.CreateMessageNotificationOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {google.chat.v1.ICreateMessageNotificationOptions} message CreateMessageNotificationOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateMessageNotificationOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.notificationType != null && Object.hasOwnProperty.call(message, "notificationType"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.notificationType);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateMessageNotificationOptions message, length delimited. Does not implicitly {@link google.chat.v1.CreateMessageNotificationOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {google.chat.v1.ICreateMessageNotificationOptions} message CreateMessageNotificationOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateMessageNotificationOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateMessageNotificationOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.CreateMessageNotificationOptions} CreateMessageNotificationOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateMessageNotificationOptions.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateMessageNotificationOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.notificationType = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateMessageNotificationOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.CreateMessageNotificationOptions} CreateMessageNotificationOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateMessageNotificationOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateMessageNotificationOptions message.
+                     * @function verify
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateMessageNotificationOptions.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.notificationType != null && message.hasOwnProperty("notificationType"))
+                            switch (message.notificationType) {
+                            default:
+                                return "notificationType: enum value expected";
+                            case 0:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateMessageNotificationOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.CreateMessageNotificationOptions} CreateMessageNotificationOptions
+                     */
+                    CreateMessageNotificationOptions.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.CreateMessageNotificationOptions)
+                            return object;
+                        var message = new $root.google.chat.v1.CreateMessageNotificationOptions();
+                        switch (object.notificationType) {
+                        default:
+                            if (typeof object.notificationType === "number") {
+                                message.notificationType = object.notificationType;
+                                break;
+                            }
+                            break;
+                        case "NOTIFICATION_TYPE_NONE":
+                        case 0:
+                            message.notificationType = 0;
+                            break;
+                        case "NOTIFICATION_TYPE_FORCE_NOTIFY":
+                        case 2:
+                            message.notificationType = 2;
+                            break;
+                        case "NOTIFICATION_TYPE_SILENT":
+                        case 3:
+                            message.notificationType = 3;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateMessageNotificationOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {google.chat.v1.CreateMessageNotificationOptions} message CreateMessageNotificationOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateMessageNotificationOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.notificationType = options.enums === String ? "NOTIFICATION_TYPE_NONE" : 0;
+                        if (message.notificationType != null && message.hasOwnProperty("notificationType"))
+                            object.notificationType = options.enums === String ? $root.google.chat.v1.CreateMessageNotificationOptions.NotificationType[message.notificationType] === undefined ? message.notificationType : $root.google.chat.v1.CreateMessageNotificationOptions.NotificationType[message.notificationType] : message.notificationType;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateMessageNotificationOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateMessageNotificationOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CreateMessageNotificationOptions
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreateMessageNotificationOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.CreateMessageNotificationOptions";
+                    };
+    
+                    /**
+                     * NotificationType enum.
+                     * @name google.chat.v1.CreateMessageNotificationOptions.NotificationType
+                     * @enum {number}
+                     * @property {number} NOTIFICATION_TYPE_NONE=0 NOTIFICATION_TYPE_NONE value
+                     * @property {number} NOTIFICATION_TYPE_FORCE_NOTIFY=2 NOTIFICATION_TYPE_FORCE_NOTIFY value
+                     * @property {number} NOTIFICATION_TYPE_SILENT=3 NOTIFICATION_TYPE_SILENT value
+                     */
+                    CreateMessageNotificationOptions.NotificationType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NOTIFICATION_TYPE_NONE"] = 0;
+                        values[valuesById[2] = "NOTIFICATION_TYPE_FORCE_NOTIFY"] = 2;
+                        values[valuesById[3] = "NOTIFICATION_TYPE_SILENT"] = 3;
+                        return values;
+                    })();
+    
+                    return CreateMessageNotificationOptions;
                 })();
     
                 v1.ListMessagesRequest = (function() {
@@ -56249,6 +56578,572 @@
                     return FindDirectMessageRequest;
                 })();
     
+                v1.FindGroupChatsRequest = (function() {
+    
+                    /**
+                     * Properties of a FindGroupChatsRequest.
+                     * @memberof google.chat.v1
+                     * @interface IFindGroupChatsRequest
+                     * @property {Array.<string>|null} [users] FindGroupChatsRequest users
+                     * @property {number|null} [pageSize] FindGroupChatsRequest pageSize
+                     * @property {string|null} [pageToken] FindGroupChatsRequest pageToken
+                     * @property {google.chat.v1.SpaceView|null} [spaceView] FindGroupChatsRequest spaceView
+                     */
+    
+                    /**
+                     * Constructs a new FindGroupChatsRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a FindGroupChatsRequest.
+                     * @implements IFindGroupChatsRequest
+                     * @constructor
+                     * @param {google.chat.v1.IFindGroupChatsRequest=} [properties] Properties to set
+                     */
+                    function FindGroupChatsRequest(properties) {
+                        this.users = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FindGroupChatsRequest users.
+                     * @member {Array.<string>} users
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @instance
+                     */
+                    FindGroupChatsRequest.prototype.users = $util.emptyArray;
+    
+                    /**
+                     * FindGroupChatsRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @instance
+                     */
+                    FindGroupChatsRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * FindGroupChatsRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @instance
+                     */
+                    FindGroupChatsRequest.prototype.pageToken = "";
+    
+                    /**
+                     * FindGroupChatsRequest spaceView.
+                     * @member {google.chat.v1.SpaceView} spaceView
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @instance
+                     */
+                    FindGroupChatsRequest.prototype.spaceView = 0;
+    
+                    /**
+                     * Creates a new FindGroupChatsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @static
+                     * @param {google.chat.v1.IFindGroupChatsRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.FindGroupChatsRequest} FindGroupChatsRequest instance
+                     */
+                    FindGroupChatsRequest.create = function create(properties) {
+                        return new FindGroupChatsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FindGroupChatsRequest message. Does not implicitly {@link google.chat.v1.FindGroupChatsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @static
+                     * @param {google.chat.v1.IFindGroupChatsRequest} message FindGroupChatsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FindGroupChatsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                        if (message.spaceView != null && Object.hasOwnProperty.call(message, "spaceView"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.spaceView);
+                        if (message.users != null && message.users.length)
+                            for (var i = 0; i < message.users.length; ++i)
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.users[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FindGroupChatsRequest message, length delimited. Does not implicitly {@link google.chat.v1.FindGroupChatsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @static
+                     * @param {google.chat.v1.IFindGroupChatsRequest} message FindGroupChatsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FindGroupChatsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FindGroupChatsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.FindGroupChatsRequest} FindGroupChatsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FindGroupChatsRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.FindGroupChatsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 5: {
+                                    if (!(message.users && message.users.length))
+                                        message.users = [];
+                                    message.users.push(reader.string());
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.spaceView = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FindGroupChatsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.FindGroupChatsRequest} FindGroupChatsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FindGroupChatsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FindGroupChatsRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FindGroupChatsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.users != null && message.hasOwnProperty("users")) {
+                            if (!Array.isArray(message.users))
+                                return "users: array expected";
+                            for (var i = 0; i < message.users.length; ++i)
+                                if (!$util.isString(message.users[i]))
+                                    return "users: string[] expected";
+                        }
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        if (message.spaceView != null && message.hasOwnProperty("spaceView"))
+                            switch (message.spaceView) {
+                            default:
+                                return "spaceView: enum value expected";
+                            case 0:
+                            case 3:
+                            case 4:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FindGroupChatsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.FindGroupChatsRequest} FindGroupChatsRequest
+                     */
+                    FindGroupChatsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.FindGroupChatsRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.FindGroupChatsRequest();
+                        if (object.users) {
+                            if (!Array.isArray(object.users))
+                                throw TypeError(".google.chat.v1.FindGroupChatsRequest.users: array expected");
+                            message.users = [];
+                            for (var i = 0; i < object.users.length; ++i)
+                                message.users[i] = String(object.users[i]);
+                        }
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        switch (object.spaceView) {
+                        default:
+                            if (typeof object.spaceView === "number") {
+                                message.spaceView = object.spaceView;
+                                break;
+                            }
+                            break;
+                        case "SPACE_VIEW_UNSPECIFIED":
+                        case 0:
+                            message.spaceView = 0;
+                            break;
+                        case "SPACE_VIEW_RESOURCE_NAME_ONLY":
+                        case 3:
+                            message.spaceView = 3;
+                            break;
+                        case "SPACE_VIEW_EXPANDED":
+                        case 4:
+                            message.spaceView = 4;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FindGroupChatsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @static
+                     * @param {google.chat.v1.FindGroupChatsRequest} message FindGroupChatsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FindGroupChatsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.users = [];
+                        if (options.defaults) {
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                            object.spaceView = options.enums === String ? "SPACE_VIEW_UNSPECIFIED" : 0;
+                        }
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        if (message.spaceView != null && message.hasOwnProperty("spaceView"))
+                            object.spaceView = options.enums === String ? $root.google.chat.v1.SpaceView[message.spaceView] === undefined ? message.spaceView : $root.google.chat.v1.SpaceView[message.spaceView] : message.spaceView;
+                        if (message.users && message.users.length) {
+                            object.users = [];
+                            for (var j = 0; j < message.users.length; ++j)
+                                object.users[j] = message.users[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FindGroupChatsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FindGroupChatsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FindGroupChatsRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.FindGroupChatsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FindGroupChatsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.FindGroupChatsRequest";
+                    };
+    
+                    return FindGroupChatsRequest;
+                })();
+    
+                v1.FindGroupChatsResponse = (function() {
+    
+                    /**
+                     * Properties of a FindGroupChatsResponse.
+                     * @memberof google.chat.v1
+                     * @interface IFindGroupChatsResponse
+                     * @property {Array.<google.chat.v1.ISpace>|null} [spaces] FindGroupChatsResponse spaces
+                     * @property {string|null} [nextPageToken] FindGroupChatsResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new FindGroupChatsResponse.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a FindGroupChatsResponse.
+                     * @implements IFindGroupChatsResponse
+                     * @constructor
+                     * @param {google.chat.v1.IFindGroupChatsResponse=} [properties] Properties to set
+                     */
+                    function FindGroupChatsResponse(properties) {
+                        this.spaces = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FindGroupChatsResponse spaces.
+                     * @member {Array.<google.chat.v1.ISpace>} spaces
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @instance
+                     */
+                    FindGroupChatsResponse.prototype.spaces = $util.emptyArray;
+    
+                    /**
+                     * FindGroupChatsResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @instance
+                     */
+                    FindGroupChatsResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new FindGroupChatsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @static
+                     * @param {google.chat.v1.IFindGroupChatsResponse=} [properties] Properties to set
+                     * @returns {google.chat.v1.FindGroupChatsResponse} FindGroupChatsResponse instance
+                     */
+                    FindGroupChatsResponse.create = function create(properties) {
+                        return new FindGroupChatsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FindGroupChatsResponse message. Does not implicitly {@link google.chat.v1.FindGroupChatsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @static
+                     * @param {google.chat.v1.IFindGroupChatsResponse} message FindGroupChatsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FindGroupChatsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.spaces != null && message.spaces.length)
+                            for (var i = 0; i < message.spaces.length; ++i)
+                                $root.google.chat.v1.Space.encode(message.spaces[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FindGroupChatsResponse message, length delimited. Does not implicitly {@link google.chat.v1.FindGroupChatsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @static
+                     * @param {google.chat.v1.IFindGroupChatsResponse} message FindGroupChatsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FindGroupChatsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FindGroupChatsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.FindGroupChatsResponse} FindGroupChatsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FindGroupChatsResponse.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.FindGroupChatsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.spaces && message.spaces.length))
+                                        message.spaces = [];
+                                    message.spaces.push($root.google.chat.v1.Space.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FindGroupChatsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.FindGroupChatsResponse} FindGroupChatsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FindGroupChatsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FindGroupChatsResponse message.
+                     * @function verify
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FindGroupChatsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.spaces != null && message.hasOwnProperty("spaces")) {
+                            if (!Array.isArray(message.spaces))
+                                return "spaces: array expected";
+                            for (var i = 0; i < message.spaces.length; ++i) {
+                                var error = $root.google.chat.v1.Space.verify(message.spaces[i]);
+                                if (error)
+                                    return "spaces." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FindGroupChatsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.FindGroupChatsResponse} FindGroupChatsResponse
+                     */
+                    FindGroupChatsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.FindGroupChatsResponse)
+                            return object;
+                        var message = new $root.google.chat.v1.FindGroupChatsResponse();
+                        if (object.spaces) {
+                            if (!Array.isArray(object.spaces))
+                                throw TypeError(".google.chat.v1.FindGroupChatsResponse.spaces: array expected");
+                            message.spaces = [];
+                            for (var i = 0; i < object.spaces.length; ++i) {
+                                if (typeof object.spaces[i] !== "object")
+                                    throw TypeError(".google.chat.v1.FindGroupChatsResponse.spaces: object expected");
+                                message.spaces[i] = $root.google.chat.v1.Space.fromObject(object.spaces[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FindGroupChatsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @static
+                     * @param {google.chat.v1.FindGroupChatsResponse} message FindGroupChatsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FindGroupChatsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.spaces = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.spaces && message.spaces.length) {
+                            object.spaces = [];
+                            for (var j = 0; j < message.spaces.length; ++j)
+                                object.spaces[j] = $root.google.chat.v1.Space.toObject(message.spaces[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FindGroupChatsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FindGroupChatsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FindGroupChatsResponse
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.FindGroupChatsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FindGroupChatsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.FindGroupChatsResponse";
+                    };
+    
+                    return FindGroupChatsResponse;
+                })();
+    
                 v1.UpdateSpaceRequest = (function() {
     
                     /**
@@ -57725,6 +58620,22 @@
                     };
     
                     return CompleteImportSpaceResponse;
+                })();
+    
+                /**
+                 * SpaceView enum.
+                 * @name google.chat.v1.SpaceView
+                 * @enum {number}
+                 * @property {number} SPACE_VIEW_UNSPECIFIED=0 SPACE_VIEW_UNSPECIFIED value
+                 * @property {number} SPACE_VIEW_RESOURCE_NAME_ONLY=3 SPACE_VIEW_RESOURCE_NAME_ONLY value
+                 * @property {number} SPACE_VIEW_EXPANDED=4 SPACE_VIEW_EXPANDED value
+                 */
+                v1.SpaceView = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "SPACE_VIEW_UNSPECIFIED"] = 0;
+                    values[valuesById[3] = "SPACE_VIEW_RESOURCE_NAME_ONLY"] = 3;
+                    values[valuesById[4] = "SPACE_VIEW_EXPANDED"] = 4;
+                    return values;
                 })();
     
                 /**
