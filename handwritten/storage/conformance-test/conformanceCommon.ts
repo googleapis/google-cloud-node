@@ -17,7 +17,7 @@
 import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
 import * as libraryMethods from './libraryMethods';
 import {Bucket, File, Gaxios, HmacKey, Notification, Storage} from '../src';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import * as assert from 'assert';
 import {
   StorageRequestOptions,
@@ -302,5 +302,5 @@ function generateName(method: String, type: string) {
 }
 
 function shortUUID() {
-  return uuid.v4().split('-').shift();
+  return crypto.randomUUID().split('-').shift();
 }

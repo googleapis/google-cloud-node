@@ -21,12 +21,15 @@ import {
   Policy,
   GaxiosError,
 } from '../src';
-import {createTestBuffer} from './testBenchUtil';
-import * as uuid from 'uuid';
+import * as path from 'path';
 import {
-  StorageTransport,
-  StorageRequestOptions,
-} from '../src/storage-transport';
+  createTestBuffer,
+  createTestFileFromBuffer,
+  deleteTestFile,
+} from './testBenchUtil';
+import * as crypto from 'crypto';
+import {getDirName} from '../src/util.js';
+import {StorageTransport} from '../src/storage-transport';
 
 const FILE_SIZE_BYTES = 9 * 1024 * 1024;
 
@@ -565,7 +568,7 @@ export async function bucketUploadResumableInstancePrecondition(
 }
 
 export async function bucketUploadResumable(options: ConformanceTestOptions) {
-  const fileName = `resumable-file-${uuid.v4()}.txt`;
+  const fileName = `resumable-file-${crypto.randomUUID()}.txt`;
   const dataBuffer = Buffer.alloc(FILE_SIZE_BYTES, 'a');
 
   const initiateOptions: StorageRequestOptions = {

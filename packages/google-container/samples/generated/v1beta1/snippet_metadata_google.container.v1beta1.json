@@ -230,7 +230,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 238,
+          "end": 248,
           "type": "FULL"
         }
       ],
@@ -261,6 +261,14 @@
           },
           {
             "name": "image_type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "image",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "image_project",
             "type": "TYPE_STRING"
           },
           {
