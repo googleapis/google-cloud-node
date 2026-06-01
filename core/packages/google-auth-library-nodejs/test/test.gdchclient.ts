@@ -392,6 +392,7 @@ describe('GdchClient', () => {
       .post('/token')
       .reply(200, {
         access_token: 'ca-verified-token',
+        expires_in: 3600,
       });
 
     const res = await client.getAccessToken();
@@ -572,6 +573,7 @@ describe('GdchClient', () => {
       .post('/token')
       .reply(200, {
         access_token: 'ca-verified-token',
+        expires_in: 3600,
       });
 
     await assert.rejects(client.getAccessToken(), (err: Error) => {
@@ -601,6 +603,29 @@ describe('GdchClient', () => {
 
     await assert.rejects(client.getAccessToken(), (err: Error) => {
       assert.ok(err.message.includes('Token response did not contain an access_token.'));
+      return true;
+    });
+    scope.done();
+  });
+
+  it('should throw error if token response does not contain expires_in', async () => {
+    const client = new GdchClient({
+      projectId: 'test-project',
+      privateKeyId: 'key-id-123',
+      privateKey: privateKeyPemSec1,
+      serviceIdentityName: 'sa-name',
+      tokenServerUri: 'https://token-server.local/token',
+      apiAudience: 'target-audience',
+    });
+
+    const scope = nock('https://token-server.local')
+      .post('/token')
+      .reply(200, {
+        access_token: 'exchange-token-abc123',
+      });
+
+    await assert.rejects(client.getAccessToken(), (err: Error) => {
+      assert.ok(err.message.includes('Token response did not contain an expires_in field.'));
       return true;
     });
     scope.done();
@@ -737,13 +762,16 @@ describe('GdchClient', () => {
   });
 
   describe('serialization and logging safety', () => {
-    it('should redact private key and credentials in toJSON() serialization', () => {
+    it('should redact private key, clientSecret, apiKey, and credentials in toJSON() serialization', () => {
       const client = new GdchClient({
         projectId: 'test-project',
         privateKeyId: 'key-id-123',
         privateKey: 'raw-secret-private-key',
         serviceIdentityName: 'sa-name',
+        clientSecret: 'raw-client-secret',
+        apiKey: 'raw-api-key',
       });
+      client._clientSecret = 'raw-internal-client-secret';
 
       client.credentials = {
         access_token: 'secret-access-token-abc123',
@@ -755,17 +783,25 @@ describe('GdchClient', () => {
       assert.strictEqual(serialized.projectId, 'test-project');
       assert.strictEqual(serialized.privateKeyId, 'key-id-123');
       assert.strictEqual(serialized.privateKey, '***REDACTED***');
+      assert.strictEqual(serialized._clientSecret, '***REDACTED***');
+      assert.strictEqual(serialized.apiKey, '***REDACTED***');
+      assert.strictEqual(serialized.gdchOptions.privateKey, '***REDACTED***');
+      assert.strictEqual(serialized.gdchOptions.clientSecret, '***REDACTED***');
+      assert.strictEqual(serialized.gdchOptions.apiKey, '***REDACTED***');
       assert.strictEqual(serialized.credentials.access_token, '***REDACTED***');
       assert.strictEqual(serialized.credentials.refresh_token, '***REDACTED***');
     });
 
-    it('should redact private key and credentials in custom inspect console output', () => {
+    it('should redact private key, clientSecret, apiKey, and credentials in custom inspect console output', () => {
       const client = new GdchClient({
         projectId: 'test-project',
         privateKeyId: 'key-id-123',
         privateKey: 'raw-secret-private-key',
         serviceIdentityName: 'sa-name',
+        clientSecret: 'raw-client-secret',
+        apiKey: 'raw-api-key',
       });
+      client._clientSecret = 'raw-internal-client-secret';
 
       client.credentials = {
         access_token: 'secret-access-token-abc123',
@@ -777,6 +813,10 @@ describe('GdchClient', () => {
 
       assert.strictEqual(inspected.projectId, 'test-project');
       assert.strictEqual(inspected.privateKey, '***REDACTED***');
+      assert.strictEqual(inspected.gdchOptions.privateKey, '***REDACTED***');
+      assert.strictEqual(inspected.gdchOptions.clientSecret, '***REDACTED***');
+      assert.strictEqual(inspected._clientSecret, '***REDACTED***');
+      assert.strictEqual(inspected.apiKey, '***REDACTED***');
       assert.strictEqual(inspected.credentials.access_token, '***REDACTED***');
       assert.strictEqual(inspected.credentials.refresh_token, '***REDACTED***');
     });

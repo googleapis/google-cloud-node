@@ -209,14 +209,14 @@ export class GdchClient extends OAuth2Client {
       if (!tokenResponse.access_token) {
         throw new Error('Token response did not contain an access_token.');
       }
+      if (!tokenResponse.expires_in) {
+        throw new Error('Token response did not contain an expires_in field.');
+      }
       const tokens: Credentials = {
         access_token: tokenResponse.access_token,
         token_type: 'STS-Bearer',
+        expiry_date: Date.now() + tokenResponse.expires_in * 1000,
       };
-
-      if (tokenResponse.expires_in) {
-        tokens.expiry_date = Date.now() + tokenResponse.expires_in * 1000;
-      }
 
       this.emit('tokens', tokens);
       return {res, tokens};
@@ -335,6 +335,28 @@ export class GdchClient extends OAuth2Client {
     return {
       ...this,
       privateKey: this.privateKey ? '***REDACTED***' : undefined,
+      _clientSecret: this._clientSecret ? '***REDACTED***' : undefined,
+      apiKey: this.apiKey ? '***REDACTED***' : undefined,
+      gdchOptions: this.gdchOptions
+        ? {
+            ...this.gdchOptions,
+            privateKey: this.gdchOptions.privateKey ? '***REDACTED***' : undefined,
+            clientSecret: this.gdchOptions.clientSecret ? '***REDACTED***' : undefined,
+            client_secret: this.gdchOptions.client_secret ? '***REDACTED***' : undefined,
+            apiKey: this.gdchOptions.apiKey ? '***REDACTED***' : undefined,
+            credentials: this.gdchOptions.credentials
+              ? {
+                  ...this.gdchOptions.credentials,
+                  access_token: this.gdchOptions.credentials.access_token
+                    ? '***REDACTED***'
+                    : undefined,
+                  refresh_token: this.gdchOptions.credentials.refresh_token
+                    ? '***REDACTED***'
+                    : undefined,
+                }
+              : undefined,
+          }
+        : undefined,
       credentials: {
         ...this.credentials,
         access_token: this.credentials?.access_token ? '***REDACTED***' : undefined,
