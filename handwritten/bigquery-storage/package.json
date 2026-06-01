@@ -42,7 +42,7 @@
     "protobufjs": "^7.5.5"
   },
   "peerDependencies": {
-    "protobufjs": "^7.5.5"
+    "protobufjs": "~7.5.5"
   },
   "devDependencies": {
     "@google-cloud/bigquery": "^8.0.0",
