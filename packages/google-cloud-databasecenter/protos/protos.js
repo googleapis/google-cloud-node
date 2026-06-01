@@ -4154,6 +4154,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.databasecenter.v1beta.DatabaseCenter|aggregateQueryStats}.
+                         * @memberof google.cloud.databasecenter.v1beta.DatabaseCenter
+                         * @typedef AggregateQueryStatsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse} [response] AggregateQueryStatsResponse
+                         */
+    
+                        /**
+                         * Calls AggregateQueryStats.
+                         * @function aggregateQueryStats
+                         * @memberof google.cloud.databasecenter.v1beta.DatabaseCenter
+                         * @instance
+                         * @param {google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest} request AggregateQueryStatsRequest message or plain object
+                         * @param {google.cloud.databasecenter.v1beta.DatabaseCenter.AggregateQueryStatsCallback} callback Node-style callback called with the error, if any, and AggregateQueryStatsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DatabaseCenter.prototype.aggregateQueryStats = function aggregateQueryStats(request, callback) {
+                            return this.rpcCall(aggregateQueryStats, $root.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest, $root.google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse, request, callback);
+                        }, "name", { value: "AggregateQueryStats" });
+    
+                        /**
+                         * Calls AggregateQueryStats.
+                         * @function aggregateQueryStats
+                         * @memberof google.cloud.databasecenter.v1beta.DatabaseCenter
+                         * @instance
+                         * @param {google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest} request AggregateQueryStatsRequest message or plain object
+                         * @returns {Promise<google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.databasecenter.v1beta.DatabaseCenter|queryIssues}.
                          * @memberof google.cloud.databasecenter.v1beta.DatabaseCenter
                          * @typedef QueryIssuesCallback
@@ -6932,6 +6965,594 @@
                         return AggregateIssueStatsRequest;
                     })();
     
+                    v1beta.AggregateQueryStatsRequest = (function() {
+    
+                        /**
+                         * Properties of an AggregateQueryStatsRequest.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @interface IAggregateQueryStatsRequest
+                         * @property {string|null} [parent] AggregateQueryStatsRequest parent
+                         * @property {string|null} [orderBy] AggregateQueryStatsRequest orderBy
+                         * @property {string|null} [filter] AggregateQueryStatsRequest filter
+                         * @property {number|null} [pageSize] AggregateQueryStatsRequest pageSize
+                         * @property {string|null} [pageToken] AggregateQueryStatsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new AggregateQueryStatsRequest.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @classdesc Represents an AggregateQueryStatsRequest.
+                         * @implements IAggregateQueryStatsRequest
+                         * @constructor
+                         * @param {google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest=} [properties] Properties to set
+                         */
+                        function AggregateQueryStatsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AggregateQueryStatsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @instance
+                         */
+                        AggregateQueryStatsRequest.prototype.parent = "";
+    
+                        /**
+                         * AggregateQueryStatsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @instance
+                         */
+                        AggregateQueryStatsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * AggregateQueryStatsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @instance
+                         */
+                        AggregateQueryStatsRequest.prototype.filter = "";
+    
+                        /**
+                         * AggregateQueryStatsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @instance
+                         */
+                        AggregateQueryStatsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * AggregateQueryStatsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @instance
+                         */
+                        AggregateQueryStatsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new AggregateQueryStatsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest} AggregateQueryStatsRequest instance
+                         */
+                        AggregateQueryStatsRequest.create = function create(properties) {
+                            return new AggregateQueryStatsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AggregateQueryStatsRequest message. Does not implicitly {@link google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest} message AggregateQueryStatsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AggregateQueryStatsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AggregateQueryStatsRequest message, length delimited. Does not implicitly {@link google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest} message AggregateQueryStatsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AggregateQueryStatsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AggregateQueryStatsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest} AggregateQueryStatsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AggregateQueryStatsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AggregateQueryStatsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest} AggregateQueryStatsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AggregateQueryStatsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AggregateQueryStatsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AggregateQueryStatsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AggregateQueryStatsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest} AggregateQueryStatsRequest
+                         */
+                        AggregateQueryStatsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest)
+                                return object;
+                            var message = new $root.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AggregateQueryStatsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest} message AggregateQueryStatsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AggregateQueryStatsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.orderBy = "";
+                                object.filter = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AggregateQueryStatsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AggregateQueryStatsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AggregateQueryStatsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AggregateQueryStatsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest";
+                        };
+    
+                        return AggregateQueryStatsRequest;
+                    })();
+    
+                    v1beta.AggregateQueryStatsResponse = (function() {
+    
+                        /**
+                         * Properties of an AggregateQueryStatsResponse.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @interface IAggregateQueryStatsResponse
+                         * @property {Array.<google.cloud.databasecenter.v1beta.IQueryStatsInfo>|null} [queryStats] AggregateQueryStatsResponse queryStats
+                         * @property {string|null} [nextPageToken] AggregateQueryStatsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] AggregateQueryStatsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new AggregateQueryStatsResponse.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @classdesc Represents an AggregateQueryStatsResponse.
+                         * @implements IAggregateQueryStatsResponse
+                         * @constructor
+                         * @param {google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse=} [properties] Properties to set
+                         */
+                        function AggregateQueryStatsResponse(properties) {
+                            this.queryStats = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AggregateQueryStatsResponse queryStats.
+                         * @member {Array.<google.cloud.databasecenter.v1beta.IQueryStatsInfo>} queryStats
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @instance
+                         */
+                        AggregateQueryStatsResponse.prototype.queryStats = $util.emptyArray;
+    
+                        /**
+                         * AggregateQueryStatsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @instance
+                         */
+                        AggregateQueryStatsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * AggregateQueryStatsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @instance
+                         */
+                        AggregateQueryStatsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AggregateQueryStatsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse} AggregateQueryStatsResponse instance
+                         */
+                        AggregateQueryStatsResponse.create = function create(properties) {
+                            return new AggregateQueryStatsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AggregateQueryStatsResponse message. Does not implicitly {@link google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse} message AggregateQueryStatsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AggregateQueryStatsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.queryStats != null && message.queryStats.length)
+                                for (var i = 0; i < message.queryStats.length; ++i)
+                                    $root.google.cloud.databasecenter.v1beta.QueryStatsInfo.encode(message.queryStats[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AggregateQueryStatsResponse message, length delimited. Does not implicitly {@link google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse} message AggregateQueryStatsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AggregateQueryStatsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AggregateQueryStatsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse} AggregateQueryStatsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AggregateQueryStatsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.queryStats && message.queryStats.length))
+                                            message.queryStats = [];
+                                        message.queryStats.push($root.google.cloud.databasecenter.v1beta.QueryStatsInfo.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AggregateQueryStatsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse} AggregateQueryStatsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AggregateQueryStatsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AggregateQueryStatsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AggregateQueryStatsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.queryStats != null && message.hasOwnProperty("queryStats")) {
+                                if (!Array.isArray(message.queryStats))
+                                    return "queryStats: array expected";
+                                for (var i = 0; i < message.queryStats.length; ++i) {
+                                    var error = $root.google.cloud.databasecenter.v1beta.QueryStatsInfo.verify(message.queryStats[i]);
+                                    if (error)
+                                        return "queryStats." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AggregateQueryStatsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse} AggregateQueryStatsResponse
+                         */
+                        AggregateQueryStatsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse)
+                                return object;
+                            var message = new $root.google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse();
+                            if (object.queryStats) {
+                                if (!Array.isArray(object.queryStats))
+                                    throw TypeError(".google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse.queryStats: array expected");
+                                message.queryStats = [];
+                                for (var i = 0; i < object.queryStats.length; ++i) {
+                                    if (typeof object.queryStats[i] !== "object")
+                                        throw TypeError(".google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse.queryStats: object expected");
+                                    message.queryStats[i] = $root.google.cloud.databasecenter.v1beta.QueryStatsInfo.fromObject(object.queryStats[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AggregateQueryStatsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse} message AggregateQueryStatsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AggregateQueryStatsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.queryStats = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.queryStats && message.queryStats.length) {
+                                object.queryStats = [];
+                                for (var j = 0; j < message.queryStats.length; ++j)
+                                    object.queryStats[j] = $root.google.cloud.databasecenter.v1beta.QueryStatsInfo.toObject(message.queryStats[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AggregateQueryStatsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AggregateQueryStatsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AggregateQueryStatsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AggregateQueryStatsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.databasecenter.v1beta.AggregateQueryStatsResponse";
+                        };
+    
+                        return AggregateQueryStatsResponse;
+                    })();
+    
                     v1beta.AggregateIssueStatsResponse = (function() {
     
                         /**
@@ -9056,6 +9677,1254 @@
                         };
     
                         return AggregateFleetRequest;
+                    })();
+    
+                    v1beta.QueryStatsInfo = (function() {
+    
+                        /**
+                         * Properties of a QueryStatsInfo.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @interface IQueryStatsInfo
+                         * @property {google.cloud.databasecenter.v1beta.IQueryStats|null} [aggregatedQueryStats] QueryStatsInfo aggregatedQueryStats
+                         * @property {Array.<google.cloud.databasecenter.v1beta.IQueryStats>|null} [queryStats] QueryStatsInfo queryStats
+                         */
+    
+                        /**
+                         * Constructs a new QueryStatsInfo.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @classdesc Represents a QueryStatsInfo.
+                         * @implements IQueryStatsInfo
+                         * @constructor
+                         * @param {google.cloud.databasecenter.v1beta.IQueryStatsInfo=} [properties] Properties to set
+                         */
+                        function QueryStatsInfo(properties) {
+                            this.queryStats = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryStatsInfo aggregatedQueryStats.
+                         * @member {google.cloud.databasecenter.v1beta.IQueryStats|null|undefined} aggregatedQueryStats
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @instance
+                         */
+                        QueryStatsInfo.prototype.aggregatedQueryStats = null;
+    
+                        /**
+                         * QueryStatsInfo queryStats.
+                         * @member {Array.<google.cloud.databasecenter.v1beta.IQueryStats>} queryStats
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @instance
+                         */
+                        QueryStatsInfo.prototype.queryStats = $util.emptyArray;
+    
+                        /**
+                         * Creates a new QueryStatsInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IQueryStatsInfo=} [properties] Properties to set
+                         * @returns {google.cloud.databasecenter.v1beta.QueryStatsInfo} QueryStatsInfo instance
+                         */
+                        QueryStatsInfo.create = function create(properties) {
+                            return new QueryStatsInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryStatsInfo message. Does not implicitly {@link google.cloud.databasecenter.v1beta.QueryStatsInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IQueryStatsInfo} message QueryStatsInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryStatsInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.aggregatedQueryStats != null && Object.hasOwnProperty.call(message, "aggregatedQueryStats"))
+                                $root.google.cloud.databasecenter.v1beta.QueryStats.encode(message.aggregatedQueryStats, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.queryStats != null && message.queryStats.length)
+                                for (var i = 0; i < message.queryStats.length; ++i)
+                                    $root.google.cloud.databasecenter.v1beta.QueryStats.encode(message.queryStats[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryStatsInfo message, length delimited. Does not implicitly {@link google.cloud.databasecenter.v1beta.QueryStatsInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IQueryStatsInfo} message QueryStatsInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryStatsInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryStatsInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.databasecenter.v1beta.QueryStatsInfo} QueryStatsInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryStatsInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.databasecenter.v1beta.QueryStatsInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.aggregatedQueryStats = $root.google.cloud.databasecenter.v1beta.QueryStats.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.queryStats && message.queryStats.length))
+                                            message.queryStats = [];
+                                        message.queryStats.push($root.google.cloud.databasecenter.v1beta.QueryStats.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryStatsInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.databasecenter.v1beta.QueryStatsInfo} QueryStatsInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryStatsInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryStatsInfo message.
+                         * @function verify
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryStatsInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.aggregatedQueryStats != null && message.hasOwnProperty("aggregatedQueryStats")) {
+                                var error = $root.google.cloud.databasecenter.v1beta.QueryStats.verify(message.aggregatedQueryStats);
+                                if (error)
+                                    return "aggregatedQueryStats." + error;
+                            }
+                            if (message.queryStats != null && message.hasOwnProperty("queryStats")) {
+                                if (!Array.isArray(message.queryStats))
+                                    return "queryStats: array expected";
+                                for (var i = 0; i < message.queryStats.length; ++i) {
+                                    var error = $root.google.cloud.databasecenter.v1beta.QueryStats.verify(message.queryStats[i]);
+                                    if (error)
+                                        return "queryStats." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryStatsInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.databasecenter.v1beta.QueryStatsInfo} QueryStatsInfo
+                         */
+                        QueryStatsInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.databasecenter.v1beta.QueryStatsInfo)
+                                return object;
+                            var message = new $root.google.cloud.databasecenter.v1beta.QueryStatsInfo();
+                            if (object.aggregatedQueryStats != null) {
+                                if (typeof object.aggregatedQueryStats !== "object")
+                                    throw TypeError(".google.cloud.databasecenter.v1beta.QueryStatsInfo.aggregatedQueryStats: object expected");
+                                message.aggregatedQueryStats = $root.google.cloud.databasecenter.v1beta.QueryStats.fromObject(object.aggregatedQueryStats);
+                            }
+                            if (object.queryStats) {
+                                if (!Array.isArray(object.queryStats))
+                                    throw TypeError(".google.cloud.databasecenter.v1beta.QueryStatsInfo.queryStats: array expected");
+                                message.queryStats = [];
+                                for (var i = 0; i < object.queryStats.length; ++i) {
+                                    if (typeof object.queryStats[i] !== "object")
+                                        throw TypeError(".google.cloud.databasecenter.v1beta.QueryStatsInfo.queryStats: object expected");
+                                    message.queryStats[i] = $root.google.cloud.databasecenter.v1beta.QueryStats.fromObject(object.queryStats[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryStatsInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.QueryStatsInfo} message QueryStatsInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryStatsInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.queryStats = [];
+                            if (options.defaults)
+                                object.aggregatedQueryStats = null;
+                            if (message.aggregatedQueryStats != null && message.hasOwnProperty("aggregatedQueryStats"))
+                                object.aggregatedQueryStats = $root.google.cloud.databasecenter.v1beta.QueryStats.toObject(message.aggregatedQueryStats, options);
+                            if (message.queryStats && message.queryStats.length) {
+                                object.queryStats = [];
+                                for (var j = 0; j < message.queryStats.length; ++j)
+                                    object.queryStats[j] = $root.google.cloud.databasecenter.v1beta.QueryStats.toObject(message.queryStats[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryStatsInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryStatsInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryStatsInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStatsInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryStatsInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.databasecenter.v1beta.QueryStatsInfo";
+                        };
+    
+                        return QueryStatsInfo;
+                    })();
+    
+                    v1beta.ResourceId = (function() {
+    
+                        /**
+                         * Properties of a ResourceId.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @interface IResourceId
+                         * @property {string|null} [fullResourceName] ResourceId fullResourceName
+                         * @property {string|null} [resourceType] ResourceId resourceType
+                         * @property {google.cloud.databasecenter.v1beta.IProduct|null} [product] ResourceId product
+                         */
+    
+                        /**
+                         * Constructs a new ResourceId.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @classdesc Represents a ResourceId.
+                         * @implements IResourceId
+                         * @constructor
+                         * @param {google.cloud.databasecenter.v1beta.IResourceId=} [properties] Properties to set
+                         */
+                        function ResourceId(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceId fullResourceName.
+                         * @member {string} fullResourceName
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @instance
+                         */
+                        ResourceId.prototype.fullResourceName = "";
+    
+                        /**
+                         * ResourceId resourceType.
+                         * @member {string} resourceType
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @instance
+                         */
+                        ResourceId.prototype.resourceType = "";
+    
+                        /**
+                         * ResourceId product.
+                         * @member {google.cloud.databasecenter.v1beta.IProduct|null|undefined} product
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @instance
+                         */
+                        ResourceId.prototype.product = null;
+    
+                        /**
+                         * Creates a new ResourceId instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IResourceId=} [properties] Properties to set
+                         * @returns {google.cloud.databasecenter.v1beta.ResourceId} ResourceId instance
+                         */
+                        ResourceId.create = function create(properties) {
+                            return new ResourceId(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceId message. Does not implicitly {@link google.cloud.databasecenter.v1beta.ResourceId.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IResourceId} message ResourceId message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceId.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.fullResourceName != null && Object.hasOwnProperty.call(message, "fullResourceName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.fullResourceName);
+                            if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceType);
+                            if (message.product != null && Object.hasOwnProperty.call(message, "product"))
+                                $root.google.cloud.databasecenter.v1beta.Product.encode(message.product, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceId message, length delimited. Does not implicitly {@link google.cloud.databasecenter.v1beta.ResourceId.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IResourceId} message ResourceId message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceId.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceId message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.databasecenter.v1beta.ResourceId} ResourceId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceId.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.databasecenter.v1beta.ResourceId();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.fullResourceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.resourceType = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.product = $root.google.cloud.databasecenter.v1beta.Product.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceId message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.databasecenter.v1beta.ResourceId} ResourceId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceId.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceId message.
+                         * @function verify
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceId.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                if (!$util.isString(message.fullResourceName))
+                                    return "fullResourceName: string expected";
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                if (!$util.isString(message.resourceType))
+                                    return "resourceType: string expected";
+                            if (message.product != null && message.hasOwnProperty("product")) {
+                                var error = $root.google.cloud.databasecenter.v1beta.Product.verify(message.product);
+                                if (error)
+                                    return "product." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceId message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.databasecenter.v1beta.ResourceId} ResourceId
+                         */
+                        ResourceId.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.databasecenter.v1beta.ResourceId)
+                                return object;
+                            var message = new $root.google.cloud.databasecenter.v1beta.ResourceId();
+                            if (object.fullResourceName != null)
+                                message.fullResourceName = String(object.fullResourceName);
+                            if (object.resourceType != null)
+                                message.resourceType = String(object.resourceType);
+                            if (object.product != null) {
+                                if (typeof object.product !== "object")
+                                    throw TypeError(".google.cloud.databasecenter.v1beta.ResourceId.product: object expected");
+                                message.product = $root.google.cloud.databasecenter.v1beta.Product.fromObject(object.product);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceId message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.ResourceId} message ResourceId
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceId.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.fullResourceName = "";
+                                object.resourceType = "";
+                                object.product = null;
+                            }
+                            if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                object.fullResourceName = message.fullResourceName;
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                object.resourceType = message.resourceType;
+                            if (message.product != null && message.hasOwnProperty("product"))
+                                object.product = $root.google.cloud.databasecenter.v1beta.Product.toObject(message.product, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceId to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceId.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceId
+                         * @function getTypeUrl
+                         * @memberof google.cloud.databasecenter.v1beta.ResourceId
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceId.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.databasecenter.v1beta.ResourceId";
+                        };
+    
+                        return ResourceId;
+                    })();
+    
+                    v1beta.QueryStats = (function() {
+    
+                        /**
+                         * Properties of a QueryStats.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @interface IQueryStats
+                         * @property {string|null} [queryHash] QueryStats queryHash
+                         * @property {string|null} [normalizedQuery] QueryStats normalizedQuery
+                         * @property {string|null} [resourceType] QueryStats resourceType
+                         * @property {Array.<google.cloud.databasecenter.v1beta.IResourceId>|null} [resourceIds] QueryStats resourceIds
+                         * @property {google.cloud.databasecenter.v1beta.IQueryMetrics|null} [queryMetrics] QueryStats queryMetrics
+                         * @property {google.cloud.databasecenter.v1beta.IInefficientQueryInfo|null} [inefficientQueryInfo] QueryStats inefficientQueryInfo
+                         */
+    
+                        /**
+                         * Constructs a new QueryStats.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @classdesc Represents a QueryStats.
+                         * @implements IQueryStats
+                         * @constructor
+                         * @param {google.cloud.databasecenter.v1beta.IQueryStats=} [properties] Properties to set
+                         */
+                        function QueryStats(properties) {
+                            this.resourceIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryStats queryHash.
+                         * @member {string} queryHash
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @instance
+                         */
+                        QueryStats.prototype.queryHash = "";
+    
+                        /**
+                         * QueryStats normalizedQuery.
+                         * @member {string} normalizedQuery
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @instance
+                         */
+                        QueryStats.prototype.normalizedQuery = "";
+    
+                        /**
+                         * QueryStats resourceType.
+                         * @member {string} resourceType
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @instance
+                         */
+                        QueryStats.prototype.resourceType = "";
+    
+                        /**
+                         * QueryStats resourceIds.
+                         * @member {Array.<google.cloud.databasecenter.v1beta.IResourceId>} resourceIds
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @instance
+                         */
+                        QueryStats.prototype.resourceIds = $util.emptyArray;
+    
+                        /**
+                         * QueryStats queryMetrics.
+                         * @member {google.cloud.databasecenter.v1beta.IQueryMetrics|null|undefined} queryMetrics
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @instance
+                         */
+                        QueryStats.prototype.queryMetrics = null;
+    
+                        /**
+                         * QueryStats inefficientQueryInfo.
+                         * @member {google.cloud.databasecenter.v1beta.IInefficientQueryInfo|null|undefined} inefficientQueryInfo
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @instance
+                         */
+                        QueryStats.prototype.inefficientQueryInfo = null;
+    
+                        /**
+                         * Creates a new QueryStats instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IQueryStats=} [properties] Properties to set
+                         * @returns {google.cloud.databasecenter.v1beta.QueryStats} QueryStats instance
+                         */
+                        QueryStats.create = function create(properties) {
+                            return new QueryStats(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryStats message. Does not implicitly {@link google.cloud.databasecenter.v1beta.QueryStats.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IQueryStats} message QueryStats message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryStats.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.queryHash != null && Object.hasOwnProperty.call(message, "queryHash"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.queryHash);
+                            if (message.normalizedQuery != null && Object.hasOwnProperty.call(message, "normalizedQuery"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.normalizedQuery);
+                            if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.resourceType);
+                            if (message.resourceIds != null && message.resourceIds.length)
+                                for (var i = 0; i < message.resourceIds.length; ++i)
+                                    $root.google.cloud.databasecenter.v1beta.ResourceId.encode(message.resourceIds[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.queryMetrics != null && Object.hasOwnProperty.call(message, "queryMetrics"))
+                                $root.google.cloud.databasecenter.v1beta.QueryMetrics.encode(message.queryMetrics, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.inefficientQueryInfo != null && Object.hasOwnProperty.call(message, "inefficientQueryInfo"))
+                                $root.google.cloud.databasecenter.v1beta.InefficientQueryInfo.encode(message.inefficientQueryInfo, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryStats message, length delimited. Does not implicitly {@link google.cloud.databasecenter.v1beta.QueryStats.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IQueryStats} message QueryStats message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryStats.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryStats message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.databasecenter.v1beta.QueryStats} QueryStats
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryStats.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.databasecenter.v1beta.QueryStats();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.queryHash = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.normalizedQuery = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.resourceType = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.resourceIds && message.resourceIds.length))
+                                            message.resourceIds = [];
+                                        message.resourceIds.push($root.google.cloud.databasecenter.v1beta.ResourceId.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.queryMetrics = $root.google.cloud.databasecenter.v1beta.QueryMetrics.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.inefficientQueryInfo = $root.google.cloud.databasecenter.v1beta.InefficientQueryInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryStats message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.databasecenter.v1beta.QueryStats} QueryStats
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryStats.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryStats message.
+                         * @function verify
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryStats.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.queryHash != null && message.hasOwnProperty("queryHash"))
+                                if (!$util.isString(message.queryHash))
+                                    return "queryHash: string expected";
+                            if (message.normalizedQuery != null && message.hasOwnProperty("normalizedQuery"))
+                                if (!$util.isString(message.normalizedQuery))
+                                    return "normalizedQuery: string expected";
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                if (!$util.isString(message.resourceType))
+                                    return "resourceType: string expected";
+                            if (message.resourceIds != null && message.hasOwnProperty("resourceIds")) {
+                                if (!Array.isArray(message.resourceIds))
+                                    return "resourceIds: array expected";
+                                for (var i = 0; i < message.resourceIds.length; ++i) {
+                                    var error = $root.google.cloud.databasecenter.v1beta.ResourceId.verify(message.resourceIds[i]);
+                                    if (error)
+                                        return "resourceIds." + error;
+                                }
+                            }
+                            if (message.queryMetrics != null && message.hasOwnProperty("queryMetrics")) {
+                                var error = $root.google.cloud.databasecenter.v1beta.QueryMetrics.verify(message.queryMetrics);
+                                if (error)
+                                    return "queryMetrics." + error;
+                            }
+                            if (message.inefficientQueryInfo != null && message.hasOwnProperty("inefficientQueryInfo")) {
+                                var error = $root.google.cloud.databasecenter.v1beta.InefficientQueryInfo.verify(message.inefficientQueryInfo);
+                                if (error)
+                                    return "inefficientQueryInfo." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryStats message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.databasecenter.v1beta.QueryStats} QueryStats
+                         */
+                        QueryStats.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.databasecenter.v1beta.QueryStats)
+                                return object;
+                            var message = new $root.google.cloud.databasecenter.v1beta.QueryStats();
+                            if (object.queryHash != null)
+                                message.queryHash = String(object.queryHash);
+                            if (object.normalizedQuery != null)
+                                message.normalizedQuery = String(object.normalizedQuery);
+                            if (object.resourceType != null)
+                                message.resourceType = String(object.resourceType);
+                            if (object.resourceIds) {
+                                if (!Array.isArray(object.resourceIds))
+                                    throw TypeError(".google.cloud.databasecenter.v1beta.QueryStats.resourceIds: array expected");
+                                message.resourceIds = [];
+                                for (var i = 0; i < object.resourceIds.length; ++i) {
+                                    if (typeof object.resourceIds[i] !== "object")
+                                        throw TypeError(".google.cloud.databasecenter.v1beta.QueryStats.resourceIds: object expected");
+                                    message.resourceIds[i] = $root.google.cloud.databasecenter.v1beta.ResourceId.fromObject(object.resourceIds[i]);
+                                }
+                            }
+                            if (object.queryMetrics != null) {
+                                if (typeof object.queryMetrics !== "object")
+                                    throw TypeError(".google.cloud.databasecenter.v1beta.QueryStats.queryMetrics: object expected");
+                                message.queryMetrics = $root.google.cloud.databasecenter.v1beta.QueryMetrics.fromObject(object.queryMetrics);
+                            }
+                            if (object.inefficientQueryInfo != null) {
+                                if (typeof object.inefficientQueryInfo !== "object")
+                                    throw TypeError(".google.cloud.databasecenter.v1beta.QueryStats.inefficientQueryInfo: object expected");
+                                message.inefficientQueryInfo = $root.google.cloud.databasecenter.v1beta.InefficientQueryInfo.fromObject(object.inefficientQueryInfo);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryStats message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.QueryStats} message QueryStats
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryStats.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.resourceIds = [];
+                            if (options.defaults) {
+                                object.queryHash = "";
+                                object.normalizedQuery = "";
+                                object.resourceType = "";
+                                object.queryMetrics = null;
+                                object.inefficientQueryInfo = null;
+                            }
+                            if (message.queryHash != null && message.hasOwnProperty("queryHash"))
+                                object.queryHash = message.queryHash;
+                            if (message.normalizedQuery != null && message.hasOwnProperty("normalizedQuery"))
+                                object.normalizedQuery = message.normalizedQuery;
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                object.resourceType = message.resourceType;
+                            if (message.resourceIds && message.resourceIds.length) {
+                                object.resourceIds = [];
+                                for (var j = 0; j < message.resourceIds.length; ++j)
+                                    object.resourceIds[j] = $root.google.cloud.databasecenter.v1beta.ResourceId.toObject(message.resourceIds[j], options);
+                            }
+                            if (message.queryMetrics != null && message.hasOwnProperty("queryMetrics"))
+                                object.queryMetrics = $root.google.cloud.databasecenter.v1beta.QueryMetrics.toObject(message.queryMetrics, options);
+                            if (message.inefficientQueryInfo != null && message.hasOwnProperty("inefficientQueryInfo"))
+                                object.inefficientQueryInfo = $root.google.cloud.databasecenter.v1beta.InefficientQueryInfo.toObject(message.inefficientQueryInfo, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryStats to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryStats.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryStats
+                         * @function getTypeUrl
+                         * @memberof google.cloud.databasecenter.v1beta.QueryStats
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryStats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.databasecenter.v1beta.QueryStats";
+                        };
+    
+                        return QueryStats;
+                    })();
+    
+                    v1beta.QueryMetrics = (function() {
+    
+                        /**
+                         * Properties of a QueryMetrics.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @interface IQueryMetrics
+                         * @property {number|Long|null} [executionCount] QueryMetrics executionCount
+                         * @property {google.protobuf.IDuration|null} [avgCpuTime] QueryMetrics avgCpuTime
+                         * @property {google.protobuf.IDuration|null} [totalCpuTime] QueryMetrics totalCpuTime
+                         * @property {number|Long|null} [rowsProcessed] QueryMetrics rowsProcessed
+                         * @property {google.cloud.databasecenter.v1beta.QueryMetrics.MetricsWindow|null} [metricsWindow] QueryMetrics metricsWindow
+                         */
+    
+                        /**
+                         * Constructs a new QueryMetrics.
+                         * @memberof google.cloud.databasecenter.v1beta
+                         * @classdesc Represents a QueryMetrics.
+                         * @implements IQueryMetrics
+                         * @constructor
+                         * @param {google.cloud.databasecenter.v1beta.IQueryMetrics=} [properties] Properties to set
+                         */
+                        function QueryMetrics(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryMetrics executionCount.
+                         * @member {number|Long} executionCount
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @instance
+                         */
+                        QueryMetrics.prototype.executionCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * QueryMetrics avgCpuTime.
+                         * @member {google.protobuf.IDuration|null|undefined} avgCpuTime
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @instance
+                         */
+                        QueryMetrics.prototype.avgCpuTime = null;
+    
+                        /**
+                         * QueryMetrics totalCpuTime.
+                         * @member {google.protobuf.IDuration|null|undefined} totalCpuTime
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @instance
+                         */
+                        QueryMetrics.prototype.totalCpuTime = null;
+    
+                        /**
+                         * QueryMetrics rowsProcessed.
+                         * @member {number|Long} rowsProcessed
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @instance
+                         */
+                        QueryMetrics.prototype.rowsProcessed = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * QueryMetrics metricsWindow.
+                         * @member {google.cloud.databasecenter.v1beta.QueryMetrics.MetricsWindow} metricsWindow
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @instance
+                         */
+                        QueryMetrics.prototype.metricsWindow = 0;
+    
+                        /**
+                         * Creates a new QueryMetrics instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IQueryMetrics=} [properties] Properties to set
+                         * @returns {google.cloud.databasecenter.v1beta.QueryMetrics} QueryMetrics instance
+                         */
+                        QueryMetrics.create = function create(properties) {
+                            return new QueryMetrics(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryMetrics message. Does not implicitly {@link google.cloud.databasecenter.v1beta.QueryMetrics.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IQueryMetrics} message QueryMetrics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryMetrics.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.executionCount != null && Object.hasOwnProperty.call(message, "executionCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.executionCount);
+                            if (message.avgCpuTime != null && Object.hasOwnProperty.call(message, "avgCpuTime"))
+                                $root.google.protobuf.Duration.encode(message.avgCpuTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.totalCpuTime != null && Object.hasOwnProperty.call(message, "totalCpuTime"))
+                                $root.google.protobuf.Duration.encode(message.totalCpuTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.rowsProcessed != null && Object.hasOwnProperty.call(message, "rowsProcessed"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.rowsProcessed);
+                            if (message.metricsWindow != null && Object.hasOwnProperty.call(message, "metricsWindow"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.metricsWindow);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryMetrics message, length delimited. Does not implicitly {@link google.cloud.databasecenter.v1beta.QueryMetrics.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.IQueryMetrics} message QueryMetrics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryMetrics.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryMetrics message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.databasecenter.v1beta.QueryMetrics} QueryMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryMetrics.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.databasecenter.v1beta.QueryMetrics();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.executionCount = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.avgCpuTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalCpuTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.rowsProcessed = reader.int64();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.metricsWindow = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryMetrics message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.databasecenter.v1beta.QueryMetrics} QueryMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryMetrics.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryMetrics message.
+                         * @function verify
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryMetrics.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.executionCount != null && message.hasOwnProperty("executionCount"))
+                                if (!$util.isInteger(message.executionCount) && !(message.executionCount && $util.isInteger(message.executionCount.low) && $util.isInteger(message.executionCount.high)))
+                                    return "executionCount: integer|Long expected";
+                            if (message.avgCpuTime != null && message.hasOwnProperty("avgCpuTime")) {
+                                var error = $root.google.protobuf.Duration.verify(message.avgCpuTime);
+                                if (error)
+                                    return "avgCpuTime." + error;
+                            }
+                            if (message.totalCpuTime != null && message.hasOwnProperty("totalCpuTime")) {
+                                var error = $root.google.protobuf.Duration.verify(message.totalCpuTime);
+                                if (error)
+                                    return "totalCpuTime." + error;
+                            }
+                            if (message.rowsProcessed != null && message.hasOwnProperty("rowsProcessed"))
+                                if (!$util.isInteger(message.rowsProcessed) && !(message.rowsProcessed && $util.isInteger(message.rowsProcessed.low) && $util.isInteger(message.rowsProcessed.high)))
+                                    return "rowsProcessed: integer|Long expected";
+                            if (message.metricsWindow != null && message.hasOwnProperty("metricsWindow"))
+                                switch (message.metricsWindow) {
+                                default:
+                                    return "metricsWindow: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryMetrics message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.databasecenter.v1beta.QueryMetrics} QueryMetrics
+                         */
+                        QueryMetrics.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.databasecenter.v1beta.QueryMetrics)
+                                return object;
+                            var message = new $root.google.cloud.databasecenter.v1beta.QueryMetrics();
+                            if (object.executionCount != null)
+                                if ($util.Long)
+                                    (message.executionCount = $util.Long.fromValue(object.executionCount)).unsigned = false;
+                                else if (typeof object.executionCount === "string")
+                                    message.executionCount = parseInt(object.executionCount, 10);
+                                else if (typeof object.executionCount === "number")
+                                    message.executionCount = object.executionCount;
+                                else if (typeof object.executionCount === "object")
+                                    message.executionCount = new $util.LongBits(object.executionCount.low >>> 0, object.executionCount.high >>> 0).toNumber();
+                            if (object.avgCpuTime != null) {
+                                if (typeof object.avgCpuTime !== "object")
+                                    throw TypeError(".google.cloud.databasecenter.v1beta.QueryMetrics.avgCpuTime: object expected");
+                                message.avgCpuTime = $root.google.protobuf.Duration.fromObject(object.avgCpuTime);
+                            }
+                            if (object.totalCpuTime != null) {
+                                if (typeof object.totalCpuTime !== "object")
+                                    throw TypeError(".google.cloud.databasecenter.v1beta.QueryMetrics.totalCpuTime: object expected");
+                                message.totalCpuTime = $root.google.protobuf.Duration.fromObject(object.totalCpuTime);
+                            }
+                            if (object.rowsProcessed != null)
+                                if ($util.Long)
+                                    (message.rowsProcessed = $util.Long.fromValue(object.rowsProcessed)).unsigned = false;
+                                else if (typeof object.rowsProcessed === "string")
+                                    message.rowsProcessed = parseInt(object.rowsProcessed, 10);
+                                else if (typeof object.rowsProcessed === "number")
+                                    message.rowsProcessed = object.rowsProcessed;
+                                else if (typeof object.rowsProcessed === "object")
+                                    message.rowsProcessed = new $util.LongBits(object.rowsProcessed.low >>> 0, object.rowsProcessed.high >>> 0).toNumber();
+                            switch (object.metricsWindow) {
+                            default:
+                                if (typeof object.metricsWindow === "number") {
+                                    message.metricsWindow = object.metricsWindow;
+                                    break;
+                                }
+                                break;
+                            case "METRICS_WINDOW_UNSPECIFIED":
+                            case 0:
+                                message.metricsWindow = 0;
+                                break;
+                            case "LAST_ONE_DAY":
+                            case 1:
+                                message.metricsWindow = 1;
+                                break;
+                            case "LAST_ONE_WEEK":
+                            case 2:
+                                message.metricsWindow = 2;
+                                break;
+                            case "LAST_TWO_WEEKS":
+                            case 3:
+                                message.metricsWindow = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryMetrics message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @static
+                         * @param {google.cloud.databasecenter.v1beta.QueryMetrics} message QueryMetrics
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryMetrics.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.executionCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.executionCount = options.longs === String ? "0" : 0;
+                                object.avgCpuTime = null;
+                                object.totalCpuTime = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.rowsProcessed = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.rowsProcessed = options.longs === String ? "0" : 0;
+                                object.metricsWindow = options.enums === String ? "METRICS_WINDOW_UNSPECIFIED" : 0;
+                            }
+                            if (message.executionCount != null && message.hasOwnProperty("executionCount"))
+                                if (typeof message.executionCount === "number")
+                                    object.executionCount = options.longs === String ? String(message.executionCount) : message.executionCount;
+                                else
+                                    object.executionCount = options.longs === String ? $util.Long.prototype.toString.call(message.executionCount) : options.longs === Number ? new $util.LongBits(message.executionCount.low >>> 0, message.executionCount.high >>> 0).toNumber() : message.executionCount;
+                            if (message.avgCpuTime != null && message.hasOwnProperty("avgCpuTime"))
+                                object.avgCpuTime = $root.google.protobuf.Duration.toObject(message.avgCpuTime, options);
+                            if (message.totalCpuTime != null && message.hasOwnProperty("totalCpuTime"))
+                                object.totalCpuTime = $root.google.protobuf.Duration.toObject(message.totalCpuTime, options);
+                            if (message.rowsProcessed != null && message.hasOwnProperty("rowsProcessed"))
+                                if (typeof message.rowsProcessed === "number")
+                                    object.rowsProcessed = options.longs === String ? String(message.rowsProcessed) : message.rowsProcessed;
+                                else
+                                    object.rowsProcessed = options.longs === String ? $util.Long.prototype.toString.call(message.rowsProcessed) : options.longs === Number ? new $util.LongBits(message.rowsProcessed.low >>> 0, message.rowsProcessed.high >>> 0).toNumber() : message.rowsProcessed;
+                            if (message.metricsWindow != null && message.hasOwnProperty("metricsWindow"))
+                                object.metricsWindow = options.enums === String ? $root.google.cloud.databasecenter.v1beta.QueryMetrics.MetricsWindow[message.metricsWindow] === undefined ? message.metricsWindow : $root.google.cloud.databasecenter.v1beta.QueryMetrics.MetricsWindow[message.metricsWindow] : message.metricsWindow;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryMetrics to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryMetrics.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryMetrics
+                         * @function getTypeUrl
+                         * @memberof google.cloud.databasecenter.v1beta.QueryMetrics
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryMetrics.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.databasecenter.v1beta.QueryMetrics";
+                        };
+    
+                        /**
+                         * MetricsWindow enum.
+                         * @name google.cloud.databasecenter.v1beta.QueryMetrics.MetricsWindow
+                         * @enum {number}
+                         * @property {number} METRICS_WINDOW_UNSPECIFIED=0 METRICS_WINDOW_UNSPECIFIED value
+                         * @property {number} LAST_ONE_DAY=1 LAST_ONE_DAY value
+                         * @property {number} LAST_ONE_WEEK=2 LAST_ONE_WEEK value
+                         * @property {number} LAST_TWO_WEEKS=3 LAST_TWO_WEEKS value
+                         */
+                        QueryMetrics.MetricsWindow = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "METRICS_WINDOW_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "LAST_ONE_DAY"] = 1;
+                            values[valuesById[2] = "LAST_ONE_WEEK"] = 2;
+                            values[valuesById[3] = "LAST_TWO_WEEKS"] = 3;
+                            return values;
+                        })();
+    
+                        return QueryMetrics;
                     })();
     
                     v1beta.AggregateFleetResponse = (function() {
@@ -26730,6 +28599,694 @@
                 return values;
             })();
     
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
+                                    message.style.push(reader.int32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
+                };
+    
+                return ResourceReference;
+            })();
+    
             return api;
         })();
     
@@ -31905,6 +34462,7 @@
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {google.protobuf.IFeatureSet|null} [features] FileOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
+                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -31917,6 +34475,7 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -32092,6 +34651,14 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FileOptions .google.api.resourceDefinition.
+                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -32158,6 +34725,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -32280,6 +34850,12 @@
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                                 break;
                             }
+                        case 1053: {
+                                if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                    message[".google.api.resourceDefinition"] = [];
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -32392,6 +34968,15 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
+                            return ".google.api.resourceDefinition: array expected";
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            if (error)
+                                return ".google.api.resourceDefinition." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -32478,6 +35063,16 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceDefinition"]) {
+                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
+                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
+                        message[".google.api.resourceDefinition"] = [];
+                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
+                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -32494,8 +35089,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.resourceDefinition"] = [];
+                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -32563,6 +35160,11 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
+                        object[".google.api.resourceDefinition"] = [];
+                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                    }
                     return object;
                 };
     
@@ -32624,6 +35226,7 @@
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] MessageOptions deprecatedLegacyJsonFieldConflicts
                  * @property {google.protobuf.IFeatureSet|null} [features] MessageOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -32699,6 +35302,14 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * MessageOptions .google.api.resource.
+                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype[".google.api.resource"] = null;
+    
+                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -32737,6 +35348,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource"))
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -32803,6 +35416,10 @@
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                                 break;
                             }
+                        case 1053: {
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -32867,6 +35484,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        if (error)
+                            return ".google.api.resource." + error;
+                    }
                     return null;
                 };
     
@@ -32907,6 +35529,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resource"] != null) {
+                        if (typeof object[".google.api.resource"] !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                    }
                     return message;
                 };
     
@@ -32932,6 +35559,7 @@
                         object.mapEntry = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
                         object.features = null;
+                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -32950,6 +35578,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -33003,6 +35633,7 @@
                  * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -33145,6 +35776,14 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -33202,6 +35841,8 @@
                     if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
                             writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
+                    if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
                 };
     
@@ -33314,6 +35955,10 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
+                                break;
+                            }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -33462,6 +36107,11 @@
                             case 8:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -33682,6 +36332,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     return message;
                 };
     
@@ -33716,6 +36371,7 @@
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
                         object.featureSupport = null;
+                        object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -33759,6 +36415,8 @@
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
                     return object;
                 };
     

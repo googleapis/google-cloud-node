@@ -19,7 +19,7 @@
  */
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {Duplex, DuplexOptions, Readable, Transform, Writable} from 'stream';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import {
   getModuleFormat,
   getRuntimeTrackingString,
@@ -259,7 +259,7 @@ export class Util {
       'User-Agent': getUserAgentString(),
       'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
         packageJson.version
-      }-${getModuleFormat()} gccl-invocation-id/${uuid.v4()}`,
+      }-${getModuleFormat()} gccl-invocation-id/${crypto.randomUUID()}`,
     };
 
     if (gcclGcsCmd) {

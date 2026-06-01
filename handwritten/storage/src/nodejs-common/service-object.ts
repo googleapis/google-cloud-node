@@ -90,7 +90,7 @@ export interface ServiceObjectConfig {
 }
 
 export interface Methods {
-  [methodName: string]: { reqOpts?: StorageRequestOptions } | boolean;
+  [methodName: string]: {reqOpts?: StorageRequestOptions} | boolean;
 }
 
 export interface InstanceResponseCallback<T> {

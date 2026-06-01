@@ -1143,6 +1143,342 @@ describe('v1beta.DatabaseCenterClient', () => {
     });
   });
 
+  describe('aggregateQueryStats', () => {
+    it('invokes aggregateQueryStats without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+      ];
+      client.innerApiCalls.aggregateQueryStats =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.aggregateQueryStats(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.aggregateQueryStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.aggregateQueryStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes aggregateQueryStats without error using callback', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+      ];
+      client.innerApiCalls.aggregateQueryStats =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.aggregateQueryStats(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.aggregateQueryStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.aggregateQueryStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes aggregateQueryStats with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.aggregateQueryStats = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.aggregateQueryStats(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.aggregateQueryStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.aggregateQueryStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes aggregateQueryStatsStream without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+      ];
+      client.descriptors.page.aggregateQueryStats.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.aggregateQueryStatsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.databasecenter.v1beta.QueryStatsInfo[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.databasecenter.v1beta.QueryStatsInfo,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.aggregateQueryStats.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.aggregateQueryStats, request),
+      );
+      assert(
+        (client.descriptors.page.aggregateQueryStats.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes aggregateQueryStatsStream with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.aggregateQueryStats.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.aggregateQueryStatsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.databasecenter.v1beta.QueryStatsInfo[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.databasecenter.v1beta.QueryStatsInfo,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.aggregateQueryStats.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.aggregateQueryStats, request),
+      );
+      assert(
+        (client.descriptors.page.aggregateQueryStats.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with aggregateQueryStats without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.QueryStatsInfo(),
+        ),
+      ];
+      client.descriptors.page.aggregateQueryStats.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo[] =
+        [];
+      const iterable = client.aggregateQueryStatsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.aggregateQueryStats.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.aggregateQueryStats.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with aggregateQueryStats with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.databasecenter.v1beta.AggregateQueryStatsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.aggregateQueryStats.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.aggregateQueryStatsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.aggregateQueryStats.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.aggregateQueryStats.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
   describe('queryIssues', () => {
     it('invokes queryIssues without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
