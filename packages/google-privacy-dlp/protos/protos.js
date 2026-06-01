@@ -6332,6 +6332,7 @@
                          * @property {string|null} [value] ContentItem value
                          * @property {google.privacy.dlp.v2.ITable|null} [table] ContentItem table
                          * @property {google.privacy.dlp.v2.IByteContentItem|null} [byteItem] ContentItem byteItem
+                         * @property {google.privacy.dlp.v2.IConversation|null} [conversation] ContentItem conversation
                          * @property {google.privacy.dlp.v2.IContentMetadata|null} [contentMetadata] ContentItem contentMetadata
                          */
     
@@ -6375,6 +6376,14 @@
                         ContentItem.prototype.byteItem = null;
     
                         /**
+                         * ContentItem conversation.
+                         * @member {google.privacy.dlp.v2.IConversation|null|undefined} conversation
+                         * @memberof google.privacy.dlp.v2.ContentItem
+                         * @instance
+                         */
+                        ContentItem.prototype.conversation = null;
+    
+                        /**
                          * ContentItem contentMetadata.
                          * @member {google.privacy.dlp.v2.IContentMetadata|null|undefined} contentMetadata
                          * @memberof google.privacy.dlp.v2.ContentItem
@@ -6387,12 +6396,12 @@
     
                         /**
                          * ContentItem dataItem.
-                         * @member {"value"|"table"|"byteItem"|undefined} dataItem
+                         * @member {"value"|"table"|"byteItem"|"conversation"|undefined} dataItem
                          * @memberof google.privacy.dlp.v2.ContentItem
                          * @instance
                          */
                         Object.defineProperty(ContentItem.prototype, "dataItem", {
-                            get: $util.oneOfGetter($oneOfFields = ["value", "table", "byteItem"]),
+                            get: $util.oneOfGetter($oneOfFields = ["value", "table", "byteItem", "conversation"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -6428,6 +6437,8 @@
                                 $root.google.privacy.dlp.v2.ByteContentItem.encode(message.byteItem, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.contentMetadata != null && Object.hasOwnProperty.call(message, "contentMetadata"))
                                 $root.google.privacy.dlp.v2.ContentMetadata.encode(message.contentMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.conversation != null && Object.hasOwnProperty.call(message, "conversation"))
+                                $root.google.privacy.dlp.v2.Conversation.encode(message.conversation, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -6474,6 +6485,10 @@
                                     }
                                 case 5: {
                                         message.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.conversation = $root.google.privacy.dlp.v2.Conversation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -6541,6 +6556,16 @@
                                         return "byteItem." + error;
                                 }
                             }
+                            if (message.conversation != null && message.hasOwnProperty("conversation")) {
+                                if (properties.dataItem === 1)
+                                    return "dataItem: multiple values";
+                                properties.dataItem = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.Conversation.verify(message.conversation);
+                                    if (error)
+                                        return "conversation." + error;
+                                }
+                            }
                             if (message.contentMetadata != null && message.hasOwnProperty("contentMetadata")) {
                                 var error = $root.google.privacy.dlp.v2.ContentMetadata.verify(message.contentMetadata);
                                 if (error)
@@ -6572,6 +6597,11 @@
                                 if (typeof object.byteItem !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.ContentItem.byteItem: object expected");
                                 message.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.fromObject(object.byteItem);
+                            }
+                            if (object.conversation != null) {
+                                if (typeof object.conversation !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ContentItem.conversation: object expected");
+                                message.conversation = $root.google.privacy.dlp.v2.Conversation.fromObject(object.conversation);
                             }
                             if (object.contentMetadata != null) {
                                 if (typeof object.contentMetadata !== "object")
@@ -6613,6 +6643,11 @@
                             }
                             if (message.contentMetadata != null && message.hasOwnProperty("contentMetadata"))
                                 object.contentMetadata = $root.google.privacy.dlp.v2.ContentMetadata.toObject(message.contentMetadata, options);
+                            if (message.conversation != null && message.hasOwnProperty("conversation")) {
+                                object.conversation = $root.google.privacy.dlp.v2.Conversation.toObject(message.conversation, options);
+                                if (options.oneofs)
+                                    object.dataItem = "conversation";
+                            }
                             return object;
                         };
     
@@ -6869,6 +6904,524 @@
                         };
     
                         return ContentMetadata;
+                    })();
+    
+                    v2.Conversation = (function() {
+    
+                        /**
+                         * Properties of a Conversation.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IConversation
+                         * @property {Array.<google.privacy.dlp.v2.IConversationMessage>|null} [messages] Conversation messages
+                         */
+    
+                        /**
+                         * Constructs a new Conversation.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a Conversation.
+                         * @implements IConversation
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IConversation=} [properties] Properties to set
+                         */
+                        function Conversation(properties) {
+                            this.messages = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Conversation messages.
+                         * @member {Array.<google.privacy.dlp.v2.IConversationMessage>} messages
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @instance
+                         */
+                        Conversation.prototype.messages = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Conversation instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IConversation=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.Conversation} Conversation instance
+                         */
+                        Conversation.create = function create(properties) {
+                            return new Conversation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Conversation message. Does not implicitly {@link google.privacy.dlp.v2.Conversation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IConversation} message Conversation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Conversation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.messages != null && message.messages.length)
+                                for (var i = 0; i < message.messages.length; ++i)
+                                    $root.google.privacy.dlp.v2.ConversationMessage.encode(message.messages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Conversation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Conversation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IConversation} message Conversation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Conversation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Conversation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.Conversation} Conversation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Conversation.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Conversation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.messages && message.messages.length))
+                                            message.messages = [];
+                                        message.messages.push($root.google.privacy.dlp.v2.ConversationMessage.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Conversation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.Conversation} Conversation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Conversation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Conversation message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Conversation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.messages != null && message.hasOwnProperty("messages")) {
+                                if (!Array.isArray(message.messages))
+                                    return "messages: array expected";
+                                for (var i = 0; i < message.messages.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.ConversationMessage.verify(message.messages[i]);
+                                    if (error)
+                                        return "messages." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Conversation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.Conversation} Conversation
+                         */
+                        Conversation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.Conversation)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.Conversation();
+                            if (object.messages) {
+                                if (!Array.isArray(object.messages))
+                                    throw TypeError(".google.privacy.dlp.v2.Conversation.messages: array expected");
+                                message.messages = [];
+                                for (var i = 0; i < object.messages.length; ++i) {
+                                    if (typeof object.messages[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.Conversation.messages: object expected");
+                                    message.messages[i] = $root.google.privacy.dlp.v2.ConversationMessage.fromObject(object.messages[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Conversation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @static
+                         * @param {google.privacy.dlp.v2.Conversation} message Conversation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Conversation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.messages = [];
+                            if (message.messages && message.messages.length) {
+                                object.messages = [];
+                                for (var j = 0; j < message.messages.length; ++j)
+                                    object.messages[j] = $root.google.privacy.dlp.v2.ConversationMessage.toObject(message.messages[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Conversation to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Conversation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Conversation
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.Conversation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Conversation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.Conversation";
+                        };
+    
+                        return Conversation;
+                    })();
+    
+                    v2.ConversationMessage = (function() {
+    
+                        /**
+                         * Properties of a ConversationMessage.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IConversationMessage
+                         * @property {string|null} [content] ConversationMessage content
+                         * @property {google.privacy.dlp.v2.ConversationMessage.MessageType|null} [messageType] ConversationMessage messageType
+                         * @property {string|null} [participantId] ConversationMessage participantId
+                         */
+    
+                        /**
+                         * Constructs a new ConversationMessage.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a ConversationMessage.
+                         * @implements IConversationMessage
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IConversationMessage=} [properties] Properties to set
+                         */
+                        function ConversationMessage(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConversationMessage content.
+                         * @member {string} content
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @instance
+                         */
+                        ConversationMessage.prototype.content = "";
+    
+                        /**
+                         * ConversationMessage messageType.
+                         * @member {google.privacy.dlp.v2.ConversationMessage.MessageType} messageType
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @instance
+                         */
+                        ConversationMessage.prototype.messageType = 0;
+    
+                        /**
+                         * ConversationMessage participantId.
+                         * @member {string} participantId
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @instance
+                         */
+                        ConversationMessage.prototype.participantId = "";
+    
+                        /**
+                         * Creates a new ConversationMessage instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @static
+                         * @param {google.privacy.dlp.v2.IConversationMessage=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.ConversationMessage} ConversationMessage instance
+                         */
+                        ConversationMessage.create = function create(properties) {
+                            return new ConversationMessage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationMessage message. Does not implicitly {@link google.privacy.dlp.v2.ConversationMessage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @static
+                         * @param {google.privacy.dlp.v2.IConversationMessage} message ConversationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationMessage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.content);
+                            if (message.messageType != null && Object.hasOwnProperty.call(message, "messageType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.messageType);
+                            if (message.participantId != null && Object.hasOwnProperty.call(message, "participantId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.participantId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationMessage message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ConversationMessage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @static
+                         * @param {google.privacy.dlp.v2.IConversationMessage} message ConversationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConversationMessage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.ConversationMessage} ConversationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationMessage.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ConversationMessage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.content = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.messageType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.participantId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConversationMessage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.ConversationMessage} ConversationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationMessage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConversationMessage message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConversationMessage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                if (!$util.isString(message.content))
+                                    return "content: string expected";
+                            if (message.messageType != null && message.hasOwnProperty("messageType"))
+                                switch (message.messageType) {
+                                default:
+                                    return "messageType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.participantId != null && message.hasOwnProperty("participantId"))
+                                if (!$util.isString(message.participantId))
+                                    return "participantId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConversationMessage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.ConversationMessage} ConversationMessage
+                         */
+                        ConversationMessage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.ConversationMessage)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.ConversationMessage();
+                            if (object.content != null)
+                                message.content = String(object.content);
+                            switch (object.messageType) {
+                            default:
+                                if (typeof object.messageType === "number") {
+                                    message.messageType = object.messageType;
+                                    break;
+                                }
+                                break;
+                            case "MESSAGE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.messageType = 0;
+                                break;
+                            case "CONTENT":
+                            case 1:
+                                message.messageType = 1;
+                                break;
+                            case "CONTEXT":
+                            case 2:
+                                message.messageType = 2;
+                                break;
+                            }
+                            if (object.participantId != null)
+                                message.participantId = String(object.participantId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConversationMessage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @static
+                         * @param {google.privacy.dlp.v2.ConversationMessage} message ConversationMessage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConversationMessage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.content = "";
+                                object.messageType = options.enums === String ? "MESSAGE_TYPE_UNSPECIFIED" : 0;
+                                object.participantId = "";
+                            }
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                object.content = message.content;
+                            if (message.messageType != null && message.hasOwnProperty("messageType"))
+                                object.messageType = options.enums === String ? $root.google.privacy.dlp.v2.ConversationMessage.MessageType[message.messageType] === undefined ? message.messageType : $root.google.privacy.dlp.v2.ConversationMessage.MessageType[message.messageType] : message.messageType;
+                            if (message.participantId != null && message.hasOwnProperty("participantId"))
+                                object.participantId = message.participantId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConversationMessage to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConversationMessage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConversationMessage
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.ConversationMessage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConversationMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.ConversationMessage";
+                        };
+    
+                        /**
+                         * MessageType enum.
+                         * @name google.privacy.dlp.v2.ConversationMessage.MessageType
+                         * @enum {number}
+                         * @property {number} MESSAGE_TYPE_UNSPECIFIED=0 MESSAGE_TYPE_UNSPECIFIED value
+                         * @property {number} CONTENT=1 CONTENT value
+                         * @property {number} CONTEXT=2 CONTEXT value
+                         */
+                        ConversationMessage.MessageType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MESSAGE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CONTENT"] = 1;
+                            values[valuesById[2] = "CONTEXT"] = 2;
+                            return values;
+                        })();
+    
+                        return ConversationMessage;
                     })();
     
                     v2.Table = (function() {
@@ -8752,6 +9305,7 @@
                          * @property {google.privacy.dlp.v2.IImageLocation|null} [imageLocation] ContentLocation imageLocation
                          * @property {google.privacy.dlp.v2.IDocumentLocation|null} [documentLocation] ContentLocation documentLocation
                          * @property {google.privacy.dlp.v2.IMetadataLocation|null} [metadataLocation] ContentLocation metadataLocation
+                         * @property {google.privacy.dlp.v2.IConversationLocation|null} [conversationLocation] ContentLocation conversationLocation
                          * @property {google.protobuf.ITimestamp|null} [containerTimestamp] ContentLocation containerTimestamp
                          * @property {string|null} [containerVersion] ContentLocation containerVersion
                          */
@@ -8812,6 +9366,14 @@
                         ContentLocation.prototype.metadataLocation = null;
     
                         /**
+                         * ContentLocation conversationLocation.
+                         * @member {google.privacy.dlp.v2.IConversationLocation|null|undefined} conversationLocation
+                         * @memberof google.privacy.dlp.v2.ContentLocation
+                         * @instance
+                         */
+                        ContentLocation.prototype.conversationLocation = null;
+    
+                        /**
                          * ContentLocation containerTimestamp.
                          * @member {google.protobuf.ITimestamp|null|undefined} containerTimestamp
                          * @memberof google.privacy.dlp.v2.ContentLocation
@@ -8832,12 +9394,12 @@
     
                         /**
                          * ContentLocation location.
-                         * @member {"recordLocation"|"imageLocation"|"documentLocation"|"metadataLocation"|undefined} location
+                         * @member {"recordLocation"|"imageLocation"|"documentLocation"|"metadataLocation"|"conversationLocation"|undefined} location
                          * @memberof google.privacy.dlp.v2.ContentLocation
                          * @instance
                          */
                         Object.defineProperty(ContentLocation.prototype, "location", {
-                            get: $util.oneOfGetter($oneOfFields = ["recordLocation", "imageLocation", "documentLocation", "metadataLocation"]),
+                            get: $util.oneOfGetter($oneOfFields = ["recordLocation", "imageLocation", "documentLocation", "metadataLocation", "conversationLocation"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -8879,6 +9441,8 @@
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.containerVersion);
                             if (message.metadataLocation != null && Object.hasOwnProperty.call(message, "metadataLocation"))
                                 $root.google.privacy.dlp.v2.MetadataLocation.encode(message.metadataLocation, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.conversationLocation != null && Object.hasOwnProperty.call(message, "conversationLocation"))
+                                $root.google.privacy.dlp.v2.ConversationLocation.encode(message.conversationLocation, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -8933,6 +9497,10 @@
                                     }
                                 case 8: {
                                         message.metadataLocation = $root.google.privacy.dlp.v2.MetadataLocation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.conversationLocation = $root.google.privacy.dlp.v2.ConversationLocation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -9020,6 +9588,16 @@
                                         return "metadataLocation." + error;
                                 }
                             }
+                            if (message.conversationLocation != null && message.hasOwnProperty("conversationLocation")) {
+                                if (properties.location === 1)
+                                    return "location: multiple values";
+                                properties.location = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.ConversationLocation.verify(message.conversationLocation);
+                                    if (error)
+                                        return "conversationLocation." + error;
+                                }
+                            }
                             if (message.containerTimestamp != null && message.hasOwnProperty("containerTimestamp")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.containerTimestamp);
                                 if (error)
@@ -9064,6 +9642,11 @@
                                 if (typeof object.metadataLocation !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.ContentLocation.metadataLocation: object expected");
                                 message.metadataLocation = $root.google.privacy.dlp.v2.MetadataLocation.fromObject(object.metadataLocation);
+                            }
+                            if (object.conversationLocation != null) {
+                                if (typeof object.conversationLocation !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ContentLocation.conversationLocation: object expected");
+                                message.conversationLocation = $root.google.privacy.dlp.v2.ConversationLocation.fromObject(object.conversationLocation);
                             }
                             if (object.containerTimestamp != null) {
                                 if (typeof object.containerTimestamp !== "object")
@@ -9119,6 +9702,11 @@
                                 if (options.oneofs)
                                     object.location = "metadataLocation";
                             }
+                            if (message.conversationLocation != null && message.hasOwnProperty("conversationLocation")) {
+                                object.conversationLocation = $root.google.privacy.dlp.v2.ConversationLocation.toObject(message.conversationLocation, options);
+                                if (options.oneofs)
+                                    object.location = "conversationLocation";
+                            }
                             return object;
                         };
     
@@ -9149,6 +9737,441 @@
                         };
     
                         return ContentLocation;
+                    })();
+    
+                    v2.ConversationLocation = (function() {
+    
+                        /**
+                         * Properties of a ConversationLocation.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IConversationLocation
+                         * @property {number|null} [messageIndex] ConversationLocation messageIndex
+                         * @property {google.privacy.dlp.v2.ConversationLocation.IAllMessages|null} [allMessages] ConversationLocation allMessages
+                         */
+    
+                        /**
+                         * Constructs a new ConversationLocation.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a ConversationLocation.
+                         * @implements IConversationLocation
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IConversationLocation=} [properties] Properties to set
+                         */
+                        function ConversationLocation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConversationLocation messageIndex.
+                         * @member {number|null|undefined} messageIndex
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @instance
+                         */
+                        ConversationLocation.prototype.messageIndex = null;
+    
+                        /**
+                         * ConversationLocation allMessages.
+                         * @member {google.privacy.dlp.v2.ConversationLocation.IAllMessages|null|undefined} allMessages
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @instance
+                         */
+                        ConversationLocation.prototype.allMessages = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ConversationLocation location.
+                         * @member {"messageIndex"|"allMessages"|undefined} location
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @instance
+                         */
+                        Object.defineProperty(ConversationLocation.prototype, "location", {
+                            get: $util.oneOfGetter($oneOfFields = ["messageIndex", "allMessages"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ConversationLocation instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IConversationLocation=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.ConversationLocation} ConversationLocation instance
+                         */
+                        ConversationLocation.create = function create(properties) {
+                            return new ConversationLocation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationLocation message. Does not implicitly {@link google.privacy.dlp.v2.ConversationLocation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IConversationLocation} message ConversationLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationLocation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.messageIndex != null && Object.hasOwnProperty.call(message, "messageIndex"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.messageIndex);
+                            if (message.allMessages != null && Object.hasOwnProperty.call(message, "allMessages"))
+                                $root.google.privacy.dlp.v2.ConversationLocation.AllMessages.encode(message.allMessages, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ConversationLocation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IConversationLocation} message ConversationLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConversationLocation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.ConversationLocation} ConversationLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationLocation.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ConversationLocation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.messageIndex = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.allMessages = $root.google.privacy.dlp.v2.ConversationLocation.AllMessages.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConversationLocation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.ConversationLocation} ConversationLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationLocation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConversationLocation message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConversationLocation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.messageIndex != null && message.hasOwnProperty("messageIndex")) {
+                                properties.location = 1;
+                                if (!$util.isInteger(message.messageIndex))
+                                    return "messageIndex: integer expected";
+                            }
+                            if (message.allMessages != null && message.hasOwnProperty("allMessages")) {
+                                if (properties.location === 1)
+                                    return "location: multiple values";
+                                properties.location = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.ConversationLocation.AllMessages.verify(message.allMessages);
+                                    if (error)
+                                        return "allMessages." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConversationLocation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.ConversationLocation} ConversationLocation
+                         */
+                        ConversationLocation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.ConversationLocation)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.ConversationLocation();
+                            if (object.messageIndex != null)
+                                message.messageIndex = object.messageIndex | 0;
+                            if (object.allMessages != null) {
+                                if (typeof object.allMessages !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ConversationLocation.allMessages: object expected");
+                                message.allMessages = $root.google.privacy.dlp.v2.ConversationLocation.AllMessages.fromObject(object.allMessages);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConversationLocation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.ConversationLocation} message ConversationLocation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConversationLocation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.messageIndex != null && message.hasOwnProperty("messageIndex")) {
+                                object.messageIndex = message.messageIndex;
+                                if (options.oneofs)
+                                    object.location = "messageIndex";
+                            }
+                            if (message.allMessages != null && message.hasOwnProperty("allMessages")) {
+                                object.allMessages = $root.google.privacy.dlp.v2.ConversationLocation.AllMessages.toObject(message.allMessages, options);
+                                if (options.oneofs)
+                                    object.location = "allMessages";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConversationLocation to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConversationLocation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConversationLocation
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.ConversationLocation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConversationLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.ConversationLocation";
+                        };
+    
+                        ConversationLocation.AllMessages = (function() {
+    
+                            /**
+                             * Properties of an AllMessages.
+                             * @memberof google.privacy.dlp.v2.ConversationLocation
+                             * @interface IAllMessages
+                             */
+    
+                            /**
+                             * Constructs a new AllMessages.
+                             * @memberof google.privacy.dlp.v2.ConversationLocation
+                             * @classdesc Represents an AllMessages.
+                             * @implements IAllMessages
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.ConversationLocation.IAllMessages=} [properties] Properties to set
+                             */
+                            function AllMessages(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new AllMessages instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.ConversationLocation.AllMessages
+                             * @static
+                             * @param {google.privacy.dlp.v2.ConversationLocation.IAllMessages=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.ConversationLocation.AllMessages} AllMessages instance
+                             */
+                            AllMessages.create = function create(properties) {
+                                return new AllMessages(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AllMessages message. Does not implicitly {@link google.privacy.dlp.v2.ConversationLocation.AllMessages.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.ConversationLocation.AllMessages
+                             * @static
+                             * @param {google.privacy.dlp.v2.ConversationLocation.IAllMessages} message AllMessages message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AllMessages.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AllMessages message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ConversationLocation.AllMessages.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.ConversationLocation.AllMessages
+                             * @static
+                             * @param {google.privacy.dlp.v2.ConversationLocation.IAllMessages} message AllMessages message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AllMessages.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AllMessages message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.ConversationLocation.AllMessages
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.ConversationLocation.AllMessages} AllMessages
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AllMessages.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ConversationLocation.AllMessages();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AllMessages message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.ConversationLocation.AllMessages
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.ConversationLocation.AllMessages} AllMessages
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AllMessages.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AllMessages message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.ConversationLocation.AllMessages
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AllMessages.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AllMessages message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.ConversationLocation.AllMessages
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.ConversationLocation.AllMessages} AllMessages
+                             */
+                            AllMessages.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.ConversationLocation.AllMessages)
+                                    return object;
+                                return new $root.google.privacy.dlp.v2.ConversationLocation.AllMessages();
+                            };
+    
+                            /**
+                             * Creates a plain object from an AllMessages message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.ConversationLocation.AllMessages
+                             * @static
+                             * @param {google.privacy.dlp.v2.ConversationLocation.AllMessages} message AllMessages
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AllMessages.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this AllMessages to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.ConversationLocation.AllMessages
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AllMessages.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AllMessages
+                             * @function getTypeUrl
+                             * @memberof google.privacy.dlp.v2.ConversationLocation.AllMessages
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AllMessages.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.privacy.dlp.v2.ConversationLocation.AllMessages";
+                            };
+    
+                            return AllMessages;
+                        })();
+    
+                        return ConversationLocation;
                     })();
     
                     v2.MetadataLocation = (function() {

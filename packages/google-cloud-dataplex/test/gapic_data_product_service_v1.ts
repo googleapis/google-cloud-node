@@ -488,6 +488,145 @@ describe('v1.DataProductServiceClient', () => {
     });
   });
 
+  describe('requestDataProductAccess', () => {
+    it('invokes requestDataProductAccess without error', async () => {
+      const client = new dataproductserviceModule.v1.DataProductServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RequestDataProductAccessRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.RequestDataProductAccessRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RequestDataProductAccessResponse(),
+      );
+      client.innerApiCalls.requestDataProductAccess =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.requestDataProductAccess(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.requestDataProductAccess as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.requestDataProductAccess as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes requestDataProductAccess without error using callback', async () => {
+      const client = new dataproductserviceModule.v1.DataProductServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RequestDataProductAccessRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.RequestDataProductAccessRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RequestDataProductAccessResponse(),
+      );
+      client.innerApiCalls.requestDataProductAccess =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.requestDataProductAccess(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dataplex.v1.IRequestDataProductAccessResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.requestDataProductAccess as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.requestDataProductAccess as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes requestDataProductAccess with error', async () => {
+      const client = new dataproductserviceModule.v1.DataProductServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RequestDataProductAccessRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.RequestDataProductAccessRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.requestDataProductAccess = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.requestDataProductAccess(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.requestDataProductAccess as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.requestDataProductAccess as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes requestDataProductAccess with closed client', async () => {
+      const client = new dataproductserviceModule.v1.DataProductServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RequestDataProductAccessRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.RequestDataProductAccessRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.requestDataProductAccess(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('getDataAsset', () => {
     it('invokes getDataAsset without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
@@ -3078,6 +3217,70 @@ describe('v1.DataProductServiceClient', () => {
         assert.strictEqual(result, 'assetValue');
         assert(
           (client.pathTemplates.assetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('changeRequest', async () => {
+      const fakePath = '/rendered/path/changeRequest';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        change_request: 'changeRequestValue',
+      };
+      const client = new dataproductserviceModule.v1.DataProductServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.changeRequestPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.changeRequestPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('changeRequestPath', () => {
+        const result = client.changeRequestPath(
+          'projectValue',
+          'locationValue',
+          'changeRequestValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromChangeRequestName', () => {
+        const result = client.matchProjectFromChangeRequestName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromChangeRequestName', () => {
+        const result = client.matchLocationFromChangeRequestName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchChangeRequestFromChangeRequestName', () => {
+        const result = client.matchChangeRequestFromChangeRequestName(fakePath);
+        assert.strictEqual(result, 'changeRequestValue');
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

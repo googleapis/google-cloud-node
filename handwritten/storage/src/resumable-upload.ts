@@ -28,7 +28,7 @@ import {
 import {Readable, Writable, WritableOptions} from 'stream';
 import AsyncRetry from 'async-retry';
 import {RetryOptions, PreconditionOptions} from './storage.js';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import {
   getRuntimeTrackingString,
   getModuleFormat,
@@ -333,9 +333,9 @@ export class Upload extends Writable {
   isPartialUpload: boolean;
 
   private currentInvocationId = {
-    checkUploadStatus: uuid.v4(),
-    chunk: uuid.v4(),
-    uri: uuid.v4(),
+    checkUploadStatus: crypto.randomUUID(),
+    chunk: crypto.randomUUID(),
+    uri: crypto.randomUUID(),
   };
   /**
    * A cache of buffers written to this instance, ready for consuming
@@ -864,7 +864,7 @@ export class Upload extends Writable {
         try {
           const res = await this.makeRequest(reqOpts);
           // We have successfully got a URI we can now create a new invocation id
-          this.currentInvocationId.uri = uuid.v4();
+          this.currentInvocationId.uri = crypto.randomUUID();
           return res.headers.get('location');
         } catch (err) {
           const e = err as GaxiosError;
@@ -1095,7 +1095,7 @@ export class Upload extends Writable {
 
     const respHeaders = new Headers(resp.headers);
     // At this point we can safely create a new id for the chunk
-    this.currentInvocationId.chunk = uuid.v4();
+    this.currentInvocationId.chunk = crypto.randomUUID();
 
     const moreDataToUpload = await this.waitForNextChunk();
 
@@ -1225,7 +1225,7 @@ export class Upload extends Writable {
       const resp = await this.makeRequest(opts);
 
       // Successfully got the offset we can now create a new offset invocation id
-      this.currentInvocationId.checkUploadStatus = uuid.v4();
+      this.currentInvocationId.checkUploadStatus = crypto.randomUUID();
 
       return resp;
     } catch (e) {

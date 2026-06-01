@@ -22,7 +22,7 @@ import {describe, it} from 'mocha';
 import {HOST_ADDRESS} from 'gcp-metadata';
 import * as nock from 'nock';
 import {Duplex} from 'stream';
-import {v4} from 'uuid';
+import * as crypto from 'crypto';
 import {after, before} from 'mocha';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const http2spy = require('http2spy');
@@ -1003,7 +1003,7 @@ describe('Logging', () => {
   });
 
   function generateName() {
-    return `${TESTS_PREFIX}-${Date.now()}-${v4().split('-').pop()}`;
+    return `${TESTS_PREFIX}-${Date.now()}-${crypto.randomUUID().split('-').pop()}`;
   }
 
   // Parse the time the resource was created using the resource id
