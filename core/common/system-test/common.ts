@@ -12,13 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as http from 'http';
+import * as nock from 'nock';
+
+jest.mock('google-auth-library', () => {
+  const actual = jest.requireActual('google-auth-library');
+  return {
+    AuthClient: actual.AuthClient,
+    GoogleAuth: class {
+      async getProjectId() {
+        return 'fake-project-id';
+      }
+      async authorizeRequest(req: any) {
+        return req;
+      }
+      getCredentials() {}
+    },
+  };
+});
 
 import * as common from '../src';
 
 describe('Common', () => {
-  const MOCK_HOST_PORT = 8118;
-  const MOCK_HOST = `http://localhost:${MOCK_HOST_PORT}`;
+  const MOCK_HOST = 'http://localhost';
 
   describe('Service', () => {
     let service: common.Service;
@@ -32,45 +47,56 @@ describe('Common', () => {
       });
     });
 
+    afterAll(() => {
+      nock.cleanAll();
+    });
+
     it('should send a request and receive a response', done => {
       const mockResponse = 'response';
-      const mockServer = new http.Server((req, res) => {
-        res.end(mockResponse);
-      });
-
-      mockServer.listen(MOCK_HOST_PORT);
+      const scope = nock(MOCK_HOST)
+        .get('/mock-endpoint')
+        .reply(200, mockResponse);
 
       service.request(
         {
-          uri: '/mock-endpoint',
+          uri: 'http://localhost/mock-endpoint',
         },
         (err, resp) => {
-          expect(err).toBeNull();
-          expect(resp).toBe(mockResponse);
-          mockServer.close(done);
+          try {
+            expect(err).toBeNull();
+            expect(resp).toBe(mockResponse);
+            scope.done();
+            done();
+          } catch (e) {
+            done(e);
+          }
         },
       );
     });
 
     it('should retry a request', done => {
       let numRequestAttempts = 0;
-
-      const mockServer = new http.Server((req, res) => {
-        numRequestAttempts++;
-        res.statusCode = 408;
-        res.end();
-      });
-
-      mockServer.listen(MOCK_HOST_PORT);
+      const scope = nock(MOCK_HOST)
+        .get('/mock-endpoint-retry')
+        .times(4)
+        .reply(() => {
+          numRequestAttempts++;
+          return [408, ''];
+        });
 
       service.request(
         {
-          uri: '/mock-endpoint-retry',
+          uri: 'http://localhost/mock-endpoint-retry',
         },
         err => {
-          expect((err! as common.ApiError).code).toBe(408);
-          expect(numRequestAttempts).toBe(4);
-          mockServer.close(done);
+          try {
+            expect((err! as common.ApiError).code).toBe(408);
+            expect(numRequestAttempts).toBe(4);
+            scope.done();
+            done();
+          } catch (e) {
+            done(e);
+          }
         },
       );
     }, 60000);
@@ -87,17 +113,29 @@ describe('Common', () => {
         minExpectedResponseTime += getMinimumRetryDelay(numExpectedRetries + 1);
       }
 
+      const scope = nock(MOCK_HOST).persist();
+      const connRefusedError = new Error('connect ECONNREFUSED 127.0.0.1:1');
+      (connRefusedError as any).code = 'ECONNREFUSED';
+      scope
+        .get('/mock-endpoint-no-response')
+        .replyWithError(connRefusedError);
+
       const timeRequest = Date.now();
 
       service.request(
         {
-          uri: '/mock-endpoint-no-response',
+          uri: 'http://localhost/mock-endpoint-no-response',
         },
         err => {
-          expect(err?.message).toContain('ECONNREFUSED');
-          const timeResponse = Date.now();
-          expect(timeResponse - timeRequest).toBeGreaterThan(minExpectedResponseTime);
-          done();
+          try {
+            expect(err?.message).toContain('ECONNREFUSED');
+            const timeResponse = Date.now();
+            expect(timeResponse - timeRequest).toBeGreaterThan(minExpectedResponseTime);
+            scope.done();
+            done();
+          } catch (e) {
+            done(e);
+          }
         },
       );
     }, 60000);

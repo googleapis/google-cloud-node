@@ -23,15 +23,14 @@ import {Service} from '../src';
 import * as SO from '../src/service-object';
 import {ServiceObject} from '../src/service-object';
 
-(global as any).promisified = (global as any).promisified || false;
-
 jest.mock('@google-cloud/promisify', () => {
   const original = jest.requireActual('@google-cloud/promisify');
   return {
     ...original,
     promisifyAll(Class: Function, options: any) {
-      if (options && options.exclude && options.exclude.includes('getRequestInterceptors')) {
-        (global as any).promisified = true;
+      if (Class.name === 'ServiceObject') {
+        (global as any).promisifiedClass = Class.name;
+        (global as any).promisifyOptions = options;
       }
       return original.promisifyAll(Class, options);
     },
@@ -85,7 +84,10 @@ describe('ServiceObject', () => {
 
   describe('instantiation', () => {
     it('should promisify all the things', () => {
-      expect((global as any).promisified).toBe(true);
+      expect((global as any).promisifiedClass).toBe('ServiceObject');
+      expect((global as any).promisifyOptions.exclude).toEqual([
+        'getRequestInterceptors',
+      ]);
     });
 
     it('should create an empty metadata object', () => {

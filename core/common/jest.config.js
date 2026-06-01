@@ -32,4 +32,5 @@ module.exports = {
     '/build/',
     '/fixtures/',
   ],
+  coverageDirectory: '<rootDir>/.coverage',
 };
