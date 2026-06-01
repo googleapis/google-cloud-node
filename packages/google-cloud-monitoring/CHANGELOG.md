@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [5.3.3](https://github.com/googleapis/google-cloud-node/compare/monitoring-v5.3.2...monitoring-v5.3.3) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [5.3.2](https://github.com/googleapis/google-cloud-node/compare/monitoring-v5.3.1...monitoring-v5.3.2) (2026-05-01)
 
 

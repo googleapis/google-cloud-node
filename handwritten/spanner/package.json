@@ -34,8 +34,6 @@
     "docs": "jsdoc -c .jsdoc.js",
     "predocs": "npm run compile",
     "lint": "gts check",
-    "samples-test-with-archived": "cd samples/ && npm link ../ && npm test-with-archived && cd ../",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 1600000",
     "observability-test": "mocha build/observability-test --timeout 1600000",
     "cleanup": "mocha scripts/cleanup.js --timeout 30000",
@@ -52,7 +50,6 @@
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
     "benchwrapper": "node bin/benchwrapper.js",
-    "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean",
     "compile-protos": "compileProtos src",
     "coverage": "c8 mocha build/test build/test/common && c8 report --check-coverage"
@@ -94,8 +91,7 @@
     "stack-trace": "0.0.10",
     "stream-events": "^1.0.5",
     "teeny-request": "^10.0.0",
-    "through2": "^4.0.2",
-    "uuid": "^11.1.0"
+    "through2": "^4.0.2"
   },
   "devDependencies": {
     "@grpc/reflection": "^1.0.4",

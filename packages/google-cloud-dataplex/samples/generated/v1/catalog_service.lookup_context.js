@@ -34,14 +34,25 @@ function main(name, resources) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The entry names to lookup context for. The request should have
-   *  max 10 of those.
+   *  Required. The entry names to look up the context for. The maximum number of
+   *  resources for a request is limited to 10.
    *  ## Examples:
-   *  projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}
+   *  `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`
    */
   // const resources = ['abc','def']
   /**
+   *  Optional. The text representing contextual information for which metadata
+   *  context is being requested.
+   */
+  // const context = 'abc123'
+  /**
    *  Optional. Allows to configure the context.
+   *  Supported options:
+   *  - `format` - The format of the context (one of `yaml`,
+   *  `xml`, `json`, default is `yaml`).
+   *  - `context_budget` - If provided, the output will be intelligently
+   *  truncated on a best-effort basis to contain approximately the desired
+   *  amount of characters. There is no guarantee to achieve the specific amount.
    */
   // const options = [1,2,3,4]
 

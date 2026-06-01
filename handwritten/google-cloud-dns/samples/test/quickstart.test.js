@@ -18,12 +18,12 @@ const {execSync} = require('child_process');
 const {assert} = require('chai');
 const {describe, it, before, after} = require('mocha');
 const {DNS} = require('@google-cloud/dns');
-const {v4} = require('uuid');
+const crypto = require('crypto');
 
 const exec = cmd => execSync(cmd, {encoding: 'utf8'});
 
 describe(__filename, () => {
-  const zoneName = `test-${v4().substr(0, 13)}`;
+  const zoneName = `test-${crypto.randomUUID().substr(0, 13)}`;
   const dns = new DNS();
 
   before(async () => {

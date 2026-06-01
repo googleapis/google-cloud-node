@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-support",
-    "version": "2.2.1",
+    "version": "0.1.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -52,6 +52,46 @@
         "method": {
           "shortName": "ListAttachments",
           "fullName": "google.cloud.support.v2.CaseAttachmentService.ListAttachments",
+          "service": {
+            "shortName": "CaseAttachmentService",
+            "fullName": "google.cloud.support.v2.CaseAttachmentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsupport_v2_generated_CaseAttachmentService_GetAttachment_async",
+      "title": "CaseAttachmentService getAttachment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieve an attachment associated with a support case. EXAMPLES: cURL: ```shell attachment=\"projects/some-project/cases/23598314/attachments/0684M00000P3h1fQAB\" curl \\   --header \"Authorization: Bearer $(gcloud auth print-access-token)\" \\   \"https://cloudsupport.googleapis.com/v2/$attachment\" ``` Python: ```python import googleapiclient.discovery api_version = \"v2\" supportApiService = googleapiclient.discovery.build(     serviceName=\"cloudsupport\",     version=api_version,     discoveryServiceUrl=f\"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}\", ) request = (     supportApiService.cases()     .attachments()     .get(name=\"projects/some-project/cases/43595344/attachments/0684M00000P3h1fQAB\") ) print(request.execute()) ```",
+      "canonical": true,
+      "file": "case_attachment_service.get_attachment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAttachment",
+        "fullName": "google.cloud.support.v2.CaseAttachmentService.GetAttachment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.support.v2.Attachment",
+        "client": {
+          "shortName": "CaseAttachmentServiceClient",
+          "fullName": "google.cloud.support.v2.CaseAttachmentServiceClient"
+        },
+        "method": {
+          "shortName": "GetAttachment",
+          "fullName": "google.cloud.support.v2.CaseAttachmentService.GetAttachment",
           "service": {
             "shortName": "CaseAttachmentService",
             "fullName": "google.cloud.support.v2.CaseAttachmentService"
@@ -508,6 +548,46 @@
         "method": {
           "shortName": "CreateComment",
           "fullName": "google.cloud.support.v2.CommentService.CreateComment",
+          "service": {
+            "shortName": "CommentService",
+            "fullName": "google.cloud.support.v2.CommentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsupport_v2_generated_CommentService_GetComment_async",
+      "title": "CaseAttachmentService getComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieve a comment. EXAMPLES: cURL: ```shell comment=\"projects/some-project/cases/43595344/comments/234567890\" curl \\   --header \"Authorization: Bearer $(gcloud auth print-access-token)\" \\   \"https://cloudsupport.googleapis.com/v2/$comment\" ``` Python: ```python import googleapiclient.discovery api_version = \"v2\" supportApiService = googleapiclient.discovery.build(     serviceName=\"cloudsupport\",     version=api_version,     discoveryServiceUrl=f\"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}\", ) request = supportApiService.cases().comments().get(     name=\"projects/some-project/cases/43595344/comments/234567890\", ) print(request.execute()) ```",
+      "canonical": true,
+      "file": "comment_service.get_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetComment",
+        "fullName": "google.cloud.support.v2.CommentService.GetComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.support.v2.Comment",
+        "client": {
+          "shortName": "CommentServiceClient",
+          "fullName": "google.cloud.support.v2.CommentServiceClient"
+        },
+        "method": {
+          "shortName": "GetComment",
+          "fullName": "google.cloud.support.v2.CommentService.GetComment",
           "service": {
             "shortName": "CommentService",
             "fullName": "google.cloud.support.v2.CommentService"

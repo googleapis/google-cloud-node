@@ -1634,7 +1634,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 69,
+          "end": 72,
           "type": "FULL"
         }
       ],
@@ -1686,7 +1686,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 75,
+          "end": 78,
           "type": "FULL"
         }
       ],
@@ -1724,6 +1724,62 @@
         "method": {
           "shortName": "LookupEntry",
           "fullName": "google.cloud.dataplex.v1.CatalogService.LookupEntry",
+          "service": {
+            "shortName": "CatalogService",
+            "fullName": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_CatalogService_ModifyEntry_async",
+      "title": "BusinessGlossaryService modifyEntry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Modifies an entry using the permission on the source system.",
+      "canonical": true,
+      "file": "catalog_service.modify_entry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ModifyEntry",
+        "fullName": "google.cloud.dataplex.v1.CatalogService.ModifyEntry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entry",
+            "type": ".google.cloud.dataplex.v1.Entry"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "delete_missing_aspects",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "aspect_keys",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Entry",
+        "client": {
+          "shortName": "CatalogServiceClient",
+          "fullName": "google.cloud.dataplex.v1.CatalogServiceClient"
+        },
+        "method": {
+          "shortName": "ModifyEntry",
+          "fullName": "google.cloud.dataplex.v1.CatalogService.ModifyEntry",
           "service": {
             "shortName": "CatalogService",
             "fullName": "google.cloud.dataplex.v1.CatalogService"
@@ -2190,7 +2246,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 77,
           "type": "FULL"
         }
       ],
@@ -2206,6 +2262,10 @@
           {
             "name": "resources",
             "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "context",
+            "type": "TYPE_STRING"
           },
           {
             "name": "options",
@@ -4244,6 +4304,54 @@
       }
     },
     {
+      "regionTag": "dataplex_v1_generated_DataProductService_RequestDataProductAccess_async",
+      "title": "BusinessGlossaryService requestDataProductAccess Sample",
+      "origin": "API_DEFINITION",
+      "description": " Requests access to a data product. This will trigger an access approval workflow, and the requester will need to wait for the approval to be granted before they will be able to access the data product assets.",
+      "canonical": true,
+      "file": "data_product_service.request_data_product_access.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RequestDataProductAccess",
+        "fullName": "google.cloud.dataplex.v1.DataProductService.RequestDataProductAccess",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "change_request",
+            "type": ".google.cloud.dataplex.v1.ChangeRequest"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.RequestDataProductAccessResponse",
+        "client": {
+          "shortName": "DataProductServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataProductServiceClient"
+        },
+        "method": {
+          "shortName": "RequestDataProductAccess",
+          "fullName": "google.cloud.dataplex.v1.DataProductService.RequestDataProductAccess",
+          "service": {
+            "shortName": "DataProductService",
+            "fullName": "google.cloud.dataplex.v1.DataProductService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "dataplex_v1_generated_DataProductService_CreateDataAsset_async",
       "title": "BusinessGlossaryService createDataAsset Sample",
       "origin": "API_DEFINITION",
@@ -4860,6 +4968,46 @@
         "method": {
           "shortName": "ListDataScanJobs",
           "fullName": "google.cloud.dataplex.v1.DataScanService.ListDataScanJobs",
+          "service": {
+            "shortName": "DataScanService",
+            "fullName": "google.cloud.dataplex.v1.DataScanService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataScanService_CancelDataScanJob_async",
+      "title": "BusinessGlossaryService cancelDataScanJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancels a running/pending DataScan job.",
+      "canonical": true,
+      "file": "data_scan_service.cancel_data_scan_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelDataScanJob",
+        "fullName": "google.cloud.dataplex.v1.DataScanService.CancelDataScanJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.CancelDataScanJobResponse",
+        "client": {
+          "shortName": "DataScanServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataScanServiceClient"
+        },
+        "method": {
+          "shortName": "CancelDataScanJob",
+          "fullName": "google.cloud.dataplex.v1.DataScanService.CancelDataScanJob",
           "service": {
             "shortName": "DataScanService",
             "fullName": "google.cloud.dataplex.v1.DataScanService"
