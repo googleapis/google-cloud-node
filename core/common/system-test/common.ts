@@ -30,6 +30,64 @@ jest.mock('google-auth-library', () => {
   };
 });
 
+jest.mock('teeny-request', () => {
+  const teenyRequest = (reqOpts: any, callback: any) => {
+    const http = require('http');
+    const urlModule = require('url');
+    const parsed = urlModule.parse(reqOpts.uri || reqOpts.url);
+    const req = http.request(
+      {
+        ...parsed,
+        method: reqOpts.method || 'GET',
+        headers: reqOpts.headers,
+      },
+      (res: any) => {
+        let data = '';
+        res.on('data', (chunk: any) => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          const response = {
+            statusCode: res.statusCode,
+            statusMessage: res.statusMessage,
+            headers: res.headers,
+            body: data,
+          };
+          if (callback) {
+            callback(null, response, data);
+          }
+        });
+      }
+    );
+    req.on('error', (err: any) => {
+      if (callback) {
+        callback(err);
+      }
+    });
+    if (reqOpts.body) {
+      req.write(reqOpts.body);
+    }
+    req.end();
+
+    return {
+      abort() {
+        req.destroy();
+      },
+    };
+  };
+
+  teenyRequest.defaults = (requestDefaults: any) => {
+    return (reqOpts: any, callback: any) => {
+      return teenyRequest(Object.assign({}, requestDefaults, reqOpts), callback);
+    };
+  };
+
+  return {
+    teenyRequest,
+    __esModule: true,
+  };
+});
+
 import * as common from '../src';
 
 describe('Common', () => {
