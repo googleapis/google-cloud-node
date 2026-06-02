@@ -16,7 +16,7 @@ import * as crypto from 'crypto';
 import * as os from 'os';
 import * as process from 'process';
 import {MeterProvider, MetricReader} from '@opentelemetry/sdk-metrics';
-import {Counter, Histogram} from '@opentelemetry/api';
+import {Counter, Histogram, context, ROOT_CONTEXT} from '@opentelemetry/api';
 import {detectResources, Resource} from '@opentelemetry/resources';
 import {GcpDetectorSync} from '@google-cloud/opentelemetry-resource-util';
 import * as Constants from './constants';
@@ -83,9 +83,11 @@ export class MetricsTracerFactory {
     );
 
     // Start the Tracer cleanup task at an interval
-    this._intervalTracerCleanup = setInterval(
-      this._cleanMetricsTracers.bind(this),
-      Constants.TRACER_CLEANUP_INTERVAL_MS,
+    this._intervalTracerCleanup = context.with(ROOT_CONTEXT, () =>
+      setInterval(
+        this._cleanMetricsTracers.bind(this),
+        Constants.TRACER_CLEANUP_INTERVAL_MS,
+      ),
     );
     // unref the interval to prevent it from blocking app termination
     // in the event loop
