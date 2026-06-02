@@ -13,7 +13,8 @@ are addressed with the highest priority
 
 Dialogflow API client for Node.js
 
-[//]: # "partials.introduction"
+### **_IMPORTANT NOTE_**
+**Version 2.0.0 renames `dialogflow` to `@google-cloud/dialogflow` on npm, along with introducing TypeScript types.**
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
