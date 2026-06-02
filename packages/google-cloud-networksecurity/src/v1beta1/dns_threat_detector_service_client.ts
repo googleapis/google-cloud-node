@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +55,7 @@ export class DnsThreatDetectorServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('network-security');
@@ -57,11 +68,11 @@ export class DnsThreatDetectorServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  dnsThreatDetectorServiceStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  dnsThreatDetectorServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DnsThreatDetectorServiceClient.
@@ -102,21 +113,43 @@ export class DnsThreatDetectorServiceClient {
    *     const client = new DnsThreatDetectorServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof DnsThreatDetectorServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof DnsThreatDetectorServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'networksecurity.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +174,7 @@ export class DnsThreatDetectorServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,18 +187,14 @@ export class DnsThreatDetectorServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -187,25 +216,25 @@ export class DnsThreatDetectorServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       authorizationPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}'
+        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}',
       ),
       clientTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}'
+        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}',
       ),
       dnsThreatDetectorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}'
+        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/global/networks/{network}'
+        'projects/{project}/global/networks/{network}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       serverTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}'
+        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}',
       ),
     };
 
@@ -213,14 +242,20 @@ export class DnsThreatDetectorServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDnsThreatDetectors:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dnsThreatDetectors')
+      listDnsThreatDetectors: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dnsThreatDetectors',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.networksecurity.v1beta1.DnsThreatDetectorService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.networksecurity.v1beta1.DnsThreatDetectorService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -251,37 +286,47 @@ export class DnsThreatDetectorServiceClient {
     // Put together the "service stub" for
     // google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.
     this.dnsThreatDetectorServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.networksecurity.v1beta1.DnsThreatDetectorService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.networksecurity.v1beta1.DnsThreatDetectorService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.networksecurity.v1beta1.DnsThreatDetectorService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.networksecurity.v1beta1
+            .DnsThreatDetectorService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dnsThreatDetectorServiceStubMethods =
-        ['listDnsThreatDetectors', 'getDnsThreatDetector', 'createDnsThreatDetector', 'updateDnsThreatDetector', 'deleteDnsThreatDetector'];
+    const dnsThreatDetectorServiceStubMethods = [
+      'listDnsThreatDetectors',
+      'getDnsThreatDetector',
+      'createDnsThreatDetector',
+      'updateDnsThreatDetector',
+      'deleteDnsThreatDetector',
+    ];
     for (const methodName of dnsThreatDetectorServiceStubMethods) {
       const callPromise = this.dnsThreatDetectorServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -296,8 +341,14 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -308,8 +359,14 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -340,9 +397,7 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -351,8 +406,9 @@ export class DnsThreatDetectorServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -363,478 +419,699 @@ export class DnsThreatDetectorServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets the details of a single DnsThreatDetector.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the DnsThreatDetector resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/dns_threat_detector_service.get_dns_threat_detector.js</caption>
- * region_tag:networksecurity_v1beta1_generated_DnsThreatDetectorService_GetDnsThreatDetector_async
- */
+  /**
+   * Gets the details of a single DnsThreatDetector.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the DnsThreatDetector resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dns_threat_detector_service.get_dns_threat_detector.js</caption>
+   * region_tag:networksecurity_v1beta1_generated_DnsThreatDetectorService_GetDnsThreatDetector_async
+   */
   getDnsThreatDetector(
-      request?: protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      (
+        | protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getDnsThreatDetector(
-      request: protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      | protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDnsThreatDetector(
-      request: protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      | protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDnsThreatDetector(
-      request?: protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      | protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      (
+        | protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDnsThreatDetector request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+          | protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDnsThreatDetector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDnsThreatDetector(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDnsThreatDetector response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDnsThreatDetector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+          (
+            | protos.google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDnsThreatDetector response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new DnsThreatDetector in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The value for the parent of the DnsThreatDetector resource.
- * @param {string} [request.dnsThreatDetectorId]
- *   Optional. The ID of the requesting DnsThreatDetector object.
- *   If this field is not supplied, the service generates an identifier.
- * @param {google.cloud.networksecurity.v1beta1.DnsThreatDetector} request.dnsThreatDetector
- *   Required. The `DnsThreatDetector` resource to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/dns_threat_detector_service.create_dns_threat_detector.js</caption>
- * region_tag:networksecurity_v1beta1_generated_DnsThreatDetectorService_CreateDnsThreatDetector_async
- */
+  /**
+   * Creates a new DnsThreatDetector in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The value for the parent of the DnsThreatDetector resource.
+   * @param {string} [request.dnsThreatDetectorId]
+   *   Optional. The ID of the requesting DnsThreatDetector object.
+   *   If this field is not supplied, the service generates an identifier.
+   * @param {google.cloud.networksecurity.v1beta1.DnsThreatDetector} request.dnsThreatDetector
+   *   Required. The `DnsThreatDetector` resource to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dns_threat_detector_service.create_dns_threat_detector.js</caption>
+   * region_tag:networksecurity_v1beta1_generated_DnsThreatDetectorService_CreateDnsThreatDetector_async
+   */
   createDnsThreatDetector(
-      request?: protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      (
+        | protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createDnsThreatDetector(
-      request: protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      | protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDnsThreatDetector(
-      request: protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      | protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDnsThreatDetector(
-      request?: protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      | protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      (
+        | protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createDnsThreatDetector request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+          | protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDnsThreatDetector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createDnsThreatDetector(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createDnsThreatDetector response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createDnsThreatDetector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+          (
+            | protos.google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDnsThreatDetector response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a single DnsThreatDetector.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The field mask is used to specify the fields to be overwritten in
- *   the DnsThreatDetector resource by the update. The fields specified in the
- *   update_mask are relative to the resource, not the full request. A field
- *   will be overwritten if it is in the mask. If the mask is not provided then
- *   all fields present in the request will be overwritten.
- * @param {google.cloud.networksecurity.v1beta1.DnsThreatDetector} request.dnsThreatDetector
- *   Required. The DnsThreatDetector resource being updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/dns_threat_detector_service.update_dns_threat_detector.js</caption>
- * region_tag:networksecurity_v1beta1_generated_DnsThreatDetectorService_UpdateDnsThreatDetector_async
- */
+  /**
+   * Updates a single DnsThreatDetector.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The field mask is used to specify the fields to be overwritten in
+   *   the DnsThreatDetector resource by the update. The fields specified in the
+   *   update_mask are relative to the resource, not the full request. A field
+   *   will be overwritten if it is in the mask. If the mask is not provided then
+   *   all fields present in the request will be overwritten.
+   * @param {google.cloud.networksecurity.v1beta1.DnsThreatDetector} request.dnsThreatDetector
+   *   Required. The DnsThreatDetector resource being updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dns_threat_detector_service.update_dns_threat_detector.js</caption>
+   * region_tag:networksecurity_v1beta1_generated_DnsThreatDetectorService_UpdateDnsThreatDetector_async
+   */
   updateDnsThreatDetector(
-      request?: protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      (
+        | protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateDnsThreatDetector(
-      request: protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      | protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDnsThreatDetector(
-      request: protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      | protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDnsThreatDetector(
-      request?: protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-          protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      | protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+      (
+        | protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'dns_threat_detector.name': request.dnsThreatDetector!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'dns_threat_detector.name': request.dnsThreatDetector!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateDnsThreatDetector request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+          | protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDnsThreatDetector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateDnsThreatDetector(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
-        protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateDnsThreatDetector response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateDnsThreatDetector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector,
+          (
+            | protos.google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDnsThreatDetector response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a single DnsThreatDetector.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the DnsThreatDetector resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/dns_threat_detector_service.delete_dns_threat_detector.js</caption>
- * region_tag:networksecurity_v1beta1_generated_DnsThreatDetectorService_DeleteDnsThreatDetector_async
- */
+  /**
+   * Deletes a single DnsThreatDetector.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the DnsThreatDetector resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dns_threat_detector_service.delete_dns_threat_detector.js</caption>
+   * region_tag:networksecurity_v1beta1_generated_DnsThreatDetectorService_DeleteDnsThreatDetector_async
+   */
   deleteDnsThreatDetector(
-      request?: protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteDnsThreatDetector(
-      request: protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDnsThreatDetector(
-      request: protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDnsThreatDetector(
-      request?: protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteDnsThreatDetector request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDnsThreatDetector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteDnsThreatDetector(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteDnsThreatDetector response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteDnsThreatDetector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDnsThreatDetector response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists DnsThreatDetectors in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent value for `ListDnsThreatDetectorsRequest`.
- * @param {number} [request.pageSize]
- *   Optional. The requested page size. The server may return fewer items than
- *   requested. If unspecified, the server picks an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous
- *   `ListDnsThreatDetectorsRequest` call. Provide this to retrieve the
- *   subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDnsThreatDetectorsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists DnsThreatDetectors in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for `ListDnsThreatDetectorsRequest`.
+   * @param {number} [request.pageSize]
+   *   Optional. The requested page size. The server may return fewer items than
+   *   requested. If unspecified, the server picks an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous
+   *   `ListDnsThreatDetectorsRequest` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDnsThreatDetectorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDnsThreatDetectors(
-      request?: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector[],
-        protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest|null,
-        protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector[],
+      protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest | null,
+      protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse,
+    ]
+  >;
   listDnsThreatDetectors(
-      request: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-          protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector>): void;
+    request: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
+      | protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector
+    >,
+  ): void;
   listDnsThreatDetectors(
-      request: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-          protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector>): void;
+    request: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
+      | protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector
+    >,
+  ): void;
   listDnsThreatDetectors(
-      request?: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-          protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-          protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector[],
-        protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest|null,
-        protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
+      | protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector[],
+      protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest | null,
+      protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-      protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
+          | protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDnsThreatDetectors values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -843,139 +1120,143 @@ export class DnsThreatDetectorServiceClient {
     this._log.info('listDnsThreatDetectors request %j', request);
     return this.innerApiCalls
       .listDnsThreatDetectors(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector[],
-        protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest|null,
-        protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse
-      ]) => {
-        this._log.info('listDnsThreatDetectors values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector[],
+          protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest | null,
+          protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse,
+        ]) => {
+          this._log.info('listDnsThreatDetectors values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDnsThreatDetectors`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent value for `ListDnsThreatDetectorsRequest`.
- * @param {number} [request.pageSize]
- *   Optional. The requested page size. The server may return fewer items than
- *   requested. If unspecified, the server picks an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous
- *   `ListDnsThreatDetectorsRequest` call. Provide this to retrieve the
- *   subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDnsThreatDetectorsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDnsThreatDetectors`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for `ListDnsThreatDetectorsRequest`.
+   * @param {number} [request.pageSize]
+   *   Optional. The requested page size. The server may return fewer items than
+   *   requested. If unspecified, the server picks an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous
+   *   `ListDnsThreatDetectorsRequest` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDnsThreatDetectorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDnsThreatDetectorsStream(
-      request?: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDnsThreatDetectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDnsThreatDetectors stream %j', request);
     return this.descriptors.page.listDnsThreatDetectors.createStream(
       this.innerApiCalls.listDnsThreatDetectors as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDnsThreatDetectors`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent value for `ListDnsThreatDetectorsRequest`.
- * @param {number} [request.pageSize]
- *   Optional. The requested page size. The server may return fewer items than
- *   requested. If unspecified, the server picks an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous
- *   `ListDnsThreatDetectorsRequest` call. Provide this to retrieve the
- *   subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/dns_threat_detector_service.list_dns_threat_detectors.js</caption>
- * region_tag:networksecurity_v1beta1_generated_DnsThreatDetectorService_ListDnsThreatDetectors_async
- */
+  /**
+   * Equivalent to `listDnsThreatDetectors`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for `ListDnsThreatDetectorsRequest`.
+   * @param {number} [request.pageSize]
+   *   Optional. The requested page size. The server may return fewer items than
+   *   requested. If unspecified, the server picks an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous
+   *   `ListDnsThreatDetectorsRequest` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1beta1.DnsThreatDetector|DnsThreatDetector}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dns_threat_detector_service.list_dns_threat_detectors.js</caption>
+   * region_tag:networksecurity_v1beta1_generated_DnsThreatDetectorService_ListDnsThreatDetectors_async
+   */
   listDnsThreatDetectorsAsync(
-      request?: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector>{
+    request?: protos.google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDnsThreatDetectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDnsThreatDetectors iterate %j', request);
     return this.descriptors.page.listDnsThreatDetectors.asyncIterate(
       this.innerApiCalls['listDnsThreatDetectors'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1beta1.IDnsThreatDetector>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -989,40 +1270,40 @@ export class DnsThreatDetectorServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -1036,41 +1317,41 @@ export class DnsThreatDetectorServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -1084,12 +1365,12 @@ export class DnsThreatDetectorServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1124,12 +1405,11 @@ export class DnsThreatDetectorServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1162,7 +1442,7 @@ export class DnsThreatDetectorServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1179,7 +1459,11 @@ export class DnsThreatDetectorServiceClient {
    * @param {string} authorization_policy
    * @returns {string} Resource name string.
    */
-  authorizationPolicyPath(project:string,location:string,authorizationPolicy:string) {
+  authorizationPolicyPath(
+    project: string,
+    location: string,
+    authorizationPolicy: string,
+  ) {
     return this.pathTemplates.authorizationPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -1195,7 +1479,9 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).project;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).project;
   }
 
   /**
@@ -1206,7 +1492,9 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).location;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).location;
   }
 
   /**
@@ -1216,8 +1504,12 @@ export class DnsThreatDetectorServiceClient {
    *   A fully-qualified path representing AuthorizationPolicy resource.
    * @returns {string} A string representing the authorization_policy.
    */
-  matchAuthorizationPolicyFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).authorization_policy;
+  matchAuthorizationPolicyFromAuthorizationPolicyName(
+    authorizationPolicyName: string,
+  ) {
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).authorization_policy;
   }
 
   /**
@@ -1228,7 +1520,11 @@ export class DnsThreatDetectorServiceClient {
    * @param {string} client_tls_policy
    * @returns {string} Resource name string.
    */
-  clientTlsPolicyPath(project:string,location:string,clientTlsPolicy:string) {
+  clientTlsPolicyPath(
+    project: string,
+    location: string,
+    clientTlsPolicy: string,
+  ) {
     return this.pathTemplates.clientTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -1244,7 +1540,9 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).project;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -1255,7 +1553,9 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).location;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -1266,7 +1566,9 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} A string representing the client_tls_policy.
    */
   matchClientTlsPolicyFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).client_tls_policy;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).client_tls_policy;
   }
 
   /**
@@ -1277,7 +1579,11 @@ export class DnsThreatDetectorServiceClient {
    * @param {string} dns_threat_detector
    * @returns {string} Resource name string.
    */
-  dnsThreatDetectorPath(project:string,location:string,dnsThreatDetector:string) {
+  dnsThreatDetectorPath(
+    project: string,
+    location: string,
+    dnsThreatDetector: string,
+  ) {
     return this.pathTemplates.dnsThreatDetectorPathTemplate.render({
       project: project,
       location: location,
@@ -1293,7 +1599,9 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).project;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).project;
   }
 
   /**
@@ -1304,7 +1612,9 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).location;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).location;
   }
 
   /**
@@ -1314,8 +1624,12 @@ export class DnsThreatDetectorServiceClient {
    *   A fully-qualified path representing DnsThreatDetector resource.
    * @returns {string} A string representing the dns_threat_detector.
    */
-  matchDnsThreatDetectorFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).dns_threat_detector;
+  matchDnsThreatDetectorFromDnsThreatDetectorName(
+    dnsThreatDetectorName: string,
+  ) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).dns_threat_detector;
   }
 
   /**
@@ -1325,7 +1639,7 @@ export class DnsThreatDetectorServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1361,7 +1675,7 @@ export class DnsThreatDetectorServiceClient {
    * @param {string} network
    * @returns {string} Resource name string.
    */
-  networkPath(project:string,network:string) {
+  networkPath(project: string, network: string) {
     return this.pathTemplates.networkPathTemplate.render({
       project: project,
       network: network,
@@ -1396,7 +1710,7 @@ export class DnsThreatDetectorServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1421,7 +1735,11 @@ export class DnsThreatDetectorServiceClient {
    * @param {string} server_tls_policy
    * @returns {string} Resource name string.
    */
-  serverTlsPolicyPath(project:string,location:string,serverTlsPolicy:string) {
+  serverTlsPolicyPath(
+    project: string,
+    location: string,
+    serverTlsPolicy: string,
+  ) {
     return this.pathTemplates.serverTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -1437,7 +1755,9 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).project;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -1448,7 +1768,9 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).location;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -1459,7 +1781,9 @@ export class DnsThreatDetectorServiceClient {
    * @returns {string} A string representing the server_tls_policy.
    */
   matchServerTlsPolicyFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).server_tls_policy;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).server_tls_policy;
   }
 
   /**
@@ -1470,12 +1794,16 @@ export class DnsThreatDetectorServiceClient {
    */
   close(): Promise<void> {
     if (this.dnsThreatDetectorServiceStub && !this._terminated) {
-      return this.dnsThreatDetectorServiceStub.then(stub => {
+      return this.dnsThreatDetectorServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

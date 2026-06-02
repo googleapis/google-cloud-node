@@ -518,6 +518,10 @@ export class ChatServiceClient {
  *
  *   For details, see [Name a
  *   message](https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
+ * @param {google.chat.v1.CreateMessageNotificationOptions} [request.createMessageNotificationOptions]
+ *   Optional. Controls the notification behavior when the message is posted.
+ *   To learn more, see [Force notifications or send silent
+ *   messages](https://developer.google.com/workspace/chat/create-messages#force-notify-silent).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

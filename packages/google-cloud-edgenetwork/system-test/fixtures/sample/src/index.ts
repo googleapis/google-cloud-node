@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {EdgeNetworkClient} from '@google-cloud/edgenetwork';
+import { EdgeNetworkClient } from '@google-cloud/edgenetwork';
 
 // check that the client class type name can be used
 function doStuffWithEdgeNetworkClient(client: EdgeNetworkClient) {

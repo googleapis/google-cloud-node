@@ -16,10 +16,15 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AccountLimitsServiceClient, QuotaServiceClient} from '@google-shopping/quota';
+import {
+  AccountLimitsServiceClient,
+  QuotaServiceClient,
+} from '@google-shopping/quota';
 
 // check that the client class type name can be used
-function doStuffWithAccountLimitsServiceClient(client: AccountLimitsServiceClient) {
+function doStuffWithAccountLimitsServiceClient(
+  client: AccountLimitsServiceClient,
+) {
   client.close();
 }
 function doStuffWithQuotaServiceClient(client: QuotaServiceClient) {

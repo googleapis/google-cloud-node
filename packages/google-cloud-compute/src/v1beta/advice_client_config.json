@@ -23,6 +23,14 @@
         "CalendarMode": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "Capacity": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CapacityHistory": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

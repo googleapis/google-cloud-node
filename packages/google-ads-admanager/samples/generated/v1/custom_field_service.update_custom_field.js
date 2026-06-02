@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(customField, updateMask) {
+function main(customField) {
   // [START admanager_v1_generated_CustomFieldService_UpdateCustomField_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -34,7 +34,7 @@ function main(customField, updateMask) {
    */
   // const customField = {}
   /**
-   *  Required. The list of fields to update.
+   *  Optional. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -48,7 +48,6 @@ function main(customField, updateMask) {
     // Construct request
     const request = {
       customField,
-      updateMask,
     };
 
     // Run request

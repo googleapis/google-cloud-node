@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {SecurityCenterManagementClient} from './security_center_management_client';
+export { SecurityCenterManagementClient } from './security_center_management_client';

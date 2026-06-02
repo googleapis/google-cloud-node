@@ -68,6 +68,12 @@ function main(parent, message) {
    *  message (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
    */
   // const messageId = 'abc123'
+  /**
+   *  Optional. Controls the notification behavior when the message is posted.
+   *  To learn more, see Force notifications or send silent
+   *  messages (https://developer.google.com/workspace/chat/create-messages#force-notify-silent).
+   */
+  // const createMessageNotificationOptions = {}
 
   // Imports the Chat library
   const {ChatServiceClient} = require('@google-apps/chat').v1;

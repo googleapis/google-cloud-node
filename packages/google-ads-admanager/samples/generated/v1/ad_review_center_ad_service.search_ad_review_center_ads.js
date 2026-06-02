@@ -29,6 +29,17 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  Optional. Only return ads with the given status.
+   */
+  // const status = {}
+  /**
+   *  Optional. Only return ads with the given manual review status. Only
+   *  available for networks with Manual Creative Review enabled. For more
+   *  information, see
+   *  https://support.google.com/admanager/answer/2586531#manual-creative-review.
+   */
+  // const manualReviewStatus = {}
+  /**
    *  Required. The parent, which owns this collection of AdReviewCenterAds.
    *  Format: networks/{network_code}/webProperties/{web_property_code}
    *  Since a network can only have a single web property of each
@@ -53,10 +64,6 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Only return ads with the given status.
-   */
-  // const status = {}
-  /**
    *  Optional. Only return ads with the given AdReviewCenterAd IDs. If provided,
    *  no other filter can be set (other than page size and page token).
    */
@@ -64,7 +71,8 @@ function main(parent) {
   /**
    *  Optional. If provided, only return ads that served within the given date
    *  range (inclusive). The  date range must be within the last 30 days. If not
-   *  provided, the date range will be the last 30 days.
+   *  provided, the date range will be the last 30 days. This filter does not
+   *  apply to the PENDING manual review status.
    */
   // const dateTimeRange = {}
   /**
@@ -78,7 +86,7 @@ function main(parent) {
   /**
    *  Optional. If provided, restrict the search to creatives belonging to one of
    *  the given Adx buyer account IDs. Only applicable to RTB creatives. Adx
-   *  buyer account IDs can be found via the ProgrammaticBuyerService.
+   *  buyer account IDs can be found using the `ProgrammaticBuyerService`.
    */
   // const buyerAccountId = [1,2,3,4]
 

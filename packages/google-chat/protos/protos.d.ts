@@ -16128,6 +16128,9 @@ export namespace google {
                 /** Message threadReply */
                 threadReply?: (boolean|null);
 
+                /** Message silent */
+                silent?: (boolean|null);
+
                 /** Message clientAssignedMessageId */
                 clientAssignedMessageId?: (string|null);
 
@@ -16215,6 +16218,9 @@ export namespace google {
 
                 /** Message threadReply. */
                 public threadReply: boolean;
+
+                /** Message silent. */
+                public silent: boolean;
 
                 /** Message clientAssignedMessageId. */
                 public clientAssignedMessageId: string;
@@ -17630,6 +17636,9 @@ export namespace google {
 
                 /** CreateMessageRequest messageId */
                 messageId?: (string|null);
+
+                /** CreateMessageRequest createMessageNotificationOptions */
+                createMessageNotificationOptions?: (google.chat.v1.ICreateMessageNotificationOptions|null);
             }
 
             /** Represents a CreateMessageRequest. */
@@ -17658,6 +17667,9 @@ export namespace google {
 
                 /** CreateMessageRequest messageId. */
                 public messageId: string;
+
+                /** CreateMessageRequest createMessageNotificationOptions. */
+                public createMessageNotificationOptions?: (google.chat.v1.ICreateMessageNotificationOptions|null);
 
                 /**
                  * Creates a new CreateMessageRequest instance using the specified properties.
@@ -17744,6 +17756,113 @@ export namespace google {
                     MESSAGE_REPLY_OPTION_UNSPECIFIED = 0,
                     REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD = 1,
                     REPLY_MESSAGE_OR_FAIL = 2
+                }
+            }
+
+            /** Properties of a CreateMessageNotificationOptions. */
+            interface ICreateMessageNotificationOptions {
+
+                /** CreateMessageNotificationOptions notificationType */
+                notificationType?: (google.chat.v1.CreateMessageNotificationOptions.NotificationType|keyof typeof google.chat.v1.CreateMessageNotificationOptions.NotificationType|null);
+            }
+
+            /** Represents a CreateMessageNotificationOptions. */
+            class CreateMessageNotificationOptions implements ICreateMessageNotificationOptions {
+
+                /**
+                 * Constructs a new CreateMessageNotificationOptions.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ICreateMessageNotificationOptions);
+
+                /** CreateMessageNotificationOptions notificationType. */
+                public notificationType: (google.chat.v1.CreateMessageNotificationOptions.NotificationType|keyof typeof google.chat.v1.CreateMessageNotificationOptions.NotificationType);
+
+                /**
+                 * Creates a new CreateMessageNotificationOptions instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateMessageNotificationOptions instance
+                 */
+                public static create(properties?: google.chat.v1.ICreateMessageNotificationOptions): google.chat.v1.CreateMessageNotificationOptions;
+
+                /**
+                 * Encodes the specified CreateMessageNotificationOptions message. Does not implicitly {@link google.chat.v1.CreateMessageNotificationOptions.verify|verify} messages.
+                 * @param message CreateMessageNotificationOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ICreateMessageNotificationOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateMessageNotificationOptions message, length delimited. Does not implicitly {@link google.chat.v1.CreateMessageNotificationOptions.verify|verify} messages.
+                 * @param message CreateMessageNotificationOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ICreateMessageNotificationOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateMessageNotificationOptions message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateMessageNotificationOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.CreateMessageNotificationOptions;
+
+                /**
+                 * Decodes a CreateMessageNotificationOptions message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateMessageNotificationOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.CreateMessageNotificationOptions;
+
+                /**
+                 * Verifies a CreateMessageNotificationOptions message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateMessageNotificationOptions message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateMessageNotificationOptions
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.CreateMessageNotificationOptions;
+
+                /**
+                 * Creates a plain object from a CreateMessageNotificationOptions message. Also converts values to other types if specified.
+                 * @param message CreateMessageNotificationOptions
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.CreateMessageNotificationOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateMessageNotificationOptions to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CreateMessageNotificationOptions
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace CreateMessageNotificationOptions {
+
+                /** NotificationType enum. */
+                enum NotificationType {
+                    NOTIFICATION_TYPE_NONE = 0,
+                    NOTIFICATION_TYPE_FORCE_NOTIFY = 2,
+                    NOTIFICATION_TYPE_SILENT = 3
                 }
             }
 

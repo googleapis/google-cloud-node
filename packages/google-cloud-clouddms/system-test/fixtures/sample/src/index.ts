@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DataMigrationServiceClient} from '@google-cloud/dms';
+import { DataMigrationServiceClient } from '@google-cloud/dms';
 
 // check that the client class type name can be used
-function doStuffWithDataMigrationServiceClient(client: DataMigrationServiceClient) {
+function doStuffWithDataMigrationServiceClient(
+  client: DataMigrationServiceClient,
+) {
   client.close();
 }
 

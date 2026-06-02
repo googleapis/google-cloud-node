@@ -24,7 +24,7 @@ import {GrpcService} from '../src/common-grpc/service';
 import {google} from '../protos/protos';
 import {GoogleError} from 'google-gax';
 import {util} from 'protobufjs';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import Long = util.Long;
 import {isString} from '../src/helper';
 const singer = require('./data/singer');
@@ -1259,7 +1259,7 @@ describe('codec', () => {
     });
 
     it('should decode UUID', () => {
-      const value = uuid.v4();
+      const value = crypto.randomUUID();
 
       const decoded = codec.decode(value, {
         code: google.spanner.v1.TypeCode.UUID,
@@ -1676,7 +1676,7 @@ describe('codec', () => {
     });
 
     it('should encode UUID', () => {
-      const value = uuid.v4();
+      const value = crypto.randomUUID();
 
       const encoded = codec.encode(value);
 
@@ -1779,7 +1779,7 @@ describe('codec', () => {
     });
 
     it('should determine if the uuid value is string', () => {
-      assert.deepStrictEqual(codec.getType(uuid.v4()), {
+      assert.deepStrictEqual(codec.getType(crypto.randomUUID()), {
         type: 'string',
       });
     });
@@ -1788,7 +1788,7 @@ describe('codec', () => {
       const emitWarningStub = sandbox.stub(process, 'emitWarning');
       try {
         process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] = 'true';
-        assert.deepStrictEqual(codec.getType(uuid.v4()), {
+        assert.deepStrictEqual(codec.getType(crypto.randomUUID()), {
           type: 'unspecified',
         });
         assert.strictEqual(emitWarningStub.calledOnce, true);
@@ -1805,7 +1805,7 @@ describe('codec', () => {
     it('should determine if the uuid value is string when SPANNER_ENABLE_UUID_AS_UNTYPED is false', () => {
       try {
         process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] = 'false';
-        assert.deepStrictEqual(codec.getType(uuid.v4()), {
+        assert.deepStrictEqual(codec.getType(crypto.randomUUID()), {
           type: 'string',
         });
       } finally {
