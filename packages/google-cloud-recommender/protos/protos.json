@@ -26,7 +26,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "description": {
                           "type": "string",
@@ -137,7 +140,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "insightTypeGenerationConfig": {
                           "type": "InsightTypeGenerationConfig",
@@ -185,7 +191,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "description": {
                           "type": "string",
@@ -232,6 +241,11 @@
                         "xorGroupId": {
                           "type": "string",
                           "id": 18
+                        },
+                        "targetResources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 19
                         }
                       },
                       "nested": {
@@ -435,6 +449,10 @@
                         "reliabilityProjection": {
                           "type": "ReliabilityProjection",
                           "id": 103
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -484,7 +502,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "recommenderGenerationConfig": {
                           "type": "RecommenderGenerationConfig",
@@ -2493,6 +2514,28 @@
             "objc_class_prefix": "GAPI"
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
+              }
+            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -2568,28 +2611,6 @@
                   "type": "string",
                   "id": 2
                 }
-              }
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions",
-              "options": {
-                "packed": false
-              }
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7,
-                "IDENTIFIER": 8
               }
             },
             "http": {

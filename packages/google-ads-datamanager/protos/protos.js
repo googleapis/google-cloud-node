@@ -104,6 +104,7 @@
                          * @property {google.ads.datamanager.v1.IMobileData|null} [mobileData] AudienceMember mobileData
                          * @property {google.ads.datamanager.v1.IUserIdData|null} [userIdData] AudienceMember userIdData
                          * @property {google.ads.datamanager.v1.IPpidData|null} [ppidData] AudienceMember ppidData
+                         * @property {google.ads.datamanager.v1.ICompositeData|null} [compositeData] AudienceMember compositeData
                          * @property {google.ads.datamanager.v1.IConsent|null} [consent] AudienceMember consent
                          */
     
@@ -172,6 +173,14 @@
                         AudienceMember.prototype.ppidData = null;
     
                         /**
+                         * AudienceMember compositeData.
+                         * @member {google.ads.datamanager.v1.ICompositeData|null|undefined} compositeData
+                         * @memberof google.ads.datamanager.v1.AudienceMember
+                         * @instance
+                         */
+                        AudienceMember.prototype.compositeData = null;
+    
+                        /**
                          * AudienceMember consent.
                          * @member {google.ads.datamanager.v1.IConsent|null|undefined} consent
                          * @memberof google.ads.datamanager.v1.AudienceMember
@@ -184,12 +193,12 @@
     
                         /**
                          * AudienceMember data.
-                         * @member {"userData"|"pairData"|"mobileData"|"userIdData"|"ppidData"|undefined} data
+                         * @member {"userData"|"pairData"|"mobileData"|"userIdData"|"ppidData"|"compositeData"|undefined} data
                          * @memberof google.ads.datamanager.v1.AudienceMember
                          * @instance
                          */
                         Object.defineProperty(AudienceMember.prototype, "data", {
-                            get: $util.oneOfGetter($oneOfFields = ["userData", "pairData", "mobileData", "userIdData", "ppidData"]),
+                            get: $util.oneOfGetter($oneOfFields = ["userData", "pairData", "mobileData", "userIdData", "ppidData", "compositeData"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -232,6 +241,8 @@
                                 $root.google.ads.datamanager.v1.UserIdData.encode(message.userIdData, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.ppidData != null && Object.hasOwnProperty.call(message, "ppidData"))
                                 $root.google.ads.datamanager.v1.PpidData.encode(message.ppidData, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.compositeData != null && Object.hasOwnProperty.call(message, "compositeData"))
+                                $root.google.ads.datamanager.v1.CompositeData.encode(message.compositeData, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -292,6 +303,10 @@
                                     }
                                 case 7: {
                                         message.ppidData = $root.google.ads.datamanager.v1.PpidData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.compositeData = $root.google.ads.datamanager.v1.CompositeData.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
@@ -389,6 +404,16 @@
                                         return "ppidData." + error;
                                 }
                             }
+                            if (message.compositeData != null && message.hasOwnProperty("compositeData")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.ads.datamanager.v1.CompositeData.verify(message.compositeData);
+                                    if (error)
+                                        return "compositeData." + error;
+                                }
+                            }
                             if (message.consent != null && message.hasOwnProperty("consent")) {
                                 var error = $root.google.ads.datamanager.v1.Consent.verify(message.consent);
                                 if (error)
@@ -440,6 +465,11 @@
                                 if (typeof object.ppidData !== "object")
                                     throw TypeError(".google.ads.datamanager.v1.AudienceMember.ppidData: object expected");
                                 message.ppidData = $root.google.ads.datamanager.v1.PpidData.fromObject(object.ppidData);
+                            }
+                            if (object.compositeData != null) {
+                                if (typeof object.compositeData !== "object")
+                                    throw TypeError(".google.ads.datamanager.v1.AudienceMember.compositeData: object expected");
+                                message.compositeData = $root.google.ads.datamanager.v1.CompositeData.fromObject(object.compositeData);
                             }
                             if (object.consent != null) {
                                 if (typeof object.consent !== "object")
@@ -497,6 +527,11 @@
                                 object.ppidData = $root.google.ads.datamanager.v1.PpidData.toObject(message.ppidData, options);
                                 if (options.oneofs)
                                     object.data = "ppidData";
+                            }
+                            if (message.compositeData != null && message.hasOwnProperty("compositeData")) {
+                                object.compositeData = $root.google.ads.datamanager.v1.CompositeData.toObject(message.compositeData, options);
+                                if (options.oneofs)
+                                    object.data = "compositeData";
                             }
                             return object;
                         };
@@ -1396,6 +1431,523 @@
                         };
     
                         return PpidData;
+                    })();
+    
+                    v1.CompositeData = (function() {
+    
+                        /**
+                         * Properties of a CompositeData.
+                         * @memberof google.ads.datamanager.v1
+                         * @interface ICompositeData
+                         * @property {google.ads.datamanager.v1.IUserData|null} [userData] CompositeData userData
+                         * @property {Array.<google.ads.datamanager.v1.IIpData>|null} [ipData] CompositeData ipData
+                         */
+    
+                        /**
+                         * Constructs a new CompositeData.
+                         * @memberof google.ads.datamanager.v1
+                         * @classdesc Represents a CompositeData.
+                         * @implements ICompositeData
+                         * @constructor
+                         * @param {google.ads.datamanager.v1.ICompositeData=} [properties] Properties to set
+                         */
+                        function CompositeData(properties) {
+                            this.ipData = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CompositeData userData.
+                         * @member {google.ads.datamanager.v1.IUserData|null|undefined} userData
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @instance
+                         */
+                        CompositeData.prototype.userData = null;
+    
+                        /**
+                         * CompositeData ipData.
+                         * @member {Array.<google.ads.datamanager.v1.IIpData>} ipData
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @instance
+                         */
+                        CompositeData.prototype.ipData = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CompositeData instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @static
+                         * @param {google.ads.datamanager.v1.ICompositeData=} [properties] Properties to set
+                         * @returns {google.ads.datamanager.v1.CompositeData} CompositeData instance
+                         */
+                        CompositeData.create = function create(properties) {
+                            return new CompositeData(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CompositeData message. Does not implicitly {@link google.ads.datamanager.v1.CompositeData.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @static
+                         * @param {google.ads.datamanager.v1.ICompositeData} message CompositeData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CompositeData.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.userData != null && Object.hasOwnProperty.call(message, "userData"))
+                                $root.google.ads.datamanager.v1.UserData.encode(message.userData, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.ipData != null && message.ipData.length)
+                                for (var i = 0; i < message.ipData.length; ++i)
+                                    $root.google.ads.datamanager.v1.IpData.encode(message.ipData[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CompositeData message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.CompositeData.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @static
+                         * @param {google.ads.datamanager.v1.ICompositeData} message CompositeData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CompositeData.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CompositeData message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.datamanager.v1.CompositeData} CompositeData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CompositeData.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.datamanager.v1.CompositeData();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.userData = $root.google.ads.datamanager.v1.UserData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.ipData && message.ipData.length))
+                                            message.ipData = [];
+                                        message.ipData.push($root.google.ads.datamanager.v1.IpData.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CompositeData message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.datamanager.v1.CompositeData} CompositeData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CompositeData.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CompositeData message.
+                         * @function verify
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CompositeData.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.userData != null && message.hasOwnProperty("userData")) {
+                                var error = $root.google.ads.datamanager.v1.UserData.verify(message.userData);
+                                if (error)
+                                    return "userData." + error;
+                            }
+                            if (message.ipData != null && message.hasOwnProperty("ipData")) {
+                                if (!Array.isArray(message.ipData))
+                                    return "ipData: array expected";
+                                for (var i = 0; i < message.ipData.length; ++i) {
+                                    var error = $root.google.ads.datamanager.v1.IpData.verify(message.ipData[i]);
+                                    if (error)
+                                        return "ipData." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CompositeData message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.datamanager.v1.CompositeData} CompositeData
+                         */
+                        CompositeData.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.datamanager.v1.CompositeData)
+                                return object;
+                            var message = new $root.google.ads.datamanager.v1.CompositeData();
+                            if (object.userData != null) {
+                                if (typeof object.userData !== "object")
+                                    throw TypeError(".google.ads.datamanager.v1.CompositeData.userData: object expected");
+                                message.userData = $root.google.ads.datamanager.v1.UserData.fromObject(object.userData);
+                            }
+                            if (object.ipData) {
+                                if (!Array.isArray(object.ipData))
+                                    throw TypeError(".google.ads.datamanager.v1.CompositeData.ipData: array expected");
+                                message.ipData = [];
+                                for (var i = 0; i < object.ipData.length; ++i) {
+                                    if (typeof object.ipData[i] !== "object")
+                                        throw TypeError(".google.ads.datamanager.v1.CompositeData.ipData: object expected");
+                                    message.ipData[i] = $root.google.ads.datamanager.v1.IpData.fromObject(object.ipData[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CompositeData message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @static
+                         * @param {google.ads.datamanager.v1.CompositeData} message CompositeData
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CompositeData.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ipData = [];
+                            if (options.defaults)
+                                object.userData = null;
+                            if (message.userData != null && message.hasOwnProperty("userData"))
+                                object.userData = $root.google.ads.datamanager.v1.UserData.toObject(message.userData, options);
+                            if (message.ipData && message.ipData.length) {
+                                object.ipData = [];
+                                for (var j = 0; j < message.ipData.length; ++j)
+                                    object.ipData[j] = $root.google.ads.datamanager.v1.IpData.toObject(message.ipData[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CompositeData to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CompositeData.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CompositeData
+                         * @function getTypeUrl
+                         * @memberof google.ads.datamanager.v1.CompositeData
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CompositeData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.datamanager.v1.CompositeData";
+                        };
+    
+                        return CompositeData;
+                    })();
+    
+                    v1.IpData = (function() {
+    
+                        /**
+                         * Properties of an IpData.
+                         * @memberof google.ads.datamanager.v1
+                         * @interface IIpData
+                         * @property {string|null} [ipAddress] IpData ipAddress
+                         * @property {google.protobuf.ITimestamp|null} [observeStartTime] IpData observeStartTime
+                         * @property {google.protobuf.ITimestamp|null} [observeEndTime] IpData observeEndTime
+                         */
+    
+                        /**
+                         * Constructs a new IpData.
+                         * @memberof google.ads.datamanager.v1
+                         * @classdesc Represents an IpData.
+                         * @implements IIpData
+                         * @constructor
+                         * @param {google.ads.datamanager.v1.IIpData=} [properties] Properties to set
+                         */
+                        function IpData(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IpData ipAddress.
+                         * @member {string} ipAddress
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @instance
+                         */
+                        IpData.prototype.ipAddress = "";
+    
+                        /**
+                         * IpData observeStartTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} observeStartTime
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @instance
+                         */
+                        IpData.prototype.observeStartTime = null;
+    
+                        /**
+                         * IpData observeEndTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} observeEndTime
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @instance
+                         */
+                        IpData.prototype.observeEndTime = null;
+    
+                        /**
+                         * Creates a new IpData instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @static
+                         * @param {google.ads.datamanager.v1.IIpData=} [properties] Properties to set
+                         * @returns {google.ads.datamanager.v1.IpData} IpData instance
+                         */
+                        IpData.create = function create(properties) {
+                            return new IpData(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IpData message. Does not implicitly {@link google.ads.datamanager.v1.IpData.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @static
+                         * @param {google.ads.datamanager.v1.IIpData} message IpData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpData.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ipAddress != null && Object.hasOwnProperty.call(message, "ipAddress"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.ipAddress);
+                            if (message.observeStartTime != null && Object.hasOwnProperty.call(message, "observeStartTime"))
+                                $root.google.protobuf.Timestamp.encode(message.observeStartTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.observeEndTime != null && Object.hasOwnProperty.call(message, "observeEndTime"))
+                                $root.google.protobuf.Timestamp.encode(message.observeEndTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IpData message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.IpData.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @static
+                         * @param {google.ads.datamanager.v1.IIpData} message IpData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpData.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IpData message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.datamanager.v1.IpData} IpData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpData.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.datamanager.v1.IpData();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.ipAddress = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.observeStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.observeEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IpData message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.datamanager.v1.IpData} IpData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpData.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IpData message.
+                         * @function verify
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IpData.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                if (!$util.isString(message.ipAddress))
+                                    return "ipAddress: string expected";
+                            if (message.observeStartTime != null && message.hasOwnProperty("observeStartTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.observeStartTime);
+                                if (error)
+                                    return "observeStartTime." + error;
+                            }
+                            if (message.observeEndTime != null && message.hasOwnProperty("observeEndTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.observeEndTime);
+                                if (error)
+                                    return "observeEndTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IpData message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.datamanager.v1.IpData} IpData
+                         */
+                        IpData.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.datamanager.v1.IpData)
+                                return object;
+                            var message = new $root.google.ads.datamanager.v1.IpData();
+                            if (object.ipAddress != null)
+                                message.ipAddress = String(object.ipAddress);
+                            if (object.observeStartTime != null) {
+                                if (typeof object.observeStartTime !== "object")
+                                    throw TypeError(".google.ads.datamanager.v1.IpData.observeStartTime: object expected");
+                                message.observeStartTime = $root.google.protobuf.Timestamp.fromObject(object.observeStartTime);
+                            }
+                            if (object.observeEndTime != null) {
+                                if (typeof object.observeEndTime !== "object")
+                                    throw TypeError(".google.ads.datamanager.v1.IpData.observeEndTime: object expected");
+                                message.observeEndTime = $root.google.protobuf.Timestamp.fromObject(object.observeEndTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IpData message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @static
+                         * @param {google.ads.datamanager.v1.IpData} message IpData
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IpData.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.ipAddress = "";
+                                object.observeStartTime = null;
+                                object.observeEndTime = null;
+                            }
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                object.ipAddress = message.ipAddress;
+                            if (message.observeStartTime != null && message.hasOwnProperty("observeStartTime"))
+                                object.observeStartTime = $root.google.protobuf.Timestamp.toObject(message.observeStartTime, options);
+                            if (message.observeEndTime != null && message.hasOwnProperty("observeEndTime"))
+                                object.observeEndTime = $root.google.protobuf.Timestamp.toObject(message.observeEndTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IpData to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IpData.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IpData
+                         * @function getTypeUrl
+                         * @memberof google.ads.datamanager.v1.IpData
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IpData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.datamanager.v1.IpData";
+                        };
+    
+                        return IpData;
                     })();
     
                     v1.Consent = (function() {
@@ -4323,6 +4875,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             return null;
@@ -4405,6 +4958,10 @@
                             case 6:
                                 message.accountType = 6;
                                 break;
+                            case "FLOODLIGHT_CONFIG":
+                            case 7:
+                                message.accountType = 7;
+                                break;
                             }
                             return message;
                         };
@@ -4473,6 +5030,7 @@
                          * @property {number} DATA_PARTNER=4 DATA_PARTNER value
                          * @property {number} GOOGLE_ANALYTICS_PROPERTY=5 GOOGLE_ANALYTICS_PROPERTY value
                          * @property {number} GOOGLE_AD_MANAGER_AUDIENCE_LINK=6 GOOGLE_AD_MANAGER_AUDIENCE_LINK value
+                         * @property {number} FLOODLIGHT_CONFIG=7 FLOODLIGHT_CONFIG value
                          */
                         ProductAccount.AccountType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -4483,6 +5041,7 @@
                             values[valuesById[4] = "DATA_PARTNER"] = 4;
                             values[valuesById[5] = "GOOGLE_ANALYTICS_PROPERTY"] = 5;
                             values[valuesById[6] = "GOOGLE_AD_MANAGER_AUDIENCE_LINK"] = 6;
+                            values[valuesById[7] = "FLOODLIGHT_CONFIG"] = 7;
                             return values;
                         })();
     
@@ -4966,6 +5525,403 @@
                         };
     
                         return DeviceInfo;
+                    })();
+    
+                    v1.EncryptedUserId = (function() {
+    
+                        /**
+                         * Properties of an EncryptedUserId.
+                         * @memberof google.ads.datamanager.v1
+                         * @interface IEncryptedUserId
+                         * @property {string|null} [encryptedId] EncryptedUserId encryptedId
+                         * @property {google.ads.datamanager.v1.EncryptedUserId.EncryptionEntityType|null} [entityType] EncryptedUserId entityType
+                         * @property {number|Long|null} [entityId] EncryptedUserId entityId
+                         * @property {google.ads.datamanager.v1.EncryptedUserId.EncryptionSource|null} [source] EncryptedUserId source
+                         */
+    
+                        /**
+                         * Constructs a new EncryptedUserId.
+                         * @memberof google.ads.datamanager.v1
+                         * @classdesc Represents an EncryptedUserId.
+                         * @implements IEncryptedUserId
+                         * @constructor
+                         * @param {google.ads.datamanager.v1.IEncryptedUserId=} [properties] Properties to set
+                         */
+                        function EncryptedUserId(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EncryptedUserId encryptedId.
+                         * @member {string} encryptedId
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @instance
+                         */
+                        EncryptedUserId.prototype.encryptedId = "";
+    
+                        /**
+                         * EncryptedUserId entityType.
+                         * @member {google.ads.datamanager.v1.EncryptedUserId.EncryptionEntityType} entityType
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @instance
+                         */
+                        EncryptedUserId.prototype.entityType = 0;
+    
+                        /**
+                         * EncryptedUserId entityId.
+                         * @member {number|Long} entityId
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @instance
+                         */
+                        EncryptedUserId.prototype.entityId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * EncryptedUserId source.
+                         * @member {google.ads.datamanager.v1.EncryptedUserId.EncryptionSource} source
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @instance
+                         */
+                        EncryptedUserId.prototype.source = 0;
+    
+                        /**
+                         * Creates a new EncryptedUserId instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @static
+                         * @param {google.ads.datamanager.v1.IEncryptedUserId=} [properties] Properties to set
+                         * @returns {google.ads.datamanager.v1.EncryptedUserId} EncryptedUserId instance
+                         */
+                        EncryptedUserId.create = function create(properties) {
+                            return new EncryptedUserId(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EncryptedUserId message. Does not implicitly {@link google.ads.datamanager.v1.EncryptedUserId.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @static
+                         * @param {google.ads.datamanager.v1.IEncryptedUserId} message EncryptedUserId message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EncryptedUserId.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.encryptedId != null && Object.hasOwnProperty.call(message, "encryptedId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.encryptedId);
+                            if (message.entityType != null && Object.hasOwnProperty.call(message, "entityType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.entityType);
+                            if (message.entityId != null && Object.hasOwnProperty.call(message, "entityId"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.entityId);
+                            if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.source);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EncryptedUserId message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.EncryptedUserId.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @static
+                         * @param {google.ads.datamanager.v1.IEncryptedUserId} message EncryptedUserId message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EncryptedUserId.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EncryptedUserId message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.datamanager.v1.EncryptedUserId} EncryptedUserId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EncryptedUserId.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.datamanager.v1.EncryptedUserId();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.encryptedId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.entityType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.entityId = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.source = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EncryptedUserId message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.datamanager.v1.EncryptedUserId} EncryptedUserId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EncryptedUserId.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EncryptedUserId message.
+                         * @function verify
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EncryptedUserId.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.encryptedId != null && message.hasOwnProperty("encryptedId"))
+                                if (!$util.isString(message.encryptedId))
+                                    return "encryptedId: string expected";
+                            if (message.entityType != null && message.hasOwnProperty("entityType"))
+                                switch (message.entityType) {
+                                default:
+                                    return "entityType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.entityId != null && message.hasOwnProperty("entityId"))
+                                if (!$util.isInteger(message.entityId) && !(message.entityId && $util.isInteger(message.entityId.low) && $util.isInteger(message.entityId.high)))
+                                    return "entityId: integer|Long expected";
+                            if (message.source != null && message.hasOwnProperty("source"))
+                                switch (message.source) {
+                                default:
+                                    return "source: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EncryptedUserId message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.datamanager.v1.EncryptedUserId} EncryptedUserId
+                         */
+                        EncryptedUserId.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.datamanager.v1.EncryptedUserId)
+                                return object;
+                            var message = new $root.google.ads.datamanager.v1.EncryptedUserId();
+                            if (object.encryptedId != null)
+                                message.encryptedId = String(object.encryptedId);
+                            switch (object.entityType) {
+                            default:
+                                if (typeof object.entityType === "number") {
+                                    message.entityType = object.entityType;
+                                    break;
+                                }
+                                break;
+                            case "ENCRYPTION_ENTITY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.entityType = 0;
+                                break;
+                            case "CAMPAIGN_MANAGER_ACCOUNT":
+                            case 1:
+                                message.entityType = 1;
+                                break;
+                            case "CAMPAIGN_MANAGER_ADVERTISER":
+                            case 2:
+                                message.entityType = 2;
+                                break;
+                            case "DISPLAY_VIDEO_PARTNER":
+                            case 3:
+                                message.entityType = 3;
+                                break;
+                            case "DISPLAY_VIDEO_ADVERTISER":
+                            case 4:
+                                message.entityType = 4;
+                                break;
+                            case "GOOGLE_ADS_CUSTOMER":
+                            case 5:
+                                message.entityType = 5;
+                                break;
+                            case "GOOGLE_AD_MANAGER_NETWORK_CODE":
+                            case 6:
+                                message.entityType = 6;
+                                break;
+                            }
+                            if (object.entityId != null)
+                                if ($util.Long)
+                                    (message.entityId = $util.Long.fromValue(object.entityId)).unsigned = false;
+                                else if (typeof object.entityId === "string")
+                                    message.entityId = parseInt(object.entityId, 10);
+                                else if (typeof object.entityId === "number")
+                                    message.entityId = object.entityId;
+                                else if (typeof object.entityId === "object")
+                                    message.entityId = new $util.LongBits(object.entityId.low >>> 0, object.entityId.high >>> 0).toNumber();
+                            switch (object.source) {
+                            default:
+                                if (typeof object.source === "number") {
+                                    message.source = object.source;
+                                    break;
+                                }
+                                break;
+                            case "ENCRYPTION_SOURCE_UNSPECIFIED":
+                            case 0:
+                                message.source = 0;
+                                break;
+                            case "AD_SERVING":
+                            case 1:
+                                message.source = 1;
+                                break;
+                            case "DATA_TRANSFER":
+                            case 2:
+                                message.source = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EncryptedUserId message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @static
+                         * @param {google.ads.datamanager.v1.EncryptedUserId} message EncryptedUserId
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EncryptedUserId.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.encryptedId = "";
+                                object.entityType = options.enums === String ? "ENCRYPTION_ENTITY_TYPE_UNSPECIFIED" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.entityId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.entityId = options.longs === String ? "0" : 0;
+                                object.source = options.enums === String ? "ENCRYPTION_SOURCE_UNSPECIFIED" : 0;
+                            }
+                            if (message.encryptedId != null && message.hasOwnProperty("encryptedId"))
+                                object.encryptedId = message.encryptedId;
+                            if (message.entityType != null && message.hasOwnProperty("entityType"))
+                                object.entityType = options.enums === String ? $root.google.ads.datamanager.v1.EncryptedUserId.EncryptionEntityType[message.entityType] === undefined ? message.entityType : $root.google.ads.datamanager.v1.EncryptedUserId.EncryptionEntityType[message.entityType] : message.entityType;
+                            if (message.entityId != null && message.hasOwnProperty("entityId"))
+                                if (typeof message.entityId === "number")
+                                    object.entityId = options.longs === String ? String(message.entityId) : message.entityId;
+                                else
+                                    object.entityId = options.longs === String ? $util.Long.prototype.toString.call(message.entityId) : options.longs === Number ? new $util.LongBits(message.entityId.low >>> 0, message.entityId.high >>> 0).toNumber() : message.entityId;
+                            if (message.source != null && message.hasOwnProperty("source"))
+                                object.source = options.enums === String ? $root.google.ads.datamanager.v1.EncryptedUserId.EncryptionSource[message.source] === undefined ? message.source : $root.google.ads.datamanager.v1.EncryptedUserId.EncryptionSource[message.source] : message.source;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EncryptedUserId to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EncryptedUserId.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EncryptedUserId
+                         * @function getTypeUrl
+                         * @memberof google.ads.datamanager.v1.EncryptedUserId
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EncryptedUserId.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.datamanager.v1.EncryptedUserId";
+                        };
+    
+                        /**
+                         * EncryptionEntityType enum.
+                         * @name google.ads.datamanager.v1.EncryptedUserId.EncryptionEntityType
+                         * @enum {number}
+                         * @property {number} ENCRYPTION_ENTITY_TYPE_UNSPECIFIED=0 ENCRYPTION_ENTITY_TYPE_UNSPECIFIED value
+                         * @property {number} CAMPAIGN_MANAGER_ACCOUNT=1 CAMPAIGN_MANAGER_ACCOUNT value
+                         * @property {number} CAMPAIGN_MANAGER_ADVERTISER=2 CAMPAIGN_MANAGER_ADVERTISER value
+                         * @property {number} DISPLAY_VIDEO_PARTNER=3 DISPLAY_VIDEO_PARTNER value
+                         * @property {number} DISPLAY_VIDEO_ADVERTISER=4 DISPLAY_VIDEO_ADVERTISER value
+                         * @property {number} GOOGLE_ADS_CUSTOMER=5 GOOGLE_ADS_CUSTOMER value
+                         * @property {number} GOOGLE_AD_MANAGER_NETWORK_CODE=6 GOOGLE_AD_MANAGER_NETWORK_CODE value
+                         */
+                        EncryptedUserId.EncryptionEntityType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENCRYPTION_ENTITY_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CAMPAIGN_MANAGER_ACCOUNT"] = 1;
+                            values[valuesById[2] = "CAMPAIGN_MANAGER_ADVERTISER"] = 2;
+                            values[valuesById[3] = "DISPLAY_VIDEO_PARTNER"] = 3;
+                            values[valuesById[4] = "DISPLAY_VIDEO_ADVERTISER"] = 4;
+                            values[valuesById[5] = "GOOGLE_ADS_CUSTOMER"] = 5;
+                            values[valuesById[6] = "GOOGLE_AD_MANAGER_NETWORK_CODE"] = 6;
+                            return values;
+                        })();
+    
+                        /**
+                         * EncryptionSource enum.
+                         * @name google.ads.datamanager.v1.EncryptedUserId.EncryptionSource
+                         * @enum {number}
+                         * @property {number} ENCRYPTION_SOURCE_UNSPECIFIED=0 ENCRYPTION_SOURCE_UNSPECIFIED value
+                         * @property {number} AD_SERVING=1 AD_SERVING value
+                         * @property {number} DATA_TRANSFER=2 DATA_TRANSFER value
+                         */
+                        EncryptedUserId.EncryptionSource = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENCRYPTION_SOURCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AD_SERVING"] = 1;
+                            values[valuesById[2] = "DATA_TRANSFER"] = 2;
+                            return values;
+                        })();
+    
+                        return EncryptedUserId;
                     })();
     
                     v1.EncryptionInfo = (function() {
@@ -5903,7 +6859,9 @@
                      * @property {number} INVALID_REQUEST_ID=48 INVALID_REQUEST_ID value
                      * @property {number} MULTIPLE_DESTINATIONS_FOR_GOOGLE_ANALYTICS_EVENT=49 MULTIPLE_DESTINATIONS_FOR_GOOGLE_ANALYTICS_EVENT value
                      * @property {number} FIELD_VALUE_TOO_LONG=50 FIELD_VALUE_TOO_LONG value
+                     * @property {number} FIELD_VALUE_TOO_SHORT=106 FIELD_VALUE_TOO_SHORT value
                      * @property {number} TOO_MANY_ELEMENTS=51 TOO_MANY_ELEMENTS value
+                     * @property {number} TOO_FEW_ELEMENTS=105 TOO_FEW_ELEMENTS value
                      * @property {number} ALREADY_EXISTS=52 ALREADY_EXISTS value
                      * @property {number} IMMUTABLE_FIELD_FOR_UPDATE=53 IMMUTABLE_FIELD_FOR_UPDATE value
                      * @property {number} INVALID_RESOURCE_NAME=54 INVALID_RESOURCE_NAME value
@@ -5971,6 +6929,8 @@
                      * @property {number} CUSTOM_VARIABLE_NOT_ENABLED=118 CUSTOM_VARIABLE_NOT_ENABLED value
                      * @property {number} INVALID_CUSTOM_VARIABLE_VALUE=119 INVALID_CUSTOM_VARIABLE_VALUE value
                      * @property {number} CUSTOM_VARIABLE_NOT_FOUND=120 CUSTOM_VARIABLE_NOT_FOUND value
+                     * @property {number} BASELINE_LOCATION_AUTO_DETECTION_FAILED=122 BASELINE_LOCATION_AUTO_DETECTION_FAILED value
+                     * @property {number} INSIGHTS_MISSING_FOR_DIMENSION=123 INSIGHTS_MISSING_FOR_DIMENSION value
                      */
                     v1.ErrorReason = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -6025,7 +6985,9 @@
                         values[valuesById[48] = "INVALID_REQUEST_ID"] = 48;
                         values[valuesById[49] = "MULTIPLE_DESTINATIONS_FOR_GOOGLE_ANALYTICS_EVENT"] = 49;
                         values[valuesById[50] = "FIELD_VALUE_TOO_LONG"] = 50;
+                        values[valuesById[106] = "FIELD_VALUE_TOO_SHORT"] = 106;
                         values[valuesById[51] = "TOO_MANY_ELEMENTS"] = 51;
+                        values[valuesById[105] = "TOO_FEW_ELEMENTS"] = 105;
                         values[valuesById[52] = "ALREADY_EXISTS"] = 52;
                         values[valuesById[53] = "IMMUTABLE_FIELD_FOR_UPDATE"] = 53;
                         values[valuesById[54] = "INVALID_RESOURCE_NAME"] = 54;
@@ -6093,6 +7055,8 @@
                         values[valuesById[118] = "CUSTOM_VARIABLE_NOT_ENABLED"] = 118;
                         values[valuesById[119] = "INVALID_CUSTOM_VARIABLE_VALUE"] = 119;
                         values[valuesById[120] = "CUSTOM_VARIABLE_NOT_FOUND"] = 120;
+                        values[valuesById[122] = "BASELINE_LOCATION_AUTO_DETECTION_FAILED"] = 122;
+                        values[valuesById[123] = "INSIGHTS_MISSING_FOR_DIMENSION"] = 123;
                         return values;
                     })();
     
@@ -6111,6 +7075,7 @@
                          * @property {google.ads.datamanager.v1.IAdIdentifiers|null} [adIdentifiers] Event adIdentifiers
                          * @property {string|null} [currency] Event currency
                          * @property {number|null} [conversionValue] Event conversionValue
+                         * @property {number|null} [conversionCount] Event conversionCount
                          * @property {google.ads.datamanager.v1.EventSource|null} [eventSource] Event eventSource
                          * @property {google.ads.datamanager.v1.IDeviceInfo|null} [eventDeviceInfo] Event eventDeviceInfo
                          * @property {google.ads.datamanager.v1.ICartData|null} [cartData] Event cartData
@@ -6216,6 +7181,14 @@
                          * @instance
                          */
                         Event.prototype.conversionValue = null;
+    
+                        /**
+                         * Event conversionCount.
+                         * @member {number|null|undefined} conversionCount
+                         * @memberof google.ads.datamanager.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.conversionCount = null;
     
                         /**
                          * Event eventSource.
@@ -6330,6 +7303,12 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Event.prototype, "_conversionCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["conversionCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new Event instance using the specified properties.
                          * @function create
@@ -6402,6 +7381,8 @@
                                 $root.google.ads.datamanager.v1.EventLocation.encode(message.eventLocation, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             if (message.appInstanceId != null && Object.hasOwnProperty.call(message, "appInstanceId"))
                                 writer.uint32(/* id 22, wireType 2 =*/178).string(message.appInstanceId);
+                            if (message.conversionCount != null && Object.hasOwnProperty.call(message, "conversionCount"))
+                                writer.uint32(/* id 23, wireType 1 =*/185).double(message.conversionCount);
                             return writer;
                         };
     
@@ -6474,6 +7455,10 @@
                                     }
                                 case 9: {
                                         message.conversionValue = reader.double();
+                                        break;
+                                    }
+                                case 23: {
+                                        message.conversionCount = reader.double();
                                         break;
                                     }
                                 case 10: {
@@ -6613,6 +7598,11 @@
                                 if (typeof message.conversionValue !== "number")
                                     return "conversionValue: number expected";
                             }
+                            if (message.conversionCount != null && message.hasOwnProperty("conversionCount")) {
+                                properties._conversionCount = 1;
+                                if (typeof message.conversionCount !== "number")
+                                    return "conversionCount: number expected";
+                            }
                             if (message.eventSource != null && message.hasOwnProperty("eventSource"))
                                 switch (message.eventSource) {
                                 default:
@@ -6743,6 +7733,8 @@
                                 message.currency = String(object.currency);
                             if (object.conversionValue != null)
                                 message.conversionValue = Number(object.conversionValue);
+                            if (object.conversionCount != null)
+                                message.conversionCount = Number(object.conversionCount);
                             switch (object.eventSource) {
                             default:
                                 if (typeof object.eventSource === "number") {
@@ -6942,6 +7934,11 @@
                                 object.eventLocation = $root.google.ads.datamanager.v1.EventLocation.toObject(message.eventLocation, options);
                             if (message.appInstanceId != null && message.hasOwnProperty("appInstanceId"))
                                 object.appInstanceId = message.appInstanceId;
+                            if (message.conversionCount != null && message.hasOwnProperty("conversionCount")) {
+                                object.conversionCount = options.json && !isFinite(message.conversionCount) ? String(message.conversionCount) : message.conversionCount;
+                                if (options.oneofs)
+                                    object._conversionCount = "conversionCount";
+                            }
                             return object;
                         };
     
@@ -6986,6 +7983,10 @@
                          * @property {string|null} [wbraid] AdIdentifiers wbraid
                          * @property {google.ads.datamanager.v1.IDeviceInfo|null} [landingPageDeviceInfo] AdIdentifiers landingPageDeviceInfo
                          * @property {string|null} [mobileDeviceId] AdIdentifiers mobileDeviceId
+                         * @property {string|null} [dclid] AdIdentifiers dclid
+                         * @property {string|null} [impressionId] AdIdentifiers impressionId
+                         * @property {string|null} [matchId] AdIdentifiers matchId
+                         * @property {Array.<google.ads.datamanager.v1.IEncryptedUserId>|null} [encryptedUserIds] AdIdentifiers encryptedUserIds
                          */
     
                         /**
@@ -6997,6 +7998,7 @@
                          * @param {google.ads.datamanager.v1.IAdIdentifiers=} [properties] Properties to set
                          */
                         function AdIdentifiers(properties) {
+                            this.encryptedUserIds = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -7052,6 +8054,38 @@
                         AdIdentifiers.prototype.mobileDeviceId = "";
     
                         /**
+                         * AdIdentifiers dclid.
+                         * @member {string} dclid
+                         * @memberof google.ads.datamanager.v1.AdIdentifiers
+                         * @instance
+                         */
+                        AdIdentifiers.prototype.dclid = "";
+    
+                        /**
+                         * AdIdentifiers impressionId.
+                         * @member {string} impressionId
+                         * @memberof google.ads.datamanager.v1.AdIdentifiers
+                         * @instance
+                         */
+                        AdIdentifiers.prototype.impressionId = "";
+    
+                        /**
+                         * AdIdentifiers matchId.
+                         * @member {string} matchId
+                         * @memberof google.ads.datamanager.v1.AdIdentifiers
+                         * @instance
+                         */
+                        AdIdentifiers.prototype.matchId = "";
+    
+                        /**
+                         * AdIdentifiers encryptedUserIds.
+                         * @member {Array.<google.ads.datamanager.v1.IEncryptedUserId>} encryptedUserIds
+                         * @memberof google.ads.datamanager.v1.AdIdentifiers
+                         * @instance
+                         */
+                        AdIdentifiers.prototype.encryptedUserIds = $util.emptyArray;
+    
+                        /**
                          * Creates a new AdIdentifiers instance using the specified properties.
                          * @function create
                          * @memberof google.ads.datamanager.v1.AdIdentifiers
@@ -7087,6 +8121,15 @@
                                 $root.google.ads.datamanager.v1.DeviceInfo.encode(message.landingPageDeviceInfo, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.mobileDeviceId != null && Object.hasOwnProperty.call(message, "mobileDeviceId"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.mobileDeviceId);
+                            if (message.dclid != null && Object.hasOwnProperty.call(message, "dclid"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.dclid);
+                            if (message.impressionId != null && Object.hasOwnProperty.call(message, "impressionId"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.impressionId);
+                            if (message.matchId != null && Object.hasOwnProperty.call(message, "matchId"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.matchId);
+                            if (message.encryptedUserIds != null && message.encryptedUserIds.length)
+                                for (var i = 0; i < message.encryptedUserIds.length; ++i)
+                                    $root.google.ads.datamanager.v1.EncryptedUserId.encode(message.encryptedUserIds[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -7147,6 +8190,24 @@
                                         message.mobileDeviceId = reader.string();
                                         break;
                                     }
+                                case 7: {
+                                        message.dclid = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.impressionId = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.matchId = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.encryptedUserIds && message.encryptedUserIds.length))
+                                            message.encryptedUserIds = [];
+                                        message.encryptedUserIds.push($root.google.ads.datamanager.v1.EncryptedUserId.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7202,6 +8263,24 @@
                             if (message.mobileDeviceId != null && message.hasOwnProperty("mobileDeviceId"))
                                 if (!$util.isString(message.mobileDeviceId))
                                     return "mobileDeviceId: string expected";
+                            if (message.dclid != null && message.hasOwnProperty("dclid"))
+                                if (!$util.isString(message.dclid))
+                                    return "dclid: string expected";
+                            if (message.impressionId != null && message.hasOwnProperty("impressionId"))
+                                if (!$util.isString(message.impressionId))
+                                    return "impressionId: string expected";
+                            if (message.matchId != null && message.hasOwnProperty("matchId"))
+                                if (!$util.isString(message.matchId))
+                                    return "matchId: string expected";
+                            if (message.encryptedUserIds != null && message.hasOwnProperty("encryptedUserIds")) {
+                                if (!Array.isArray(message.encryptedUserIds))
+                                    return "encryptedUserIds: array expected";
+                                for (var i = 0; i < message.encryptedUserIds.length; ++i) {
+                                    var error = $root.google.ads.datamanager.v1.EncryptedUserId.verify(message.encryptedUserIds[i]);
+                                    if (error)
+                                        return "encryptedUserIds." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -7232,6 +8311,22 @@
                             }
                             if (object.mobileDeviceId != null)
                                 message.mobileDeviceId = String(object.mobileDeviceId);
+                            if (object.dclid != null)
+                                message.dclid = String(object.dclid);
+                            if (object.impressionId != null)
+                                message.impressionId = String(object.impressionId);
+                            if (object.matchId != null)
+                                message.matchId = String(object.matchId);
+                            if (object.encryptedUserIds) {
+                                if (!Array.isArray(object.encryptedUserIds))
+                                    throw TypeError(".google.ads.datamanager.v1.AdIdentifiers.encryptedUserIds: array expected");
+                                message.encryptedUserIds = [];
+                                for (var i = 0; i < object.encryptedUserIds.length; ++i) {
+                                    if (typeof object.encryptedUserIds[i] !== "object")
+                                        throw TypeError(".google.ads.datamanager.v1.AdIdentifiers.encryptedUserIds: object expected");
+                                    message.encryptedUserIds[i] = $root.google.ads.datamanager.v1.EncryptedUserId.fromObject(object.encryptedUserIds[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -7248,6 +8343,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.encryptedUserIds = [];
                             if (options.defaults) {
                                 object.sessionAttributes = "";
                                 object.gclid = "";
@@ -7255,6 +8352,9 @@
                                 object.wbraid = "";
                                 object.landingPageDeviceInfo = null;
                                 object.mobileDeviceId = "";
+                                object.dclid = "";
+                                object.impressionId = "";
+                                object.matchId = "";
                             }
                             if (message.sessionAttributes != null && message.hasOwnProperty("sessionAttributes"))
                                 object.sessionAttributes = message.sessionAttributes;
@@ -7268,6 +8368,17 @@
                                 object.landingPageDeviceInfo = $root.google.ads.datamanager.v1.DeviceInfo.toObject(message.landingPageDeviceInfo, options);
                             if (message.mobileDeviceId != null && message.hasOwnProperty("mobileDeviceId"))
                                 object.mobileDeviceId = message.mobileDeviceId;
+                            if (message.dclid != null && message.hasOwnProperty("dclid"))
+                                object.dclid = message.dclid;
+                            if (message.impressionId != null && message.hasOwnProperty("impressionId"))
+                                object.impressionId = message.impressionId;
+                            if (message.matchId != null && message.hasOwnProperty("matchId"))
+                                object.matchId = message.matchId;
+                            if (message.encryptedUserIds && message.encryptedUserIds.length) {
+                                object.encryptedUserIds = [];
+                                for (var j = 0; j < message.encryptedUserIds.length; ++j)
+                                    object.encryptedUserIds[j] = $root.google.ads.datamanager.v1.EncryptedUserId.toObject(message.encryptedUserIds[j], options);
+                            }
                             return object;
                         };
     
@@ -11883,6 +12994,7 @@
                              * @property {google.ads.datamanager.v1.RequestStatusPerDestination.IIngestPairDataStatus|null} [pairDataIngestionStatus] IngestAudienceMembersStatus pairDataIngestionStatus
                              * @property {google.ads.datamanager.v1.RequestStatusPerDestination.IIngestUserIdDataStatus|null} [userIdDataIngestionStatus] IngestAudienceMembersStatus userIdDataIngestionStatus
                              * @property {google.ads.datamanager.v1.RequestStatusPerDestination.IIngestPpidDataStatus|null} [ppidDataIngestionStatus] IngestAudienceMembersStatus ppidDataIngestionStatus
+                             * @property {google.ads.datamanager.v1.RequestStatusPerDestination.IIngestCompositeDataStatus|null} [compositeDataIngestionStatus] IngestAudienceMembersStatus compositeDataIngestionStatus
                              */
     
                             /**
@@ -11940,17 +13052,25 @@
                              */
                             IngestAudienceMembersStatus.prototype.ppidDataIngestionStatus = null;
     
+                            /**
+                             * IngestAudienceMembersStatus compositeDataIngestionStatus.
+                             * @member {google.ads.datamanager.v1.RequestStatusPerDestination.IIngestCompositeDataStatus|null|undefined} compositeDataIngestionStatus
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestAudienceMembersStatus
+                             * @instance
+                             */
+                            IngestAudienceMembersStatus.prototype.compositeDataIngestionStatus = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * IngestAudienceMembersStatus status.
-                             * @member {"userDataIngestionStatus"|"mobileDataIngestionStatus"|"pairDataIngestionStatus"|"userIdDataIngestionStatus"|"ppidDataIngestionStatus"|undefined} status
+                             * @member {"userDataIngestionStatus"|"mobileDataIngestionStatus"|"pairDataIngestionStatus"|"userIdDataIngestionStatus"|"ppidDataIngestionStatus"|"compositeDataIngestionStatus"|undefined} status
                              * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestAudienceMembersStatus
                              * @instance
                              */
                             Object.defineProperty(IngestAudienceMembersStatus.prototype, "status", {
-                                get: $util.oneOfGetter($oneOfFields = ["userDataIngestionStatus", "mobileDataIngestionStatus", "pairDataIngestionStatus", "userIdDataIngestionStatus", "ppidDataIngestionStatus"]),
+                                get: $util.oneOfGetter($oneOfFields = ["userDataIngestionStatus", "mobileDataIngestionStatus", "pairDataIngestionStatus", "userIdDataIngestionStatus", "ppidDataIngestionStatus", "compositeDataIngestionStatus"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -11988,6 +13108,8 @@
                                     $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestUserIdDataStatus.encode(message.userIdDataIngestionStatus, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.ppidDataIngestionStatus != null && Object.hasOwnProperty.call(message, "ppidDataIngestionStatus"))
                                     $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestPpidDataStatus.encode(message.ppidDataIngestionStatus, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.compositeDataIngestionStatus != null && Object.hasOwnProperty.call(message, "compositeDataIngestionStatus"))
+                                    $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus.encode(message.compositeDataIngestionStatus, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -12042,6 +13164,10 @@
                                         }
                                     case 5: {
                                             message.ppidDataIngestionStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestPpidDataStatus.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.compositeDataIngestionStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -12128,6 +13254,16 @@
                                             return "ppidDataIngestionStatus." + error;
                                     }
                                 }
+                                if (message.compositeDataIngestionStatus != null && message.hasOwnProperty("compositeDataIngestionStatus")) {
+                                    if (properties.status === 1)
+                                        return "status: multiple values";
+                                    properties.status = 1;
+                                    {
+                                        var error = $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus.verify(message.compositeDataIngestionStatus);
+                                        if (error)
+                                            return "compositeDataIngestionStatus." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -12167,6 +13303,11 @@
                                     if (typeof object.ppidDataIngestionStatus !== "object")
                                         throw TypeError(".google.ads.datamanager.v1.RequestStatusPerDestination.IngestAudienceMembersStatus.ppidDataIngestionStatus: object expected");
                                     message.ppidDataIngestionStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestPpidDataStatus.fromObject(object.ppidDataIngestionStatus);
+                                }
+                                if (object.compositeDataIngestionStatus != null) {
+                                    if (typeof object.compositeDataIngestionStatus !== "object")
+                                        throw TypeError(".google.ads.datamanager.v1.RequestStatusPerDestination.IngestAudienceMembersStatus.compositeDataIngestionStatus: object expected");
+                                    message.compositeDataIngestionStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus.fromObject(object.compositeDataIngestionStatus);
                                 }
                                 return message;
                             };
@@ -12208,6 +13349,11 @@
                                     object.ppidDataIngestionStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestPpidDataStatus.toObject(message.ppidDataIngestionStatus, options);
                                     if (options.oneofs)
                                         object.status = "ppidDataIngestionStatus";
+                                }
+                                if (message.compositeDataIngestionStatus != null && message.hasOwnProperty("compositeDataIngestionStatus")) {
+                                    object.compositeDataIngestionStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus.toObject(message.compositeDataIngestionStatus, options);
+                                    if (options.oneofs)
+                                        object.status = "compositeDataIngestionStatus";
                                 }
                                 return object;
                             };
@@ -12252,6 +13398,7 @@
                              * @property {google.ads.datamanager.v1.RequestStatusPerDestination.IRemovePairDataStatus|null} [pairDataRemovalStatus] RemoveAudienceMembersStatus pairDataRemovalStatus
                              * @property {google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveUserIdDataStatus|null} [userIdDataRemovalStatus] RemoveAudienceMembersStatus userIdDataRemovalStatus
                              * @property {google.ads.datamanager.v1.RequestStatusPerDestination.IRemovePpidDataStatus|null} [ppidDataRemovalStatus] RemoveAudienceMembersStatus ppidDataRemovalStatus
+                             * @property {google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveCompositeDataStatus|null} [compositeDataRemovalStatus] RemoveAudienceMembersStatus compositeDataRemovalStatus
                              */
     
                             /**
@@ -12309,17 +13456,25 @@
                              */
                             RemoveAudienceMembersStatus.prototype.ppidDataRemovalStatus = null;
     
+                            /**
+                             * RemoveAudienceMembersStatus compositeDataRemovalStatus.
+                             * @member {google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveCompositeDataStatus|null|undefined} compositeDataRemovalStatus
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAudienceMembersStatus
+                             * @instance
+                             */
+                            RemoveAudienceMembersStatus.prototype.compositeDataRemovalStatus = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * RemoveAudienceMembersStatus status.
-                             * @member {"userDataRemovalStatus"|"mobileDataRemovalStatus"|"pairDataRemovalStatus"|"userIdDataRemovalStatus"|"ppidDataRemovalStatus"|undefined} status
+                             * @member {"userDataRemovalStatus"|"mobileDataRemovalStatus"|"pairDataRemovalStatus"|"userIdDataRemovalStatus"|"ppidDataRemovalStatus"|"compositeDataRemovalStatus"|undefined} status
                              * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAudienceMembersStatus
                              * @instance
                              */
                             Object.defineProperty(RemoveAudienceMembersStatus.prototype, "status", {
-                                get: $util.oneOfGetter($oneOfFields = ["userDataRemovalStatus", "mobileDataRemovalStatus", "pairDataRemovalStatus", "userIdDataRemovalStatus", "ppidDataRemovalStatus"]),
+                                get: $util.oneOfGetter($oneOfFields = ["userDataRemovalStatus", "mobileDataRemovalStatus", "pairDataRemovalStatus", "userIdDataRemovalStatus", "ppidDataRemovalStatus", "compositeDataRemovalStatus"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -12357,6 +13512,8 @@
                                     $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemoveUserIdDataStatus.encode(message.userIdDataRemovalStatus, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.ppidDataRemovalStatus != null && Object.hasOwnProperty.call(message, "ppidDataRemovalStatus"))
                                     $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemovePpidDataStatus.encode(message.ppidDataRemovalStatus, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.compositeDataRemovalStatus != null && Object.hasOwnProperty.call(message, "compositeDataRemovalStatus"))
+                                    $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus.encode(message.compositeDataRemovalStatus, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -12411,6 +13568,10 @@
                                         }
                                     case 5: {
                                             message.ppidDataRemovalStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemovePpidDataStatus.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.compositeDataRemovalStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -12497,6 +13658,16 @@
                                             return "ppidDataRemovalStatus." + error;
                                     }
                                 }
+                                if (message.compositeDataRemovalStatus != null && message.hasOwnProperty("compositeDataRemovalStatus")) {
+                                    if (properties.status === 1)
+                                        return "status: multiple values";
+                                    properties.status = 1;
+                                    {
+                                        var error = $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus.verify(message.compositeDataRemovalStatus);
+                                        if (error)
+                                            return "compositeDataRemovalStatus." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -12536,6 +13707,11 @@
                                     if (typeof object.ppidDataRemovalStatus !== "object")
                                         throw TypeError(".google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAudienceMembersStatus.ppidDataRemovalStatus: object expected");
                                     message.ppidDataRemovalStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemovePpidDataStatus.fromObject(object.ppidDataRemovalStatus);
+                                }
+                                if (object.compositeDataRemovalStatus != null) {
+                                    if (typeof object.compositeDataRemovalStatus !== "object")
+                                        throw TypeError(".google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAudienceMembersStatus.compositeDataRemovalStatus: object expected");
+                                    message.compositeDataRemovalStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus.fromObject(object.compositeDataRemovalStatus);
                                 }
                                 return message;
                             };
@@ -12577,6 +13753,11 @@
                                     object.ppidDataRemovalStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemovePpidDataStatus.toObject(message.ppidDataRemovalStatus, options);
                                     if (options.oneofs)
                                         object.status = "ppidDataRemovalStatus";
+                                }
+                                if (message.compositeDataRemovalStatus != null && message.hasOwnProperty("compositeDataRemovalStatus")) {
+                                    object.compositeDataRemovalStatus = $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus.toObject(message.compositeDataRemovalStatus, options);
+                                    if (options.oneofs)
+                                        object.status = "compositeDataRemovalStatus";
                                 }
                                 return object;
                             };
@@ -15486,6 +16667,919 @@
                             return RemovePpidDataStatus;
                         })();
     
+                        RequestStatusPerDestination.IngestCompositeDataStatus = (function() {
+    
+                            /**
+                             * Properties of an IngestCompositeDataStatus.
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination
+                             * @interface IIngestCompositeDataStatus
+                             * @property {number|Long|null} [recordCount] IngestCompositeDataStatus recordCount
+                             * @property {Array.<google.ads.datamanager.v1.RequestStatusPerDestination.IDataTypeCount>|null} [dataTypeCounts] IngestCompositeDataStatus dataTypeCounts
+                             * @property {google.ads.datamanager.v1.MatchRateRange|null} [uploadMatchRateRange] IngestCompositeDataStatus uploadMatchRateRange
+                             */
+    
+                            /**
+                             * Constructs a new IngestCompositeDataStatus.
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination
+                             * @classdesc Represents an IngestCompositeDataStatus.
+                             * @implements IIngestCompositeDataStatus
+                             * @constructor
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IIngestCompositeDataStatus=} [properties] Properties to set
+                             */
+                            function IngestCompositeDataStatus(properties) {
+                                this.dataTypeCounts = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * IngestCompositeDataStatus recordCount.
+                             * @member {number|Long} recordCount
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @instance
+                             */
+                            IngestCompositeDataStatus.prototype.recordCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * IngestCompositeDataStatus dataTypeCounts.
+                             * @member {Array.<google.ads.datamanager.v1.RequestStatusPerDestination.IDataTypeCount>} dataTypeCounts
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @instance
+                             */
+                            IngestCompositeDataStatus.prototype.dataTypeCounts = $util.emptyArray;
+    
+                            /**
+                             * IngestCompositeDataStatus uploadMatchRateRange.
+                             * @member {google.ads.datamanager.v1.MatchRateRange} uploadMatchRateRange
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @instance
+                             */
+                            IngestCompositeDataStatus.prototype.uploadMatchRateRange = 0;
+    
+                            /**
+                             * Creates a new IngestCompositeDataStatus instance using the specified properties.
+                             * @function create
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IIngestCompositeDataStatus=} [properties] Properties to set
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus} IngestCompositeDataStatus instance
+                             */
+                            IngestCompositeDataStatus.create = function create(properties) {
+                                return new IngestCompositeDataStatus(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified IngestCompositeDataStatus message. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IIngestCompositeDataStatus} message IngestCompositeDataStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            IngestCompositeDataStatus.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.recordCount != null && Object.hasOwnProperty.call(message, "recordCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.recordCount);
+                                if (message.dataTypeCounts != null && message.dataTypeCounts.length)
+                                    for (var i = 0; i < message.dataTypeCounts.length; ++i)
+                                        $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.encode(message.dataTypeCounts[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.uploadMatchRateRange != null && Object.hasOwnProperty.call(message, "uploadMatchRateRange"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uploadMatchRateRange);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified IngestCompositeDataStatus message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IIngestCompositeDataStatus} message IngestCompositeDataStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            IngestCompositeDataStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an IngestCompositeDataStatus message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus} IngestCompositeDataStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            IngestCompositeDataStatus.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.recordCount = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.dataTypeCounts && message.dataTypeCounts.length))
+                                                message.dataTypeCounts = [];
+                                            message.dataTypeCounts.push($root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.uploadMatchRateRange = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an IngestCompositeDataStatus message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus} IngestCompositeDataStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            IngestCompositeDataStatus.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an IngestCompositeDataStatus message.
+                             * @function verify
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            IngestCompositeDataStatus.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.recordCount != null && message.hasOwnProperty("recordCount"))
+                                    if (!$util.isInteger(message.recordCount) && !(message.recordCount && $util.isInteger(message.recordCount.low) && $util.isInteger(message.recordCount.high)))
+                                        return "recordCount: integer|Long expected";
+                                if (message.dataTypeCounts != null && message.hasOwnProperty("dataTypeCounts")) {
+                                    if (!Array.isArray(message.dataTypeCounts))
+                                        return "dataTypeCounts: array expected";
+                                    for (var i = 0; i < message.dataTypeCounts.length; ++i) {
+                                        var error = $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.verify(message.dataTypeCounts[i]);
+                                        if (error)
+                                            return "dataTypeCounts." + error;
+                                    }
+                                }
+                                if (message.uploadMatchRateRange != null && message.hasOwnProperty("uploadMatchRateRange"))
+                                    switch (message.uploadMatchRateRange) {
+                                    default:
+                                        return "uploadMatchRateRange: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an IngestCompositeDataStatus message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus} IngestCompositeDataStatus
+                             */
+                            IngestCompositeDataStatus.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus)
+                                    return object;
+                                var message = new $root.google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus();
+                                if (object.recordCount != null)
+                                    if ($util.Long)
+                                        (message.recordCount = $util.Long.fromValue(object.recordCount)).unsigned = false;
+                                    else if (typeof object.recordCount === "string")
+                                        message.recordCount = parseInt(object.recordCount, 10);
+                                    else if (typeof object.recordCount === "number")
+                                        message.recordCount = object.recordCount;
+                                    else if (typeof object.recordCount === "object")
+                                        message.recordCount = new $util.LongBits(object.recordCount.low >>> 0, object.recordCount.high >>> 0).toNumber();
+                                if (object.dataTypeCounts) {
+                                    if (!Array.isArray(object.dataTypeCounts))
+                                        throw TypeError(".google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus.dataTypeCounts: array expected");
+                                    message.dataTypeCounts = [];
+                                    for (var i = 0; i < object.dataTypeCounts.length; ++i) {
+                                        if (typeof object.dataTypeCounts[i] !== "object")
+                                            throw TypeError(".google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus.dataTypeCounts: object expected");
+                                        message.dataTypeCounts[i] = $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.fromObject(object.dataTypeCounts[i]);
+                                    }
+                                }
+                                switch (object.uploadMatchRateRange) {
+                                default:
+                                    if (typeof object.uploadMatchRateRange === "number") {
+                                        message.uploadMatchRateRange = object.uploadMatchRateRange;
+                                        break;
+                                    }
+                                    break;
+                                case "MATCH_RATE_RANGE_UNKNOWN":
+                                case 0:
+                                    message.uploadMatchRateRange = 0;
+                                    break;
+                                case "MATCH_RATE_RANGE_NOT_ELIGIBLE":
+                                case 1:
+                                    message.uploadMatchRateRange = 1;
+                                    break;
+                                case "MATCH_RATE_RANGE_LESS_THAN_20":
+                                case 2:
+                                    message.uploadMatchRateRange = 2;
+                                    break;
+                                case "MATCH_RATE_RANGE_20_TO_30":
+                                case 3:
+                                    message.uploadMatchRateRange = 3;
+                                    break;
+                                case "MATCH_RATE_RANGE_31_TO_40":
+                                case 4:
+                                    message.uploadMatchRateRange = 4;
+                                    break;
+                                case "MATCH_RATE_RANGE_41_TO_50":
+                                case 5:
+                                    message.uploadMatchRateRange = 5;
+                                    break;
+                                case "MATCH_RATE_RANGE_51_TO_60":
+                                case 6:
+                                    message.uploadMatchRateRange = 6;
+                                    break;
+                                case "MATCH_RATE_RANGE_61_TO_70":
+                                case 7:
+                                    message.uploadMatchRateRange = 7;
+                                    break;
+                                case "MATCH_RATE_RANGE_71_TO_80":
+                                case 8:
+                                    message.uploadMatchRateRange = 8;
+                                    break;
+                                case "MATCH_RATE_RANGE_81_TO_90":
+                                case 9:
+                                    message.uploadMatchRateRange = 9;
+                                    break;
+                                case "MATCH_RATE_RANGE_91_TO_100":
+                                case 10:
+                                    message.uploadMatchRateRange = 10;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an IngestCompositeDataStatus message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus} message IngestCompositeDataStatus
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            IngestCompositeDataStatus.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.dataTypeCounts = [];
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.recordCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.recordCount = options.longs === String ? "0" : 0;
+                                    object.uploadMatchRateRange = options.enums === String ? "MATCH_RATE_RANGE_UNKNOWN" : 0;
+                                }
+                                if (message.recordCount != null && message.hasOwnProperty("recordCount"))
+                                    if (typeof message.recordCount === "number")
+                                        object.recordCount = options.longs === String ? String(message.recordCount) : message.recordCount;
+                                    else
+                                        object.recordCount = options.longs === String ? $util.Long.prototype.toString.call(message.recordCount) : options.longs === Number ? new $util.LongBits(message.recordCount.low >>> 0, message.recordCount.high >>> 0).toNumber() : message.recordCount;
+                                if (message.dataTypeCounts && message.dataTypeCounts.length) {
+                                    object.dataTypeCounts = [];
+                                    for (var j = 0; j < message.dataTypeCounts.length; ++j)
+                                        object.dataTypeCounts[j] = $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.toObject(message.dataTypeCounts[j], options);
+                                }
+                                if (message.uploadMatchRateRange != null && message.hasOwnProperty("uploadMatchRateRange"))
+                                    object.uploadMatchRateRange = options.enums === String ? $root.google.ads.datamanager.v1.MatchRateRange[message.uploadMatchRateRange] === undefined ? message.uploadMatchRateRange : $root.google.ads.datamanager.v1.MatchRateRange[message.uploadMatchRateRange] : message.uploadMatchRateRange;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this IngestCompositeDataStatus to JSON.
+                             * @function toJSON
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            IngestCompositeDataStatus.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for IngestCompositeDataStatus
+                             * @function getTypeUrl
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            IngestCompositeDataStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ads.datamanager.v1.RequestStatusPerDestination.IngestCompositeDataStatus";
+                            };
+    
+                            return IngestCompositeDataStatus;
+                        })();
+    
+                        RequestStatusPerDestination.RemoveCompositeDataStatus = (function() {
+    
+                            /**
+                             * Properties of a RemoveCompositeDataStatus.
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination
+                             * @interface IRemoveCompositeDataStatus
+                             * @property {number|Long|null} [recordCount] RemoveCompositeDataStatus recordCount
+                             * @property {Array.<google.ads.datamanager.v1.RequestStatusPerDestination.IDataTypeCount>|null} [dataTypeCounts] RemoveCompositeDataStatus dataTypeCounts
+                             */
+    
+                            /**
+                             * Constructs a new RemoveCompositeDataStatus.
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination
+                             * @classdesc Represents a RemoveCompositeDataStatus.
+                             * @implements IRemoveCompositeDataStatus
+                             * @constructor
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveCompositeDataStatus=} [properties] Properties to set
+                             */
+                            function RemoveCompositeDataStatus(properties) {
+                                this.dataTypeCounts = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RemoveCompositeDataStatus recordCount.
+                             * @member {number|Long} recordCount
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @instance
+                             */
+                            RemoveCompositeDataStatus.prototype.recordCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * RemoveCompositeDataStatus dataTypeCounts.
+                             * @member {Array.<google.ads.datamanager.v1.RequestStatusPerDestination.IDataTypeCount>} dataTypeCounts
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @instance
+                             */
+                            RemoveCompositeDataStatus.prototype.dataTypeCounts = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RemoveCompositeDataStatus instance using the specified properties.
+                             * @function create
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveCompositeDataStatus=} [properties] Properties to set
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus} RemoveCompositeDataStatus instance
+                             */
+                            RemoveCompositeDataStatus.create = function create(properties) {
+                                return new RemoveCompositeDataStatus(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RemoveCompositeDataStatus message. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveCompositeDataStatus} message RemoveCompositeDataStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RemoveCompositeDataStatus.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.recordCount != null && Object.hasOwnProperty.call(message, "recordCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.recordCount);
+                                if (message.dataTypeCounts != null && message.dataTypeCounts.length)
+                                    for (var i = 0; i < message.dataTypeCounts.length; ++i)
+                                        $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.encode(message.dataTypeCounts[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RemoveCompositeDataStatus message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveCompositeDataStatus} message RemoveCompositeDataStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RemoveCompositeDataStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RemoveCompositeDataStatus message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus} RemoveCompositeDataStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RemoveCompositeDataStatus.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.recordCount = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.dataTypeCounts && message.dataTypeCounts.length))
+                                                message.dataTypeCounts = [];
+                                            message.dataTypeCounts.push($root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RemoveCompositeDataStatus message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus} RemoveCompositeDataStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RemoveCompositeDataStatus.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RemoveCompositeDataStatus message.
+                             * @function verify
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RemoveCompositeDataStatus.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.recordCount != null && message.hasOwnProperty("recordCount"))
+                                    if (!$util.isInteger(message.recordCount) && !(message.recordCount && $util.isInteger(message.recordCount.low) && $util.isInteger(message.recordCount.high)))
+                                        return "recordCount: integer|Long expected";
+                                if (message.dataTypeCounts != null && message.hasOwnProperty("dataTypeCounts")) {
+                                    if (!Array.isArray(message.dataTypeCounts))
+                                        return "dataTypeCounts: array expected";
+                                    for (var i = 0; i < message.dataTypeCounts.length; ++i) {
+                                        var error = $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.verify(message.dataTypeCounts[i]);
+                                        if (error)
+                                            return "dataTypeCounts." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RemoveCompositeDataStatus message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus} RemoveCompositeDataStatus
+                             */
+                            RemoveCompositeDataStatus.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus)
+                                    return object;
+                                var message = new $root.google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus();
+                                if (object.recordCount != null)
+                                    if ($util.Long)
+                                        (message.recordCount = $util.Long.fromValue(object.recordCount)).unsigned = false;
+                                    else if (typeof object.recordCount === "string")
+                                        message.recordCount = parseInt(object.recordCount, 10);
+                                    else if (typeof object.recordCount === "number")
+                                        message.recordCount = object.recordCount;
+                                    else if (typeof object.recordCount === "object")
+                                        message.recordCount = new $util.LongBits(object.recordCount.low >>> 0, object.recordCount.high >>> 0).toNumber();
+                                if (object.dataTypeCounts) {
+                                    if (!Array.isArray(object.dataTypeCounts))
+                                        throw TypeError(".google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus.dataTypeCounts: array expected");
+                                    message.dataTypeCounts = [];
+                                    for (var i = 0; i < object.dataTypeCounts.length; ++i) {
+                                        if (typeof object.dataTypeCounts[i] !== "object")
+                                            throw TypeError(".google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus.dataTypeCounts: object expected");
+                                        message.dataTypeCounts[i] = $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.fromObject(object.dataTypeCounts[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RemoveCompositeDataStatus message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus} message RemoveCompositeDataStatus
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RemoveCompositeDataStatus.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.dataTypeCounts = [];
+                                if (options.defaults)
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.recordCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.recordCount = options.longs === String ? "0" : 0;
+                                if (message.recordCount != null && message.hasOwnProperty("recordCount"))
+                                    if (typeof message.recordCount === "number")
+                                        object.recordCount = options.longs === String ? String(message.recordCount) : message.recordCount;
+                                    else
+                                        object.recordCount = options.longs === String ? $util.Long.prototype.toString.call(message.recordCount) : options.longs === Number ? new $util.LongBits(message.recordCount.low >>> 0, message.recordCount.high >>> 0).toNumber() : message.recordCount;
+                                if (message.dataTypeCounts && message.dataTypeCounts.length) {
+                                    object.dataTypeCounts = [];
+                                    for (var j = 0; j < message.dataTypeCounts.length; ++j)
+                                        object.dataTypeCounts[j] = $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.toObject(message.dataTypeCounts[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RemoveCompositeDataStatus to JSON.
+                             * @function toJSON
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RemoveCompositeDataStatus.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RemoveCompositeDataStatus
+                             * @function getTypeUrl
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RemoveCompositeDataStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ads.datamanager.v1.RequestStatusPerDestination.RemoveCompositeDataStatus";
+                            };
+    
+                            return RemoveCompositeDataStatus;
+                        })();
+    
+                        RequestStatusPerDestination.DataTypeCount = (function() {
+    
+                            /**
+                             * Properties of a DataTypeCount.
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination
+                             * @interface IDataTypeCount
+                             * @property {google.ads.datamanager.v1.RequestStatusPerDestination.DataType|null} [type] DataTypeCount type
+                             * @property {number|Long|null} [count] DataTypeCount count
+                             */
+    
+                            /**
+                             * Constructs a new DataTypeCount.
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination
+                             * @classdesc Represents a DataTypeCount.
+                             * @implements IDataTypeCount
+                             * @constructor
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IDataTypeCount=} [properties] Properties to set
+                             */
+                            function DataTypeCount(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataTypeCount type.
+                             * @member {google.ads.datamanager.v1.RequestStatusPerDestination.DataType} type
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @instance
+                             */
+                            DataTypeCount.prototype.type = 0;
+    
+                            /**
+                             * DataTypeCount count.
+                             * @member {number|Long} count
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @instance
+                             */
+                            DataTypeCount.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new DataTypeCount instance using the specified properties.
+                             * @function create
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IDataTypeCount=} [properties] Properties to set
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount} DataTypeCount instance
+                             */
+                            DataTypeCount.create = function create(properties) {
+                                return new DataTypeCount(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataTypeCount message. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IDataTypeCount} message DataTypeCount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataTypeCount.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.count);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataTypeCount message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.IDataTypeCount} message DataTypeCount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataTypeCount.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataTypeCount message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount} DataTypeCount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataTypeCount.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.count = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataTypeCount message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount} DataTypeCount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataTypeCount.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataTypeCount message.
+                             * @function verify
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataTypeCount.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                                        return "count: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataTypeCount message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount} DataTypeCount
+                             */
+                            DataTypeCount.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount)
+                                    return object;
+                                var message = new $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount();
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "DATA_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "EMAIL":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "PHONE_NUMBER":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                case "ADDRESS":
+                                case 3:
+                                    message.type = 3;
+                                    break;
+                                case "IP_ADDRESS":
+                                case 4:
+                                    message.type = 4;
+                                    break;
+                                }
+                                if (object.count != null)
+                                    if ($util.Long)
+                                        (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                    else if (typeof object.count === "string")
+                                        message.count = parseInt(object.count, 10);
+                                    else if (typeof object.count === "number")
+                                        message.count = object.count;
+                                    else if (typeof object.count === "object")
+                                        message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataTypeCount message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @static
+                             * @param {google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount} message DataTypeCount
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataTypeCount.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.type = options.enums === String ? "DATA_TYPE_UNSPECIFIED" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.count = options.longs === String ? "0" : 0;
+                                }
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataType[message.type] === undefined ? message.type : $root.google.ads.datamanager.v1.RequestStatusPerDestination.DataType[message.type] : message.type;
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (typeof message.count === "number")
+                                        object.count = options.longs === String ? String(message.count) : message.count;
+                                    else
+                                        object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataTypeCount to JSON.
+                             * @function toJSON
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataTypeCount.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataTypeCount
+                             * @function getTypeUrl
+                             * @memberof google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataTypeCount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ads.datamanager.v1.RequestStatusPerDestination.DataTypeCount";
+                            };
+    
+                            return DataTypeCount;
+                        })();
+    
+                        /**
+                         * DataType enum.
+                         * @name google.ads.datamanager.v1.RequestStatusPerDestination.DataType
+                         * @enum {number}
+                         * @property {number} DATA_TYPE_UNSPECIFIED=0 DATA_TYPE_UNSPECIFIED value
+                         * @property {number} EMAIL=1 EMAIL value
+                         * @property {number} PHONE_NUMBER=2 PHONE_NUMBER value
+                         * @property {number} ADDRESS=3 ADDRESS value
+                         * @property {number} IP_ADDRESS=4 IP_ADDRESS value
+                         */
+                        RequestStatusPerDestination.DataType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DATA_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EMAIL"] = 1;
+                            values[valuesById[2] = "PHONE_NUMBER"] = 2;
+                            values[valuesById[3] = "ADDRESS"] = 3;
+                            values[valuesById[4] = "IP_ADDRESS"] = 4;
+                            return values;
+                        })();
+    
                         return RequestStatusPerDestination;
                     })();
     
@@ -15931,6 +18025,21 @@
                                 case 25:
                                 case 26:
                                 case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
                                     break;
                                 }
                             return null;
@@ -16079,6 +18188,66 @@
                             case "PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID":
                             case 28:
                                 message.reason = 28;
+                                break;
+                            case "PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND":
+                            case 29:
+                                message.reason = 29;
+                                break;
+                            case "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID":
+                            case 30:
+                                message.reason = 30;
+                                break;
+                            case "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID":
+                            case 31:
+                                message.reason = 31;
+                                break;
+                            case "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID":
+                            case 32:
+                                message.reason = 32;
+                                break;
+                            case "PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS":
+                            case 33:
+                                message.reason = 33;
+                                break;
+                            case "PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT":
+                            case 34:
+                                message.reason = 34;
+                                break;
+                            case "PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND":
+                            case 35:
+                                message.reason = 35;
+                                break;
+                            case "PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR":
+                            case 36:
+                                message.reason = 36;
+                                break;
+                            case "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID":
+                            case 37:
+                                message.reason = 37;
+                                break;
+                            case "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND":
+                            case 38:
+                                message.reason = 38;
+                                break;
+                            case "PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK":
+                            case 39:
+                                message.reason = 39;
+                                break;
+                            case "PROCESSING_ERROR_REASON_TOO_RECENT_CLICK":
+                            case 40:
+                                message.reason = 40;
+                                break;
+                            case "PROCESSING_ERROR_REASON_INVALID_CLICK":
+                            case 41:
+                                message.reason = 41;
+                                break;
+                            case "PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK":
+                            case 42:
+                                message.reason = 42;
+                                break;
+                            case "PROCESSING_ERROR_REASON_CLICK_NOT_FOUND":
+                            case 43:
+                                message.reason = 43;
                                 break;
                             }
                             return message;
@@ -16705,6 +18874,21 @@
                      * @property {number} PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR=25 PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR value
                      * @property {number} PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER=26 PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER value
                      * @property {number} PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID=28 PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID value
+                     * @property {number} PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND=29 PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND value
+                     * @property {number} PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID=30 PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID value
+                     * @property {number} PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID=31 PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID value
+                     * @property {number} PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID=32 PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID value
+                     * @property {number} PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS=33 PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS value
+                     * @property {number} PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT=34 PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT value
+                     * @property {number} PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND=35 PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND value
+                     * @property {number} PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR=36 PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR value
+                     * @property {number} PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID=37 PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID value
+                     * @property {number} PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND=38 PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND value
+                     * @property {number} PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK=39 PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK value
+                     * @property {number} PROCESSING_ERROR_REASON_TOO_RECENT_CLICK=40 PROCESSING_ERROR_REASON_TOO_RECENT_CLICK value
+                     * @property {number} PROCESSING_ERROR_REASON_INVALID_CLICK=41 PROCESSING_ERROR_REASON_INVALID_CLICK value
+                     * @property {number} PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK=42 PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK value
+                     * @property {number} PROCESSING_ERROR_REASON_CLICK_NOT_FOUND=43 PROCESSING_ERROR_REASON_CLICK_NOT_FOUND value
                      */
                     v1.ProcessingErrorReason = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -16737,6 +18921,21 @@
                         values[valuesById[25] = "PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR"] = 25;
                         values[valuesById[26] = "PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER"] = 26;
                         values[valuesById[28] = "PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID"] = 28;
+                        values[valuesById[29] = "PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND"] = 29;
+                        values[valuesById[30] = "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID"] = 30;
+                        values[valuesById[31] = "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID"] = 31;
+                        values[valuesById[32] = "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID"] = 32;
+                        values[valuesById[33] = "PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS"] = 33;
+                        values[valuesById[34] = "PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT"] = 34;
+                        values[valuesById[35] = "PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND"] = 35;
+                        values[valuesById[36] = "PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR"] = 36;
+                        values[valuesById[37] = "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID"] = 37;
+                        values[valuesById[38] = "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND"] = 38;
+                        values[valuesById[39] = "PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK"] = 39;
+                        values[valuesById[40] = "PROCESSING_ERROR_REASON_TOO_RECENT_CLICK"] = 40;
+                        values[valuesById[41] = "PROCESSING_ERROR_REASON_INVALID_CLICK"] = 41;
+                        values[valuesById[42] = "PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK"] = 42;
+                        values[valuesById[43] = "PROCESSING_ERROR_REASON_CLICK_NOT_FOUND"] = 43;
                         return values;
                     })();
     
@@ -31514,6 +33713,515 @@
                 return values;
             })();
     
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 * @property {Array.<google.api.ITypeReference>|null} [referencedTypes] FieldInfo referencedTypes
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    this.referencedTypes = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * FieldInfo referencedTypes.
+                 * @member {Array.<google.api.ITypeReference>} referencedTypes
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.referencedTypes = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    if (message.referencedTypes != null && message.referencedTypes.length)
+                        for (var i = 0; i < message.referencedTypes.length; ++i)
+                            $root.google.api.TypeReference.encode(message.referencedTypes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.referencedTypes && message.referencedTypes.length))
+                                    message.referencedTypes = [];
+                                message.referencedTypes.push($root.google.api.TypeReference.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    if (message.referencedTypes != null && message.hasOwnProperty("referencedTypes")) {
+                        if (!Array.isArray(message.referencedTypes))
+                            return "referencedTypes: array expected";
+                        for (var i = 0; i < message.referencedTypes.length; ++i) {
+                            var error = $root.google.api.TypeReference.verify(message.referencedTypes[i]);
+                            if (error)
+                                return "referencedTypes." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    if (object.referencedTypes) {
+                        if (!Array.isArray(object.referencedTypes))
+                            throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
+                        message.referencedTypes = [];
+                        for (var i = 0; i < object.referencedTypes.length; ++i) {
+                            if (typeof object.referencedTypes[i] !== "object")
+                                throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
+                            message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.referencedTypes = [];
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    if (message.referencedTypes && message.referencedTypes.length) {
+                        object.referencedTypes = [];
+                        for (var j = 0; j < message.referencedTypes.length; ++j)
+                            object.referencedTypes[j] = $root.google.api.TypeReference.toObject(message.referencedTypes[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
+            })();
+    
+            api.TypeReference = (function() {
+    
+                /**
+                 * Properties of a TypeReference.
+                 * @memberof google.api
+                 * @interface ITypeReference
+                 * @property {string|null} [typeName] TypeReference typeName
+                 */
+    
+                /**
+                 * Constructs a new TypeReference.
+                 * @memberof google.api
+                 * @classdesc Represents a TypeReference.
+                 * @implements ITypeReference
+                 * @constructor
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 */
+                function TypeReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TypeReference typeName.
+                 * @member {string} typeName
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 */
+                TypeReference.prototype.typeName = "";
+    
+                /**
+                 * Creates a new TypeReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 * @returns {google.api.TypeReference} TypeReference instance
+                 */
+                TypeReference.create = function create(properties) {
+                    return new TypeReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.typeName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TypeReference message.
+                 * @function verify
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TypeReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        if (!$util.isString(message.typeName))
+                            return "typeName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.TypeReference} TypeReference
+                 */
+                TypeReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.TypeReference)
+                        return object;
+                    var message = new $root.google.api.TypeReference();
+                    if (object.typeName != null)
+                        message.typeName = String(object.typeName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.TypeReference} message TypeReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TypeReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.typeName = "";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        object.typeName = message.typeName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TypeReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TypeReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TypeReference
+                 * @function getTypeUrl
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TypeReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.TypeReference";
+                };
+    
+                return TypeReference;
+            })();
+    
             api.ResourceDescriptor = (function() {
     
                 /**
@@ -44109,6 +46817,7 @@
                  * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
@@ -44252,6 +46961,14 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
+    
+                /**
                  * FieldOptions .google.api.resourceReference.
                  * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
                  * @memberof google.protobuf.FieldOptions
@@ -44319,6 +47036,8 @@
                             writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -44431,6 +47150,10 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         case 1055: {
@@ -44583,6 +47306,11 @@
                             case 8:
                                 break;
                             }
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
@@ -44808,6 +47536,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
                     if (object[".google.api.resourceReference"] != null) {
                         if (typeof object[".google.api.resourceReference"] !== "object")
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
@@ -44848,6 +47581,7 @@
                         object.features = null;
                         object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
+                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -44893,6 +47627,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     
