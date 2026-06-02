@@ -156,6 +156,11 @@ describe('OpenTelemetry Context Isolation Tests', () => {
   });
 
   describe('MetricsTracerFactory background cleanup timer', () => {
+    beforeEach(async () => {
+      MetricsTracerFactory.enabled = true;
+      await MetricsTracerFactory.resetInstance();
+    });
+
     afterEach(async () => {
       await MetricsTracerFactory.resetInstance();
     });

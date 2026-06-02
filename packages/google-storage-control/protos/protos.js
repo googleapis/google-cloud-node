@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots._google_cloud_storage_control_protos || ($protobuf.roots._google_cloud_storage_control_protos = {});
+    var $root = $protobuf.roots["_google_cloud_storage_control_protos"] || ($protobuf.roots["_google_cloud_storage_control_protos"] = {});
     
     $root.google = (function() {
     
@@ -1232,7 +1232,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         PendingRenameInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -1319,6 +1319,8 @@
                         PendingRenameInfo.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.PendingRenameInfo)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.PendingRenameInfo: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -1501,7 +1503,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Folder.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -1622,6 +1624,8 @@
                         Folder.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.Folder)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.Folder: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -1639,17 +1643,17 @@
                                 else if (typeof object.metageneration === "object")
                                     message.metageneration = new $util.LongBits(object.metageneration.low >>> 0, object.metageneration.high >>> 0).toNumber();
                             if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
+                                if (!$util.isObject(object.createTime))
                                     throw TypeError(".google.storage.control.v2.Folder.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                             }
                             if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
+                                if (!$util.isObject(object.updateTime))
                                     throw TypeError(".google.storage.control.v2.Folder.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
                             if (object.pendingRenameInfo != null) {
-                                if (typeof object.pendingRenameInfo !== "object")
+                                if (!$util.isObject(object.pendingRenameInfo))
                                     throw TypeError(".google.storage.control.v2.Folder.pendingRenameInfo: object expected");
                                 message.pendingRenameInfo = $root.google.storage.control.v2.PendingRenameInfo.fromObject(object.pendingRenameInfo, long + 1);
                             }
@@ -1854,7 +1858,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -1967,6 +1971,8 @@
                         GetFolderRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.GetFolderRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.GetFolderRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -2193,7 +2199,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CreateFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -2310,6 +2316,8 @@
                         CreateFolderRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.CreateFolderRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.CreateFolderRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -2318,7 +2326,7 @@
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             if (object.folder != null) {
-                                if (typeof object.folder !== "object")
+                                if (!$util.isObject(object.folder))
                                     throw TypeError(".google.storage.control.v2.CreateFolderRequest.folder: object expected");
                                 message.folder = $root.google.storage.control.v2.Folder.fromObject(object.folder, long + 1);
                             }
@@ -2520,7 +2528,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         DeleteFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -2633,6 +2641,8 @@
                         DeleteFolderRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.DeleteFolderRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.DeleteFolderRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -2892,7 +2902,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListFoldersRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -3028,6 +3038,8 @@
                         ListFoldersRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ListFoldersRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListFoldersRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -3215,7 +3227,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListFoldersResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -3317,6 +3329,8 @@
                         ListFoldersResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ListFoldersResponse)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListFoldersResponse: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -3327,7 +3341,7 @@
                                     throw TypeError(".google.storage.control.v2.ListFoldersResponse.folders: array expected");
                                 message.folders = [];
                                 for (var i = 0; i < object.folders.length; ++i) {
-                                    if (typeof object.folders[i] !== "object")
+                                    if (!$util.isObject(object.folders[i]))
                                         throw TypeError(".google.storage.control.v2.ListFoldersResponse.folders: object expected");
                                     message.folders[i] = $root.google.storage.control.v2.Folder.fromObject(object.folders[i], long + 1);
                                 }
@@ -3531,7 +3545,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         RenameFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -3651,6 +3665,8 @@
                         RenameFolderRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.RenameFolderRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.RenameFolderRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -3886,7 +3902,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         DeleteFolderRecursiveRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -3999,6 +4015,8 @@
                         DeleteFolderRecursiveRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.DeleteFolderRecursiveRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.DeleteFolderRecursiveRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -4236,7 +4254,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CommonLongRunningOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -4364,23 +4382,25 @@
                         CommonLongRunningOperationMetadata.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.CommonLongRunningOperationMetadata)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.CommonLongRunningOperationMetadata: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.control.v2.CommonLongRunningOperationMetadata();
                             if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
+                                if (!$util.isObject(object.createTime))
                                     throw TypeError(".google.storage.control.v2.CommonLongRunningOperationMetadata.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                             }
                             if (object.endTime != null) {
-                                if (typeof object.endTime !== "object")
+                                if (!$util.isObject(object.endTime))
                                     throw TypeError(".google.storage.control.v2.CommonLongRunningOperationMetadata.endTime: object expected");
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
                             }
                             if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
+                                if (!$util.isObject(object.updateTime))
                                     throw TypeError(".google.storage.control.v2.CommonLongRunningOperationMetadata.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
@@ -4559,7 +4579,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         RenameFolderMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -4662,13 +4682,15 @@
                         RenameFolderMetadata.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.RenameFolderMetadata)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.RenameFolderMetadata: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.control.v2.RenameFolderMetadata();
                             if (object.commonMetadata != null) {
-                                if (typeof object.commonMetadata !== "object")
+                                if (!$util.isObject(object.commonMetadata))
                                     throw TypeError(".google.storage.control.v2.RenameFolderMetadata.commonMetadata: object expected");
                                 message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.fromObject(object.commonMetadata, long + 1);
                             }
@@ -4825,7 +4847,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         DeleteFolderRecursiveMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -4921,13 +4943,15 @@
                         DeleteFolderRecursiveMetadata.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.DeleteFolderRecursiveMetadata)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.DeleteFolderRecursiveMetadata: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.control.v2.DeleteFolderRecursiveMetadata();
                             if (object.commonMetadata != null) {
-                                if (typeof object.commonMetadata !== "object")
+                                if (!$util.isObject(object.commonMetadata))
                                     throw TypeError(".google.storage.control.v2.DeleteFolderRecursiveMetadata.commonMetadata: object expected");
                                 message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.fromObject(object.commonMetadata, long + 1);
                             }
@@ -5112,7 +5136,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         StorageLayout.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -5231,6 +5255,8 @@
                         StorageLayout.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.StorageLayout)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.StorageLayout: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -5243,12 +5269,12 @@
                             if (object.locationType != null)
                                 message.locationType = String(object.locationType);
                             if (object.customPlacementConfig != null) {
-                                if (typeof object.customPlacementConfig !== "object")
+                                if (!$util.isObject(object.customPlacementConfig))
                                     throw TypeError(".google.storage.control.v2.StorageLayout.customPlacementConfig: object expected");
                                 message.customPlacementConfig = $root.google.storage.control.v2.StorageLayout.CustomPlacementConfig.fromObject(object.customPlacementConfig, long + 1);
                             }
                             if (object.hierarchicalNamespace != null) {
-                                if (typeof object.hierarchicalNamespace !== "object")
+                                if (!$util.isObject(object.hierarchicalNamespace))
                                     throw TypeError(".google.storage.control.v2.StorageLayout.hierarchicalNamespace: object expected");
                                 message.hierarchicalNamespace = $root.google.storage.control.v2.StorageLayout.HierarchicalNamespace.fromObject(object.hierarchicalNamespace, long + 1);
                             }
@@ -5395,7 +5421,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CustomPlacementConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -5488,6 +5514,8 @@
                             CustomPlacementConfig.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.control.v2.StorageLayout.CustomPlacementConfig)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.StorageLayout.CustomPlacementConfig: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -5634,7 +5662,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             HierarchicalNamespace.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -5721,6 +5749,8 @@
                             HierarchicalNamespace.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.control.v2.StorageLayout.HierarchicalNamespace)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.StorageLayout.HierarchicalNamespace: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -5884,7 +5914,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetStorageLayoutRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -5985,6 +6015,8 @@
                         GetStorageLayoutRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.GetStorageLayoutRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.GetStorageLayoutRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -6167,7 +6199,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ManagedFolder.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -6279,6 +6311,8 @@
                         ManagedFolder.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ManagedFolder)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ManagedFolder: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -6296,12 +6330,12 @@
                                 else if (typeof object.metageneration === "object")
                                     message.metageneration = new $util.LongBits(object.metageneration.low >>> 0, object.metageneration.high >>> 0).toNumber();
                             if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
+                                if (!$util.isObject(object.createTime))
                                     throw TypeError(".google.storage.control.v2.ManagedFolder.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                             }
                             if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
+                                if (!$util.isObject(object.updateTime))
                                     throw TypeError(".google.storage.control.v2.ManagedFolder.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
@@ -6503,7 +6537,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetManagedFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -6616,6 +6650,8 @@
                         GetManagedFolderRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.GetManagedFolderRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.GetManagedFolderRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -6831,7 +6867,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CreateManagedFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -6941,6 +6977,8 @@
                         CreateManagedFolderRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.CreateManagedFolderRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.CreateManagedFolderRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -6949,7 +6987,7 @@
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             if (object.managedFolder != null) {
-                                if (typeof object.managedFolder !== "object")
+                                if (!$util.isObject(object.managedFolder))
                                     throw TypeError(".google.storage.control.v2.CreateManagedFolderRequest.managedFolder: object expected");
                                 message.managedFolder = $root.google.storage.control.v2.ManagedFolder.fromObject(object.managedFolder, long + 1);
                             }
@@ -7157,7 +7195,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         DeleteManagedFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -7277,6 +7315,8 @@
                         DeleteManagedFolderRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.DeleteManagedFolderRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.DeleteManagedFolderRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -7508,7 +7548,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListManagedFoldersRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -7623,6 +7663,8 @@
                         ListManagedFoldersRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ListManagedFoldersRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListManagedFoldersRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -7795,7 +7837,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListManagedFoldersResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -7897,6 +7939,8 @@
                         ListManagedFoldersResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ListManagedFoldersResponse)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListManagedFoldersResponse: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -7907,7 +7951,7 @@
                                     throw TypeError(".google.storage.control.v2.ListManagedFoldersResponse.managedFolders: array expected");
                                 message.managedFolders = [];
                                 for (var i = 0; i < object.managedFolders.length; ++i) {
-                                    if (typeof object.managedFolders[i] !== "object")
+                                    if (!$util.isObject(object.managedFolders[i]))
                                         throw TypeError(".google.storage.control.v2.ListManagedFoldersResponse.managedFolders: object expected");
                                     message.managedFolders[i] = $root.google.storage.control.v2.ManagedFolder.fromObject(object.managedFolders[i], long + 1);
                                 }
@@ -8123,7 +8167,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CreateAnywhereCacheMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -8252,13 +8296,15 @@
                         CreateAnywhereCacheMetadata.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.CreateAnywhereCacheMetadata)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.CreateAnywhereCacheMetadata: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.control.v2.CreateAnywhereCacheMetadata();
                             if (object.commonMetadata != null) {
-                                if (typeof object.commonMetadata !== "object")
+                                if (!$util.isObject(object.commonMetadata))
                                     throw TypeError(".google.storage.control.v2.CreateAnywhereCacheMetadata.commonMetadata: object expected");
                                 message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.fromObject(object.commonMetadata, long + 1);
                             }
@@ -8267,7 +8313,7 @@
                             if (object.zone != null)
                                 message.zone = String(object.zone);
                             if (object.ttl != null) {
-                                if (typeof object.ttl !== "object")
+                                if (!$util.isObject(object.ttl))
                                     throw TypeError(".google.storage.control.v2.CreateAnywhereCacheMetadata.ttl: object expected");
                                 message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl, long + 1);
                             }
@@ -8495,7 +8541,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         UpdateAnywhereCacheMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -8624,13 +8670,15 @@
                         UpdateAnywhereCacheMetadata.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.UpdateAnywhereCacheMetadata)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.UpdateAnywhereCacheMetadata: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.control.v2.UpdateAnywhereCacheMetadata();
                             if (object.commonMetadata != null) {
-                                if (typeof object.commonMetadata !== "object")
+                                if (!$util.isObject(object.commonMetadata))
                                     throw TypeError(".google.storage.control.v2.UpdateAnywhereCacheMetadata.commonMetadata: object expected");
                                 message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.fromObject(object.commonMetadata, long + 1);
                             }
@@ -8639,7 +8687,7 @@
                             if (object.zone != null)
                                 message.zone = String(object.zone);
                             if (object.ttl != null) {
-                                if (typeof object.ttl !== "object")
+                                if (!$util.isObject(object.ttl))
                                     throw TypeError(".google.storage.control.v2.UpdateAnywhereCacheMetadata.ttl: object expected");
                                 message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl, long + 1);
                             }
@@ -8873,7 +8921,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         AnywhereCache.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -9015,6 +9063,8 @@
                         AnywhereCache.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.AnywhereCache)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.AnywhereCache: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -9025,7 +9075,7 @@
                             if (object.zone != null)
                                 message.zone = String(object.zone);
                             if (object.ttl != null) {
-                                if (typeof object.ttl !== "object")
+                                if (!$util.isObject(object.ttl))
                                     throw TypeError(".google.storage.control.v2.AnywhereCache.ttl: object expected");
                                 message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl, long + 1);
                             }
@@ -9034,12 +9084,12 @@
                             if (object.state != null)
                                 message.state = String(object.state);
                             if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
+                                if (!$util.isObject(object.createTime))
                                     throw TypeError(".google.storage.control.v2.AnywhereCache.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                             }
                             if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
+                                if (!$util.isObject(object.updateTime))
                                     throw TypeError(".google.storage.control.v2.AnywhereCache.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
@@ -9220,7 +9270,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CreateAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -9323,6 +9373,8 @@
                         CreateAnywhereCacheRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.CreateAnywhereCacheRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.CreateAnywhereCacheRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -9331,7 +9383,7 @@
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             if (object.anywhereCache != null) {
-                                if (typeof object.anywhereCache !== "object")
+                                if (!$util.isObject(object.anywhereCache))
                                     throw TypeError(".google.storage.control.v2.CreateAnywhereCacheRequest.anywhereCache: object expected");
                                 message.anywhereCache = $root.google.storage.control.v2.AnywhereCache.fromObject(object.anywhereCache, long + 1);
                             }
@@ -9497,7 +9549,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         UpdateAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -9602,18 +9654,20 @@
                         UpdateAnywhereCacheRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.UpdateAnywhereCacheRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.UpdateAnywhereCacheRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.control.v2.UpdateAnywhereCacheRequest();
                             if (object.anywhereCache != null) {
-                                if (typeof object.anywhereCache !== "object")
+                                if (!$util.isObject(object.anywhereCache))
                                     throw TypeError(".google.storage.control.v2.UpdateAnywhereCacheRequest.anywhereCache: object expected");
                                 message.anywhereCache = $root.google.storage.control.v2.AnywhereCache.fromObject(object.anywhereCache, long + 1);
                             }
                             if (object.updateMask != null) {
-                                if (typeof object.updateMask !== "object")
+                                if (!$util.isObject(object.updateMask))
                                     throw TypeError(".google.storage.control.v2.UpdateAnywhereCacheRequest.updateMask: object expected");
                                 message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                             }
@@ -9768,7 +9822,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         DisableAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -9862,6 +9916,8 @@
                         DisableAnywhereCacheRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.DisableAnywhereCacheRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.DisableAnywhereCacheRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -10017,7 +10073,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         PauseAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -10111,6 +10167,8 @@
                         PauseAnywhereCacheRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.PauseAnywhereCacheRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.PauseAnywhereCacheRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -10266,7 +10324,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ResumeAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -10360,6 +10418,8 @@
                         ResumeAnywhereCacheRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ResumeAnywhereCacheRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ResumeAnywhereCacheRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -10515,7 +10575,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -10609,6 +10669,8 @@
                         GetAnywhereCacheRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.GetAnywhereCacheRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.GetAnywhereCacheRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -10786,7 +10848,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListAnywhereCachesRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -10894,6 +10956,8 @@
                         ListAnywhereCachesRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ListAnywhereCachesRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListAnywhereCachesRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -11061,7 +11125,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListAnywhereCachesResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -11163,6 +11227,8 @@
                         ListAnywhereCachesResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ListAnywhereCachesResponse)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListAnywhereCachesResponse: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -11173,7 +11239,7 @@
                                     throw TypeError(".google.storage.control.v2.ListAnywhereCachesResponse.anywhereCaches: array expected");
                                 message.anywhereCaches = [];
                                 for (var i = 0; i < object.anywhereCaches.length; ++i) {
-                                    if (typeof object.anywhereCaches[i] !== "object")
+                                    if (!$util.isObject(object.anywhereCaches[i]))
                                         throw TypeError(".google.storage.control.v2.ListAnywhereCachesResponse.anywhereCaches: object expected");
                                     message.anywhereCaches[i] = $root.google.storage.control.v2.AnywhereCache.fromObject(object.anywhereCaches[i], long + 1);
                                 }
@@ -11373,7 +11439,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         IntelligenceConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -11511,6 +11577,8 @@
                         IntelligenceConfig.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.IntelligenceConfig)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.IntelligenceConfig: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -11547,22 +11615,22 @@
                                 break;
                             }
                             if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
+                                if (!$util.isObject(object.updateTime))
                                     throw TypeError(".google.storage.control.v2.IntelligenceConfig.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
                             if (object.filter != null) {
-                                if (typeof object.filter !== "object")
+                                if (!$util.isObject(object.filter))
                                     throw TypeError(".google.storage.control.v2.IntelligenceConfig.filter: object expected");
                                 message.filter = $root.google.storage.control.v2.IntelligenceConfig.Filter.fromObject(object.filter, long + 1);
                             }
                             if (object.effectiveIntelligenceConfig != null) {
-                                if (typeof object.effectiveIntelligenceConfig !== "object")
+                                if (!$util.isObject(object.effectiveIntelligenceConfig))
                                     throw TypeError(".google.storage.control.v2.IntelligenceConfig.effectiveIntelligenceConfig: object expected");
                                 message.effectiveIntelligenceConfig = $root.google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.fromObject(object.effectiveIntelligenceConfig, long + 1);
                             }
                             if (object.trialConfig != null) {
-                                if (typeof object.trialConfig !== "object")
+                                if (!$util.isObject(object.trialConfig))
                                     throw TypeError(".google.storage.control.v2.IntelligenceConfig.trialConfig: object expected");
                                 message.trialConfig = $root.google.storage.control.v2.IntelligenceConfig.TrialConfig.fromObject(object.trialConfig, long + 1);
                             }
@@ -11788,7 +11856,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             Filter.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -11921,28 +11989,30 @@
                             Filter.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.control.v2.IntelligenceConfig.Filter)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.IntelligenceConfig.Filter: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.storage.control.v2.IntelligenceConfig.Filter();
                                 if (object.includedCloudStorageLocations != null) {
-                                    if (typeof object.includedCloudStorageLocations !== "object")
+                                    if (!$util.isObject(object.includedCloudStorageLocations))
                                         throw TypeError(".google.storage.control.v2.IntelligenceConfig.Filter.includedCloudStorageLocations: object expected");
                                     message.includedCloudStorageLocations = $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations.fromObject(object.includedCloudStorageLocations, long + 1);
                                 }
                                 if (object.excludedCloudStorageLocations != null) {
-                                    if (typeof object.excludedCloudStorageLocations !== "object")
+                                    if (!$util.isObject(object.excludedCloudStorageLocations))
                                         throw TypeError(".google.storage.control.v2.IntelligenceConfig.Filter.excludedCloudStorageLocations: object expected");
                                     message.excludedCloudStorageLocations = $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations.fromObject(object.excludedCloudStorageLocations, long + 1);
                                 }
                                 if (object.includedCloudStorageBuckets != null) {
-                                    if (typeof object.includedCloudStorageBuckets !== "object")
+                                    if (!$util.isObject(object.includedCloudStorageBuckets))
                                         throw TypeError(".google.storage.control.v2.IntelligenceConfig.Filter.includedCloudStorageBuckets: object expected");
                                     message.includedCloudStorageBuckets = $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets.fromObject(object.includedCloudStorageBuckets, long + 1);
                                 }
                                 if (object.excludedCloudStorageBuckets != null) {
-                                    if (typeof object.excludedCloudStorageBuckets !== "object")
+                                    if (!$util.isObject(object.excludedCloudStorageBuckets))
                                         throw TypeError(".google.storage.control.v2.IntelligenceConfig.Filter.excludedCloudStorageBuckets: object expected");
                                     message.excludedCloudStorageBuckets = $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets.fromObject(object.excludedCloudStorageBuckets, long + 1);
                                 }
@@ -12092,7 +12162,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 CloudStorageLocations.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -12185,6 +12255,8 @@
                                 CloudStorageLocations.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -12333,7 +12405,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 CloudStorageBuckets.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -12426,6 +12498,8 @@
                                 CloudStorageBuckets.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -12586,7 +12660,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             EffectiveIntelligenceConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -12686,6 +12760,8 @@
                             EffectiveIntelligenceConfig.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -12864,7 +12940,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             TrialConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -12953,13 +13029,15 @@
                             TrialConfig.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.control.v2.IntelligenceConfig.TrialConfig)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.IntelligenceConfig.TrialConfig: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.storage.control.v2.IntelligenceConfig.TrialConfig();
                                 if (object.expireTime != null) {
-                                    if (typeof object.expireTime !== "object")
+                                    if (!$util.isObject(object.expireTime))
                                         throw TypeError(".google.storage.control.v2.IntelligenceConfig.TrialConfig.expireTime: object expected");
                                     message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime, long + 1);
                                 }
@@ -13119,7 +13197,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         UpdateOrganizationIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -13224,18 +13302,20 @@
                         UpdateOrganizationIntelligenceConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest();
                             if (object.intelligenceConfig != null) {
-                                if (typeof object.intelligenceConfig !== "object")
+                                if (!$util.isObject(object.intelligenceConfig))
                                     throw TypeError(".google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest.intelligenceConfig: object expected");
                                 message.intelligenceConfig = $root.google.storage.control.v2.IntelligenceConfig.fromObject(object.intelligenceConfig, long + 1);
                             }
                             if (object.updateMask != null) {
-                                if (typeof object.updateMask !== "object")
+                                if (!$util.isObject(object.updateMask))
                                     throw TypeError(".google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest.updateMask: object expected");
                                 message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                             }
@@ -13401,7 +13481,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         UpdateFolderIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -13506,18 +13586,20 @@
                         UpdateFolderIntelligenceConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.UpdateFolderIntelligenceConfigRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest();
                             if (object.intelligenceConfig != null) {
-                                if (typeof object.intelligenceConfig !== "object")
+                                if (!$util.isObject(object.intelligenceConfig))
                                     throw TypeError(".google.storage.control.v2.UpdateFolderIntelligenceConfigRequest.intelligenceConfig: object expected");
                                 message.intelligenceConfig = $root.google.storage.control.v2.IntelligenceConfig.fromObject(object.intelligenceConfig, long + 1);
                             }
                             if (object.updateMask != null) {
-                                if (typeof object.updateMask !== "object")
+                                if (!$util.isObject(object.updateMask))
                                     throw TypeError(".google.storage.control.v2.UpdateFolderIntelligenceConfigRequest.updateMask: object expected");
                                 message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                             }
@@ -13683,7 +13765,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         UpdateProjectIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -13788,18 +13870,20 @@
                         UpdateProjectIntelligenceConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.UpdateProjectIntelligenceConfigRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest();
                             if (object.intelligenceConfig != null) {
-                                if (typeof object.intelligenceConfig !== "object")
+                                if (!$util.isObject(object.intelligenceConfig))
                                     throw TypeError(".google.storage.control.v2.UpdateProjectIntelligenceConfigRequest.intelligenceConfig: object expected");
                                 message.intelligenceConfig = $root.google.storage.control.v2.IntelligenceConfig.fromObject(object.intelligenceConfig, long + 1);
                             }
                             if (object.updateMask != null) {
-                                if (typeof object.updateMask !== "object")
+                                if (!$util.isObject(object.updateMask))
                                     throw TypeError(".google.storage.control.v2.UpdateProjectIntelligenceConfigRequest.updateMask: object expected");
                                 message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                             }
@@ -13943,7 +14027,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetOrganizationIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -14030,6 +14114,8 @@
                         GetOrganizationIntelligenceConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.GetOrganizationIntelligenceConfigRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -14168,7 +14254,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetFolderIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -14255,6 +14341,8 @@
                         GetFolderIntelligenceConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.GetFolderIntelligenceConfigRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.GetFolderIntelligenceConfigRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -14393,7 +14481,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetProjectIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -14480,6 +14568,8 @@
                         GetProjectIntelligenceConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.GetProjectIntelligenceConfigRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.GetProjectIntelligenceConfigRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -14777,7 +14867,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         IntelligenceFinding.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -15013,6 +15103,8 @@
                         IntelligenceFinding.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.IntelligenceFinding)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.IntelligenceFinding: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -15087,12 +15179,12 @@
                                 break;
                             }
                             if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
+                                if (!$util.isObject(object.createTime))
                                     throw TypeError(".google.storage.control.v2.IntelligenceFinding.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                             }
                             if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
+                                if (!$util.isObject(object.updateTime))
                                     throw TypeError(".google.storage.control.v2.IntelligenceFinding.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
@@ -15106,27 +15198,27 @@
                                     message.associatedResources[i] = String(object.associatedResources[i]);
                             }
                             if (object.observationPeriod != null) {
-                                if (typeof object.observationPeriod !== "object")
+                                if (!$util.isObject(object.observationPeriod))
                                     throw TypeError(".google.storage.control.v2.IntelligenceFinding.observationPeriod: object expected");
                                 message.observationPeriod = $root.google.type.Interval.fromObject(object.observationPeriod, long + 1);
                             }
                             if (object.coldlineAndArchivalStorageOperationsSpike != null) {
-                                if (typeof object.coldlineAndArchivalStorageOperationsSpike !== "object")
+                                if (!$util.isObject(object.coldlineAndArchivalStorageOperationsSpike))
                                     throw TypeError(".google.storage.control.v2.IntelligenceFinding.coldlineAndArchivalStorageOperationsSpike: object expected");
                                 message.coldlineAndArchivalStorageOperationsSpike = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.fromObject(object.coldlineAndArchivalStorageOperationsSpike, long + 1);
                             }
                             if (object.throttledRequestsSpike != null) {
-                                if (typeof object.throttledRequestsSpike !== "object")
+                                if (!$util.isObject(object.throttledRequestsSpike))
                                     throw TypeError(".google.storage.control.v2.IntelligenceFinding.throttledRequestsSpike: object expected");
                                 message.throttledRequestsSpike = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.fromObject(object.throttledRequestsSpike, long + 1);
                             }
                             if (object.crossRegionEgressSpike != null) {
-                                if (typeof object.crossRegionEgressSpike !== "object")
+                                if (!$util.isObject(object.crossRegionEgressSpike))
                                     throw TypeError(".google.storage.control.v2.IntelligenceFinding.crossRegionEgressSpike: object expected");
                                 message.crossRegionEgressSpike = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.fromObject(object.crossRegionEgressSpike, long + 1);
                             }
                             if (object.storageGrowthAboveTrend != null) {
-                                if (typeof object.storageGrowthAboveTrend !== "object")
+                                if (!$util.isObject(object.storageGrowthAboveTrend))
                                     throw TypeError(".google.storage.control.v2.IntelligenceFinding.storageGrowthAboveTrend: object expected");
                                 message.storageGrowthAboveTrend = $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.fromObject(object.storageGrowthAboveTrend, long + 1);
                             }
@@ -15334,7 +15426,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ColdlineAndArchivalStorageOperationsSpike.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -15443,6 +15535,8 @@
                             ColdlineAndArchivalStorageOperationsSpike.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -15464,7 +15558,7 @@
                                         throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.topBuckets: array expected");
                                     message.topBuckets = [];
                                     for (var i = 0; i < object.topBuckets.length; ++i) {
-                                        if (typeof object.topBuckets[i] !== "object")
+                                        if (!$util.isObject(object.topBuckets[i]))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.topBuckets: object expected");
                                         message.topBuckets[i] = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.fromObject(object.topBuckets[i], long + 1);
                                     }
@@ -15675,7 +15769,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -15803,6 +15897,8 @@
                                 BucketContribution.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -15822,12 +15918,12 @@
                                         else if (typeof object.totalOperationsCount === "object")
                                             message.totalOperationsCount = new $util.LongBits(object.totalOperationsCount.low >>> 0, object.totalOperationsCount.high >>> 0).toNumber();
                                     if (object.contribution != null) {
-                                        if (typeof object.contribution !== "object")
+                                        if (!$util.isObject(object.contribution))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.contribution: object expected");
                                         message.contribution = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.fromObject(object.contribution, long + 1);
                                     }
                                     if (object.error != null) {
-                                        if (typeof object.error !== "object")
+                                        if (!$util.isObject(object.error))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.error: object expected");
                                         message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
                                     }
@@ -15987,7 +16083,7 @@
                                      * @returns {$protobuf.Writer} Writer
                                      */
                                     Contribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                        return this.encode(message, writer).ldelim();
+                                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                     };
     
                                     /**
@@ -16082,6 +16178,8 @@
                                     Contribution.fromObject = function fromObject(object, long) {
                                         if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution)
                                             return object;
+                                        if (!$util.isObject(object))
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution: object expected");
                                         if (long === undefined)
                                             long = 0;
                                         if (long > $util.recursionLimit)
@@ -16092,7 +16190,7 @@
                                                 throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.topPrefixes: array expected");
                                             message.topPrefixes = [];
                                             for (var i = 0; i < object.topPrefixes.length; ++i) {
-                                                if (typeof object.topPrefixes[i] !== "object")
+                                                if (!$util.isObject(object.topPrefixes[i]))
                                                     throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.topPrefixes: object expected");
                                                 message.topPrefixes[i] = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution.fromObject(object.topPrefixes[i], long + 1);
                                             }
@@ -16250,7 +16348,7 @@
                                          * @returns {$protobuf.Writer} Writer
                                          */
                                         PrefixContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                            return this.encode(message, writer).ldelim();
+                                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                         };
     
                                         /**
@@ -16351,6 +16449,8 @@
                                         PrefixContribution.fromObject = function fromObject(object, long) {
                                             if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution)
                                                 return object;
+                                            if (!$util.isObject(object))
+                                                throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution: object expected");
                                             if (long === undefined)
                                                 long = 0;
                                             if (long > $util.recursionLimit)
@@ -16549,7 +16649,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CrossRegionEgressSpike.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -16658,6 +16758,8 @@
                             CrossRegionEgressSpike.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -16679,7 +16781,7 @@
                                         throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.topBuckets: array expected");
                                     message.topBuckets = [];
                                     for (var i = 0; i < object.topBuckets.length; ++i) {
-                                        if (typeof object.topBuckets[i] !== "object")
+                                        if (!$util.isObject(object.topBuckets[i]))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.topBuckets: object expected");
                                         message.topBuckets[i] = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.fromObject(object.topBuckets[i], long + 1);
                                     }
@@ -16890,7 +16992,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -17018,6 +17120,8 @@
                                 BucketContribution.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -17037,12 +17141,12 @@
                                     if (object.percentageIncrease != null)
                                         message.percentageIncrease = Number(object.percentageIncrease);
                                     if (object.contribution != null) {
-                                        if (typeof object.contribution !== "object")
+                                        if (!$util.isObject(object.contribution))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.contribution: object expected");
                                         message.contribution = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.fromObject(object.contribution, long + 1);
                                     }
                                     if (object.error != null) {
-                                        if (typeof object.error !== "object")
+                                        if (!$util.isObject(object.error))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.error: object expected");
                                         message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
                                     }
@@ -17202,7 +17306,7 @@
                                      * @returns {$protobuf.Writer} Writer
                                      */
                                     Contribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                        return this.encode(message, writer).ldelim();
+                                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                     };
     
                                     /**
@@ -17297,6 +17401,8 @@
                                     Contribution.fromObject = function fromObject(object, long) {
                                         if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution)
                                             return object;
+                                        if (!$util.isObject(object))
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution: object expected");
                                         if (long === undefined)
                                             long = 0;
                                         if (long > $util.recursionLimit)
@@ -17307,7 +17413,7 @@
                                                 throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.topPrefixes: array expected");
                                             message.topPrefixes = [];
                                             for (var i = 0; i < object.topPrefixes.length; ++i) {
-                                                if (typeof object.topPrefixes[i] !== "object")
+                                                if (!$util.isObject(object.topPrefixes[i]))
                                                     throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.topPrefixes: object expected");
                                                 message.topPrefixes[i] = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution.fromObject(object.topPrefixes[i], long + 1);
                                             }
@@ -17465,7 +17571,7 @@
                                          * @returns {$protobuf.Writer} Writer
                                          */
                                         PrefixContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                            return this.encode(message, writer).ldelim();
+                                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                         };
     
                                         /**
@@ -17566,6 +17672,8 @@
                                         PrefixContribution.fromObject = function fromObject(object, long) {
                                             if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution)
                                                 return object;
+                                            if (!$util.isObject(object))
+                                                throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution: object expected");
                                             if (long === undefined)
                                                 long = 0;
                                             if (long > $util.recursionLimit)
@@ -17764,7 +17872,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ThrottledRequestSpike.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -17873,6 +17981,8 @@
                             ThrottledRequestSpike.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -17894,7 +18004,7 @@
                                         throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.topBuckets: array expected");
                                     message.topBuckets = [];
                                     for (var i = 0; i < object.topBuckets.length; ++i) {
-                                        if (typeof object.topBuckets[i] !== "object")
+                                        if (!$util.isObject(object.topBuckets[i]))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.topBuckets: object expected");
                                         message.topBuckets[i] = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.fromObject(object.topBuckets[i], long + 1);
                                     }
@@ -18105,7 +18215,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -18233,6 +18343,8 @@
                                 BucketContribution.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -18252,12 +18364,12 @@
                                     if (object.percentageIncrease != null)
                                         message.percentageIncrease = Number(object.percentageIncrease);
                                     if (object.contribution != null) {
-                                        if (typeof object.contribution !== "object")
+                                        if (!$util.isObject(object.contribution))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.contribution: object expected");
                                         message.contribution = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.fromObject(object.contribution, long + 1);
                                     }
                                     if (object.error != null) {
-                                        if (typeof object.error !== "object")
+                                        if (!$util.isObject(object.error))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.error: object expected");
                                         message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
                                     }
@@ -18417,7 +18529,7 @@
                                      * @returns {$protobuf.Writer} Writer
                                      */
                                     Contribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                        return this.encode(message, writer).ldelim();
+                                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                     };
     
                                     /**
@@ -18512,6 +18624,8 @@
                                     Contribution.fromObject = function fromObject(object, long) {
                                         if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution)
                                             return object;
+                                        if (!$util.isObject(object))
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution: object expected");
                                         if (long === undefined)
                                             long = 0;
                                         if (long > $util.recursionLimit)
@@ -18522,7 +18636,7 @@
                                                 throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.topPrefixes: array expected");
                                             message.topPrefixes = [];
                                             for (var i = 0; i < object.topPrefixes.length; ++i) {
-                                                if (typeof object.topPrefixes[i] !== "object")
+                                                if (!$util.isObject(object.topPrefixes[i]))
                                                     throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.topPrefixes: object expected");
                                                 message.topPrefixes[i] = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution.fromObject(object.topPrefixes[i], long + 1);
                                             }
@@ -18680,7 +18794,7 @@
                                          * @returns {$protobuf.Writer} Writer
                                          */
                                         PrefixContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                            return this.encode(message, writer).ldelim();
+                                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                         };
     
                                         /**
@@ -18781,6 +18895,8 @@
                                         PrefixContribution.fromObject = function fromObject(object, long) {
                                             if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution)
                                                 return object;
+                                            if (!$util.isObject(object))
+                                                throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution: object expected");
                                             if (long === undefined)
                                                 long = 0;
                                             if (long > $util.recursionLimit)
@@ -18979,7 +19095,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StorageGrowthAboveTrend.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -19088,6 +19204,8 @@
                             StorageGrowthAboveTrend.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -19109,7 +19227,7 @@
                                         throw TypeError(".google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.topBuckets: array expected");
                                     message.topBuckets = [];
                                     for (var i = 0; i < object.topBuckets.length; ++i) {
-                                        if (typeof object.topBuckets[i] !== "object")
+                                        if (!$util.isObject(object.topBuckets[i]))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.topBuckets: object expected");
                                         message.topBuckets[i] = $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.fromObject(object.topBuckets[i], long + 1);
                                     }
@@ -19309,7 +19427,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -19423,6 +19541,8 @@
                                 BucketContribution.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -19442,7 +19562,7 @@
                                     if (object.percentageIncrease != null)
                                         message.percentageIncrease = Number(object.percentageIncrease);
                                     if (object.error != null) {
-                                        if (typeof object.error !== "object")
+                                        if (!$util.isObject(object.error))
                                             throw TypeError(".google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.error: object expected");
                                         message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
                                     }
@@ -19626,7 +19746,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         IntelligenceFindingRevision.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -19731,6 +19851,8 @@
                         IntelligenceFindingRevision.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.IntelligenceFindingRevision)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.IntelligenceFindingRevision: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -19739,12 +19861,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.snapshot != null) {
-                                if (typeof object.snapshot !== "object")
+                                if (!$util.isObject(object.snapshot))
                                     throw TypeError(".google.storage.control.v2.IntelligenceFindingRevision.snapshot: object expected");
                                 message.snapshot = $root.google.storage.control.v2.IntelligenceFinding.fromObject(object.snapshot, long + 1);
                             }
                             if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
+                                if (!$util.isObject(object.createTime))
                                     throw TypeError(".google.storage.control.v2.IntelligenceFindingRevision.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                             }
@@ -19886,7 +20008,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetIntelligenceFindingRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -19973,6 +20095,8 @@
                         GetIntelligenceFindingRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.GetIntelligenceFindingRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.GetIntelligenceFindingRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -20144,7 +20268,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListIntelligenceFindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -20252,6 +20376,8 @@
                         ListIntelligenceFindingsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ListIntelligenceFindingsRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListIntelligenceFindingsRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -20419,7 +20545,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListIntelligenceFindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -20521,6 +20647,8 @@
                         ListIntelligenceFindingsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ListIntelligenceFindingsResponse)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListIntelligenceFindingsResponse: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -20531,7 +20659,7 @@
                                     throw TypeError(".google.storage.control.v2.ListIntelligenceFindingsResponse.intelligenceFindings: array expected");
                                 message.intelligenceFindings = [];
                                 for (var i = 0; i < object.intelligenceFindings.length; ++i) {
-                                    if (typeof object.intelligenceFindings[i] !== "object")
+                                    if (!$util.isObject(object.intelligenceFindings[i]))
                                         throw TypeError(".google.storage.control.v2.ListIntelligenceFindingsResponse.intelligenceFindings: object expected");
                                     message.intelligenceFindings[i] = $root.google.storage.control.v2.IntelligenceFinding.fromObject(object.intelligenceFindings[i], long + 1);
                                 }
@@ -20720,7 +20848,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         SummarizeIntelligenceFindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -20841,6 +20969,8 @@
                         SummarizeIntelligenceFindingsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.SummarizeIntelligenceFindingsRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -21047,7 +21177,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         SummarizeIntelligenceFindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -21149,6 +21279,8 @@
                         SummarizeIntelligenceFindingsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.SummarizeIntelligenceFindingsResponse: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -21159,7 +21291,7 @@
                                     throw TypeError(".google.storage.control.v2.SummarizeIntelligenceFindingsResponse.findingSummaries: array expected");
                                 message.findingSummaries = [];
                                 for (var i = 0; i < object.findingSummaries.length; ++i) {
-                                    if (typeof object.findingSummaries[i] !== "object")
+                                    if (!$util.isObject(object.findingSummaries[i]))
                                         throw TypeError(".google.storage.control.v2.SummarizeIntelligenceFindingsResponse.findingSummaries: object expected");
                                     message.findingSummaries[i] = $root.google.storage.control.v2.FindingSummary.fromObject(object.findingSummaries[i], long + 1);
                                 }
@@ -21304,7 +21436,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetIntelligenceFindingRevisionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -21391,6 +21523,8 @@
                         GetIntelligenceFindingRevisionRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.GetIntelligenceFindingRevisionRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -21551,7 +21685,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListIntelligenceFindingRevisionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -21652,6 +21786,8 @@
                         ListIntelligenceFindingRevisionsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListIntelligenceFindingRevisionsRequest: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -21814,7 +21950,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListIntelligenceFindingRevisionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -21916,6 +22052,8 @@
                         ListIntelligenceFindingRevisionsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListIntelligenceFindingRevisionsResponse: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -21926,7 +22064,7 @@
                                     throw TypeError(".google.storage.control.v2.ListIntelligenceFindingRevisionsResponse.intelligenceFindingRevisions: array expected");
                                 message.intelligenceFindingRevisions = [];
                                 for (var i = 0; i < object.intelligenceFindingRevisions.length; ++i) {
-                                    if (typeof object.intelligenceFindingRevisions[i] !== "object")
+                                    if (!$util.isObject(object.intelligenceFindingRevisions[i]))
                                         throw TypeError(".google.storage.control.v2.ListIntelligenceFindingRevisionsResponse.intelligenceFindingRevisions: object expected");
                                     message.intelligenceFindingRevisions[i] = $root.google.storage.control.v2.IntelligenceFindingRevision.fromObject(object.intelligenceFindingRevisions[i], long + 1);
                                 }
@@ -22139,7 +22277,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         FindingSummary.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -22299,6 +22437,8 @@
                         FindingSummary.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.control.v2.FindingSummary)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.FindingSummary: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -22355,12 +22495,12 @@
                             if (object.targetResource != null)
                                 message.targetResource = String(object.targetResource);
                             if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
+                                if (!$util.isObject(object.createTime))
                                     throw TypeError(".google.storage.control.v2.FindingSummary.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                             }
                             if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
+                                if (!$util.isObject(object.updateTime))
                                     throw TypeError(".google.storage.control.v2.FindingSummary.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
@@ -22385,7 +22525,7 @@
                                     throw TypeError(".google.storage.control.v2.FindingSummary.summaryDetails: array expected");
                                 message.summaryDetails = [];
                                 for (var i = 0; i < object.summaryDetails.length; ++i) {
-                                    if (typeof object.summaryDetails[i] !== "object")
+                                    if (!$util.isObject(object.summaryDetails[i]))
                                         throw TypeError(".google.storage.control.v2.FindingSummary.summaryDetails: object expected");
                                     message.summaryDetails[i] = $root.google.storage.control.v2.FindingSummary.SummaryDetails.fromObject(object.summaryDetails[i], long + 1);
                                 }
@@ -22588,7 +22728,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SummaryDetails.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -22709,6 +22849,8 @@
                             SummaryDetails.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.control.v2.FindingSummary.SummaryDetails)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.FindingSummary.SummaryDetails: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -23845,7 +23987,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     DeleteBucketRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -23951,6 +24093,8 @@
                     DeleteBucketRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.DeleteBucketRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.DeleteBucketRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -24181,7 +24325,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     GetBucketRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -24299,6 +24443,8 @@
                     GetBucketRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.GetBucketRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.GetBucketRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -24325,7 +24471,7 @@
                             else if (typeof object.ifMetagenerationNotMatch === "object")
                                 message.ifMetagenerationNotMatch = new $util.LongBits(object.ifMetagenerationNotMatch.low >>> 0, object.ifMetagenerationNotMatch.high >>> 0).toNumber();
                         if (object.readMask != null) {
-                            if (typeof object.readMask !== "object")
+                            if (!$util.isObject(object.readMask))
                                 throw TypeError(".google.storage.v2.GetBucketRequest.readMask: object expected");
                             message.readMask = $root.google.protobuf.FieldMask.fromObject(object.readMask, long + 1);
                         }
@@ -24540,7 +24686,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CreateBucketRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -24664,6 +24810,8 @@
                     CreateBucketRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.CreateBucketRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.CreateBucketRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -24672,7 +24820,7 @@
                         if (object.parent != null)
                             message.parent = String(object.parent);
                         if (object.bucket != null) {
-                            if (typeof object.bucket !== "object")
+                            if (!$util.isObject(object.bucket))
                                 throw TypeError(".google.storage.v2.CreateBucketRequest.bucket: object expected");
                             message.bucket = $root.google.storage.v2.Bucket.fromObject(object.bucket, long + 1);
                         }
@@ -24895,7 +25043,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ListBucketsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -25023,6 +25171,8 @@
                     ListBucketsRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ListBucketsRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ListBucketsRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -25037,7 +25187,7 @@
                         if (object.prefix != null)
                             message.prefix = String(object.prefix);
                         if (object.readMask != null) {
-                            if (typeof object.readMask !== "object")
+                            if (!$util.isObject(object.readMask))
                                 throw TypeError(".google.storage.v2.ListBucketsRequest.readMask: object expected");
                             message.readMask = $root.google.protobuf.FieldMask.fromObject(object.readMask, long + 1);
                         }
@@ -25218,7 +25368,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ListBucketsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -25333,6 +25483,8 @@
                     ListBucketsResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ListBucketsResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ListBucketsResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -25343,7 +25495,7 @@
                                 throw TypeError(".google.storage.v2.ListBucketsResponse.buckets: array expected");
                             message.buckets = [];
                             for (var i = 0; i < object.buckets.length; ++i) {
-                                if (typeof object.buckets[i] !== "object")
+                                if (!$util.isObject(object.buckets[i]))
                                     throw TypeError(".google.storage.v2.ListBucketsResponse.buckets: object expected");
                                 message.buckets[i] = $root.google.storage.v2.Bucket.fromObject(object.buckets[i], long + 1);
                             }
@@ -25513,7 +25665,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     LockBucketRetentionPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -25607,6 +25759,8 @@
                     LockBucketRetentionPolicyRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.LockBucketRetentionPolicyRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.LockBucketRetentionPolicyRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -25837,7 +25991,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     UpdateBucketRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -25968,13 +26122,15 @@
                     UpdateBucketRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.UpdateBucketRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.UpdateBucketRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.storage.v2.UpdateBucketRequest();
                         if (object.bucket != null) {
-                            if (typeof object.bucket !== "object")
+                            if (!$util.isObject(object.bucket))
                                 throw TypeError(".google.storage.v2.UpdateBucketRequest.bucket: object expected");
                             message.bucket = $root.google.storage.v2.Bucket.fromObject(object.bucket, long + 1);
                         }
@@ -26001,7 +26157,7 @@
                         if (object.predefinedDefaultObjectAcl != null)
                             message.predefinedDefaultObjectAcl = String(object.predefinedDefaultObjectAcl);
                         if (object.updateMask != null) {
-                            if (typeof object.updateMask !== "object")
+                            if (!$util.isObject(object.updateMask))
                                 throw TypeError(".google.storage.v2.UpdateBucketRequest.updateMask: object expected");
                             message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
@@ -26277,7 +26433,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ComposeObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -26441,13 +26597,15 @@
                     ComposeObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ComposeObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ComposeObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.storage.v2.ComposeObjectRequest();
                         if (object.destination != null) {
-                            if (typeof object.destination !== "object")
+                            if (!$util.isObject(object.destination))
                                 throw TypeError(".google.storage.v2.ComposeObjectRequest.destination: object expected");
                             message.destination = $root.google.storage.v2.StorageObject.fromObject(object.destination, long + 1);
                         }
@@ -26456,7 +26614,7 @@
                                 throw TypeError(".google.storage.v2.ComposeObjectRequest.sourceObjects: array expected");
                             message.sourceObjects = [];
                             for (var i = 0; i < object.sourceObjects.length; ++i) {
-                                if (typeof object.sourceObjects[i] !== "object")
+                                if (!$util.isObject(object.sourceObjects[i]))
                                     throw TypeError(".google.storage.v2.ComposeObjectRequest.sourceObjects: object expected");
                                 message.sourceObjects[i] = $root.google.storage.v2.ComposeObjectRequest.SourceObject.fromObject(object.sourceObjects[i], long + 1);
                             }
@@ -26484,12 +26642,12 @@
                         if (object.kmsKey != null)
                             message.kmsKey = String(object.kmsKey);
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.ComposeObjectRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
                         if (object.objectChecksums != null) {
-                            if (typeof object.objectChecksums !== "object")
+                            if (!$util.isObject(object.objectChecksums))
                                 throw TypeError(".google.storage.v2.ComposeObjectRequest.objectChecksums: object expected");
                             message.objectChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.objectChecksums, long + 1);
                         }
@@ -26690,7 +26848,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         SourceObject.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -26793,6 +26951,8 @@
                         SourceObject.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.ComposeObjectRequest.SourceObject)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.ComposeObjectRequest.SourceObject: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -26810,7 +26970,7 @@
                                 else if (typeof object.generation === "object")
                                     message.generation = new $util.LongBits(object.generation.low >>> 0, object.generation.high >>> 0).toNumber();
                             if (object.objectPreconditions != null) {
-                                if (typeof object.objectPreconditions !== "object")
+                                if (!$util.isObject(object.objectPreconditions))
                                     throw TypeError(".google.storage.v2.ComposeObjectRequest.SourceObject.objectPreconditions: object expected");
                                 message.objectPreconditions = $root.google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions.fromObject(object.objectPreconditions, long + 1);
                             }
@@ -26967,7 +27127,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ObjectPreconditions.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -27057,6 +27217,8 @@
                             ObjectPreconditions.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -27318,7 +27480,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     DeleteObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -27465,6 +27627,8 @@
                     DeleteObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.DeleteObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.DeleteObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -27520,7 +27684,7 @@
                             else if (typeof object.ifMetagenerationNotMatch === "object")
                                 message.ifMetagenerationNotMatch = new $util.LongBits(object.ifMetagenerationNotMatch.low >>> 0, object.ifMetagenerationNotMatch.high >>> 0).toNumber();
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.DeleteObjectRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
@@ -27846,7 +28010,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     RestoreObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -28009,6 +28173,8 @@
                     RestoreObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.RestoreObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.RestoreObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -28068,7 +28234,7 @@
                         if (object.copySourceAcl != null)
                             message.copySourceAcl = Boolean(object.copySourceAcl);
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.RestoreObjectRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
@@ -28270,7 +28436,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CancelResumableWriteRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -28357,6 +28523,8 @@
                     CancelResumableWriteRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.CancelResumableWriteRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.CancelResumableWriteRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -28484,7 +28652,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CancelResumableWriteResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -28564,6 +28732,8 @@
                     CancelResumableWriteResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.CancelResumableWriteResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.CancelResumableWriteResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -28831,7 +29001,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReadObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -29004,6 +29174,8 @@
                     ReadObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ReadObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ReadObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -29077,12 +29249,12 @@
                             else if (typeof object.ifMetagenerationNotMatch === "object")
                                 message.ifMetagenerationNotMatch = new $util.LongBits(object.ifMetagenerationNotMatch.low >>> 0, object.ifMetagenerationNotMatch.high >>> 0).toNumber();
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.ReadObjectRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
                         if (object.readMask != null) {
-                            if (typeof object.readMask !== "object")
+                            if (!$util.isObject(object.readMask))
                                 throw TypeError(".google.storage.v2.ReadObjectRequest.readMask: object expected");
                             message.readMask = $root.google.protobuf.FieldMask.fromObject(object.readMask, long + 1);
                         }
@@ -29454,7 +29626,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     GetObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -29629,6 +29801,8 @@
                     GetObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.GetObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.GetObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -29686,12 +29860,12 @@
                             else if (typeof object.ifMetagenerationNotMatch === "object")
                                 message.ifMetagenerationNotMatch = new $util.LongBits(object.ifMetagenerationNotMatch.low >>> 0, object.ifMetagenerationNotMatch.high >>> 0).toNumber();
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.GetObjectRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
                         if (object.readMask != null) {
-                            if (typeof object.readMask !== "object")
+                            if (!$util.isObject(object.readMask))
                                 throw TypeError(".google.storage.v2.GetObjectRequest.readMask: object expected");
                             message.readMask = $root.google.protobuf.FieldMask.fromObject(object.readMask, long + 1);
                         }
@@ -29933,7 +30107,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReadObjectResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -30049,28 +30223,30 @@
                     ReadObjectResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ReadObjectResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ReadObjectResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.storage.v2.ReadObjectResponse();
                         if (object.checksummedData != null) {
-                            if (typeof object.checksummedData !== "object")
+                            if (!$util.isObject(object.checksummedData))
                                 throw TypeError(".google.storage.v2.ReadObjectResponse.checksummedData: object expected");
                             message.checksummedData = $root.google.storage.v2.ChecksummedData.fromObject(object.checksummedData, long + 1);
                         }
                         if (object.objectChecksums != null) {
-                            if (typeof object.objectChecksums !== "object")
+                            if (!$util.isObject(object.objectChecksums))
                                 throw TypeError(".google.storage.v2.ReadObjectResponse.objectChecksums: object expected");
                             message.objectChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.objectChecksums, long + 1);
                         }
                         if (object.contentRange != null) {
-                            if (typeof object.contentRange !== "object")
+                            if (!$util.isObject(object.contentRange))
                                 throw TypeError(".google.storage.v2.ReadObjectResponse.contentRange: object expected");
                             message.contentRange = $root.google.storage.v2.ContentRange.fromObject(object.contentRange, long + 1);
                         }
                         if (object.metadata != null) {
-                            if (typeof object.metadata !== "object")
+                            if (!$util.isObject(object.metadata))
                                 throw TypeError(".google.storage.v2.ReadObjectResponse.metadata: object expected");
                             message.metadata = $root.google.storage.v2.StorageObject.fromObject(object.metadata, long + 1);
                         }
@@ -30370,7 +30546,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadObjectSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -30550,6 +30726,8 @@
                     BidiReadObjectSpec.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BidiReadObjectSpec)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BidiReadObjectSpec: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -30605,17 +30783,17 @@
                             else if (typeof object.ifMetagenerationNotMatch === "object")
                                 message.ifMetagenerationNotMatch = new $util.LongBits(object.ifMetagenerationNotMatch.low >>> 0, object.ifMetagenerationNotMatch.high >>> 0).toNumber();
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.BidiReadObjectSpec.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
                         if (object.readMask != null) {
-                            if (typeof object.readMask !== "object")
+                            if (!$util.isObject(object.readMask))
                                 throw TypeError(".google.storage.v2.BidiReadObjectSpec.readMask: object expected");
                             message.readMask = $root.google.protobuf.FieldMask.fromObject(object.readMask, long + 1);
                         }
                         if (object.readHandle != null) {
-                            if (typeof object.readHandle !== "object")
+                            if (!$util.isObject(object.readHandle))
                                 throw TypeError(".google.storage.v2.BidiReadObjectSpec.readHandle: object expected");
                             message.readHandle = $root.google.storage.v2.BidiReadHandle.fromObject(object.readHandle, long + 1);
                         }
@@ -30839,7 +31017,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -30943,13 +31121,15 @@
                     BidiReadObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BidiReadObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BidiReadObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.storage.v2.BidiReadObjectRequest();
                         if (object.readObjectSpec != null) {
-                            if (typeof object.readObjectSpec !== "object")
+                            if (!$util.isObject(object.readObjectSpec))
                                 throw TypeError(".google.storage.v2.BidiReadObjectRequest.readObjectSpec: object expected");
                             message.readObjectSpec = $root.google.storage.v2.BidiReadObjectSpec.fromObject(object.readObjectSpec, long + 1);
                         }
@@ -30958,7 +31138,7 @@
                                 throw TypeError(".google.storage.v2.BidiReadObjectRequest.readRanges: array expected");
                             message.readRanges = [];
                             for (var i = 0; i < object.readRanges.length; ++i) {
-                                if (typeof object.readRanges[i] !== "object")
+                                if (!$util.isObject(object.readRanges[i]))
                                     throw TypeError(".google.storage.v2.BidiReadObjectRequest.readRanges: object expected");
                                 message.readRanges[i] = $root.google.storage.v2.ReadRange.fromObject(object.readRanges[i], long + 1);
                             }
@@ -31125,7 +31305,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadObjectResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -31238,6 +31418,8 @@
                     BidiReadObjectResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BidiReadObjectResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BidiReadObjectResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -31248,18 +31430,18 @@
                                 throw TypeError(".google.storage.v2.BidiReadObjectResponse.objectDataRanges: array expected");
                             message.objectDataRanges = [];
                             for (var i = 0; i < object.objectDataRanges.length; ++i) {
-                                if (typeof object.objectDataRanges[i] !== "object")
+                                if (!$util.isObject(object.objectDataRanges[i]))
                                     throw TypeError(".google.storage.v2.BidiReadObjectResponse.objectDataRanges: object expected");
                                 message.objectDataRanges[i] = $root.google.storage.v2.ObjectRangeData.fromObject(object.objectDataRanges[i], long + 1);
                             }
                         }
                         if (object.metadata != null) {
-                            if (typeof object.metadata !== "object")
+                            if (!$util.isObject(object.metadata))
                                 throw TypeError(".google.storage.v2.BidiReadObjectResponse.metadata: object expected");
                             message.metadata = $root.google.storage.v2.StorageObject.fromObject(object.metadata, long + 1);
                         }
                         if (object.readHandle != null) {
-                            if (typeof object.readHandle !== "object")
+                            if (!$util.isObject(object.readHandle))
                                 throw TypeError(".google.storage.v2.BidiReadObjectResponse.readHandle: object expected");
                             message.readHandle = $root.google.storage.v2.BidiReadHandle.fromObject(object.readHandle, long + 1);
                         }
@@ -31425,7 +31607,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadObjectRedirectedError.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -31524,13 +31706,15 @@
                     BidiReadObjectRedirectedError.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BidiReadObjectRedirectedError)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BidiReadObjectRedirectedError: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.storage.v2.BidiReadObjectRedirectedError();
                         if (object.readHandle != null) {
-                            if (typeof object.readHandle !== "object")
+                            if (!$util.isObject(object.readHandle))
                                 throw TypeError(".google.storage.v2.BidiReadObjectRedirectedError.readHandle: object expected");
                             message.readHandle = $root.google.storage.v2.BidiReadHandle.fromObject(object.readHandle, long + 1);
                         }
@@ -31715,7 +31899,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiWriteObjectRedirectedError.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -31826,6 +32010,8 @@
                     BidiWriteObjectRedirectedError.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BidiWriteObjectRedirectedError)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BidiWriteObjectRedirectedError: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -31834,7 +32020,7 @@
                         if (object.routingToken != null)
                             message.routingToken = String(object.routingToken);
                         if (object.writeHandle != null) {
-                            if (typeof object.writeHandle !== "object")
+                            if (!$util.isObject(object.writeHandle))
                                 throw TypeError(".google.storage.v2.BidiWriteObjectRedirectedError.writeHandle: object expected");
                             message.writeHandle = $root.google.storage.v2.BidiWriteHandle.fromObject(object.writeHandle, long + 1);
                         }
@@ -31996,7 +32182,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadObjectError.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -32091,6 +32277,8 @@
                     BidiReadObjectError.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BidiReadObjectError)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BidiReadObjectError: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -32101,7 +32289,7 @@
                                 throw TypeError(".google.storage.v2.BidiReadObjectError.readRangeErrors: array expected");
                             message.readRangeErrors = [];
                             for (var i = 0; i < object.readRangeErrors.length; ++i) {
-                                if (typeof object.readRangeErrors[i] !== "object")
+                                if (!$util.isObject(object.readRangeErrors[i]))
                                     throw TypeError(".google.storage.v2.BidiReadObjectError.readRangeErrors: object expected");
                                 message.readRangeErrors[i] = $root.google.storage.v2.ReadRangeError.fromObject(object.readRangeErrors[i], long + 1);
                             }
@@ -32251,7 +32439,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReadRangeError.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -32347,6 +32535,8 @@
                     ReadRangeError.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ReadRangeError)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ReadRangeError: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -32362,7 +32552,7 @@
                             else if (typeof object.readId === "object")
                                 message.readId = new $util.LongBits(object.readId.low >>> 0, object.readId.high >>> 0).toNumber();
                         if (object.status != null) {
-                            if (typeof object.status !== "object")
+                            if (!$util.isObject(object.status))
                                 throw TypeError(".google.storage.v2.ReadRangeError.status: object expected");
                             message.status = $root.google.rpc.Status.fromObject(object.status, long + 1);
                         }
@@ -32532,7 +32722,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReadRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -32633,6 +32823,8 @@
                     ReadRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ReadRange)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ReadRange: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -32852,7 +33044,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ObjectRangeData.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -32957,18 +33149,20 @@
                     ObjectRangeData.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ObjectRangeData)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ObjectRangeData: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.storage.v2.ObjectRangeData();
                         if (object.checksummedData != null) {
-                            if (typeof object.checksummedData !== "object")
+                            if (!$util.isObject(object.checksummedData))
                                 throw TypeError(".google.storage.v2.ObjectRangeData.checksummedData: object expected");
                             message.checksummedData = $root.google.storage.v2.ChecksummedData.fromObject(object.checksummedData, long + 1);
                         }
                         if (object.readRange != null) {
-                            if (typeof object.readRange !== "object")
+                            if (!$util.isObject(object.readRange))
                                 throw TypeError(".google.storage.v2.ObjectRangeData.readRange: object expected");
                             message.readRange = $root.google.storage.v2.ReadRange.fromObject(object.readRange, long + 1);
                         }
@@ -33112,7 +33306,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadHandle.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -33199,6 +33393,8 @@
                     BidiReadHandle.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BidiReadHandle)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BidiReadHandle: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -33346,7 +33542,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiWriteHandle.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -33433,6 +33629,8 @@
                     BidiWriteHandle.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BidiWriteHandle)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BidiWriteHandle: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -33696,7 +33894,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     WriteObjectSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -33847,13 +34045,15 @@
                     WriteObjectSpec.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.WriteObjectSpec)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.WriteObjectSpec: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.storage.v2.WriteObjectSpec();
                         if (object.resource != null) {
-                            if (typeof object.resource !== "object")
+                            if (!$util.isObject(object.resource))
                                 throw TypeError(".google.storage.v2.WriteObjectSpec.resource: object expected");
                             message.resource = $root.google.storage.v2.StorageObject.fromObject(object.resource, long + 1);
                         }
@@ -34187,7 +34387,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     WriteObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -34335,6 +34535,8 @@
                     WriteObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.WriteObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.WriteObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -34343,7 +34545,7 @@
                         if (object.uploadId != null)
                             message.uploadId = String(object.uploadId);
                         if (object.writeObjectSpec != null) {
-                            if (typeof object.writeObjectSpec !== "object")
+                            if (!$util.isObject(object.writeObjectSpec))
                                 throw TypeError(".google.storage.v2.WriteObjectRequest.writeObjectSpec: object expected");
                             message.writeObjectSpec = $root.google.storage.v2.WriteObjectSpec.fromObject(object.writeObjectSpec, long + 1);
                         }
@@ -34357,19 +34559,19 @@
                             else if (typeof object.writeOffset === "object")
                                 message.writeOffset = new $util.LongBits(object.writeOffset.low >>> 0, object.writeOffset.high >>> 0).toNumber();
                         if (object.checksummedData != null) {
-                            if (typeof object.checksummedData !== "object")
+                            if (!$util.isObject(object.checksummedData))
                                 throw TypeError(".google.storage.v2.WriteObjectRequest.checksummedData: object expected");
                             message.checksummedData = $root.google.storage.v2.ChecksummedData.fromObject(object.checksummedData, long + 1);
                         }
                         if (object.objectChecksums != null) {
-                            if (typeof object.objectChecksums !== "object")
+                            if (!$util.isObject(object.objectChecksums))
                                 throw TypeError(".google.storage.v2.WriteObjectRequest.objectChecksums: object expected");
                             message.objectChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.objectChecksums, long + 1);
                         }
                         if (object.finishWrite != null)
                             message.finishWrite = Boolean(object.finishWrite);
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.WriteObjectRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
@@ -34574,7 +34776,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     WriteObjectResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -34687,6 +34889,8 @@
                     WriteObjectResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.WriteObjectResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.WriteObjectResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -34702,12 +34906,12 @@
                             else if (typeof object.persistedSize === "object")
                                 message.persistedSize = new $util.LongBits(object.persistedSize.low >>> 0, object.persistedSize.high >>> 0).toNumber();
                         if (object.resource != null) {
-                            if (typeof object.resource !== "object")
+                            if (!$util.isObject(object.resource))
                                 throw TypeError(".google.storage.v2.WriteObjectResponse.resource: object expected");
                             message.resource = $root.google.storage.v2.StorageObject.fromObject(object.resource, long + 1);
                         }
                         if (object.persistedDataChecksums != null) {
-                            if (typeof object.persistedDataChecksums !== "object")
+                            if (!$util.isObject(object.persistedDataChecksums))
                                 throw TypeError(".google.storage.v2.WriteObjectResponse.persistedDataChecksums: object expected");
                             message.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.persistedDataChecksums, long + 1);
                         }
@@ -34950,7 +35154,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     AppendObjectSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -35091,6 +35295,8 @@
                     AppendObjectSpec.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.AppendObjectSpec)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.AppendObjectSpec: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -35130,7 +35336,7 @@
                         if (object.routingToken != null)
                             message.routingToken = String(object.routingToken);
                         if (object.writeHandle != null) {
-                            if (typeof object.writeHandle !== "object")
+                            if (!$util.isObject(object.writeHandle))
                                 throw TypeError(".google.storage.v2.AppendObjectSpec.writeHandle: object expected");
                             message.writeHandle = $root.google.storage.v2.BidiWriteHandle.fromObject(object.writeHandle, long + 1);
                         }
@@ -35435,7 +35641,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiWriteObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -35611,6 +35817,8 @@
                     BidiWriteObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BidiWriteObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BidiWriteObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -35619,12 +35827,12 @@
                         if (object.uploadId != null)
                             message.uploadId = String(object.uploadId);
                         if (object.writeObjectSpec != null) {
-                            if (typeof object.writeObjectSpec !== "object")
+                            if (!$util.isObject(object.writeObjectSpec))
                                 throw TypeError(".google.storage.v2.BidiWriteObjectRequest.writeObjectSpec: object expected");
                             message.writeObjectSpec = $root.google.storage.v2.WriteObjectSpec.fromObject(object.writeObjectSpec, long + 1);
                         }
                         if (object.appendObjectSpec != null) {
-                            if (typeof object.appendObjectSpec !== "object")
+                            if (!$util.isObject(object.appendObjectSpec))
                                 throw TypeError(".google.storage.v2.BidiWriteObjectRequest.appendObjectSpec: object expected");
                             message.appendObjectSpec = $root.google.storage.v2.AppendObjectSpec.fromObject(object.appendObjectSpec, long + 1);
                         }
@@ -35638,12 +35846,12 @@
                             else if (typeof object.writeOffset === "object")
                                 message.writeOffset = new $util.LongBits(object.writeOffset.low >>> 0, object.writeOffset.high >>> 0).toNumber();
                         if (object.checksummedData != null) {
-                            if (typeof object.checksummedData !== "object")
+                            if (!$util.isObject(object.checksummedData))
                                 throw TypeError(".google.storage.v2.BidiWriteObjectRequest.checksummedData: object expected");
                             message.checksummedData = $root.google.storage.v2.ChecksummedData.fromObject(object.checksummedData, long + 1);
                         }
                         if (object.objectChecksums != null) {
-                            if (typeof object.objectChecksums !== "object")
+                            if (!$util.isObject(object.objectChecksums))
                                 throw TypeError(".google.storage.v2.BidiWriteObjectRequest.objectChecksums: object expected");
                             message.objectChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.objectChecksums, long + 1);
                         }
@@ -35654,7 +35862,7 @@
                         if (object.finishWrite != null)
                             message.finishWrite = Boolean(object.finishWrite);
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.BidiWriteObjectRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
@@ -35887,7 +36095,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiWriteObjectResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -36012,6 +36220,8 @@
                     BidiWriteObjectResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BidiWriteObjectResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BidiWriteObjectResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -36027,17 +36237,17 @@
                             else if (typeof object.persistedSize === "object")
                                 message.persistedSize = new $util.LongBits(object.persistedSize.low >>> 0, object.persistedSize.high >>> 0).toNumber();
                         if (object.resource != null) {
-                            if (typeof object.resource !== "object")
+                            if (!$util.isObject(object.resource))
                                 throw TypeError(".google.storage.v2.BidiWriteObjectResponse.resource: object expected");
                             message.resource = $root.google.storage.v2.StorageObject.fromObject(object.resource, long + 1);
                         }
                         if (object.persistedDataChecksums != null) {
-                            if (typeof object.persistedDataChecksums !== "object")
+                            if (!$util.isObject(object.persistedDataChecksums))
                                 throw TypeError(".google.storage.v2.BidiWriteObjectResponse.persistedDataChecksums: object expected");
                             message.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.persistedDataChecksums, long + 1);
                         }
                         if (object.writeHandle != null) {
-                            if (typeof object.writeHandle !== "object")
+                            if (!$util.isObject(object.writeHandle))
                                 throw TypeError(".google.storage.v2.BidiWriteObjectResponse.writeHandle: object expected");
                             message.writeHandle = $root.google.storage.v2.BidiWriteHandle.fromObject(object.writeHandle, long + 1);
                         }
@@ -36344,7 +36554,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ListObjectsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -36528,6 +36738,8 @@
                     ListObjectsRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ListObjectsRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ListObjectsRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -36548,7 +36760,7 @@
                         if (object.versions != null)
                             message.versions = Boolean(object.versions);
                         if (object.readMask != null) {
-                            if (typeof object.readMask !== "object")
+                            if (!$util.isObject(object.readMask))
                                 throw TypeError(".google.storage.v2.ListObjectsRequest.readMask: object expected");
                             message.readMask = $root.google.protobuf.FieldMask.fromObject(object.readMask, long + 1);
                         }
@@ -36748,7 +36960,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     QueryWriteStatusRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -36844,6 +37056,8 @@
                     QueryWriteStatusRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.QueryWriteStatusRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.QueryWriteStatusRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -36852,7 +37066,7 @@
                         if (object.uploadId != null)
                             message.uploadId = String(object.uploadId);
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.QueryWriteStatusRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
@@ -37027,7 +37241,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     QueryWriteStatusResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -37140,6 +37354,8 @@
                     QueryWriteStatusResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.QueryWriteStatusResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.QueryWriteStatusResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -37155,12 +37371,12 @@
                             else if (typeof object.persistedSize === "object")
                                 message.persistedSize = new $util.LongBits(object.persistedSize.low >>> 0, object.persistedSize.high >>> 0).toNumber();
                         if (object.resource != null) {
-                            if (typeof object.resource !== "object")
+                            if (!$util.isObject(object.resource))
                                 throw TypeError(".google.storage.v2.QueryWriteStatusResponse.resource: object expected");
                             message.resource = $root.google.storage.v2.StorageObject.fromObject(object.resource, long + 1);
                         }
                         if (object.persistedDataChecksums != null) {
-                            if (typeof object.persistedDataChecksums !== "object")
+                            if (!$util.isObject(object.persistedDataChecksums))
                                 throw TypeError(".google.storage.v2.QueryWriteStatusResponse.persistedDataChecksums: object expected");
                             message.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.persistedDataChecksums, long + 1);
                         }
@@ -37603,7 +37819,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     RewriteObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -37867,6 +38083,8 @@
                     RewriteObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.RewriteObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.RewriteObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -37879,7 +38097,7 @@
                         if (object.destinationKmsKey != null)
                             message.destinationKmsKey = String(object.destinationKmsKey);
                         if (object.destination != null) {
-                            if (typeof object.destination !== "object")
+                            if (!$util.isObject(object.destination))
                                 throw TypeError(".google.storage.v2.RewriteObjectRequest.destination: object expected");
                             message.destination = $root.google.storage.v2.StorageObject.fromObject(object.destination, long + 1);
                         }
@@ -37994,12 +38212,12 @@
                             else if (object.copySourceEncryptionKeySha256Bytes.length >= 0)
                                 message.copySourceEncryptionKeySha256Bytes = object.copySourceEncryptionKeySha256Bytes;
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.RewriteObjectRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
                         if (object.objectChecksums != null) {
-                            if (typeof object.objectChecksums !== "object")
+                            if (!$util.isObject(object.objectChecksums))
                                 throw TypeError(".google.storage.v2.RewriteObjectRequest.objectChecksums: object expected");
                             message.objectChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.objectChecksums, long + 1);
                         }
@@ -38331,7 +38549,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     RewriteResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -38448,6 +38666,8 @@
                     RewriteResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.RewriteResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.RewriteResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -38476,7 +38696,7 @@
                         if (object.rewriteToken != null)
                             message.rewriteToken = String(object.rewriteToken);
                         if (object.resource != null) {
-                            if (typeof object.resource !== "object")
+                            if (!$util.isObject(object.resource))
                                 throw TypeError(".google.storage.v2.RewriteResponse.resource: object expected");
                             message.resource = $root.google.storage.v2.StorageObject.fromObject(object.resource, long + 1);
                         }
@@ -38803,7 +39023,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     MoveObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -38977,6 +39197,8 @@
                     MoveObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.MoveObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.MoveObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -39300,7 +39522,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     StartResumableWriteRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -39407,23 +39629,25 @@
                     StartResumableWriteRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.StartResumableWriteRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.StartResumableWriteRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.storage.v2.StartResumableWriteRequest();
                         if (object.writeObjectSpec != null) {
-                            if (typeof object.writeObjectSpec !== "object")
+                            if (!$util.isObject(object.writeObjectSpec))
                                 throw TypeError(".google.storage.v2.StartResumableWriteRequest.writeObjectSpec: object expected");
                             message.writeObjectSpec = $root.google.storage.v2.WriteObjectSpec.fromObject(object.writeObjectSpec, long + 1);
                         }
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.StartResumableWriteRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
                         if (object.objectChecksums != null) {
-                            if (typeof object.objectChecksums !== "object")
+                            if (!$util.isObject(object.objectChecksums))
                                 throw TypeError(".google.storage.v2.StartResumableWriteRequest.objectChecksums: object expected");
                             message.objectChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.objectChecksums, long + 1);
                         }
@@ -39565,7 +39789,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     StartResumableWriteResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -39652,6 +39876,8 @@
                     StartResumableWriteResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.StartResumableWriteResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.StartResumableWriteResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -39905,7 +40131,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     UpdateObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -40063,13 +40289,15 @@
                     UpdateObjectRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.UpdateObjectRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.UpdateObjectRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.storage.v2.UpdateObjectRequest();
                         if (object.object != null) {
-                            if (typeof object.object !== "object")
+                            if (!$util.isObject(object.object))
                                 throw TypeError(".google.storage.v2.UpdateObjectRequest.object: object expected");
                             message.object = $root.google.storage.v2.StorageObject.fromObject(object.object, long + 1);
                         }
@@ -40112,12 +40340,12 @@
                         if (object.predefinedAcl != null)
                             message.predefinedAcl = String(object.predefinedAcl);
                         if (object.updateMask != null) {
-                            if (typeof object.updateMask !== "object")
+                            if (!$util.isObject(object.updateMask))
                                 throw TypeError(".google.storage.v2.UpdateObjectRequest.updateMask: object expected");
                             message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
                         if (object.commonObjectRequestParams != null) {
-                            if (typeof object.commonObjectRequestParams !== "object")
+                            if (!$util.isObject(object.commonObjectRequestParams))
                                 throw TypeError(".google.storage.v2.UpdateObjectRequest.commonObjectRequestParams: object expected");
                             message.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.fromObject(object.commonObjectRequestParams, long + 1);
                         }
@@ -40329,7 +40557,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CommonObjectRequestParams.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -40430,6 +40658,8 @@
                     CommonObjectRequestParams.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.CommonObjectRequestParams)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.CommonObjectRequestParams: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -40586,7 +40816,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ServiceConstants.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -40666,6 +40896,8 @@
                     ServiceConstants.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ServiceConstants)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ServiceConstants: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -41194,7 +41426,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Bucket.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -41586,6 +41818,8 @@
                     Bucket.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.Bucket)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.Bucket: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -41621,7 +41855,7 @@
                                 throw TypeError(".google.storage.v2.Bucket.acl: array expected");
                             message.acl = [];
                             for (var i = 0; i < object.acl.length; ++i) {
-                                if (typeof object.acl[i] !== "object")
+                                if (!$util.isObject(object.acl[i]))
                                     throw TypeError(".google.storage.v2.Bucket.acl: object expected");
                                 message.acl[i] = $root.google.storage.v2.BucketAccessControl.fromObject(object.acl[i], long + 1);
                             }
@@ -41631,18 +41865,18 @@
                                 throw TypeError(".google.storage.v2.Bucket.defaultObjectAcl: array expected");
                             message.defaultObjectAcl = [];
                             for (var i = 0; i < object.defaultObjectAcl.length; ++i) {
-                                if (typeof object.defaultObjectAcl[i] !== "object")
+                                if (!$util.isObject(object.defaultObjectAcl[i]))
                                     throw TypeError(".google.storage.v2.Bucket.defaultObjectAcl: object expected");
                                 message.defaultObjectAcl[i] = $root.google.storage.v2.ObjectAccessControl.fromObject(object.defaultObjectAcl[i], long + 1);
                             }
                         }
                         if (object.lifecycle != null) {
-                            if (typeof object.lifecycle !== "object")
+                            if (!$util.isObject(object.lifecycle))
                                 throw TypeError(".google.storage.v2.Bucket.lifecycle: object expected");
                             message.lifecycle = $root.google.storage.v2.Bucket.Lifecycle.fromObject(object.lifecycle, long + 1);
                         }
                         if (object.createTime != null) {
-                            if (typeof object.createTime !== "object")
+                            if (!$util.isObject(object.createTime))
                                 throw TypeError(".google.storage.v2.Bucket.createTime: object expected");
                             message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                         }
@@ -41651,20 +41885,20 @@
                                 throw TypeError(".google.storage.v2.Bucket.cors: array expected");
                             message.cors = [];
                             for (var i = 0; i < object.cors.length; ++i) {
-                                if (typeof object.cors[i] !== "object")
+                                if (!$util.isObject(object.cors[i]))
                                     throw TypeError(".google.storage.v2.Bucket.cors: object expected");
                                 message.cors[i] = $root.google.storage.v2.Bucket.Cors.fromObject(object.cors[i], long + 1);
                             }
                         }
                         if (object.updateTime != null) {
-                            if (typeof object.updateTime !== "object")
+                            if (!$util.isObject(object.updateTime))
                                 throw TypeError(".google.storage.v2.Bucket.updateTime: object expected");
                             message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                         }
                         if (object.defaultEventBasedHold != null)
                             message.defaultEventBasedHold = Boolean(object.defaultEventBasedHold);
                         if (object.labels) {
-                            if (typeof object.labels !== "object")
+                            if (!$util.isObject(object.labels))
                                 throw TypeError(".google.storage.v2.Bucket.labels: object expected");
                             message.labels = {};
                             for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i) {
@@ -41674,74 +41908,74 @@
                             }
                         }
                         if (object.website != null) {
-                            if (typeof object.website !== "object")
+                            if (!$util.isObject(object.website))
                                 throw TypeError(".google.storage.v2.Bucket.website: object expected");
                             message.website = $root.google.storage.v2.Bucket.Website.fromObject(object.website, long + 1);
                         }
                         if (object.versioning != null) {
-                            if (typeof object.versioning !== "object")
+                            if (!$util.isObject(object.versioning))
                                 throw TypeError(".google.storage.v2.Bucket.versioning: object expected");
                             message.versioning = $root.google.storage.v2.Bucket.Versioning.fromObject(object.versioning, long + 1);
                         }
                         if (object.logging != null) {
-                            if (typeof object.logging !== "object")
+                            if (!$util.isObject(object.logging))
                                 throw TypeError(".google.storage.v2.Bucket.logging: object expected");
                             message.logging = $root.google.storage.v2.Bucket.Logging.fromObject(object.logging, long + 1);
                         }
                         if (object.owner != null) {
-                            if (typeof object.owner !== "object")
+                            if (!$util.isObject(object.owner))
                                 throw TypeError(".google.storage.v2.Bucket.owner: object expected");
                             message.owner = $root.google.storage.v2.Owner.fromObject(object.owner, long + 1);
                         }
                         if (object.encryption != null) {
-                            if (typeof object.encryption !== "object")
+                            if (!$util.isObject(object.encryption))
                                 throw TypeError(".google.storage.v2.Bucket.encryption: object expected");
                             message.encryption = $root.google.storage.v2.Bucket.Encryption.fromObject(object.encryption, long + 1);
                         }
                         if (object.billing != null) {
-                            if (typeof object.billing !== "object")
+                            if (!$util.isObject(object.billing))
                                 throw TypeError(".google.storage.v2.Bucket.billing: object expected");
                             message.billing = $root.google.storage.v2.Bucket.Billing.fromObject(object.billing, long + 1);
                         }
                         if (object.retentionPolicy != null) {
-                            if (typeof object.retentionPolicy !== "object")
+                            if (!$util.isObject(object.retentionPolicy))
                                 throw TypeError(".google.storage.v2.Bucket.retentionPolicy: object expected");
                             message.retentionPolicy = $root.google.storage.v2.Bucket.RetentionPolicy.fromObject(object.retentionPolicy, long + 1);
                         }
                         if (object.iamConfig != null) {
-                            if (typeof object.iamConfig !== "object")
+                            if (!$util.isObject(object.iamConfig))
                                 throw TypeError(".google.storage.v2.Bucket.iamConfig: object expected");
                             message.iamConfig = $root.google.storage.v2.Bucket.IamConfig.fromObject(object.iamConfig, long + 1);
                         }
                         if (object.satisfiesPzs != null)
                             message.satisfiesPzs = Boolean(object.satisfiesPzs);
                         if (object.customPlacementConfig != null) {
-                            if (typeof object.customPlacementConfig !== "object")
+                            if (!$util.isObject(object.customPlacementConfig))
                                 throw TypeError(".google.storage.v2.Bucket.customPlacementConfig: object expected");
                             message.customPlacementConfig = $root.google.storage.v2.Bucket.CustomPlacementConfig.fromObject(object.customPlacementConfig, long + 1);
                         }
                         if (object.autoclass != null) {
-                            if (typeof object.autoclass !== "object")
+                            if (!$util.isObject(object.autoclass))
                                 throw TypeError(".google.storage.v2.Bucket.autoclass: object expected");
                             message.autoclass = $root.google.storage.v2.Bucket.Autoclass.fromObject(object.autoclass, long + 1);
                         }
                         if (object.hierarchicalNamespace != null) {
-                            if (typeof object.hierarchicalNamespace !== "object")
+                            if (!$util.isObject(object.hierarchicalNamespace))
                                 throw TypeError(".google.storage.v2.Bucket.hierarchicalNamespace: object expected");
                             message.hierarchicalNamespace = $root.google.storage.v2.Bucket.HierarchicalNamespace.fromObject(object.hierarchicalNamespace, long + 1);
                         }
                         if (object.softDeletePolicy != null) {
-                            if (typeof object.softDeletePolicy !== "object")
+                            if (!$util.isObject(object.softDeletePolicy))
                                 throw TypeError(".google.storage.v2.Bucket.softDeletePolicy: object expected");
                             message.softDeletePolicy = $root.google.storage.v2.Bucket.SoftDeletePolicy.fromObject(object.softDeletePolicy, long + 1);
                         }
                         if (object.objectRetention != null) {
-                            if (typeof object.objectRetention !== "object")
+                            if (!$util.isObject(object.objectRetention))
                                 throw TypeError(".google.storage.v2.Bucket.objectRetention: object expected");
                             message.objectRetention = $root.google.storage.v2.Bucket.ObjectRetention.fromObject(object.objectRetention, long + 1);
                         }
                         if (object.ipFilter != null) {
-                            if (typeof object.ipFilter !== "object")
+                            if (!$util.isObject(object.ipFilter))
                                 throw TypeError(".google.storage.v2.Bucket.ipFilter: object expected");
                             message.ipFilter = $root.google.storage.v2.Bucket.IpFilter.fromObject(object.ipFilter, long + 1);
                         }
@@ -41997,7 +42231,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Billing.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -42084,6 +42318,8 @@
                         Billing.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.Billing)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.Billing: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -42261,7 +42497,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Cors.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -42387,6 +42623,8 @@
                         Cors.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.Cors)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.Cors: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -42620,7 +42858,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Encryption.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -42744,6 +42982,8 @@
                         Encryption.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.Encryption)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.Encryption: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -42752,17 +42992,17 @@
                             if (object.defaultKmsKey != null)
                                 message.defaultKmsKey = String(object.defaultKmsKey);
                             if (object.googleManagedEncryptionEnforcementConfig != null) {
-                                if (typeof object.googleManagedEncryptionEnforcementConfig !== "object")
+                                if (!$util.isObject(object.googleManagedEncryptionEnforcementConfig))
                                     throw TypeError(".google.storage.v2.Bucket.Encryption.googleManagedEncryptionEnforcementConfig: object expected");
                                 message.googleManagedEncryptionEnforcementConfig = $root.google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig.fromObject(object.googleManagedEncryptionEnforcementConfig, long + 1);
                             }
                             if (object.customerManagedEncryptionEnforcementConfig != null) {
-                                if (typeof object.customerManagedEncryptionEnforcementConfig !== "object")
+                                if (!$util.isObject(object.customerManagedEncryptionEnforcementConfig))
                                     throw TypeError(".google.storage.v2.Bucket.Encryption.customerManagedEncryptionEnforcementConfig: object expected");
                                 message.customerManagedEncryptionEnforcementConfig = $root.google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig.fromObject(object.customerManagedEncryptionEnforcementConfig, long + 1);
                             }
                             if (object.customerSuppliedEncryptionEnforcementConfig != null) {
-                                if (typeof object.customerSuppliedEncryptionEnforcementConfig !== "object")
+                                if (!$util.isObject(object.customerSuppliedEncryptionEnforcementConfig))
                                     throw TypeError(".google.storage.v2.Bucket.Encryption.customerSuppliedEncryptionEnforcementConfig: object expected");
                                 message.customerSuppliedEncryptionEnforcementConfig = $root.google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig.fromObject(object.customerSuppliedEncryptionEnforcementConfig, long + 1);
                             }
@@ -42935,7 +43175,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             GoogleManagedEncryptionEnforcementConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -43037,6 +43277,8 @@
                             GoogleManagedEncryptionEnforcementConfig.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -43045,7 +43287,7 @@
                                 if (object.restrictionMode != null)
                                     message.restrictionMode = String(object.restrictionMode);
                                 if (object.effectiveTime != null) {
-                                    if (typeof object.effectiveTime !== "object")
+                                    if (!$util.isObject(object.effectiveTime))
                                         throw TypeError(".google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig.effectiveTime: object expected");
                                     message.effectiveTime = $root.google.protobuf.Timestamp.fromObject(object.effectiveTime, long + 1);
                                 }
@@ -43212,7 +43454,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CustomerManagedEncryptionEnforcementConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -43314,6 +43556,8 @@
                             CustomerManagedEncryptionEnforcementConfig.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -43322,7 +43566,7 @@
                                 if (object.restrictionMode != null)
                                     message.restrictionMode = String(object.restrictionMode);
                                 if (object.effectiveTime != null) {
-                                    if (typeof object.effectiveTime !== "object")
+                                    if (!$util.isObject(object.effectiveTime))
                                         throw TypeError(".google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig.effectiveTime: object expected");
                                     message.effectiveTime = $root.google.protobuf.Timestamp.fromObject(object.effectiveTime, long + 1);
                                 }
@@ -43489,7 +43733,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CustomerSuppliedEncryptionEnforcementConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -43591,6 +43835,8 @@
                             CustomerSuppliedEncryptionEnforcementConfig.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -43599,7 +43845,7 @@
                                 if (object.restrictionMode != null)
                                     message.restrictionMode = String(object.restrictionMode);
                                 if (object.effectiveTime != null) {
-                                    if (typeof object.effectiveTime !== "object")
+                                    if (!$util.isObject(object.effectiveTime))
                                         throw TypeError(".google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig.effectiveTime: object expected");
                                     message.effectiveTime = $root.google.protobuf.Timestamp.fromObject(object.effectiveTime, long + 1);
                                 }
@@ -43754,7 +44000,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         IamConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -43850,13 +44096,15 @@
                         IamConfig.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.IamConfig)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.IamConfig: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.v2.Bucket.IamConfig();
                             if (object.uniformBucketLevelAccess != null) {
-                                if (typeof object.uniformBucketLevelAccess !== "object")
+                                if (!$util.isObject(object.uniformBucketLevelAccess))
                                     throw TypeError(".google.storage.v2.Bucket.IamConfig.uniformBucketLevelAccess: object expected");
                                 message.uniformBucketLevelAccess = $root.google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess.fromObject(object.uniformBucketLevelAccess, long + 1);
                             }
@@ -44005,7 +44253,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             UniformBucketLevelAccess.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -44101,6 +44349,8 @@
                             UniformBucketLevelAccess.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -44109,7 +44359,7 @@
                                 if (object.enabled != null)
                                     message.enabled = Boolean(object.enabled);
                                 if (object.lockTime != null) {
-                                    if (typeof object.lockTime !== "object")
+                                    if (!$util.isObject(object.lockTime))
                                         throw TypeError(".google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess.lockTime: object expected");
                                     message.lockTime = $root.google.protobuf.Timestamp.fromObject(object.lockTime, long + 1);
                                 }
@@ -44253,7 +44503,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Lifecycle.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -44348,6 +44598,8 @@
                         Lifecycle.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.Lifecycle)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.Lifecycle: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -44358,7 +44610,7 @@
                                     throw TypeError(".google.storage.v2.Bucket.Lifecycle.rule: array expected");
                                 message.rule = [];
                                 for (var i = 0; i < object.rule.length; ++i) {
-                                    if (typeof object.rule[i] !== "object")
+                                    if (!$util.isObject(object.rule[i]))
                                         throw TypeError(".google.storage.v2.Bucket.Lifecycle.rule: object expected");
                                     message.rule[i] = $root.google.storage.v2.Bucket.Lifecycle.Rule.fromObject(object.rule[i], long + 1);
                                 }
@@ -44505,7 +44757,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             Rule.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -44603,18 +44855,20 @@
                             Rule.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.v2.Bucket.Lifecycle.Rule)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.v2.Bucket.Lifecycle.Rule: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.storage.v2.Bucket.Lifecycle.Rule();
                                 if (object.action != null) {
-                                    if (typeof object.action !== "object")
+                                    if (!$util.isObject(object.action))
                                         throw TypeError(".google.storage.v2.Bucket.Lifecycle.Rule.action: object expected");
                                     message.action = $root.google.storage.v2.Bucket.Lifecycle.Rule.Action.fromObject(object.action, long + 1);
                                 }
                                 if (object.condition != null) {
-                                    if (typeof object.condition !== "object")
+                                    if (!$util.isObject(object.condition))
                                         throw TypeError(".google.storage.v2.Bucket.Lifecycle.Rule.condition: object expected");
                                     message.condition = $root.google.storage.v2.Bucket.Lifecycle.Rule.Condition.fromObject(object.condition, long + 1);
                                 }
@@ -44761,7 +45015,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 Action.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -44855,6 +45109,8 @@
                                 Action.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.storage.v2.Bucket.Lifecycle.Rule.Action)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.storage.v2.Bucket.Lifecycle.Rule.Action: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -45148,7 +45404,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 Condition.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -45340,6 +45596,8 @@
                                 Condition.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.storage.v2.Bucket.Lifecycle.Rule.Condition)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.storage.v2.Bucket.Lifecycle.Rule.Condition: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -45348,7 +45606,7 @@
                                     if (object.ageDays != null)
                                         message.ageDays = object.ageDays | 0;
                                     if (object.createdBefore != null) {
-                                        if (typeof object.createdBefore !== "object")
+                                        if (!$util.isObject(object.createdBefore))
                                             throw TypeError(".google.storage.v2.Bucket.Lifecycle.Rule.Condition.createdBefore: object expected");
                                         message.createdBefore = $root.google.type.Date.fromObject(object.createdBefore, long + 1);
                                     }
@@ -45366,14 +45624,14 @@
                                     if (object.daysSinceCustomTime != null)
                                         message.daysSinceCustomTime = object.daysSinceCustomTime | 0;
                                     if (object.customTimeBefore != null) {
-                                        if (typeof object.customTimeBefore !== "object")
+                                        if (!$util.isObject(object.customTimeBefore))
                                             throw TypeError(".google.storage.v2.Bucket.Lifecycle.Rule.Condition.customTimeBefore: object expected");
                                         message.customTimeBefore = $root.google.type.Date.fromObject(object.customTimeBefore, long + 1);
                                     }
                                     if (object.daysSinceNoncurrentTime != null)
                                         message.daysSinceNoncurrentTime = object.daysSinceNoncurrentTime | 0;
                                     if (object.noncurrentTimeBefore != null) {
-                                        if (typeof object.noncurrentTimeBefore !== "object")
+                                        if (!$util.isObject(object.noncurrentTimeBefore))
                                             throw TypeError(".google.storage.v2.Bucket.Lifecycle.Rule.Condition.noncurrentTimeBefore: object expected");
                                         message.noncurrentTimeBefore = $root.google.type.Date.fromObject(object.noncurrentTimeBefore, long + 1);
                                     }
@@ -45591,7 +45849,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Logging.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -45685,6 +45943,8 @@
                         Logging.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.Logging)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.Logging: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -45829,7 +46089,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ObjectRetention.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -45916,6 +46176,8 @@
                         ObjectRetention.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.ObjectRetention)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.ObjectRetention: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -46076,7 +46338,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         RetentionPolicy.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -46181,20 +46443,22 @@
                         RetentionPolicy.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.RetentionPolicy)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.RetentionPolicy: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.v2.Bucket.RetentionPolicy();
                             if (object.effectiveTime != null) {
-                                if (typeof object.effectiveTime !== "object")
+                                if (!$util.isObject(object.effectiveTime))
                                     throw TypeError(".google.storage.v2.Bucket.RetentionPolicy.effectiveTime: object expected");
                                 message.effectiveTime = $root.google.protobuf.Timestamp.fromObject(object.effectiveTime, long + 1);
                             }
                             if (object.isLocked != null)
                                 message.isLocked = Boolean(object.isLocked);
                             if (object.retentionDuration != null) {
-                                if (typeof object.retentionDuration !== "object")
+                                if (!$util.isObject(object.retentionDuration))
                                     throw TypeError(".google.storage.v2.Bucket.RetentionPolicy.retentionDuration: object expected");
                                 message.retentionDuration = $root.google.protobuf.Duration.fromObject(object.retentionDuration, long + 1);
                             }
@@ -46362,7 +46626,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         SoftDeletePolicy.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -46467,18 +46731,20 @@
                         SoftDeletePolicy.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.SoftDeletePolicy)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.SoftDeletePolicy: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.storage.v2.Bucket.SoftDeletePolicy();
                             if (object.retentionDuration != null) {
-                                if (typeof object.retentionDuration !== "object")
+                                if (!$util.isObject(object.retentionDuration))
                                     throw TypeError(".google.storage.v2.Bucket.SoftDeletePolicy.retentionDuration: object expected");
                                 message.retentionDuration = $root.google.protobuf.Duration.fromObject(object.retentionDuration, long + 1);
                             }
                             if (object.effectiveTime != null) {
-                                if (typeof object.effectiveTime !== "object")
+                                if (!$util.isObject(object.effectiveTime))
                                     throw TypeError(".google.storage.v2.Bucket.SoftDeletePolicy.effectiveTime: object expected");
                                 message.effectiveTime = $root.google.protobuf.Timestamp.fromObject(object.effectiveTime, long + 1);
                             }
@@ -46619,7 +46885,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Versioning.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -46706,6 +46972,8 @@
                         Versioning.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.Versioning)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.Versioning: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -46855,7 +47123,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Website.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -46949,6 +47217,8 @@
                         Website.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.Website)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.Website: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -47095,7 +47365,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CustomPlacementConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -47188,6 +47458,8 @@
                         CustomPlacementConfig.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.CustomPlacementConfig)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.CustomPlacementConfig: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -47382,7 +47654,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Autoclass.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -47500,6 +47772,8 @@
                         Autoclass.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.Autoclass)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.Autoclass: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -47508,14 +47782,14 @@
                             if (object.enabled != null)
                                 message.enabled = Boolean(object.enabled);
                             if (object.toggleTime != null) {
-                                if (typeof object.toggleTime !== "object")
+                                if (!$util.isObject(object.toggleTime))
                                     throw TypeError(".google.storage.v2.Bucket.Autoclass.toggleTime: object expected");
                                 message.toggleTime = $root.google.protobuf.Timestamp.fromObject(object.toggleTime, long + 1);
                             }
                             if (object.terminalStorageClass != null)
                                 message.terminalStorageClass = String(object.terminalStorageClass);
                             if (object.terminalStorageClassUpdateTime != null) {
-                                if (typeof object.terminalStorageClassUpdateTime !== "object")
+                                if (!$util.isObject(object.terminalStorageClassUpdateTime))
                                     throw TypeError(".google.storage.v2.Bucket.Autoclass.terminalStorageClassUpdateTime: object expected");
                                 message.terminalStorageClassUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.terminalStorageClassUpdateTime, long + 1);
                             }
@@ -47731,7 +48005,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         IpFilter.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -47864,6 +48138,8 @@
                         IpFilter.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.IpFilter)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.IpFilter: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -47872,7 +48148,7 @@
                             if (object.mode != null)
                                 message.mode = String(object.mode);
                             if (object.publicNetworkSource != null) {
-                                if (typeof object.publicNetworkSource !== "object")
+                                if (!$util.isObject(object.publicNetworkSource))
                                     throw TypeError(".google.storage.v2.Bucket.IpFilter.publicNetworkSource: object expected");
                                 message.publicNetworkSource = $root.google.storage.v2.Bucket.IpFilter.PublicNetworkSource.fromObject(object.publicNetworkSource, long + 1);
                             }
@@ -47881,7 +48157,7 @@
                                     throw TypeError(".google.storage.v2.Bucket.IpFilter.vpcNetworkSources: array expected");
                                 message.vpcNetworkSources = [];
                                 for (var i = 0; i < object.vpcNetworkSources.length; ++i) {
-                                    if (typeof object.vpcNetworkSources[i] !== "object")
+                                    if (!$util.isObject(object.vpcNetworkSources[i]))
                                         throw TypeError(".google.storage.v2.Bucket.IpFilter.vpcNetworkSources: object expected");
                                     message.vpcNetworkSources[i] = $root.google.storage.v2.Bucket.IpFilter.VpcNetworkSource.fromObject(object.vpcNetworkSources[i], long + 1);
                                 }
@@ -48042,7 +48318,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             PublicNetworkSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -48135,6 +48411,8 @@
                             PublicNetworkSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.v2.Bucket.IpFilter.PublicNetworkSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.v2.Bucket.IpFilter.PublicNetworkSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -48303,7 +48581,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             VpcNetworkSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -48406,6 +48684,8 @@
                             VpcNetworkSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.storage.v2.Bucket.IpFilter.VpcNetworkSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.v2.Bucket.IpFilter.VpcNetworkSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -48562,7 +48842,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         HierarchicalNamespace.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -48649,6 +48929,8 @@
                         HierarchicalNamespace.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.Bucket.HierarchicalNamespace)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.Bucket.HierarchicalNamespace: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -48878,7 +49160,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BucketAccessControl.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -49023,6 +49305,8 @@
                     BucketAccessControl.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.BucketAccessControl)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.BucketAccessControl: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -49045,7 +49329,7 @@
                         if (object.domain != null)
                             message.domain = String(object.domain);
                         if (object.projectTeam != null) {
-                            if (typeof object.projectTeam !== "object")
+                            if (!$util.isObject(object.projectTeam))
                                 throw TypeError(".google.storage.v2.BucketAccessControl.projectTeam: object expected");
                             message.projectTeam = $root.google.storage.v2.ProjectTeam.fromObject(object.projectTeam, long + 1);
                         }
@@ -49225,7 +49509,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ChecksummedData.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -49322,6 +49606,8 @@
                     ChecksummedData.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ChecksummedData)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ChecksummedData: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -49496,7 +49782,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ObjectChecksums.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -49593,6 +49879,8 @@
                     ObjectChecksums.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ObjectChecksums)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ObjectChecksums: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -49769,7 +50057,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ObjectCustomContextPayload.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -49874,6 +50162,8 @@
                     ObjectCustomContextPayload.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ObjectCustomContextPayload)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ObjectCustomContextPayload: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -49882,12 +50172,12 @@
                         if (object.value != null)
                             message.value = String(object.value);
                         if (object.createTime != null) {
-                            if (typeof object.createTime !== "object")
+                            if (!$util.isObject(object.createTime))
                                 throw TypeError(".google.storage.v2.ObjectCustomContextPayload.createTime: object expected");
                             message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                         }
                         if (object.updateTime != null) {
-                            if (typeof object.updateTime !== "object")
+                            if (!$util.isObject(object.updateTime))
                                 throw TypeError(".google.storage.v2.ObjectCustomContextPayload.updateTime: object expected");
                             message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                         }
@@ -50033,7 +50323,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ObjectContexts.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -50148,19 +50438,21 @@
                     ObjectContexts.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ObjectContexts)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ObjectContexts: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.storage.v2.ObjectContexts();
                         if (object.custom) {
-                            if (typeof object.custom !== "object")
+                            if (!$util.isObject(object.custom))
                                 throw TypeError(".google.storage.v2.ObjectContexts.custom: object expected");
                             message.custom = {};
                             for (var keys = Object.keys(object.custom), i = 0; i < keys.length; ++i) {
                                 if (keys[i] === "__proto__")
                                     $util.makeProp(message.custom, keys[i]);
-                                if (typeof object.custom[keys[i]] !== "object")
+                                if (!$util.isObject(object.custom[keys[i]]))
                                     throw TypeError(".google.storage.v2.ObjectContexts.custom: object expected");
                                 message.custom[keys[i]] = $root.google.storage.v2.ObjectCustomContextPayload.fromObject(object.custom[keys[i]], long + 1);
                             }
@@ -50314,7 +50606,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CustomerEncryption.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -50408,6 +50700,8 @@
                     CustomerEncryption.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.CustomerEncryption)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.CustomerEncryption: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -50944,7 +51238,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     StorageObject.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -51328,6 +51622,8 @@
                     StorageObject.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.StorageObject)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.StorageObject: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -51381,7 +51677,7 @@
                                 throw TypeError(".google.storage.v2.StorageObject.acl: array expected");
                             message.acl = [];
                             for (var i = 0; i < object.acl.length; ++i) {
-                                if (typeof object.acl[i] !== "object")
+                                if (!$util.isObject(object.acl[i]))
                                     throw TypeError(".google.storage.v2.StorageObject.acl: object expected");
                                 message.acl[i] = $root.google.storage.v2.ObjectAccessControl.fromObject(object.acl[i], long + 1);
                             }
@@ -51389,50 +51685,50 @@
                         if (object.contentLanguage != null)
                             message.contentLanguage = String(object.contentLanguage);
                         if (object.deleteTime != null) {
-                            if (typeof object.deleteTime !== "object")
+                            if (!$util.isObject(object.deleteTime))
                                 throw TypeError(".google.storage.v2.StorageObject.deleteTime: object expected");
                             message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime, long + 1);
                         }
                         if (object.finalizeTime != null) {
-                            if (typeof object.finalizeTime !== "object")
+                            if (!$util.isObject(object.finalizeTime))
                                 throw TypeError(".google.storage.v2.StorageObject.finalizeTime: object expected");
                             message.finalizeTime = $root.google.protobuf.Timestamp.fromObject(object.finalizeTime, long + 1);
                         }
                         if (object.contentType != null)
                             message.contentType = String(object.contentType);
                         if (object.createTime != null) {
-                            if (typeof object.createTime !== "object")
+                            if (!$util.isObject(object.createTime))
                                 throw TypeError(".google.storage.v2.StorageObject.createTime: object expected");
                             message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                         }
                         if (object.componentCount != null)
                             message.componentCount = object.componentCount | 0;
                         if (object.checksums != null) {
-                            if (typeof object.checksums !== "object")
+                            if (!$util.isObject(object.checksums))
                                 throw TypeError(".google.storage.v2.StorageObject.checksums: object expected");
                             message.checksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.checksums, long + 1);
                         }
                         if (object.updateTime != null) {
-                            if (typeof object.updateTime !== "object")
+                            if (!$util.isObject(object.updateTime))
                                 throw TypeError(".google.storage.v2.StorageObject.updateTime: object expected");
                             message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                         }
                         if (object.kmsKey != null)
                             message.kmsKey = String(object.kmsKey);
                         if (object.updateStorageClassTime != null) {
-                            if (typeof object.updateStorageClassTime !== "object")
+                            if (!$util.isObject(object.updateStorageClassTime))
                                 throw TypeError(".google.storage.v2.StorageObject.updateStorageClassTime: object expected");
                             message.updateStorageClassTime = $root.google.protobuf.Timestamp.fromObject(object.updateStorageClassTime, long + 1);
                         }
                         if (object.temporaryHold != null)
                             message.temporaryHold = Boolean(object.temporaryHold);
                         if (object.retentionExpireTime != null) {
-                            if (typeof object.retentionExpireTime !== "object")
+                            if (!$util.isObject(object.retentionExpireTime))
                                 throw TypeError(".google.storage.v2.StorageObject.retentionExpireTime: object expected");
                             message.retentionExpireTime = $root.google.protobuf.Timestamp.fromObject(object.retentionExpireTime, long + 1);
                         }
                         if (object.metadata) {
-                            if (typeof object.metadata !== "object")
+                            if (!$util.isObject(object.metadata))
                                 throw TypeError(".google.storage.v2.StorageObject.metadata: object expected");
                             message.metadata = {};
                             for (var keys = Object.keys(object.metadata), i = 0; i < keys.length; ++i) {
@@ -51442,39 +51738,39 @@
                             }
                         }
                         if (object.contexts != null) {
-                            if (typeof object.contexts !== "object")
+                            if (!$util.isObject(object.contexts))
                                 throw TypeError(".google.storage.v2.StorageObject.contexts: object expected");
                             message.contexts = $root.google.storage.v2.ObjectContexts.fromObject(object.contexts, long + 1);
                         }
                         if (object.eventBasedHold != null)
                             message.eventBasedHold = Boolean(object.eventBasedHold);
                         if (object.owner != null) {
-                            if (typeof object.owner !== "object")
+                            if (!$util.isObject(object.owner))
                                 throw TypeError(".google.storage.v2.StorageObject.owner: object expected");
                             message.owner = $root.google.storage.v2.Owner.fromObject(object.owner, long + 1);
                         }
                         if (object.customerEncryption != null) {
-                            if (typeof object.customerEncryption !== "object")
+                            if (!$util.isObject(object.customerEncryption))
                                 throw TypeError(".google.storage.v2.StorageObject.customerEncryption: object expected");
                             message.customerEncryption = $root.google.storage.v2.CustomerEncryption.fromObject(object.customerEncryption, long + 1);
                         }
                         if (object.customTime != null) {
-                            if (typeof object.customTime !== "object")
+                            if (!$util.isObject(object.customTime))
                                 throw TypeError(".google.storage.v2.StorageObject.customTime: object expected");
                             message.customTime = $root.google.protobuf.Timestamp.fromObject(object.customTime, long + 1);
                         }
                         if (object.softDeleteTime != null) {
-                            if (typeof object.softDeleteTime !== "object")
+                            if (!$util.isObject(object.softDeleteTime))
                                 throw TypeError(".google.storage.v2.StorageObject.softDeleteTime: object expected");
                             message.softDeleteTime = $root.google.protobuf.Timestamp.fromObject(object.softDeleteTime, long + 1);
                         }
                         if (object.hardDeleteTime != null) {
-                            if (typeof object.hardDeleteTime !== "object")
+                            if (!$util.isObject(object.hardDeleteTime))
                                 throw TypeError(".google.storage.v2.StorageObject.hardDeleteTime: object expected");
                             message.hardDeleteTime = $root.google.protobuf.Timestamp.fromObject(object.hardDeleteTime, long + 1);
                         }
                         if (object.retention != null) {
-                            if (typeof object.retention !== "object")
+                            if (!$util.isObject(object.retention))
                                 throw TypeError(".google.storage.v2.StorageObject.retention: object expected");
                             message.retention = $root.google.storage.v2.StorageObject.Retention.fromObject(object.retention, long + 1);
                         }
@@ -51761,7 +52057,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Retention.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                         };
     
                         /**
@@ -51863,6 +52159,8 @@
                         Retention.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.storage.v2.StorageObject.Retention)
                                 return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.v2.StorageObject.Retention: object expected");
                             if (long === undefined)
                                 long = 0;
                             if (long > $util.recursionLimit)
@@ -51889,7 +52187,7 @@
                                 break;
                             }
                             if (object.retainUntilTime != null) {
-                                if (typeof object.retainUntilTime !== "object")
+                                if (!$util.isObject(object.retainUntilTime))
                                     throw TypeError(".google.storage.v2.StorageObject.Retention.retainUntilTime: object expected");
                                 message.retainUntilTime = $root.google.protobuf.Timestamp.fromObject(object.retainUntilTime, long + 1);
                             }
@@ -52135,7 +52433,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ObjectAccessControl.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -52280,6 +52578,8 @@
                     ObjectAccessControl.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ObjectAccessControl)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ObjectAccessControl: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -52302,7 +52602,7 @@
                         if (object.domain != null)
                             message.domain = String(object.domain);
                         if (object.projectTeam != null) {
-                            if (typeof object.projectTeam !== "object")
+                            if (!$util.isObject(object.projectTeam))
                                 throw TypeError(".google.storage.v2.ObjectAccessControl.projectTeam: object expected");
                             message.projectTeam = $root.google.storage.v2.ProjectTeam.fromObject(object.projectTeam, long + 1);
                         }
@@ -52488,7 +52788,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ListObjectsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -52603,6 +52903,8 @@
                     ListObjectsResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ListObjectsResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ListObjectsResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -52613,7 +52915,7 @@
                                 throw TypeError(".google.storage.v2.ListObjectsResponse.objects: array expected");
                             message.objects = [];
                             for (var i = 0; i < object.objects.length; ++i) {
-                                if (typeof object.objects[i] !== "object")
+                                if (!$util.isObject(object.objects[i]))
                                     throw TypeError(".google.storage.v2.ListObjectsResponse.objects: object expected");
                                 message.objects[i] = $root.google.storage.v2.StorageObject.fromObject(object.objects[i], long + 1);
                             }
@@ -52783,7 +53085,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ProjectTeam.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -52877,6 +53179,8 @@
                     ProjectTeam.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ProjectTeam)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ProjectTeam: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -53032,7 +53336,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Owner.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -53126,6 +53430,8 @@
                     Owner.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.Owner)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.Owner: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -53292,7 +53598,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ContentRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -53393,6 +53699,8 @@
                     ContentRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ContentRange)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.storage.v2.ContentRange: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -53618,7 +53926,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Http.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -53720,6 +54028,8 @@
                 Http.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Http)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.Http: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -53730,7 +54040,7 @@
                             throw TypeError(".google.api.Http.rules: array expected");
                         message.rules = [];
                         for (var i = 0; i < object.rules.length; ++i) {
-                            if (typeof object.rules[i] !== "object")
+                            if (!$util.isObject(object.rules[i]))
                                 throw TypeError(".google.api.Http.rules: object expected");
                             message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i], long + 1);
                         }
@@ -53990,7 +54300,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 HttpRule.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -54174,6 +54484,8 @@
                 HttpRule.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.HttpRule)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.HttpRule: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -54192,7 +54504,7 @@
                     if (object.patch != null)
                         message.patch = String(object.patch);
                     if (object.custom != null) {
-                        if (typeof object.custom !== "object")
+                        if (!$util.isObject(object.custom))
                             throw TypeError(".google.api.HttpRule.custom: object expected");
                         message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom, long + 1);
                     }
@@ -54205,7 +54517,7 @@
                             throw TypeError(".google.api.HttpRule.additionalBindings: array expected");
                         message.additionalBindings = [];
                         for (var i = 0; i < object.additionalBindings.length; ++i) {
-                            if (typeof object.additionalBindings[i] !== "object")
+                            if (!$util.isObject(object.additionalBindings[i]))
                                 throw TypeError(".google.api.HttpRule.additionalBindings: object expected");
                             message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i], long + 1);
                         }
@@ -54396,7 +54708,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CustomHttpPattern.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -54490,6 +54802,8 @@
                 CustomHttpPattern.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CustomHttpPattern)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.CustomHttpPattern: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -54661,7 +54975,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CommonLanguageSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -54781,6 +55095,8 @@
                 CommonLanguageSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CommonLanguageSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.CommonLanguageSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -54814,7 +55130,7 @@
                             }
                     }
                     if (object.selectiveGapicGeneration != null) {
-                        if (typeof object.selectiveGapicGeneration !== "object")
+                        if (!$util.isObject(object.selectiveGapicGeneration))
                             throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
                         message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration, long + 1);
                     }
@@ -55070,7 +55386,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ClientLibrarySettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -55254,6 +55570,8 @@
                 ClientLibrarySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ClientLibrarySettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.ClientLibrarySettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -55304,42 +55622,42 @@
                     if (object.restNumericEnums != null)
                         message.restNumericEnums = Boolean(object.restNumericEnums);
                     if (object.javaSettings != null) {
-                        if (typeof object.javaSettings !== "object")
+                        if (!$util.isObject(object.javaSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.javaSettings: object expected");
                         message.javaSettings = $root.google.api.JavaSettings.fromObject(object.javaSettings, long + 1);
                     }
                     if (object.cppSettings != null) {
-                        if (typeof object.cppSettings !== "object")
+                        if (!$util.isObject(object.cppSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.cppSettings: object expected");
                         message.cppSettings = $root.google.api.CppSettings.fromObject(object.cppSettings, long + 1);
                     }
                     if (object.phpSettings != null) {
-                        if (typeof object.phpSettings !== "object")
+                        if (!$util.isObject(object.phpSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.phpSettings: object expected");
                         message.phpSettings = $root.google.api.PhpSettings.fromObject(object.phpSettings, long + 1);
                     }
                     if (object.pythonSettings != null) {
-                        if (typeof object.pythonSettings !== "object")
+                        if (!$util.isObject(object.pythonSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.pythonSettings: object expected");
                         message.pythonSettings = $root.google.api.PythonSettings.fromObject(object.pythonSettings, long + 1);
                     }
                     if (object.nodeSettings != null) {
-                        if (typeof object.nodeSettings !== "object")
+                        if (!$util.isObject(object.nodeSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.nodeSettings: object expected");
                         message.nodeSettings = $root.google.api.NodeSettings.fromObject(object.nodeSettings, long + 1);
                     }
                     if (object.dotnetSettings != null) {
-                        if (typeof object.dotnetSettings !== "object")
+                        if (!$util.isObject(object.dotnetSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.dotnetSettings: object expected");
                         message.dotnetSettings = $root.google.api.DotnetSettings.fromObject(object.dotnetSettings, long + 1);
                     }
                     if (object.rubySettings != null) {
-                        if (typeof object.rubySettings !== "object")
+                        if (!$util.isObject(object.rubySettings))
                             throw TypeError(".google.api.ClientLibrarySettings.rubySettings: object expected");
                         message.rubySettings = $root.google.api.RubySettings.fromObject(object.rubySettings, long + 1);
                     }
                     if (object.goSettings != null) {
-                        if (typeof object.goSettings !== "object")
+                        if (!$util.isObject(object.goSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.goSettings: object expected");
                         message.goSettings = $root.google.api.GoSettings.fromObject(object.goSettings, long + 1);
                     }
@@ -55621,7 +55939,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Publishing.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -55811,6 +56129,8 @@
                 Publishing.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Publishing)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.Publishing: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -55821,7 +56141,7 @@
                             throw TypeError(".google.api.Publishing.methodSettings: array expected");
                         message.methodSettings = [];
                         for (var i = 0; i < object.methodSettings.length; ++i) {
-                            if (typeof object.methodSettings[i] !== "object")
+                            if (!$util.isObject(object.methodSettings[i]))
                                 throw TypeError(".google.api.Publishing.methodSettings: object expected");
                             message.methodSettings[i] = $root.google.api.MethodSettings.fromObject(object.methodSettings[i], long + 1);
                         }
@@ -55888,7 +56208,7 @@
                             throw TypeError(".google.api.Publishing.librarySettings: array expected");
                         message.librarySettings = [];
                         for (var i = 0; i < object.librarySettings.length; ++i) {
-                            if (typeof object.librarySettings[i] !== "object")
+                            if (!$util.isObject(object.librarySettings[i]))
                                 throw TypeError(".google.api.Publishing.librarySettings: object expected");
                             message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i], long + 1);
                         }
@@ -56094,7 +56414,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 JavaSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -56223,6 +56543,8 @@
                 JavaSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.JavaSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.JavaSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -56231,7 +56553,7 @@
                     if (object.libraryPackage != null)
                         message.libraryPackage = String(object.libraryPackage);
                     if (object.serviceClassNames) {
-                        if (typeof object.serviceClassNames !== "object")
+                        if (!$util.isObject(object.serviceClassNames))
                             throw TypeError(".google.api.JavaSettings.serviceClassNames: object expected");
                         message.serviceClassNames = {};
                         for (var keys = Object.keys(object.serviceClassNames), i = 0; i < keys.length; ++i) {
@@ -56241,7 +56563,7 @@
                         }
                     }
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.JavaSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
@@ -56391,7 +56713,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CppSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -56480,13 +56802,15 @@
                 CppSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CppSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.CppSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CppSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.CppSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
@@ -56621,7 +56945,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 PhpSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -56710,13 +57034,15 @@
                 PhpSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PhpSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.PhpSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PhpSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.PhpSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
@@ -56862,7 +57188,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 PythonSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -56960,18 +57286,20 @@
                 PythonSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PythonSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.PythonSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PythonSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.experimentalFeatures != null) {
-                        if (typeof object.experimentalFeatures !== "object")
+                        if (!$util.isObject(object.experimentalFeatures))
                             throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
                         message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures, long + 1);
                     }
@@ -57129,7 +57457,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -57230,6 +57558,8 @@
                     ExperimentalFeatures.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.api.PythonSettings.ExperimentalFeatures: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -57382,7 +57712,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 NodeSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -57471,13 +57801,15 @@
                 NodeSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.NodeSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.NodeSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.NodeSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.NodeSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
@@ -57677,7 +58009,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DotnetSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -57871,18 +58203,20 @@
                 DotnetSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.DotnetSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.DotnetSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.DotnetSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
+                        if (!$util.isObject(object.renamedServices))
                             throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
                         message.renamedServices = {};
                         for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
@@ -57892,7 +58226,7 @@
                         }
                     }
                     if (object.renamedResources) {
-                        if (typeof object.renamedResources !== "object")
+                        if (!$util.isObject(object.renamedResources))
                             throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
                         message.renamedResources = {};
                         for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i) {
@@ -58094,7 +58428,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 RubySettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -58183,13 +58517,15 @@
                 RubySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.RubySettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.RubySettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.RubySettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.RubySettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
@@ -58337,7 +58673,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 GoSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -58459,18 +58795,20 @@
                 GoSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.GoSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.GoSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.GoSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
+                        if (!$util.isObject(object.renamedServices))
                             throw TypeError(".google.api.GoSettings.renamedServices: object expected");
                         message.renamedServices = {};
                         for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
@@ -58645,7 +58983,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -58754,6 +59092,8 @@
                 MethodSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.MethodSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.MethodSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -58762,7 +59102,7 @@
                     if (object.selector != null)
                         message.selector = String(object.selector);
                     if (object.longRunning != null) {
-                        if (typeof object.longRunning !== "object")
+                        if (!$util.isObject(object.longRunning))
                             throw TypeError(".google.api.MethodSettings.longRunning: object expected");
                         message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning, long + 1);
                     }
@@ -58945,7 +59285,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     LongRunning.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -59059,25 +59399,27 @@
                     LongRunning.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.MethodSettings.LongRunning)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.api.MethodSettings.LongRunning: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.api.MethodSettings.LongRunning();
                         if (object.initialPollDelay != null) {
-                            if (typeof object.initialPollDelay !== "object")
+                            if (!$util.isObject(object.initialPollDelay))
                                 throw TypeError(".google.api.MethodSettings.LongRunning.initialPollDelay: object expected");
                             message.initialPollDelay = $root.google.protobuf.Duration.fromObject(object.initialPollDelay, long + 1);
                         }
                         if (object.pollDelayMultiplier != null)
                             message.pollDelayMultiplier = Number(object.pollDelayMultiplier);
                         if (object.maxPollDelay != null) {
-                            if (typeof object.maxPollDelay !== "object")
+                            if (!$util.isObject(object.maxPollDelay))
                                 throw TypeError(".google.api.MethodSettings.LongRunning.maxPollDelay: object expected");
                             message.maxPollDelay = $root.google.protobuf.Duration.fromObject(object.maxPollDelay, long + 1);
                         }
                         if (object.totalPollTimeout != null) {
-                            if (typeof object.totalPollTimeout !== "object")
+                            if (!$util.isObject(object.totalPollTimeout))
                                 throw TypeError(".google.api.MethodSettings.LongRunning.totalPollTimeout: object expected");
                             message.totalPollTimeout = $root.google.protobuf.Duration.fromObject(object.totalPollTimeout, long + 1);
                         }
@@ -59280,7 +59622,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -59380,6 +59722,8 @@
                 SelectiveGapicGeneration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.SelectiveGapicGeneration)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.SelectiveGapicGeneration: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -59599,7 +59943,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -59709,6 +60053,8 @@
                 FieldInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.FieldInfo)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.FieldInfo: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -59747,7 +60093,7 @@
                             throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
                         message.referencedTypes = [];
                         for (var i = 0; i < object.referencedTypes.length; ++i) {
-                            if (typeof object.referencedTypes[i] !== "object")
+                            if (!$util.isObject(object.referencedTypes[i]))
                                 throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
                             message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i], long + 1);
                         }
@@ -59910,7 +60256,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -59997,6 +60343,8 @@
                 TypeReference.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.TypeReference)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.TypeReference: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -60208,7 +60556,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -60365,6 +60713,8 @@
                 ResourceDescriptor.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceDescriptor)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.ResourceDescriptor: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -60625,7 +60975,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -60719,6 +61069,8 @@
                 ResourceReference.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceReference)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.ResourceReference: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -60865,7 +61217,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 RoutingRule.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -60960,6 +61312,8 @@
                 RoutingRule.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.RoutingRule)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.RoutingRule: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -60970,7 +61324,7 @@
                             throw TypeError(".google.api.RoutingRule.routingParameters: array expected");
                         message.routingParameters = [];
                         for (var i = 0; i < object.routingParameters.length; ++i) {
-                            if (typeof object.routingParameters[i] !== "object")
+                            if (!$util.isObject(object.routingParameters[i]))
                                 throw TypeError(".google.api.RoutingRule.routingParameters: object expected");
                             message.routingParameters[i] = $root.google.api.RoutingParameter.fromObject(object.routingParameters[i], long + 1);
                         }
@@ -61120,7 +61474,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 RoutingParameter.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -61214,6 +61568,8 @@
                 RoutingParameter.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.RoutingParameter)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.RoutingParameter: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -61372,7 +61728,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileDescriptorSet.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -61467,6 +61823,8 @@
                 FileDescriptorSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorSet)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FileDescriptorSet: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -61477,7 +61835,7 @@
                             throw TypeError(".google.protobuf.FileDescriptorSet.file: array expected");
                         message.file = [];
                         for (var i = 0; i < object.file.length; ++i) {
-                            if (typeof object.file[i] !== "object")
+                            if (!$util.isObject(object.file[i]))
                                 throw TypeError(".google.protobuf.FileDescriptorSet.file: object expected");
                             message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i], long + 1);
                         }
@@ -61809,7 +62167,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -62072,6 +62430,8 @@
                 FileDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FileDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -62114,7 +62474,7 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.messageType: array expected");
                         message.messageType = [];
                         for (var i = 0; i < object.messageType.length; ++i) {
-                            if (typeof object.messageType[i] !== "object")
+                            if (!$util.isObject(object.messageType[i]))
                                 throw TypeError(".google.protobuf.FileDescriptorProto.messageType: object expected");
                             message.messageType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.messageType[i], long + 1);
                         }
@@ -62124,7 +62484,7 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.enumType: array expected");
                         message.enumType = [];
                         for (var i = 0; i < object.enumType.length; ++i) {
-                            if (typeof object.enumType[i] !== "object")
+                            if (!$util.isObject(object.enumType[i]))
                                 throw TypeError(".google.protobuf.FileDescriptorProto.enumType: object expected");
                             message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
@@ -62134,7 +62494,7 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.service: array expected");
                         message.service = [];
                         for (var i = 0; i < object.service.length; ++i) {
-                            if (typeof object.service[i] !== "object")
+                            if (!$util.isObject(object.service[i]))
                                 throw TypeError(".google.protobuf.FileDescriptorProto.service: object expected");
                             message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i], long + 1);
                         }
@@ -62144,18 +62504,18 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.extension: array expected");
                         message.extension = [];
                         for (var i = 0; i < object.extension.length; ++i) {
-                            if (typeof object.extension[i] !== "object")
+                            if (!$util.isObject(object.extension[i]))
                                 throw TypeError(".google.protobuf.FileDescriptorProto.extension: object expected");
                             message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
                     }
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.FileDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.FileOptions.fromObject(object.options, long + 1);
                     }
                     if (object.sourceCodeInfo != null) {
-                        if (typeof object.sourceCodeInfo !== "object")
+                        if (!$util.isObject(object.sourceCodeInfo))
                             throw TypeError(".google.protobuf.FileDescriptorProto.sourceCodeInfo: object expected");
                         message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.fromObject(object.sourceCodeInfo, long + 1);
                     }
@@ -62540,7 +62900,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -62767,6 +63127,8 @@
                 DescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.DescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.DescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -62779,7 +63141,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.field: array expected");
                         message.field = [];
                         for (var i = 0; i < object.field.length; ++i) {
-                            if (typeof object.field[i] !== "object")
+                            if (!$util.isObject(object.field[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.field: object expected");
                             message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i], long + 1);
                         }
@@ -62789,7 +63151,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.extension: array expected");
                         message.extension = [];
                         for (var i = 0; i < object.extension.length; ++i) {
-                            if (typeof object.extension[i] !== "object")
+                            if (!$util.isObject(object.extension[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.extension: object expected");
                             message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
@@ -62799,7 +63161,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.nestedType: array expected");
                         message.nestedType = [];
                         for (var i = 0; i < object.nestedType.length; ++i) {
-                            if (typeof object.nestedType[i] !== "object")
+                            if (!$util.isObject(object.nestedType[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.nestedType: object expected");
                             message.nestedType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nestedType[i], long + 1);
                         }
@@ -62809,7 +63171,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.enumType: array expected");
                         message.enumType = [];
                         for (var i = 0; i < object.enumType.length; ++i) {
-                            if (typeof object.enumType[i] !== "object")
+                            if (!$util.isObject(object.enumType[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.enumType: object expected");
                             message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
@@ -62819,7 +63181,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.extensionRange: array expected");
                         message.extensionRange = [];
                         for (var i = 0; i < object.extensionRange.length; ++i) {
-                            if (typeof object.extensionRange[i] !== "object")
+                            if (!$util.isObject(object.extensionRange[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.extensionRange: object expected");
                             message.extensionRange[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extensionRange[i], long + 1);
                         }
@@ -62829,13 +63191,13 @@
                             throw TypeError(".google.protobuf.DescriptorProto.oneofDecl: array expected");
                         message.oneofDecl = [];
                         for (var i = 0; i < object.oneofDecl.length; ++i) {
-                            if (typeof object.oneofDecl[i] !== "object")
+                            if (!$util.isObject(object.oneofDecl[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.oneofDecl: object expected");
                             message.oneofDecl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneofDecl[i], long + 1);
                         }
                     }
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MessageOptions.fromObject(object.options, long + 1);
                     }
@@ -62844,7 +63206,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.reservedRange: array expected");
                         message.reservedRange = [];
                         for (var i = 0; i < object.reservedRange.length; ++i) {
-                            if (typeof object.reservedRange[i] !== "object")
+                            if (!$util.isObject(object.reservedRange[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.reservedRange: object expected");
                             message.reservedRange[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
@@ -63083,7 +63445,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ExtensionRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -63186,6 +63548,8 @@
                     ExtensionRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ExtensionRange)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.DescriptorProto.ExtensionRange: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -63196,7 +63560,7 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         if (object.options != null) {
-                            if (typeof object.options !== "object")
+                            if (!$util.isObject(object.options))
                                 throw TypeError(".google.protobuf.DescriptorProto.ExtensionRange.options: object expected");
                             message.options = $root.google.protobuf.ExtensionRangeOptions.fromObject(object.options, long + 1);
                         }
@@ -63349,7 +63713,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -63443,6 +63807,8 @@
                     ReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ReservedRange)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.DescriptorProto.ReservedRange: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -63627,7 +63993,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ExtensionRangeOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -63758,6 +64124,8 @@
                 ExtensionRangeOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ExtensionRangeOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.ExtensionRangeOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -63768,7 +64136,7 @@
                             throw TypeError(".google.protobuf.ExtensionRangeOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -63778,13 +64146,13 @@
                             throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: array expected");
                         message.declaration = [];
                         for (var i = 0; i < object.declaration.length; ++i) {
-                            if (typeof object.declaration[i] !== "object")
+                            if (!$util.isObject(object.declaration[i]))
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
                             message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i], long + 1);
                         }
                     }
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -63994,7 +64362,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Declaration.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -64109,6 +64477,8 @@
                     Declaration.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.ExtensionRangeOptions.Declaration: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -64395,7 +64765,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -64581,6 +64951,8 @@
                 FieldDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FieldDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -64701,7 +65073,7 @@
                     if (object.jsonName != null)
                         message.jsonName = String(object.jsonName);
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.FieldOptions.fromObject(object.options, long + 1);
                     }
@@ -64942,7 +65314,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 OneofDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -65038,6 +65410,8 @@
                 OneofDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.OneofDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -65046,7 +65420,7 @@
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.OneofDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.OneofOptions.fromObject(object.options, long + 1);
                     }
@@ -65246,7 +65620,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -65398,6 +65772,8 @@
                 EnumDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.EnumDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -65410,13 +65786,13 @@
                             throw TypeError(".google.protobuf.EnumDescriptorProto.value: array expected");
                         message.value = [];
                         for (var i = 0; i < object.value.length; ++i) {
-                            if (typeof object.value[i] !== "object")
+                            if (!$util.isObject(object.value[i]))
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.value: object expected");
                             message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i], long + 1);
                         }
                     }
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.EnumDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.EnumOptions.fromObject(object.options, long + 1);
                     }
@@ -65425,7 +65801,7 @@
                             throw TypeError(".google.protobuf.EnumDescriptorProto.reservedRange: array expected");
                         message.reservedRange = [];
                         for (var i = 0; i < object.reservedRange.length; ++i) {
-                            if (typeof object.reservedRange[i] !== "object")
+                            if (!$util.isObject(object.reservedRange[i]))
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.reservedRange: object expected");
                             message.reservedRange[i] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
@@ -65623,7 +65999,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     EnumReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -65717,6 +66093,8 @@
                     EnumReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.EnumDescriptorProto.EnumReservedRange)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.EnumDescriptorProto.EnumReservedRange: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -65886,7 +66264,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumValueDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -65989,6 +66367,8 @@
                 EnumValueDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.EnumValueDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -65999,7 +66379,7 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.EnumValueDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options, long + 1);
                     }
@@ -66165,7 +66545,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ServiceDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -66276,6 +66656,8 @@
                 ServiceDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.ServiceDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -66288,13 +66670,13 @@
                             throw TypeError(".google.protobuf.ServiceDescriptorProto.method: array expected");
                         message.method = [];
                         for (var i = 0; i < object.method.length; ++i) {
-                            if (typeof object.method[i] !== "object")
+                            if (!$util.isObject(object.method[i]))
                                 throw TypeError(".google.protobuf.ServiceDescriptorProto.method: object expected");
                             message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i], long + 1);
                         }
                     }
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.ServiceDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options, long + 1);
                     }
@@ -66495,7 +66877,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -66619,6 +67001,8 @@
                 MethodDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.MethodDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -66631,7 +67015,7 @@
                     if (object.outputType != null)
                         message.outputType = String(object.outputType);
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MethodOptions.fromObject(object.options, long + 1);
                     }
@@ -67021,7 +67405,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -67279,6 +67663,8 @@
                 FileOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FileOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -67341,7 +67727,7 @@
                     if (object.rubyPackage != null)
                         message.rubyPackage = String(object.rubyPackage);
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.FileOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -67350,7 +67736,7 @@
                             throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -67360,7 +67746,7 @@
                             throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
                         message[".google.api.resourceDefinition"] = [];
                         for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
-                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                            if (!$util.isObject(object[".google.api.resourceDefinition"][i]))
                                 throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
                             message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i], long + 1);
                         }
@@ -67663,7 +68049,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MessageOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -67811,6 +68197,8 @@
                 MessageOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MessageOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.MessageOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -67827,7 +68215,7 @@
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.MessageOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -67836,13 +68224,13 @@
                             throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resource"] != null) {
-                        if (typeof object[".google.api.resource"] !== "object")
+                        if (!$util.isObject(object[".google.api.resource"]))
                             throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
                         message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"], long + 1);
                     }
@@ -68187,7 +68575,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -68475,6 +68863,8 @@
                 FieldOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FieldOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -68610,18 +69000,18 @@
                             throw TypeError(".google.protobuf.FieldOptions.editionDefaults: array expected");
                         message.editionDefaults = [];
                         for (var i = 0; i < object.editionDefaults.length; ++i) {
-                            if (typeof object.editionDefaults[i] !== "object")
+                            if (!$util.isObject(object.editionDefaults[i]))
                                 throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
                             message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i], long + 1);
                         }
                     }
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
+                        if (!$util.isObject(object.featureSupport))
                             throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
                         message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
@@ -68630,7 +69020,7 @@
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -68685,12 +69075,12 @@
                             }
                     }
                     if (object[".google.api.fieldInfo"] != null) {
-                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                        if (!$util.isObject(object[".google.api.fieldInfo"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
                         message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"], long + 1);
                     }
                     if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
+                        if (!$util.isObject(object[".google.api.resourceReference"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
                         message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"], long + 1);
                     }
@@ -68974,7 +69364,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     EditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -69083,6 +69473,8 @@
                     EditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.FieldOptions.EditionDefault: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -69314,7 +69706,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -69467,6 +69859,8 @@
                     FeatureSupport.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.FieldOptions.FeatureSupport: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -69799,7 +70193,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 OneofOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -69903,13 +70297,15 @@
                 OneofOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.OneofOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.OneofOptions();
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.OneofOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -69918,7 +70314,7 @@
                             throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -70107,7 +70503,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -70232,6 +70628,8 @@
                 EnumOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.EnumOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -70244,7 +70642,7 @@
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.EnumOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -70253,7 +70651,7 @@
                             throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -70452,7 +70850,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumValueOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -70579,6 +70977,8 @@
                 EnumValueOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.EnumValueOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -70587,14 +70987,14 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
                     if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
+                        if (!$util.isObject(object.featureSupport))
                             throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
                         message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
@@ -70603,7 +71003,7 @@
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -70813,7 +71213,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ServiceOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -70945,13 +71345,15 @@
                 ServiceOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.ServiceOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ServiceOptions();
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -70962,7 +71364,7 @@
                             throw TypeError(".google.protobuf.ServiceOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.ServiceOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -71205,7 +71607,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -71369,6 +71771,8 @@
                 MethodOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.MethodOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -71397,7 +71801,7 @@
                         break;
                     }
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.MethodOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -71406,13 +71810,13 @@
                             throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.http"] != null) {
-                        if (typeof object[".google.api.http"] !== "object")
+                        if (!$util.isObject(object[".google.api.http"]))
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
                         message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"], long + 1);
                     }
@@ -71424,12 +71828,12 @@
                             message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
                     }
                     if (object[".google.api.routing"] != null) {
-                        if (typeof object[".google.api.routing"] !== "object")
+                        if (!$util.isObject(object[".google.api.routing"]))
                             throw TypeError(".google.protobuf.MethodOptions..google.api.routing: object expected");
                         message[".google.api.routing"] = $root.google.api.RoutingRule.fromObject(object[".google.api.routing"], long + 1);
                     }
                     if (object[".google.longrunning.operationInfo"] != null) {
-                        if (typeof object[".google.longrunning.operationInfo"] !== "object")
+                        if (!$util.isObject(object[".google.longrunning.operationInfo"]))
                             throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
                         message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"], long + 1);
                     }
@@ -71678,7 +72082,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 UninterpretedOption.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -71815,6 +72219,8 @@
                 UninterpretedOption.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.UninterpretedOption)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.UninterpretedOption: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -71825,7 +72231,7 @@
                             throw TypeError(".google.protobuf.UninterpretedOption.name: array expected");
                         message.name = [];
                         for (var i = 0; i < object.name.length; ++i) {
-                            if (typeof object.name[i] !== "object")
+                            if (!$util.isObject(object.name[i]))
                                 throw TypeError(".google.protobuf.UninterpretedOption.name: object expected");
                             message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i], long + 1);
                         }
@@ -72043,7 +72449,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     NamePart.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -72139,6 +72545,8 @@
                     NamePart.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.UninterpretedOption.NamePart)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.UninterpretedOption.NamePart: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -72363,7 +72771,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FeatureSet.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -72550,6 +72958,8 @@
                 FeatureSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSet)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FeatureSet: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -72980,7 +73390,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -73060,6 +73470,8 @@
                     VisibilityFeature.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.FeatureSet.VisibilityFeature: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -73231,7 +73643,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FeatureSetDefaults.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -73370,6 +73782,8 @@
                 FeatureSetDefaults.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSetDefaults)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FeatureSetDefaults: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -73380,7 +73794,7 @@
                             throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: array expected");
                         message.defaults = [];
                         for (var i = 0; i < object.defaults.length; ++i) {
-                            if (typeof object.defaults[i] !== "object")
+                            if (!$util.isObject(object.defaults[i]))
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: object expected");
                             message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i], long + 1);
                         }
@@ -73658,7 +74072,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     FeatureSetEditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -73778,6 +74192,8 @@
                     FeatureSetEditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -73840,12 +74256,12 @@
                             break;
                         }
                         if (object.overridableFeatures != null) {
-                            if (typeof object.overridableFeatures !== "object")
+                            if (!$util.isObject(object.overridableFeatures))
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
                             message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures, long + 1);
                         }
                         if (object.fixedFeatures != null) {
-                            if (typeof object.fixedFeatures !== "object")
+                            if (!$util.isObject(object.fixedFeatures))
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
                             message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures, long + 1);
                         }
@@ -73992,7 +74408,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 SourceCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -74087,6 +74503,8 @@
                 SourceCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.SourceCodeInfo)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.SourceCodeInfo: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -74097,7 +74515,7 @@
                             throw TypeError(".google.protobuf.SourceCodeInfo.location: array expected");
                         message.location = [];
                         for (var i = 0; i < object.location.length; ++i) {
-                            if (typeof object.location[i] !== "object")
+                            if (!$util.isObject(object.location[i]))
                                 throw TypeError(".google.protobuf.SourceCodeInfo.location: object expected");
                             message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i], long + 1);
                         }
@@ -74289,7 +74707,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Location.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -74432,6 +74850,8 @@
                     Location.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.SourceCodeInfo.Location)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.SourceCodeInfo.Location: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -74622,7 +75042,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 GeneratedCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -74717,6 +75137,8 @@
                 GeneratedCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.GeneratedCodeInfo)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.GeneratedCodeInfo: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -74727,7 +75149,7 @@
                             throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: array expected");
                         message.annotation = [];
                         for (var i = 0; i < object.annotation.length; ++i) {
-                            if (typeof object.annotation[i] !== "object")
+                            if (!$util.isObject(object.annotation[i]))
                                 throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: object expected");
                             message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i], long + 1);
                         }
@@ -74912,7 +75334,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Annotation.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -75044,6 +75466,8 @@
                     Annotation.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.GeneratedCodeInfo.Annotation)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.GeneratedCodeInfo.Annotation: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -75276,7 +75700,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Duration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -75370,6 +75794,8 @@
                 Duration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Duration)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.Duration: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -75532,7 +75958,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -75625,6 +76051,8 @@
                 FieldMask.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldMask)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FieldMask: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -75782,7 +76210,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -75876,6 +76304,8 @@
                 Any.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Any)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.Any: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -76018,7 +76448,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Empty.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -76098,6 +76528,8 @@
                 Empty.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Empty)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.Empty: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -76233,7 +76665,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -76327,6 +76759,8 @@
                 Timestamp.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Timestamp)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.Timestamp: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -76664,7 +77098,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     SetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -76769,6 +77203,8 @@
                     SetIamPolicyRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.SetIamPolicyRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.SetIamPolicyRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -76777,12 +77213,12 @@
                         if (object.resource != null)
                             message.resource = String(object.resource);
                         if (object.policy != null) {
-                            if (typeof object.policy !== "object")
+                            if (!$util.isObject(object.policy))
                                 throw TypeError(".google.iam.v1.SetIamPolicyRequest.policy: object expected");
                             message.policy = $root.google.iam.v1.Policy.fromObject(object.policy, long + 1);
                         }
                         if (object.updateMask != null) {
-                            if (typeof object.updateMask !== "object")
+                            if (!$util.isObject(object.updateMask))
                                 throw TypeError(".google.iam.v1.SetIamPolicyRequest.updateMask: object expected");
                             message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
@@ -76935,7 +77371,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     GetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -77031,6 +77467,8 @@
                     GetIamPolicyRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.GetIamPolicyRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.GetIamPolicyRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -77039,7 +77477,7 @@
                         if (object.resource != null)
                             message.resource = String(object.resource);
                         if (object.options != null) {
-                            if (typeof object.options !== "object")
+                            if (!$util.isObject(object.options))
                                 throw TypeError(".google.iam.v1.GetIamPolicyRequest.options: object expected");
                             message.options = $root.google.iam.v1.GetPolicyOptions.fromObject(object.options, long + 1);
                         }
@@ -77191,7 +77629,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     TestIamPermissionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -77291,6 +77729,8 @@
                     TestIamPermissionsRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.TestIamPermissionsRequest)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.TestIamPermissionsRequest: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -77445,7 +77885,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     TestIamPermissionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -77538,6 +77978,8 @@
                     TestIamPermissionsResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.TestIamPermissionsResponse)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.TestIamPermissionsResponse: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -77684,7 +78126,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     GetPolicyOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -77771,6 +78213,8 @@
                     GetPolicyOptions.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.GetPolicyOptions)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.GetPolicyOptions: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -77946,7 +78390,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Policy.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -78070,6 +78514,8 @@
                     Policy.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.Policy)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.Policy: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -78082,7 +78528,7 @@
                                 throw TypeError(".google.iam.v1.Policy.bindings: array expected");
                             message.bindings = [];
                             for (var i = 0; i < object.bindings.length; ++i) {
-                                if (typeof object.bindings[i] !== "object")
+                                if (!$util.isObject(object.bindings[i]))
                                     throw TypeError(".google.iam.v1.Policy.bindings: object expected");
                                 message.bindings[i] = $root.google.iam.v1.Binding.fromObject(object.bindings[i], long + 1);
                             }
@@ -78092,7 +78538,7 @@
                                 throw TypeError(".google.iam.v1.Policy.auditConfigs: array expected");
                             message.auditConfigs = [];
                             for (var i = 0; i < object.auditConfigs.length; ++i) {
-                                if (typeof object.auditConfigs[i] !== "object")
+                                if (!$util.isObject(object.auditConfigs[i]))
                                     throw TypeError(".google.iam.v1.Policy.auditConfigs: object expected");
                                 message.auditConfigs[i] = $root.google.iam.v1.AuditConfig.fromObject(object.auditConfigs[i], long + 1);
                             }
@@ -78281,7 +78727,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Binding.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -78390,6 +78836,8 @@
                     Binding.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.Binding)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.Binding: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -78405,7 +78853,7 @@
                                 message.members[i] = String(object.members[i]);
                         }
                         if (object.condition != null) {
-                            if (typeof object.condition !== "object")
+                            if (!$util.isObject(object.condition))
                                 throw TypeError(".google.iam.v1.Binding.condition: object expected");
                             message.condition = $root.google.type.Expr.fromObject(object.condition, long + 1);
                         }
@@ -78564,7 +79012,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     AuditConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -78666,6 +79114,8 @@
                     AuditConfig.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.AuditConfig)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.AuditConfig: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -78678,7 +79128,7 @@
                                 throw TypeError(".google.iam.v1.AuditConfig.auditLogConfigs: array expected");
                             message.auditLogConfigs = [];
                             for (var i = 0; i < object.auditLogConfigs.length; ++i) {
-                                if (typeof object.auditLogConfigs[i] !== "object")
+                                if (!$util.isObject(object.auditLogConfigs[i]))
                                     throw TypeError(".google.iam.v1.AuditConfig.auditLogConfigs: object expected");
                                 message.auditLogConfigs[i] = $root.google.iam.v1.AuditLogConfig.fromObject(object.auditLogConfigs[i], long + 1);
                             }
@@ -78834,7 +79284,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     AuditLogConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -78941,6 +79391,8 @@
                     AuditLogConfig.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.AuditLogConfig)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.AuditLogConfig: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -79148,7 +79600,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     PolicyDelta.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -79258,6 +79710,8 @@
                     PolicyDelta.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.PolicyDelta)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.PolicyDelta: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -79268,7 +79722,7 @@
                                 throw TypeError(".google.iam.v1.PolicyDelta.bindingDeltas: array expected");
                             message.bindingDeltas = [];
                             for (var i = 0; i < object.bindingDeltas.length; ++i) {
-                                if (typeof object.bindingDeltas[i] !== "object")
+                                if (!$util.isObject(object.bindingDeltas[i]))
                                     throw TypeError(".google.iam.v1.PolicyDelta.bindingDeltas: object expected");
                                 message.bindingDeltas[i] = $root.google.iam.v1.BindingDelta.fromObject(object.bindingDeltas[i], long + 1);
                             }
@@ -79278,7 +79732,7 @@
                                 throw TypeError(".google.iam.v1.PolicyDelta.auditConfigDeltas: array expected");
                             message.auditConfigDeltas = [];
                             for (var i = 0; i < object.auditConfigDeltas.length; ++i) {
-                                if (typeof object.auditConfigDeltas[i] !== "object")
+                                if (!$util.isObject(object.auditConfigDeltas[i]))
                                     throw TypeError(".google.iam.v1.PolicyDelta.auditConfigDeltas: object expected");
                                 message.auditConfigDeltas[i] = $root.google.iam.v1.AuditConfigDelta.fromObject(object.auditConfigDeltas[i], long + 1);
                             }
@@ -79457,7 +79911,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BindingDelta.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -79573,6 +80027,8 @@
                     BindingDelta.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.BindingDelta)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.BindingDelta: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -79603,7 +80059,7 @@
                         if (object.member != null)
                             message.member = String(object.member);
                         if (object.condition != null) {
-                            if (typeof object.condition !== "object")
+                            if (!$util.isObject(object.condition))
                                 throw TypeError(".google.iam.v1.BindingDelta.condition: object expected");
                             message.condition = $root.google.type.Expr.fromObject(object.condition, long + 1);
                         }
@@ -79797,7 +80253,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     AuditConfigDelta.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -79911,6 +80367,8 @@
                     AuditConfigDelta.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.iam.v1.AuditConfigDelta)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.iam.v1.AuditConfigDelta: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -80147,7 +80605,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Expr.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -80255,6 +80713,8 @@
                 Expr.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.Expr)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.type.Expr: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -80420,7 +80880,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Interval.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -80518,18 +80978,20 @@
                 Interval.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.Interval)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.type.Interval: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.type.Interval();
                     if (object.startTime != null) {
-                        if (typeof object.startTime !== "object")
+                        if (!$util.isObject(object.startTime))
                             throw TypeError(".google.type.Interval.startTime: object expected");
                         message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime, long + 1);
                     }
                     if (object.endTime != null) {
-                        if (typeof object.endTime !== "object")
+                        if (!$util.isObject(object.endTime))
                             throw TypeError(".google.type.Interval.endTime: object expected");
                         message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
                     }
@@ -80690,7 +81152,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Date.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -80791,6 +81253,8 @@
                 Date.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.Date)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.type.Date: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -81210,7 +81674,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Operation.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -81340,6 +81804,8 @@
                 Operation.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.Operation)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.longrunning.Operation: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -81348,19 +81814,19 @@
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.metadata != null) {
-                        if (typeof object.metadata !== "object")
+                        if (!$util.isObject(object.metadata))
                             throw TypeError(".google.longrunning.Operation.metadata: object expected");
                         message.metadata = $root.google.protobuf.Any.fromObject(object.metadata, long + 1);
                     }
                     if (object.done != null)
                         message.done = Boolean(object.done);
                     if (object.error != null) {
-                        if (typeof object.error !== "object")
+                        if (!$util.isObject(object.error))
                             throw TypeError(".google.longrunning.Operation.error: object expected");
                         message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
                     }
                     if (object.response != null) {
-                        if (typeof object.response !== "object")
+                        if (!$util.isObject(object.response))
                             throw TypeError(".google.longrunning.Operation.response: object expected");
                         message.response = $root.google.protobuf.Any.fromObject(object.response, long + 1);
                     }
@@ -81512,7 +81978,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 GetOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -81599,6 +82065,8 @@
                 GetOperationRequest.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.GetOperationRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.longrunning.GetOperationRequest: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -81770,7 +82238,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ListOperationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -81878,6 +82346,8 @@
                 ListOperationsRequest.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.ListOperationsRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.longrunning.ListOperationsRequest: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -82045,7 +82515,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ListOperationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -82147,6 +82617,8 @@
                 ListOperationsResponse.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.ListOperationsResponse)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.longrunning.ListOperationsResponse: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -82157,7 +82629,7 @@
                             throw TypeError(".google.longrunning.ListOperationsResponse.operations: array expected");
                         message.operations = [];
                         for (var i = 0; i < object.operations.length; ++i) {
-                            if (typeof object.operations[i] !== "object")
+                            if (!$util.isObject(object.operations[i]))
                                 throw TypeError(".google.longrunning.ListOperationsResponse.operations: object expected");
                             message.operations[i] = $root.google.longrunning.Operation.fromObject(object.operations[i], long + 1);
                         }
@@ -82302,7 +82774,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CancelOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -82389,6 +82861,8 @@
                 CancelOperationRequest.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.CancelOperationRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.longrunning.CancelOperationRequest: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -82527,7 +83001,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DeleteOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -82614,6 +83088,8 @@
                 DeleteOperationRequest.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.DeleteOperationRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.longrunning.DeleteOperationRequest: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -82763,7 +83239,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 WaitOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -82859,6 +83335,8 @@
                 WaitOperationRequest.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.WaitOperationRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.longrunning.WaitOperationRequest: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -82867,7 +83345,7 @@
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.timeout != null) {
-                        if (typeof object.timeout !== "object")
+                        if (!$util.isObject(object.timeout))
                             throw TypeError(".google.longrunning.WaitOperationRequest.timeout: object expected");
                         message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout, long + 1);
                     }
@@ -83017,7 +83495,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 OperationInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -83111,6 +83589,8 @@
                 OperationInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.OperationInfo)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.longrunning.OperationInfo: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -83291,7 +83771,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Status.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -83400,6 +83880,8 @@
                 Status.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.rpc.Status)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.rpc.Status: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -83414,7 +83896,7 @@
                             throw TypeError(".google.rpc.Status.details: array expected");
                         message.details = [];
                         for (var i = 0; i < object.details.length; ++i) {
-                            if (typeof object.details[i] !== "object")
+                            if (!$util.isObject(object.details[i]))
                                 throw TypeError(".google.rpc.Status.details: object expected");
                             message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i], long + 1);
                         }

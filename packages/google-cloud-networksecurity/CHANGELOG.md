@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.4.1...network-security-v3.5.0) (2026-06-01)
+
+
+### Features
+
+* [networksecurity] add networksecurity v1 client library ([#8348](https://github.com/googleapis/google-cloud-node/issues/8348)) ([4f49c6f](https://github.com/googleapis/google-cloud-node/commit/4f49c6ff43031718838555e67a50a495c8cd7c89))
+
 ## [3.4.1](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.4.0...network-security-v3.4.1) (2026-05-01)
 
 
