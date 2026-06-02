@@ -61,7 +61,7 @@ describe('Common', () => {
             } catch (e) {
               mockServer.close(() => done(e));
             }
-          }
+          },
         );
       });
     });
@@ -95,7 +95,7 @@ describe('Common', () => {
             } catch (e) {
               mockServer.close(() => done(e)); // Cleanup even if assertion fails
             }
-          }
+          },
         );
       });
     });

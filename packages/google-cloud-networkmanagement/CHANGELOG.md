@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v5.3.1...network-management-v5.4.0) (2026-06-01)
+
+
+### Features
+
+* [networkmanagement] add fields and messages for Cloud Run jobs ([#8355](https://github.com/googleapis/google-cloud-node/issues/8355)) ([551a1fa](https://github.com/googleapis/google-cloud-node/commit/551a1fafaebc737b15710de8e461f8d6ce1ee690))
+
 ## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/network-management-v5.3.0...network-management-v5.3.1) (2026-05-01)
 
 

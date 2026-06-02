@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {TripServiceClient} from './trip_service_client';
-export {VehicleServiceClient} from './vehicle_service_client';
+export { TripServiceClient } from './trip_service_client';
+export { VehicleServiceClient } from './vehicle_service_client';

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.3.0...chronicle-v0.4.0) (2026-05-12)
+
+
+### Features
+
+* [chronicle] Adding Client Libraries for BigQueryExportService ([#8139](https://github.com/googleapis/google-cloud-node/issues/8139)) ([ddb0db6](https://github.com/googleapis/google-cloud-node/commit/ddb0db637cff6477e8be1f60c9c5ba19c4a4e4a3))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.2.1...chronicle-v0.3.0) (2026-05-01)
 
 

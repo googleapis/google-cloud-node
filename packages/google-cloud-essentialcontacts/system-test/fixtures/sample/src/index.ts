@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {EssentialContactsServiceClient} from '@google-cloud/essential-contacts';
+import { EssentialContactsServiceClient } from '@google-cloud/essential-contacts';
 
 // check that the client class type name can be used
-function doStuffWithEssentialContactsServiceClient(client: EssentialContactsServiceClient) {
+function doStuffWithEssentialContactsServiceClient(
+  client: EssentialContactsServiceClient,
+) {
   client.close();
 }
 

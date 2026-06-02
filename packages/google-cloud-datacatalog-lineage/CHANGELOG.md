@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/lineage-v2.1.2...lineage-v2.2.0) (2026-05-14)
+
+
+### Features
+
+* [lineage] A new method SearchLineageStreaming is added ([#8238](https://github.com/googleapis/google-cloud-node/issues/8238)) ([9641d36](https://github.com/googleapis/google-cloud-node/commit/9641d3641c304e1779a4a0ef83a6482c552c66b1))
+* Added support for column level lineage information to be passed and returned from the Lineage service ([9641d36](https://github.com/googleapis/google-cloud-node/commit/9641d3641c304e1779a4a0ef83a6482c552c66b1))
+* SearchLinks can now accept multiple source and target entity references as search criteria ([9641d36](https://github.com/googleapis/google-cloud-node/commit/9641d3641c304e1779a4a0ef83a6482c552c66b1))
+
 ## [2.1.2](https://github.com/googleapis/google-cloud-node/compare/lineage-v2.1.1...lineage-v2.1.2) (2026-05-01)
 
 

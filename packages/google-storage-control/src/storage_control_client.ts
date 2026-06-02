@@ -2673,6 +2673,250 @@ export class StorageControlClient {
   }
 
   /**
+   * Gets the `IntelligenceFinding` for a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `IntelligenceFinding` resource.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceFinding|IntelligenceFinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_intelligence_finding.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetIntelligenceFinding_async
+   */
+
+  getIntelligenceFinding(
+    request?: protos.google.storage.control.v2.IGetIntelligenceFindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceFinding,
+      (
+        | protos.google.storage.control.v2.IGetIntelligenceFindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getIntelligenceFinding(
+    request: protos.google.storage.control.v2.IGetIntelligenceFindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceFinding,
+      | protos.google.storage.control.v2.IGetIntelligenceFindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIntelligenceFinding(
+    request: protos.google.storage.control.v2.IGetIntelligenceFindingRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceFinding,
+      | protos.google.storage.control.v2.IGetIntelligenceFindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  /**
+   * Gets the `IntelligenceFinding` for a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `IntelligenceFinding` resource.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceFinding|IntelligenceFinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_intelligence_finding.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetIntelligenceFinding_async
+   */
+  getIntelligenceFinding(
+    request?: protos.google.storage.control.v2.IGetIntelligenceFindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceFinding,
+          | protos.google.storage.control.v2.IGetIntelligenceFindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IIntelligenceFinding,
+      | protos.google.storage.control.v2.IGetIntelligenceFindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceFinding,
+      (
+        | protos.google.storage.control.v2.IGetIntelligenceFindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.getIntelligenceFinding(
+        request,
+        options,
+      );
+    }
+    return this.storageControlInternal.getIntelligenceFinding(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
+   * Gets the `IntelligenceFindingRevision` resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `IntelligenceFindingRevision` resource.
+   *   ## Format:
+   *
+   *   `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceFindingRevision|IntelligenceFindingRevision}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_intelligence_finding_revision.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetIntelligenceFindingRevision_async
+   */
+
+  getIntelligenceFindingRevision(
+    request?: protos.google.storage.control.v2.IGetIntelligenceFindingRevisionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceFindingRevision,
+      (
+        | protos.google.storage.control.v2.IGetIntelligenceFindingRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getIntelligenceFindingRevision(
+    request: protos.google.storage.control.v2.IGetIntelligenceFindingRevisionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceFindingRevision,
+      | protos.google.storage.control.v2.IGetIntelligenceFindingRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIntelligenceFindingRevision(
+    request: protos.google.storage.control.v2.IGetIntelligenceFindingRevisionRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceFindingRevision,
+      | protos.google.storage.control.v2.IGetIntelligenceFindingRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  /**
+   * Gets the `IntelligenceFindingRevision` resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `IntelligenceFindingRevision` resource.
+   *   ## Format:
+   *
+   *   `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceFindingRevision|IntelligenceFindingRevision}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_intelligence_finding_revision.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetIntelligenceFindingRevision_async
+   */
+  getIntelligenceFindingRevision(
+    request?: protos.google.storage.control.v2.IGetIntelligenceFindingRevisionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceFindingRevision,
+          | protos.google.storage.control.v2.IGetIntelligenceFindingRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IIntelligenceFindingRevision,
+      | protos.google.storage.control.v2.IGetIntelligenceFindingRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceFindingRevision,
+      (
+        | protos.google.storage.control.v2.IGetIntelligenceFindingRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.getIntelligenceFindingRevision(
+        request,
+        options,
+      );
+    }
+    return this.storageControlInternal.getIntelligenceFindingRevision(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
    * Renames a source folder to a destination folder. This operation is only
    * applicable to a hierarchical namespace enabled bucket. During a rename, the
    * source and destination folders are locked until the long running operation
@@ -4038,6 +4282,775 @@ export class StorageControlClient {
   }
 
   /**
+   * Lists the `IntelligenceFinding` resources for the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the `IntelligenceFinding` resource.
+   *
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. The filter expression to be applied.
+   *   Supports filtering by `type` and `associated_resources`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `IntelligenceFinding` resources to return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListIntelligenceFindings`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListIntelligenceFindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.IntelligenceFinding|IntelligenceFinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIntelligenceFindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+
+  listIntelligenceFindings(
+    request?: protos.google.storage.control.v2.IListIntelligenceFindingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceFinding[],
+      protos.google.storage.control.v2.IListIntelligenceFindingsRequest | null,
+      protos.google.storage.control.v2.IListIntelligenceFindingsResponse,
+    ]
+  >;
+  listIntelligenceFindings(
+    request: protos.google.storage.control.v2.IListIntelligenceFindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListIntelligenceFindingsRequest,
+      | protos.google.storage.control.v2.IListIntelligenceFindingsResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IIntelligenceFinding
+    >,
+  ): void;
+  listIntelligenceFindings(
+    request: protos.google.storage.control.v2.IListIntelligenceFindingsRequest,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListIntelligenceFindingsRequest,
+      | protos.google.storage.control.v2.IListIntelligenceFindingsResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IIntelligenceFinding
+    >,
+  ): void;
+  /**
+   * Lists the `IntelligenceFinding` resources for the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the `IntelligenceFinding` resource.
+   *
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. The filter expression to be applied.
+   *   Supports filtering by `type` and `associated_resources`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `IntelligenceFinding` resources to return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListIntelligenceFindings`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListIntelligenceFindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.IntelligenceFinding|IntelligenceFinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIntelligenceFindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listIntelligenceFindings(
+    request?: protos.google.storage.control.v2.IListIntelligenceFindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.storage.control.v2.IListIntelligenceFindingsRequest,
+          | protos.google.storage.control.v2.IListIntelligenceFindingsResponse
+          | null
+          | undefined,
+          protos.google.storage.control.v2.IIntelligenceFinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.storage.control.v2.IListIntelligenceFindingsRequest,
+      | protos.google.storage.control.v2.IListIntelligenceFindingsResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IIntelligenceFinding
+    >,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceFinding[],
+      protos.google.storage.control.v2.IListIntelligenceFindingsRequest | null,
+      protos.google.storage.control.v2.IListIntelligenceFindingsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.listIntelligenceFindings(
+        request,
+        options,
+      );
+    }
+    return this.storageControlInternal.listIntelligenceFindings(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
+   * Equivalent to `listIntelligenceFindings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the `IntelligenceFinding` resource.
+   *
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. The filter expression to be applied.
+   *   Supports filtering by `type` and `associated_resources`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `IntelligenceFinding` resources to return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListIntelligenceFindings`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListIntelligenceFindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.storage.control.v2.IntelligenceFinding|IntelligenceFinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listIntelligenceFindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listIntelligenceFindingsStream(
+    request?: protos.google.storage.control.v2.IListIntelligenceFindingsRequest,
+    options?: CallOptions,
+  ): Transform {
+    return this.storageControlInternal.listIntelligenceFindingsStream(
+      request,
+      options,
+    );
+  }
+
+  /**
+   * Equivalent to `listIntelligenceFindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the `IntelligenceFinding` resource.
+   *
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. The filter expression to be applied.
+   *   Supports filtering by `type` and `associated_resources`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `IntelligenceFinding` resources to return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListIntelligenceFindings`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListIntelligenceFindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.storage.control.v2.IntelligenceFinding|IntelligenceFinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.list_intelligence_findings.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_ListIntelligenceFindings_async
+   */
+  listIntelligenceFindingsAsync(
+    request?: protos.google.storage.control.v2.IListIntelligenceFindingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.storage.control.v2.IIntelligenceFinding> {
+    return this.storageControlInternal.listIntelligenceFindingsAsync(
+      request,
+      options,
+    );
+  }
+
+  /**
+   * Summarize the intelligence findings for the specified scope(org, folder or
+   * project).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The scope to summarize the findings for.
+   *   Format:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `folders/{folder}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`
+   * @param {google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope} [request.resourceScope]
+   *   Optional. Determines the granularity of the findings
+   *   when the `parent` is an organization or folder.
+   *
+   *   - `PARENT` (or not set): A single summary is
+   *     returned for each insight type, aggregated across the entire `parent`
+   *     scope.
+   *   - `PROJECT`: A separate summary is returned for each
+   *     insight type for every project within the `parent` scope.
+   *
+   *   The only supported values are `PARENT` and `PROJECT`.
+   *   If no value is specified, the API behaviour defaults to the `PARENT`.
+   * @param {string} [request.filter]
+   *   Optional. The filter expression, following AIP-160.
+   *   Supports filtering by FindingType.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of findings to return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `SummarizeIntelligenceFindings` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `SummarizeIntelligenceFindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.FindingSummary|FindingSummary}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `summarizeIntelligenceFindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+
+  summarizeIntelligenceFindings(
+    request?: protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IFindingSummary[],
+      protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest | null,
+      protos.google.storage.control.v2.ISummarizeIntelligenceFindingsResponse,
+    ]
+  >;
+  summarizeIntelligenceFindings(
+    request: protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest,
+      | protos.google.storage.control.v2.ISummarizeIntelligenceFindingsResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IFindingSummary
+    >,
+  ): void;
+  summarizeIntelligenceFindings(
+    request: protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest,
+      | protos.google.storage.control.v2.ISummarizeIntelligenceFindingsResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IFindingSummary
+    >,
+  ): void;
+  /**
+   * Summarize the intelligence findings for the specified scope(org, folder or
+   * project).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The scope to summarize the findings for.
+   *   Format:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `folders/{folder}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`
+   * @param {google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope} [request.resourceScope]
+   *   Optional. Determines the granularity of the findings
+   *   when the `parent` is an organization or folder.
+   *
+   *   - `PARENT` (or not set): A single summary is
+   *     returned for each insight type, aggregated across the entire `parent`
+   *     scope.
+   *   - `PROJECT`: A separate summary is returned for each
+   *     insight type for every project within the `parent` scope.
+   *
+   *   The only supported values are `PARENT` and `PROJECT`.
+   *   If no value is specified, the API behaviour defaults to the `PARENT`.
+   * @param {string} [request.filter]
+   *   Optional. The filter expression, following AIP-160.
+   *   Supports filtering by FindingType.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of findings to return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `SummarizeIntelligenceFindings` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `SummarizeIntelligenceFindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.FindingSummary|FindingSummary}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `summarizeIntelligenceFindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  summarizeIntelligenceFindings(
+    request?: protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest,
+          | protos.google.storage.control.v2.ISummarizeIntelligenceFindingsResponse
+          | null
+          | undefined,
+          protos.google.storage.control.v2.IFindingSummary
+        >,
+    callback?: PaginationCallback<
+      protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest,
+      | protos.google.storage.control.v2.ISummarizeIntelligenceFindingsResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IFindingSummary
+    >,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IFindingSummary[],
+      protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest | null,
+      protos.google.storage.control.v2.ISummarizeIntelligenceFindingsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.summarizeIntelligenceFindings(
+        request,
+        options,
+      );
+    }
+    return this.storageControlInternal.summarizeIntelligenceFindings(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
+   * Equivalent to `summarizeIntelligenceFindings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The scope to summarize the findings for.
+   *   Format:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `folders/{folder}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`
+   * @param {google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope} [request.resourceScope]
+   *   Optional. Determines the granularity of the findings
+   *   when the `parent` is an organization or folder.
+   *
+   *   - `PARENT` (or not set): A single summary is
+   *     returned for each insight type, aggregated across the entire `parent`
+   *     scope.
+   *   - `PROJECT`: A separate summary is returned for each
+   *     insight type for every project within the `parent` scope.
+   *
+   *   The only supported values are `PARENT` and `PROJECT`.
+   *   If no value is specified, the API behaviour defaults to the `PARENT`.
+   * @param {string} [request.filter]
+   *   Optional. The filter expression, following AIP-160.
+   *   Supports filtering by FindingType.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of findings to return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `SummarizeIntelligenceFindings` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `SummarizeIntelligenceFindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.storage.control.v2.FindingSummary|FindingSummary} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `summarizeIntelligenceFindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  summarizeIntelligenceFindingsStream(
+    request?: protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest,
+    options?: CallOptions,
+  ): Transform {
+    return this.storageControlInternal.summarizeIntelligenceFindingsStream(
+      request,
+      options,
+    );
+  }
+
+  /**
+   * Equivalent to `summarizeIntelligenceFindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The scope to summarize the findings for.
+   *   Format:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `folders/{folder}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`
+   * @param {google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope} [request.resourceScope]
+   *   Optional. Determines the granularity of the findings
+   *   when the `parent` is an organization or folder.
+   *
+   *   - `PARENT` (or not set): A single summary is
+   *     returned for each insight type, aggregated across the entire `parent`
+   *     scope.
+   *   - `PROJECT`: A separate summary is returned for each
+   *     insight type for every project within the `parent` scope.
+   *
+   *   The only supported values are `PARENT` and `PROJECT`.
+   *   If no value is specified, the API behaviour defaults to the `PARENT`.
+   * @param {string} [request.filter]
+   *   Optional. The filter expression, following AIP-160.
+   *   Supports filtering by FindingType.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of findings to return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `SummarizeIntelligenceFindings` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `SummarizeIntelligenceFindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.storage.control.v2.FindingSummary|FindingSummary}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.summarize_intelligence_findings.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_SummarizeIntelligenceFindings_async
+   */
+  summarizeIntelligenceFindingsAsync(
+    request?: protos.google.storage.control.v2.ISummarizeIntelligenceFindingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.storage.control.v2.IFindingSummary> {
+    return this.storageControlInternal.summarizeIntelligenceFindingsAsync(
+      request,
+      options,
+    );
+  }
+
+  /**
+   * Lists all the revisions of an `IntelligenceFinding` resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the `IntelligenceFindingRevision` resource.
+   *   ## Format:
+   *
+   *   `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `IntelligenceFindingRevision` resources to
+   *   return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListIntelligenceFindingRevisions` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.IntelligenceFindingRevision|IntelligenceFindingRevision}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIntelligenceFindingRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+
+  listIntelligenceFindingRevisions(
+    request?: protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceFindingRevision[],
+      protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest | null,
+      protos.google.storage.control.v2.IListIntelligenceFindingRevisionsResponse,
+    ]
+  >;
+  listIntelligenceFindingRevisions(
+    request: protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest,
+      | protos.google.storage.control.v2.IListIntelligenceFindingRevisionsResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IIntelligenceFindingRevision
+    >,
+  ): void;
+  listIntelligenceFindingRevisions(
+    request: protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest,
+      | protos.google.storage.control.v2.IListIntelligenceFindingRevisionsResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IIntelligenceFindingRevision
+    >,
+  ): void;
+  /**
+   * Lists all the revisions of an `IntelligenceFinding` resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the `IntelligenceFindingRevision` resource.
+   *   ## Format:
+   *
+   *   `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `IntelligenceFindingRevision` resources to
+   *   return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListIntelligenceFindingRevisions` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.IntelligenceFindingRevision|IntelligenceFindingRevision}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIntelligenceFindingRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listIntelligenceFindingRevisions(
+    request?: protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest,
+          | protos.google.storage.control.v2.IListIntelligenceFindingRevisionsResponse
+          | null
+          | undefined,
+          protos.google.storage.control.v2.IIntelligenceFindingRevision
+        >,
+    callback?: PaginationCallback<
+      protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest,
+      | protos.google.storage.control.v2.IListIntelligenceFindingRevisionsResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IIntelligenceFindingRevision
+    >,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceFindingRevision[],
+      protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest | null,
+      protos.google.storage.control.v2.IListIntelligenceFindingRevisionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.listIntelligenceFindingRevisions(
+        request,
+        options,
+      );
+    }
+    return this.storageControlInternal.listIntelligenceFindingRevisions(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
+   * Equivalent to `listIntelligenceFindingRevisions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the `IntelligenceFindingRevision` resource.
+   *   ## Format:
+   *
+   *   `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `IntelligenceFindingRevision` resources to
+   *   return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListIntelligenceFindingRevisions` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.storage.control.v2.IntelligenceFindingRevision|IntelligenceFindingRevision} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listIntelligenceFindingRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listIntelligenceFindingRevisionsStream(
+    request?: protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest,
+    options?: CallOptions,
+  ): Transform {
+    return this.storageControlInternal.listIntelligenceFindingRevisionsStream(
+      request,
+      options,
+    );
+  }
+
+  /**
+   * Equivalent to `listIntelligenceFindingRevisions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the `IntelligenceFindingRevision` resource.
+   *   ## Format:
+   *
+   *   `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `IntelligenceFindingRevision` resources to
+   *   return.
+   *
+   *   The maximum value is `100`; values above `100` will be coerced to `100`.
+   *   The default value is `100`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListIntelligenceFindingRevisions` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.storage.control.v2.IntelligenceFindingRevision|IntelligenceFindingRevision}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.list_intelligence_finding_revisions.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_ListIntelligenceFindingRevisions_async
+   */
+  listIntelligenceFindingRevisionsAsync(
+    request?: protos.google.storage.control.v2.IListIntelligenceFindingRevisionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.storage.control.v2.IIntelligenceFindingRevision> {
+    return this.storageControlInternal.listIntelligenceFindingRevisionsAsync(
+      request,
+      options,
+    );
+  }
+
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -4584,6 +5597,187 @@ export class StorageControlClient {
   ) {
     return this.storageControlInternal.matchLocationFromFolderLocationIntelligenceConfigName(
       folderLocationIntelligenceConfigName,
+    );
+  }
+
+  /**
+   * Return a fully-qualified intelligenceFinding resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intelligence_finding
+   * @returns {string} Resource name string.
+   */
+  intelligenceFindingPath(
+    project: string,
+    location: string,
+    intelligenceFinding: string,
+  ) {
+    return this.storageControlInternal.intelligenceFindingPath(
+      project,
+      location,
+      intelligenceFinding,
+    );
+  }
+
+  /**
+   * Parse the project from IntelligenceFinding resource.
+   *
+   * @param {string} intelligenceFindingName
+   *   A fully-qualified path representing IntelligenceFinding resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIntelligenceFindingName(intelligenceFindingName: string) {
+    return this.storageControlInternal.matchProjectFromIntelligenceFindingName(
+      intelligenceFindingName,
+    );
+  }
+
+  /**
+   * Parse the location from IntelligenceFinding resource.
+   *
+   * @param {string} intelligenceFindingName
+   *   A fully-qualified path representing IntelligenceFinding resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIntelligenceFindingName(intelligenceFindingName: string) {
+    return this.storageControlInternal.matchLocationFromIntelligenceFindingName(
+      intelligenceFindingName,
+    );
+  }
+
+  /**
+   * Parse the intelligence_finding from IntelligenceFinding resource.
+   *
+   * @param {string} intelligenceFindingName
+   *   A fully-qualified path representing IntelligenceFinding resource.
+   * @returns {string} A string representing the intelligence_finding.
+   */
+  matchIntelligenceFindingFromIntelligenceFindingName(
+    intelligenceFindingName: string,
+  ) {
+    return this.storageControlInternal.matchIntelligenceFindingFromIntelligenceFindingName(
+      intelligenceFindingName,
+    );
+  }
+
+  /**
+   * Return a fully-qualified intelligenceFindingRevision resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intelligence_finding
+   * @param {string} revision
+   * @returns {string} Resource name string.
+   */
+  intelligenceFindingRevisionPath(
+    project: string,
+    location: string,
+    intelligenceFinding: string,
+    revision: string,
+  ) {
+    return this.storageControlInternal.intelligenceFindingRevisionPath(
+      project,
+      location,
+      intelligenceFinding,
+      revision,
+    );
+  }
+
+  /**
+   * Parse the project from IntelligenceFindingRevision resource.
+   *
+   * @param {string} intelligenceFindingRevisionName
+   *   A fully-qualified path representing IntelligenceFindingRevision resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIntelligenceFindingRevisionName(
+    intelligenceFindingRevisionName: string,
+  ) {
+    return this.storageControlInternal.matchProjectFromIntelligenceFindingRevisionName(
+      intelligenceFindingRevisionName,
+    );
+  }
+
+  /**
+   * Parse the location from IntelligenceFindingRevision resource.
+   *
+   * @param {string} intelligenceFindingRevisionName
+   *   A fully-qualified path representing IntelligenceFindingRevision resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIntelligenceFindingRevisionName(
+    intelligenceFindingRevisionName: string,
+  ) {
+    return this.storageControlInternal.matchLocationFromIntelligenceFindingRevisionName(
+      intelligenceFindingRevisionName,
+    );
+  }
+
+  /**
+   * Parse the intelligence_finding from IntelligenceFindingRevision resource.
+   *
+   * @param {string} intelligenceFindingRevisionName
+   *   A fully-qualified path representing IntelligenceFindingRevision resource.
+   * @returns {string} A string representing the intelligence_finding.
+   */
+  matchIntelligenceFindingFromIntelligenceFindingRevisionName(
+    intelligenceFindingRevisionName: string,
+  ) {
+    return this.storageControlInternal.matchIntelligenceFindingFromIntelligenceFindingRevisionName(
+      intelligenceFindingRevisionName,
+    );
+  }
+
+  /**
+   * Parse the revision from IntelligenceFindingRevision resource.
+   *
+   * @param {string} intelligenceFindingRevisionName
+   *   A fully-qualified path representing IntelligenceFindingRevision resource.
+   * @returns {string} A string representing the revision.
+   */
+  matchRevisionFromIntelligenceFindingRevisionName(
+    intelligenceFindingRevisionName: string,
+  ) {
+    return this.storageControlInternal.matchRevisionFromIntelligenceFindingRevisionName(
+      intelligenceFindingRevisionName,
+    );
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.storageControlInternal.locationPath(project, location);
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.storageControlInternal.matchProjectFromLocationName(
+      locationName,
+    );
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.storageControlInternal.matchLocationFromLocationName(
+      locationName,
     );
   }
 

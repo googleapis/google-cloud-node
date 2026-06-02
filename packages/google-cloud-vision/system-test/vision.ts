@@ -17,7 +17,7 @@ import {describe, it, before, after} from 'mocha';
 import * as fs from 'fs';
 import * as path from 'path';
 import {Storage} from '@google-cloud/storage';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import * as prototypes from '../protos/protos';
 import * as vision from '../src';
 
@@ -131,6 +131,6 @@ describe('Vision', () => {
   });
 
   function generateName() {
-    return TESTS_PREFIX + uuid.v1();
+    return TESTS_PREFIX + crypto.randomUUID();
   }
 });

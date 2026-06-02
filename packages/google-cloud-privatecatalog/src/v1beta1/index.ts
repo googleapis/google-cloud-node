@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {PrivateCatalogClient} from './private_catalog_client';
+export { PrivateCatalogClient } from './private_catalog_client';
