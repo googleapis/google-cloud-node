@@ -63,7 +63,7 @@
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha --config ../../.mocharc.js build/test"
+    "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "license": "Apache-2.0",
   "engines": {

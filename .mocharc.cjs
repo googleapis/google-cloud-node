@@ -28,4 +28,4 @@ if (process.env.MOCHA_REPORTER) {
 if (process.env.MOCHA_REPORTER_OUTPUT) {
   config['reporter-option'] = `output=${process.env.MOCHA_REPORTER_OUTPUT}`;
 }
-export default config
+module.exports = config

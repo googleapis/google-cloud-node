@@ -31,7 +31,7 @@
     "Cloud AutoML API"
   ],
   "scripts": {
-    "test": "c8 mocha --config ../../.mocharc.js build/test",
+    "test": "c8 mocha --config ../../.mocharc.cjs build/test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "lint": "gts check",
     "fix": "gts fix",
