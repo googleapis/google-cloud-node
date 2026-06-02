@@ -13,7 +13,11 @@ are addressed with the highest priority
 
 Cloud Translation API client for Node.js
 
-[//]: # "partials.introduction"
+The [Cloud Translation API](https://cloud.google.com/translate/docs/),
+can dynamically translate text between thousands
+of language pairs. The Cloud Translation API lets websites and programs
+integrate with the translation service programmatically. The Cloud Translation
+API is part of the larger Cloud Machine Learning API family.
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
