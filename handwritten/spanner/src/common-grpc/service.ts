@@ -27,7 +27,7 @@ import {
   ServiceConfig,
   util,
 } from '@google-cloud/common';
-import {replaceProjectIdToken} from '@google-cloud/projectify';
+import { replaceProjectIdToken } from '../helper';
 import {
   loadSync,
   PackageDefinition,
