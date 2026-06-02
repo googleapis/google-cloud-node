@@ -121,6 +121,108 @@
         }
       }
     },
+    "DataSubscriptionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataSubscriptionServiceClient",
+          "rpcs": {
+            "CreateSubscription": {
+              "methods": [
+                "createSubscription"
+              ]
+            },
+            "UpdateSubscription": {
+              "methods": [
+                "updateSubscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "deleteSubscription"
+              ]
+            },
+            "CreateSubscriber": {
+              "methods": [
+                "createSubscriber"
+              ]
+            },
+            "UpdateSubscriber": {
+              "methods": [
+                "updateSubscriber"
+              ]
+            },
+            "DeleteSubscriber": {
+              "methods": [
+                "deleteSubscriber"
+              ]
+            },
+            "ListSubscribers": {
+              "methods": [
+                "listSubscribers",
+                "listSubscribersStream",
+                "listSubscribersAsync"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "listSubscriptions",
+                "listSubscriptionsStream",
+                "listSubscriptionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataSubscriptionServiceClient",
+          "rpcs": {
+            "CreateSubscription": {
+              "methods": [
+                "createSubscription"
+              ]
+            },
+            "UpdateSubscription": {
+              "methods": [
+                "updateSubscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "deleteSubscription"
+              ]
+            },
+            "CreateSubscriber": {
+              "methods": [
+                "createSubscriber"
+              ]
+            },
+            "UpdateSubscriber": {
+              "methods": [
+                "updateSubscriber"
+              ]
+            },
+            "DeleteSubscriber": {
+              "methods": [
+                "deleteSubscriber"
+              ]
+            },
+            "ListSubscribers": {
+              "methods": [
+                "listSubscribers",
+                "listSubscribersStream",
+                "listSubscribersAsync"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "listSubscriptions",
+                "listSubscriptionsStream",
+                "listSubscriptionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "HealthProfileService": {
       "clients": {
         "grpc": {
@@ -149,6 +251,23 @@
             "GetIdentity": {
               "methods": [
                 "getIdentity"
+              ]
+            },
+            "GetIrnProfile": {
+              "methods": [
+                "getIrnProfile"
+              ]
+            },
+            "GetPairedDevice": {
+              "methods": [
+                "getPairedDevice"
+              ]
+            },
+            "ListPairedDevices": {
+              "methods": [
+                "listPairedDevices",
+                "listPairedDevicesStream",
+                "listPairedDevicesAsync"
               ]
             }
           }
@@ -179,6 +298,23 @@
             "GetIdentity": {
               "methods": [
                 "getIdentity"
+              ]
+            },
+            "GetIrnProfile": {
+              "methods": [
+                "getIrnProfile"
+              ]
+            },
+            "GetPairedDevice": {
+              "methods": [
+                "getPairedDevice"
+              ]
+            },
+            "ListPairedDevices": {
+              "methods": [
+                "listPairedDevices",
+                "listPairedDevicesStream",
+                "listPairedDevicesAsync"
               ]
             }
           }

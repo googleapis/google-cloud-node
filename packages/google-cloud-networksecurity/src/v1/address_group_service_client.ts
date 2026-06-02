@@ -18,11 +18,24 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +59,7 @@ export class AddressGroupServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('network-security');
@@ -59,12 +72,12 @@ export class AddressGroupServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  addressGroupServiceStub?: Promise<{[name: string]: Function}>;
+  addressGroupServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of AddressGroupServiceClient.
@@ -105,21 +118,42 @@ export class AddressGroupServiceClient {
    *     const client = new AddressGroupServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AddressGroupServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'networksecurity.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -144,7 +178,7 @@ export class AddressGroupServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -157,18 +191,14 @@ export class AddressGroupServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -190,91 +220,106 @@ export class AddressGroupServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       authorizationPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}'
+        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}',
       ),
       authzPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}'
+        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}',
       ),
       backendAuthenticationConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}'
+        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}',
       ),
       clientTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}'
+        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}',
       ),
       dnsThreatDetectorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}'
+        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}',
       ),
       firewallEndpointAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}'
+        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}',
       ),
       gatewaySecurityPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}'
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}',
       ),
       gatewaySecurityPolicyRulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}'
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}',
       ),
       interceptDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}'
+        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}',
       ),
       interceptDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}'
+        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}',
       ),
       interceptEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}'
+        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}',
       ),
-      interceptEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}'
-      ),
+      interceptEndpointGroupAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}',
+        ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       mirroringDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}'
+        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}',
       ),
       mirroringDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}'
+        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}',
       ),
       mirroringEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}'
+        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}',
       ),
-      mirroringEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}'
-      ),
-      organizationLocationAddressGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/addressGroups/{address_group}'
-      ),
-      organizationLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
-      ),
-      organizationLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}'
-      ),
-      organizationLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}'
-      ),
+      mirroringEndpointGroupAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}',
+        ),
+      organizationLocationAddressGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/addressGroups/{address_group}',
+        ),
+      organizationLocationFirewallEndpointsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}',
+        ),
+      organizationLocationSecurityProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}',
+        ),
+      organizationLocationSecurityProfileGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}',
+        ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       projectLocationAddressGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/addressGroups/{address_group}'
+        'projects/{project}/locations/{location}/addressGroups/{address_group}',
       ),
-      projectLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
+      projectLocationFirewallEndpointsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}',
+        ),
+      projectLocationSecurityProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityProfiles/{security_profile}',
+        ),
+      projectLocationSecurityProfileGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}',
+        ),
+      sACAttachmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sacAttachments/{sac_attachment}',
       ),
-      projectLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityProfiles/{security_profile}'
-      ),
-      projectLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}'
+      sACRealmPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sacRealms/{sac_realm}',
       ),
       serverTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}'
+        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}',
       ),
       tlsInspectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}'
+        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}',
       ),
       urlListPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/urlLists/{url_list}'
+        'projects/{project}/locations/{location}/urlLists/{url_list}',
       ),
     };
 
@@ -282,10 +327,16 @@ export class AddressGroupServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAddressGroups:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'addressGroups'),
-      listAddressGroupReferences:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'addressGroupReferences')
+      listAddressGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'addressGroups',
+      ),
+      listAddressGroupReferences: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'addressGroupReferences',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -294,78 +345,215 @@ export class AddressGroupServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',}],
-      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',}],
-      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*}' },
+          ],
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*}/locations' },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createAddressGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.AddressGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.AddressGroup',
+    ) as gax.protobuf.Type;
     const createAddressGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateAddressGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.AddressGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.AddressGroup',
+    ) as gax.protobuf.Type;
     const updateAddressGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const addAddressGroupItemsResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.AddressGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.AddressGroup',
+    ) as gax.protobuf.Type;
     const addAddressGroupItemsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const removeAddressGroupItemsResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.AddressGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.AddressGroup',
+    ) as gax.protobuf.Type;
     const removeAddressGroupItemsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const cloneAddressGroupItemsResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.AddressGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.AddressGroup',
+    ) as gax.protobuf.Type;
     const cloneAddressGroupItemsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteAddressGroupResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteAddressGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createAddressGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAddressGroupResponse.decode.bind(createAddressGroupResponse),
-        createAddressGroupMetadata.decode.bind(createAddressGroupMetadata)),
+        createAddressGroupMetadata.decode.bind(createAddressGroupMetadata),
+      ),
       updateAddressGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAddressGroupResponse.decode.bind(updateAddressGroupResponse),
-        updateAddressGroupMetadata.decode.bind(updateAddressGroupMetadata)),
+        updateAddressGroupMetadata.decode.bind(updateAddressGroupMetadata),
+      ),
       addAddressGroupItems: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         addAddressGroupItemsResponse.decode.bind(addAddressGroupItemsResponse),
-        addAddressGroupItemsMetadata.decode.bind(addAddressGroupItemsMetadata)),
+        addAddressGroupItemsMetadata.decode.bind(addAddressGroupItemsMetadata),
+      ),
       removeAddressGroupItems: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        removeAddressGroupItemsResponse.decode.bind(removeAddressGroupItemsResponse),
-        removeAddressGroupItemsMetadata.decode.bind(removeAddressGroupItemsMetadata)),
+        removeAddressGroupItemsResponse.decode.bind(
+          removeAddressGroupItemsResponse,
+        ),
+        removeAddressGroupItemsMetadata.decode.bind(
+          removeAddressGroupItemsMetadata,
+        ),
+      ),
       cloneAddressGroupItems: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        cloneAddressGroupItemsResponse.decode.bind(cloneAddressGroupItemsResponse),
-        cloneAddressGroupItemsMetadata.decode.bind(cloneAddressGroupItemsMetadata)),
+        cloneAddressGroupItemsResponse.decode.bind(
+          cloneAddressGroupItemsResponse,
+        ),
+        cloneAddressGroupItemsMetadata.decode.bind(
+          cloneAddressGroupItemsMetadata,
+        ),
+      ),
       deleteAddressGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAddressGroupResponse.decode.bind(deleteAddressGroupResponse),
-        deleteAddressGroupMetadata.decode.bind(deleteAddressGroupMetadata))
+        deleteAddressGroupMetadata.decode.bind(deleteAddressGroupMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.networksecurity.v1.AddressGroupService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.networksecurity.v1.AddressGroupService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -396,28 +584,44 @@ export class AddressGroupServiceClient {
     // Put together the "service stub" for
     // google.cloud.networksecurity.v1.AddressGroupService.
     this.addressGroupServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.networksecurity.v1.AddressGroupService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.networksecurity.v1.AddressGroupService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.networksecurity.v1.AddressGroupService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.networksecurity.v1
+            .AddressGroupService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const addressGroupServiceStubMethods =
-        ['listAddressGroups', 'getAddressGroup', 'createAddressGroup', 'updateAddressGroup', 'addAddressGroupItems', 'removeAddressGroupItems', 'cloneAddressGroupItems', 'deleteAddressGroup', 'listAddressGroupReferences'];
+    const addressGroupServiceStubMethods = [
+      'listAddressGroups',
+      'getAddressGroup',
+      'createAddressGroup',
+      'updateAddressGroup',
+      'addAddressGroupItems',
+      'removeAddressGroupItems',
+      'cloneAddressGroupItems',
+      'deleteAddressGroup',
+      'listAddressGroupReferences',
+    ];
     for (const methodName of addressGroupServiceStubMethods) {
       const callPromise = this.addressGroupServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -427,7 +631,7 @@ export class AddressGroupServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -442,8 +646,14 @@ export class AddressGroupServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -454,8 +664,14 @@ export class AddressGroupServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -486,9 +702,7 @@ export class AddressGroupServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -497,8 +711,9 @@ export class AddressGroupServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -509,941 +724,1387 @@ export class AddressGroupServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single address group.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. A name of the AddressGroup to get. Must be in the format
- *   `projects/* /locations/{location}/addressGroups/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1.AddressGroup|AddressGroup}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.get_address_group.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_GetAddressGroup_async
- */
+  /**
+   * Gets details of a single address group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the AddressGroup to get. Must be in the format
+   *   `projects/* /locations/{location}/addressGroups/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1.AddressGroup|AddressGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.get_address_group.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_GetAddressGroup_async
+   */
   getAddressGroup(
-      request?: protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.IAddressGroup,
-        protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.IAddressGroup,
+      (
+        | protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getAddressGroup(
-      request: protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1.IAddressGroup,
-          protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1.IAddressGroup,
+      | protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAddressGroup(
-      request: protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1.IAddressGroup,
-          protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1.IAddressGroup,
+      | protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAddressGroup(
-      request?: protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1.IAddressGroup,
-          protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1.IAddressGroup,
-          protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.IAddressGroup,
-        protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1.IAddressGroup,
+      | protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.IAddressGroup,
+      (
+        | protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getAddressGroup request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1.IAddressGroup,
-        protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1.IAddressGroup,
+          | protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAddressGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAddressGroup(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1.IAddressGroup,
-        protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAddressGroup response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAddressGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1.IAddressGroup,
+          (
+            | protos.google.cloud.networksecurity.v1.IGetAddressGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAddressGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new address group in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the AddressGroup. Must be in the
- *   format `projects/* /locations/{location}`.
- * @param {string} request.addressGroupId
- *   Required. Short name of the AddressGroup resource to be created.
- *   This value should be 1-63 characters long, containing only
- *   letters, numbers, hyphens, and underscores, and should not start
- *   with a number. E.g. "authz_policy".
- * @param {google.cloud.networksecurity.v1.AddressGroup} request.addressGroup
- *   Required. AddressGroup resource to be created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.create_address_group.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_CreateAddressGroup_async
- */
+  /**
+   * Creates a new address group in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the AddressGroup. Must be in the
+   *   format `projects/* /locations/{location}`.
+   * @param {string} request.addressGroupId
+   *   Required. Short name of the AddressGroup resource to be created.
+   *   This value should be 1-63 characters long, containing only
+   *   letters, numbers, hyphens, and underscores, and should not start
+   *   with a number. E.g. "authz_policy".
+   * @param {google.cloud.networksecurity.v1.AddressGroup} request.addressGroup
+   *   Required. AddressGroup resource to be created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.create_address_group.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_CreateAddressGroup_async
+   */
   createAddressGroup(
-      request?: protos.google.cloud.networksecurity.v1.ICreateAddressGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.ICreateAddressGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createAddressGroup(
-      request: protos.google.cloud.networksecurity.v1.ICreateAddressGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.ICreateAddressGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAddressGroup(
-      request: protos.google.cloud.networksecurity.v1.ICreateAddressGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.ICreateAddressGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAddressGroup(
-      request?: protos.google.cloud.networksecurity.v1.ICreateAddressGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.ICreateAddressGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAddressGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAddressGroup request %j', request);
-    return this.innerApiCalls.createAddressGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createAddressGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createAddressGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAddressGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createAddressGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.create_address_group.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_CreateAddressGroup_async
- */
-  async checkCreateAddressGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1.AddressGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createAddressGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.create_address_group.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_CreateAddressGroup_async
+   */
+  async checkCreateAddressGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1.AddressGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('createAddressGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAddressGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1.AddressGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAddressGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1.AddressGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single address group.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   AddressGroup resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields will be overwritten.
- * @param {google.cloud.networksecurity.v1.AddressGroup} request.addressGroup
- *   Required. Updated AddressGroup resource.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.update_address_group.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_UpdateAddressGroup_async
- */
+  /**
+   * Updates the parameters of a single address group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   AddressGroup resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.networksecurity.v1.AddressGroup} request.addressGroup
+   *   Required. Updated AddressGroup resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.update_address_group.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_UpdateAddressGroup_async
+   */
   updateAddressGroup(
-      request?: protos.google.cloud.networksecurity.v1.IUpdateAddressGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IUpdateAddressGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateAddressGroup(
-      request: protos.google.cloud.networksecurity.v1.IUpdateAddressGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IUpdateAddressGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAddressGroup(
-      request: protos.google.cloud.networksecurity.v1.IUpdateAddressGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IUpdateAddressGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAddressGroup(
-      request?: protos.google.cloud.networksecurity.v1.IUpdateAddressGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.IUpdateAddressGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'address_group.name': request.addressGroup!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'address_group.name': request.addressGroup!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAddressGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAddressGroup request %j', request);
-    return this.innerApiCalls.updateAddressGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateAddressGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateAddressGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAddressGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateAddressGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.update_address_group.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_UpdateAddressGroup_async
- */
-  async checkUpdateAddressGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1.AddressGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateAddressGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.update_address_group.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_UpdateAddressGroup_async
+   */
+  async checkUpdateAddressGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1.AddressGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateAddressGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAddressGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1.AddressGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateAddressGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1.AddressGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
-/**
- * Adds items to an address group.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.addressGroup
- *   Required. A name of the AddressGroup to add items to. Must be in the format
- *   `projects|organization/* /locations/{location}/addressGroups/*`.
- * @param {string[]} request.items
- *   Required. List of items to add.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.add_address_group_items.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_AddAddressGroupItems_async
- */
+  /**
+   * Adds items to an address group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.addressGroup
+   *   Required. A name of the AddressGroup to add items to. Must be in the format
+   *   `projects|organization/* /locations/{location}/addressGroups/*`.
+   * @param {string[]} request.items
+   *   Required. List of items to add.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.add_address_group_items.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_AddAddressGroupItems_async
+   */
   addAddressGroupItems(
-      request?: protos.google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   addAddressGroupItems(
-      request: protos.google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   addAddressGroupItems(
-      request: protos.google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   addAddressGroupItems(
-      request?: protos.google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'address_group': request.addressGroup ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        address_group: request.addressGroup ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('addAddressGroupItems response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('addAddressGroupItems request %j', request);
-    return this.innerApiCalls.addAddressGroupItems(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('addAddressGroupItems response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .addAddressGroupItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('addAddressGroupItems response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `addAddressGroupItems()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.add_address_group_items.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_AddAddressGroupItems_async
- */
-  async checkAddAddressGroupItemsProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1.AddressGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `addAddressGroupItems()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.add_address_group_items.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_AddAddressGroupItems_async
+   */
+  async checkAddAddressGroupItemsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1.AddressGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('addAddressGroupItems long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.addAddressGroupItems, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1.AddressGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.addAddressGroupItems,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1.AddressGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
-/**
- * Removes items from an address group.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.addressGroup
- *   Required. A name of the AddressGroup to remove items from. Must be in the
- *   format `projects|organization/* /locations/{location}/addressGroups/*`.
- * @param {string[]} request.items
- *   Required. List of items to remove.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.remove_address_group_items.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_RemoveAddressGroupItems_async
- */
+  /**
+   * Removes items from an address group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.addressGroup
+   *   Required. A name of the AddressGroup to remove items from. Must be in the
+   *   format `projects|organization/* /locations/{location}/addressGroups/*`.
+   * @param {string[]} request.items
+   *   Required. List of items to remove.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.remove_address_group_items.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_RemoveAddressGroupItems_async
+   */
   removeAddressGroupItems(
-      request?: protos.google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   removeAddressGroupItems(
-      request: protos.google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   removeAddressGroupItems(
-      request: protos.google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   removeAddressGroupItems(
-      request?: protos.google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'address_group': request.addressGroup ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        address_group: request.addressGroup ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('removeAddressGroupItems response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('removeAddressGroupItems request %j', request);
-    return this.innerApiCalls.removeAddressGroupItems(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('removeAddressGroupItems response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .removeAddressGroupItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('removeAddressGroupItems response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `removeAddressGroupItems()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.remove_address_group_items.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_RemoveAddressGroupItems_async
- */
-  async checkRemoveAddressGroupItemsProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1.AddressGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `removeAddressGroupItems()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.remove_address_group_items.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_RemoveAddressGroupItems_async
+   */
+  async checkRemoveAddressGroupItemsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1.AddressGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('removeAddressGroupItems long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.removeAddressGroupItems, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1.AddressGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.removeAddressGroupItems,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1.AddressGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
-/**
- * Clones items from one address group to another.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.addressGroup
- *   Required. A name of the AddressGroup to clone items to. Must be in the
- *   format `projects|organization/* /locations/{location}/addressGroups/*`.
- * @param {string} request.sourceAddressGroup
- *   Required. Source address group to clone items from.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.clone_address_group_items.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_CloneAddressGroupItems_async
- */
+  /**
+   * Clones items from one address group to another.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.addressGroup
+   *   Required. A name of the AddressGroup to clone items to. Must be in the
+   *   format `projects|organization/* /locations/{location}/addressGroups/*`.
+   * @param {string} request.sourceAddressGroup
+   *   Required. Source address group to clone items from.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.clone_address_group_items.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_CloneAddressGroupItems_async
+   */
   cloneAddressGroupItems(
-      request?: protos.google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   cloneAddressGroupItems(
-      request: protos.google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   cloneAddressGroupItems(
-      request: protos.google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   cloneAddressGroupItems(
-      request?: protos.google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'address_group': request.addressGroup ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        address_group: request.addressGroup ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('cloneAddressGroupItems response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('cloneAddressGroupItems request %j', request);
-    return this.innerApiCalls.cloneAddressGroupItems(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('cloneAddressGroupItems response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .cloneAddressGroupItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAddressGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cloneAddressGroupItems response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `cloneAddressGroupItems()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.clone_address_group_items.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_CloneAddressGroupItems_async
- */
-  async checkCloneAddressGroupItemsProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1.AddressGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `cloneAddressGroupItems()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.clone_address_group_items.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_CloneAddressGroupItems_async
+   */
+  async checkCloneAddressGroupItemsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1.AddressGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('cloneAddressGroupItems long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.cloneAddressGroupItems, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1.AddressGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.cloneAddressGroupItems,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1.AddressGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single address group.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. A name of the AddressGroup to delete. Must be in the format
- *   `projects/* /locations/{location}/addressGroups/*`.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.delete_address_group.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_DeleteAddressGroup_async
- */
+  /**
+   * Deletes a single address group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the AddressGroup to delete. Must be in the format
+   *   `projects/* /locations/{location}/addressGroups/*`.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.delete_address_group.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_DeleteAddressGroup_async
+   */
   deleteAddressGroup(
-      request?: protos.google.cloud.networksecurity.v1.IDeleteAddressGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IDeleteAddressGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteAddressGroup(
-      request: protos.google.cloud.networksecurity.v1.IDeleteAddressGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IDeleteAddressGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAddressGroup(
-      request: protos.google.cloud.networksecurity.v1.IDeleteAddressGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IDeleteAddressGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAddressGroup(
-      request?: protos.google.cloud.networksecurity.v1.IDeleteAddressGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.IDeleteAddressGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAddressGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAddressGroup request %j', request);
-    return this.innerApiCalls.deleteAddressGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteAddressGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteAddressGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAddressGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteAddressGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.delete_address_group.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_DeleteAddressGroup_async
- */
-  async checkDeleteAddressGroupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteAddressGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.delete_address_group.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_DeleteAddressGroup_async
+   */
+  async checkDeleteAddressGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteAddressGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAddressGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAddressGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
- /**
- * Lists address groups in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location from which the AddressGroups
- *   should be listed, specified in the format
- *   `projects/* /locations/{location}`.
- * @param {number} request.pageSize
- *   Maximum number of AddressGroups to return per call.
- * @param {string} request.pageToken
- *   The value returned by the last
- *   `ListAddressGroupsResponse` Indicates that this is a
- *   continuation of a prior `ListAddressGroups` call, and
- *   that the system should return the next page of data.
- * @param {boolean} [request.returnPartialSuccess]
- *   Optional. If true, allow partial responses for multi-regional Aggregated
- *   List requests.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1.AddressGroup|AddressGroup}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAddressGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists address groups in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the AddressGroups
+   *   should be listed, specified in the format
+   *   `projects/* /locations/{location}`.
+   * @param {number} request.pageSize
+   *   Maximum number of AddressGroups to return per call.
+   * @param {string} request.pageToken
+   *   The value returned by the last
+   *   `ListAddressGroupsResponse` Indicates that this is a
+   *   continuation of a prior `ListAddressGroups` call, and
+   *   that the system should return the next page of data.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If true, allow partial responses for multi-regional Aggregated
+   *   List requests.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1.AddressGroup|AddressGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAddressGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAddressGroups(
-      request?: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.IAddressGroup[],
-        protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.IAddressGroup[],
+      protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse,
+    ]
+  >;
   listAddressGroups(
-      request: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-          protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.IAddressGroup>): void;
+    request: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
+      | protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.IAddressGroup
+    >,
+  ): void;
   listAddressGroups(
-      request: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-          protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.IAddressGroup>): void;
+    request: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
+      | protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.IAddressGroup
+    >,
+  ): void;
   listAddressGroups(
-      request?: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-          protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.IAddressGroup>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-          protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.IAddressGroup>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.IAddressGroup[],
-        protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.IAddressGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
+      | protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.IAddressGroup
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.IAddressGroup[],
+      protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-      protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1.IAddressGroup>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
+          | protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.IAddressGroup
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAddressGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1452,211 +2113,240 @@ export class AddressGroupServiceClient {
     this._log.info('listAddressGroups request %j', request);
     return this.innerApiCalls
       .listAddressGroups(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1.IAddressGroup[],
-        protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse
-      ]) => {
-        this._log.info('listAddressGroups values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1.IAddressGroup[],
+          protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest | null,
+          protos.google.cloud.networksecurity.v1.IListAddressGroupsResponse,
+        ]) => {
+          this._log.info('listAddressGroups values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAddressGroups`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location from which the AddressGroups
- *   should be listed, specified in the format
- *   `projects/* /locations/{location}`.
- * @param {number} request.pageSize
- *   Maximum number of AddressGroups to return per call.
- * @param {string} request.pageToken
- *   The value returned by the last
- *   `ListAddressGroupsResponse` Indicates that this is a
- *   continuation of a prior `ListAddressGroups` call, and
- *   that the system should return the next page of data.
- * @param {boolean} [request.returnPartialSuccess]
- *   Optional. If true, allow partial responses for multi-regional Aggregated
- *   List requests.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1.AddressGroup|AddressGroup} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAddressGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listAddressGroups`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the AddressGroups
+   *   should be listed, specified in the format
+   *   `projects/* /locations/{location}`.
+   * @param {number} request.pageSize
+   *   Maximum number of AddressGroups to return per call.
+   * @param {string} request.pageToken
+   *   The value returned by the last
+   *   `ListAddressGroupsResponse` Indicates that this is a
+   *   continuation of a prior `ListAddressGroups` call, and
+   *   that the system should return the next page of data.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If true, allow partial responses for multi-regional Aggregated
+   *   List requests.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1.AddressGroup|AddressGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAddressGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAddressGroupsStream(
-      request?: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAddressGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAddressGroups stream %j', request);
     return this.descriptors.page.listAddressGroups.createStream(
       this.innerApiCalls.listAddressGroups as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAddressGroups`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location from which the AddressGroups
- *   should be listed, specified in the format
- *   `projects/* /locations/{location}`.
- * @param {number} request.pageSize
- *   Maximum number of AddressGroups to return per call.
- * @param {string} request.pageToken
- *   The value returned by the last
- *   `ListAddressGroupsResponse` Indicates that this is a
- *   continuation of a prior `ListAddressGroups` call, and
- *   that the system should return the next page of data.
- * @param {boolean} [request.returnPartialSuccess]
- *   Optional. If true, allow partial responses for multi-regional Aggregated
- *   List requests.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1.AddressGroup|AddressGroup}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.list_address_groups.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_ListAddressGroups_async
- */
+  /**
+   * Equivalent to `listAddressGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the AddressGroups
+   *   should be listed, specified in the format
+   *   `projects/* /locations/{location}`.
+   * @param {number} request.pageSize
+   *   Maximum number of AddressGroups to return per call.
+   * @param {string} request.pageToken
+   *   The value returned by the last
+   *   `ListAddressGroupsResponse` Indicates that this is a
+   *   continuation of a prior `ListAddressGroups` call, and
+   *   that the system should return the next page of data.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If true, allow partial responses for multi-regional Aggregated
+   *   List requests.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1.AddressGroup|AddressGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.list_address_groups.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_ListAddressGroups_async
+   */
   listAddressGroupsAsync(
-      request?: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1.IAddressGroup>{
+    request?: protos.google.cloud.networksecurity.v1.IListAddressGroupsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1.IAddressGroup> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAddressGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAddressGroups iterate %j', request);
     return this.descriptors.page.listAddressGroups.asyncIterate(
       this.innerApiCalls['listAddressGroups'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1.IAddressGroup>;
   }
- /**
- * Lists references of an address group.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.addressGroup
- *   Required. A name of the AddressGroup to clone items to. Must be in the
- *   format `projects|organization/* /locations/{location}/addressGroups/*`.
- * @param {number} request.pageSize
- *   The maximum number of references to return.  If unspecified, server
- *   will pick an appropriate default. Server may return fewer items than
- *   requested. A caller should only rely on response's
- *   {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.next_page_token|next_page_token}
- *   to determine if there are more AddressGroupUsers left to be queried.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous List request,
- *   if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference|AddressGroupReference}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAddressGroupReferencesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists references of an address group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.addressGroup
+   *   Required. A name of the AddressGroup to clone items to. Must be in the
+   *   format `projects|organization/* /locations/{location}/addressGroups/*`.
+   * @param {number} request.pageSize
+   *   The maximum number of references to return.  If unspecified, server
+   *   will pick an appropriate default. Server may return fewer items than
+   *   requested. A caller should only rely on response's
+   *   {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.next_page_token|next_page_token}
+   *   to determine if there are more AddressGroupUsers left to be queried.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference|AddressGroupReference}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAddressGroupReferencesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAddressGroupReferences(
-      request?: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[],
-        protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest|null,
-        protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[],
+      protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest | null,
+      protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse,
+    ]
+  >;
   listAddressGroupReferences(
-      request: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-          protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference>): void;
+    request: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
+      | protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference
+    >,
+  ): void;
   listAddressGroupReferences(
-      request: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-          protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference>): void;
+    request: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
+      | protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference
+    >,
+  ): void;
   listAddressGroupReferences(
-      request?: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-          protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-          protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[],
-        protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest|null,
-        protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
+      | protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[],
+      protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest | null,
+      protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'address_group': request.addressGroup ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        address_group: request.addressGroup ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-      protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
+          | protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAddressGroupReferences values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1665,145 +2355,149 @@ export class AddressGroupServiceClient {
     this._log.info('listAddressGroupReferences request %j', request);
     return this.innerApiCalls
       .listAddressGroupReferences(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[],
-        protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest|null,
-        protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse
-      ]) => {
-        this._log.info('listAddressGroupReferences values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[],
+          protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest | null,
+          protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse,
+        ]) => {
+          this._log.info('listAddressGroupReferences values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAddressGroupReferences`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.addressGroup
- *   Required. A name of the AddressGroup to clone items to. Must be in the
- *   format `projects|organization/* /locations/{location}/addressGroups/*`.
- * @param {number} request.pageSize
- *   The maximum number of references to return.  If unspecified, server
- *   will pick an appropriate default. Server may return fewer items than
- *   requested. A caller should only rely on response's
- *   {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.next_page_token|next_page_token}
- *   to determine if there are more AddressGroupUsers left to be queried.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous List request,
- *   if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference|AddressGroupReference} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAddressGroupReferencesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listAddressGroupReferences`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.addressGroup
+   *   Required. A name of the AddressGroup to clone items to. Must be in the
+   *   format `projects|organization/* /locations/{location}/addressGroups/*`.
+   * @param {number} request.pageSize
+   *   The maximum number of references to return.  If unspecified, server
+   *   will pick an appropriate default. Server may return fewer items than
+   *   requested. A caller should only rely on response's
+   *   {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.next_page_token|next_page_token}
+   *   to determine if there are more AddressGroupUsers left to be queried.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference|AddressGroupReference} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAddressGroupReferencesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAddressGroupReferencesStream(
-      request?: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'address_group': request.addressGroup ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        address_group: request.addressGroup ?? '',
+      });
     const defaultCallSettings = this._defaults['listAddressGroupReferences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAddressGroupReferences stream %j', request);
     return this.descriptors.page.listAddressGroupReferences.createStream(
       this.innerApiCalls.listAddressGroupReferences as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAddressGroupReferences`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.addressGroup
- *   Required. A name of the AddressGroup to clone items to. Must be in the
- *   format `projects|organization/* /locations/{location}/addressGroups/*`.
- * @param {number} request.pageSize
- *   The maximum number of references to return.  If unspecified, server
- *   will pick an appropriate default. Server may return fewer items than
- *   requested. A caller should only rely on response's
- *   {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.next_page_token|next_page_token}
- *   to determine if there are more AddressGroupUsers left to be queried.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous List request,
- *   if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference|AddressGroupReference}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/address_group_service.list_address_group_references.js</caption>
- * region_tag:networksecurity_v1_generated_AddressGroupService_ListAddressGroupReferences_async
- */
+  /**
+   * Equivalent to `listAddressGroupReferences`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.addressGroup
+   *   Required. A name of the AddressGroup to clone items to. Must be in the
+   *   format `projects|organization/* /locations/{location}/addressGroups/*`.
+   * @param {number} request.pageSize
+   *   The maximum number of references to return.  If unspecified, server
+   *   will pick an appropriate default. Server may return fewer items than
+   *   requested. A caller should only rely on response's
+   *   {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.next_page_token|next_page_token}
+   *   to determine if there are more AddressGroupUsers left to be queried.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference|AddressGroupReference}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/address_group_service.list_address_group_references.js</caption>
+   * region_tag:networksecurity_v1_generated_AddressGroupService_ListAddressGroupReferences_async
+   */
   listAddressGroupReferencesAsync(
-      request?: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference>{
+    request?: protos.google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'address_group': request.addressGroup ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        address_group: request.addressGroup ?? '',
+      });
     const defaultCallSettings = this._defaults['listAddressGroupReferences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAddressGroupReferences iterate %j', request);
     return this.descriptors.page.listAddressGroupReferences.asyncIterate(
       this.innerApiCalls['listAddressGroupReferences'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -1817,40 +2511,40 @@ export class AddressGroupServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -1864,41 +2558,41 @@ export class AddressGroupServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -1912,12 +2606,12 @@ export class AddressGroupServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1952,12 +2646,11 @@ export class AddressGroupServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1990,12 +2683,12 @@ export class AddressGroupServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2038,22 +2731,22 @@ export class AddressGroupServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2088,15 +2781,15 @@ export class AddressGroupServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2130,7 +2823,7 @@ export class AddressGroupServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2143,25 +2836,24 @@ export class AddressGroupServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -2200,22 +2892,22 @@ export class AddressGroupServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2231,7 +2923,11 @@ export class AddressGroupServiceClient {
    * @param {string} authorization_policy
    * @returns {string} Resource name string.
    */
-  authorizationPolicyPath(project:string,location:string,authorizationPolicy:string) {
+  authorizationPolicyPath(
+    project: string,
+    location: string,
+    authorizationPolicy: string,
+  ) {
     return this.pathTemplates.authorizationPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2247,7 +2943,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).project;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).project;
   }
 
   /**
@@ -2258,7 +2956,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).location;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).location;
   }
 
   /**
@@ -2268,8 +2968,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing AuthorizationPolicy resource.
    * @returns {string} A string representing the authorization_policy.
    */
-  matchAuthorizationPolicyFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).authorization_policy;
+  matchAuthorizationPolicyFromAuthorizationPolicyName(
+    authorizationPolicyName: string,
+  ) {
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).authorization_policy;
   }
 
   /**
@@ -2280,7 +2984,7 @@ export class AddressGroupServiceClient {
    * @param {string} authz_policy
    * @returns {string} Resource name string.
    */
-  authzPolicyPath(project:string,location:string,authzPolicy:string) {
+  authzPolicyPath(project: string, location: string, authzPolicy: string) {
     return this.pathTemplates.authzPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2296,7 +3000,8 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).project;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .project;
   }
 
   /**
@@ -2307,7 +3012,8 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).location;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .location;
   }
 
   /**
@@ -2318,7 +3024,8 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the authz_policy.
    */
   matchAuthzPolicyFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).authz_policy;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .authz_policy;
   }
 
   /**
@@ -2329,7 +3036,11 @@ export class AddressGroupServiceClient {
    * @param {string} backend_authentication_config
    * @returns {string} Resource name string.
    */
-  backendAuthenticationConfigPath(project:string,location:string,backendAuthenticationConfig:string) {
+  backendAuthenticationConfigPath(
+    project: string,
+    location: string,
+    backendAuthenticationConfig: string,
+  ) {
     return this.pathTemplates.backendAuthenticationConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2344,8 +3055,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).project;
+  matchProjectFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).project;
   }
 
   /**
@@ -2355,8 +3070,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).location;
+  matchLocationFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).location;
   }
 
   /**
@@ -2366,8 +3085,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the backend_authentication_config.
    */
-  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).backend_authentication_config;
+  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).backend_authentication_config;
   }
 
   /**
@@ -2378,7 +3101,11 @@ export class AddressGroupServiceClient {
    * @param {string} client_tls_policy
    * @returns {string} Resource name string.
    */
-  clientTlsPolicyPath(project:string,location:string,clientTlsPolicy:string) {
+  clientTlsPolicyPath(
+    project: string,
+    location: string,
+    clientTlsPolicy: string,
+  ) {
     return this.pathTemplates.clientTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2394,7 +3121,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).project;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -2405,7 +3134,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).location;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -2416,7 +3147,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the client_tls_policy.
    */
   matchClientTlsPolicyFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).client_tls_policy;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).client_tls_policy;
   }
 
   /**
@@ -2427,7 +3160,11 @@ export class AddressGroupServiceClient {
    * @param {string} dns_threat_detector
    * @returns {string} Resource name string.
    */
-  dnsThreatDetectorPath(project:string,location:string,dnsThreatDetector:string) {
+  dnsThreatDetectorPath(
+    project: string,
+    location: string,
+    dnsThreatDetector: string,
+  ) {
     return this.pathTemplates.dnsThreatDetectorPathTemplate.render({
       project: project,
       location: location,
@@ -2443,7 +3180,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).project;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).project;
   }
 
   /**
@@ -2454,7 +3193,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).location;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).location;
   }
 
   /**
@@ -2464,8 +3205,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing DnsThreatDetector resource.
    * @returns {string} A string representing the dns_threat_detector.
    */
-  matchDnsThreatDetectorFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).dns_threat_detector;
+  matchDnsThreatDetectorFromDnsThreatDetectorName(
+    dnsThreatDetectorName: string,
+  ) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).dns_threat_detector;
   }
 
   /**
@@ -2476,7 +3221,11 @@ export class AddressGroupServiceClient {
    * @param {string} firewall_endpoint_association
    * @returns {string} Resource name string.
    */
-  firewallEndpointAssociationPath(project:string,location:string,firewallEndpointAssociation:string) {
+  firewallEndpointAssociationPath(
+    project: string,
+    location: string,
+    firewallEndpointAssociation: string,
+  ) {
     return this.pathTemplates.firewallEndpointAssociationPathTemplate.render({
       project: project,
       location: location,
@@ -2491,8 +3240,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).project;
+  matchProjectFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).project;
   }
 
   /**
@@ -2502,8 +3255,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).location;
+  matchLocationFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).location;
   }
 
   /**
@@ -2513,8 +3270,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the firewall_endpoint_association.
    */
-  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).firewall_endpoint_association;
+  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).firewall_endpoint_association;
   }
 
   /**
@@ -2525,7 +3286,11 @@ export class AddressGroupServiceClient {
    * @param {string} gateway_security_policy
    * @returns {string} Resource name string.
    */
-  gatewaySecurityPolicyPath(project:string,location:string,gatewaySecurityPolicy:string) {
+  gatewaySecurityPolicyPath(
+    project: string,
+    location: string,
+    gatewaySecurityPolicy: string,
+  ) {
     return this.pathTemplates.gatewaySecurityPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2541,7 +3306,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).project;
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).project;
   }
 
   /**
@@ -2551,8 +3318,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).location;
+  matchLocationFromGatewaySecurityPolicyName(
+    gatewaySecurityPolicyName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).location;
   }
 
   /**
@@ -2562,8 +3333,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicy resource.
    * @returns {string} A string representing the gateway_security_policy.
    */
-  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).gateway_security_policy;
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(
+    gatewaySecurityPolicyName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).gateway_security_policy;
   }
 
   /**
@@ -2575,7 +3350,12 @@ export class AddressGroupServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  gatewaySecurityPolicyRulePath(project:string,location:string,gatewaySecurityPolicy:string,rule:string) {
+  gatewaySecurityPolicyRulePath(
+    project: string,
+    location: string,
+    gatewaySecurityPolicy: string,
+    rule: string,
+  ) {
     return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render({
       project: project,
       location: location,
@@ -2591,8 +3371,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).project;
+  matchProjectFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).project;
   }
 
   /**
@@ -2602,8 +3386,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).location;
+  matchLocationFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).location;
   }
 
   /**
@@ -2613,8 +3401,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the gateway_security_policy.
    */
-  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).gateway_security_policy;
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).gateway_security_policy;
   }
 
   /**
@@ -2624,8 +3416,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the rule.
    */
-  matchRuleFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).rule;
+  matchRuleFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).rule;
   }
 
   /**
@@ -2636,7 +3432,11 @@ export class AddressGroupServiceClient {
    * @param {string} intercept_deployment
    * @returns {string} Resource name string.
    */
-  interceptDeploymentPath(project:string,location:string,interceptDeployment:string) {
+  interceptDeploymentPath(
+    project: string,
+    location: string,
+    interceptDeployment: string,
+  ) {
     return this.pathTemplates.interceptDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -2652,7 +3452,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).project;
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).project;
   }
 
   /**
@@ -2663,7 +3465,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).location;
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).location;
   }
 
   /**
@@ -2673,8 +3477,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing InterceptDeployment resource.
    * @returns {string} A string representing the intercept_deployment.
    */
-  matchInterceptDeploymentFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).intercept_deployment;
+  matchInterceptDeploymentFromInterceptDeploymentName(
+    interceptDeploymentName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).intercept_deployment;
   }
 
   /**
@@ -2685,7 +3493,11 @@ export class AddressGroupServiceClient {
    * @param {string} intercept_deployment_group
    * @returns {string} Resource name string.
    */
-  interceptDeploymentGroupPath(project:string,location:string,interceptDeploymentGroup:string) {
+  interceptDeploymentGroupPath(
+    project: string,
+    location: string,
+    interceptDeploymentGroup: string,
+  ) {
     return this.pathTemplates.interceptDeploymentGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2700,8 +3512,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).project;
+  matchProjectFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).project;
   }
 
   /**
@@ -2711,8 +3527,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).location;
+  matchLocationFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).location;
   }
 
   /**
@@ -2722,8 +3542,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the intercept_deployment_group.
    */
-  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).intercept_deployment_group;
+  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).intercept_deployment_group;
   }
 
   /**
@@ -2734,7 +3558,11 @@ export class AddressGroupServiceClient {
    * @param {string} intercept_endpoint_group
    * @returns {string} Resource name string.
    */
-  interceptEndpointGroupPath(project:string,location:string,interceptEndpointGroup:string) {
+  interceptEndpointGroupPath(
+    project: string,
+    location: string,
+    interceptEndpointGroup: string,
+  ) {
     return this.pathTemplates.interceptEndpointGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2749,8 +3577,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).project;
+  matchProjectFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).project;
   }
 
   /**
@@ -2760,8 +3592,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).location;
+  matchLocationFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).location;
   }
 
   /**
@@ -2771,8 +3607,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the intercept_endpoint_group.
    */
-  matchInterceptEndpointGroupFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).intercept_endpoint_group;
+  matchInterceptEndpointGroupFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).intercept_endpoint_group;
   }
 
   /**
@@ -2783,12 +3623,18 @@ export class AddressGroupServiceClient {
    * @param {string} intercept_endpoint_group_association
    * @returns {string} Resource name string.
    */
-  interceptEndpointGroupAssociationPath(project:string,location:string,interceptEndpointGroupAssociation:string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render({
-      project: project,
-      location: location,
-      intercept_endpoint_group_association: interceptEndpointGroupAssociation,
-    });
+  interceptEndpointGroupAssociationPath(
+    project: string,
+    location: string,
+    interceptEndpointGroupAssociation: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        intercept_endpoint_group_association: interceptEndpointGroupAssociation,
+      },
+    );
   }
 
   /**
@@ -2798,8 +3644,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).project;
+  matchProjectFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).project;
   }
 
   /**
@@ -2809,8 +3659,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).location;
+  matchLocationFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).location;
   }
 
   /**
@@ -2820,8 +3674,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the intercept_endpoint_group_association.
    */
-  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).intercept_endpoint_group_association;
+  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).intercept_endpoint_group_association;
   }
 
   /**
@@ -2831,7 +3689,7 @@ export class AddressGroupServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2868,7 +3726,11 @@ export class AddressGroupServiceClient {
    * @param {string} mirroring_deployment
    * @returns {string} Resource name string.
    */
-  mirroringDeploymentPath(project:string,location:string,mirroringDeployment:string) {
+  mirroringDeploymentPath(
+    project: string,
+    location: string,
+    mirroringDeployment: string,
+  ) {
     return this.pathTemplates.mirroringDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -2884,7 +3746,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).project;
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).project;
   }
 
   /**
@@ -2895,7 +3759,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).location;
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).location;
   }
 
   /**
@@ -2905,8 +3771,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing MirroringDeployment resource.
    * @returns {string} A string representing the mirroring_deployment.
    */
-  matchMirroringDeploymentFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).mirroring_deployment;
+  matchMirroringDeploymentFromMirroringDeploymentName(
+    mirroringDeploymentName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).mirroring_deployment;
   }
 
   /**
@@ -2917,7 +3787,11 @@ export class AddressGroupServiceClient {
    * @param {string} mirroring_deployment_group
    * @returns {string} Resource name string.
    */
-  mirroringDeploymentGroupPath(project:string,location:string,mirroringDeploymentGroup:string) {
+  mirroringDeploymentGroupPath(
+    project: string,
+    location: string,
+    mirroringDeploymentGroup: string,
+  ) {
     return this.pathTemplates.mirroringDeploymentGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2932,8 +3806,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).project;
+  matchProjectFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).project;
   }
 
   /**
@@ -2943,8 +3821,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).location;
+  matchLocationFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).location;
   }
 
   /**
@@ -2954,8 +3836,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the mirroring_deployment_group.
    */
-  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).mirroring_deployment_group;
+  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).mirroring_deployment_group;
   }
 
   /**
@@ -2966,7 +3852,11 @@ export class AddressGroupServiceClient {
    * @param {string} mirroring_endpoint_group
    * @returns {string} Resource name string.
    */
-  mirroringEndpointGroupPath(project:string,location:string,mirroringEndpointGroup:string) {
+  mirroringEndpointGroupPath(
+    project: string,
+    location: string,
+    mirroringEndpointGroup: string,
+  ) {
     return this.pathTemplates.mirroringEndpointGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2981,8 +3871,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).project;
+  matchProjectFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).project;
   }
 
   /**
@@ -2992,8 +3886,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).location;
+  matchLocationFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).location;
   }
 
   /**
@@ -3003,8 +3901,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the mirroring_endpoint_group.
    */
-  matchMirroringEndpointGroupFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).mirroring_endpoint_group;
+  matchMirroringEndpointGroupFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).mirroring_endpoint_group;
   }
 
   /**
@@ -3015,12 +3917,18 @@ export class AddressGroupServiceClient {
    * @param {string} mirroring_endpoint_group_association
    * @returns {string} Resource name string.
    */
-  mirroringEndpointGroupAssociationPath(project:string,location:string,mirroringEndpointGroupAssociation:string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render({
-      project: project,
-      location: location,
-      mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
-    });
+  mirroringEndpointGroupAssociationPath(
+    project: string,
+    location: string,
+    mirroringEndpointGroupAssociation: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
+      },
+    );
   }
 
   /**
@@ -3030,8 +3938,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).project;
+  matchProjectFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).project;
   }
 
   /**
@@ -3041,8 +3953,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).location;
+  matchLocationFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).location;
   }
 
   /**
@@ -3052,8 +3968,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the mirroring_endpoint_group_association.
    */
-  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).mirroring_endpoint_group_association;
+  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).mirroring_endpoint_group_association;
   }
 
   /**
@@ -3064,12 +3984,18 @@ export class AddressGroupServiceClient {
    * @param {string} address_group
    * @returns {string} Resource name string.
    */
-  organizationLocationAddressGroupPath(organization:string,location:string,addressGroup:string) {
-    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.render({
-      organization: organization,
-      location: location,
-      address_group: addressGroup,
-    });
+  organizationLocationAddressGroupPath(
+    organization: string,
+    location: string,
+    addressGroup: string,
+  ) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        address_group: addressGroup,
+      },
+    );
   }
 
   /**
@@ -3079,8 +4005,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_address_group resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationAddressGroupName(organizationLocationAddressGroupName: string) {
-    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(organizationLocationAddressGroupName).organization;
+  matchOrganizationFromOrganizationLocationAddressGroupName(
+    organizationLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(
+      organizationLocationAddressGroupName,
+    ).organization;
   }
 
   /**
@@ -3090,8 +4020,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_address_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationAddressGroupName(organizationLocationAddressGroupName: string) {
-    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(organizationLocationAddressGroupName).location;
+  matchLocationFromOrganizationLocationAddressGroupName(
+    organizationLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(
+      organizationLocationAddressGroupName,
+    ).location;
   }
 
   /**
@@ -3101,8 +4035,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_address_group resource.
    * @returns {string} A string representing the address_group.
    */
-  matchAddressGroupFromOrganizationLocationAddressGroupName(organizationLocationAddressGroupName: string) {
-    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(organizationLocationAddressGroupName).address_group;
+  matchAddressGroupFromOrganizationLocationAddressGroupName(
+    organizationLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(
+      organizationLocationAddressGroupName,
+    ).address_group;
   }
 
   /**
@@ -3113,12 +4051,18 @@ export class AddressGroupServiceClient {
    * @param {string} firewall_endpoint
    * @returns {string} Resource name string.
    */
-  organizationLocationFirewallEndpointsPath(organization:string,location:string,firewallEndpoint:string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render({
-      organization: organization,
-      location: location,
-      firewall_endpoint: firewallEndpoint,
-    });
+  organizationLocationFirewallEndpointsPath(
+    organization: string,
+    location: string,
+    firewallEndpoint: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        firewall_endpoint: firewallEndpoint,
+      },
+    );
   }
 
   /**
@@ -3128,8 +4072,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).organization;
+  matchOrganizationFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).organization;
   }
 
   /**
@@ -3139,8 +4087,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).location;
+  matchLocationFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).location;
   }
 
   /**
@@ -3150,8 +4102,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the firewall_endpoint.
    */
-  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).firewall_endpoint;
+  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).firewall_endpoint;
   }
 
   /**
@@ -3162,12 +4118,18 @@ export class AddressGroupServiceClient {
    * @param {string} security_profile
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityProfilePath(organization:string,location:string,securityProfile:string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render({
-      organization: organization,
-      location: location,
-      security_profile: securityProfile,
-    });
+  organizationLocationSecurityProfilePath(
+    organization: string,
+    location: string,
+    securityProfile: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_profile: securityProfile,
+      },
+    );
   }
 
   /**
@@ -3177,8 +4139,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).organization;
+  matchOrganizationFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).organization;
   }
 
   /**
@@ -3188,8 +4154,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).location;
+  matchLocationFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).location;
   }
 
   /**
@@ -3199,8 +4169,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the security_profile.
    */
-  matchSecurityProfileFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).security_profile;
+  matchSecurityProfileFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).security_profile;
   }
 
   /**
@@ -3211,12 +4185,18 @@ export class AddressGroupServiceClient {
    * @param {string} security_profile_group
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityProfileGroupPath(organization:string,location:string,securityProfileGroup:string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render({
-      organization: organization,
-      location: location,
-      security_profile_group: securityProfileGroup,
-    });
+  organizationLocationSecurityProfileGroupPath(
+    organization: string,
+    location: string,
+    securityProfileGroup: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_profile_group: securityProfileGroup,
+      },
+    );
   }
 
   /**
@@ -3226,8 +4206,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).organization;
+  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).organization;
   }
 
   /**
@@ -3237,8 +4221,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).location;
+  matchLocationFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).location;
   }
 
   /**
@@ -3248,8 +4236,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the security_profile_group.
    */
-  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).security_profile_group;
+  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).security_profile_group;
   }
 
   /**
@@ -3258,7 +4250,7 @@ export class AddressGroupServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3283,7 +4275,11 @@ export class AddressGroupServiceClient {
    * @param {string} address_group
    * @returns {string} Resource name string.
    */
-  projectLocationAddressGroupPath(project:string,location:string,addressGroup:string) {
+  projectLocationAddressGroupPath(
+    project: string,
+    location: string,
+    addressGroup: string,
+  ) {
     return this.pathTemplates.projectLocationAddressGroupPathTemplate.render({
       project: project,
       location: location,
@@ -3298,8 +4294,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_address_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAddressGroupName(projectLocationAddressGroupName: string) {
-    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(projectLocationAddressGroupName).project;
+  matchProjectFromProjectLocationAddressGroupName(
+    projectLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(
+      projectLocationAddressGroupName,
+    ).project;
   }
 
   /**
@@ -3309,8 +4309,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_address_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAddressGroupName(projectLocationAddressGroupName: string) {
-    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(projectLocationAddressGroupName).location;
+  matchLocationFromProjectLocationAddressGroupName(
+    projectLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(
+      projectLocationAddressGroupName,
+    ).location;
   }
 
   /**
@@ -3320,8 +4324,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_address_group resource.
    * @returns {string} A string representing the address_group.
    */
-  matchAddressGroupFromProjectLocationAddressGroupName(projectLocationAddressGroupName: string) {
-    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(projectLocationAddressGroupName).address_group;
+  matchAddressGroupFromProjectLocationAddressGroupName(
+    projectLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(
+      projectLocationAddressGroupName,
+    ).address_group;
   }
 
   /**
@@ -3332,12 +4340,18 @@ export class AddressGroupServiceClient {
    * @param {string} firewall_endpoint
    * @returns {string} Resource name string.
    */
-  projectLocationFirewallEndpointsPath(project:string,location:string,firewallEndpoint:string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render({
-      project: project,
-      location: location,
-      firewall_endpoint: firewallEndpoint,
-    });
+  projectLocationFirewallEndpointsPath(
+    project: string,
+    location: string,
+    firewallEndpoint: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        firewall_endpoint: firewallEndpoint,
+      },
+    );
   }
 
   /**
@@ -3347,8 +4361,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).project;
+  matchProjectFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).project;
   }
 
   /**
@@ -3358,8 +4376,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).location;
+  matchLocationFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).location;
   }
 
   /**
@@ -3369,8 +4391,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the firewall_endpoint.
    */
-  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).firewall_endpoint;
+  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).firewall_endpoint;
   }
 
   /**
@@ -3381,12 +4407,18 @@ export class AddressGroupServiceClient {
    * @param {string} security_profile
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityProfilePath(project:string,location:string,securityProfile:string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render({
-      project: project,
-      location: location,
-      security_profile: securityProfile,
-    });
+  projectLocationSecurityProfilePath(
+    project: string,
+    location: string,
+    securityProfile: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_profile: securityProfile,
+      },
+    );
   }
 
   /**
@@ -3396,8 +4428,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).project;
+  matchProjectFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).project;
   }
 
   /**
@@ -3407,8 +4443,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).location;
+  matchLocationFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).location;
   }
 
   /**
@@ -3418,8 +4458,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the security_profile.
    */
-  matchSecurityProfileFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).security_profile;
+  matchSecurityProfileFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).security_profile;
   }
 
   /**
@@ -3430,12 +4474,18 @@ export class AddressGroupServiceClient {
    * @param {string} security_profile_group
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityProfileGroupPath(project:string,location:string,securityProfileGroup:string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render({
-      project: project,
-      location: location,
-      security_profile_group: securityProfileGroup,
-    });
+  projectLocationSecurityProfileGroupPath(
+    project: string,
+    location: string,
+    securityProfileGroup: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_profile_group: securityProfileGroup,
+      },
+    );
   }
 
   /**
@@ -3445,8 +4495,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).project;
+  matchProjectFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).project;
   }
 
   /**
@@ -3456,8 +4510,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).location;
+  matchLocationFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).location;
   }
 
   /**
@@ -3467,8 +4525,114 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the security_profile_group.
    */
-  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).security_profile_group;
+  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).security_profile_group;
+  }
+
+  /**
+   * Return a fully-qualified sACAttachment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sac_attachment
+   * @returns {string} Resource name string.
+   */
+  sACAttachmentPath(project: string, location: string, sacAttachment: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.render({
+      project: project,
+      location: location,
+      sac_attachment: sacAttachment,
+    });
+  }
+
+  /**
+   * Parse the project from SACAttachment resource.
+   *
+   * @param {string} sACAttachmentName
+   *   A fully-qualified path representing SACAttachment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSACAttachmentName(sACAttachmentName: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from SACAttachment resource.
+   *
+   * @param {string} sACAttachmentName
+   *   A fully-qualified path representing SACAttachment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSACAttachmentName(sACAttachmentName: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .location;
+  }
+
+  /**
+   * Parse the sac_attachment from SACAttachment resource.
+   *
+   * @param {string} sACAttachmentName
+   *   A fully-qualified path representing SACAttachment resource.
+   * @returns {string} A string representing the sac_attachment.
+   */
+  matchSacAttachmentFromSACAttachmentName(sACAttachmentName: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .sac_attachment;
+  }
+
+  /**
+   * Return a fully-qualified sACRealm resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sac_realm
+   * @returns {string} Resource name string.
+   */
+  sACRealmPath(project: string, location: string, sacRealm: string) {
+    return this.pathTemplates.sACRealmPathTemplate.render({
+      project: project,
+      location: location,
+      sac_realm: sacRealm,
+    });
+  }
+
+  /**
+   * Parse the project from SACRealm resource.
+   *
+   * @param {string} sACRealmName
+   *   A fully-qualified path representing SACRealm resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSACRealmName(sACRealmName: string) {
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName).project;
+  }
+
+  /**
+   * Parse the location from SACRealm resource.
+   *
+   * @param {string} sACRealmName
+   *   A fully-qualified path representing SACRealm resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSACRealmName(sACRealmName: string) {
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName).location;
+  }
+
+  /**
+   * Parse the sac_realm from SACRealm resource.
+   *
+   * @param {string} sACRealmName
+   *   A fully-qualified path representing SACRealm resource.
+   * @returns {string} A string representing the sac_realm.
+   */
+  matchSacRealmFromSACRealmName(sACRealmName: string) {
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName)
+      .sac_realm;
   }
 
   /**
@@ -3479,7 +4643,11 @@ export class AddressGroupServiceClient {
    * @param {string} server_tls_policy
    * @returns {string} Resource name string.
    */
-  serverTlsPolicyPath(project:string,location:string,serverTlsPolicy:string) {
+  serverTlsPolicyPath(
+    project: string,
+    location: string,
+    serverTlsPolicy: string,
+  ) {
     return this.pathTemplates.serverTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3495,7 +4663,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).project;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -3506,7 +4676,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).location;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -3517,7 +4689,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the server_tls_policy.
    */
   matchServerTlsPolicyFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).server_tls_policy;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).server_tls_policy;
   }
 
   /**
@@ -3528,7 +4702,11 @@ export class AddressGroupServiceClient {
    * @param {string} tls_inspection_policy
    * @returns {string} Resource name string.
    */
-  tlsInspectionPolicyPath(project:string,location:string,tlsInspectionPolicy:string) {
+  tlsInspectionPolicyPath(
+    project: string,
+    location: string,
+    tlsInspectionPolicy: string,
+  ) {
     return this.pathTemplates.tlsInspectionPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3544,7 +4722,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).project;
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).project;
   }
 
   /**
@@ -3555,7 +4735,9 @@ export class AddressGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).location;
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).location;
   }
 
   /**
@@ -3565,8 +4747,12 @@ export class AddressGroupServiceClient {
    *   A fully-qualified path representing TlsInspectionPolicy resource.
    * @returns {string} A string representing the tls_inspection_policy.
    */
-  matchTlsInspectionPolicyFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).tls_inspection_policy;
+  matchTlsInspectionPolicyFromTlsInspectionPolicyName(
+    tlsInspectionPolicyName: string,
+  ) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).tls_inspection_policy;
   }
 
   /**
@@ -3577,7 +4763,7 @@ export class AddressGroupServiceClient {
    * @param {string} url_list
    * @returns {string} Resource name string.
    */
-  urlListPath(project:string,location:string,urlList:string) {
+  urlListPath(project: string, location: string, urlList: string) {
     return this.pathTemplates.urlListPathTemplate.render({
       project: project,
       location: location,
@@ -3626,12 +4812,16 @@ export class AddressGroupServiceClient {
    */
   close(): Promise<void> {
     if (this.addressGroupServiceStub && !this._terminated) {
-      return this.addressGroupServiceStub.then(stub => {
+      return this.addressGroupServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

@@ -19,7 +19,7 @@
 import * as assert from 'assert';
 import {describe, it, before} from 'mocha';
 import delay from 'delay';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import {express as elb} from '../src/index';
 import {Logging} from '@google-cloud/logging';
 
@@ -27,7 +27,7 @@ const logging = new Logging();
 
 const WRITE_CONSISTENCY_DELAY_MS = 20 * 1000;
 const TEST_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS + 10 * 1000;
-const LOG_NAME = `bunyan-system-test-${uuid.v4()}`;
+const LOG_NAME = `bunyan-system-test-${crypto.randomUUID()}`;
 
 describe('express middleware', () => {
   let logger: elb.MiddlewareReturnType['logger'];
@@ -40,7 +40,7 @@ describe('express middleware', () => {
   describe('global logger', () => {
     it('should properly write log entries', async function () {
       this.timeout(TEST_TIMEOUT);
-      const LOG_MESSAGE = `unique log message ${uuid.v4()}`;
+      const LOG_MESSAGE = `unique log message ${crypto.randomUUID()}`;
       logger.info(LOG_MESSAGE);
 
       await delay(WRITE_CONSISTENCY_DELAY_MS);
@@ -55,7 +55,7 @@ describe('express middleware', () => {
   describe('request logging middleware', () => {
     it('should write request correlated log entries', function (done) {
       this.timeout(TEST_TIMEOUT);
-      const LOG_MESSAGE = `correlated log message ${uuid.v4()}`;
+      const LOG_MESSAGE = `correlated log message ${crypto.randomUUID()}`;
       const fakeRequest = {headers: {fake: 'header'}};
       const fakeResponse = {};
       const next = async () => {

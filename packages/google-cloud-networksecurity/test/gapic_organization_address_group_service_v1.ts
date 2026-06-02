@@ -19,3803 +19,5902 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as organizationaddressgroupserviceModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
+import {
+  protobuf,
+  LROperation,
+  operationsProtos,
+  IamProtos,
+  LocationProtos,
+} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json'),
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject,
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error,
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error,
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({ done: true, value: undefined });
+          }
+          return Promise.resolve({ done: false, value: responses![counter++] });
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.OrganizationAddressGroupServiceClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient();
-            const apiEndpoint = client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'networksecurity.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'networksecurity.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          organizationaddressgroupserviceModule.v1
+            .OrganizationAddressGroupServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'networksecurity.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          organizationaddressgroupserviceModule.v1
+            .OrganizationAddressGroupServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'networksecurity.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          { universeDomain: 'example.com' },
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'networksecurity.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          { universe_domain: 'example.com' },
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'networksecurity.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'networksecurity.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient();
-            const universeDomain = client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+              { universeDomain: 'configured.example.com' },
+            );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'networksecurity.configured.example.com',
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          { universe_domain: 'example.com', universeDomain: 'example.net' },
+        );
+      });
+    });
 
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient.servicePath;
-                assert.strictEqual(servicePath, 'networksecurity.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('has port', () => {
+      const port =
+        organizationaddressgroupserviceModule.v1
+          .OrganizationAddressGroupServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'networksecurity.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('should create a client with no option', () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            fallback: true,
+          },
+        );
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      assert.strictEqual(client.organizationAddressGroupServiceStub, undefined);
+      await client.initialize();
+      assert(client.organizationAddressGroupServiceStub);
+    });
+
+    it('has close method for the initialized client', (done) => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      client.initialize().catch((err) => {
+        throw err;
+      });
+      assert(client.organizationAddressGroupServiceStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has close method for the non-initialized client', (done) => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      assert.strictEqual(client.organizationAddressGroupServiceStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
+
+  describe('getAddressGroup', () => {
+    it('invokes getAddressGroup without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.GetAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetAddressGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.AddressGroup(),
+      );
+      client.innerApiCalls.getAddressGroup = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAddressGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAddressGroup without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.GetAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetAddressGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.AddressGroup(),
+      );
+      client.innerApiCalls.getAddressGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAddressGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.networksecurity.v1.IAddressGroup | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAddressGroup with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.GetAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetAddressGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAddressGroup = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getAddressGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAddressGroup with closed client', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.GetAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetAddressGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getAddressGroup(request), expectedError);
+    });
+  });
+
+  describe('createAddressGroup', () => {
+    it('invokes createAddressGroup without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.CreateAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.CreateAddressGroupRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createAddressGroup =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createAddressGroup(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAddressGroup without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.CreateAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.CreateAddressGroupRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createAddressGroup =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAddressGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.networksecurity.v1.IAddressGroup,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAddressGroup with call error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.CreateAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.CreateAddressGroupRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAddressGroup = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createAddressGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAddressGroup with LRO error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.CreateAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.CreateAddressGroupRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAddressGroup = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createAddressGroup(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateAddressGroupProgress without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateAddressGroupProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateAddressGroupProgress with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateAddressGroupProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateAddressGroup', () => {
+    it('invokes updateAddressGroup without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.UpdateAddressGroupRequest(),
+      );
+      request.addressGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.UpdateAddressGroupRequest',
+        ['addressGroup', 'name'],
+      );
+      request.addressGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `address_group.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateAddressGroup =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateAddressGroup(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAddressGroup without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.UpdateAddressGroupRequest(),
+      );
+      request.addressGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.UpdateAddressGroupRequest',
+        ['addressGroup', 'name'],
+      );
+      request.addressGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `address_group.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateAddressGroup =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAddressGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.networksecurity.v1.IAddressGroup,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAddressGroup with call error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.UpdateAddressGroupRequest(),
+      );
+      request.addressGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.UpdateAddressGroupRequest',
+        ['addressGroup', 'name'],
+      );
+      request.addressGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `address_group.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAddressGroup = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateAddressGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAddressGroup with LRO error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.UpdateAddressGroupRequest(),
+      );
+      request.addressGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.UpdateAddressGroupRequest',
+        ['addressGroup', 'name'],
+      );
+      request.addressGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `address_group.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAddressGroup = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateAddressGroup(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateAddressGroupProgress without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateAddressGroupProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateAddressGroupProgress with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateAddressGroupProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('addAddressGroupItems', () => {
+    it('invokes addAddressGroupItems without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.addAddressGroupItems =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.addAddressGroupItems(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAddressGroupItems without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.addAddressGroupItems =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addAddressGroupItems(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.networksecurity.v1.IAddressGroup,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAddressGroupItems with call error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addAddressGroupItems = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.addAddressGroupItems(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAddressGroupItems with LRO error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addAddressGroupItems = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.addAddressGroupItems(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkAddAddressGroupItemsProgress without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkAddAddressGroupItemsProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkAddAddressGroupItemsProgress with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkAddAddressGroupItemsProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('removeAddressGroupItems', () => {
+    it('invokes removeAddressGroupItems without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.removeAddressGroupItems =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.removeAddressGroupItems(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeAddressGroupItems without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.removeAddressGroupItems =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeAddressGroupItems(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.networksecurity.v1.IAddressGroup,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeAddressGroupItems with call error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeAddressGroupItems = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.removeAddressGroupItems(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.removeAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeAddressGroupItems with LRO error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeAddressGroupItems = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.removeAddressGroupItems(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.removeAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkRemoveAddressGroupItemsProgress without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkRemoveAddressGroupItemsProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRemoveAddressGroupItemsProgress with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkRemoveAddressGroupItemsProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('cloneAddressGroupItems', () => {
+    it('invokes cloneAddressGroupItems without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.cloneAddressGroupItems =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.cloneAddressGroupItems(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cloneAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cloneAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cloneAddressGroupItems without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.cloneAddressGroupItems =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.cloneAddressGroupItems(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.networksecurity.v1.IAddressGroup,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.networksecurity.v1.IAddressGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cloneAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cloneAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cloneAddressGroupItems with call error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cloneAddressGroupItems = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.cloneAddressGroupItems(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.cloneAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cloneAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cloneAddressGroupItems with LRO error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cloneAddressGroupItems = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.cloneAddressGroupItems(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.cloneAddressGroupItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cloneAddressGroupItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCloneAddressGroupItemsProgress without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCloneAddressGroupItemsProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCloneAddressGroupItemsProgress with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCloneAddressGroupItemsProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteAddressGroup', () => {
+    it('invokes deleteAddressGroup without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.DeleteAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.DeleteAddressGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAddressGroup =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteAddressGroup(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAddressGroup without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.DeleteAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.DeleteAddressGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAddressGroup =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAddressGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAddressGroup with call error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.DeleteAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.DeleteAddressGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAddressGroup = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteAddressGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAddressGroup with LRO error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.DeleteAddressGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.DeleteAddressGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAddressGroup = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteAddressGroup(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAddressGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAddressGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteAddressGroupProgress without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteAddressGroupProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteAddressGroupProgress with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteAddressGroupProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listAddressGroups', () => {
+    it('invokes listAddressGroups without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+      ];
+      client.innerApiCalls.listAddressGroups = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAddressGroups(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAddressGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAddressGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAddressGroups without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+      ];
+      client.innerApiCalls.listAddressGroups =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAddressGroups(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.networksecurity.v1.IAddressGroup[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAddressGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAddressGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAddressGroups with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAddressGroups = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listAddressGroups(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAddressGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAddressGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAddressGroupsStream without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+      ];
+      client.descriptors.page.listAddressGroups.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAddressGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.networksecurity.v1.AddressGroup[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.networksecurity.v1.AddressGroup) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAddressGroups.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAddressGroups, request),
+      );
+      assert(
+        (client.descriptors.page.listAddressGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listAddressGroupsStream with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAddressGroups.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAddressGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.networksecurity.v1.AddressGroup[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.networksecurity.v1.AddressGroup) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAddressGroups.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAddressGroups, request),
+      );
+      assert(
+        (client.descriptors.page.listAddressGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listAddressGroups without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.AddressGroup(),
+        ),
+      ];
+      client.descriptors.page.listAddressGroups.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.networksecurity.v1.IAddressGroup[] =
+        [];
+      const iterable = client.listAddressGroupsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAddressGroups.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAddressGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listAddressGroups with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAddressGroups.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAddressGroupsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.networksecurity.v1.IAddressGroup[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({universeDomain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'networksecurity.example.com');
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAddressGroups.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAddressGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('listAddressGroupReferences', () => {
+    it('invokes listAddressGroupReferences without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+      ];
+      client.innerApiCalls.listAddressGroupReferences =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAddressGroupReferences(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAddressGroupReferences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAddressGroupReferences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAddressGroupReferences without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+      ];
+      client.innerApiCalls.listAddressGroupReferences =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAddressGroupReferences(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAddressGroupReferences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAddressGroupReferences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAddressGroupReferences with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAddressGroupReferences = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listAddressGroupReferences(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listAddressGroupReferences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAddressGroupReferences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAddressGroupReferencesStream without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+      ];
+      client.descriptors.page.listAddressGroupReferences.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAddressGroupReferencesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({universe_domain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'networksecurity.example.com');
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listAddressGroupReferences
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAddressGroupReferences, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listAddressGroupReferences
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient();
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'networksecurity.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+    it('invokes listAddressGroupReferencesStream with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAddressGroupReferences.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAddressGroupReferencesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listAddressGroupReferences
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAddressGroupReferences, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listAddressGroupReferences
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
 
-                it('value configured in code has priority over environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({universeDomain: 'configured.example.com'});
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'networksecurity.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
+    it('uses async iteration with listAddressGroupReferences without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference(),
+        ),
+      ];
+      client.descriptors.page.listAddressGroupReferences.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[] =
+        [];
+      const iterable = client.listAddressGroupReferencesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAddressGroupReferences
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAddressGroupReferences
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAddressGroupReferences with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest',
+        ['addressGroup'],
+      );
+      request.addressGroup = defaultValue1;
+      const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAddressGroupReferences.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAddressGroupReferencesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
-
-        it('has port', () => {
-            const port = organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient.port;
-            assert(port);
-            assert(typeof port === 'number');
-        });
-
-        it('should create a client with no option', () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.organizationAddressGroupServiceStub, undefined);
-            await client.initialize();
-            assert(client.organizationAddressGroupServiceStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.organizationAddressGroupServiceStub);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.organizationAddressGroupServiceStub, undefined);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
-        });
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAddressGroupReferences
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAddressGroupReferences
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
     });
-
-    describe('getAddressGroup', () => {
-        it('invokes getAddressGroup without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.GetAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.GetAddressGroupRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.AddressGroup()
-            );
-            client.innerApiCalls.getAddressGroup = stubSimpleCall(expectedResponse);
-            const [response] = await client.getAddressGroup(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getAddressGroup without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.GetAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.GetAddressGroupRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.AddressGroup()
-            );
-            client.innerApiCalls.getAddressGroup = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getAddressGroup(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1.IAddressGroup|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getAddressGroup with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.GetAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.GetAddressGroupRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getAddressGroup = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getAddressGroup(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getAddressGroup with closed client', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.GetAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.GetAddressGroupRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getAddressGroup(request), expectedError);
-        });
+  });
+  describe('getIamPolicy', () => {
+    it('invokes getIamPolicy without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest(),
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy(),
+      );
+      client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
+      const response = await client.getIamPolicy(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
     });
-
-    describe('createAddressGroup', () => {
-        it('invokes createAddressGroup without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.CreateAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.CreateAddressGroupRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createAddressGroup = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createAddressGroup(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createAddressGroup without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.CreateAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.CreateAddressGroupRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createAddressGroup = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createAddressGroup(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createAddressGroup with call error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.CreateAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.CreateAddressGroupRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createAddressGroup = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createAddressGroup(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createAddressGroup with LRO error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.CreateAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.CreateAddressGroupRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createAddressGroup = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createAddressGroup(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkCreateAddressGroupProgress without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreateAddressGroupProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkCreateAddressGroupProgress with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreateAddressGroupProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
+    it('invokes getIamPolicy without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest(),
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy(),
+      );
+      client.iamClient.getIamPolicy = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client
+          .getIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
     });
-
-    describe('updateAddressGroup', () => {
-        it('invokes updateAddressGroup without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.UpdateAddressGroupRequest()
-            );
-            request.addressGroup ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.UpdateAddressGroupRequest', ['addressGroup', 'name']);
-            request.addressGroup.name = defaultValue1;
-            const expectedHeaderRequestParams = `address_group.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.updateAddressGroup = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.updateAddressGroup(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateAddressGroup without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.UpdateAddressGroupRequest()
-            );
-            request.addressGroup ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.UpdateAddressGroupRequest', ['addressGroup', 'name']);
-            request.addressGroup.name = defaultValue1;
-            const expectedHeaderRequestParams = `address_group.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.updateAddressGroup = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateAddressGroup(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateAddressGroup with call error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.UpdateAddressGroupRequest()
-            );
-            request.addressGroup ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.UpdateAddressGroupRequest', ['addressGroup', 'name']);
-            request.addressGroup.name = defaultValue1;
-            const expectedHeaderRequestParams = `address_group.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateAddressGroup = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.updateAddressGroup(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateAddressGroup with LRO error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.UpdateAddressGroupRequest()
-            );
-            request.addressGroup ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.UpdateAddressGroupRequest', ['addressGroup', 'name']);
-            request.addressGroup.name = defaultValue1;
-            const expectedHeaderRequestParams = `address_group.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateAddressGroup = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.updateAddressGroup(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.updateAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkUpdateAddressGroupProgress without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkUpdateAddressGroupProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkUpdateAddressGroupProgress with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkUpdateAddressGroupProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
+    it('invokes getIamPolicy with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest(),
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.getIamPolicy(request, expectedOptions),
+        expectedError,
+      );
+      assert(
+        (client.iamClient.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
     });
-
-    describe('addAddressGroupItems', () => {
-        it('invokes addAddressGroupItems without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.addAddressGroupItems = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.addAddressGroupItems(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.addAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.addAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes addAddressGroupItems without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.addAddressGroupItems = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.addAddressGroupItems(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.addAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.addAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes addAddressGroupItems with call error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.addAddressGroupItems = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.addAddressGroupItems(request), expectedError);
-            const actualRequest = (client.innerApiCalls.addAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.addAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes addAddressGroupItems with LRO error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.addAddressGroupItems = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.addAddressGroupItems(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.addAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.addAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkAddAddressGroupItemsProgress without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkAddAddressGroupItemsProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkAddAddressGroupItemsProgress with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkAddAddressGroupItemsProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
+  });
+  describe('setIamPolicy', () => {
+    it('invokes setIamPolicy without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest(),
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy(),
+      );
+      client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
+      const response = await client.setIamPolicy(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
     });
-
-    describe('removeAddressGroupItems', () => {
-        it('invokes removeAddressGroupItems without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.removeAddressGroupItems = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.removeAddressGroupItems(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.removeAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.removeAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes removeAddressGroupItems without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.removeAddressGroupItems = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.removeAddressGroupItems(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.removeAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.removeAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes removeAddressGroupItems with call error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.removeAddressGroupItems = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.removeAddressGroupItems(request), expectedError);
-            const actualRequest = (client.innerApiCalls.removeAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.removeAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes removeAddressGroupItems with LRO error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.removeAddressGroupItems = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.removeAddressGroupItems(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.removeAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.removeAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkRemoveAddressGroupItemsProgress without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkRemoveAddressGroupItemsProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkRemoveAddressGroupItemsProgress with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkRemoveAddressGroupItemsProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
+    it('invokes setIamPolicy without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest(),
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy(),
+      );
+      client.iamClient.setIamPolicy = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client
+          .setIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
     });
-
-    describe('cloneAddressGroupItems', () => {
-        it('invokes cloneAddressGroupItems without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.cloneAddressGroupItems = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.cloneAddressGroupItems(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.cloneAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.cloneAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes cloneAddressGroupItems without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.cloneAddressGroupItems = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.cloneAddressGroupItems(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1.IAddressGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.cloneAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.cloneAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes cloneAddressGroupItems with call error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.cloneAddressGroupItems = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.cloneAddressGroupItems(request), expectedError);
-            const actualRequest = (client.innerApiCalls.cloneAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.cloneAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes cloneAddressGroupItems with LRO error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.cloneAddressGroupItems = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.cloneAddressGroupItems(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.cloneAddressGroupItems as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.cloneAddressGroupItems as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkCloneAddressGroupItemsProgress without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCloneAddressGroupItemsProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkCloneAddressGroupItemsProgress with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCloneAddressGroupItemsProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
+    it('invokes setIamPolicy with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest(),
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.setIamPolicy(request, expectedOptions),
+        expectedError,
+      );
+      assert(
+        (client.iamClient.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
     });
-
-    describe('deleteAddressGroup', () => {
-        it('invokes deleteAddressGroup without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.DeleteAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.DeleteAddressGroupRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteAddressGroup = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.deleteAddressGroup(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteAddressGroup without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.DeleteAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.DeleteAddressGroupRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteAddressGroup = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteAddressGroup(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteAddressGroup with call error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.DeleteAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.DeleteAddressGroupRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteAddressGroup = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.deleteAddressGroup(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteAddressGroup with LRO error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.DeleteAddressGroupRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.DeleteAddressGroupRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteAddressGroup = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.deleteAddressGroup(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteAddressGroup as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteAddressGroup as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkDeleteAddressGroupProgress without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkDeleteAddressGroupProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkDeleteAddressGroupProgress with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkDeleteAddressGroupProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
+  });
+  describe('testIamPermissions', () => {
+    it('invokes testIamPermissions without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest(),
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse(),
+      );
+      client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
+      const response = await client.testIamPermissions(
+        request,
+        expectedOptions,
+      );
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
     });
-
-    describe('listAddressGroups', () => {
-        it('invokes listAddressGroups without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-            ];
-            client.innerApiCalls.listAddressGroups = stubSimpleCall(expectedResponse);
-            const [response] = await client.listAddressGroups(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listAddressGroups as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listAddressGroups as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listAddressGroups without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-            ];
-            client.innerApiCalls.listAddressGroups = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listAddressGroups(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1.IAddressGroup[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listAddressGroups as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listAddressGroups as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listAddressGroups with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listAddressGroups = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listAddressGroups(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listAddressGroups as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listAddressGroups as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listAddressGroupsStream without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-            ];
-            client.descriptors.page.listAddressGroups.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listAddressGroupsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.networksecurity.v1.AddressGroup[] = [];
-                stream.on('data', (response: protos.google.cloud.networksecurity.v1.AddressGroup) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listAddressGroups.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listAddressGroups, request));
-            assert(
-                (client.descriptors.page.listAddressGroups.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listAddressGroupsStream with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listAddressGroups.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listAddressGroupsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.networksecurity.v1.AddressGroup[] = [];
-                stream.on('data', (response: protos.google.cloud.networksecurity.v1.AddressGroup) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listAddressGroups.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listAddressGroups, request));
-            assert(
-                (client.descriptors.page.listAddressGroups.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listAddressGroups without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.AddressGroup()),
-            ];
-            client.descriptors.page.listAddressGroups.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.networksecurity.v1.IAddressGroup[] = [];
-            const iterable = client.listAddressGroupsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes testIamPermissions without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest(),
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse(),
+      );
+      client.iamClient.testIamPermissions = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client
+          .testIamPermissions(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
+    });
+    it('invokes testIamPermissions with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest(),
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.testIamPermissions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.testIamPermissions(request, expectedOptions),
+        expectedError,
+      );
+      assert(
+        (client.iamClient.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
+    });
+  });
+  describe('getLocation', () => {
+    it('invokes getLocation without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location(),
+      );
+      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+      const response = await client.getLocation(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
+    });
+    it('invokes getLocation without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location(),
+      );
+      client.locationsClient.getLocation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLocation(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listAddressGroups.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listAddressGroups.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+    });
+    it('invokes getLocation with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.locationsClient.getLocation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getLocation(request, expectedOptions),
+        expectedError,
+      );
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
+    });
+  });
+  describe('listLocationsAsync', () => {
+    it('uses async iteration with listLocations without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+      ];
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+      const iterable = client.listLocationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+    it('uses async iteration with listLocations with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listLocationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+  });
 
-        it('uses async iteration with listAddressGroups with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listAddressGroups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listAddressGroupsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.networksecurity.v1.IAddressGroup[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listAddressGroups.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listAddressGroups.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+  describe('Path templates', () => {
+    describe('authorizationPolicy', async () => {
+      const fakePath = '/rendered/path/authorizationPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        authorization_policy: 'authorizationPolicyValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.authorizationPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.authorizationPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('authorizationPolicyPath', () => {
+        const result = client.authorizationPolicyPath(
+          'projectValue',
+          'locationValue',
+          'authorizationPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.authorizationPolicyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAuthorizationPolicyName', () => {
+        const result = client.matchProjectFromAuthorizationPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.authorizationPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAuthorizationPolicyName', () => {
+        const result =
+          client.matchLocationFromAuthorizationPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.authorizationPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAuthorizationPolicyFromAuthorizationPolicyName', () => {
+        const result =
+          client.matchAuthorizationPolicyFromAuthorizationPolicyName(fakePath);
+        assert.strictEqual(result, 'authorizationPolicyValue');
+        assert(
+          (
+            client.pathTemplates.authorizationPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('listAddressGroupReferences', () => {
-        it('invokes listAddressGroupReferences without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-            ];
-            client.innerApiCalls.listAddressGroupReferences = stubSimpleCall(expectedResponse);
-            const [response] = await client.listAddressGroupReferences(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listAddressGroupReferences as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listAddressGroupReferences as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+    describe('authzPolicy', async () => {
+      const fakePath = '/rendered/path/authzPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        authz_policy: 'authzPolicyValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.authzPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.authzPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        it('invokes listAddressGroupReferences without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-            ];
-            client.innerApiCalls.listAddressGroupReferences = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listAddressGroupReferences(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listAddressGroupReferences as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listAddressGroupReferences as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('authzPolicyPath', () => {
+        const result = client.authzPolicyPath(
+          'projectValue',
+          'locationValue',
+          'authzPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.authzPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-        it('invokes listAddressGroupReferences with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listAddressGroupReferences = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listAddressGroupReferences(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listAddressGroupReferences as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listAddressGroupReferences as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('matchProjectFromAuthzPolicyName', () => {
+        const result = client.matchProjectFromAuthzPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
 
-        it('invokes listAddressGroupReferencesStream without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-            ];
-            client.descriptors.page.listAddressGroupReferences.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listAddressGroupReferencesStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference[] = [];
-                stream.on('data', (response: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listAddressGroupReferences.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listAddressGroupReferences, request));
-            assert(
-                (client.descriptors.page.listAddressGroupReferences.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+      it('matchLocationFromAuthzPolicyName', () => {
+        const result = client.matchLocationFromAuthzPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
 
-        it('invokes listAddressGroupReferencesStream with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listAddressGroupReferences.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listAddressGroupReferencesStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference[] = [];
-                stream.on('data', (response: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listAddressGroupReferences.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listAddressGroupReferences, request));
-            assert(
-                (client.descriptors.page.listAddressGroupReferences.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listAddressGroupReferences without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-              generateSampleMessage(new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference()),
-            ];
-            client.descriptors.page.listAddressGroupReferences.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[] = [];
-            const iterable = client.listAddressGroupReferencesAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listAddressGroupReferences.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listAddressGroupReferences.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listAddressGroupReferences with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest', ['addressGroup']);
-            request.addressGroup = defaultValue1;
-            const expectedHeaderRequestParams = `address_group=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listAddressGroupReferences.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listAddressGroupReferencesAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listAddressGroupReferences.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listAddressGroupReferences.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-    });
-    describe('getIamPolicy', () => {
-        it('invokes getIamPolicy without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
-            const response = await client.getIamPolicy(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes getIamPolicy without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.getIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getIamPolicy(
-                    request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getIamPolicy with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getIamPolicy(request, expectedOptions), expectedError);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-    describe('setIamPolicy', () => {
-        it('invokes setIamPolicy without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
-            const response = await client.setIamPolicy(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes setIamPolicy without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.setIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.setIamPolicy(
-                    request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0));
-        });
-        it('invokes setIamPolicy with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.setIamPolicy(request, expectedOptions), expectedError);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-    describe('testIamPermissions', () => {
-        it('invokes testIamPermissions without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-            );
-            client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
-            const response = await client.testIamPermissions(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes testIamPermissions without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-            );
-            client.iamClient.testIamPermissions = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.testIamPermissions(
-                    request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.TestIamPermissionsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0));
-        });
-        it('invokes testIamPermissions with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.iamClient.testIamPermissions = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.testIamPermissions(request, expectedOptions), expectedError);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-    describe('getLocation', () => {
-        it('invokes getLocation without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new LocationProtos.google.cloud.location.Location()
-            );
-            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-            const response = await client.getLocation(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes getLocation without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new LocationProtos.google.cloud.location.Location()
-            );
-            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getLocation(
-                    request,
-                    expectedOptions,
-                    (
-                        err?: Error | null,
-                        result?: LocationProtos.google.cloud.location.ILocation | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getLocation with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-    describe('listLocationsAsync', () => {
-        it('uses async iteration with listLocations without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-                new LocationProtos.google.cloud.location.ListLocationsRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedResponse = [
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-            ];
-            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-            const iterable = client.listLocationsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-        it('uses async iteration with listLocations with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.ListLocationsRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedError = new Error('expected');
-            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listLocationsAsync(request);
-            await assert.rejects(async () => {
-                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-    });
-    describe('getOperation', () => {
-        it('invokes getOperation without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new operationsProtos.google.longrunning.Operation()
-            );
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const response = await client.getOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes getOperation without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new operationsProtos.google.longrunning.Operation()
-            );
-            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.getOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: operationsProtos.google.longrunning.Operation | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getOperation with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('cancelOperation', () => {
-        it('invokes cancelOperation without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
-            const response = await client.cancelOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes cancelOperation without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.cancelOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: protos.google.protobuf.Empty | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes cancelOperation with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('deleteOperation', () => {
-        it('invokes deleteOperation without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
-            const response = await client.deleteOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes deleteOperation without error using callback', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.deleteOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: protos.google.protobuf.Empty | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes deleteOperation with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('listOperationsAsync', () => {
-        it('uses async iteration with listOperations without error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.ListOperationsRequest()
-            );
-            const expectedResponse = [
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-            ];
-            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: operationsProtos.google.longrunning.IOperation[] = [];
-            const iterable = client.operationsClient.listOperationsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
-        it('uses async iteration with listOperations with error', async () => {
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.ListOperationsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.operationsClient.listOperationsAsync(request);
-            await assert.rejects(async () => {
-                const responses: operationsProtos.google.longrunning.IOperation[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
+      it('matchAuthzPolicyFromAuthzPolicyName', () => {
+        const result = client.matchAuthzPolicyFromAuthzPolicyName(fakePath);
+        assert.strictEqual(result, 'authzPolicyValue');
+        assert(
+          (client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('Path templates', () => {
-
-        describe('authorizationPolicy', async () => {
-            const fakePath = "/rendered/path/authorizationPolicy";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                authorization_policy: "authorizationPolicyValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.authorizationPolicyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.authorizationPolicyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('authorizationPolicyPath', () => {
-                const result = client.authorizationPolicyPath("projectValue", "locationValue", "authorizationPolicyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.authorizationPolicyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromAuthorizationPolicyName', () => {
-                const result = client.matchProjectFromAuthorizationPolicyName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.authorizationPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromAuthorizationPolicyName', () => {
-                const result = client.matchLocationFromAuthorizationPolicyName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.authorizationPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchAuthorizationPolicyFromAuthorizationPolicyName', () => {
-                const result = client.matchAuthorizationPolicyFromAuthorizationPolicyName(fakePath);
-                assert.strictEqual(result, "authorizationPolicyValue");
-                assert((client.pathTemplates.authorizationPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('authzPolicy', async () => {
-            const fakePath = "/rendered/path/authzPolicy";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                authz_policy: "authzPolicyValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.authzPolicyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.authzPolicyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('authzPolicyPath', () => {
-                const result = client.authzPolicyPath("projectValue", "locationValue", "authzPolicyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.authzPolicyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromAuthzPolicyName', () => {
-                const result = client.matchProjectFromAuthzPolicyName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromAuthzPolicyName', () => {
-                const result = client.matchLocationFromAuthzPolicyName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchAuthzPolicyFromAuthzPolicyName', () => {
-                const result = client.matchAuthzPolicyFromAuthzPolicyName(fakePath);
-                assert.strictEqual(result, "authzPolicyValue");
-                assert((client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('backendAuthenticationConfig', async () => {
-            const fakePath = "/rendered/path/backendAuthenticationConfig";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                backend_authentication_config: "backendAuthenticationConfigValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.backendAuthenticationConfigPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.backendAuthenticationConfigPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('backendAuthenticationConfigPath', () => {
-                const result = client.backendAuthenticationConfigPath("projectValue", "locationValue", "backendAuthenticationConfigValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromBackendAuthenticationConfigName', () => {
-                const result = client.matchProjectFromBackendAuthenticationConfigName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromBackendAuthenticationConfigName', () => {
-                const result = client.matchLocationFromBackendAuthenticationConfigName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchBackendAuthenticationConfigFromBackendAuthenticationConfigName', () => {
-                const result = client.matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(fakePath);
-                assert.strictEqual(result, "backendAuthenticationConfigValue");
-                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('clientTlsPolicy', async () => {
-            const fakePath = "/rendered/path/clientTlsPolicy";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                client_tls_policy: "clientTlsPolicyValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.clientTlsPolicyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.clientTlsPolicyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('clientTlsPolicyPath', () => {
-                const result = client.clientTlsPolicyPath("projectValue", "locationValue", "clientTlsPolicyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.clientTlsPolicyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromClientTlsPolicyName', () => {
-                const result = client.matchProjectFromClientTlsPolicyName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.clientTlsPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromClientTlsPolicyName', () => {
-                const result = client.matchLocationFromClientTlsPolicyName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.clientTlsPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchClientTlsPolicyFromClientTlsPolicyName', () => {
-                const result = client.matchClientTlsPolicyFromClientTlsPolicyName(fakePath);
-                assert.strictEqual(result, "clientTlsPolicyValue");
-                assert((client.pathTemplates.clientTlsPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dnsThreatDetector', async () => {
-            const fakePath = "/rendered/path/dnsThreatDetector";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dns_threat_detector: "dnsThreatDetectorValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dnsThreatDetectorPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dnsThreatDetectorPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dnsThreatDetectorPath', () => {
-                const result = client.dnsThreatDetectorPath("projectValue", "locationValue", "dnsThreatDetectorValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDnsThreatDetectorName', () => {
-                const result = client.matchProjectFromDnsThreatDetectorName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDnsThreatDetectorName', () => {
-                const result = client.matchLocationFromDnsThreatDetectorName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDnsThreatDetectorFromDnsThreatDetectorName', () => {
-                const result = client.matchDnsThreatDetectorFromDnsThreatDetectorName(fakePath);
-                assert.strictEqual(result, "dnsThreatDetectorValue");
-                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('firewallEndpointAssociation', async () => {
-            const fakePath = "/rendered/path/firewallEndpointAssociation";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                firewall_endpoint_association: "firewallEndpointAssociationValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.firewallEndpointAssociationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.firewallEndpointAssociationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('firewallEndpointAssociationPath', () => {
-                const result = client.firewallEndpointAssociationPath("projectValue", "locationValue", "firewallEndpointAssociationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFirewallEndpointAssociationName', () => {
-                const result = client.matchProjectFromFirewallEndpointAssociationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFirewallEndpointAssociationName', () => {
-                const result = client.matchLocationFromFirewallEndpointAssociationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFirewallEndpointAssociationFromFirewallEndpointAssociationName', () => {
-                const result = client.matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(fakePath);
-                assert.strictEqual(result, "firewallEndpointAssociationValue");
-                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('gatewaySecurityPolicy', async () => {
-            const fakePath = "/rendered/path/gatewaySecurityPolicy";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                gateway_security_policy: "gatewaySecurityPolicyValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.gatewaySecurityPolicyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.gatewaySecurityPolicyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('gatewaySecurityPolicyPath', () => {
-                const result = client.gatewaySecurityPolicyPath("projectValue", "locationValue", "gatewaySecurityPolicyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromGatewaySecurityPolicyName', () => {
-                const result = client.matchProjectFromGatewaySecurityPolicyName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromGatewaySecurityPolicyName', () => {
-                const result = client.matchLocationFromGatewaySecurityPolicyName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchGatewaySecurityPolicyFromGatewaySecurityPolicyName', () => {
-                const result = client.matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(fakePath);
-                assert.strictEqual(result, "gatewaySecurityPolicyValue");
-                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('gatewaySecurityPolicyRule', async () => {
-            const fakePath = "/rendered/path/gatewaySecurityPolicyRule";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                gateway_security_policy: "gatewaySecurityPolicyValue",
-                rule: "ruleValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('gatewaySecurityPolicyRulePath', () => {
-                const result = client.gatewaySecurityPolicyRulePath("projectValue", "locationValue", "gatewaySecurityPolicyValue", "ruleValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromGatewaySecurityPolicyRuleName', () => {
-                const result = client.matchProjectFromGatewaySecurityPolicyRuleName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromGatewaySecurityPolicyRuleName', () => {
-                const result = client.matchLocationFromGatewaySecurityPolicyRuleName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName', () => {
-                const result = client.matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(fakePath);
-                assert.strictEqual(result, "gatewaySecurityPolicyValue");
-                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRuleFromGatewaySecurityPolicyRuleName', () => {
-                const result = client.matchRuleFromGatewaySecurityPolicyRuleName(fakePath);
-                assert.strictEqual(result, "ruleValue");
-                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('interceptDeployment', async () => {
-            const fakePath = "/rendered/path/interceptDeployment";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                intercept_deployment: "interceptDeploymentValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.interceptDeploymentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.interceptDeploymentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('interceptDeploymentPath', () => {
-                const result = client.interceptDeploymentPath("projectValue", "locationValue", "interceptDeploymentValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.interceptDeploymentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromInterceptDeploymentName', () => {
-                const result = client.matchProjectFromInterceptDeploymentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.interceptDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromInterceptDeploymentName', () => {
-                const result = client.matchLocationFromInterceptDeploymentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.interceptDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInterceptDeploymentFromInterceptDeploymentName', () => {
-                const result = client.matchInterceptDeploymentFromInterceptDeploymentName(fakePath);
-                assert.strictEqual(result, "interceptDeploymentValue");
-                assert((client.pathTemplates.interceptDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('interceptDeploymentGroup', async () => {
-            const fakePath = "/rendered/path/interceptDeploymentGroup";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                intercept_deployment_group: "interceptDeploymentGroupValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.interceptDeploymentGroupPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.interceptDeploymentGroupPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('interceptDeploymentGroupPath', () => {
-                const result = client.interceptDeploymentGroupPath("projectValue", "locationValue", "interceptDeploymentGroupValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromInterceptDeploymentGroupName', () => {
-                const result = client.matchProjectFromInterceptDeploymentGroupName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromInterceptDeploymentGroupName', () => {
-                const result = client.matchLocationFromInterceptDeploymentGroupName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInterceptDeploymentGroupFromInterceptDeploymentGroupName', () => {
-                const result = client.matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(fakePath);
-                assert.strictEqual(result, "interceptDeploymentGroupValue");
-                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('interceptEndpointGroup', async () => {
-            const fakePath = "/rendered/path/interceptEndpointGroup";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                intercept_endpoint_group: "interceptEndpointGroupValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.interceptEndpointGroupPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.interceptEndpointGroupPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('interceptEndpointGroupPath', () => {
-                const result = client.interceptEndpointGroupPath("projectValue", "locationValue", "interceptEndpointGroupValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromInterceptEndpointGroupName', () => {
-                const result = client.matchProjectFromInterceptEndpointGroupName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromInterceptEndpointGroupName', () => {
-                const result = client.matchLocationFromInterceptEndpointGroupName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInterceptEndpointGroupFromInterceptEndpointGroupName', () => {
-                const result = client.matchInterceptEndpointGroupFromInterceptEndpointGroupName(fakePath);
-                assert.strictEqual(result, "interceptEndpointGroupValue");
-                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('interceptEndpointGroupAssociation', async () => {
-            const fakePath = "/rendered/path/interceptEndpointGroupAssociation";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                intercept_endpoint_group_association: "interceptEndpointGroupAssociationValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('interceptEndpointGroupAssociationPath', () => {
-                const result = client.interceptEndpointGroupAssociationPath("projectValue", "locationValue", "interceptEndpointGroupAssociationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromInterceptEndpointGroupAssociationName', () => {
-                const result = client.matchProjectFromInterceptEndpointGroupAssociationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromInterceptEndpointGroupAssociationName', () => {
-                const result = client.matchLocationFromInterceptEndpointGroupAssociationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName', () => {
-                const result = client.matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(fakePath);
-                assert.strictEqual(result, "interceptEndpointGroupAssociationValue");
-                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('location', async () => {
-            const fakePath = "/rendered/path/location";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.locationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.locationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('locationPath', () => {
-                const result = client.locationPath("projectValue", "locationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromLocationName', () => {
-                const result = client.matchProjectFromLocationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromLocationName', () => {
-                const result = client.matchLocationFromLocationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('mirroringDeployment', async () => {
-            const fakePath = "/rendered/path/mirroringDeployment";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                mirroring_deployment: "mirroringDeploymentValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.mirroringDeploymentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.mirroringDeploymentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('mirroringDeploymentPath', () => {
-                const result = client.mirroringDeploymentPath("projectValue", "locationValue", "mirroringDeploymentValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.mirroringDeploymentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromMirroringDeploymentName', () => {
-                const result = client.matchProjectFromMirroringDeploymentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.mirroringDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromMirroringDeploymentName', () => {
-                const result = client.matchLocationFromMirroringDeploymentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.mirroringDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMirroringDeploymentFromMirroringDeploymentName', () => {
-                const result = client.matchMirroringDeploymentFromMirroringDeploymentName(fakePath);
-                assert.strictEqual(result, "mirroringDeploymentValue");
-                assert((client.pathTemplates.mirroringDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('mirroringDeploymentGroup', async () => {
-            const fakePath = "/rendered/path/mirroringDeploymentGroup";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                mirroring_deployment_group: "mirroringDeploymentGroupValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.mirroringDeploymentGroupPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.mirroringDeploymentGroupPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('mirroringDeploymentGroupPath', () => {
-                const result = client.mirroringDeploymentGroupPath("projectValue", "locationValue", "mirroringDeploymentGroupValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromMirroringDeploymentGroupName', () => {
-                const result = client.matchProjectFromMirroringDeploymentGroupName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromMirroringDeploymentGroupName', () => {
-                const result = client.matchLocationFromMirroringDeploymentGroupName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMirroringDeploymentGroupFromMirroringDeploymentGroupName', () => {
-                const result = client.matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(fakePath);
-                assert.strictEqual(result, "mirroringDeploymentGroupValue");
-                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('mirroringEndpointGroup', async () => {
-            const fakePath = "/rendered/path/mirroringEndpointGroup";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                mirroring_endpoint_group: "mirroringEndpointGroupValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.mirroringEndpointGroupPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.mirroringEndpointGroupPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('mirroringEndpointGroupPath', () => {
-                const result = client.mirroringEndpointGroupPath("projectValue", "locationValue", "mirroringEndpointGroupValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromMirroringEndpointGroupName', () => {
-                const result = client.matchProjectFromMirroringEndpointGroupName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromMirroringEndpointGroupName', () => {
-                const result = client.matchLocationFromMirroringEndpointGroupName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMirroringEndpointGroupFromMirroringEndpointGroupName', () => {
-                const result = client.matchMirroringEndpointGroupFromMirroringEndpointGroupName(fakePath);
-                assert.strictEqual(result, "mirroringEndpointGroupValue");
-                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('mirroringEndpointGroupAssociation', async () => {
-            const fakePath = "/rendered/path/mirroringEndpointGroupAssociation";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                mirroring_endpoint_group_association: "mirroringEndpointGroupAssociationValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('mirroringEndpointGroupAssociationPath', () => {
-                const result = client.mirroringEndpointGroupAssociationPath("projectValue", "locationValue", "mirroringEndpointGroupAssociationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromMirroringEndpointGroupAssociationName', () => {
-                const result = client.matchProjectFromMirroringEndpointGroupAssociationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromMirroringEndpointGroupAssociationName', () => {
-                const result = client.matchLocationFromMirroringEndpointGroupAssociationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName', () => {
-                const result = client.matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(fakePath);
-                assert.strictEqual(result, "mirroringEndpointGroupAssociationValue");
-                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('organizationLocationAddressGroup', async () => {
-            const fakePath = "/rendered/path/organizationLocationAddressGroup";
-            const expectedParameters = {
-                organization: "organizationValue",
-                location: "locationValue",
-                address_group: "addressGroupValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.organizationLocationAddressGroupPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.organizationLocationAddressGroupPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('organizationLocationAddressGroupPath', () => {
-                const result = client.organizationLocationAddressGroupPath("organizationValue", "locationValue", "addressGroupValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.organizationLocationAddressGroupPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromOrganizationLocationAddressGroupName', () => {
-                const result = client.matchOrganizationFromOrganizationLocationAddressGroupName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.organizationLocationAddressGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromOrganizationLocationAddressGroupName', () => {
-                const result = client.matchLocationFromOrganizationLocationAddressGroupName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.organizationLocationAddressGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchAddressGroupFromOrganizationLocationAddressGroupName', () => {
-                const result = client.matchAddressGroupFromOrganizationLocationAddressGroupName(fakePath);
-                assert.strictEqual(result, "addressGroupValue");
-                assert((client.pathTemplates.organizationLocationAddressGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('organizationLocationFirewallEndpoints', async () => {
-            const fakePath = "/rendered/path/organizationLocationFirewallEndpoints";
-            const expectedParameters = {
-                organization: "organizationValue",
-                location: "locationValue",
-                firewall_endpoint: "firewallEndpointValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('organizationLocationFirewallEndpointsPath', () => {
-                const result = client.organizationLocationFirewallEndpointsPath("organizationValue", "locationValue", "firewallEndpointValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromOrganizationLocationFirewallEndpointsName', () => {
-                const result = client.matchOrganizationFromOrganizationLocationFirewallEndpointsName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromOrganizationLocationFirewallEndpointsName', () => {
-                const result = client.matchLocationFromOrganizationLocationFirewallEndpointsName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName', () => {
-                const result = client.matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(fakePath);
-                assert.strictEqual(result, "firewallEndpointValue");
-                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('organizationLocationSecurityProfile', async () => {
-            const fakePath = "/rendered/path/organizationLocationSecurityProfile";
-            const expectedParameters = {
-                organization: "organizationValue",
-                location: "locationValue",
-                security_profile: "securityProfileValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.organizationLocationSecurityProfilePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('organizationLocationSecurityProfilePath', () => {
-                const result = client.organizationLocationSecurityProfilePath("organizationValue", "locationValue", "securityProfileValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromOrganizationLocationSecurityProfileName', () => {
-                const result = client.matchOrganizationFromOrganizationLocationSecurityProfileName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromOrganizationLocationSecurityProfileName', () => {
-                const result = client.matchLocationFromOrganizationLocationSecurityProfileName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSecurityProfileFromOrganizationLocationSecurityProfileName', () => {
-                const result = client.matchSecurityProfileFromOrganizationLocationSecurityProfileName(fakePath);
-                assert.strictEqual(result, "securityProfileValue");
-                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('organizationLocationSecurityProfileGroup', async () => {
-            const fakePath = "/rendered/path/organizationLocationSecurityProfileGroup";
-            const expectedParameters = {
-                organization: "organizationValue",
-                location: "locationValue",
-                security_profile_group: "securityProfileGroupValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('organizationLocationSecurityProfileGroupPath', () => {
-                const result = client.organizationLocationSecurityProfileGroupPath("organizationValue", "locationValue", "securityProfileGroupValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromOrganizationLocationSecurityProfileGroupName', () => {
-                const result = client.matchOrganizationFromOrganizationLocationSecurityProfileGroupName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromOrganizationLocationSecurityProfileGroupName', () => {
-                const result = client.matchLocationFromOrganizationLocationSecurityProfileGroupName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName', () => {
-                const result = client.matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(fakePath);
-                assert.strictEqual(result, "securityProfileGroupValue");
-                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('project', async () => {
-            const fakePath = "/rendered/path/project";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectPath', () => {
-                const result = client.projectPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectName', () => {
-                const result = client.matchProjectFromProjectName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationAddressGroup', async () => {
-            const fakePath = "/rendered/path/projectLocationAddressGroup";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                address_group: "addressGroupValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationAddressGroupPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationAddressGroupPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationAddressGroupPath', () => {
-                const result = client.projectLocationAddressGroupPath("projectValue", "locationValue", "addressGroupValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationAddressGroupPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationAddressGroupName', () => {
-                const result = client.matchProjectFromProjectLocationAddressGroupName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationAddressGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationAddressGroupName', () => {
-                const result = client.matchLocationFromProjectLocationAddressGroupName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationAddressGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchAddressGroupFromProjectLocationAddressGroupName', () => {
-                const result = client.matchAddressGroupFromProjectLocationAddressGroupName(fakePath);
-                assert.strictEqual(result, "addressGroupValue");
-                assert((client.pathTemplates.projectLocationAddressGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationFirewallEndpoints', async () => {
-            const fakePath = "/rendered/path/projectLocationFirewallEndpoints";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                firewall_endpoint: "firewallEndpointValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationFirewallEndpointsPath', () => {
-                const result = client.projectLocationFirewallEndpointsPath("projectValue", "locationValue", "firewallEndpointValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationFirewallEndpointsName', () => {
-                const result = client.matchProjectFromProjectLocationFirewallEndpointsName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationFirewallEndpointsName', () => {
-                const result = client.matchLocationFromProjectLocationFirewallEndpointsName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFirewallEndpointFromProjectLocationFirewallEndpointsName', () => {
-                const result = client.matchFirewallEndpointFromProjectLocationFirewallEndpointsName(fakePath);
-                assert.strictEqual(result, "firewallEndpointValue");
-                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationSecurityProfile', async () => {
-            const fakePath = "/rendered/path/projectLocationSecurityProfile";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                security_profile: "securityProfileValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationSecurityProfilePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationSecurityProfilePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationSecurityProfilePath', () => {
-                const result = client.projectLocationSecurityProfilePath("projectValue", "locationValue", "securityProfileValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationSecurityProfileName', () => {
-                const result = client.matchProjectFromProjectLocationSecurityProfileName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationSecurityProfileName', () => {
-                const result = client.matchLocationFromProjectLocationSecurityProfileName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSecurityProfileFromProjectLocationSecurityProfileName', () => {
-                const result = client.matchSecurityProfileFromProjectLocationSecurityProfileName(fakePath);
-                assert.strictEqual(result, "securityProfileValue");
-                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationSecurityProfileGroup', async () => {
-            const fakePath = "/rendered/path/projectLocationSecurityProfileGroup";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                security_profile_group: "securityProfileGroupValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationSecurityProfileGroupPath', () => {
-                const result = client.projectLocationSecurityProfileGroupPath("projectValue", "locationValue", "securityProfileGroupValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationSecurityProfileGroupName', () => {
-                const result = client.matchProjectFromProjectLocationSecurityProfileGroupName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationSecurityProfileGroupName', () => {
-                const result = client.matchLocationFromProjectLocationSecurityProfileGroupName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName', () => {
-                const result = client.matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(fakePath);
-                assert.strictEqual(result, "securityProfileGroupValue");
-                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('serverTlsPolicy', async () => {
-            const fakePath = "/rendered/path/serverTlsPolicy";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                server_tls_policy: "serverTlsPolicyValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.serverTlsPolicyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.serverTlsPolicyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('serverTlsPolicyPath', () => {
-                const result = client.serverTlsPolicyPath("projectValue", "locationValue", "serverTlsPolicyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.serverTlsPolicyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromServerTlsPolicyName', () => {
-                const result = client.matchProjectFromServerTlsPolicyName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.serverTlsPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromServerTlsPolicyName', () => {
-                const result = client.matchLocationFromServerTlsPolicyName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.serverTlsPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchServerTlsPolicyFromServerTlsPolicyName', () => {
-                const result = client.matchServerTlsPolicyFromServerTlsPolicyName(fakePath);
-                assert.strictEqual(result, "serverTlsPolicyValue");
-                assert((client.pathTemplates.serverTlsPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tlsInspectionPolicy', async () => {
-            const fakePath = "/rendered/path/tlsInspectionPolicy";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tls_inspection_policy: "tlsInspectionPolicyValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tlsInspectionPolicyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tlsInspectionPolicyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tlsInspectionPolicyPath', () => {
-                const result = client.tlsInspectionPolicyPath("projectValue", "locationValue", "tlsInspectionPolicyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTlsInspectionPolicyName', () => {
-                const result = client.matchProjectFromTlsInspectionPolicyName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTlsInspectionPolicyName', () => {
-                const result = client.matchLocationFromTlsInspectionPolicyName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTlsInspectionPolicyFromTlsInspectionPolicyName', () => {
-                const result = client.matchTlsInspectionPolicyFromTlsInspectionPolicyName(fakePath);
-                assert.strictEqual(result, "tlsInspectionPolicyValue");
-                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('urlList', async () => {
-            const fakePath = "/rendered/path/urlList";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                url_list: "urlListValue",
-            };
-            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.urlListPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.urlListPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('urlListPath', () => {
-                const result = client.urlListPath("projectValue", "locationValue", "urlListValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.urlListPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromUrlListName', () => {
-                const result = client.matchProjectFromUrlListName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.urlListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromUrlListName', () => {
-                const result = client.matchLocationFromUrlListName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.urlListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchUrlListFromUrlListName', () => {
-                const result = client.matchUrlListFromUrlListName(fakePath);
-                assert.strictEqual(result, "urlListValue");
-                assert((client.pathTemplates.urlListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+    describe('backendAuthenticationConfig', async () => {
+      const fakePath = '/rendered/path/backendAuthenticationConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        backend_authentication_config: 'backendAuthenticationConfigValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.backendAuthenticationConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.backendAuthenticationConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('backendAuthenticationConfigPath', () => {
+        const result = client.backendAuthenticationConfigPath(
+          'projectValue',
+          'locationValue',
+          'backendAuthenticationConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.backendAuthenticationConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromBackendAuthenticationConfigName', () => {
+        const result =
+          client.matchProjectFromBackendAuthenticationConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.backendAuthenticationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromBackendAuthenticationConfigName', () => {
+        const result =
+          client.matchLocationFromBackendAuthenticationConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.backendAuthenticationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBackendAuthenticationConfigFromBackendAuthenticationConfigName', () => {
+        const result =
+          client.matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'backendAuthenticationConfigValue');
+        assert(
+          (
+            client.pathTemplates.backendAuthenticationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
+
+    describe('clientTlsPolicy', async () => {
+      const fakePath = '/rendered/path/clientTlsPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        client_tls_policy: 'clientTlsPolicyValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.clientTlsPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.clientTlsPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('clientTlsPolicyPath', () => {
+        const result = client.clientTlsPolicyPath(
+          'projectValue',
+          'locationValue',
+          'clientTlsPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.clientTlsPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromClientTlsPolicyName', () => {
+        const result = client.matchProjectFromClientTlsPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.clientTlsPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromClientTlsPolicyName', () => {
+        const result = client.matchLocationFromClientTlsPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.clientTlsPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchClientTlsPolicyFromClientTlsPolicyName', () => {
+        const result =
+          client.matchClientTlsPolicyFromClientTlsPolicyName(fakePath);
+        assert.strictEqual(result, 'clientTlsPolicyValue');
+        assert(
+          (client.pathTemplates.clientTlsPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dnsThreatDetector', async () => {
+      const fakePath = '/rendered/path/dnsThreatDetector';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dns_threat_detector: 'dnsThreatDetectorValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.dnsThreatDetectorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dnsThreatDetectorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dnsThreatDetectorPath', () => {
+        const result = client.dnsThreatDetectorPath(
+          'projectValue',
+          'locationValue',
+          'dnsThreatDetectorValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.dnsThreatDetectorPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDnsThreatDetectorName', () => {
+        const result = client.matchProjectFromDnsThreatDetectorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.dnsThreatDetectorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDnsThreatDetectorName', () => {
+        const result = client.matchLocationFromDnsThreatDetectorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.dnsThreatDetectorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDnsThreatDetectorFromDnsThreatDetectorName', () => {
+        const result =
+          client.matchDnsThreatDetectorFromDnsThreatDetectorName(fakePath);
+        assert.strictEqual(result, 'dnsThreatDetectorValue');
+        assert(
+          (
+            client.pathTemplates.dnsThreatDetectorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('firewallEndpointAssociation', async () => {
+      const fakePath = '/rendered/path/firewallEndpointAssociation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        firewall_endpoint_association: 'firewallEndpointAssociationValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.firewallEndpointAssociationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.firewallEndpointAssociationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('firewallEndpointAssociationPath', () => {
+        const result = client.firewallEndpointAssociationPath(
+          'projectValue',
+          'locationValue',
+          'firewallEndpointAssociationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.firewallEndpointAssociationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFirewallEndpointAssociationName', () => {
+        const result =
+          client.matchProjectFromFirewallEndpointAssociationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.firewallEndpointAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFirewallEndpointAssociationName', () => {
+        const result =
+          client.matchLocationFromFirewallEndpointAssociationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.firewallEndpointAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFirewallEndpointAssociationFromFirewallEndpointAssociationName', () => {
+        const result =
+          client.matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'firewallEndpointAssociationValue');
+        assert(
+          (
+            client.pathTemplates.firewallEndpointAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('gatewaySecurityPolicy', async () => {
+      const fakePath = '/rendered/path/gatewaySecurityPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        gateway_security_policy: 'gatewaySecurityPolicyValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.gatewaySecurityPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.gatewaySecurityPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('gatewaySecurityPolicyPath', () => {
+        const result = client.gatewaySecurityPolicyPath(
+          'projectValue',
+          'locationValue',
+          'gatewaySecurityPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.gatewaySecurityPolicyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromGatewaySecurityPolicyName', () => {
+        const result =
+          client.matchProjectFromGatewaySecurityPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.gatewaySecurityPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromGatewaySecurityPolicyName', () => {
+        const result =
+          client.matchLocationFromGatewaySecurityPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.gatewaySecurityPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchGatewaySecurityPolicyFromGatewaySecurityPolicyName', () => {
+        const result =
+          client.matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'gatewaySecurityPolicyValue');
+        assert(
+          (
+            client.pathTemplates.gatewaySecurityPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('gatewaySecurityPolicyRule', async () => {
+      const fakePath = '/rendered/path/gatewaySecurityPolicyRule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        gateway_security_policy: 'gatewaySecurityPolicyValue',
+        rule: 'ruleValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('gatewaySecurityPolicyRulePath', () => {
+        const result = client.gatewaySecurityPolicyRulePath(
+          'projectValue',
+          'locationValue',
+          'gatewaySecurityPolicyValue',
+          'ruleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromGatewaySecurityPolicyRuleName', () => {
+        const result =
+          client.matchProjectFromGatewaySecurityPolicyRuleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromGatewaySecurityPolicyRuleName', () => {
+        const result =
+          client.matchLocationFromGatewaySecurityPolicyRuleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName', () => {
+        const result =
+          client.matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'gatewaySecurityPolicyValue');
+        assert(
+          (
+            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleFromGatewaySecurityPolicyRuleName', () => {
+        const result =
+          client.matchRuleFromGatewaySecurityPolicyRuleName(fakePath);
+        assert.strictEqual(result, 'ruleValue');
+        assert(
+          (
+            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('interceptDeployment', async () => {
+      const fakePath = '/rendered/path/interceptDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        intercept_deployment: 'interceptDeploymentValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.interceptDeploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.interceptDeploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('interceptDeploymentPath', () => {
+        const result = client.interceptDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'interceptDeploymentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.interceptDeploymentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInterceptDeploymentName', () => {
+        const result = client.matchProjectFromInterceptDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.interceptDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromInterceptDeploymentName', () => {
+        const result =
+          client.matchLocationFromInterceptDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.interceptDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInterceptDeploymentFromInterceptDeploymentName', () => {
+        const result =
+          client.matchInterceptDeploymentFromInterceptDeploymentName(fakePath);
+        assert.strictEqual(result, 'interceptDeploymentValue');
+        assert(
+          (
+            client.pathTemplates.interceptDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('interceptDeploymentGroup', async () => {
+      const fakePath = '/rendered/path/interceptDeploymentGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        intercept_deployment_group: 'interceptDeploymentGroupValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.interceptDeploymentGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.interceptDeploymentGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('interceptDeploymentGroupPath', () => {
+        const result = client.interceptDeploymentGroupPath(
+          'projectValue',
+          'locationValue',
+          'interceptDeploymentGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.interceptDeploymentGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInterceptDeploymentGroupName', () => {
+        const result =
+          client.matchProjectFromInterceptDeploymentGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.interceptDeploymentGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromInterceptDeploymentGroupName', () => {
+        const result =
+          client.matchLocationFromInterceptDeploymentGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.interceptDeploymentGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInterceptDeploymentGroupFromInterceptDeploymentGroupName', () => {
+        const result =
+          client.matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'interceptDeploymentGroupValue');
+        assert(
+          (
+            client.pathTemplates.interceptDeploymentGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('interceptEndpointGroup', async () => {
+      const fakePath = '/rendered/path/interceptEndpointGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        intercept_endpoint_group: 'interceptEndpointGroupValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.interceptEndpointGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.interceptEndpointGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('interceptEndpointGroupPath', () => {
+        const result = client.interceptEndpointGroupPath(
+          'projectValue',
+          'locationValue',
+          'interceptEndpointGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.interceptEndpointGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInterceptEndpointGroupName', () => {
+        const result =
+          client.matchProjectFromInterceptEndpointGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.interceptEndpointGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromInterceptEndpointGroupName', () => {
+        const result =
+          client.matchLocationFromInterceptEndpointGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.interceptEndpointGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInterceptEndpointGroupFromInterceptEndpointGroupName', () => {
+        const result =
+          client.matchInterceptEndpointGroupFromInterceptEndpointGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'interceptEndpointGroupValue');
+        assert(
+          (
+            client.pathTemplates.interceptEndpointGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('interceptEndpointGroupAssociation', async () => {
+      const fakePath = '/rendered/path/interceptEndpointGroupAssociation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        intercept_endpoint_group_association:
+          'interceptEndpointGroupAssociationValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('interceptEndpointGroupAssociationPath', () => {
+        const result = client.interceptEndpointGroupAssociationPath(
+          'projectValue',
+          'locationValue',
+          'interceptEndpointGroupAssociationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.interceptEndpointGroupAssociationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInterceptEndpointGroupAssociationName', () => {
+        const result =
+          client.matchProjectFromInterceptEndpointGroupAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.interceptEndpointGroupAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromInterceptEndpointGroupAssociationName', () => {
+        const result =
+          client.matchLocationFromInterceptEndpointGroupAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.interceptEndpointGroupAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName', () => {
+        const result =
+          client.matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'interceptEndpointGroupAssociationValue');
+        assert(
+          (
+            client.pathTemplates.interceptEndpointGroupAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('location', async () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('mirroringDeployment', async () => {
+      const fakePath = '/rendered/path/mirroringDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        mirroring_deployment: 'mirroringDeploymentValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.mirroringDeploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.mirroringDeploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('mirroringDeploymentPath', () => {
+        const result = client.mirroringDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'mirroringDeploymentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.mirroringDeploymentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromMirroringDeploymentName', () => {
+        const result = client.matchProjectFromMirroringDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.mirroringDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromMirroringDeploymentName', () => {
+        const result =
+          client.matchLocationFromMirroringDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.mirroringDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMirroringDeploymentFromMirroringDeploymentName', () => {
+        const result =
+          client.matchMirroringDeploymentFromMirroringDeploymentName(fakePath);
+        assert.strictEqual(result, 'mirroringDeploymentValue');
+        assert(
+          (
+            client.pathTemplates.mirroringDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('mirroringDeploymentGroup', async () => {
+      const fakePath = '/rendered/path/mirroringDeploymentGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        mirroring_deployment_group: 'mirroringDeploymentGroupValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.mirroringDeploymentGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.mirroringDeploymentGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('mirroringDeploymentGroupPath', () => {
+        const result = client.mirroringDeploymentGroupPath(
+          'projectValue',
+          'locationValue',
+          'mirroringDeploymentGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.mirroringDeploymentGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromMirroringDeploymentGroupName', () => {
+        const result =
+          client.matchProjectFromMirroringDeploymentGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.mirroringDeploymentGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromMirroringDeploymentGroupName', () => {
+        const result =
+          client.matchLocationFromMirroringDeploymentGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.mirroringDeploymentGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMirroringDeploymentGroupFromMirroringDeploymentGroupName', () => {
+        const result =
+          client.matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'mirroringDeploymentGroupValue');
+        assert(
+          (
+            client.pathTemplates.mirroringDeploymentGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('mirroringEndpointGroup', async () => {
+      const fakePath = '/rendered/path/mirroringEndpointGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        mirroring_endpoint_group: 'mirroringEndpointGroupValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.mirroringEndpointGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.mirroringEndpointGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('mirroringEndpointGroupPath', () => {
+        const result = client.mirroringEndpointGroupPath(
+          'projectValue',
+          'locationValue',
+          'mirroringEndpointGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.mirroringEndpointGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromMirroringEndpointGroupName', () => {
+        const result =
+          client.matchProjectFromMirroringEndpointGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.mirroringEndpointGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromMirroringEndpointGroupName', () => {
+        const result =
+          client.matchLocationFromMirroringEndpointGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.mirroringEndpointGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMirroringEndpointGroupFromMirroringEndpointGroupName', () => {
+        const result =
+          client.matchMirroringEndpointGroupFromMirroringEndpointGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'mirroringEndpointGroupValue');
+        assert(
+          (
+            client.pathTemplates.mirroringEndpointGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('mirroringEndpointGroupAssociation', async () => {
+      const fakePath = '/rendered/path/mirroringEndpointGroupAssociation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        mirroring_endpoint_group_association:
+          'mirroringEndpointGroupAssociationValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('mirroringEndpointGroupAssociationPath', () => {
+        const result = client.mirroringEndpointGroupAssociationPath(
+          'projectValue',
+          'locationValue',
+          'mirroringEndpointGroupAssociationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromMirroringEndpointGroupAssociationName', () => {
+        const result =
+          client.matchProjectFromMirroringEndpointGroupAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromMirroringEndpointGroupAssociationName', () => {
+        const result =
+          client.matchLocationFromMirroringEndpointGroupAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName', () => {
+        const result =
+          client.matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'mirroringEndpointGroupAssociationValue');
+        assert(
+          (
+            client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('organizationLocationAddressGroup', async () => {
+      const fakePath = '/rendered/path/organizationLocationAddressGroup';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        address_group: 'addressGroupValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.organizationLocationAddressGroupPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationAddressGroupPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationAddressGroupPath', () => {
+        const result = client.organizationLocationAddressGroupPath(
+          'organizationValue',
+          'locationValue',
+          'addressGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationAddressGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationAddressGroupName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationAddressGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAddressGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationAddressGroupName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationAddressGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAddressGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAddressGroupFromOrganizationLocationAddressGroupName', () => {
+        const result =
+          client.matchAddressGroupFromOrganizationLocationAddressGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'addressGroupValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAddressGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('organizationLocationFirewallEndpoints', async () => {
+      const fakePath = '/rendered/path/organizationLocationFirewallEndpoints';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        firewall_endpoint: 'firewallEndpointValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationFirewallEndpointsPath', () => {
+        const result = client.organizationLocationFirewallEndpointsPath(
+          'organizationValue',
+          'locationValue',
+          'firewallEndpointValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationFirewallEndpointsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationFirewallEndpointsName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationFirewallEndpointsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationFirewallEndpointsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationFirewallEndpointsName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationFirewallEndpointsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationFirewallEndpointsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName', () => {
+        const result =
+          client.matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'firewallEndpointValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationFirewallEndpointsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('organizationLocationSecurityProfile', async () => {
+      const fakePath = '/rendered/path/organizationLocationSecurityProfile';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        security_profile: 'securityProfileValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.organizationLocationSecurityProfilePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationSecurityProfilePath', () => {
+        const result = client.organizationLocationSecurityProfilePath(
+          'organizationValue',
+          'locationValue',
+          'securityProfileValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationSecurityProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationSecurityProfileName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationSecurityProfileName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationSecurityProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationSecurityProfileName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationSecurityProfileName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationSecurityProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSecurityProfileFromOrganizationLocationSecurityProfileName', () => {
+        const result =
+          client.matchSecurityProfileFromOrganizationLocationSecurityProfileName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'securityProfileValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationSecurityProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('organizationLocationSecurityProfileGroup', async () => {
+      const fakePath =
+        '/rendered/path/organizationLocationSecurityProfileGroup';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        security_profile_group: 'securityProfileGroupValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationSecurityProfileGroupPath', () => {
+        const result = client.organizationLocationSecurityProfileGroupPath(
+          'organizationValue',
+          'locationValue',
+          'securityProfileGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSecurityProfileGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationSecurityProfileGroupName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationSecurityProfileGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSecurityProfileGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationSecurityProfileGroupName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationSecurityProfileGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSecurityProfileGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName', () => {
+        const result =
+          client.matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'securityProfileGroupValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSecurityProfileGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('project', async () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationAddressGroup', async () => {
+      const fakePath = '/rendered/path/projectLocationAddressGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        address_group: 'addressGroupValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationAddressGroupPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAddressGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationAddressGroupPath', () => {
+        const result = client.projectLocationAddressGroupPath(
+          'projectValue',
+          'locationValue',
+          'addressGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationAddressGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationAddressGroupName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAddressGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationAddressGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationAddressGroupName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAddressGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationAddressGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAddressGroupFromProjectLocationAddressGroupName', () => {
+        const result =
+          client.matchAddressGroupFromProjectLocationAddressGroupName(fakePath);
+        assert.strictEqual(result, 'addressGroupValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationAddressGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationFirewallEndpoints', async () => {
+      const fakePath = '/rendered/path/projectLocationFirewallEndpoints';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        firewall_endpoint: 'firewallEndpointValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationFirewallEndpointsPath', () => {
+        const result = client.projectLocationFirewallEndpointsPath(
+          'projectValue',
+          'locationValue',
+          'firewallEndpointValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationFirewallEndpointsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationFirewallEndpointsName', () => {
+        const result =
+          client.matchProjectFromProjectLocationFirewallEndpointsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFirewallEndpointsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationFirewallEndpointsName', () => {
+        const result =
+          client.matchLocationFromProjectLocationFirewallEndpointsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFirewallEndpointsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFirewallEndpointFromProjectLocationFirewallEndpointsName', () => {
+        const result =
+          client.matchFirewallEndpointFromProjectLocationFirewallEndpointsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'firewallEndpointValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFirewallEndpointsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationSecurityProfile', async () => {
+      const fakePath = '/rendered/path/projectLocationSecurityProfile';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        security_profile: 'securityProfileValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationSecurityProfilePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationSecurityProfilePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationSecurityProfilePath', () => {
+        const result = client.projectLocationSecurityProfilePath(
+          'projectValue',
+          'locationValue',
+          'securityProfileValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationSecurityProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationSecurityProfileName', () => {
+        const result =
+          client.matchProjectFromProjectLocationSecurityProfileName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecurityProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationSecurityProfileName', () => {
+        const result =
+          client.matchLocationFromProjectLocationSecurityProfileName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecurityProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSecurityProfileFromProjectLocationSecurityProfileName', () => {
+        const result =
+          client.matchSecurityProfileFromProjectLocationSecurityProfileName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'securityProfileValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecurityProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationSecurityProfileGroup', async () => {
+      const fakePath = '/rendered/path/projectLocationSecurityProfileGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        security_profile_group: 'securityProfileGroupValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationSecurityProfileGroupPath', () => {
+        const result = client.projectLocationSecurityProfileGroupPath(
+          'projectValue',
+          'locationValue',
+          'securityProfileGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationSecurityProfileGroupName', () => {
+        const result =
+          client.matchProjectFromProjectLocationSecurityProfileGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationSecurityProfileGroupName', () => {
+        const result =
+          client.matchLocationFromProjectLocationSecurityProfileGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName', () => {
+        const result =
+          client.matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'securityProfileGroupValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('sACAttachment', async () => {
+      const fakePath = '/rendered/path/sACAttachment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        sac_attachment: 'sacAttachmentValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.sACAttachmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.sACAttachmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('sACAttachmentPath', () => {
+        const result = client.sACAttachmentPath(
+          'projectValue',
+          'locationValue',
+          'sacAttachmentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.sACAttachmentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromSACAttachmentName', () => {
+        const result = client.matchProjectFromSACAttachmentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.sACAttachmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromSACAttachmentName', () => {
+        const result = client.matchLocationFromSACAttachmentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.sACAttachmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSacAttachmentFromSACAttachmentName', () => {
+        const result = client.matchSacAttachmentFromSACAttachmentName(fakePath);
+        assert.strictEqual(result, 'sacAttachmentValue');
+        assert(
+          (client.pathTemplates.sACAttachmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('sACRealm', async () => {
+      const fakePath = '/rendered/path/sACRealm';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        sac_realm: 'sacRealmValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.sACRealmPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.sACRealmPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('sACRealmPath', () => {
+        const result = client.sACRealmPath(
+          'projectValue',
+          'locationValue',
+          'sacRealmValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.sACRealmPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromSACRealmName', () => {
+        const result = client.matchProjectFromSACRealmName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.sACRealmPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromSACRealmName', () => {
+        const result = client.matchLocationFromSACRealmName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.sACRealmPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSacRealmFromSACRealmName', () => {
+        const result = client.matchSacRealmFromSACRealmName(fakePath);
+        assert.strictEqual(result, 'sacRealmValue');
+        assert(
+          (client.pathTemplates.sACRealmPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('serverTlsPolicy', async () => {
+      const fakePath = '/rendered/path/serverTlsPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        server_tls_policy: 'serverTlsPolicyValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.serverTlsPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.serverTlsPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('serverTlsPolicyPath', () => {
+        const result = client.serverTlsPolicyPath(
+          'projectValue',
+          'locationValue',
+          'serverTlsPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.serverTlsPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromServerTlsPolicyName', () => {
+        const result = client.matchProjectFromServerTlsPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.serverTlsPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromServerTlsPolicyName', () => {
+        const result = client.matchLocationFromServerTlsPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.serverTlsPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchServerTlsPolicyFromServerTlsPolicyName', () => {
+        const result =
+          client.matchServerTlsPolicyFromServerTlsPolicyName(fakePath);
+        assert.strictEqual(result, 'serverTlsPolicyValue');
+        assert(
+          (client.pathTemplates.serverTlsPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('tlsInspectionPolicy', async () => {
+      const fakePath = '/rendered/path/tlsInspectionPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tls_inspection_policy: 'tlsInspectionPolicyValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.tlsInspectionPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tlsInspectionPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tlsInspectionPolicyPath', () => {
+        const result = client.tlsInspectionPolicyPath(
+          'projectValue',
+          'locationValue',
+          'tlsInspectionPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.tlsInspectionPolicyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromTlsInspectionPolicyName', () => {
+        const result = client.matchProjectFromTlsInspectionPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.tlsInspectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromTlsInspectionPolicyName', () => {
+        const result =
+          client.matchLocationFromTlsInspectionPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.tlsInspectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTlsInspectionPolicyFromTlsInspectionPolicyName', () => {
+        const result =
+          client.matchTlsInspectionPolicyFromTlsInspectionPolicyName(fakePath);
+        assert.strictEqual(result, 'tlsInspectionPolicyValue');
+        assert(
+          (
+            client.pathTemplates.tlsInspectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('urlList', async () => {
+      const fakePath = '/rendered/path/urlList';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        url_list: 'urlListValue',
+      };
+      const client =
+        new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.urlListPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.urlListPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('urlListPath', () => {
+        const result = client.urlListPath(
+          'projectValue',
+          'locationValue',
+          'urlListValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.urlListPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromUrlListName', () => {
+        const result = client.matchProjectFromUrlListName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.urlListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromUrlListName', () => {
+        const result = client.matchLocationFromUrlListName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.urlListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchUrlListFromUrlListName', () => {
+        const result = client.matchUrlListFromUrlListName(fakePath);
+        assert.strictEqual(result, 'urlListValue');
+        assert(
+          (client.pathTemplates.urlListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+  });
 });
