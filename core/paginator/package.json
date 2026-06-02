@@ -41,7 +41,6 @@
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
-    "linkinator": "^6.1.2",
     "mocha": "^11.1.0",
     "path-to-regexp": "^8.2.0",
     "proxyquire": "^2.1.3",

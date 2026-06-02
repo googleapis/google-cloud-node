@@ -106,7 +106,6 @@
     "jsdoc-fresh": "^4.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "length-prefixed-json-stream": "^1.0.1",
-    "linkinator": "^6.1.4",
     "long": "^5.3.2",
     "mkdirp": "^3.0.1",
     "mocha": "^11.7.1",

@@ -40,9 +40,7 @@
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
-    "gts": "^6.0.2",
-    "tsx": "^4.19.0",
-    "linkinator": "^6.1.2"
+    "gts": "^6.0.2"
   },
   "engines": {
     "node": ">=18"
