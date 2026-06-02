@@ -1862,6 +1862,13 @@ export class BigtableClient {
    *   inferred from the `param_types` in the `PrepareQueryRequest`. Any non-empty
    *   `Value.type` must match the corresponding `param_types` entry, or be
    *   rejected with `INVALID_ARGUMENT`.
+   * @param {number[]} [request.viewParameters]
+   *   Optional. This map provides the runtime values returned by the
+   *   VIEW_PARAMETERS() function calls, typically used for user-level scoping of
+   *   data based on identity.
+   *
+   *   The key is the name of the view parameter e.g. `user_id`, and
+   *   the value is the parameter value e.g. `alice@example.com`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}

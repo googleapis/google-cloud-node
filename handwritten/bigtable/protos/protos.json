@@ -6125,6 +6125,14 @@
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
                       }
+                    },
+                    "viewParameters": {
+                      "keyType": "string",
+                      "type": "Value",
+                      "id": 12,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },

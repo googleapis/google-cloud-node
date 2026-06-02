@@ -22731,6 +22731,9 @@ export namespace google {
 
                 /** ExecuteQueryRequest params */
                 params?: ({ [k: string]: google.bigtable.v2.IValue }|null);
+
+                /** ExecuteQueryRequest viewParameters */
+                viewParameters?: ({ [k: string]: google.bigtable.v2.IValue }|null);
             }
 
             /** Represents an ExecuteQueryRequest. */
@@ -22762,6 +22765,9 @@ export namespace google {
 
                 /** ExecuteQueryRequest params. */
                 public params: { [k: string]: google.bigtable.v2.IValue };
+
+                /** ExecuteQueryRequest viewParameters. */
+                public viewParameters: { [k: string]: google.bigtable.v2.IValue };
 
                 /** ExecuteQueryRequest dataFormat. */
                 public dataFormat?: "protoFormat";
