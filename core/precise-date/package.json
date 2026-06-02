@@ -46,7 +46,7 @@
     "gts": "^6.0.2",
     "mocha": "^11.1.0",
     "path-to-regexp": "^8.2.0",
-    "sinon": "^19.0.2",
+    "sinon": "21.0.3",
     "typescript": "^5.8.2"
   },
   "engines": {

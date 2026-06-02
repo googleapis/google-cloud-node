@@ -61,7 +61,7 @@
     "linkinator": "^6.1.2",
     "mocha": "^11.1.0",
     "nock": "^14.0.1",
-    "sinon": "^19.0.2",
+    "sinon": "21.0.3",
     "typescript": "^5.7.3"
   },
   "nyc": {

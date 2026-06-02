@@ -94,7 +94,7 @@
     "mocha": "^11.7.4",
     "pack-n-play": "^4.2.1",
     "typescript": "5.8.3",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "ts-loader": "^8.4.0",
     "webpack": "^5.102.1",
     "webpack-cli": "^6.0.1"
