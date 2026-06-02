@@ -16,7 +16,8 @@ const config = {
   "enable-source-maps": true,
   "throw-deprecation": true,
   "timeout": 10000,
-  "parallel": true
+  "parallel": true,
+  "recursive": true
 }
 if (process.env.MOCHA_THROW_DEPRECATION === 'false') {
   delete config['throw-deprecation'];
