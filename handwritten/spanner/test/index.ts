@@ -24,7 +24,7 @@ import * as proxyquire from 'proxyquire';
 import * as through from 'through2';
 import {util} from '@google-cloud/common';
 import {PreciseDate} from '@google-cloud/precise-date';
-import { replaceProjectIdToken } from '../src/helper';
+import {replaceProjectIdToken} from '../src/helper';
 import * as pfy from '@google-cloud/promisify';
 import {grpc} from 'google-gax';
 import * as sinon from 'sinon';

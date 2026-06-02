@@ -16,7 +16,7 @@
 
 import {GrpcService, GrpcServiceConfig} from './common-grpc/service';
 import {PreciseDate} from '@google-cloud/precise-date';
-import { replaceProjectIdToken } from './helper';
+import {replaceProjectIdToken} from './helper';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';

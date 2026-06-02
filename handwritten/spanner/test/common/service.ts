@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as path from 'path';
-import { util } from '@google-cloud/common';
+import {util} from '@google-cloud/common';
 import * as grpcProtoLoader from '@grpc/proto-loader';
 import * as assert from 'assert';
 import {before, beforeEach, after, afterEach, describe, it} from 'mocha';
@@ -24,7 +24,7 @@ import * as proxyquire from 'proxyquire';
 import * as retryRequest from 'retry-request';
 import * as sn from 'sinon';
 import {PassThrough} from 'stream';
-import { isDate, replaceProjectIdToken } from '../../src/helper';
+import {isDate, replaceProjectIdToken} from '../../src/helper';
 
 const sinon = sn.createSandbox();
 const glob = global as {} as {GCLOUD_SANDBOX_ENV?: boolean | {}};

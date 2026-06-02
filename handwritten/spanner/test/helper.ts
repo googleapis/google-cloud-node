@@ -15,9 +15,9 @@
  */
 
 import * as assert from 'assert';
-import { describe, it } from 'mocha';
-import { replaceProjectIdToken } from '../src/helper';
-import { Stream } from 'stream';
+import {describe, it} from 'mocha';
+import {replaceProjectIdToken} from '../src/helper';
+import {Stream} from 'stream';
 
 describe('helper', () => {
   describe('replaceProjectIdToken', () => {
@@ -84,7 +84,8 @@ describe('helper', () => {
             key: 'projects/{{projectId}}',
           },
         },
-        mutations: [ // mutations key skipped
+        mutations: [
+          // mutations key skipped
           {
             insert: {
               table: 'Users',

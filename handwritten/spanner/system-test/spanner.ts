@@ -933,7 +933,11 @@ describe('Spanner', () => {
       });
 
       it('GOOGLE_STANDARD_SQL should write uuid array values', async () => {
-        const values = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
+        const values = [
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+        ];
         const {row} = await insert(
           {UUIDArray: values},
           Spanner.GOOGLE_STANDARD_SQL,
@@ -942,7 +946,11 @@ describe('Spanner', () => {
       });
 
       it.skip('POSTGRESQL should write uuid array values', async () => {
-        const values = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
+        const values = [
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+        ];
         const {row} = await insert({UUIDArray: values}, Spanner.POSTGRESQL);
         assert.deepStrictEqual(row.toJSON().UUIDArray, values);
       });
@@ -4674,7 +4682,11 @@ describe('Spanner', () => {
           });
 
           it('GOOGLE_STANDARD_SQL should bind arrays', async () => {
-            const values = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
+            const values = [
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+            ];
 
             const query = {
               sql: 'SELECT @v',
@@ -4714,7 +4726,11 @@ describe('Spanner', () => {
           });
 
           it.skip('POSTGRESQL should bind arrays', async () => {
-            const values = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
+            const values = [
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+            ];
 
             const query = {
               sql: 'SELECT $1',
