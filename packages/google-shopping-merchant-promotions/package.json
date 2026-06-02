@@ -40,7 +40,7 @@
     "postpack": "minifyProtoJson",
     "prepare": "npm run compile",
     "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test",
+    "test": "c8 mocha --config ../../.mocharc.js build/test",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
     "prelint": "cd samples; npm link ../; npm i"
   },
