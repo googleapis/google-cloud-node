@@ -26,8 +26,6 @@
     "lint": "gts check",
     "samples-test": "mocha build/samples-test",
     "docs": "jsdoc -c .jsdoc.js",
-    "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs",
     "webpack": "webpack",
     "browser-test": "karma start",
     "prelint": "cd samples; npm link ../; npm install",

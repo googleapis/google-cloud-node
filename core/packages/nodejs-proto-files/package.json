@@ -38,8 +38,6 @@
     "clean": "gts clean",
     "compile": "tsc -p .",
     "pretest": "npm run prepare && npm run compile",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },

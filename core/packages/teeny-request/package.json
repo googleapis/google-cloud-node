@@ -16,8 +16,6 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
-    "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs",
     "system-test": "echo no system test",
     "samples-test": "echo no samples",
     "precompile": "gts clean"

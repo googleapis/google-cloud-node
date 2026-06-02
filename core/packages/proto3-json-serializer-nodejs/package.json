@@ -33,8 +33,6 @@
     "pretest": "npm run compile",
     "compile-test-protos": "cd test-fixtures/proto && pbjs -t json test.proto > test.json",
     "docs": "jsdoc -c .jsdoc.js",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "prelint": "cd samples && npm link ../ && npm install"
   },

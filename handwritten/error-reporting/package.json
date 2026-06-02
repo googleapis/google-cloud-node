@@ -30,8 +30,6 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "license-check": "jsgl --local .",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "precompile": "gts clean"
   },
   "dependencies": {

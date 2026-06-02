@@ -45,8 +45,6 @@
     "predocs": "npm run compile",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "types": "node scripts/gen-types.js",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"

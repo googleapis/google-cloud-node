@@ -19,8 +19,6 @@
     "docs": "jsdoc -c .jsdoc.js",
     "samples-test": "echo 'no samples test'",
     "system-test": "echo 'no system test'",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "clean": "gts clean",
     "precompile": "gts clean"
   },

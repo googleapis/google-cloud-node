@@ -22,8 +22,6 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "license-check": "jsgl --local .",
-    "docs-test": "echo 'skipping tests for time being'",
-    "predocs-test": "npm run docs",
     "precompile": "gts clean"
   },
   "author": {
