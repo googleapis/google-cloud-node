@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.2.1...datamanager-v0.3.0) (2026-06-01)
+
+
+### Features
+
+* [datamanager] add the coupon_codes field to CartData to track coupon redemptions for Google Ads and Google Analytics ([#8300](https://github.com/googleapis/google-cloud-node/issues/8300)) ([ecec52d](https://github.com/googleapis/google-cloud-node/commit/ecec52d9fa7e5a8557596f42407412b714c8bd3d))
+
 ## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.2.0...datamanager-v0.2.1) (2026-05-01)
 
 

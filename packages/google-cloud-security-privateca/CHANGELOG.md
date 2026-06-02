@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v7.0.2...security-private-ca-v7.1.0) (2026-06-01)
+
+
+### Features
+
+* [security] add allow_requester_specified_not_before_time and requested_not_before_time fields to PrivateCA v1 API ([#8364](https://github.com/googleapis/google-cloud-node/issues/8364)) ([c57233c](https://github.com/googleapis/google-cloud-node/commit/c57233c171eaf119ed7a98dd9a3a8ea8610fbc59))
+
 ## [7.0.2](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v7.0.1...security-private-ca-v7.0.2) (2026-05-01)
 
 
