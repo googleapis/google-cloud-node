@@ -1840,6 +1840,7 @@
                          * @property {string|null} [etag] Recommendation etag
                          * @property {Array.<google.cloud.recommender.v1.Recommendation.IInsightReference>|null} [associatedInsights] Recommendation associatedInsights
                          * @property {string|null} [xorGroupId] Recommendation xorGroupId
+                         * @property {Array.<string>|null} [targetResources] Recommendation targetResources
                          */
     
                         /**
@@ -1853,6 +1854,7 @@
                         function Recommendation(properties) {
                             this.additionalImpact = [];
                             this.associatedInsights = [];
+                            this.targetResources = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1956,6 +1958,14 @@
                         Recommendation.prototype.xorGroupId = "";
     
                         /**
+                         * Recommendation targetResources.
+                         * @member {Array.<string>} targetResources
+                         * @memberof google.cloud.recommender.v1.Recommendation
+                         * @instance
+                         */
+                        Recommendation.prototype.targetResources = $util.emptyArray;
+    
+                        /**
                          * Creates a new Recommendation instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recommender.v1.Recommendation
@@ -2005,6 +2015,9 @@
                                 writer.uint32(/* id 17, wireType 0 =*/136).int32(message.priority);
                             if (message.xorGroupId != null && Object.hasOwnProperty.call(message, "xorGroupId"))
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.xorGroupId);
+                            if (message.targetResources != null && message.targetResources.length)
+                                for (var i = 0; i < message.targetResources.length; ++i)
+                                    writer.uint32(/* id 19, wireType 2 =*/154).string(message.targetResources[i]);
                             return writer;
                         };
     
@@ -2091,6 +2104,12 @@
                                     }
                                 case 18: {
                                         message.xorGroupId = reader.string();
+                                        break;
+                                    }
+                                case 19: {
+                                        if (!(message.targetResources && message.targetResources.length))
+                                            message.targetResources = [];
+                                        message.targetResources.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -2192,6 +2211,13 @@
                             if (message.xorGroupId != null && message.hasOwnProperty("xorGroupId"))
                                 if (!$util.isString(message.xorGroupId))
                                     return "xorGroupId: string expected";
+                            if (message.targetResources != null && message.hasOwnProperty("targetResources")) {
+                                if (!Array.isArray(message.targetResources))
+                                    return "targetResources: array expected";
+                                for (var i = 0; i < message.targetResources.length; ++i)
+                                    if (!$util.isString(message.targetResources[i]))
+                                        return "targetResources: string[] expected";
+                            }
                             return null;
                         };
     
@@ -2285,6 +2311,13 @@
                             }
                             if (object.xorGroupId != null)
                                 message.xorGroupId = String(object.xorGroupId);
+                            if (object.targetResources) {
+                                if (!Array.isArray(object.targetResources))
+                                    throw TypeError(".google.cloud.recommender.v1.Recommendation.targetResources: array expected");
+                                message.targetResources = [];
+                                for (var i = 0; i < object.targetResources.length; ++i)
+                                    message.targetResources[i] = String(object.targetResources[i]);
+                            }
                             return message;
                         };
     
@@ -2304,6 +2337,7 @@
                             if (options.arrays || options.defaults) {
                                 object.additionalImpact = [];
                                 object.associatedInsights = [];
+                                object.targetResources = [];
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -2347,6 +2381,11 @@
                                 object.priority = options.enums === String ? $root.google.cloud.recommender.v1.Recommendation.Priority[message.priority] === undefined ? message.priority : $root.google.cloud.recommender.v1.Recommendation.Priority[message.priority] : message.priority;
                             if (message.xorGroupId != null && message.hasOwnProperty("xorGroupId"))
                                 object.xorGroupId = message.xorGroupId;
+                            if (message.targetResources && message.targetResources.length) {
+                                object.targetResources = [];
+                                for (var j = 0; j < message.targetResources.length; ++j)
+                                    object.targetResources[j] = message.targetResources[j];
+                            }
                             return object;
                         };
     
@@ -4870,6 +4909,7 @@
                          * @property {google.cloud.recommender.v1.ISecurityProjection|null} [securityProjection] Impact securityProjection
                          * @property {google.cloud.recommender.v1.ISustainabilityProjection|null} [sustainabilityProjection] Impact sustainabilityProjection
                          * @property {google.cloud.recommender.v1.IReliabilityProjection|null} [reliabilityProjection] Impact reliabilityProjection
+                         * @property {string|null} [service] Impact service
                          */
     
                         /**
@@ -4927,6 +4967,14 @@
                          */
                         Impact.prototype.reliabilityProjection = null;
     
+                        /**
+                         * Impact service.
+                         * @member {string} service
+                         * @memberof google.cloud.recommender.v1.Impact
+                         * @instance
+                         */
+                        Impact.prototype.service = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -4967,6 +5015,8 @@
                                 writer = $Writer.create();
                             if (message.category != null && Object.hasOwnProperty.call(message, "category"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.category);
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.service);
                             if (message.costProjection != null && Object.hasOwnProperty.call(message, "costProjection"))
                                 $root.google.cloud.recommender.v1.CostProjection.encode(message.costProjection, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             if (message.securityProjection != null && Object.hasOwnProperty.call(message, "securityProjection"))
@@ -5029,6 +5079,10 @@
                                     }
                                 case 103: {
                                         message.reliabilityProjection = $root.google.cloud.recommender.v1.ReliabilityProjection.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.service = reader.string();
                                         break;
                                     }
                                 default:
@@ -5118,6 +5172,9 @@
                                         return "reliabilityProjection." + error;
                                 }
                             }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
                             return null;
                         };
     
@@ -5189,6 +5246,8 @@
                                     throw TypeError(".google.cloud.recommender.v1.Impact.reliabilityProjection: object expected");
                                 message.reliabilityProjection = $root.google.cloud.recommender.v1.ReliabilityProjection.fromObject(object.reliabilityProjection);
                             }
+                            if (object.service != null)
+                                message.service = String(object.service);
                             return message;
                         };
     
@@ -5205,10 +5264,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.category = options.enums === String ? "CATEGORY_UNSPECIFIED" : 0;
+                                object.service = "";
+                            }
                             if (message.category != null && message.hasOwnProperty("category"))
                                 object.category = options.enums === String ? $root.google.cloud.recommender.v1.Impact.Category[message.category] === undefined ? message.category : $root.google.cloud.recommender.v1.Impact.Category[message.category] : message.category;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
                             if (message.costProjection != null && message.hasOwnProperty("costProjection")) {
                                 object.costProjection = $root.google.cloud.recommender.v1.CostProjection.toObject(message.costProjection, options);
                                 if (options.oneofs)
@@ -21645,6 +21708,34 @@
              */
             var api = {};
     
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             * @property {number} IDENTIFIER=8 IDENTIFIER value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                values[valuesById[8] = "IDENTIFIER"] = 8;
+                return values;
+            })();
+    
             api.ResourceDescriptor = (function() {
     
                 /**
@@ -22331,34 +22422,6 @@
                 };
     
                 return ResourceReference;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             * @property {number} IDENTIFIER=8 IDENTIFIER value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                values[valuesById[8] = "IDENTIFIER"] = 8;
-                return values;
             })();
     
             api.Http = (function() {
@@ -34267,8 +34330,8 @@
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
                  * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
-                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -34403,20 +34466,20 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.resourceReference.
-                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.resourceReference"] = null;
-    
-                /**
                  * FieldOptions .google.api.fieldBehavior.
                  * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -34581,10 +34644,6 @@
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                                 break;
                             }
-                        case 1055: {
-                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                                break;
-                            }
                         case 1052: {
                                 if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
                                     message[".google.api.fieldBehavior"] = [];
@@ -34594,6 +34653,10 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
+                                break;
+                            }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -34724,11 +34787,6 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
-                        if (error)
-                            return ".google.api.resourceReference." + error;
-                    }
                     if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
@@ -34747,6 +34805,11 @@
                             case 8:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -34918,11 +34981,6 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
-                    }
                     if (object[".google.api.fieldBehavior"]) {
                         if (!Array.isArray(object[".google.api.fieldBehavior"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
@@ -34971,6 +35029,11 @@
                                 message[".google.api.fieldBehavior"][i] = 8;
                                 break;
                             }
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
                     return message;
                 };

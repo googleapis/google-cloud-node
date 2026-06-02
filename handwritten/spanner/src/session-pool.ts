@@ -22,6 +22,7 @@ import {Session} from './session';
 import {Transaction} from './transaction';
 import {NormalCallback} from './common';
 import {GoogleError, grpc, ServiceError} from 'google-gax';
+import {context, ROOT_CONTEXT} from '@opentelemetry/api';
 import trace = require('stack-trace');
 import {
   ObservabilityOptions,
@@ -1061,12 +1062,16 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
   _startHouseKeeping(): void {
     const evictRate = this.options.idlesAfter! * 60000;
 
-    this._evictHandle = setInterval(() => this._evictIdleSessions(), evictRate);
+    this._evictHandle = context.with(ROOT_CONTEXT, () =>
+      setInterval(() => this._evictIdleSessions(), evictRate),
+    );
     this._evictHandle.unref();
 
     const pingRate = this.options.keepAlive! * 60000;
 
-    this._pingHandle = setInterval(() => this._pingIdleSessions(), pingRate);
+    this._pingHandle = context.with(ROOT_CONTEXT, () =>
+      setInterval(() => this._pingIdleSessions(), pingRate),
+    );
     this._pingHandle.unref();
   }
 
