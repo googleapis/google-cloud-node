@@ -365,7 +365,11 @@ export function replaceProjectIdToken(value: any, projectId: string): any {
  * Custom error type for missing project ID errors.
  */
 class MissingProjectIdError extends Error {
-  message = `Sorry, we cannot connect to Cloud Services without a project
+  constructor() {
+    super(
+      `Sorry, we cannot connect to Cloud Services without a project
     ID. You may specify one with an environment variable named
-    "GOOGLE_CLOUD_PROJECT".`.replace(/ +/g, ' ');
+    "GOOGLE_CLOUD_PROJECT".`.replace(/ +/g, ' '),
+    );
+  }
 }
