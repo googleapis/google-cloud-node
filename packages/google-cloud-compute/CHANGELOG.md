@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [6.13.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.12.0...compute-v6.13.0) (2026-06-01)
+
+
+### Features
+
+* [compute] Update Compute Engine v1beta API to revision 20260427 ([#1194](https://github.com/googleapis/google-cloud-node/issues/1194)) ([#8285](https://github.com/googleapis/google-cloud-node/issues/8285)) ([5293fbc](https://github.com/googleapis/google-cloud-node/commit/5293fbcf148363882516565b00482ae39d6bf1c8))
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.11.0...compute-v6.12.0) (2026-05-27)
 
 
