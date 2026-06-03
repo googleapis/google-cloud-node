@@ -295,15 +295,21 @@ export function isUuid(value: any): boolean {
 const PROJECT_ID_TOKEN = '{{projectId}}';
 const PROJECT_ID_TOKEN_REGEX = /{{projectId}}/g;
 
-// Keys to skip recursive traversal for Spanner SDK requests to avoid scanning large user data payloads.
-const KEYS_TO_SKIP = new Set([
-  'params',
-  'paramTypes',
-  'mutations',
-  'sql',
-  'queryOptions',
-  'requestOptions',
-  'transactionOptions',
+// Whitelisted request properties that contain, or lead to, resource name strings with project ID placeholders.
+const KEYS_TO_SCAN = new Set([
+  'database',
+  'session',
+  'name',
+  'parent',
+  'instance',
+  'resource',
+  'backup',
+  'instanceConfig',
+  'baseConfig',
+  'kmsKeyName',
+  // Intermediate object keys that must be traversed to reach the above leaves
+  'config',
+  'encryptionConfig',
 ]);
 
 /**
@@ -341,13 +347,13 @@ export function replaceProjectIdToken(value: any, projectId: string): any {
     return value;
   }
 
-  if (value instanceof Buffer || value instanceof Stream) {
+  if (value instanceof Buffer || value instanceof Stream || isDate(value)) {
     return value;
   }
 
   for (const key in value) {
     if (Object.prototype.hasOwnProperty.call(value, key)) {
-      if (KEYS_TO_SKIP.has(key)) {
+      if (!KEYS_TO_SCAN.has(key)) {
         continue;
       }
       const original = value[key];

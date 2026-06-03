@@ -136,24 +136,25 @@ describe('helper', () => {
 
     it('should replace any {{projectId}} it finds (nested / complex tree)', () => {
       const input = {
-        here: 'A {{projectId}} Z',
-        nested: {
-          here: 'A {{projectId}} Z',
-          nested: {
-            here: 'A {{projectId}} Z',
+        parent: 'A {{projectId}} Z',
+        database: {
+          parent: 'A {{projectId}} Z',
+          baseConfig: 'projects/{{projectId}}/instanceConfigs/base-1',
+          config: {
+            name: 'A {{projectId}} Z',
           },
         },
-        array: [
+        backup: [
           {
-            here: 'A {{projectId}} Z',
-            nested: {
-              here: 'A {{projectId}} Z',
+            name: 'A {{projectId}} Z',
+            encryptionConfig: {
+              kmsKeyName: 'A {{projectId}} Z',
             },
-            nestedArray: [
+            database: [
               {
-                here: 'A {{projectId}} Z',
-                nested: {
-                  here: 'A {{projectId}} Z',
+                session: 'A {{projectId}} Z',
+                parent: {
+                  name: 'A {{projectId}} Z',
                 },
               },
             ],
@@ -161,24 +162,25 @@ describe('helper', () => {
         ],
       };
       const expected = {
-        here: 'A my-project-id Z',
-        nested: {
-          here: 'A my-project-id Z',
-          nested: {
-            here: 'A my-project-id Z',
+        parent: 'A my-project-id Z',
+        database: {
+          parent: 'A my-project-id Z',
+          baseConfig: 'projects/my-project-id/instanceConfigs/base-1',
+          config: {
+            name: 'A my-project-id Z',
           },
         },
-        array: [
+        backup: [
           {
-            here: 'A my-project-id Z',
-            nested: {
-              here: 'A my-project-id Z',
+            name: 'A my-project-id Z',
+            encryptionConfig: {
+              kmsKeyName: 'A my-project-id Z',
             },
-            nestedArray: [
+            database: [
               {
-                here: 'A my-project-id Z',
-                nested: {
-                  here: 'A my-project-id Z',
+                session: 'A my-project-id Z',
+                parent: {
+                  name: 'A my-project-id Z',
                 },
               },
             ],
