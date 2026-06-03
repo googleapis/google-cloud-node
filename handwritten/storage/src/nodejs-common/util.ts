@@ -979,15 +979,15 @@ export class Util {
         if (!(headers as any).has('content-type')) {
           (headers as any).set('Content-Type', 'application/json');
         }
+        reqOpts.headers = headers;
       } else {
         const hasContentType = Object.keys(headers).some(
           key => key.toLowerCase() === 'content-type'
         );
-        if (!hasContentType) {
-          (headers as any)['Content-Type'] = 'application/json';
-        }
+        reqOpts.headers = hasContentType
+          ? headers
+          : { ...headers, 'Content-Type': 'application/json' };
       }
-      reqOpts.headers = headers;
     }
 
     reqOpts.uri = replaceProjectIdToken(reqOpts.uri, projectId);
