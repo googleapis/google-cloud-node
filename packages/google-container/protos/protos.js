@@ -7159,6 +7159,7 @@
                      * @property {string|null} [serviceAccount] NodeConfig serviceAccount
                      * @property {Object.<string,string>|null} [metadata] NodeConfig metadata
                      * @property {string|null} [imageType] NodeConfig imageType
+                     * @property {google.container.v1.ICustomImageConfig|null} [nodeImageConfig] NodeConfig nodeImageConfig
                      * @property {Object.<string,string>|null} [labels] NodeConfig labels
                      * @property {number|null} [localSsdCount] NodeConfig localSsdCount
                      * @property {Array.<string>|null} [tags] NodeConfig tags
@@ -7274,6 +7275,14 @@
                      * @instance
                      */
                     NodeConfig.prototype.imageType = "";
+    
+                    /**
+                     * NodeConfig nodeImageConfig.
+                     * @member {google.container.v1.ICustomImageConfig|null|undefined} nodeImageConfig
+                     * @memberof google.container.v1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.nodeImageConfig = null;
     
                     /**
                      * NodeConfig labels.
@@ -7779,6 +7788,8 @@
                             $root.google.protobuf.Duration.encode(message.consolidationDelay, writer.uint32(/* id 60, wireType 2 =*/482).fork()).ldelim();
                         if (message.taintConfig != null && Object.hasOwnProperty.call(message, "taintConfig"))
                             $root.google.container.v1.TaintConfig.encode(message.taintConfig, writer.uint32(/* id 62, wireType 2 =*/498).fork()).ldelim();
+                        if (message.nodeImageConfig != null && Object.hasOwnProperty.call(message, "nodeImageConfig"))
+                            $root.google.container.v1.CustomImageConfig.encode(message.nodeImageConfig, writer.uint32(/* id 90, wireType 2 =*/722).fork()).ldelim();
                         return writer;
                     };
     
@@ -7858,6 +7869,10 @@
                                 }
                             case 5: {
                                     message.imageType = reader.string();
+                                    break;
+                                }
+                            case 90: {
+                                    message.nodeImageConfig = $root.google.container.v1.CustomImageConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 6: {
@@ -8139,6 +8154,11 @@
                         if (message.imageType != null && message.hasOwnProperty("imageType"))
                             if (!$util.isString(message.imageType))
                                 return "imageType: string expected";
+                        if (message.nodeImageConfig != null && message.hasOwnProperty("nodeImageConfig")) {
+                            var error = $root.google.container.v1.CustomImageConfig.verify(message.nodeImageConfig);
+                            if (error)
+                                return "nodeImageConfig." + error;
+                        }
                         if (message.labels != null && message.hasOwnProperty("labels")) {
                             if (!$util.isObject(message.labels))
                                 return "labels: object expected";
@@ -8414,6 +8434,11 @@
                         }
                         if (object.imageType != null)
                             message.imageType = String(object.imageType);
+                        if (object.nodeImageConfig != null) {
+                            if (typeof object.nodeImageConfig !== "object")
+                                throw TypeError(".google.container.v1.NodeConfig.nodeImageConfig: object expected");
+                            message.nodeImageConfig = $root.google.container.v1.CustomImageConfig.fromObject(object.nodeImageConfig);
+                        }
                         if (object.labels) {
                             if (typeof object.labels !== "object")
                                 throw TypeError(".google.container.v1.NodeConfig.labels: object expected");
@@ -8713,6 +8738,7 @@
                             object.effectiveCgroupMode = options.enums === String ? "EFFECTIVE_CGROUP_MODE_UNSPECIFIED" : 0;
                             object.bootDisk = null;
                             object.consolidationDelay = null;
+                            object.nodeImageConfig = null;
                         }
                         if (message.machineType != null && message.hasOwnProperty("machineType"))
                             object.machineType = message.machineType;
@@ -8856,6 +8882,8 @@
                             if (options.oneofs)
                                 object._taintConfig = "taintConfig";
                         }
+                        if (message.nodeImageConfig != null && message.hasOwnProperty("nodeImageConfig"))
+                            object.nodeImageConfig = $root.google.container.v1.CustomImageConfig.toObject(message.nodeImageConfig, options);
                         return object;
                     };
     
@@ -11041,6 +11069,235 @@
                     };
     
                     return ShieldedInstanceConfig;
+                })();
+    
+                v1.CustomImageConfig = (function() {
+    
+                    /**
+                     * Properties of a CustomImageConfig.
+                     * @memberof google.container.v1
+                     * @interface ICustomImageConfig
+                     * @property {string|null} [image] CustomImageConfig image
+                     * @property {string|null} [imageProject] CustomImageConfig imageProject
+                     */
+    
+                    /**
+                     * Constructs a new CustomImageConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a CustomImageConfig.
+                     * @implements ICustomImageConfig
+                     * @constructor
+                     * @param {google.container.v1.ICustomImageConfig=} [properties] Properties to set
+                     */
+                    function CustomImageConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CustomImageConfig image.
+                     * @member {string} image
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @instance
+                     */
+                    CustomImageConfig.prototype.image = "";
+    
+                    /**
+                     * CustomImageConfig imageProject.
+                     * @member {string} imageProject
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @instance
+                     */
+                    CustomImageConfig.prototype.imageProject = "";
+    
+                    /**
+                     * Creates a new CustomImageConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @static
+                     * @param {google.container.v1.ICustomImageConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.CustomImageConfig} CustomImageConfig instance
+                     */
+                    CustomImageConfig.create = function create(properties) {
+                        return new CustomImageConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CustomImageConfig message. Does not implicitly {@link google.container.v1.CustomImageConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @static
+                     * @param {google.container.v1.ICustomImageConfig} message CustomImageConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CustomImageConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.image != null && Object.hasOwnProperty.call(message, "image"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.image);
+                        if (message.imageProject != null && Object.hasOwnProperty.call(message, "imageProject"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.imageProject);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CustomImageConfig message, length delimited. Does not implicitly {@link google.container.v1.CustomImageConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @static
+                     * @param {google.container.v1.ICustomImageConfig} message CustomImageConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CustomImageConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CustomImageConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.CustomImageConfig} CustomImageConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CustomImageConfig.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.CustomImageConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.image = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.imageProject = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CustomImageConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.CustomImageConfig} CustomImageConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CustomImageConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CustomImageConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CustomImageConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.image != null && message.hasOwnProperty("image"))
+                            if (!$util.isString(message.image))
+                                return "image: string expected";
+                        if (message.imageProject != null && message.hasOwnProperty("imageProject"))
+                            if (!$util.isString(message.imageProject))
+                                return "imageProject: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CustomImageConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.CustomImageConfig} CustomImageConfig
+                     */
+                    CustomImageConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.CustomImageConfig)
+                            return object;
+                        var message = new $root.google.container.v1.CustomImageConfig();
+                        if (object.image != null)
+                            message.image = String(object.image);
+                        if (object.imageProject != null)
+                            message.imageProject = String(object.imageProject);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CustomImageConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @static
+                     * @param {google.container.v1.CustomImageConfig} message CustomImageConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CustomImageConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.image = "";
+                            object.imageProject = "";
+                        }
+                        if (message.image != null && message.hasOwnProperty("image"))
+                            object.image = message.image;
+                        if (message.imageProject != null && message.hasOwnProperty("imageProject"))
+                            object.imageProject = message.imageProject;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CustomImageConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CustomImageConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CustomImageConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.CustomImageConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CustomImageConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.CustomImageConfig";
+                    };
+    
+                    return CustomImageConfig;
                 })();
     
                 v1.SandboxConfig = (function() {
@@ -16811,6 +17068,7 @@
                      * @property {google.container.v1.IPodSnapshotConfig|null} [podSnapshotConfig] AddonsConfig podSnapshotConfig
                      * @property {google.container.v1.ISlurmOperatorConfig|null} [slurmOperatorConfig] AddonsConfig slurmOperatorConfig
                      * @property {google.container.v1.ISliceControllerConfig|null} [sliceControllerConfig] AddonsConfig sliceControllerConfig
+                     * @property {google.container.v1.IAgentSandboxConfig|null} [agentSandboxConfig] AddonsConfig agentSandboxConfig
                      * @property {google.container.v1.INodeReadinessConfig|null} [nodeReadinessConfig] AddonsConfig nodeReadinessConfig
                      */
     
@@ -16982,6 +17240,14 @@
                     AddonsConfig.prototype.sliceControllerConfig = null;
     
                     /**
+                     * AddonsConfig agentSandboxConfig.
+                     * @member {google.container.v1.IAgentSandboxConfig|null|undefined} agentSandboxConfig
+                     * @memberof google.container.v1.AddonsConfig
+                     * @instance
+                     */
+                    AddonsConfig.prototype.agentSandboxConfig = null;
+    
+                    /**
                      * AddonsConfig nodeReadinessConfig.
                      * @member {google.container.v1.INodeReadinessConfig|null|undefined} nodeReadinessConfig
                      * @memberof google.container.v1.AddonsConfig
@@ -17051,6 +17317,8 @@
                             $root.google.container.v1.SlurmOperatorConfig.encode(message.slurmOperatorConfig, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                         if (message.sliceControllerConfig != null && Object.hasOwnProperty.call(message, "sliceControllerConfig"))
                             $root.google.container.v1.SliceControllerConfig.encode(message.sliceControllerConfig, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                        if (message.agentSandboxConfig != null && Object.hasOwnProperty.call(message, "agentSandboxConfig"))
+                            $root.google.container.v1.AgentSandboxConfig.encode(message.agentSandboxConfig, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                         if (message.nodeReadinessConfig != null && Object.hasOwnProperty.call(message, "nodeReadinessConfig"))
                             $root.google.container.v1.NodeReadinessConfig.encode(message.nodeReadinessConfig, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
                         return writer;
@@ -17163,6 +17431,10 @@
                                 }
                             case 26: {
                                     message.sliceControllerConfig = $root.google.container.v1.SliceControllerConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 28: {
+                                    message.agentSandboxConfig = $root.google.container.v1.AgentSandboxConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 29: {
@@ -17299,6 +17571,11 @@
                             if (error)
                                 return "sliceControllerConfig." + error;
                         }
+                        if (message.agentSandboxConfig != null && message.hasOwnProperty("agentSandboxConfig")) {
+                            var error = $root.google.container.v1.AgentSandboxConfig.verify(message.agentSandboxConfig);
+                            if (error)
+                                return "agentSandboxConfig." + error;
+                        }
                         if (message.nodeReadinessConfig != null && message.hasOwnProperty("nodeReadinessConfig")) {
                             var error = $root.google.container.v1.NodeReadinessConfig.verify(message.nodeReadinessConfig);
                             if (error)
@@ -17414,6 +17691,11 @@
                                 throw TypeError(".google.container.v1.AddonsConfig.sliceControllerConfig: object expected");
                             message.sliceControllerConfig = $root.google.container.v1.SliceControllerConfig.fromObject(object.sliceControllerConfig);
                         }
+                        if (object.agentSandboxConfig != null) {
+                            if (typeof object.agentSandboxConfig !== "object")
+                                throw TypeError(".google.container.v1.AddonsConfig.agentSandboxConfig: object expected");
+                            message.agentSandboxConfig = $root.google.container.v1.AgentSandboxConfig.fromObject(object.agentSandboxConfig);
+                        }
                         if (object.nodeReadinessConfig != null) {
                             if (typeof object.nodeReadinessConfig !== "object")
                                 throw TypeError(".google.container.v1.AddonsConfig.nodeReadinessConfig: object expected");
@@ -17455,6 +17737,7 @@
                             object.podSnapshotConfig = null;
                             object.slurmOperatorConfig = null;
                             object.sliceControllerConfig = null;
+                            object.agentSandboxConfig = null;
                             object.nodeReadinessConfig = null;
                         }
                         if (message.httpLoadBalancing != null && message.hasOwnProperty("httpLoadBalancing"))
@@ -17495,6 +17778,8 @@
                             object.slurmOperatorConfig = $root.google.container.v1.SlurmOperatorConfig.toObject(message.slurmOperatorConfig, options);
                         if (message.sliceControllerConfig != null && message.hasOwnProperty("sliceControllerConfig"))
                             object.sliceControllerConfig = $root.google.container.v1.SliceControllerConfig.toObject(message.sliceControllerConfig, options);
+                        if (message.agentSandboxConfig != null && message.hasOwnProperty("agentSandboxConfig"))
+                            object.agentSandboxConfig = $root.google.container.v1.AgentSandboxConfig.toObject(message.agentSandboxConfig, options);
                         if (message.nodeReadinessConfig != null && message.hasOwnProperty("nodeReadinessConfig"))
                             object.nodeReadinessConfig = $root.google.container.v1.NodeReadinessConfig.toObject(message.nodeReadinessConfig, options);
                         return object;
@@ -21314,6 +21599,211 @@
                     };
     
                     return SlurmOperatorConfig;
+                })();
+    
+                v1.AgentSandboxConfig = (function() {
+    
+                    /**
+                     * Properties of an AgentSandboxConfig.
+                     * @memberof google.container.v1
+                     * @interface IAgentSandboxConfig
+                     * @property {boolean|null} [enabled] AgentSandboxConfig enabled
+                     */
+    
+                    /**
+                     * Constructs a new AgentSandboxConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents an AgentSandboxConfig.
+                     * @implements IAgentSandboxConfig
+                     * @constructor
+                     * @param {google.container.v1.IAgentSandboxConfig=} [properties] Properties to set
+                     */
+                    function AgentSandboxConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AgentSandboxConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @instance
+                     */
+                    AgentSandboxConfig.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new AgentSandboxConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @static
+                     * @param {google.container.v1.IAgentSandboxConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.AgentSandboxConfig} AgentSandboxConfig instance
+                     */
+                    AgentSandboxConfig.create = function create(properties) {
+                        return new AgentSandboxConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AgentSandboxConfig message. Does not implicitly {@link google.container.v1.AgentSandboxConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @static
+                     * @param {google.container.v1.IAgentSandboxConfig} message AgentSandboxConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AgentSandboxConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AgentSandboxConfig message, length delimited. Does not implicitly {@link google.container.v1.AgentSandboxConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @static
+                     * @param {google.container.v1.IAgentSandboxConfig} message AgentSandboxConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AgentSandboxConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AgentSandboxConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.AgentSandboxConfig} AgentSandboxConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AgentSandboxConfig.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.AgentSandboxConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.enabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AgentSandboxConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.AgentSandboxConfig} AgentSandboxConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AgentSandboxConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AgentSandboxConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AgentSandboxConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AgentSandboxConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.AgentSandboxConfig} AgentSandboxConfig
+                     */
+                    AgentSandboxConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.AgentSandboxConfig)
+                            return object;
+                        var message = new $root.google.container.v1.AgentSandboxConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AgentSandboxConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @static
+                     * @param {google.container.v1.AgentSandboxConfig} message AgentSandboxConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AgentSandboxConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AgentSandboxConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AgentSandboxConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AgentSandboxConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.AgentSandboxConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AgentSandboxConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.AgentSandboxConfig";
+                    };
+    
+                    return AgentSandboxConfig;
                 })();
     
                 v1.NodeReadinessConfig = (function() {
@@ -30622,6 +31112,8 @@
                      * @property {google.container.v1.IAddonsConfig|null} [desiredAddonsConfig] ClusterUpdate desiredAddonsConfig
                      * @property {string|null} [desiredNodePoolId] ClusterUpdate desiredNodePoolId
                      * @property {string|null} [desiredImageType] ClusterUpdate desiredImageType
+                     * @property {string|null} [desiredImage] ClusterUpdate desiredImage
+                     * @property {string|null} [desiredImageProject] ClusterUpdate desiredImageProject
                      * @property {google.container.v1.IDatabaseEncryption|null} [desiredDatabaseEncryption] ClusterUpdate desiredDatabaseEncryption
                      * @property {google.container.v1.IWorkloadIdentityConfig|null} [desiredWorkloadIdentityConfig] ClusterUpdate desiredWorkloadIdentityConfig
                      * @property {google.container.v1.IMeshCertificates|null} [desiredMeshCertificates] ClusterUpdate desiredMeshCertificates
@@ -30753,6 +31245,22 @@
                      * @instance
                      */
                     ClusterUpdate.prototype.desiredImageType = "";
+    
+                    /**
+                     * ClusterUpdate desiredImage.
+                     * @member {string} desiredImage
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredImage = "";
+    
+                    /**
+                     * ClusterUpdate desiredImageProject.
+                     * @member {string} desiredImageProject
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredImageProject = "";
     
                     /**
                      * ClusterUpdate desiredDatabaseEncryption.
@@ -31470,6 +31978,10 @@
                             $root.google.container.v1.ReleaseChannel.encode(message.desiredReleaseChannel, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
                         if (message.desiredL4ilbSubsettingConfig != null && Object.hasOwnProperty.call(message, "desiredL4ilbSubsettingConfig"))
                             $root.google.container.v1.ILBSubsettingConfig.encode(message.desiredL4ilbSubsettingConfig, writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
+                        if (message.desiredImage != null && Object.hasOwnProperty.call(message, "desiredImage"))
+                            writer.uint32(/* id 44, wireType 2 =*/354).string(message.desiredImage);
+                        if (message.desiredImageProject != null && Object.hasOwnProperty.call(message, "desiredImageProject"))
+                            writer.uint32(/* id 45, wireType 2 =*/362).string(message.desiredImageProject);
                         if (message.desiredDatabaseEncryption != null && Object.hasOwnProperty.call(message, "desiredDatabaseEncryption"))
                             $root.google.container.v1.DatabaseEncryption.encode(message.desiredDatabaseEncryption, writer.uint32(/* id 46, wireType 2 =*/370).fork()).ldelim();
                         if (message.desiredWorkloadIdentityConfig != null && Object.hasOwnProperty.call(message, "desiredWorkloadIdentityConfig"))
@@ -31646,6 +32158,14 @@
                                 }
                             case 8: {
                                     message.desiredImageType = reader.string();
+                                    break;
+                                }
+                            case 44: {
+                                    message.desiredImage = reader.string();
+                                    break;
+                                }
+                            case 45: {
+                                    message.desiredImageProject = reader.string();
                                     break;
                                 }
                             case 46: {
@@ -31999,6 +32519,12 @@
                         if (message.desiredImageType != null && message.hasOwnProperty("desiredImageType"))
                             if (!$util.isString(message.desiredImageType))
                                 return "desiredImageType: string expected";
+                        if (message.desiredImage != null && message.hasOwnProperty("desiredImage"))
+                            if (!$util.isString(message.desiredImage))
+                                return "desiredImage: string expected";
+                        if (message.desiredImageProject != null && message.hasOwnProperty("desiredImageProject"))
+                            if (!$util.isString(message.desiredImageProject))
+                                return "desiredImageProject: string expected";
                         if (message.desiredDatabaseEncryption != null && message.hasOwnProperty("desiredDatabaseEncryption")) {
                             var error = $root.google.container.v1.DatabaseEncryption.verify(message.desiredDatabaseEncryption);
                             if (error)
@@ -32421,6 +32947,10 @@
                             message.desiredNodePoolId = String(object.desiredNodePoolId);
                         if (object.desiredImageType != null)
                             message.desiredImageType = String(object.desiredImageType);
+                        if (object.desiredImage != null)
+                            message.desiredImage = String(object.desiredImage);
+                        if (object.desiredImageProject != null)
+                            message.desiredImageProject = String(object.desiredImageProject);
                         if (object.desiredDatabaseEncryption != null) {
                             if (typeof object.desiredDatabaseEncryption !== "object")
                                 throw TypeError(".google.container.v1.ClusterUpdate.desiredDatabaseEncryption: object expected");
@@ -32866,6 +33396,8 @@
                             object.desiredDefaultSnatStatus = null;
                             object.desiredReleaseChannel = null;
                             object.desiredL4ilbSubsettingConfig = null;
+                            object.desiredImage = "";
+                            object.desiredImageProject = "";
                             object.desiredDatabaseEncryption = null;
                             object.desiredWorkloadIdentityConfig = null;
                             object.desiredShieldedNodes = null;
@@ -32957,6 +33489,10 @@
                             object.desiredReleaseChannel = $root.google.container.v1.ReleaseChannel.toObject(message.desiredReleaseChannel, options);
                         if (message.desiredL4ilbSubsettingConfig != null && message.hasOwnProperty("desiredL4ilbSubsettingConfig"))
                             object.desiredL4ilbSubsettingConfig = $root.google.container.v1.ILBSubsettingConfig.toObject(message.desiredL4ilbSubsettingConfig, options);
+                        if (message.desiredImage != null && message.hasOwnProperty("desiredImage"))
+                            object.desiredImage = message.desiredImage;
+                        if (message.desiredImageProject != null && message.hasOwnProperty("desiredImageProject"))
+                            object.desiredImageProject = message.desiredImageProject;
                         if (message.desiredDatabaseEncryption != null && message.hasOwnProperty("desiredDatabaseEncryption"))
                             object.desiredDatabaseEncryption = $root.google.container.v1.DatabaseEncryption.toObject(message.desiredDatabaseEncryption, options);
                         if (message.desiredWorkloadIdentityConfig != null && message.hasOwnProperty("desiredWorkloadIdentityConfig"))
@@ -36945,6 +37481,8 @@
                      * @property {string|null} [nodeVersion] UpdateNodePoolRequest nodeVersion
                      * @property {string|null} [imageType] UpdateNodePoolRequest imageType
                      * @property {string|null} [name] UpdateNodePoolRequest name
+                     * @property {string|null} [image] UpdateNodePoolRequest image
+                     * @property {string|null} [imageProject] UpdateNodePoolRequest imageProject
                      * @property {Array.<string>|null} [locations] UpdateNodePoolRequest locations
                      * @property {google.container.v1.IWorkloadMetadataConfig|null} [workloadMetadataConfig] UpdateNodePoolRequest workloadMetadataConfig
                      * @property {google.container.v1.NodePool.IUpgradeSettings|null} [upgradeSettings] UpdateNodePoolRequest upgradeSettings
@@ -37051,6 +37589,22 @@
                      * @instance
                      */
                     UpdateNodePoolRequest.prototype.name = "";
+    
+                    /**
+                     * UpdateNodePoolRequest image.
+                     * @member {string} image
+                     * @memberof google.container.v1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.image = "";
+    
+                    /**
+                     * UpdateNodePoolRequest imageProject.
+                     * @member {string} imageProject
+                     * @memberof google.container.v1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.imageProject = "";
     
                     /**
                      * UpdateNodePoolRequest locations.
@@ -37347,6 +37901,10 @@
                             writer.uint32(/* id 6, wireType 2 =*/50).string(message.imageType);
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.name);
+                        if (message.image != null && Object.hasOwnProperty.call(message, "image"))
+                            writer.uint32(/* id 10, wireType 2 =*/82).string(message.image);
+                        if (message.imageProject != null && Object.hasOwnProperty.call(message, "imageProject"))
+                            writer.uint32(/* id 11, wireType 2 =*/90).string(message.imageProject);
                         if (message.locations != null && message.locations.length)
                             for (var i = 0; i < message.locations.length; ++i)
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.locations[i]);
@@ -37474,6 +38032,14 @@
                                 }
                             case 8: {
                                     message.name = reader.string();
+                                    break;
+                                }
+                            case 10: {
+                                    message.image = reader.string();
+                                    break;
+                                }
+                            case 11: {
+                                    message.imageProject = reader.string();
                                     break;
                                 }
                             case 13: {
@@ -37663,6 +38229,12 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
+                        if (message.image != null && message.hasOwnProperty("image"))
+                            if (!$util.isString(message.image))
+                                return "image: string expected";
+                        if (message.imageProject != null && message.hasOwnProperty("imageProject"))
+                            if (!$util.isString(message.imageProject))
+                                return "imageProject: string expected";
                         if (message.locations != null && message.hasOwnProperty("locations")) {
                             if (!Array.isArray(message.locations))
                                 return "locations: array expected";
@@ -37847,6 +38419,10 @@
                             message.imageType = String(object.imageType);
                         if (object.name != null)
                             message.name = String(object.name);
+                        if (object.image != null)
+                            message.image = String(object.image);
+                        if (object.imageProject != null)
+                            message.imageProject = String(object.imageProject);
                         if (object.locations) {
                             if (!Array.isArray(object.locations))
                                 throw TypeError(".google.container.v1.UpdateNodePoolRequest.locations: array expected");
@@ -38032,6 +38608,8 @@
                             object.nodeVersion = "";
                             object.imageType = "";
                             object.name = "";
+                            object.image = "";
+                            object.imageProject = "";
                             object.workloadMetadataConfig = null;
                             object.upgradeSettings = null;
                             object.tags = null;
@@ -38078,6 +38656,10 @@
                             object.imageType = message.imageType;
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
+                        if (message.image != null && message.hasOwnProperty("image"))
+                            object.image = message.image;
+                        if (message.imageProject != null && message.hasOwnProperty("imageProject"))
+                            object.imageProject = message.imageProject;
                         if (message.locations && message.locations.length) {
                             object.locations = [];
                             for (var j = 0; j < message.locations.length; ++j)
@@ -57966,6 +58548,7 @@
                      * @property {google.container.v1.InTransitEncryptionConfig|null} [inTransitEncryptionConfig] NetworkConfig inTransitEncryptionConfig
                      * @property {boolean|null} [enableCiliumClusterwideNetworkPolicy] NetworkConfig enableCiliumClusterwideNetworkPolicy
                      * @property {boolean|null} [defaultEnablePrivateNodes] NetworkConfig defaultEnablePrivateNodes
+                     * @property {google.container.v1.IDataplaneV2Config|null} [dataplaneV2Config] NetworkConfig dataplaneV2Config
                      * @property {boolean|null} [disableL4LbFirewallReconciliation] NetworkConfig disableL4LbFirewallReconciliation
                      */
     
@@ -58113,6 +58696,14 @@
                     NetworkConfig.prototype.defaultEnablePrivateNodes = null;
     
                     /**
+                     * NetworkConfig dataplaneV2Config.
+                     * @member {google.container.v1.IDataplaneV2Config|null|undefined} dataplaneV2Config
+                     * @memberof google.container.v1.NetworkConfig
+                     * @instance
+                     */
+                    NetworkConfig.prototype.dataplaneV2Config = null;
+    
+                    /**
                      * NetworkConfig disableL4LbFirewallReconciliation.
                      * @member {boolean|null|undefined} disableL4LbFirewallReconciliation
                      * @memberof google.container.v1.NetworkConfig
@@ -58144,6 +58735,12 @@
                     // Virtual OneOf for proto3 optional field
                     Object.defineProperty(NetworkConfig.prototype, "_defaultEnablePrivateNodes", {
                         get: $util.oneOfGetter($oneOfFields = ["defaultEnablePrivateNodes"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(NetworkConfig.prototype, "_dataplaneV2Config", {
+                        get: $util.oneOfGetter($oneOfFields = ["dataplaneV2Config"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -58209,6 +58806,8 @@
                             writer.uint32(/* id 21, wireType 0 =*/168).bool(message.enableCiliumClusterwideNetworkPolicy);
                         if (message.defaultEnablePrivateNodes != null && Object.hasOwnProperty.call(message, "defaultEnablePrivateNodes"))
                             writer.uint32(/* id 22, wireType 0 =*/176).bool(message.defaultEnablePrivateNodes);
+                        if (message.dataplaneV2Config != null && Object.hasOwnProperty.call(message, "dataplaneV2Config"))
+                            $root.google.container.v1.DataplaneV2Config.encode(message.dataplaneV2Config, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                         if (message.disableL4LbFirewallReconciliation != null && Object.hasOwnProperty.call(message, "disableL4LbFirewallReconciliation"))
                             writer.uint32(/* id 24, wireType 0 =*/192).bool(message.disableL4LbFirewallReconciliation);
                         return writer;
@@ -58309,6 +58908,10 @@
                                 }
                             case 22: {
                                     message.defaultEnablePrivateNodes = reader.bool();
+                                    break;
+                                }
+                            case 23: {
+                                    message.dataplaneV2Config = $root.google.container.v1.DataplaneV2Config.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 24: {
@@ -58436,6 +59039,14 @@
                             if (typeof message.defaultEnablePrivateNodes !== "boolean")
                                 return "defaultEnablePrivateNodes: boolean expected";
                         }
+                        if (message.dataplaneV2Config != null && message.hasOwnProperty("dataplaneV2Config")) {
+                            properties._dataplaneV2Config = 1;
+                            {
+                                var error = $root.google.container.v1.DataplaneV2Config.verify(message.dataplaneV2Config);
+                                if (error)
+                                    return "dataplaneV2Config." + error;
+                            }
+                        }
                         if (message.disableL4LbFirewallReconciliation != null && message.hasOwnProperty("disableL4LbFirewallReconciliation")) {
                             properties._disableL4LbFirewallReconciliation = 1;
                             if (typeof message.disableL4LbFirewallReconciliation !== "boolean")
@@ -58561,6 +59172,11 @@
                             message.enableCiliumClusterwideNetworkPolicy = Boolean(object.enableCiliumClusterwideNetworkPolicy);
                         if (object.defaultEnablePrivateNodes != null)
                             message.defaultEnablePrivateNodes = Boolean(object.defaultEnablePrivateNodes);
+                        if (object.dataplaneV2Config != null) {
+                            if (typeof object.dataplaneV2Config !== "object")
+                                throw TypeError(".google.container.v1.NetworkConfig.dataplaneV2Config: object expected");
+                            message.dataplaneV2Config = $root.google.container.v1.DataplaneV2Config.fromObject(object.dataplaneV2Config);
+                        }
                         if (object.disableL4LbFirewallReconciliation != null)
                             message.disableL4LbFirewallReconciliation = Boolean(object.disableL4LbFirewallReconciliation);
                         return message;
@@ -58636,6 +59252,11 @@
                             object.defaultEnablePrivateNodes = message.defaultEnablePrivateNodes;
                             if (options.oneofs)
                                 object._defaultEnablePrivateNodes = "defaultEnablePrivateNodes";
+                        }
+                        if (message.dataplaneV2Config != null && message.hasOwnProperty("dataplaneV2Config")) {
+                            object.dataplaneV2Config = $root.google.container.v1.DataplaneV2Config.toObject(message.dataplaneV2Config, options);
+                            if (options.oneofs)
+                                object._dataplaneV2Config = "dataplaneV2Config";
                         }
                         if (message.disableL4LbFirewallReconciliation != null && message.hasOwnProperty("disableL4LbFirewallReconciliation")) {
                             object.disableL4LbFirewallReconciliation = message.disableL4LbFirewallReconciliation;
@@ -74494,6 +75115,264 @@
                     values[valuesById[1] = "LEGACY_DATAPATH"] = 1;
                     values[valuesById[2] = "ADVANCED_DATAPATH"] = 2;
                     return values;
+                })();
+    
+                v1.DataplaneV2Config = (function() {
+    
+                    /**
+                     * Properties of a DataplaneV2Config.
+                     * @memberof google.container.v1
+                     * @interface IDataplaneV2Config
+                     * @property {google.container.v1.DataplaneV2Config.ScalabilityMode|null} [scalabilityMode] DataplaneV2Config scalabilityMode
+                     */
+    
+                    /**
+                     * Constructs a new DataplaneV2Config.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a DataplaneV2Config.
+                     * @implements IDataplaneV2Config
+                     * @constructor
+                     * @param {google.container.v1.IDataplaneV2Config=} [properties] Properties to set
+                     */
+                    function DataplaneV2Config(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DataplaneV2Config scalabilityMode.
+                     * @member {google.container.v1.DataplaneV2Config.ScalabilityMode|null|undefined} scalabilityMode
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @instance
+                     */
+                    DataplaneV2Config.prototype.scalabilityMode = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(DataplaneV2Config.prototype, "_scalabilityMode", {
+                        get: $util.oneOfGetter($oneOfFields = ["scalabilityMode"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new DataplaneV2Config instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @static
+                     * @param {google.container.v1.IDataplaneV2Config=} [properties] Properties to set
+                     * @returns {google.container.v1.DataplaneV2Config} DataplaneV2Config instance
+                     */
+                    DataplaneV2Config.create = function create(properties) {
+                        return new DataplaneV2Config(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DataplaneV2Config message. Does not implicitly {@link google.container.v1.DataplaneV2Config.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @static
+                     * @param {google.container.v1.IDataplaneV2Config} message DataplaneV2Config message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DataplaneV2Config.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.scalabilityMode != null && Object.hasOwnProperty.call(message, "scalabilityMode"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.scalabilityMode);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DataplaneV2Config message, length delimited. Does not implicitly {@link google.container.v1.DataplaneV2Config.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @static
+                     * @param {google.container.v1.IDataplaneV2Config} message DataplaneV2Config message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DataplaneV2Config.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DataplaneV2Config message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.DataplaneV2Config} DataplaneV2Config
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DataplaneV2Config.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.DataplaneV2Config();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.scalabilityMode = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DataplaneV2Config message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.DataplaneV2Config} DataplaneV2Config
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DataplaneV2Config.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DataplaneV2Config message.
+                     * @function verify
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DataplaneV2Config.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.scalabilityMode != null && message.hasOwnProperty("scalabilityMode")) {
+                            properties._scalabilityMode = 1;
+                            switch (message.scalabilityMode) {
+                            default:
+                                return "scalabilityMode: enum value expected";
+                            case 0:
+                            case 3:
+                            case 4:
+                                break;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DataplaneV2Config message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.DataplaneV2Config} DataplaneV2Config
+                     */
+                    DataplaneV2Config.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.DataplaneV2Config)
+                            return object;
+                        var message = new $root.google.container.v1.DataplaneV2Config();
+                        switch (object.scalabilityMode) {
+                        default:
+                            if (typeof object.scalabilityMode === "number") {
+                                message.scalabilityMode = object.scalabilityMode;
+                                break;
+                            }
+                            break;
+                        case "SCALABILITY_MODE_UNSPECIFIED":
+                        case 0:
+                            message.scalabilityMode = 0;
+                            break;
+                        case "DISABLED":
+                        case 3:
+                            message.scalabilityMode = 3;
+                            break;
+                        case "SCALE_OPTIMIZED":
+                        case 4:
+                            message.scalabilityMode = 4;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DataplaneV2Config message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @static
+                     * @param {google.container.v1.DataplaneV2Config} message DataplaneV2Config
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DataplaneV2Config.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.scalabilityMode != null && message.hasOwnProperty("scalabilityMode")) {
+                            object.scalabilityMode = options.enums === String ? $root.google.container.v1.DataplaneV2Config.ScalabilityMode[message.scalabilityMode] === undefined ? message.scalabilityMode : $root.google.container.v1.DataplaneV2Config.ScalabilityMode[message.scalabilityMode] : message.scalabilityMode;
+                            if (options.oneofs)
+                                object._scalabilityMode = "scalabilityMode";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DataplaneV2Config to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DataplaneV2Config.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DataplaneV2Config
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.DataplaneV2Config
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DataplaneV2Config.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.DataplaneV2Config";
+                    };
+    
+                    /**
+                     * ScalabilityMode enum.
+                     * @name google.container.v1.DataplaneV2Config.ScalabilityMode
+                     * @enum {number}
+                     * @property {number} SCALABILITY_MODE_UNSPECIFIED=0 SCALABILITY_MODE_UNSPECIFIED value
+                     * @property {number} DISABLED=3 DISABLED value
+                     * @property {number} SCALE_OPTIMIZED=4 SCALE_OPTIMIZED value
+                     */
+                    DataplaneV2Config.ScalabilityMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SCALABILITY_MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[3] = "DISABLED"] = 3;
+                        values[valuesById[4] = "SCALE_OPTIMIZED"] = 4;
+                        return values;
+                    })();
+    
+                    return DataplaneV2Config;
                 })();
     
                 /**
@@ -94139,7 +95018,6 @@
                      * @memberof google.container.v1beta1
                      * @interface ICustomImageConfig
                      * @property {string|null} [image] CustomImageConfig image
-                     * @property {string|null} [imageFamily] CustomImageConfig imageFamily
                      * @property {string|null} [imageProject] CustomImageConfig imageProject
                      */
     
@@ -94165,14 +95043,6 @@
                      * @instance
                      */
                     CustomImageConfig.prototype.image = "";
-    
-                    /**
-                     * CustomImageConfig imageFamily.
-                     * @member {string} imageFamily
-                     * @memberof google.container.v1beta1.CustomImageConfig
-                     * @instance
-                     */
-                    CustomImageConfig.prototype.imageFamily = "";
     
                     /**
                      * CustomImageConfig imageProject.
@@ -94208,8 +95078,6 @@
                             writer = $Writer.create();
                         if (message.image != null && Object.hasOwnProperty.call(message, "image"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.image);
-                        if (message.imageFamily != null && Object.hasOwnProperty.call(message, "imageFamily"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.imageFamily);
                         if (message.imageProject != null && Object.hasOwnProperty.call(message, "imageProject"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.imageProject);
                         return writer;
@@ -94250,10 +95118,6 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.image = reader.string();
-                                    break;
-                                }
-                            case 2: {
-                                    message.imageFamily = reader.string();
                                     break;
                                 }
                             case 3: {
@@ -94298,9 +95162,6 @@
                         if (message.image != null && message.hasOwnProperty("image"))
                             if (!$util.isString(message.image))
                                 return "image: string expected";
-                        if (message.imageFamily != null && message.hasOwnProperty("imageFamily"))
-                            if (!$util.isString(message.imageFamily))
-                                return "imageFamily: string expected";
                         if (message.imageProject != null && message.hasOwnProperty("imageProject"))
                             if (!$util.isString(message.imageProject))
                                 return "imageProject: string expected";
@@ -94321,8 +95182,6 @@
                         var message = new $root.google.container.v1beta1.CustomImageConfig();
                         if (object.image != null)
                             message.image = String(object.image);
-                        if (object.imageFamily != null)
-                            message.imageFamily = String(object.imageFamily);
                         if (object.imageProject != null)
                             message.imageProject = String(object.imageProject);
                         return message;
@@ -94343,13 +95202,10 @@
                         var object = {};
                         if (options.defaults) {
                             object.image = "";
-                            object.imageFamily = "";
                             object.imageProject = "";
                         }
                         if (message.image != null && message.hasOwnProperty("image"))
                             object.image = message.image;
-                        if (message.imageFamily != null && message.hasOwnProperty("imageFamily"))
-                            object.imageFamily = message.imageFamily;
                         if (message.imageProject != null && message.hasOwnProperty("imageProject"))
                             object.imageProject = message.imageProject;
                         return object;
