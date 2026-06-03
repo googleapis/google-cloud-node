@@ -44,5 +44,14 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1",
+      "tablesort": "5.6.0",
+      "cheerio": "1.0.0",
+      "gcp-metadata": "^7.0.1",
+      "gaxios": "7.1.4"
+    }
   }
 }
