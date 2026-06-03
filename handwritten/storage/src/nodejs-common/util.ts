@@ -970,6 +970,21 @@ export class Util {
       delete reqOpts.json.autoPaginate;
       delete reqOpts.json.autoPaginateVal;
       reqOpts.json = replaceProjectIdToken(reqOpts.json, projectId);
+
+      const headers = reqOpts.headers || {};
+      if (typeof (headers as any).set === 'function') {
+        if (!(headers as any).has('content-type')) {
+          (headers as any).set('Content-Type', 'application/json');
+        }
+      } else {
+        const hasContentType = Object.keys(headers).some(
+          key => key.toLowerCase() === 'content-type'
+        );
+        if (!hasContentType) {
+          (headers as any)['Content-Type'] = 'application/json';
+        }
+      }
+      reqOpts.headers = headers;
     }
 
     reqOpts.uri = replaceProjectIdToken(reqOpts.uri, projectId);
