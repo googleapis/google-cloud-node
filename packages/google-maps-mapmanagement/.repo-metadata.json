@@ -1,0 +1,17 @@
+{
+  "name": "mapmanagement",
+  "name_pretty": "Map Management API",
+  "product_documentation": "https://developers.google.com/maps/documentation/mapmanagement/overview",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/mapmanagement/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/mapmanagement",
+  "api_id": "mapmanagement.googleapis.com",
+  "default_version": "v2beta",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "mapmanagement"
+}
+
