@@ -30,6 +30,10 @@ fi
 # A script file for running the test in a sub project.
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
+if [ "${LIST_PACKAGES}" = "true" ]; then
+    packages=()
+fi
+
 
 if [ ${BUILD_TYPE} == "presubmit" ]; then
     # For presubmit build, we want to know the difference from the
@@ -204,21 +208,33 @@ for subdir in ${subdirs[@]}; do
             fi
         fi
         if [ "${should_test}" = true ]; then
-            echo "running test in ${d}"
-            pushd ${d}
-            # Temporarily allow failure.
-            set +e
-            ${test_script}
-            ret=$?
-            set -e
-            if [ ${ret} -ne 0 ]; then
-                RETVAL=${ret}
-                # Since there are so many APIs, we should exit early if there's an error
-                exit ${RETVAL}
+            if [ "${LIST_PACKAGES}" = "true" ]; then
+                # Strip trailing slash and add to packages list
+                clean_d=$(echo "${d}" | sed 's/\/$//')
+                packages+=("\"${clean_d}\"")
+            else
+                echo "running test in ${d}"
+                pushd ${d}
+                # Temporarily allow failure.
+                set +e
+                ${test_script}
+                ret=$?
+                set -e
+                if [ ${ret} -ne 0 ]; then
+                    RETVAL=${ret}
+                    # Since there are so many APIs, we should exit early if there's an error
+                    exit ${RETVAL}
+                fi
+                popd
             fi
-            popd
         fi
     done
 done
+
+if [ "${LIST_PACKAGES}" = "true" ]; then
+    # Print the packages list as JSON array
+    echo "["$(IFS=,; echo "${packages[*]}")"]"
+    exit 0
+fi
 
 exit ${RETVAL}

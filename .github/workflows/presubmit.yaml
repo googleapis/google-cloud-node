@@ -2,11 +2,40 @@ on:
   pull_request:
 name: presubmit
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.set-packages.outputs.packages }}
+      should_run: ${{ steps.set-packages.outputs.should_run }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 300
+      - name: Get list of packages to test
+        id: set-packages
+        run: |
+          # Fetch origin main so we can compare changes
+          git fetch origin main --deepen=300
+          export LIST_PACKAGES=true
+          export BUILD_TYPE=presubmit
+          export TEST_TYPE=units
+          PACKAGES_JSON=$(ci/run_conditional_tests.sh)
+          echo "packages=${PACKAGES_JSON}" >> $GITHUB_OUTPUT
+          if [ "${PACKAGES_JSON}" = "[]" ] || [ -z "${PACKAGES_JSON}" ]; then
+            echo "should_run=false" >> $GITHUB_OUTPUT
+          else
+            echo "should_run=true" >> $GITHUB_OUTPUT
+          fi
+
   units:
+    needs: setup
+    if: ${{ needs.setup.outputs.should_run == 'true' }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node-version: [18, 20, 22]
+        package: ${{ fromJson(needs.setup.outputs.packages) }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -18,9 +47,14 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: ^10.0.0
-      - run: node --version
-      - run: ci/run_conditional_tests.sh
-        name: Run unit tests
+      - name: Install dependencies
+        run: |
+          pnpm install
+      - name: Run unit test for package
+        run: |
+          cd ${{ matrix.package }}
+          pnpm run compile
+          pnpm test
         env:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
