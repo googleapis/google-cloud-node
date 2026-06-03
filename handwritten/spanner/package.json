@@ -109,7 +109,7 @@
     "@types/node": "^25.5.0",
     "@types/proxyquire": "^1.3.31",
     "@types/request": "^2.48.12",
-    "@types/sinon": "^21.0.0",
+    "@types/sinon": "21.0.3",
     "@types/through2": "^2.0.41",
     "@types/yargs": "^17.0.35",
     "binary-search-bounds": "^2.0.5",
