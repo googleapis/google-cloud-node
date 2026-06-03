@@ -36,7 +36,7 @@
     "lint": "gts check",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
-    "system-test": "npm run compile && c8 mocha build/system-test",
+    "system-test": "npm run compile && c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
     "docs": "jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
