@@ -1,4 +1,3 @@
-
 {
   "name": "{{ api.publishName }}",
   "version": "0.1.0",
@@ -56,8 +55,6 @@
     "compile-protos": "compileProtos esm/src --esm {% if api.legacyProtoLoad %}--skip-json {% endif %}",
     "docs": "jsdoc -c .jsdoc.cjs",
     "postpack": "minifyProtoJson build/cjs && minifyProtoJson build/esm",
-    "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
