@@ -972,7 +972,10 @@ export class Util {
       reqOpts.json = replaceProjectIdToken(reqOpts.json, projectId);
 
       const headers = reqOpts.headers || {};
-      if (typeof (headers as any).set === 'function') {
+      if (
+        typeof (headers as any).set === 'function' &&
+        typeof (headers as any).has === 'function'
+      ) {
         if (!(headers as any).has('content-type')) {
           (headers as any).set('Content-Type', 'application/json');
         }

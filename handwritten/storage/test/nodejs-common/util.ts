@@ -1822,6 +1822,9 @@ describe('common/util', () => {
     });
 
     it('should set Content-Type header on Headers instance when json is set', () => {
+      if (typeof Headers === 'undefined') {
+        return;
+      }
       const projectId = 'project-id';
       const headersInstance = new Headers();
       const reqOpts = {
