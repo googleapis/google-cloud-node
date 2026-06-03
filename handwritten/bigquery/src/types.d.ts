@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Discovery Revision: 20260328
+ * Discovery Revision: 20260429
  */
 
 /**
@@ -889,6 +889,16 @@ declare namespace bigquery {
      * Whether any accessed data was protected by the data masking.
      */
     dataMaskingApplied?: boolean;
+  };
+
+  /**
+   * A list of data policy options. For more information, see [Mask data by applying data policies to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column).
+   */
+  type IDataPolicyList = {
+    /**
+     * Contains a list of data policy options. At most 9 data policies are allowed per field.
+     */
+    dataPolicies?: Array<IDataPolicyOption>;
   };
 
   /**
@@ -1788,6 +1798,10 @@ declare namespace bigquery {
      */
     containerMemory?: string;
     /**
+     * Optional. Maximum number of requests that a Cloud Run instance can handle concurrently. If absent or if `0`, a default concurrency is used.
+     */
+    containerRequestConcurrency?: string;
+    /**
      * Optional. Maximum number of rows in each batch sent to the external runtime. If absent or if 0, BigQuery dynamically decides the number of rows in a batch.
      */
     maxBatchingRows?: string;
@@ -1884,6 +1898,16 @@ declare namespace bigquery {
   };
 
   /**
+   * Provides cache statistics for a GenAi function call.
+   */
+  type IGenAiFunctionCacheStats = {
+    /**
+     * Number of rows served from cache.
+     */
+    numCacheHitRows?: string;
+  };
+
+  /**
    * Provides cost optimization statistics for a GenAi function call.
    */
   type IGenAiFunctionCostOptimizationStats = {
@@ -1915,6 +1939,10 @@ declare namespace bigquery {
    * Provides statistics for each Ai function call within a query.
    */
   type IGenAiFunctionStats = {
+    /**
+     * Cache stats for the function.
+     */
+    cacheStats?: IGenAiFunctionCacheStats;
     /**
      * Cost optimization stats if applied on the rows processed by the function.
      */
@@ -3729,6 +3757,20 @@ declare namespace bigquery {
   };
 
   /**
+   * Column Metadata Index staleness detailed infnormation.
+   */
+  type IMetadataCacheStalenessInsight = {
+    /**
+     * Output only. Average column metadata index staleness of previous runs with the same query hash.
+     */
+    avgPreviousStalenessMs?: string;
+    /**
+     * Output only. The percent increase in staleness between the current job and the average staleness of previous jobs with the same query hash.
+     */
+    stalenessPercentageIncrease?: number;
+  };
+
+  /**
    * Statistics for metadata caching in queried tables.
    */
   type IMetadataCacheStatistics = {
@@ -4027,6 +4069,10 @@ declare namespace bigquery {
      * Output only. Standalone query stage performance insights, for exploring potential improvements.
      */
     stagePerformanceStandaloneInsights?: Array<IStagePerformanceStandaloneInsight>;
+    /**
+     * Output only. Performance insights for table-level attributes that changed compared to previous runs.
+     */
+    tableChangeInsights?: Array<ITableChangeInsight>;
   };
 
   /**
@@ -5577,6 +5623,24 @@ declare namespace bigquery {
   type ITableCell = {v?: any};
 
   /**
+   * Table-level performance insights compared to previous runs. These insights don't apply to specific query stages, rather they apply to the whole table.
+   */
+  type ITableChangeInsight = {
+    /**
+     * Output only. True if the table's column metadata index was not used in the current job, but was used in a previous job with the same query hash.
+     */
+    metadataCacheNotUsedButUsedPreviously?: boolean;
+    /**
+     * Output only. If present, indicates that the table's metadata column index staleness has increased significantly compared to previous jobs with the same query hash.
+     */
+    metadataCacheStalenessInsight?: IMetadataCacheStalenessInsight;
+    /**
+     * Output only. The table that was queried.
+     */
+    tableReference?: ITableReference;
+  };
+
+  /**
    * The TableConstraints defines the primary key and foreign key.
    */
   type ITableConstraints = {
@@ -5718,9 +5782,22 @@ declare namespace bigquery {
      */
     collation?: string;
     /**
+     * Optional. Specifies the data governance tags on this field. This field works with other column-level security fields as follows: - Precedence: If a data governance tag is attached to a column, it takes precedence over the policy tag attached to the column. However, if a data policy is attached to a column, it takes precedence over the data governance tag. - Patching behavior (how this field behaves during a `Table.patch` schema update): - Unset: If the `data_governance_tags_info` field is omitted from the update request, the existing tags on the column are preserved. - Empty Field: To clear data governance tags from a column, send the `data_governance_tags_info` field as an empty object. This will remove all tags from the column. - Updating tags: To replace existing tag, send the field with the new tag.
+     */
+    dataGovernanceTagsInfo?: {
+      /**
+       * Optional. The data governance tags added to this field are used for field-level access control. Only one data governance tag is currently supported on a field. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "123456789012/pii" where 123456789012 is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "sensitive". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details. For example: "123456789012/pii": "sensitive", "myProject/cost_center": "sales"
+       */
+      dataGovernanceTags?: {[key: string]: string};
+    };
+    /**
      * Optional. Data policies attached to this field, used for field-level access control.
      */
     dataPolicies?: Array<IDataPolicyOption>;
+    /**
+     * Optional. Specifies data policies attached to this field, used for field-level access control. When set, this will be the source of truth for data policy information.
+     */
+    dataPolicyList?: IDataPolicyList;
     /**
      * Optional. A SQL expression to specify the [default value] (https://cloud.google.com/bigquery/docs/default-values) for this field.
      */
