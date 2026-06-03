@@ -36,11 +36,7 @@ import {
   CreateSessionOptions,
 } from './database';
 import {ServiceObjectConfig} from '@google-cloud/common';
-import {
-  NormalCallback,
-  addLeaderAwareRoutingHeader,
-  getCommonHeaders,
-} from './common';
+import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
 import {ObservabilityOptions} from './instrument';
 import {grpc, CallOptions} from 'google-gax';
 import IRequestOptions = google.spanner.v1.IRequestOptions;
@@ -261,10 +257,7 @@ export class Session extends common.GrpcServiceObject {
     } as {} as ServiceObjectConfig);
 
     this._observabilityOptions = database._observabilityOptions;
-    this.commonHeaders_ = getCommonHeaders(
-      (this.parent as Database).formattedName_,
-      this._observabilityOptions?.enableEndToEndTracing,
-    );
+    this.commonHeaders_ = {...database.commonHeaders_};
     this.request = database.request;
     this.requestStream = database.requestStream;
 
