@@ -452,9 +452,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    MessageStoragePolicy.encode = function encode(message, writer) {
+                    MessageStoragePolicy.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.allowedPersistenceRegions != null && message.allowedPersistenceRegions.length)
                             for (var i = 0; i < message.allowedPersistenceRegions.length; ++i)
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.allowedPersistenceRegions[i]);
@@ -599,9 +603,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    MessageStoragePolicy.toObject = function toObject(message, options) {
+                    MessageStoragePolicy.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.allowedPersistenceRegions = [];
@@ -726,9 +734,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    SchemaSettings.encode = function encode(message, writer) {
+                    SchemaSettings.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.schema);
                         if (message.encoding != null && Object.hasOwnProperty.call(message, "encoding"))
@@ -907,9 +919,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    SchemaSettings.toObject = function toObject(message, options) {
+                    SchemaSettings.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.schema = "";
@@ -1069,21 +1085,25 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    IngestionDataSourceSettings.encode = function encode(message, writer) {
+                    IngestionDataSourceSettings.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.awsKinesis != null && Object.hasOwnProperty.call(message, "awsKinesis"))
-                            $root.google.pubsub.v1.IngestionDataSourceSettings.AwsKinesis.encode(message.awsKinesis, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionDataSourceSettings.AwsKinesis.encode(message.awsKinesis, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.cloudStorage != null && Object.hasOwnProperty.call(message, "cloudStorage"))
-                            $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.encode(message.cloudStorage, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.encode(message.cloudStorage, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         if (message.azureEventHubs != null && Object.hasOwnProperty.call(message, "azureEventHubs"))
-                            $root.google.pubsub.v1.IngestionDataSourceSettings.AzureEventHubs.encode(message.azureEventHubs, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionDataSourceSettings.AzureEventHubs.encode(message.azureEventHubs, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         if (message.platformLogsSettings != null && Object.hasOwnProperty.call(message, "platformLogsSettings"))
-                            $root.google.pubsub.v1.PlatformLogsSettings.encode(message.platformLogsSettings, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.pubsub.v1.PlatformLogsSettings.encode(message.platformLogsSettings, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         if (message.awsMsk != null && Object.hasOwnProperty.call(message, "awsMsk"))
-                            $root.google.pubsub.v1.IngestionDataSourceSettings.AwsMsk.encode(message.awsMsk, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionDataSourceSettings.AwsMsk.encode(message.awsMsk, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                         if (message.confluentCloud != null && Object.hasOwnProperty.call(message, "confluentCloud"))
-                            $root.google.pubsub.v1.IngestionDataSourceSettings.ConfluentCloud.encode(message.confluentCloud, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionDataSourceSettings.ConfluentCloud.encode(message.confluentCloud, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -1302,36 +1322,40 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    IngestionDataSourceSettings.toObject = function toObject(message, options) {
+                    IngestionDataSourceSettings.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.platformLogsSettings = null;
                         if (message.awsKinesis != null && message.hasOwnProperty("awsKinesis")) {
-                            object.awsKinesis = $root.google.pubsub.v1.IngestionDataSourceSettings.AwsKinesis.toObject(message.awsKinesis, options);
+                            object.awsKinesis = $root.google.pubsub.v1.IngestionDataSourceSettings.AwsKinesis.toObject(message.awsKinesis, options, q + 1);
                             if (options.oneofs)
                                 object.source = "awsKinesis";
                         }
                         if (message.cloudStorage != null && message.hasOwnProperty("cloudStorage")) {
-                            object.cloudStorage = $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.toObject(message.cloudStorage, options);
+                            object.cloudStorage = $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.toObject(message.cloudStorage, options, q + 1);
                             if (options.oneofs)
                                 object.source = "cloudStorage";
                         }
                         if (message.azureEventHubs != null && message.hasOwnProperty("azureEventHubs")) {
-                            object.azureEventHubs = $root.google.pubsub.v1.IngestionDataSourceSettings.AzureEventHubs.toObject(message.azureEventHubs, options);
+                            object.azureEventHubs = $root.google.pubsub.v1.IngestionDataSourceSettings.AzureEventHubs.toObject(message.azureEventHubs, options, q + 1);
                             if (options.oneofs)
                                 object.source = "azureEventHubs";
                         }
                         if (message.platformLogsSettings != null && message.hasOwnProperty("platformLogsSettings"))
-                            object.platformLogsSettings = $root.google.pubsub.v1.PlatformLogsSettings.toObject(message.platformLogsSettings, options);
+                            object.platformLogsSettings = $root.google.pubsub.v1.PlatformLogsSettings.toObject(message.platformLogsSettings, options, q + 1);
                         if (message.awsMsk != null && message.hasOwnProperty("awsMsk")) {
-                            object.awsMsk = $root.google.pubsub.v1.IngestionDataSourceSettings.AwsMsk.toObject(message.awsMsk, options);
+                            object.awsMsk = $root.google.pubsub.v1.IngestionDataSourceSettings.AwsMsk.toObject(message.awsMsk, options, q + 1);
                             if (options.oneofs)
                                 object.source = "awsMsk";
                         }
                         if (message.confluentCloud != null && message.hasOwnProperty("confluentCloud")) {
-                            object.confluentCloud = $root.google.pubsub.v1.IngestionDataSourceSettings.ConfluentCloud.toObject(message.confluentCloud, options);
+                            object.confluentCloud = $root.google.pubsub.v1.IngestionDataSourceSettings.ConfluentCloud.toObject(message.confluentCloud, options, q + 1);
                             if (options.oneofs)
                                 object.source = "confluentCloud";
                         }
@@ -1453,9 +1477,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        AwsKinesis.encode = function encode(message, writer) {
+                        AwsKinesis.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
                             if (message.streamArn != null && Object.hasOwnProperty.call(message, "streamArn"))
@@ -1660,9 +1688,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        AwsKinesis.toObject = function toObject(message, options) {
+                        AwsKinesis.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
@@ -1856,21 +1888,25 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        CloudStorage.encode = function encode(message, writer) {
+                        CloudStorage.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
                             if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.bucket);
                             if (message.textFormat != null && Object.hasOwnProperty.call(message, "textFormat"))
-                                $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.TextFormat.encode(message.textFormat, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.TextFormat.encode(message.textFormat, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                             if (message.avroFormat != null && Object.hasOwnProperty.call(message, "avroFormat"))
-                                $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.AvroFormat.encode(message.avroFormat, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.AvroFormat.encode(message.avroFormat, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                             if (message.pubsubAvroFormat != null && Object.hasOwnProperty.call(message, "pubsubAvroFormat"))
-                                $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.PubSubAvroFormat.encode(message.pubsubAvroFormat, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.PubSubAvroFormat.encode(message.pubsubAvroFormat, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                             if (message.minimumObjectCreateTime != null && Object.hasOwnProperty.call(message, "minimumObjectCreateTime"))
-                                $root.google.protobuf.Timestamp.encode(message.minimumObjectCreateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                $root.google.protobuf.Timestamp.encode(message.minimumObjectCreateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                             if (message.matchGlob != null && Object.hasOwnProperty.call(message, "matchGlob"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.matchGlob);
                             return writer;
@@ -2119,9 +2155,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        CloudStorage.toObject = function toObject(message, options) {
+                        CloudStorage.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
@@ -2134,22 +2174,22 @@
                             if (message.bucket != null && message.hasOwnProperty("bucket"))
                                 object.bucket = message.bucket;
                             if (message.textFormat != null && message.hasOwnProperty("textFormat")) {
-                                object.textFormat = $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.TextFormat.toObject(message.textFormat, options);
+                                object.textFormat = $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.TextFormat.toObject(message.textFormat, options, q + 1);
                                 if (options.oneofs)
                                     object.inputFormat = "textFormat";
                             }
                             if (message.avroFormat != null && message.hasOwnProperty("avroFormat")) {
-                                object.avroFormat = $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.AvroFormat.toObject(message.avroFormat, options);
+                                object.avroFormat = $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.AvroFormat.toObject(message.avroFormat, options, q + 1);
                                 if (options.oneofs)
                                     object.inputFormat = "avroFormat";
                             }
                             if (message.pubsubAvroFormat != null && message.hasOwnProperty("pubsubAvroFormat")) {
-                                object.pubsubAvroFormat = $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.PubSubAvroFormat.toObject(message.pubsubAvroFormat, options);
+                                object.pubsubAvroFormat = $root.google.pubsub.v1.IngestionDataSourceSettings.CloudStorage.PubSubAvroFormat.toObject(message.pubsubAvroFormat, options, q + 1);
                                 if (options.oneofs)
                                     object.inputFormat = "pubsubAvroFormat";
                             }
                             if (message.minimumObjectCreateTime != null && message.hasOwnProperty("minimumObjectCreateTime"))
-                                object.minimumObjectCreateTime = $root.google.protobuf.Timestamp.toObject(message.minimumObjectCreateTime, options);
+                                object.minimumObjectCreateTime = $root.google.protobuf.Timestamp.toObject(message.minimumObjectCreateTime, options, q + 1);
                             if (message.matchGlob != null && message.hasOwnProperty("matchGlob"))
                                 object.matchGlob = message.matchGlob;
                             return object;
@@ -2265,9 +2305,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            TextFormat.encode = function encode(message, writer) {
+                            TextFormat.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.delimiter != null && Object.hasOwnProperty.call(message, "delimiter"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.delimiter);
                                 return writer;
@@ -2392,9 +2436,13 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            TextFormat.toObject = function toObject(message, options) {
+                            TextFormat.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (message.delimiter != null && message.hasOwnProperty("delimiter")) {
                                     object.delimiter = message.delimiter;
@@ -2477,9 +2525,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            AvroFormat.encode = function encode(message, writer) {
+                            AvroFormat.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 return writer;
                             };
     
@@ -2666,9 +2718,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            PubSubAvroFormat.encode = function encode(message, writer) {
+                            PubSubAvroFormat.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 return writer;
                             };
     
@@ -2930,9 +2986,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        AzureEventHubs.encode = function encode(message, writer) {
+                        AzureEventHubs.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
                             if (message.resourceGroup != null && Object.hasOwnProperty.call(message, "resourceGroup"))
@@ -3180,9 +3240,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        AzureEventHubs.toObject = function toObject(message, options) {
+                        AzureEventHubs.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
@@ -3357,9 +3421,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        AwsMsk.encode = function encode(message, writer) {
+                        AwsMsk.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
                             if (message.clusterArn != null && Object.hasOwnProperty.call(message, "clusterArn"))
@@ -3564,9 +3632,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        AwsMsk.toObject = function toObject(message, options) {
+                        AwsMsk.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
@@ -3737,9 +3809,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        ConfluentCloud.encode = function encode(message, writer) {
+                        ConfluentCloud.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
                             if (message.bootstrapServer != null && Object.hasOwnProperty.call(message, "bootstrapServer"))
@@ -3960,9 +4036,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        ConfluentCloud.toObject = function toObject(message, options) {
+                        ConfluentCloud.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
@@ -4096,9 +4176,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    PlatformLogsSettings.encode = function encode(message, writer) {
+                    PlatformLogsSettings.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.severity);
                         return writer;
@@ -4259,9 +4343,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    PlatformLogsSettings.toObject = function toObject(message, options) {
+                    PlatformLogsSettings.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
@@ -4442,23 +4530,27 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    IngestionFailureEvent.encode = function encode(message, writer) {
+                    IngestionFailureEvent.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
                         if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorMessage);
                         if (message.cloudStorageFailure != null && Object.hasOwnProperty.call(message, "cloudStorageFailure"))
-                            $root.google.pubsub.v1.IngestionFailureEvent.CloudStorageFailure.encode(message.cloudStorageFailure, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionFailureEvent.CloudStorageFailure.encode(message.cloudStorageFailure, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         if (message.awsMskFailure != null && Object.hasOwnProperty.call(message, "awsMskFailure"))
-                            $root.google.pubsub.v1.IngestionFailureEvent.AwsMskFailureReason.encode(message.awsMskFailure, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionFailureEvent.AwsMskFailureReason.encode(message.awsMskFailure, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         if (message.azureEventHubsFailure != null && Object.hasOwnProperty.call(message, "azureEventHubsFailure"))
-                            $root.google.pubsub.v1.IngestionFailureEvent.AzureEventHubsFailureReason.encode(message.azureEventHubsFailure, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionFailureEvent.AzureEventHubsFailureReason.encode(message.azureEventHubsFailure, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                         if (message.confluentCloudFailure != null && Object.hasOwnProperty.call(message, "confluentCloudFailure"))
-                            $root.google.pubsub.v1.IngestionFailureEvent.ConfluentCloudFailureReason.encode(message.confluentCloudFailure, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionFailureEvent.ConfluentCloudFailureReason.encode(message.confluentCloudFailure, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                         if (message.awsKinesisFailure != null && Object.hasOwnProperty.call(message, "awsKinesisFailure"))
-                            $root.google.pubsub.v1.IngestionFailureEvent.AwsKinesisFailureReason.encode(message.awsKinesisFailure, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionFailureEvent.AwsKinesisFailureReason.encode(message.awsKinesisFailure, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -4681,9 +4773,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    IngestionFailureEvent.toObject = function toObject(message, options) {
+                    IngestionFailureEvent.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.topic = "";
@@ -4694,27 +4790,27 @@
                         if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
                             object.errorMessage = message.errorMessage;
                         if (message.cloudStorageFailure != null && message.hasOwnProperty("cloudStorageFailure")) {
-                            object.cloudStorageFailure = $root.google.pubsub.v1.IngestionFailureEvent.CloudStorageFailure.toObject(message.cloudStorageFailure, options);
+                            object.cloudStorageFailure = $root.google.pubsub.v1.IngestionFailureEvent.CloudStorageFailure.toObject(message.cloudStorageFailure, options, q + 1);
                             if (options.oneofs)
                                 object.failure = "cloudStorageFailure";
                         }
                         if (message.awsMskFailure != null && message.hasOwnProperty("awsMskFailure")) {
-                            object.awsMskFailure = $root.google.pubsub.v1.IngestionFailureEvent.AwsMskFailureReason.toObject(message.awsMskFailure, options);
+                            object.awsMskFailure = $root.google.pubsub.v1.IngestionFailureEvent.AwsMskFailureReason.toObject(message.awsMskFailure, options, q + 1);
                             if (options.oneofs)
                                 object.failure = "awsMskFailure";
                         }
                         if (message.azureEventHubsFailure != null && message.hasOwnProperty("azureEventHubsFailure")) {
-                            object.azureEventHubsFailure = $root.google.pubsub.v1.IngestionFailureEvent.AzureEventHubsFailureReason.toObject(message.azureEventHubsFailure, options);
+                            object.azureEventHubsFailure = $root.google.pubsub.v1.IngestionFailureEvent.AzureEventHubsFailureReason.toObject(message.azureEventHubsFailure, options, q + 1);
                             if (options.oneofs)
                                 object.failure = "azureEventHubsFailure";
                         }
                         if (message.confluentCloudFailure != null && message.hasOwnProperty("confluentCloudFailure")) {
-                            object.confluentCloudFailure = $root.google.pubsub.v1.IngestionFailureEvent.ConfluentCloudFailureReason.toObject(message.confluentCloudFailure, options);
+                            object.confluentCloudFailure = $root.google.pubsub.v1.IngestionFailureEvent.ConfluentCloudFailureReason.toObject(message.confluentCloudFailure, options, q + 1);
                             if (options.oneofs)
                                 object.failure = "confluentCloudFailure";
                         }
                         if (message.awsKinesisFailure != null && message.hasOwnProperty("awsKinesisFailure")) {
-                            object.awsKinesisFailure = $root.google.pubsub.v1.IngestionFailureEvent.AwsKinesisFailureReason.toObject(message.awsKinesisFailure, options);
+                            object.awsKinesisFailure = $root.google.pubsub.v1.IngestionFailureEvent.AwsKinesisFailureReason.toObject(message.awsKinesisFailure, options, q + 1);
                             if (options.oneofs)
                                 object.failure = "awsKinesisFailure";
                         }
@@ -4791,9 +4887,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        ApiViolationReason.encode = function encode(message, writer) {
+                        ApiViolationReason.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             return writer;
                         };
     
@@ -4980,9 +5080,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        AvroFailureReason.encode = function encode(message, writer) {
+                        AvroFailureReason.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             return writer;
                         };
     
@@ -5169,9 +5273,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        SchemaViolationReason.encode = function encode(message, writer) {
+                        SchemaViolationReason.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             return writer;
                         };
     
@@ -5358,9 +5466,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        MessageTransformationFailureReason.encode = function encode(message, writer) {
+                        MessageTransformationFailureReason.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             return writer;
                         };
     
@@ -5624,9 +5736,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        CloudStorageFailure.encode = function encode(message, writer) {
+                        CloudStorageFailure.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
                             if (message.objectName != null && Object.hasOwnProperty.call(message, "objectName"))
@@ -5634,13 +5750,13 @@
                             if (message.objectGeneration != null && Object.hasOwnProperty.call(message, "objectGeneration"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.objectGeneration);
                             if (message.avroFailureReason != null && Object.hasOwnProperty.call(message, "avroFailureReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.AvroFailureReason.encode(message.avroFailureReason, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.AvroFailureReason.encode(message.avroFailureReason, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                             if (message.apiViolationReason != null && Object.hasOwnProperty.call(message, "apiViolationReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.encode(message.apiViolationReason, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.encode(message.apiViolationReason, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                             if (message.schemaViolationReason != null && Object.hasOwnProperty.call(message, "schemaViolationReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.encode(message.schemaViolationReason, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.encode(message.schemaViolationReason, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                             if (message.messageTransformationFailureReason != null && Object.hasOwnProperty.call(message, "messageTransformationFailureReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.encode(message.messageTransformationFailureReason, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.encode(message.messageTransformationFailureReason, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                             return writer;
                         };
     
@@ -5821,7 +5937,7 @@
                                 message.objectName = String(object.objectName);
                             if (object.objectGeneration != null)
                                 if ($util.Long)
-                                    (message.objectGeneration = $util.Long.fromValue(object.objectGeneration)).unsigned = false;
+                                    message.objectGeneration = $util.Long.fromValue(object.objectGeneration, false);
                                 else if (typeof object.objectGeneration === "string")
                                     message.objectGeneration = parseInt(object.objectGeneration, 10);
                                 else if (typeof object.objectGeneration === "number")
@@ -5860,45 +5976,51 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        CloudStorageFailure.toObject = function toObject(message, options) {
+                        CloudStorageFailure.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.bucket = "";
                                 object.objectName = "";
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.objectGeneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.objectGeneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.objectGeneration = options.longs === String ? "0" : 0;
+                                    object.objectGeneration = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             }
                             if (message.bucket != null && message.hasOwnProperty("bucket"))
                                 object.bucket = message.bucket;
                             if (message.objectName != null && message.hasOwnProperty("objectName"))
                                 object.objectName = message.objectName;
                             if (message.objectGeneration != null && message.hasOwnProperty("objectGeneration"))
-                                if (typeof message.objectGeneration === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.objectGeneration = typeof message.objectGeneration === "number" ? BigInt(message.objectGeneration) : $util.Long.fromBits(message.objectGeneration.low >>> 0, message.objectGeneration.high >>> 0, false).toBigInt();
+                                else if (typeof message.objectGeneration === "number")
                                     object.objectGeneration = options.longs === String ? String(message.objectGeneration) : message.objectGeneration;
                                 else
                                     object.objectGeneration = options.longs === String ? $util.Long.prototype.toString.call(message.objectGeneration) : options.longs === Number ? new $util.LongBits(message.objectGeneration.low >>> 0, message.objectGeneration.high >>> 0).toNumber() : message.objectGeneration;
                             if (message.avroFailureReason != null && message.hasOwnProperty("avroFailureReason")) {
-                                object.avroFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.AvroFailureReason.toObject(message.avroFailureReason, options);
+                                object.avroFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.AvroFailureReason.toObject(message.avroFailureReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "avroFailureReason";
                             }
                             if (message.apiViolationReason != null && message.hasOwnProperty("apiViolationReason")) {
-                                object.apiViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.toObject(message.apiViolationReason, options);
+                                object.apiViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.toObject(message.apiViolationReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "apiViolationReason";
                             }
                             if (message.schemaViolationReason != null && message.hasOwnProperty("schemaViolationReason")) {
-                                object.schemaViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.toObject(message.schemaViolationReason, options);
+                                object.schemaViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.toObject(message.schemaViolationReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "schemaViolationReason";
                             }
                             if (message.messageTransformationFailureReason != null && message.hasOwnProperty("messageTransformationFailureReason")) {
-                                object.messageTransformationFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.toObject(message.messageTransformationFailureReason, options);
+                                object.messageTransformationFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.toObject(message.messageTransformationFailureReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "messageTransformationFailureReason";
                             }
@@ -6055,9 +6177,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        AwsMskFailureReason.encode = function encode(message, writer) {
+                        AwsMskFailureReason.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.clusterArn != null && Object.hasOwnProperty.call(message, "clusterArn"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.clusterArn);
                             if (message.kafkaTopic != null && Object.hasOwnProperty.call(message, "kafkaTopic"))
@@ -6067,11 +6193,11 @@
                             if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int64(message.offset);
                             if (message.apiViolationReason != null && Object.hasOwnProperty.call(message, "apiViolationReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.encode(message.apiViolationReason, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.encode(message.apiViolationReason, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                             if (message.schemaViolationReason != null && Object.hasOwnProperty.call(message, "schemaViolationReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.encode(message.schemaViolationReason, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.encode(message.schemaViolationReason, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                             if (message.messageTransformationFailureReason != null && Object.hasOwnProperty.call(message, "messageTransformationFailureReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.encode(message.messageTransformationFailureReason, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.encode(message.messageTransformationFailureReason, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                             return writer;
                         };
     
@@ -6245,7 +6371,7 @@
                                 message.kafkaTopic = String(object.kafkaTopic);
                             if (object.partitionId != null)
                                 if ($util.Long)
-                                    (message.partitionId = $util.Long.fromValue(object.partitionId)).unsigned = false;
+                                    message.partitionId = $util.Long.fromValue(object.partitionId, false);
                                 else if (typeof object.partitionId === "string")
                                     message.partitionId = parseInt(object.partitionId, 10);
                                 else if (typeof object.partitionId === "number")
@@ -6254,7 +6380,7 @@
                                     message.partitionId = new $util.LongBits(object.partitionId.low >>> 0, object.partitionId.high >>> 0).toNumber();
                             if (object.offset != null)
                                 if ($util.Long)
-                                    (message.offset = $util.Long.fromValue(object.offset)).unsigned = false;
+                                    message.offset = $util.Long.fromValue(object.offset, false);
                                 else if (typeof object.offset === "string")
                                     message.offset = parseInt(object.offset, 10);
                                 else if (typeof object.offset === "number")
@@ -6288,50 +6414,58 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        AwsMskFailureReason.toObject = function toObject(message, options) {
+                        AwsMskFailureReason.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.clusterArn = "";
                                 object.kafkaTopic = "";
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.partitionId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.partitionId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.partitionId = options.longs === String ? "0" : 0;
+                                    object.partitionId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.offset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.offset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.offset = options.longs === String ? "0" : 0;
+                                    object.offset = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             }
                             if (message.clusterArn != null && message.hasOwnProperty("clusterArn"))
                                 object.clusterArn = message.clusterArn;
                             if (message.kafkaTopic != null && message.hasOwnProperty("kafkaTopic"))
                                 object.kafkaTopic = message.kafkaTopic;
                             if (message.partitionId != null && message.hasOwnProperty("partitionId"))
-                                if (typeof message.partitionId === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.partitionId = typeof message.partitionId === "number" ? BigInt(message.partitionId) : $util.Long.fromBits(message.partitionId.low >>> 0, message.partitionId.high >>> 0, false).toBigInt();
+                                else if (typeof message.partitionId === "number")
                                     object.partitionId = options.longs === String ? String(message.partitionId) : message.partitionId;
                                 else
                                     object.partitionId = options.longs === String ? $util.Long.prototype.toString.call(message.partitionId) : options.longs === Number ? new $util.LongBits(message.partitionId.low >>> 0, message.partitionId.high >>> 0).toNumber() : message.partitionId;
                             if (message.offset != null && message.hasOwnProperty("offset"))
-                                if (typeof message.offset === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.offset = typeof message.offset === "number" ? BigInt(message.offset) : $util.Long.fromBits(message.offset.low >>> 0, message.offset.high >>> 0, false).toBigInt();
+                                else if (typeof message.offset === "number")
                                     object.offset = options.longs === String ? String(message.offset) : message.offset;
                                 else
                                     object.offset = options.longs === String ? $util.Long.prototype.toString.call(message.offset) : options.longs === Number ? new $util.LongBits(message.offset.low >>> 0, message.offset.high >>> 0).toNumber() : message.offset;
                             if (message.apiViolationReason != null && message.hasOwnProperty("apiViolationReason")) {
-                                object.apiViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.toObject(message.apiViolationReason, options);
+                                object.apiViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.toObject(message.apiViolationReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "apiViolationReason";
                             }
                             if (message.schemaViolationReason != null && message.hasOwnProperty("schemaViolationReason")) {
-                                object.schemaViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.toObject(message.schemaViolationReason, options);
+                                object.schemaViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.toObject(message.schemaViolationReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "schemaViolationReason";
                             }
                             if (message.messageTransformationFailureReason != null && message.hasOwnProperty("messageTransformationFailureReason")) {
-                                object.messageTransformationFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.toObject(message.messageTransformationFailureReason, options);
+                                object.messageTransformationFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.toObject(message.messageTransformationFailureReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "messageTransformationFailureReason";
                             }
@@ -6488,9 +6622,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        AzureEventHubsFailureReason.encode = function encode(message, writer) {
+                        AzureEventHubsFailureReason.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.namespace != null && Object.hasOwnProperty.call(message, "namespace"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.namespace);
                             if (message.eventHub != null && Object.hasOwnProperty.call(message, "eventHub"))
@@ -6500,11 +6638,11 @@
                             if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int64(message.offset);
                             if (message.apiViolationReason != null && Object.hasOwnProperty.call(message, "apiViolationReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.encode(message.apiViolationReason, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.encode(message.apiViolationReason, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                             if (message.schemaViolationReason != null && Object.hasOwnProperty.call(message, "schemaViolationReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.encode(message.schemaViolationReason, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.encode(message.schemaViolationReason, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                             if (message.messageTransformationFailureReason != null && Object.hasOwnProperty.call(message, "messageTransformationFailureReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.encode(message.messageTransformationFailureReason, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.encode(message.messageTransformationFailureReason, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                             return writer;
                         };
     
@@ -6678,7 +6816,7 @@
                                 message.eventHub = String(object.eventHub);
                             if (object.partitionId != null)
                                 if ($util.Long)
-                                    (message.partitionId = $util.Long.fromValue(object.partitionId)).unsigned = false;
+                                    message.partitionId = $util.Long.fromValue(object.partitionId, false);
                                 else if (typeof object.partitionId === "string")
                                     message.partitionId = parseInt(object.partitionId, 10);
                                 else if (typeof object.partitionId === "number")
@@ -6687,7 +6825,7 @@
                                     message.partitionId = new $util.LongBits(object.partitionId.low >>> 0, object.partitionId.high >>> 0).toNumber();
                             if (object.offset != null)
                                 if ($util.Long)
-                                    (message.offset = $util.Long.fromValue(object.offset)).unsigned = false;
+                                    message.offset = $util.Long.fromValue(object.offset, false);
                                 else if (typeof object.offset === "string")
                                     message.offset = parseInt(object.offset, 10);
                                 else if (typeof object.offset === "number")
@@ -6721,50 +6859,58 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        AzureEventHubsFailureReason.toObject = function toObject(message, options) {
+                        AzureEventHubsFailureReason.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.namespace = "";
                                 object.eventHub = "";
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.partitionId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.partitionId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.partitionId = options.longs === String ? "0" : 0;
+                                    object.partitionId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.offset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.offset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.offset = options.longs === String ? "0" : 0;
+                                    object.offset = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             }
                             if (message.namespace != null && message.hasOwnProperty("namespace"))
                                 object.namespace = message.namespace;
                             if (message.eventHub != null && message.hasOwnProperty("eventHub"))
                                 object.eventHub = message.eventHub;
                             if (message.partitionId != null && message.hasOwnProperty("partitionId"))
-                                if (typeof message.partitionId === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.partitionId = typeof message.partitionId === "number" ? BigInt(message.partitionId) : $util.Long.fromBits(message.partitionId.low >>> 0, message.partitionId.high >>> 0, false).toBigInt();
+                                else if (typeof message.partitionId === "number")
                                     object.partitionId = options.longs === String ? String(message.partitionId) : message.partitionId;
                                 else
                                     object.partitionId = options.longs === String ? $util.Long.prototype.toString.call(message.partitionId) : options.longs === Number ? new $util.LongBits(message.partitionId.low >>> 0, message.partitionId.high >>> 0).toNumber() : message.partitionId;
                             if (message.offset != null && message.hasOwnProperty("offset"))
-                                if (typeof message.offset === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.offset = typeof message.offset === "number" ? BigInt(message.offset) : $util.Long.fromBits(message.offset.low >>> 0, message.offset.high >>> 0, false).toBigInt();
+                                else if (typeof message.offset === "number")
                                     object.offset = options.longs === String ? String(message.offset) : message.offset;
                                 else
                                     object.offset = options.longs === String ? $util.Long.prototype.toString.call(message.offset) : options.longs === Number ? new $util.LongBits(message.offset.low >>> 0, message.offset.high >>> 0).toNumber() : message.offset;
                             if (message.apiViolationReason != null && message.hasOwnProperty("apiViolationReason")) {
-                                object.apiViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.toObject(message.apiViolationReason, options);
+                                object.apiViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.toObject(message.apiViolationReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "apiViolationReason";
                             }
                             if (message.schemaViolationReason != null && message.hasOwnProperty("schemaViolationReason")) {
-                                object.schemaViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.toObject(message.schemaViolationReason, options);
+                                object.schemaViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.toObject(message.schemaViolationReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "schemaViolationReason";
                             }
                             if (message.messageTransformationFailureReason != null && message.hasOwnProperty("messageTransformationFailureReason")) {
-                                object.messageTransformationFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.toObject(message.messageTransformationFailureReason, options);
+                                object.messageTransformationFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.toObject(message.messageTransformationFailureReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "messageTransformationFailureReason";
                             }
@@ -6921,9 +7067,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        ConfluentCloudFailureReason.encode = function encode(message, writer) {
+                        ConfluentCloudFailureReason.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.clusterId != null && Object.hasOwnProperty.call(message, "clusterId"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.clusterId);
                             if (message.kafkaTopic != null && Object.hasOwnProperty.call(message, "kafkaTopic"))
@@ -6933,11 +7083,11 @@
                             if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int64(message.offset);
                             if (message.apiViolationReason != null && Object.hasOwnProperty.call(message, "apiViolationReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.encode(message.apiViolationReason, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.encode(message.apiViolationReason, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                             if (message.schemaViolationReason != null && Object.hasOwnProperty.call(message, "schemaViolationReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.encode(message.schemaViolationReason, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.encode(message.schemaViolationReason, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                             if (message.messageTransformationFailureReason != null && Object.hasOwnProperty.call(message, "messageTransformationFailureReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.encode(message.messageTransformationFailureReason, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.encode(message.messageTransformationFailureReason, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                             return writer;
                         };
     
@@ -7111,7 +7261,7 @@
                                 message.kafkaTopic = String(object.kafkaTopic);
                             if (object.partitionId != null)
                                 if ($util.Long)
-                                    (message.partitionId = $util.Long.fromValue(object.partitionId)).unsigned = false;
+                                    message.partitionId = $util.Long.fromValue(object.partitionId, false);
                                 else if (typeof object.partitionId === "string")
                                     message.partitionId = parseInt(object.partitionId, 10);
                                 else if (typeof object.partitionId === "number")
@@ -7120,7 +7270,7 @@
                                     message.partitionId = new $util.LongBits(object.partitionId.low >>> 0, object.partitionId.high >>> 0).toNumber();
                             if (object.offset != null)
                                 if ($util.Long)
-                                    (message.offset = $util.Long.fromValue(object.offset)).unsigned = false;
+                                    message.offset = $util.Long.fromValue(object.offset, false);
                                 else if (typeof object.offset === "string")
                                     message.offset = parseInt(object.offset, 10);
                                 else if (typeof object.offset === "number")
@@ -7154,50 +7304,58 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        ConfluentCloudFailureReason.toObject = function toObject(message, options) {
+                        ConfluentCloudFailureReason.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.clusterId = "";
                                 object.kafkaTopic = "";
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.partitionId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.partitionId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.partitionId = options.longs === String ? "0" : 0;
+                                    object.partitionId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.offset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.offset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.offset = options.longs === String ? "0" : 0;
+                                    object.offset = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             }
                             if (message.clusterId != null && message.hasOwnProperty("clusterId"))
                                 object.clusterId = message.clusterId;
                             if (message.kafkaTopic != null && message.hasOwnProperty("kafkaTopic"))
                                 object.kafkaTopic = message.kafkaTopic;
                             if (message.partitionId != null && message.hasOwnProperty("partitionId"))
-                                if (typeof message.partitionId === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.partitionId = typeof message.partitionId === "number" ? BigInt(message.partitionId) : $util.Long.fromBits(message.partitionId.low >>> 0, message.partitionId.high >>> 0, false).toBigInt();
+                                else if (typeof message.partitionId === "number")
                                     object.partitionId = options.longs === String ? String(message.partitionId) : message.partitionId;
                                 else
                                     object.partitionId = options.longs === String ? $util.Long.prototype.toString.call(message.partitionId) : options.longs === Number ? new $util.LongBits(message.partitionId.low >>> 0, message.partitionId.high >>> 0).toNumber() : message.partitionId;
                             if (message.offset != null && message.hasOwnProperty("offset"))
-                                if (typeof message.offset === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.offset = typeof message.offset === "number" ? BigInt(message.offset) : $util.Long.fromBits(message.offset.low >>> 0, message.offset.high >>> 0, false).toBigInt();
+                                else if (typeof message.offset === "number")
                                     object.offset = options.longs === String ? String(message.offset) : message.offset;
                                 else
                                     object.offset = options.longs === String ? $util.Long.prototype.toString.call(message.offset) : options.longs === Number ? new $util.LongBits(message.offset.low >>> 0, message.offset.high >>> 0).toNumber() : message.offset;
                             if (message.apiViolationReason != null && message.hasOwnProperty("apiViolationReason")) {
-                                object.apiViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.toObject(message.apiViolationReason, options);
+                                object.apiViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.toObject(message.apiViolationReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "apiViolationReason";
                             }
                             if (message.schemaViolationReason != null && message.hasOwnProperty("schemaViolationReason")) {
-                                object.schemaViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.toObject(message.schemaViolationReason, options);
+                                object.schemaViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.toObject(message.schemaViolationReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "schemaViolationReason";
                             }
                             if (message.messageTransformationFailureReason != null && message.hasOwnProperty("messageTransformationFailureReason")) {
-                                object.messageTransformationFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.toObject(message.messageTransformationFailureReason, options);
+                                object.messageTransformationFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.toObject(message.messageTransformationFailureReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "messageTransformationFailureReason";
                             }
@@ -7345,9 +7503,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        AwsKinesisFailureReason.encode = function encode(message, writer) {
+                        AwsKinesisFailureReason.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.streamArn != null && Object.hasOwnProperty.call(message, "streamArn"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.streamArn);
                             if (message.partitionKey != null && Object.hasOwnProperty.call(message, "partitionKey"))
@@ -7355,11 +7517,11 @@
                             if (message.sequenceNumber != null && Object.hasOwnProperty.call(message, "sequenceNumber"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.sequenceNumber);
                             if (message.schemaViolationReason != null && Object.hasOwnProperty.call(message, "schemaViolationReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.encode(message.schemaViolationReason, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.encode(message.schemaViolationReason, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                             if (message.messageTransformationFailureReason != null && Object.hasOwnProperty.call(message, "messageTransformationFailureReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.encode(message.messageTransformationFailureReason, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.encode(message.messageTransformationFailureReason, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                             if (message.apiViolationReason != null && Object.hasOwnProperty.call(message, "apiViolationReason"))
-                                $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.encode(message.apiViolationReason, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.encode(message.apiViolationReason, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                             return writer;
                         };
     
@@ -7553,9 +7715,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        AwsKinesisFailureReason.toObject = function toObject(message, options) {
+                        AwsKinesisFailureReason.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.streamArn = "";
@@ -7569,17 +7735,17 @@
                             if (message.sequenceNumber != null && message.hasOwnProperty("sequenceNumber"))
                                 object.sequenceNumber = message.sequenceNumber;
                             if (message.schemaViolationReason != null && message.hasOwnProperty("schemaViolationReason")) {
-                                object.schemaViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.toObject(message.schemaViolationReason, options);
+                                object.schemaViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.SchemaViolationReason.toObject(message.schemaViolationReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "schemaViolationReason";
                             }
                             if (message.messageTransformationFailureReason != null && message.hasOwnProperty("messageTransformationFailureReason")) {
-                                object.messageTransformationFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.toObject(message.messageTransformationFailureReason, options);
+                                object.messageTransformationFailureReason = $root.google.pubsub.v1.IngestionFailureEvent.MessageTransformationFailureReason.toObject(message.messageTransformationFailureReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "messageTransformationFailureReason";
                             }
                             if (message.apiViolationReason != null && message.hasOwnProperty("apiViolationReason")) {
-                                object.apiViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.toObject(message.apiViolationReason, options);
+                                object.apiViolationReason = $root.google.pubsub.v1.IngestionFailureEvent.ApiViolationReason.toObject(message.apiViolationReason, options, q + 1);
                                 if (options.oneofs)
                                     object.reason = "apiViolationReason";
                             }
@@ -7680,9 +7846,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    JavaScriptUDF.encode = function encode(message, writer) {
+                    JavaScriptUDF.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.functionName != null && Object.hasOwnProperty.call(message, "functionName"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.functionName);
                         if (message.code != null && Object.hasOwnProperty.call(message, "code"))
@@ -7815,9 +7985,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    JavaScriptUDF.toObject = function toObject(message, options) {
+                    JavaScriptUDF.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.functionName = "";
@@ -7944,13 +8118,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    AIInference.encode = function encode(message, writer) {
+                    AIInference.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.endpoint != null && Object.hasOwnProperty.call(message, "endpoint"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.endpoint);
                         if (message.unstructuredInference != null && Object.hasOwnProperty.call(message, "unstructuredInference"))
-                            $root.google.pubsub.v1.AIInference.UnstructuredInference.encode(message.unstructuredInference, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.pubsub.v1.AIInference.UnstructuredInference.encode(message.unstructuredInference, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.serviceAccountEmail);
                         return writer;
@@ -8099,9 +8277,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    AIInference.toObject = function toObject(message, options) {
+                    AIInference.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.endpoint = "";
@@ -8110,7 +8292,7 @@
                         if (message.endpoint != null && message.hasOwnProperty("endpoint"))
                             object.endpoint = message.endpoint;
                         if (message.unstructuredInference != null && message.hasOwnProperty("unstructuredInference")) {
-                            object.unstructuredInference = $root.google.pubsub.v1.AIInference.UnstructuredInference.toObject(message.unstructuredInference, options);
+                            object.unstructuredInference = $root.google.pubsub.v1.AIInference.UnstructuredInference.toObject(message.unstructuredInference, options, q + 1);
                             if (options.oneofs)
                                 object.inferenceMode = "unstructuredInference";
                         }
@@ -8198,11 +8380,15 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        UnstructuredInference.encode = function encode(message, writer) {
+                        UnstructuredInference.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
-                                $root.google.protobuf.Struct.encode(message.parameters, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                $root.google.protobuf.Struct.encode(message.parameters, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                             return writer;
                         };
     
@@ -8327,14 +8513,18 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        UnstructuredInference.toObject = function toObject(message, options) {
+                        UnstructuredInference.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults)
                                 object.parameters = null;
                             if (message.parameters != null && message.hasOwnProperty("parameters"))
-                                object.parameters = $root.google.protobuf.Struct.toObject(message.parameters, options);
+                                object.parameters = $root.google.protobuf.Struct.toObject(message.parameters, options, q + 1);
                             return object;
                         };
     
@@ -8464,17 +8654,21 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    MessageTransform.encode = function encode(message, writer) {
+                    MessageTransform.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.javascriptUdf != null && Object.hasOwnProperty.call(message, "javascriptUdf"))
-                            $root.google.pubsub.v1.JavaScriptUDF.encode(message.javascriptUdf, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.pubsub.v1.JavaScriptUDF.encode(message.javascriptUdf, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                             writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enabled);
                         if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
                             writer.uint32(/* id 4, wireType 0 =*/32).bool(message.disabled);
                         if (message.aiInference != null && Object.hasOwnProperty.call(message, "aiInference"))
-                            $root.google.pubsub.v1.AIInference.encode(message.aiInference, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            $root.google.pubsub.v1.AIInference.encode(message.aiInference, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -8640,16 +8834,20 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    MessageTransform.toObject = function toObject(message, options) {
+                    MessageTransform.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.enabled = false;
                             object.disabled = false;
                         }
                         if (message.javascriptUdf != null && message.hasOwnProperty("javascriptUdf")) {
-                            object.javascriptUdf = $root.google.pubsub.v1.JavaScriptUDF.toObject(message.javascriptUdf, options);
+                            object.javascriptUdf = $root.google.pubsub.v1.JavaScriptUDF.toObject(message.javascriptUdf, options, q + 1);
                             if (options.oneofs)
                                 object.transform = "javascriptUdf";
                         }
@@ -8658,7 +8856,7 @@
                         if (message.disabled != null && message.hasOwnProperty("disabled"))
                             object.disabled = message.disabled;
                         if (message.aiInference != null && message.hasOwnProperty("aiInference")) {
-                            object.aiInference = $root.google.pubsub.v1.AIInference.toObject(message.aiInference, options);
+                            object.aiInference = $root.google.pubsub.v1.AIInference.toObject(message.aiInference, options, q + 1);
                             if (options.oneofs)
                                 object.transform = "aiInference";
                         }
@@ -8840,31 +9038,35 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Topic.encode = function encode(message, writer) {
+                    Topic.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                             for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                         if (message.messageStoragePolicy != null && Object.hasOwnProperty.call(message, "messageStoragePolicy"))
-                            $root.google.pubsub.v1.MessageStoragePolicy.encode(message.messageStoragePolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.pubsub.v1.MessageStoragePolicy.encode(message.messageStoragePolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.kmsKeyName);
                         if (message.schemaSettings != null && Object.hasOwnProperty.call(message, "schemaSettings"))
-                            $root.google.pubsub.v1.SchemaSettings.encode(message.schemaSettings, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            $root.google.pubsub.v1.SchemaSettings.encode(message.schemaSettings, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                         if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                             writer.uint32(/* id 7, wireType 0 =*/56).bool(message.satisfiesPzs);
                         if (message.messageRetentionDuration != null && Object.hasOwnProperty.call(message, "messageRetentionDuration"))
-                            $root.google.protobuf.Duration.encode(message.messageRetentionDuration, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.messageRetentionDuration, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                         if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                             writer.uint32(/* id 9, wireType 0 =*/72).int32(message.state);
                         if (message.ingestionDataSourceSettings != null && Object.hasOwnProperty.call(message, "ingestionDataSourceSettings"))
-                            $root.google.pubsub.v1.IngestionDataSourceSettings.encode(message.ingestionDataSourceSettings, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            $root.google.pubsub.v1.IngestionDataSourceSettings.encode(message.ingestionDataSourceSettings, writer.uint32(/* id 10, wireType 2 =*/82).fork(), q + 1).ldelim();
                         if (message.messageTransforms != null && message.messageTransforms.length)
                             for (var i = 0; i < message.messageTransforms.length; ++i)
-                                $root.google.pubsub.v1.MessageTransform.encode(message.messageTransforms[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                $root.google.pubsub.v1.MessageTransform.encode(message.messageTransforms[i], writer.uint32(/* id 13, wireType 2 =*/106).fork(), q + 1).ldelim();
                         if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
                             for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 14, wireType 2 =*/114).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
@@ -9205,9 +9407,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Topic.toObject = function toObject(message, options) {
+                    Topic.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.messageTransforms = [];
@@ -9237,23 +9443,23 @@
                             }
                         }
                         if (message.messageStoragePolicy != null && message.hasOwnProperty("messageStoragePolicy"))
-                            object.messageStoragePolicy = $root.google.pubsub.v1.MessageStoragePolicy.toObject(message.messageStoragePolicy, options);
+                            object.messageStoragePolicy = $root.google.pubsub.v1.MessageStoragePolicy.toObject(message.messageStoragePolicy, options, q + 1);
                         if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                             object.kmsKeyName = message.kmsKeyName;
                         if (message.schemaSettings != null && message.hasOwnProperty("schemaSettings"))
-                            object.schemaSettings = $root.google.pubsub.v1.SchemaSettings.toObject(message.schemaSettings, options);
+                            object.schemaSettings = $root.google.pubsub.v1.SchemaSettings.toObject(message.schemaSettings, options, q + 1);
                         if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                             object.satisfiesPzs = message.satisfiesPzs;
                         if (message.messageRetentionDuration != null && message.hasOwnProperty("messageRetentionDuration"))
-                            object.messageRetentionDuration = $root.google.protobuf.Duration.toObject(message.messageRetentionDuration, options);
+                            object.messageRetentionDuration = $root.google.protobuf.Duration.toObject(message.messageRetentionDuration, options, q + 1);
                         if (message.state != null && message.hasOwnProperty("state"))
                             object.state = options.enums === String ? $root.google.pubsub.v1.Topic.State[message.state] === undefined ? message.state : $root.google.pubsub.v1.Topic.State[message.state] : message.state;
                         if (message.ingestionDataSourceSettings != null && message.hasOwnProperty("ingestionDataSourceSettings"))
-                            object.ingestionDataSourceSettings = $root.google.pubsub.v1.IngestionDataSourceSettings.toObject(message.ingestionDataSourceSettings, options);
+                            object.ingestionDataSourceSettings = $root.google.pubsub.v1.IngestionDataSourceSettings.toObject(message.ingestionDataSourceSettings, options, q + 1);
                         if (message.messageTransforms && message.messageTransforms.length) {
                             object.messageTransforms = [];
                             for (var j = 0; j < message.messageTransforms.length; ++j)
-                                object.messageTransforms[j] = $root.google.pubsub.v1.MessageTransform.toObject(message.messageTransforms[j], options);
+                                object.messageTransforms[j] = $root.google.pubsub.v1.MessageTransform.toObject(message.messageTransforms[j], options, q + 1);
                         }
                         if (message.tags && (keys2 = Object.keys(message.tags)).length) {
                             object.tags = {};
@@ -9401,9 +9607,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    PubsubMessage.encode = function encode(message, writer) {
+                    PubsubMessage.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.data != null && Object.hasOwnProperty.call(message, "data"))
                             writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.data);
                         if (message.attributes != null && Object.hasOwnProperty.call(message, "attributes"))
@@ -9412,7 +9622,7 @@
                         if (message.messageId != null && Object.hasOwnProperty.call(message, "messageId"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.messageId);
                         if (message.publishTime != null && Object.hasOwnProperty.call(message, "publishTime"))
-                            $root.google.protobuf.Timestamp.encode(message.publishTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.Timestamp.encode(message.publishTime, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         if (message.orderingKey != null && Object.hasOwnProperty.call(message, "orderingKey"))
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderingKey);
                         return writer;
@@ -9612,9 +9822,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    PubsubMessage.toObject = function toObject(message, options) {
+                    PubsubMessage.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.objects || options.defaults)
                             object.attributes = {};
@@ -9644,7 +9858,7 @@
                         if (message.messageId != null && message.hasOwnProperty("messageId"))
                             object.messageId = message.messageId;
                         if (message.publishTime != null && message.hasOwnProperty("publishTime"))
-                            object.publishTime = $root.google.protobuf.Timestamp.toObject(message.publishTime, options);
+                            object.publishTime = $root.google.protobuf.Timestamp.toObject(message.publishTime, options, q + 1);
                         if (message.orderingKey != null && message.hasOwnProperty("orderingKey"))
                             object.orderingKey = message.orderingKey;
                         return object;
@@ -9732,9 +9946,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    GetTopicRequest.encode = function encode(message, writer) {
+                    GetTopicRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
                         return writer;
@@ -9856,9 +10074,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    GetTopicRequest.toObject = function toObject(message, options) {
+                    GetTopicRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.topic = "";
@@ -9958,13 +10180,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    UpdateTopicRequest.encode = function encode(message, writer) {
+                    UpdateTopicRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
-                            $root.google.pubsub.v1.Topic.encode(message.topic, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.pubsub.v1.Topic.encode(message.topic, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -10103,18 +10329,22 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    UpdateTopicRequest.toObject = function toObject(message, options) {
+                    UpdateTopicRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.topic = null;
                             object.updateMask = null;
                         }
                         if (message.topic != null && message.hasOwnProperty("topic"))
-                            object.topic = $root.google.pubsub.v1.Topic.toObject(message.topic, options);
+                            object.topic = $root.google.pubsub.v1.Topic.toObject(message.topic, options, q + 1);
                         if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
                         return object;
                     };
     
@@ -10210,14 +10440,18 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    PublishRequest.encode = function encode(message, writer) {
+                    PublishRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
                         if (message.messages != null && message.messages.length)
                             for (var i = 0; i < message.messages.length; ++i)
-                                $root.google.pubsub.v1.PubsubMessage.encode(message.messages[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                $root.google.pubsub.v1.PubsubMessage.encode(message.messages[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -10362,9 +10596,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    PublishRequest.toObject = function toObject(message, options) {
+                    PublishRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.messages = [];
@@ -10375,7 +10613,7 @@
                         if (message.messages && message.messages.length) {
                             object.messages = [];
                             for (var j = 0; j < message.messages.length; ++j)
-                                object.messages[j] = $root.google.pubsub.v1.PubsubMessage.toObject(message.messages[j], options);
+                                object.messages[j] = $root.google.pubsub.v1.PubsubMessage.toObject(message.messages[j], options, q + 1);
                         }
                         return object;
                     };
@@ -10463,9 +10701,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    PublishResponse.encode = function encode(message, writer) {
+                    PublishResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.messageIds != null && message.messageIds.length)
                             for (var i = 0; i < message.messageIds.length; ++i)
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.messageIds[i]);
@@ -10599,9 +10841,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    PublishResponse.toObject = function toObject(message, options) {
+                    PublishResponse.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.messageIds = [];
@@ -10713,9 +10959,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListTopicsRequest.encode = function encode(message, writer) {
+                    ListTopicsRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.project != null && Object.hasOwnProperty.call(message, "project"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.project);
                         if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
@@ -10859,9 +11109,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListTopicsRequest.toObject = function toObject(message, options) {
+                    ListTopicsRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.project = "";
@@ -10969,12 +11223,16 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListTopicsResponse.encode = function encode(message, writer) {
+                    ListTopicsResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.topics != null && message.topics.length)
                             for (var i = 0; i < message.topics.length; ++i)
-                                $root.google.pubsub.v1.Topic.encode(message.topics[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                $root.google.pubsub.v1.Topic.encode(message.topics[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
                         return writer;
@@ -11121,9 +11379,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListTopicsResponse.toObject = function toObject(message, options) {
+                    ListTopicsResponse.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.topics = [];
@@ -11132,7 +11394,7 @@
                         if (message.topics && message.topics.length) {
                             object.topics = [];
                             for (var j = 0; j < message.topics.length; ++j)
-                                object.topics[j] = $root.google.pubsub.v1.Topic.toObject(message.topics[j], options);
+                                object.topics[j] = $root.google.pubsub.v1.Topic.toObject(message.topics[j], options, q + 1);
                         }
                         if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                             object.nextPageToken = message.nextPageToken;
@@ -11239,9 +11501,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListTopicSubscriptionsRequest.encode = function encode(message, writer) {
+                    ListTopicSubscriptionsRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
                         if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
@@ -11385,9 +11651,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListTopicSubscriptionsRequest.toObject = function toObject(message, options) {
+                    ListTopicSubscriptionsRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.topic = "";
@@ -11495,9 +11765,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListTopicSubscriptionsResponse.encode = function encode(message, writer) {
+                    ListTopicSubscriptionsResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscriptions != null && message.subscriptions.length)
                             for (var i = 0; i < message.subscriptions.length; ++i)
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscriptions[i]);
@@ -11642,9 +11916,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListTopicSubscriptionsResponse.toObject = function toObject(message, options) {
+                    ListTopicSubscriptionsResponse.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.subscriptions = [];
@@ -11760,9 +12038,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListTopicSnapshotsRequest.encode = function encode(message, writer) {
+                    ListTopicSnapshotsRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
                         if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
@@ -11906,9 +12188,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListTopicSnapshotsRequest.toObject = function toObject(message, options) {
+                    ListTopicSnapshotsRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.topic = "";
@@ -12016,9 +12302,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListTopicSnapshotsResponse.encode = function encode(message, writer) {
+                    ListTopicSnapshotsResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.snapshots != null && message.snapshots.length)
                             for (var i = 0; i < message.snapshots.length; ++i)
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.snapshots[i]);
@@ -12163,9 +12453,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListTopicSnapshotsResponse.toObject = function toObject(message, options) {
+                    ListTopicSnapshotsResponse.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.snapshots = [];
@@ -12263,9 +12557,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    DeleteTopicRequest.encode = function encode(message, writer) {
+                    DeleteTopicRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
                         return writer;
@@ -12387,9 +12685,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    DeleteTopicRequest.toObject = function toObject(message, options) {
+                    DeleteTopicRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.topic = "";
@@ -12480,9 +12782,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    DetachSubscriptionRequest.encode = function encode(message, writer) {
+                    DetachSubscriptionRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscription);
                         return writer;
@@ -12604,9 +12910,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    DetachSubscriptionRequest.toObject = function toObject(message, options) {
+                    DetachSubscriptionRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.subscription = "";
@@ -12688,9 +12998,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    DetachSubscriptionResponse.encode = function encode(message, writer) {
+                    DetachSubscriptionResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         return writer;
                     };
     
@@ -13641,56 +13955,60 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Subscription.encode = function encode(message, writer) {
+                    Subscription.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.topic);
                         if (message.pushConfig != null && Object.hasOwnProperty.call(message, "pushConfig"))
-                            $root.google.pubsub.v1.PushConfig.encode(message.pushConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.pubsub.v1.PushConfig.encode(message.pushConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         if (message.ackDeadlineSeconds != null && Object.hasOwnProperty.call(message, "ackDeadlineSeconds"))
                             writer.uint32(/* id 5, wireType 0 =*/40).int32(message.ackDeadlineSeconds);
                         if (message.retainAckedMessages != null && Object.hasOwnProperty.call(message, "retainAckedMessages"))
                             writer.uint32(/* id 7, wireType 0 =*/56).bool(message.retainAckedMessages);
                         if (message.messageRetentionDuration != null && Object.hasOwnProperty.call(message, "messageRetentionDuration"))
-                            $root.google.protobuf.Duration.encode(message.messageRetentionDuration, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.messageRetentionDuration, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                         if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                             for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                         if (message.enableMessageOrdering != null && Object.hasOwnProperty.call(message, "enableMessageOrdering"))
                             writer.uint32(/* id 10, wireType 0 =*/80).bool(message.enableMessageOrdering);
                         if (message.expirationPolicy != null && Object.hasOwnProperty.call(message, "expirationPolicy"))
-                            $root.google.pubsub.v1.ExpirationPolicy.encode(message.expirationPolicy, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            $root.google.pubsub.v1.ExpirationPolicy.encode(message.expirationPolicy, writer.uint32(/* id 11, wireType 2 =*/90).fork(), q + 1).ldelim();
                         if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                             writer.uint32(/* id 12, wireType 2 =*/98).string(message.filter);
                         if (message.deadLetterPolicy != null && Object.hasOwnProperty.call(message, "deadLetterPolicy"))
-                            $root.google.pubsub.v1.DeadLetterPolicy.encode(message.deadLetterPolicy, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            $root.google.pubsub.v1.DeadLetterPolicy.encode(message.deadLetterPolicy, writer.uint32(/* id 13, wireType 2 =*/106).fork(), q + 1).ldelim();
                         if (message.retryPolicy != null && Object.hasOwnProperty.call(message, "retryPolicy"))
-                            $root.google.pubsub.v1.RetryPolicy.encode(message.retryPolicy, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            $root.google.pubsub.v1.RetryPolicy.encode(message.retryPolicy, writer.uint32(/* id 14, wireType 2 =*/114).fork(), q + 1).ldelim();
                         if (message.detached != null && Object.hasOwnProperty.call(message, "detached"))
                             writer.uint32(/* id 15, wireType 0 =*/120).bool(message.detached);
                         if (message.enableExactlyOnceDelivery != null && Object.hasOwnProperty.call(message, "enableExactlyOnceDelivery"))
                             writer.uint32(/* id 16, wireType 0 =*/128).bool(message.enableExactlyOnceDelivery);
                         if (message.topicMessageRetentionDuration != null && Object.hasOwnProperty.call(message, "topicMessageRetentionDuration"))
-                            $root.google.protobuf.Duration.encode(message.topicMessageRetentionDuration, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.topicMessageRetentionDuration, writer.uint32(/* id 17, wireType 2 =*/138).fork(), q + 1).ldelim();
                         if (message.bigqueryConfig != null && Object.hasOwnProperty.call(message, "bigqueryConfig"))
-                            $root.google.pubsub.v1.BigQueryConfig.encode(message.bigqueryConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            $root.google.pubsub.v1.BigQueryConfig.encode(message.bigqueryConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork(), q + 1).ldelim();
                         if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                             writer.uint32(/* id 19, wireType 0 =*/152).int32(message.state);
                         if (message.cloudStorageConfig != null && Object.hasOwnProperty.call(message, "cloudStorageConfig"))
-                            $root.google.pubsub.v1.CloudStorageConfig.encode(message.cloudStorageConfig, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            $root.google.pubsub.v1.CloudStorageConfig.encode(message.cloudStorageConfig, writer.uint32(/* id 22, wireType 2 =*/178).fork(), q + 1).ldelim();
                         if (message.analyticsHubSubscriptionInfo != null && Object.hasOwnProperty.call(message, "analyticsHubSubscriptionInfo"))
-                            $root.google.pubsub.v1.Subscription.AnalyticsHubSubscriptionInfo.encode(message.analyticsHubSubscriptionInfo, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            $root.google.pubsub.v1.Subscription.AnalyticsHubSubscriptionInfo.encode(message.analyticsHubSubscriptionInfo, writer.uint32(/* id 23, wireType 2 =*/186).fork(), q + 1).ldelim();
                         if (message.messageTransforms != null && message.messageTransforms.length)
                             for (var i = 0; i < message.messageTransforms.length; ++i)
-                                $root.google.pubsub.v1.MessageTransform.encode(message.messageTransforms[i], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                                $root.google.pubsub.v1.MessageTransform.encode(message.messageTransforms[i], writer.uint32(/* id 25, wireType 2 =*/202).fork(), q + 1).ldelim();
                         if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
                             for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 26, wireType 2 =*/210).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
                         if (message.bigtableConfig != null && Object.hasOwnProperty.call(message, "bigtableConfig"))
-                            $root.google.pubsub.v1.BigtableConfig.encode(message.bigtableConfig, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                            $root.google.pubsub.v1.BigtableConfig.encode(message.bigtableConfig, writer.uint32(/* id 27, wireType 2 =*/218).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -14157,9 +14475,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Subscription.toObject = function toObject(message, options) {
+                    Subscription.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.messageTransforms = [];
@@ -14193,13 +14515,13 @@
                         if (message.topic != null && message.hasOwnProperty("topic"))
                             object.topic = message.topic;
                         if (message.pushConfig != null && message.hasOwnProperty("pushConfig"))
-                            object.pushConfig = $root.google.pubsub.v1.PushConfig.toObject(message.pushConfig, options);
+                            object.pushConfig = $root.google.pubsub.v1.PushConfig.toObject(message.pushConfig, options, q + 1);
                         if (message.ackDeadlineSeconds != null && message.hasOwnProperty("ackDeadlineSeconds"))
                             object.ackDeadlineSeconds = message.ackDeadlineSeconds;
                         if (message.retainAckedMessages != null && message.hasOwnProperty("retainAckedMessages"))
                             object.retainAckedMessages = message.retainAckedMessages;
                         if (message.messageRetentionDuration != null && message.hasOwnProperty("messageRetentionDuration"))
-                            object.messageRetentionDuration = $root.google.protobuf.Duration.toObject(message.messageRetentionDuration, options);
+                            object.messageRetentionDuration = $root.google.protobuf.Duration.toObject(message.messageRetentionDuration, options, q + 1);
                         var keys2;
                         if (message.labels && (keys2 = Object.keys(message.labels)).length) {
                             object.labels = {};
@@ -14212,31 +14534,31 @@
                         if (message.enableMessageOrdering != null && message.hasOwnProperty("enableMessageOrdering"))
                             object.enableMessageOrdering = message.enableMessageOrdering;
                         if (message.expirationPolicy != null && message.hasOwnProperty("expirationPolicy"))
-                            object.expirationPolicy = $root.google.pubsub.v1.ExpirationPolicy.toObject(message.expirationPolicy, options);
+                            object.expirationPolicy = $root.google.pubsub.v1.ExpirationPolicy.toObject(message.expirationPolicy, options, q + 1);
                         if (message.filter != null && message.hasOwnProperty("filter"))
                             object.filter = message.filter;
                         if (message.deadLetterPolicy != null && message.hasOwnProperty("deadLetterPolicy"))
-                            object.deadLetterPolicy = $root.google.pubsub.v1.DeadLetterPolicy.toObject(message.deadLetterPolicy, options);
+                            object.deadLetterPolicy = $root.google.pubsub.v1.DeadLetterPolicy.toObject(message.deadLetterPolicy, options, q + 1);
                         if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy"))
-                            object.retryPolicy = $root.google.pubsub.v1.RetryPolicy.toObject(message.retryPolicy, options);
+                            object.retryPolicy = $root.google.pubsub.v1.RetryPolicy.toObject(message.retryPolicy, options, q + 1);
                         if (message.detached != null && message.hasOwnProperty("detached"))
                             object.detached = message.detached;
                         if (message.enableExactlyOnceDelivery != null && message.hasOwnProperty("enableExactlyOnceDelivery"))
                             object.enableExactlyOnceDelivery = message.enableExactlyOnceDelivery;
                         if (message.topicMessageRetentionDuration != null && message.hasOwnProperty("topicMessageRetentionDuration"))
-                            object.topicMessageRetentionDuration = $root.google.protobuf.Duration.toObject(message.topicMessageRetentionDuration, options);
+                            object.topicMessageRetentionDuration = $root.google.protobuf.Duration.toObject(message.topicMessageRetentionDuration, options, q + 1);
                         if (message.bigqueryConfig != null && message.hasOwnProperty("bigqueryConfig"))
-                            object.bigqueryConfig = $root.google.pubsub.v1.BigQueryConfig.toObject(message.bigqueryConfig, options);
+                            object.bigqueryConfig = $root.google.pubsub.v1.BigQueryConfig.toObject(message.bigqueryConfig, options, q + 1);
                         if (message.state != null && message.hasOwnProperty("state"))
                             object.state = options.enums === String ? $root.google.pubsub.v1.Subscription.State[message.state] === undefined ? message.state : $root.google.pubsub.v1.Subscription.State[message.state] : message.state;
                         if (message.cloudStorageConfig != null && message.hasOwnProperty("cloudStorageConfig"))
-                            object.cloudStorageConfig = $root.google.pubsub.v1.CloudStorageConfig.toObject(message.cloudStorageConfig, options);
+                            object.cloudStorageConfig = $root.google.pubsub.v1.CloudStorageConfig.toObject(message.cloudStorageConfig, options, q + 1);
                         if (message.analyticsHubSubscriptionInfo != null && message.hasOwnProperty("analyticsHubSubscriptionInfo"))
-                            object.analyticsHubSubscriptionInfo = $root.google.pubsub.v1.Subscription.AnalyticsHubSubscriptionInfo.toObject(message.analyticsHubSubscriptionInfo, options);
+                            object.analyticsHubSubscriptionInfo = $root.google.pubsub.v1.Subscription.AnalyticsHubSubscriptionInfo.toObject(message.analyticsHubSubscriptionInfo, options, q + 1);
                         if (message.messageTransforms && message.messageTransforms.length) {
                             object.messageTransforms = [];
                             for (var j = 0; j < message.messageTransforms.length; ++j)
-                                object.messageTransforms[j] = $root.google.pubsub.v1.MessageTransform.toObject(message.messageTransforms[j], options);
+                                object.messageTransforms[j] = $root.google.pubsub.v1.MessageTransform.toObject(message.messageTransforms[j], options, q + 1);
                         }
                         if (message.tags && (keys2 = Object.keys(message.tags)).length) {
                             object.tags = {};
@@ -14247,7 +14569,7 @@
                             }
                         }
                         if (message.bigtableConfig != null && message.hasOwnProperty("bigtableConfig"))
-                            object.bigtableConfig = $root.google.pubsub.v1.BigtableConfig.toObject(message.bigtableConfig, options);
+                            object.bigtableConfig = $root.google.pubsub.v1.BigtableConfig.toObject(message.bigtableConfig, options, q + 1);
                         return object;
                     };
     
@@ -14355,9 +14677,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        AnalyticsHubSubscriptionInfo.encode = function encode(message, writer) {
+                        AnalyticsHubSubscriptionInfo.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.listing != null && Object.hasOwnProperty.call(message, "listing"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.listing);
                             if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
@@ -14490,9 +14816,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        AnalyticsHubSubscriptionInfo.toObject = function toObject(message, options) {
+                        AnalyticsHubSubscriptionInfo.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.listing = "";
@@ -14599,13 +14929,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    RetryPolicy.encode = function encode(message, writer) {
+                    RetryPolicy.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.minimumBackoff != null && Object.hasOwnProperty.call(message, "minimumBackoff"))
-                            $root.google.protobuf.Duration.encode(message.minimumBackoff, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.minimumBackoff, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.maximumBackoff != null && Object.hasOwnProperty.call(message, "maximumBackoff"))
-                            $root.google.protobuf.Duration.encode(message.maximumBackoff, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.maximumBackoff, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -14744,18 +15078,22 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    RetryPolicy.toObject = function toObject(message, options) {
+                    RetryPolicy.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.minimumBackoff = null;
                             object.maximumBackoff = null;
                         }
                         if (message.minimumBackoff != null && message.hasOwnProperty("minimumBackoff"))
-                            object.minimumBackoff = $root.google.protobuf.Duration.toObject(message.minimumBackoff, options);
+                            object.minimumBackoff = $root.google.protobuf.Duration.toObject(message.minimumBackoff, options, q + 1);
                         if (message.maximumBackoff != null && message.hasOwnProperty("maximumBackoff"))
-                            object.maximumBackoff = $root.google.protobuf.Duration.toObject(message.maximumBackoff, options);
+                            object.maximumBackoff = $root.google.protobuf.Duration.toObject(message.maximumBackoff, options, q + 1);
                         return object;
                     };
     
@@ -14850,9 +15188,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    DeadLetterPolicy.encode = function encode(message, writer) {
+                    DeadLetterPolicy.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.deadLetterTopic != null && Object.hasOwnProperty.call(message, "deadLetterTopic"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.deadLetterTopic);
                         if (message.maxDeliveryAttempts != null && Object.hasOwnProperty.call(message, "maxDeliveryAttempts"))
@@ -14985,9 +15327,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    DeadLetterPolicy.toObject = function toObject(message, options) {
+                    DeadLetterPolicy.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.deadLetterTopic = "";
@@ -15082,11 +15428,15 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ExpirationPolicy.encode = function encode(message, writer) {
+                    ExpirationPolicy.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
-                            $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -15211,14 +15561,18 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ExpirationPolicy.toObject = function toObject(message, options) {
+                    ExpirationPolicy.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.ttl = null;
                         if (message.ttl != null && message.hasOwnProperty("ttl"))
-                            object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
+                            object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options, q + 1);
                         return object;
                     };
     
@@ -15366,20 +15720,24 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    PushConfig.encode = function encode(message, writer) {
+                    PushConfig.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.pushEndpoint != null && Object.hasOwnProperty.call(message, "pushEndpoint"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.pushEndpoint);
                         if (message.attributes != null && Object.hasOwnProperty.call(message, "attributes"))
                             for (var keys = Object.keys(message.attributes), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.attributes[keys[i]]).ldelim();
                         if (message.oidcToken != null && Object.hasOwnProperty.call(message, "oidcToken"))
-                            $root.google.pubsub.v1.PushConfig.OidcToken.encode(message.oidcToken, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.pubsub.v1.PushConfig.OidcToken.encode(message.oidcToken, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         if (message.pubsubWrapper != null && Object.hasOwnProperty.call(message, "pubsubWrapper"))
-                            $root.google.pubsub.v1.PushConfig.PubsubWrapper.encode(message.pubsubWrapper, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.pubsub.v1.PushConfig.PubsubWrapper.encode(message.pubsubWrapper, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         if (message.noWrapper != null && Object.hasOwnProperty.call(message, "noWrapper"))
-                            $root.google.pubsub.v1.PushConfig.NoWrapper.encode(message.noWrapper, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.pubsub.v1.PushConfig.NoWrapper.encode(message.noWrapper, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -15596,9 +15954,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    PushConfig.toObject = function toObject(message, options) {
+                    PushConfig.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.objects || options.defaults)
                             object.attributes = {};
@@ -15616,17 +15978,17 @@
                             }
                         }
                         if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
-                            object.oidcToken = $root.google.pubsub.v1.PushConfig.OidcToken.toObject(message.oidcToken, options);
+                            object.oidcToken = $root.google.pubsub.v1.PushConfig.OidcToken.toObject(message.oidcToken, options, q + 1);
                             if (options.oneofs)
                                 object.authenticationMethod = "oidcToken";
                         }
                         if (message.pubsubWrapper != null && message.hasOwnProperty("pubsubWrapper")) {
-                            object.pubsubWrapper = $root.google.pubsub.v1.PushConfig.PubsubWrapper.toObject(message.pubsubWrapper, options);
+                            object.pubsubWrapper = $root.google.pubsub.v1.PushConfig.PubsubWrapper.toObject(message.pubsubWrapper, options, q + 1);
                             if (options.oneofs)
                                 object.wrapper = "pubsubWrapper";
                         }
                         if (message.noWrapper != null && message.hasOwnProperty("noWrapper")) {
-                            object.noWrapper = $root.google.pubsub.v1.PushConfig.NoWrapper.toObject(message.noWrapper, options);
+                            object.noWrapper = $root.google.pubsub.v1.PushConfig.NoWrapper.toObject(message.noWrapper, options, q + 1);
                             if (options.oneofs)
                                 object.wrapper = "noWrapper";
                         }
@@ -15721,9 +16083,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        OidcToken.encode = function encode(message, writer) {
+                        OidcToken.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccountEmail);
                             if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
@@ -15856,9 +16222,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        OidcToken.toObject = function toObject(message, options) {
+                        OidcToken.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.serviceAccountEmail = "";
@@ -15944,9 +16314,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        PubsubWrapper.encode = function encode(message, writer) {
+                        PubsubWrapper.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             return writer;
                         };
     
@@ -16142,9 +16516,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        NoWrapper.encode = function encode(message, writer) {
+                        NoWrapper.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.writeMetadata != null && Object.hasOwnProperty.call(message, "writeMetadata"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.writeMetadata);
                             return writer;
@@ -16266,9 +16644,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        NoWrapper.toObject = function toObject(message, options) {
+                        NoWrapper.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults)
                                 object.writeMetadata = false;
@@ -16416,9 +16798,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    BigQueryConfig.encode = function encode(message, writer) {
+                    BigQueryConfig.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.table != null && Object.hasOwnProperty.call(message, "table"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.table);
                         if (message.useTopicSchema != null && Object.hasOwnProperty.call(message, "useTopicSchema"))
@@ -16650,9 +17036,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    BigQueryConfig.toObject = function toObject(message, options) {
+                    BigQueryConfig.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.table = "";
@@ -16822,9 +17212,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    BigtableConfig.encode = function encode(message, writer) {
+                    BigtableConfig.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.table != null && Object.hasOwnProperty.call(message, "table"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.table);
                         if (message.appProfileId != null && Object.hasOwnProperty.call(message, "appProfileId"))
@@ -17039,9 +17433,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    BigtableConfig.toObject = function toObject(message, options) {
+                    BigtableConfig.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.table = "";
@@ -17275,9 +17673,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    CloudStorageConfig.encode = function encode(message, writer) {
+                    CloudStorageConfig.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
                         if (message.filenamePrefix != null && Object.hasOwnProperty.call(message, "filenamePrefix"))
@@ -17285,11 +17687,11 @@
                         if (message.filenameSuffix != null && Object.hasOwnProperty.call(message, "filenameSuffix"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.filenameSuffix);
                         if (message.textConfig != null && Object.hasOwnProperty.call(message, "textConfig"))
-                            $root.google.pubsub.v1.CloudStorageConfig.TextConfig.encode(message.textConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.pubsub.v1.CloudStorageConfig.TextConfig.encode(message.textConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         if (message.avroConfig != null && Object.hasOwnProperty.call(message, "avroConfig"))
-                            $root.google.pubsub.v1.CloudStorageConfig.AvroConfig.encode(message.avroConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.pubsub.v1.CloudStorageConfig.AvroConfig.encode(message.avroConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                         if (message.maxDuration != null && Object.hasOwnProperty.call(message, "maxDuration"))
-                            $root.google.protobuf.Duration.encode(message.maxDuration, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.maxDuration, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                         if (message.maxBytes != null && Object.hasOwnProperty.call(message, "maxBytes"))
                             writer.uint32(/* id 7, wireType 0 =*/56).int64(message.maxBytes);
                         if (message.maxMessages != null && Object.hasOwnProperty.call(message, "maxMessages"))
@@ -17525,7 +17927,7 @@
                         }
                         if (object.maxBytes != null)
                             if ($util.Long)
-                                (message.maxBytes = $util.Long.fromValue(object.maxBytes)).unsigned = false;
+                                message.maxBytes = $util.Long.fromValue(object.maxBytes, false);
                             else if (typeof object.maxBytes === "string")
                                 message.maxBytes = parseInt(object.maxBytes, 10);
                             else if (typeof object.maxBytes === "number")
@@ -17534,7 +17936,7 @@
                                 message.maxBytes = new $util.LongBits(object.maxBytes.low >>> 0, object.maxBytes.high >>> 0).toNumber();
                         if (object.maxMessages != null)
                             if ($util.Long)
-                                (message.maxMessages = $util.Long.fromValue(object.maxMessages)).unsigned = false;
+                                message.maxMessages = $util.Long.fromValue(object.maxMessages, false);
                             else if (typeof object.maxMessages === "string")
                                 message.maxMessages = parseInt(object.maxMessages, 10);
                             else if (typeof object.maxMessages === "number")
@@ -17591,9 +17993,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    CloudStorageConfig.toObject = function toObject(message, options) {
+                    CloudStorageConfig.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.bucket = "";
@@ -17602,14 +18008,14 @@
                             object.maxDuration = null;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.maxBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.maxBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.maxBytes = options.longs === String ? "0" : 0;
+                                object.maxBytes = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.maxMessages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.maxMessages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.maxMessages = options.longs === String ? "0" : 0;
+                                object.maxMessages = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             object.filenameDatetimeFormat = "";
                             object.serviceAccountEmail = "";
@@ -17621,24 +18027,28 @@
                         if (message.filenameSuffix != null && message.hasOwnProperty("filenameSuffix"))
                             object.filenameSuffix = message.filenameSuffix;
                         if (message.textConfig != null && message.hasOwnProperty("textConfig")) {
-                            object.textConfig = $root.google.pubsub.v1.CloudStorageConfig.TextConfig.toObject(message.textConfig, options);
+                            object.textConfig = $root.google.pubsub.v1.CloudStorageConfig.TextConfig.toObject(message.textConfig, options, q + 1);
                             if (options.oneofs)
                                 object.outputFormat = "textConfig";
                         }
                         if (message.avroConfig != null && message.hasOwnProperty("avroConfig")) {
-                            object.avroConfig = $root.google.pubsub.v1.CloudStorageConfig.AvroConfig.toObject(message.avroConfig, options);
+                            object.avroConfig = $root.google.pubsub.v1.CloudStorageConfig.AvroConfig.toObject(message.avroConfig, options, q + 1);
                             if (options.oneofs)
                                 object.outputFormat = "avroConfig";
                         }
                         if (message.maxDuration != null && message.hasOwnProperty("maxDuration"))
-                            object.maxDuration = $root.google.protobuf.Duration.toObject(message.maxDuration, options);
+                            object.maxDuration = $root.google.protobuf.Duration.toObject(message.maxDuration, options, q + 1);
                         if (message.maxBytes != null && message.hasOwnProperty("maxBytes"))
-                            if (typeof message.maxBytes === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.maxBytes = typeof message.maxBytes === "number" ? BigInt(message.maxBytes) : $util.Long.fromBits(message.maxBytes.low >>> 0, message.maxBytes.high >>> 0, false).toBigInt();
+                            else if (typeof message.maxBytes === "number")
                                 object.maxBytes = options.longs === String ? String(message.maxBytes) : message.maxBytes;
                             else
                                 object.maxBytes = options.longs === String ? $util.Long.prototype.toString.call(message.maxBytes) : options.longs === Number ? new $util.LongBits(message.maxBytes.low >>> 0, message.maxBytes.high >>> 0).toNumber() : message.maxBytes;
                         if (message.maxMessages != null && message.hasOwnProperty("maxMessages"))
-                            if (typeof message.maxMessages === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.maxMessages = typeof message.maxMessages === "number" ? BigInt(message.maxMessages) : $util.Long.fromBits(message.maxMessages.low >>> 0, message.maxMessages.high >>> 0, false).toBigInt();
+                            else if (typeof message.maxMessages === "number")
                                 object.maxMessages = options.longs === String ? String(message.maxMessages) : message.maxMessages;
                             else
                                 object.maxMessages = options.longs === String ? $util.Long.prototype.toString.call(message.maxMessages) : options.longs === Number ? new $util.LongBits(message.maxMessages.low >>> 0, message.maxMessages.high >>> 0).toNumber() : message.maxMessages;
@@ -17721,9 +18131,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        TextConfig.encode = function encode(message, writer) {
+                        TextConfig.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             return writer;
                         };
     
@@ -17928,9 +18342,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        AvroConfig.encode = function encode(message, writer) {
+                        AvroConfig.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.writeMetadata != null && Object.hasOwnProperty.call(message, "writeMetadata"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.writeMetadata);
                             if (message.useTopicSchema != null && Object.hasOwnProperty.call(message, "useTopicSchema"))
@@ -18063,9 +18481,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        AvroConfig.toObject = function toObject(message, options) {
+                        AvroConfig.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.writeMetadata = false;
@@ -18205,13 +18627,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ReceivedMessage.encode = function encode(message, writer) {
+                    ReceivedMessage.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.ackId != null && Object.hasOwnProperty.call(message, "ackId"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.ackId);
                         if (message.message != null && Object.hasOwnProperty.call(message, "message"))
-                            $root.google.pubsub.v1.PubsubMessage.encode(message.message, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.pubsub.v1.PubsubMessage.encode(message.message, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         if (message.deliveryAttempt != null && Object.hasOwnProperty.call(message, "deliveryAttempt"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.deliveryAttempt);
                         return writer;
@@ -18356,9 +18782,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ReceivedMessage.toObject = function toObject(message, options) {
+                    ReceivedMessage.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.ackId = "";
@@ -18368,7 +18798,7 @@
                         if (message.ackId != null && message.hasOwnProperty("ackId"))
                             object.ackId = message.ackId;
                         if (message.message != null && message.hasOwnProperty("message"))
-                            object.message = $root.google.pubsub.v1.PubsubMessage.toObject(message.message, options);
+                            object.message = $root.google.pubsub.v1.PubsubMessage.toObject(message.message, options, q + 1);
                         if (message.deliveryAttempt != null && message.hasOwnProperty("deliveryAttempt"))
                             object.deliveryAttempt = message.deliveryAttempt;
                         return object;
@@ -18456,9 +18886,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    GetSubscriptionRequest.encode = function encode(message, writer) {
+                    GetSubscriptionRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscription);
                         return writer;
@@ -18580,9 +19014,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    GetSubscriptionRequest.toObject = function toObject(message, options) {
+                    GetSubscriptionRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.subscription = "";
@@ -18682,13 +19120,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    UpdateSubscriptionRequest.encode = function encode(message, writer) {
+                    UpdateSubscriptionRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
-                            $root.google.pubsub.v1.Subscription.encode(message.subscription, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.pubsub.v1.Subscription.encode(message.subscription, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -18827,18 +19269,22 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    UpdateSubscriptionRequest.toObject = function toObject(message, options) {
+                    UpdateSubscriptionRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.subscription = null;
                             object.updateMask = null;
                         }
                         if (message.subscription != null && message.hasOwnProperty("subscription"))
-                            object.subscription = $root.google.pubsub.v1.Subscription.toObject(message.subscription, options);
+                            object.subscription = $root.google.pubsub.v1.Subscription.toObject(message.subscription, options, q + 1);
                         if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
                         return object;
                     };
     
@@ -18942,9 +19388,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListSubscriptionsRequest.encode = function encode(message, writer) {
+                    ListSubscriptionsRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.project != null && Object.hasOwnProperty.call(message, "project"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.project);
                         if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
@@ -19088,9 +19538,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListSubscriptionsRequest.toObject = function toObject(message, options) {
+                    ListSubscriptionsRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.project = "";
@@ -19198,12 +19652,16 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListSubscriptionsResponse.encode = function encode(message, writer) {
+                    ListSubscriptionsResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscriptions != null && message.subscriptions.length)
                             for (var i = 0; i < message.subscriptions.length; ++i)
-                                $root.google.pubsub.v1.Subscription.encode(message.subscriptions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                $root.google.pubsub.v1.Subscription.encode(message.subscriptions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
                         return writer;
@@ -19350,9 +19808,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListSubscriptionsResponse.toObject = function toObject(message, options) {
+                    ListSubscriptionsResponse.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.subscriptions = [];
@@ -19361,7 +19823,7 @@
                         if (message.subscriptions && message.subscriptions.length) {
                             object.subscriptions = [];
                             for (var j = 0; j < message.subscriptions.length; ++j)
-                                object.subscriptions[j] = $root.google.pubsub.v1.Subscription.toObject(message.subscriptions[j], options);
+                                object.subscriptions[j] = $root.google.pubsub.v1.Subscription.toObject(message.subscriptions[j], options, q + 1);
                         }
                         if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                             object.nextPageToken = message.nextPageToken;
@@ -19450,9 +19912,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    DeleteSubscriptionRequest.encode = function encode(message, writer) {
+                    DeleteSubscriptionRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscription);
                         return writer;
@@ -19574,9 +20040,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    DeleteSubscriptionRequest.toObject = function toObject(message, options) {
+                    DeleteSubscriptionRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.subscription = "";
@@ -19676,13 +20146,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ModifyPushConfigRequest.encode = function encode(message, writer) {
+                    ModifyPushConfigRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscription);
                         if (message.pushConfig != null && Object.hasOwnProperty.call(message, "pushConfig"))
-                            $root.google.pubsub.v1.PushConfig.encode(message.pushConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.pubsub.v1.PushConfig.encode(message.pushConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -19816,9 +20290,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ModifyPushConfigRequest.toObject = function toObject(message, options) {
+                    ModifyPushConfigRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.subscription = "";
@@ -19827,7 +20305,7 @@
                         if (message.subscription != null && message.hasOwnProperty("subscription"))
                             object.subscription = message.subscription;
                         if (message.pushConfig != null && message.hasOwnProperty("pushConfig"))
-                            object.pushConfig = $root.google.pubsub.v1.PushConfig.toObject(message.pushConfig, options);
+                            object.pushConfig = $root.google.pubsub.v1.PushConfig.toObject(message.pushConfig, options, q + 1);
                         return object;
                     };
     
@@ -19931,9 +20409,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    PullRequest.encode = function encode(message, writer) {
+                    PullRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscription);
                         if (message.returnImmediately != null && Object.hasOwnProperty.call(message, "returnImmediately"))
@@ -20077,9 +20559,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    PullRequest.toObject = function toObject(message, options) {
+                    PullRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.subscription = "";
@@ -20178,12 +20664,16 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    PullResponse.encode = function encode(message, writer) {
+                    PullResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.receivedMessages != null && message.receivedMessages.length)
                             for (var i = 0; i < message.receivedMessages.length; ++i)
-                                $root.google.pubsub.v1.ReceivedMessage.encode(message.receivedMessages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                $root.google.pubsub.v1.ReceivedMessage.encode(message.receivedMessages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -20319,16 +20809,20 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    PullResponse.toObject = function toObject(message, options) {
+                    PullResponse.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.receivedMessages = [];
                         if (message.receivedMessages && message.receivedMessages.length) {
                             object.receivedMessages = [];
                             for (var j = 0; j < message.receivedMessages.length; ++j)
-                                object.receivedMessages[j] = $root.google.pubsub.v1.ReceivedMessage.toObject(message.receivedMessages[j], options);
+                                object.receivedMessages[j] = $root.google.pubsub.v1.ReceivedMessage.toObject(message.receivedMessages[j], options, q + 1);
                         }
                         return object;
                     };
@@ -20434,9 +20928,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ModifyAckDeadlineRequest.encode = function encode(message, writer) {
+                    ModifyAckDeadlineRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscription);
                         if (message.ackDeadlineSeconds != null && Object.hasOwnProperty.call(message, "ackDeadlineSeconds"))
@@ -20592,9 +21090,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ModifyAckDeadlineRequest.toObject = function toObject(message, options) {
+                    ModifyAckDeadlineRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.ackIds = [];
@@ -20706,9 +21208,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    AcknowledgeRequest.encode = function encode(message, writer) {
+                    AcknowledgeRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscription);
                         if (message.ackIds != null && message.ackIds.length)
@@ -20853,9 +21359,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    AcknowledgeRequest.toObject = function toObject(message, options) {
+                    AcknowledgeRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.ackIds = [];
@@ -21028,9 +21538,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    StreamingPullRequest.encode = function encode(message, writer) {
+                    StreamingPullRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscription);
                         if (message.ackIds != null && message.ackIds.length)
@@ -21268,7 +21782,7 @@
                             message.clientId = String(object.clientId);
                         if (object.maxOutstandingMessages != null)
                             if ($util.Long)
-                                (message.maxOutstandingMessages = $util.Long.fromValue(object.maxOutstandingMessages)).unsigned = false;
+                                message.maxOutstandingMessages = $util.Long.fromValue(object.maxOutstandingMessages, false);
                             else if (typeof object.maxOutstandingMessages === "string")
                                 message.maxOutstandingMessages = parseInt(object.maxOutstandingMessages, 10);
                             else if (typeof object.maxOutstandingMessages === "number")
@@ -21277,7 +21791,7 @@
                                 message.maxOutstandingMessages = new $util.LongBits(object.maxOutstandingMessages.low >>> 0, object.maxOutstandingMessages.high >>> 0).toNumber();
                         if (object.maxOutstandingBytes != null)
                             if ($util.Long)
-                                (message.maxOutstandingBytes = $util.Long.fromValue(object.maxOutstandingBytes)).unsigned = false;
+                                message.maxOutstandingBytes = $util.Long.fromValue(object.maxOutstandingBytes, false);
                             else if (typeof object.maxOutstandingBytes === "string")
                                 message.maxOutstandingBytes = parseInt(object.maxOutstandingBytes, 10);
                             else if (typeof object.maxOutstandingBytes === "number")
@@ -21286,7 +21800,7 @@
                                 message.maxOutstandingBytes = new $util.LongBits(object.maxOutstandingBytes.low >>> 0, object.maxOutstandingBytes.high >>> 0).toNumber();
                         if (object.protocolVersion != null)
                             if ($util.Long)
-                                (message.protocolVersion = $util.Long.fromValue(object.protocolVersion)).unsigned = false;
+                                message.protocolVersion = $util.Long.fromValue(object.protocolVersion, false);
                             else if (typeof object.protocolVersion === "string")
                                 message.protocolVersion = parseInt(object.protocolVersion, 10);
                             else if (typeof object.protocolVersion === "number")
@@ -21305,9 +21819,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    StreamingPullRequest.toObject = function toObject(message, options) {
+                    StreamingPullRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults) {
                             object.ackIds = [];
@@ -21320,19 +21838,19 @@
                             object.clientId = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.maxOutstandingMessages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.maxOutstandingMessages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.maxOutstandingMessages = options.longs === String ? "0" : 0;
+                                object.maxOutstandingMessages = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.maxOutstandingBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.maxOutstandingBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.maxOutstandingBytes = options.longs === String ? "0" : 0;
+                                object.maxOutstandingBytes = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.protocolVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.protocolVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.protocolVersion = options.longs === String ? "0" : 0;
+                                object.protocolVersion = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         }
                         if (message.subscription != null && message.hasOwnProperty("subscription"))
                             object.subscription = message.subscription;
@@ -21356,17 +21874,23 @@
                         if (message.clientId != null && message.hasOwnProperty("clientId"))
                             object.clientId = message.clientId;
                         if (message.maxOutstandingMessages != null && message.hasOwnProperty("maxOutstandingMessages"))
-                            if (typeof message.maxOutstandingMessages === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.maxOutstandingMessages = typeof message.maxOutstandingMessages === "number" ? BigInt(message.maxOutstandingMessages) : $util.Long.fromBits(message.maxOutstandingMessages.low >>> 0, message.maxOutstandingMessages.high >>> 0, false).toBigInt();
+                            else if (typeof message.maxOutstandingMessages === "number")
                                 object.maxOutstandingMessages = options.longs === String ? String(message.maxOutstandingMessages) : message.maxOutstandingMessages;
                             else
                                 object.maxOutstandingMessages = options.longs === String ? $util.Long.prototype.toString.call(message.maxOutstandingMessages) : options.longs === Number ? new $util.LongBits(message.maxOutstandingMessages.low >>> 0, message.maxOutstandingMessages.high >>> 0).toNumber() : message.maxOutstandingMessages;
                         if (message.maxOutstandingBytes != null && message.hasOwnProperty("maxOutstandingBytes"))
-                            if (typeof message.maxOutstandingBytes === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.maxOutstandingBytes = typeof message.maxOutstandingBytes === "number" ? BigInt(message.maxOutstandingBytes) : $util.Long.fromBits(message.maxOutstandingBytes.low >>> 0, message.maxOutstandingBytes.high >>> 0, false).toBigInt();
+                            else if (typeof message.maxOutstandingBytes === "number")
                                 object.maxOutstandingBytes = options.longs === String ? String(message.maxOutstandingBytes) : message.maxOutstandingBytes;
                             else
                                 object.maxOutstandingBytes = options.longs === String ? $util.Long.prototype.toString.call(message.maxOutstandingBytes) : options.longs === Number ? new $util.LongBits(message.maxOutstandingBytes.low >>> 0, message.maxOutstandingBytes.high >>> 0).toNumber() : message.maxOutstandingBytes;
                         if (message.protocolVersion != null && message.hasOwnProperty("protocolVersion"))
-                            if (typeof message.protocolVersion === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.protocolVersion = typeof message.protocolVersion === "number" ? BigInt(message.protocolVersion) : $util.Long.fromBits(message.protocolVersion.low >>> 0, message.protocolVersion.high >>> 0, false).toBigInt();
+                            else if (typeof message.protocolVersion === "number")
                                 object.protocolVersion = options.longs === String ? String(message.protocolVersion) : message.protocolVersion;
                             else
                                 object.protocolVersion = options.longs === String ? $util.Long.prototype.toString.call(message.protocolVersion) : options.longs === Number ? new $util.LongBits(message.protocolVersion.low >>> 0, message.protocolVersion.high >>> 0).toNumber() : message.protocolVersion;
@@ -21483,18 +22007,22 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    StreamingPullResponse.encode = function encode(message, writer) {
+                    StreamingPullResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.receivedMessages != null && message.receivedMessages.length)
                             for (var i = 0; i < message.receivedMessages.length; ++i)
-                                $root.google.pubsub.v1.ReceivedMessage.encode(message.receivedMessages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                $root.google.pubsub.v1.ReceivedMessage.encode(message.receivedMessages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.modifyAckDeadlineConfirmation != null && Object.hasOwnProperty.call(message, "modifyAckDeadlineConfirmation"))
-                            $root.google.pubsub.v1.StreamingPullResponse.ModifyAckDeadlineConfirmation.encode(message.modifyAckDeadlineConfirmation, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.pubsub.v1.StreamingPullResponse.ModifyAckDeadlineConfirmation.encode(message.modifyAckDeadlineConfirmation, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         if (message.subscriptionProperties != null && Object.hasOwnProperty.call(message, "subscriptionProperties"))
-                            $root.google.pubsub.v1.StreamingPullResponse.SubscriptionProperties.encode(message.subscriptionProperties, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.pubsub.v1.StreamingPullResponse.SubscriptionProperties.encode(message.subscriptionProperties, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         if (message.acknowledgeConfirmation != null && Object.hasOwnProperty.call(message, "acknowledgeConfirmation"))
-                            $root.google.pubsub.v1.StreamingPullResponse.AcknowledgeConfirmation.encode(message.acknowledgeConfirmation, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.pubsub.v1.StreamingPullResponse.AcknowledgeConfirmation.encode(message.acknowledgeConfirmation, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -21672,9 +22200,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    StreamingPullResponse.toObject = function toObject(message, options) {
+                    StreamingPullResponse.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.receivedMessages = [];
@@ -21686,14 +22218,14 @@
                         if (message.receivedMessages && message.receivedMessages.length) {
                             object.receivedMessages = [];
                             for (var j = 0; j < message.receivedMessages.length; ++j)
-                                object.receivedMessages[j] = $root.google.pubsub.v1.ReceivedMessage.toObject(message.receivedMessages[j], options);
+                                object.receivedMessages[j] = $root.google.pubsub.v1.ReceivedMessage.toObject(message.receivedMessages[j], options, q + 1);
                         }
                         if (message.modifyAckDeadlineConfirmation != null && message.hasOwnProperty("modifyAckDeadlineConfirmation"))
-                            object.modifyAckDeadlineConfirmation = $root.google.pubsub.v1.StreamingPullResponse.ModifyAckDeadlineConfirmation.toObject(message.modifyAckDeadlineConfirmation, options);
+                            object.modifyAckDeadlineConfirmation = $root.google.pubsub.v1.StreamingPullResponse.ModifyAckDeadlineConfirmation.toObject(message.modifyAckDeadlineConfirmation, options, q + 1);
                         if (message.subscriptionProperties != null && message.hasOwnProperty("subscriptionProperties"))
-                            object.subscriptionProperties = $root.google.pubsub.v1.StreamingPullResponse.SubscriptionProperties.toObject(message.subscriptionProperties, options);
+                            object.subscriptionProperties = $root.google.pubsub.v1.StreamingPullResponse.SubscriptionProperties.toObject(message.subscriptionProperties, options, q + 1);
                         if (message.acknowledgeConfirmation != null && message.hasOwnProperty("acknowledgeConfirmation"))
-                            object.acknowledgeConfirmation = $root.google.pubsub.v1.StreamingPullResponse.AcknowledgeConfirmation.toObject(message.acknowledgeConfirmation, options);
+                            object.acknowledgeConfirmation = $root.google.pubsub.v1.StreamingPullResponse.AcknowledgeConfirmation.toObject(message.acknowledgeConfirmation, options, q + 1);
                         return object;
                     };
     
@@ -21807,9 +22339,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        AcknowledgeConfirmation.encode = function encode(message, writer) {
+                        AcknowledgeConfirmation.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.ackIds != null && message.ackIds.length)
                                 for (var i = 0; i < message.ackIds.length; ++i)
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.ackIds[i]);
@@ -22012,9 +22548,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        AcknowledgeConfirmation.toObject = function toObject(message, options) {
+                        AcknowledgeConfirmation.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.arrays || options.defaults) {
                                 object.ackIds = [];
@@ -22148,9 +22688,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        ModifyAckDeadlineConfirmation.encode = function encode(message, writer) {
+                        ModifyAckDeadlineConfirmation.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.ackIds != null && message.ackIds.length)
                                 for (var i = 0; i < message.ackIds.length; ++i)
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.ackIds[i]);
@@ -22330,9 +22874,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        ModifyAckDeadlineConfirmation.toObject = function toObject(message, options) {
+                        ModifyAckDeadlineConfirmation.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.arrays || options.defaults) {
                                 object.ackIds = [];
@@ -22448,9 +22996,13 @@
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        SubscriptionProperties.encode = function encode(message, writer) {
+                        SubscriptionProperties.encode = function encode(message, writer, q) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             if (message.exactlyOnceDeliveryEnabled != null && Object.hasOwnProperty.call(message, "exactlyOnceDeliveryEnabled"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.exactlyOnceDeliveryEnabled);
                             if (message.messageOrderingEnabled != null && Object.hasOwnProperty.call(message, "messageOrderingEnabled"))
@@ -22583,9 +23135,13 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        SubscriptionProperties.toObject = function toObject(message, options) {
+                        SubscriptionProperties.toObject = function toObject(message, options, q) {
                             if (!options)
                                 options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
                             var object = {};
                             if (options.defaults) {
                                 object.exactlyOnceDeliveryEnabled = false;
@@ -22712,9 +23268,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    CreateSnapshotRequest.encode = function encode(message, writer) {
+                    CreateSnapshotRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
@@ -22939,9 +23499,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    CreateSnapshotRequest.toObject = function toObject(message, options) {
+                    CreateSnapshotRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.objects || options.defaults) {
                             object.labels = {};
@@ -23066,13 +23630,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    UpdateSnapshotRequest.encode = function encode(message, writer) {
+                    UpdateSnapshotRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
-                            $root.google.pubsub.v1.Snapshot.encode(message.snapshot, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.pubsub.v1.Snapshot.encode(message.snapshot, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -23211,18 +23779,22 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    UpdateSnapshotRequest.toObject = function toObject(message, options) {
+                    UpdateSnapshotRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.snapshot = null;
                             object.updateMask = null;
                         }
                         if (message.snapshot != null && message.hasOwnProperty("snapshot"))
-                            object.snapshot = $root.google.pubsub.v1.Snapshot.toObject(message.snapshot, options);
+                            object.snapshot = $root.google.pubsub.v1.Snapshot.toObject(message.snapshot, options, q + 1);
                         if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
                         return object;
                     };
     
@@ -23336,15 +23908,19 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Snapshot.encode = function encode(message, writer) {
+                    Snapshot.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.topic);
                         if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
-                            $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                             for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
@@ -23533,9 +24109,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Snapshot.toObject = function toObject(message, options) {
+                    Snapshot.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.objects || options.defaults)
                             object.labels = {};
@@ -23549,7 +24129,7 @@
                         if (message.topic != null && message.hasOwnProperty("topic"))
                             object.topic = message.topic;
                         if (message.expireTime != null && message.hasOwnProperty("expireTime"))
-                            object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                            object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options, q + 1);
                         var keys2;
                         if (message.labels && (keys2 = Object.keys(message.labels)).length) {
                             object.labels = {};
@@ -23644,9 +24224,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    GetSnapshotRequest.encode = function encode(message, writer) {
+                    GetSnapshotRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.snapshot);
                         return writer;
@@ -23768,9 +24352,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    GetSnapshotRequest.toObject = function toObject(message, options) {
+                    GetSnapshotRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.snapshot = "";
@@ -23879,9 +24467,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListSnapshotsRequest.encode = function encode(message, writer) {
+                    ListSnapshotsRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.project != null && Object.hasOwnProperty.call(message, "project"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.project);
                         if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
@@ -24025,9 +24617,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListSnapshotsRequest.toObject = function toObject(message, options) {
+                    ListSnapshotsRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.project = "";
@@ -24135,12 +24731,16 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListSnapshotsResponse.encode = function encode(message, writer) {
+                    ListSnapshotsResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.snapshots != null && message.snapshots.length)
                             for (var i = 0; i < message.snapshots.length; ++i)
-                                $root.google.pubsub.v1.Snapshot.encode(message.snapshots[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                $root.google.pubsub.v1.Snapshot.encode(message.snapshots[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
                         return writer;
@@ -24287,9 +24887,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListSnapshotsResponse.toObject = function toObject(message, options) {
+                    ListSnapshotsResponse.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.snapshots = [];
@@ -24298,7 +24902,7 @@
                         if (message.snapshots && message.snapshots.length) {
                             object.snapshots = [];
                             for (var j = 0; j < message.snapshots.length; ++j)
-                                object.snapshots[j] = $root.google.pubsub.v1.Snapshot.toObject(message.snapshots[j], options);
+                                object.snapshots[j] = $root.google.pubsub.v1.Snapshot.toObject(message.snapshots[j], options, q + 1);
                         }
                         if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                             object.nextPageToken = message.nextPageToken;
@@ -24387,9 +24991,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    DeleteSnapshotRequest.encode = function encode(message, writer) {
+                    DeleteSnapshotRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.snapshot);
                         return writer;
@@ -24511,9 +25119,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    DeleteSnapshotRequest.toObject = function toObject(message, options) {
+                    DeleteSnapshotRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.snapshot = "";
@@ -24636,13 +25248,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    SeekRequest.encode = function encode(message, writer) {
+                    SeekRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscription);
                         if (message.time != null && Object.hasOwnProperty.call(message, "time"))
-                            $root.google.protobuf.Timestamp.encode(message.time, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.Timestamp.encode(message.time, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.snapshot);
                         return writer;
@@ -24795,16 +25411,20 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    SeekRequest.toObject = function toObject(message, options) {
+                    SeekRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.subscription = "";
                         if (message.subscription != null && message.hasOwnProperty("subscription"))
                             object.subscription = message.subscription;
                         if (message.time != null && message.hasOwnProperty("time")) {
-                            object.time = $root.google.protobuf.Timestamp.toObject(message.time, options);
+                            object.time = $root.google.protobuf.Timestamp.toObject(message.time, options, q + 1);
                             if (options.oneofs)
                                 object.target = "time";
                         }
@@ -24889,9 +25509,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    SeekResponse.encode = function encode(message, writer) {
+                    SeekResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         return writer;
                     };
     
@@ -25488,9 +26112,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Schema.encode = function encode(message, writer) {
+                    Schema.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.type != null && Object.hasOwnProperty.call(message, "type"))
@@ -25500,7 +26128,7 @@
                         if (message.revisionId != null && Object.hasOwnProperty.call(message, "revisionId"))
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.revisionId);
                         if (message.revisionCreateTime != null && Object.hasOwnProperty.call(message, "revisionCreateTime"))
-                            $root.google.protobuf.Timestamp.encode(message.revisionCreateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            $root.google.protobuf.Timestamp.encode(message.revisionCreateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -25685,9 +26313,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Schema.toObject = function toObject(message, options) {
+                    Schema.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.name = "";
@@ -25705,7 +26337,7 @@
                         if (message.revisionId != null && message.hasOwnProperty("revisionId"))
                             object.revisionId = message.revisionId;
                         if (message.revisionCreateTime != null && message.hasOwnProperty("revisionCreateTime"))
-                            object.revisionCreateTime = $root.google.protobuf.Timestamp.toObject(message.revisionCreateTime, options);
+                            object.revisionCreateTime = $root.google.protobuf.Timestamp.toObject(message.revisionCreateTime, options, q + 1);
                         return object;
                     };
     
@@ -25841,13 +26473,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    CreateSchemaRequest.encode = function encode(message, writer) {
+                    CreateSchemaRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                         if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
-                            $root.google.pubsub.v1.Schema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.pubsub.v1.Schema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         if (message.schemaId != null && Object.hasOwnProperty.call(message, "schemaId"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.schemaId);
                         return writer;
@@ -25992,9 +26628,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    CreateSchemaRequest.toObject = function toObject(message, options) {
+                    CreateSchemaRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.parent = "";
@@ -26004,7 +26644,7 @@
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
                         if (message.schema != null && message.hasOwnProperty("schema"))
-                            object.schema = $root.google.pubsub.v1.Schema.toObject(message.schema, options);
+                            object.schema = $root.google.pubsub.v1.Schema.toObject(message.schema, options, q + 1);
                         if (message.schemaId != null && message.hasOwnProperty("schemaId"))
                             object.schemaId = message.schemaId;
                         return object;
@@ -26101,9 +26741,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    GetSchemaRequest.encode = function encode(message, writer) {
+                    GetSchemaRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.view != null && Object.hasOwnProperty.call(message, "view"))
@@ -26260,9 +26904,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    GetSchemaRequest.toObject = function toObject(message, options) {
+                    GetSchemaRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.name = "";
@@ -26384,9 +27032,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListSchemasRequest.encode = function encode(message, writer) {
+                    ListSchemasRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                         if (message.view != null && Object.hasOwnProperty.call(message, "view"))
@@ -26565,9 +27217,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListSchemasRequest.toObject = function toObject(message, options) {
+                    ListSchemasRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.parent = "";
@@ -26678,12 +27334,16 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListSchemasResponse.encode = function encode(message, writer) {
+                    ListSchemasResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.schemas != null && message.schemas.length)
                             for (var i = 0; i < message.schemas.length; ++i)
-                                $root.google.pubsub.v1.Schema.encode(message.schemas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                $root.google.pubsub.v1.Schema.encode(message.schemas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
                         return writer;
@@ -26830,9 +27490,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListSchemasResponse.toObject = function toObject(message, options) {
+                    ListSchemasResponse.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.schemas = [];
@@ -26841,7 +27505,7 @@
                         if (message.schemas && message.schemas.length) {
                             object.schemas = [];
                             for (var j = 0; j < message.schemas.length; ++j)
-                                object.schemas[j] = $root.google.pubsub.v1.Schema.toObject(message.schemas[j], options);
+                                object.schemas[j] = $root.google.pubsub.v1.Schema.toObject(message.schemas[j], options, q + 1);
                         }
                         if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                             object.nextPageToken = message.nextPageToken;
@@ -26957,9 +27621,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListSchemaRevisionsRequest.encode = function encode(message, writer) {
+                    ListSchemaRevisionsRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.view != null && Object.hasOwnProperty.call(message, "view"))
@@ -27138,9 +27806,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListSchemaRevisionsRequest.toObject = function toObject(message, options) {
+                    ListSchemaRevisionsRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.name = "";
@@ -27251,12 +27923,16 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ListSchemaRevisionsResponse.encode = function encode(message, writer) {
+                    ListSchemaRevisionsResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.schemas != null && message.schemas.length)
                             for (var i = 0; i < message.schemas.length; ++i)
-                                $root.google.pubsub.v1.Schema.encode(message.schemas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                $root.google.pubsub.v1.Schema.encode(message.schemas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
                         return writer;
@@ -27403,9 +28079,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ListSchemaRevisionsResponse.toObject = function toObject(message, options) {
+                    ListSchemaRevisionsResponse.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.schemas = [];
@@ -27414,7 +28094,7 @@
                         if (message.schemas && message.schemas.length) {
                             object.schemas = [];
                             for (var j = 0; j < message.schemas.length; ++j)
-                                object.schemas[j] = $root.google.pubsub.v1.Schema.toObject(message.schemas[j], options);
+                                object.schemas[j] = $root.google.pubsub.v1.Schema.toObject(message.schemas[j], options, q + 1);
                         }
                         if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                             object.nextPageToken = message.nextPageToken;
@@ -27512,13 +28192,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    CommitSchemaRequest.encode = function encode(message, writer) {
+                    CommitSchemaRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
-                            $root.google.pubsub.v1.Schema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.pubsub.v1.Schema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -27652,9 +28336,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    CommitSchemaRequest.toObject = function toObject(message, options) {
+                    CommitSchemaRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.name = "";
@@ -27663,7 +28351,7 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.schema != null && message.hasOwnProperty("schema"))
-                            object.schema = $root.google.pubsub.v1.Schema.toObject(message.schema, options);
+                            object.schema = $root.google.pubsub.v1.Schema.toObject(message.schema, options, q + 1);
                         return object;
                     };
     
@@ -27758,9 +28446,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    RollbackSchemaRequest.encode = function encode(message, writer) {
+                    RollbackSchemaRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.revisionId != null && Object.hasOwnProperty.call(message, "revisionId"))
@@ -27893,9 +28585,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    RollbackSchemaRequest.toObject = function toObject(message, options) {
+                    RollbackSchemaRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.name = "";
@@ -27999,9 +28695,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    DeleteSchemaRevisionRequest.encode = function encode(message, writer) {
+                    DeleteSchemaRevisionRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.revisionId != null && Object.hasOwnProperty.call(message, "revisionId"))
@@ -28134,9 +28834,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    DeleteSchemaRevisionRequest.toObject = function toObject(message, options) {
+                    DeleteSchemaRevisionRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.name = "";
@@ -28231,9 +28935,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    DeleteSchemaRequest.encode = function encode(message, writer) {
+                    DeleteSchemaRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         return writer;
@@ -28355,9 +29063,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    DeleteSchemaRequest.toObject = function toObject(message, options) {
+                    DeleteSchemaRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.name = "";
@@ -28457,13 +29169,17 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ValidateSchemaRequest.encode = function encode(message, writer) {
+                    ValidateSchemaRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                         if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
-                            $root.google.pubsub.v1.Schema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.pubsub.v1.Schema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -28597,9 +29313,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ValidateSchemaRequest.toObject = function toObject(message, options) {
+                    ValidateSchemaRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.parent = "";
@@ -28608,7 +29328,7 @@
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
                         if (message.schema != null && message.hasOwnProperty("schema"))
-                            object.schema = $root.google.pubsub.v1.Schema.toObject(message.schema, options);
+                            object.schema = $root.google.pubsub.v1.Schema.toObject(message.schema, options, q + 1);
                         return object;
                     };
     
@@ -28685,9 +29405,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ValidateSchemaResponse.encode = function encode(message, writer) {
+                    ValidateSchemaResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         return writer;
                     };
     
@@ -28933,15 +29657,19 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ValidateMessageRequest.encode = function encode(message, writer) {
+                    ValidateMessageRequest.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
                         if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
-                            $root.google.pubsub.v1.Schema.encode(message.schema, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.pubsub.v1.Schema.encode(message.schema, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         if (message.message != null && Object.hasOwnProperty.call(message, "message"))
                             writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.message);
                         if (message.encoding != null && Object.hasOwnProperty.call(message, "encoding"))
@@ -29141,9 +29869,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ValidateMessageRequest.toObject = function toObject(message, options) {
+                    ValidateMessageRequest.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.parent = "";
@@ -29164,7 +29896,7 @@
                                 object.schemaSpec = "name";
                         }
                         if (message.schema != null && message.hasOwnProperty("schema")) {
-                            object.schema = $root.google.pubsub.v1.Schema.toObject(message.schema, options);
+                            object.schema = $root.google.pubsub.v1.Schema.toObject(message.schema, options, q + 1);
                             if (options.oneofs)
                                 object.schemaSpec = "schema";
                         }
@@ -29248,9 +29980,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ValidateMessageResponse.encode = function encode(message, writer) {
+                    ValidateMessageResponse.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         return writer;
                     };
     
@@ -29487,12 +30223,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Http.encode = function encode(message, writer) {
+                Http.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.rules != null && message.rules.length)
                         for (var i = 0; i < message.rules.length; ++i)
-                            $root.google.api.HttpRule.encode(message.rules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.api.HttpRule.encode(message.rules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.fullyDecodeReservedExpansion != null && Object.hasOwnProperty.call(message, "fullyDecodeReservedExpansion"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.fullyDecodeReservedExpansion);
                     return writer;
@@ -29639,9 +30379,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Http.toObject = function toObject(message, options) {
+                Http.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.rules = [];
@@ -29650,7 +30394,7 @@
                     if (message.rules && message.rules.length) {
                         object.rules = [];
                         for (var j = 0; j < message.rules.length; ++j)
-                            object.rules[j] = $root.google.api.HttpRule.toObject(message.rules[j], options);
+                            object.rules[j] = $root.google.api.HttpRule.toObject(message.rules[j], options, q + 1);
                     }
                     if (message.fullyDecodeReservedExpansion != null && message.hasOwnProperty("fullyDecodeReservedExpansion"))
                         object.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion;
@@ -29835,9 +30579,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                HttpRule.encode = function encode(message, writer) {
+                HttpRule.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
                     if (message.get != null && Object.hasOwnProperty.call(message, "get"))
@@ -29853,10 +30601,10 @@
                     if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.body);
                     if (message.custom != null && Object.hasOwnProperty.call(message, "custom"))
-                        $root.google.api.CustomHttpPattern.encode(message.custom, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        $root.google.api.CustomHttpPattern.encode(message.custom, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                     if (message.additionalBindings != null && message.additionalBindings.length)
                         for (var i = 0; i < message.additionalBindings.length; ++i)
-                            $root.google.api.HttpRule.encode(message.additionalBindings[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            $root.google.api.HttpRule.encode(message.additionalBindings[i], writer.uint32(/* id 11, wireType 2 =*/90).fork(), q + 1).ldelim();
                     if (message.responseBody != null && Object.hasOwnProperty.call(message, "responseBody"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.responseBody);
                     return writer;
@@ -30104,9 +30852,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                HttpRule.toObject = function toObject(message, options) {
+                HttpRule.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.additionalBindings = [];
@@ -30145,14 +30897,14 @@
                     if (message.body != null && message.hasOwnProperty("body"))
                         object.body = message.body;
                     if (message.custom != null && message.hasOwnProperty("custom")) {
-                        object.custom = $root.google.api.CustomHttpPattern.toObject(message.custom, options);
+                        object.custom = $root.google.api.CustomHttpPattern.toObject(message.custom, options, q + 1);
                         if (options.oneofs)
                             object.pattern = "custom";
                     }
                     if (message.additionalBindings && message.additionalBindings.length) {
                         object.additionalBindings = [];
                         for (var j = 0; j < message.additionalBindings.length; ++j)
-                            object.additionalBindings[j] = $root.google.api.HttpRule.toObject(message.additionalBindings[j], options);
+                            object.additionalBindings[j] = $root.google.api.HttpRule.toObject(message.additionalBindings[j], options, q + 1);
                     }
                     if (message.responseBody != null && message.hasOwnProperty("responseBody"))
                         object.responseBody = message.responseBody;
@@ -30250,9 +31002,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CustomHttpPattern.encode = function encode(message, writer) {
+                CustomHttpPattern.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.kind);
                     if (message.path != null && Object.hasOwnProperty.call(message, "path"))
@@ -30385,9 +31141,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                CustomHttpPattern.toObject = function toObject(message, options) {
+                CustomHttpPattern.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.kind = "";
@@ -30501,9 +31261,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CommonLanguageSettings.encode = function encode(message, writer) {
+                CommonLanguageSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.referenceDocsUri != null && Object.hasOwnProperty.call(message, "referenceDocsUri"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.referenceDocsUri);
                     if (message.destinations != null && message.destinations.length) {
@@ -30513,7 +31277,7 @@
                         writer.ldelim();
                     }
                     if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
-                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -30696,9 +31460,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                CommonLanguageSettings.toObject = function toObject(message, options) {
+                CommonLanguageSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
@@ -30714,7 +31482,7 @@
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
                     if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
-                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options, q + 1);
                     return object;
                 };
     
@@ -30890,9 +31658,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ClientLibrarySettings.encode = function encode(message, writer) {
+                ClientLibrarySettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
                     if (message.launchStage != null && Object.hasOwnProperty.call(message, "launchStage"))
@@ -30900,21 +31672,21 @@
                     if (message.restNumericEnums != null && Object.hasOwnProperty.call(message, "restNumericEnums"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.restNumericEnums);
                     if (message.javaSettings != null && Object.hasOwnProperty.call(message, "javaSettings"))
-                        $root.google.api.JavaSettings.encode(message.javaSettings, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                        $root.google.api.JavaSettings.encode(message.javaSettings, writer.uint32(/* id 21, wireType 2 =*/170).fork(), q + 1).ldelim();
                     if (message.cppSettings != null && Object.hasOwnProperty.call(message, "cppSettings"))
-                        $root.google.api.CppSettings.encode(message.cppSettings, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                        $root.google.api.CppSettings.encode(message.cppSettings, writer.uint32(/* id 22, wireType 2 =*/178).fork(), q + 1).ldelim();
                     if (message.phpSettings != null && Object.hasOwnProperty.call(message, "phpSettings"))
-                        $root.google.api.PhpSettings.encode(message.phpSettings, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                        $root.google.api.PhpSettings.encode(message.phpSettings, writer.uint32(/* id 23, wireType 2 =*/186).fork(), q + 1).ldelim();
                     if (message.pythonSettings != null && Object.hasOwnProperty.call(message, "pythonSettings"))
-                        $root.google.api.PythonSettings.encode(message.pythonSettings, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                        $root.google.api.PythonSettings.encode(message.pythonSettings, writer.uint32(/* id 24, wireType 2 =*/194).fork(), q + 1).ldelim();
                     if (message.nodeSettings != null && Object.hasOwnProperty.call(message, "nodeSettings"))
-                        $root.google.api.NodeSettings.encode(message.nodeSettings, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                        $root.google.api.NodeSettings.encode(message.nodeSettings, writer.uint32(/* id 25, wireType 2 =*/202).fork(), q + 1).ldelim();
                     if (message.dotnetSettings != null && Object.hasOwnProperty.call(message, "dotnetSettings"))
-                        $root.google.api.DotnetSettings.encode(message.dotnetSettings, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                        $root.google.api.DotnetSettings.encode(message.dotnetSettings, writer.uint32(/* id 26, wireType 2 =*/210).fork(), q + 1).ldelim();
                     if (message.rubySettings != null && Object.hasOwnProperty.call(message, "rubySettings"))
-                        $root.google.api.RubySettings.encode(message.rubySettings, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                        $root.google.api.RubySettings.encode(message.rubySettings, writer.uint32(/* id 27, wireType 2 =*/218).fork(), q + 1).ldelim();
                     if (message.goSettings != null && Object.hasOwnProperty.call(message, "goSettings"))
-                        $root.google.api.GoSettings.encode(message.goSettings, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                        $root.google.api.GoSettings.encode(message.goSettings, writer.uint32(/* id 28, wireType 2 =*/226).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -31213,9 +31985,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ClientLibrarySettings.toObject = function toObject(message, options) {
+                ClientLibrarySettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.version = "";
@@ -31237,21 +32013,21 @@
                     if (message.restNumericEnums != null && message.hasOwnProperty("restNumericEnums"))
                         object.restNumericEnums = message.restNumericEnums;
                     if (message.javaSettings != null && message.hasOwnProperty("javaSettings"))
-                        object.javaSettings = $root.google.api.JavaSettings.toObject(message.javaSettings, options);
+                        object.javaSettings = $root.google.api.JavaSettings.toObject(message.javaSettings, options, q + 1);
                     if (message.cppSettings != null && message.hasOwnProperty("cppSettings"))
-                        object.cppSettings = $root.google.api.CppSettings.toObject(message.cppSettings, options);
+                        object.cppSettings = $root.google.api.CppSettings.toObject(message.cppSettings, options, q + 1);
                     if (message.phpSettings != null && message.hasOwnProperty("phpSettings"))
-                        object.phpSettings = $root.google.api.PhpSettings.toObject(message.phpSettings, options);
+                        object.phpSettings = $root.google.api.PhpSettings.toObject(message.phpSettings, options, q + 1);
                     if (message.pythonSettings != null && message.hasOwnProperty("pythonSettings"))
-                        object.pythonSettings = $root.google.api.PythonSettings.toObject(message.pythonSettings, options);
+                        object.pythonSettings = $root.google.api.PythonSettings.toObject(message.pythonSettings, options, q + 1);
                     if (message.nodeSettings != null && message.hasOwnProperty("nodeSettings"))
-                        object.nodeSettings = $root.google.api.NodeSettings.toObject(message.nodeSettings, options);
+                        object.nodeSettings = $root.google.api.NodeSettings.toObject(message.nodeSettings, options, q + 1);
                     if (message.dotnetSettings != null && message.hasOwnProperty("dotnetSettings"))
-                        object.dotnetSettings = $root.google.api.DotnetSettings.toObject(message.dotnetSettings, options);
+                        object.dotnetSettings = $root.google.api.DotnetSettings.toObject(message.dotnetSettings, options, q + 1);
                     if (message.rubySettings != null && message.hasOwnProperty("rubySettings"))
-                        object.rubySettings = $root.google.api.RubySettings.toObject(message.rubySettings, options);
+                        object.rubySettings = $root.google.api.RubySettings.toObject(message.rubySettings, options, q + 1);
                     if (message.goSettings != null && message.hasOwnProperty("goSettings"))
-                        object.goSettings = $root.google.api.GoSettings.toObject(message.goSettings, options);
+                        object.goSettings = $root.google.api.GoSettings.toObject(message.goSettings, options, q + 1);
                     return object;
                 };
     
@@ -31430,12 +32206,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Publishing.encode = function encode(message, writer) {
+                Publishing.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.methodSettings != null && message.methodSettings.length)
                         for (var i = 0; i < message.methodSettings.length; ++i)
-                            $root.google.api.MethodSettings.encode(message.methodSettings[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.api.MethodSettings.encode(message.methodSettings[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.newIssueUri != null && Object.hasOwnProperty.call(message, "newIssueUri"))
                         writer.uint32(/* id 101, wireType 2 =*/810).string(message.newIssueUri);
                     if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
@@ -31453,7 +32233,7 @@
                         writer.uint32(/* id 107, wireType 0 =*/856).int32(message.organization);
                     if (message.librarySettings != null && message.librarySettings.length)
                         for (var i = 0; i < message.librarySettings.length; ++i)
-                            $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
+                            $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork(), q + 1).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
                     if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
@@ -31759,9 +32539,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Publishing.toObject = function toObject(message, options) {
+                Publishing.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.methodSettings = [];
@@ -31781,7 +32565,7 @@
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
                         for (var j = 0; j < message.methodSettings.length; ++j)
-                            object.methodSettings[j] = $root.google.api.MethodSettings.toObject(message.methodSettings[j], options);
+                            object.methodSettings[j] = $root.google.api.MethodSettings.toObject(message.methodSettings[j], options, q + 1);
                     }
                     if (message.newIssueUri != null && message.hasOwnProperty("newIssueUri"))
                         object.newIssueUri = message.newIssueUri;
@@ -31803,7 +32587,7 @@
                     if (message.librarySettings && message.librarySettings.length) {
                         object.librarySettings = [];
                         for (var j = 0; j < message.librarySettings.length; ++j)
-                            object.librarySettings[j] = $root.google.api.ClientLibrarySettings.toObject(message.librarySettings[j], options);
+                            object.librarySettings[j] = $root.google.api.ClientLibrarySettings.toObject(message.librarySettings[j], options, q + 1);
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
@@ -31913,16 +32697,20 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                JavaSettings.encode = function encode(message, writer) {
+                JavaSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.libraryPackage != null && Object.hasOwnProperty.call(message, "libraryPackage"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.libraryPackage);
                     if (message.serviceClassNames != null && Object.hasOwnProperty.call(message, "serviceClassNames"))
                         for (var keys = Object.keys(message.serviceClassNames), i = 0; i < keys.length; ++i)
                             writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.serviceClassNames[keys[i]]).ldelim();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -32099,9 +32887,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                JavaSettings.toObject = function toObject(message, options) {
+                JavaSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.objects || options.defaults)
                         object.serviceClassNames = {};
@@ -32121,7 +32913,7 @@
                         }
                     }
                     if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
     
@@ -32207,11 +32999,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CppSettings.encode = function encode(message, writer) {
+                CppSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -32336,14 +33132,18 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                CppSettings.toObject = function toObject(message, options) {
+                CppSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
     
@@ -32429,11 +33229,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                PhpSettings.encode = function encode(message, writer) {
+                PhpSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -32558,14 +33362,18 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                PhpSettings.toObject = function toObject(message, options) {
+                PhpSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
     
@@ -32660,13 +33468,17 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                PythonSettings.encode = function encode(message, writer) {
+                PythonSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
-                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -32805,18 +33617,22 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                PythonSettings.toObject = function toObject(message, options) {
+                PythonSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.common = null;
                         object.experimentalFeatures = null;
                     }
                     if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
-                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options, q + 1);
                     return object;
                 };
     
@@ -32917,9 +33733,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ExperimentalFeatures.encode = function encode(message, writer) {
+                    ExperimentalFeatures.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
                             writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
                         if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
@@ -33063,9 +33883,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                    ExperimentalFeatures.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.restAsyncIoEnabled = false;
@@ -33166,11 +33990,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                NodeSettings.encode = function encode(message, writer) {
+                NodeSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -33295,14 +34123,18 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                NodeSettings.toObject = function toObject(message, options) {
+                NodeSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
     
@@ -33438,11 +34270,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                DotnetSettings.encode = function encode(message, writer) {
+                DotnetSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
                         for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
                             writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
@@ -33728,9 +34564,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                DotnetSettings.toObject = function toObject(message, options) {
+                DotnetSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.ignoredResources = [];
@@ -33744,7 +34584,7 @@
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
@@ -33862,11 +34702,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                RubySettings.encode = function encode(message, writer) {
+                RubySettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -33991,14 +34835,18 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                RubySettings.toObject = function toObject(message, options) {
+                RubySettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
     
@@ -34094,11 +34942,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                GoSettings.encode = function encode(message, writer) {
+                GoSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
                         for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
                             writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
@@ -34269,16 +35121,20 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                GoSettings.toObject = function toObject(message, options) {
+                GoSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.objects || options.defaults)
                         object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
@@ -34392,13 +35248,17 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                MethodSettings.encode = function encode(message, writer) {
+                MethodSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
                     if (message.longRunning != null && Object.hasOwnProperty.call(message, "longRunning"))
-                        $root.google.api.MethodSettings.LongRunning.encode(message.longRunning, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        $root.google.api.MethodSettings.LongRunning.encode(message.longRunning, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.autoPopulatedFields != null && message.autoPopulatedFields.length)
                         for (var i = 0; i < message.autoPopulatedFields.length; ++i)
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.autoPopulatedFields[i]);
@@ -34555,9 +35415,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                MethodSettings.toObject = function toObject(message, options) {
+                MethodSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.autoPopulatedFields = [];
@@ -34568,7 +35432,7 @@
                     if (message.selector != null && message.hasOwnProperty("selector"))
                         object.selector = message.selector;
                     if (message.longRunning != null && message.hasOwnProperty("longRunning"))
-                        object.longRunning = $root.google.api.MethodSettings.LongRunning.toObject(message.longRunning, options);
+                        object.longRunning = $root.google.api.MethodSettings.LongRunning.toObject(message.longRunning, options, q + 1);
                     if (message.autoPopulatedFields && message.autoPopulatedFields.length) {
                         object.autoPopulatedFields = [];
                         for (var j = 0; j < message.autoPopulatedFields.length; ++j)
@@ -34683,17 +35547,21 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    LongRunning.encode = function encode(message, writer) {
+                    LongRunning.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.initialPollDelay != null && Object.hasOwnProperty.call(message, "initialPollDelay"))
-                            $root.google.protobuf.Duration.encode(message.initialPollDelay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.initialPollDelay, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.pollDelayMultiplier != null && Object.hasOwnProperty.call(message, "pollDelayMultiplier"))
                             writer.uint32(/* id 2, wireType 5 =*/21).float(message.pollDelayMultiplier);
                         if (message.maxPollDelay != null && Object.hasOwnProperty.call(message, "maxPollDelay"))
-                            $root.google.protobuf.Duration.encode(message.maxPollDelay, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.maxPollDelay, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         if (message.totalPollTimeout != null && Object.hasOwnProperty.call(message, "totalPollTimeout"))
-                            $root.google.protobuf.Duration.encode(message.totalPollTimeout, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.totalPollTimeout, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -34855,9 +35723,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    LongRunning.toObject = function toObject(message, options) {
+                    LongRunning.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.initialPollDelay = null;
@@ -34866,13 +35738,13 @@
                             object.totalPollTimeout = null;
                         }
                         if (message.initialPollDelay != null && message.hasOwnProperty("initialPollDelay"))
-                            object.initialPollDelay = $root.google.protobuf.Duration.toObject(message.initialPollDelay, options);
+                            object.initialPollDelay = $root.google.protobuf.Duration.toObject(message.initialPollDelay, options, q + 1);
                         if (message.pollDelayMultiplier != null && message.hasOwnProperty("pollDelayMultiplier"))
                             object.pollDelayMultiplier = options.json && !isFinite(message.pollDelayMultiplier) ? String(message.pollDelayMultiplier) : message.pollDelayMultiplier;
                         if (message.maxPollDelay != null && message.hasOwnProperty("maxPollDelay"))
-                            object.maxPollDelay = $root.google.protobuf.Duration.toObject(message.maxPollDelay, options);
+                            object.maxPollDelay = $root.google.protobuf.Duration.toObject(message.maxPollDelay, options, q + 1);
                         if (message.totalPollTimeout != null && message.hasOwnProperty("totalPollTimeout"))
-                            object.totalPollTimeout = $root.google.protobuf.Duration.toObject(message.totalPollTimeout, options);
+                            object.totalPollTimeout = $root.google.protobuf.Duration.toObject(message.totalPollTimeout, options, q + 1);
                         return object;
                     };
     
@@ -35013,9 +35885,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                SelectiveGapicGeneration.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.methods != null && message.methods.length)
                         for (var i = 0; i < message.methods.length; ++i)
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
@@ -35160,9 +36036,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                SelectiveGapicGeneration.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.methods = [];
@@ -35370,9 +36250,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ResourceDescriptor.encode = function encode(message, writer) {
+                ResourceDescriptor.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
                     if (message.pattern != null && message.pattern.length)
@@ -35635,9 +36519,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ResourceDescriptor.toObject = function toObject(message, options) {
+                ResourceDescriptor.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.pattern = [];
@@ -35794,9 +36682,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ResourceReference.encode = function encode(message, writer) {
+                ResourceReference.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
                     if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
@@ -35929,9 +36821,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ResourceReference.toObject = function toObject(message, options) {
+                ResourceReference.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.type = "";
@@ -36039,12 +36935,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FileDescriptorSet.encode = function encode(message, writer) {
+                FileDescriptorSet.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.file != null && message.file.length)
                         for (var i = 0; i < message.file.length; ++i)
-                            $root.google.protobuf.FileDescriptorProto.encode(message.file[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.FileDescriptorProto.encode(message.file[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -36180,16 +37080,20 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FileDescriptorSet.toObject = function toObject(message, options) {
+                FileDescriptorSet.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.file = [];
                     if (message.file && message.file.length) {
                         object.file = [];
                         for (var j = 0; j < message.file.length; ++j)
-                            object.file[j] = $root.google.protobuf.FileDescriptorProto.toObject(message.file[j], options);
+                            object.file[j] = $root.google.protobuf.FileDescriptorProto.toObject(message.file[j], options, q + 1);
                     }
                     return object;
                 };
@@ -36435,9 +37339,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FileDescriptorProto.encode = function encode(message, writer) {
+                FileDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
@@ -36447,20 +37355,20 @@
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.dependency[i]);
                     if (message.messageType != null && message.messageType.length)
                         for (var i = 0; i < message.messageType.length; ++i)
-                            $root.google.protobuf.DescriptorProto.encode(message.messageType[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.DescriptorProto.encode(message.messageType[i], writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     if (message.enumType != null && message.enumType.length)
                         for (var i = 0; i < message.enumType.length; ++i)
-                            $root.google.protobuf.EnumDescriptorProto.encode(message.enumType[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.protobuf.EnumDescriptorProto.encode(message.enumType[i], writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                     if (message.service != null && message.service.length)
                         for (var i = 0; i < message.service.length; ++i)
-                            $root.google.protobuf.ServiceDescriptorProto.encode(message.service[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            $root.google.protobuf.ServiceDescriptorProto.encode(message.service[i], writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
-                            $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.FileOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        $root.google.protobuf.FileOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                     if (message.sourceCodeInfo != null && Object.hasOwnProperty.call(message, "sourceCodeInfo"))
-                        $root.google.protobuf.SourceCodeInfo.encode(message.sourceCodeInfo, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        $root.google.protobuf.SourceCodeInfo.encode(message.sourceCodeInfo, writer.uint32(/* id 9, wireType 2 =*/74).fork(), q + 1).ldelim();
                     if (message.publicDependency != null && message.publicDependency.length)
                         for (var i = 0; i < message.publicDependency.length; ++i)
                             writer.uint32(/* id 10, wireType 0 =*/80).int32(message.publicDependency[i]);
@@ -36907,9 +37815,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FileDescriptorProto.toObject = function toObject(message, options) {
+                FileDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.dependency = [];
@@ -36941,27 +37853,27 @@
                     if (message.messageType && message.messageType.length) {
                         object.messageType = [];
                         for (var j = 0; j < message.messageType.length; ++j)
-                            object.messageType[j] = $root.google.protobuf.DescriptorProto.toObject(message.messageType[j], options);
+                            object.messageType[j] = $root.google.protobuf.DescriptorProto.toObject(message.messageType[j], options, q + 1);
                     }
                     if (message.enumType && message.enumType.length) {
                         object.enumType = [];
                         for (var j = 0; j < message.enumType.length; ++j)
-                            object.enumType[j] = $root.google.protobuf.EnumDescriptorProto.toObject(message.enumType[j], options);
+                            object.enumType[j] = $root.google.protobuf.EnumDescriptorProto.toObject(message.enumType[j], options, q + 1);
                     }
                     if (message.service && message.service.length) {
                         object.service = [];
                         for (var j = 0; j < message.service.length; ++j)
-                            object.service[j] = $root.google.protobuf.ServiceDescriptorProto.toObject(message.service[j], options);
+                            object.service[j] = $root.google.protobuf.ServiceDescriptorProto.toObject(message.service[j], options, q + 1);
                     }
                     if (message.extension && message.extension.length) {
                         object.extension = [];
                         for (var j = 0; j < message.extension.length; ++j)
-                            object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options);
+                            object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options, q + 1);
                     }
                     if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.FileOptions.toObject(message.options, options);
+                        object.options = $root.google.protobuf.FileOptions.toObject(message.options, options, q + 1);
                     if (message.sourceCodeInfo != null && message.hasOwnProperty("sourceCodeInfo"))
-                        object.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.toObject(message.sourceCodeInfo, options);
+                        object.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.toObject(message.sourceCodeInfo, options, q + 1);
                     if (message.publicDependency && message.publicDependency.length) {
                         object.publicDependency = [];
                         for (var j = 0; j < message.publicDependency.length; ++j)
@@ -37164,34 +38076,38 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                DescriptorProto.encode = function encode(message, writer) {
+                DescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.field != null && message.field.length)
                         for (var i = 0; i < message.field.length; ++i)
-                            $root.google.protobuf.FieldDescriptorProto.encode(message.field[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.FieldDescriptorProto.encode(message.field[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.nestedType != null && message.nestedType.length)
                         for (var i = 0; i < message.nestedType.length; ++i)
-                            $root.google.protobuf.DescriptorProto.encode(message.nestedType[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.protobuf.DescriptorProto.encode(message.nestedType[i], writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     if (message.enumType != null && message.enumType.length)
                         for (var i = 0; i < message.enumType.length; ++i)
-                            $root.google.protobuf.EnumDescriptorProto.encode(message.enumType[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.EnumDescriptorProto.encode(message.enumType[i], writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     if (message.extensionRange != null && message.extensionRange.length)
                         for (var i = 0; i < message.extensionRange.length; ++i)
-                            $root.google.protobuf.DescriptorProto.ExtensionRange.encode(message.extensionRange[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.protobuf.DescriptorProto.ExtensionRange.encode(message.extensionRange[i], writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
-                            $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.MessageOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        $root.google.protobuf.MessageOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                     if (message.oneofDecl != null && message.oneofDecl.length)
                         for (var i = 0; i < message.oneofDecl.length; ++i)
-                            $root.google.protobuf.OneofDescriptorProto.encode(message.oneofDecl[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            $root.google.protobuf.OneofDescriptorProto.encode(message.oneofDecl[i], writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                     if (message.reservedRange != null && message.reservedRange.length)
                         for (var i = 0; i < message.reservedRange.length; ++i)
-                            $root.google.protobuf.DescriptorProto.ReservedRange.encode(message.reservedRange[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            $root.google.protobuf.DescriptorProto.ReservedRange.encode(message.reservedRange[i], writer.uint32(/* id 9, wireType 2 =*/74).fork(), q + 1).ldelim();
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
@@ -37558,9 +38474,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                DescriptorProto.toObject = function toObject(message, options) {
+                DescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.field = [];
@@ -37582,39 +38502,39 @@
                     if (message.field && message.field.length) {
                         object.field = [];
                         for (var j = 0; j < message.field.length; ++j)
-                            object.field[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.field[j], options);
+                            object.field[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.field[j], options, q + 1);
                     }
                     if (message.nestedType && message.nestedType.length) {
                         object.nestedType = [];
                         for (var j = 0; j < message.nestedType.length; ++j)
-                            object.nestedType[j] = $root.google.protobuf.DescriptorProto.toObject(message.nestedType[j], options);
+                            object.nestedType[j] = $root.google.protobuf.DescriptorProto.toObject(message.nestedType[j], options, q + 1);
                     }
                     if (message.enumType && message.enumType.length) {
                         object.enumType = [];
                         for (var j = 0; j < message.enumType.length; ++j)
-                            object.enumType[j] = $root.google.protobuf.EnumDescriptorProto.toObject(message.enumType[j], options);
+                            object.enumType[j] = $root.google.protobuf.EnumDescriptorProto.toObject(message.enumType[j], options, q + 1);
                     }
                     if (message.extensionRange && message.extensionRange.length) {
                         object.extensionRange = [];
                         for (var j = 0; j < message.extensionRange.length; ++j)
-                            object.extensionRange[j] = $root.google.protobuf.DescriptorProto.ExtensionRange.toObject(message.extensionRange[j], options);
+                            object.extensionRange[j] = $root.google.protobuf.DescriptorProto.ExtensionRange.toObject(message.extensionRange[j], options, q + 1);
                     }
                     if (message.extension && message.extension.length) {
                         object.extension = [];
                         for (var j = 0; j < message.extension.length; ++j)
-                            object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options);
+                            object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options, q + 1);
                     }
                     if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.MessageOptions.toObject(message.options, options);
+                        object.options = $root.google.protobuf.MessageOptions.toObject(message.options, options, q + 1);
                     if (message.oneofDecl && message.oneofDecl.length) {
                         object.oneofDecl = [];
                         for (var j = 0; j < message.oneofDecl.length; ++j)
-                            object.oneofDecl[j] = $root.google.protobuf.OneofDescriptorProto.toObject(message.oneofDecl[j], options);
+                            object.oneofDecl[j] = $root.google.protobuf.OneofDescriptorProto.toObject(message.oneofDecl[j], options, q + 1);
                     }
                     if (message.reservedRange && message.reservedRange.length) {
                         object.reservedRange = [];
                         for (var j = 0; j < message.reservedRange.length; ++j)
-                            object.reservedRange[j] = $root.google.protobuf.DescriptorProto.ReservedRange.toObject(message.reservedRange[j], options);
+                            object.reservedRange[j] = $root.google.protobuf.DescriptorProto.ReservedRange.toObject(message.reservedRange[j], options, q + 1);
                     }
                     if (message.reservedName && message.reservedName.length) {
                         object.reservedName = [];
@@ -37723,15 +38643,19 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ExtensionRange.encode = function encode(message, writer) {
+                    ExtensionRange.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
                         if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                            $root.google.protobuf.ExtensionRangeOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.protobuf.ExtensionRangeOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -37874,9 +38798,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ExtensionRange.toObject = function toObject(message, options) {
+                    ExtensionRange.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.start = 0;
@@ -37888,7 +38816,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.options != null && message.hasOwnProperty("options"))
-                            object.options = $root.google.protobuf.ExtensionRangeOptions.toObject(message.options, options);
+                            object.options = $root.google.protobuf.ExtensionRangeOptions.toObject(message.options, options, q + 1);
                         return object;
                     };
     
@@ -37983,9 +38911,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ReservedRange.encode = function encode(message, writer) {
+                    ReservedRange.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
@@ -38118,9 +39050,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ReservedRange.toObject = function toObject(message, options) {
+                    ReservedRange.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.start = 0;
@@ -38247,19 +39183,23 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ExtensionRangeOptions.encode = function encode(message, writer) {
+                ExtensionRangeOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.declaration != null && message.declaration.length)
                         for (var i = 0; i < message.declaration.length; ++i)
-                            $root.google.protobuf.ExtensionRangeOptions.Declaration.encode(message.declaration[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.ExtensionRangeOptions.Declaration.encode(message.declaration[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.verification);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -38462,9 +39402,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ExtensionRangeOptions.toObject = function toObject(message, options) {
+                ExtensionRangeOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.declaration = [];
@@ -38477,16 +39421,16 @@
                     if (message.declaration && message.declaration.length) {
                         object.declaration = [];
                         for (var j = 0; j < message.declaration.length; ++j)
-                            object.declaration[j] = $root.google.protobuf.ExtensionRangeOptions.Declaration.toObject(message.declaration[j], options);
+                            object.declaration[j] = $root.google.protobuf.ExtensionRangeOptions.Declaration.toObject(message.declaration[j], options, q + 1);
                     }
                     if (message.verification != null && message.hasOwnProperty("verification"))
                         object.verification = options.enums === String ? $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] === undefined ? message.verification : $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] : message.verification;
                     if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     return object;
                 };
@@ -38606,9 +39550,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Declaration.encode = function encode(message, writer) {
+                    Declaration.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.number);
                         if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
@@ -38774,9 +39722,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Declaration.toObject = function toObject(message, options) {
+                    Declaration.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.number = 0;
@@ -38987,9 +39939,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FieldDescriptorProto.encode = function encode(message, writer) {
+                FieldDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
@@ -39005,7 +39961,7 @@
                     if (message.defaultValue != null && Object.hasOwnProperty.call(message, "defaultValue"))
                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.defaultValue);
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.FieldOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        $root.google.protobuf.FieldOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                     if (message.oneofIndex != null && Object.hasOwnProperty.call(message, "oneofIndex"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.oneofIndex);
                     if (message.jsonName != null && Object.hasOwnProperty.call(message, "jsonName"))
@@ -39349,9 +40305,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FieldDescriptorProto.toObject = function toObject(message, options) {
+                FieldDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.name = "";
@@ -39381,7 +40341,7 @@
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
                         object.defaultValue = message.defaultValue;
                     if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.FieldOptions.toObject(message.options, options);
+                        object.options = $root.google.protobuf.FieldOptions.toObject(message.options, options, q + 1);
                     if (message.oneofIndex != null && message.hasOwnProperty("oneofIndex"))
                         object.oneofIndex = message.oneofIndex;
                     if (message.jsonName != null && message.hasOwnProperty("jsonName"))
@@ -39544,13 +40504,17 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                OneofDescriptorProto.encode = function encode(message, writer) {
+                OneofDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.OneofOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        $root.google.protobuf.OneofOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -39684,9 +40648,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                OneofDescriptorProto.toObject = function toObject(message, options) {
+                OneofDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.name = "";
@@ -39695,7 +40663,7 @@
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
                     if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.OneofOptions.toObject(message.options, options);
+                        object.options = $root.google.protobuf.OneofOptions.toObject(message.options, options, q + 1);
                     return object;
                 };
     
@@ -39829,19 +40797,23 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                EnumDescriptorProto.encode = function encode(message, writer) {
+                EnumDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.value != null && message.value.length)
                         for (var i = 0; i < message.value.length; ++i)
-                            $root.google.protobuf.EnumValueDescriptorProto.encode(message.value[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.EnumValueDescriptorProto.encode(message.value[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.EnumOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.protobuf.EnumOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     if (message.reservedRange != null && message.reservedRange.length)
                         for (var i = 0; i < message.reservedRange.length; ++i)
-                            $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.encode(message.reservedRange[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.encode(message.reservedRange[i], writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
@@ -40083,9 +41055,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                EnumDescriptorProto.toObject = function toObject(message, options) {
+                EnumDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.value = [];
@@ -40102,14 +41078,14 @@
                     if (message.value && message.value.length) {
                         object.value = [];
                         for (var j = 0; j < message.value.length; ++j)
-                            object.value[j] = $root.google.protobuf.EnumValueDescriptorProto.toObject(message.value[j], options);
+                            object.value[j] = $root.google.protobuf.EnumValueDescriptorProto.toObject(message.value[j], options, q + 1);
                     }
                     if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.EnumOptions.toObject(message.options, options);
+                        object.options = $root.google.protobuf.EnumOptions.toObject(message.options, options, q + 1);
                     if (message.reservedRange && message.reservedRange.length) {
                         object.reservedRange = [];
                         for (var j = 0; j < message.reservedRange.length; ++j)
-                            object.reservedRange[j] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.toObject(message.reservedRange[j], options);
+                            object.reservedRange[j] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.toObject(message.reservedRange[j], options, q + 1);
                     }
                     if (message.reservedName && message.reservedName.length) {
                         object.reservedName = [];
@@ -40209,9 +41185,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    EnumReservedRange.encode = function encode(message, writer) {
+                    EnumReservedRange.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
@@ -40344,9 +41324,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    EnumReservedRange.toObject = function toObject(message, options) {
+                    EnumReservedRange.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.start = 0;
@@ -40462,15 +41446,19 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                EnumValueDescriptorProto.encode = function encode(message, writer) {
+                EnumValueDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.number);
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.EnumValueOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.protobuf.EnumValueOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -40613,9 +41601,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                EnumValueDescriptorProto.toObject = function toObject(message, options) {
+                EnumValueDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.name = "";
@@ -40627,7 +41619,7 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.EnumValueOptions.toObject(message.options, options);
+                        object.options = $root.google.protobuf.EnumValueOptions.toObject(message.options, options, q + 1);
                     return object;
                 };
     
@@ -40732,16 +41724,20 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ServiceDescriptorProto.encode = function encode(message, writer) {
+                ServiceDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.method != null && message.method.length)
                         for (var i = 0; i < message.method.length; ++i)
-                            $root.google.protobuf.MethodDescriptorProto.encode(message.method[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.MethodDescriptorProto.encode(message.method[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.ServiceOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.protobuf.ServiceOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -40900,9 +41896,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ServiceDescriptorProto.toObject = function toObject(message, options) {
+                ServiceDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.method = [];
@@ -40915,10 +41915,10 @@
                     if (message.method && message.method.length) {
                         object.method = [];
                         for (var j = 0; j < message.method.length; ++j)
-                            object.method[j] = $root.google.protobuf.MethodDescriptorProto.toObject(message.method[j], options);
+                            object.method[j] = $root.google.protobuf.MethodDescriptorProto.toObject(message.method[j], options, q + 1);
                     }
                     if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.ServiceOptions.toObject(message.options, options);
+                        object.options = $root.google.protobuf.ServiceOptions.toObject(message.options, options, q + 1);
                     return object;
                 };
     
@@ -41049,9 +42049,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                MethodDescriptorProto.encode = function encode(message, writer) {
+                MethodDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.inputType != null && Object.hasOwnProperty.call(message, "inputType"))
@@ -41059,7 +42063,7 @@
                     if (message.outputType != null && Object.hasOwnProperty.call(message, "outputType"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.outputType);
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.MethodOptions.encode(message.options, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        $root.google.protobuf.MethodOptions.encode(message.options, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     if (message.clientStreaming != null && Object.hasOwnProperty.call(message, "clientStreaming"))
                         writer.uint32(/* id 5, wireType 0 =*/40).bool(message.clientStreaming);
                     if (message.serverStreaming != null && Object.hasOwnProperty.call(message, "serverStreaming"))
@@ -41233,9 +42237,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                MethodDescriptorProto.toObject = function toObject(message, options) {
+                MethodDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.name = "";
@@ -41252,7 +42260,7 @@
                     if (message.outputType != null && message.hasOwnProperty("outputType"))
                         object.outputType = message.outputType;
                     if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.MethodOptions.toObject(message.options, options);
+                        object.options = $root.google.protobuf.MethodOptions.toObject(message.options, options, q + 1);
                     if (message.clientStreaming != null && message.hasOwnProperty("clientStreaming"))
                         object.clientStreaming = message.clientStreaming;
                     if (message.serverStreaming != null && message.hasOwnProperty("serverStreaming"))
@@ -41533,9 +42541,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FileOptions.encode = function encode(message, writer) {
+                FileOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.javaPackage != null && Object.hasOwnProperty.call(message, "javaPackage"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.javaPackage);
                     if (message.javaOuterClassname != null && Object.hasOwnProperty.call(message, "javaOuterClassname"))
@@ -41575,13 +42587,13 @@
                     if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         writer.uint32(/* id 45, wireType 2 =*/362).string(message.rubyPackage);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
                         for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
-                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -41951,9 +42963,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FileOptions.toObject = function toObject(message, options) {
+                FileOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
@@ -42020,16 +43036,16 @@
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         object.rubyPackage = message.rubyPackage;
                     if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
                         object[".google.api.resourceDefinition"] = [];
                         for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
-                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options, q + 1);
                     }
                     return object;
                 };
@@ -42196,9 +43212,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                MessageOptions.encode = function encode(message, writer) {
+                MessageOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.messageSetWireFormat != null && Object.hasOwnProperty.call(message, "messageSetWireFormat"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.messageSetWireFormat);
                     if (message.noStandardDescriptorAccessor != null && Object.hasOwnProperty.call(message, "noStandardDescriptorAccessor"))
@@ -42210,12 +43230,12 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 11, wireType 0 =*/88).bool(message.deprecatedLegacyJsonFieldConflicts);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 12, wireType 2 =*/98).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource"))
-                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -42424,9 +43444,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                MessageOptions.toObject = function toObject(message, options) {
+                MessageOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
@@ -42450,14 +43474,14 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
                     if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
-                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options, q + 1);
                     return object;
                 };
     
@@ -42682,9 +43706,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FieldOptions.encode = function encode(message, writer) {
+                FieldOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ctype);
                     if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
@@ -42708,19 +43736,19 @@
                             writer.uint32(/* id 19, wireType 0 =*/152).int32(message.targets[i]);
                     if (message.editionDefaults != null && message.editionDefaults.length)
                         for (var i = 0; i < message.editionDefaults.length; ++i)
-                            $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork(), q + 1).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork(), q + 1).ldelim();
                     if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
                             writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
-                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -43239,9 +44267,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FieldOptions.toObject = function toObject(message, options) {
+                FieldOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.targets = [];
@@ -43289,16 +44321,16 @@
                     if (message.editionDefaults && message.editionDefaults.length) {
                         object.editionDefaults = [];
                         for (var j = 0; j < message.editionDefaults.length; ++j)
-                            object.editionDefaults[j] = $root.google.protobuf.FieldOptions.EditionDefault.toObject(message.editionDefaults[j], options);
+                            object.editionDefaults[j] = $root.google.protobuf.FieldOptions.EditionDefault.toObject(message.editionDefaults[j], options, q + 1);
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
@@ -43306,7 +44338,7 @@
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
-                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options, q + 1);
                     return object;
                 };
     
@@ -43476,9 +44508,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    EditionDefault.encode = function encode(message, writer) {
+                    EditionDefault.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
@@ -43680,9 +44716,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    EditionDefault.toObject = function toObject(message, options) {
+                    EditionDefault.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.value = "";
@@ -43804,9 +44844,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    FeatureSupport.encode = function encode(message, writer) {
+                    FeatureSupport.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
                         if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
@@ -44168,9 +45212,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    FeatureSupport.toObject = function toObject(message, options) {
+                    FeatureSupport.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
@@ -44284,14 +45332,18 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                OneofOptions.encode = function encode(message, writer) {
+                OneofOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -44441,20 +45493,24 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                OneofOptions.toObject = function toObject(message, options) {
+                OneofOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
                     if (options.defaults)
                         object.features = null;
                     if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     return object;
                 };
@@ -44578,9 +45634,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                EnumOptions.encode = function encode(message, writer) {
+                EnumOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.allowAlias != null && Object.hasOwnProperty.call(message, "allowAlias"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowAlias);
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
@@ -44588,10 +45648,10 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 6, wireType 0 =*/48).bool(message.deprecatedLegacyJsonFieldConflicts);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -44768,9 +45828,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                EnumOptions.toObject = function toObject(message, options) {
+                EnumOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
@@ -44787,11 +45851,11 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
                     if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     return object;
                 };
@@ -44915,20 +45979,24 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                EnumValueOptions.encode = function encode(message, writer) {
+                EnumValueOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
                     if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -45110,9 +46178,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                EnumValueOptions.toObject = function toObject(message, options) {
+                EnumValueOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
@@ -45125,15 +46197,15 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
                     if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     return object;
                 };
@@ -45266,16 +46338,20 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ServiceOptions.encode = function encode(message, writer) {
+                ServiceOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 34, wireType 2 =*/274).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     if (message[".google.api.defaultHost"] != null && Object.hasOwnProperty.call(message, ".google.api.defaultHost"))
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
@@ -45467,9 +46543,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ServiceOptions.toObject = function toObject(message, options) {
+                ServiceOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
@@ -45483,11 +46563,11 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
@@ -45627,23 +46707,27 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                MethodOptions.encode = function encode(message, writer) {
+                MethodOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         writer.uint32(/* id 34, wireType 0 =*/272).int32(message.idempotencyLevel);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 35, wireType 2 =*/282).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
                     if (message[".google.api.http"] != null && Object.hasOwnProperty.call(message, ".google.api.http"))
-                        $root.google.api.HttpRule.encode(message[".google.api.http"], writer.uint32(/* id 72295728, wireType 2 =*/578365826).fork()).ldelim();
+                        $root.google.api.HttpRule.encode(message[".google.api.http"], writer.uint32(/* id 72295728, wireType 2 =*/578365826).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -45869,9 +46953,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                MethodOptions.toObject = function toObject(message, options) {
+                MethodOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
@@ -45888,11 +46976,11 @@
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
                         object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
                         object[".google.api.methodSignature"] = [];
@@ -45900,7 +46988,7 @@
                             object[".google.api.methodSignature"][j] = message[".google.api.methodSignature"][j];
                     }
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http"))
-                        object[".google.api.http"] = $root.google.api.HttpRule.toObject(message[".google.api.http"], options);
+                        object[".google.api.http"] = $root.google.api.HttpRule.toObject(message[".google.api.http"], options, q + 1);
                     return object;
                 };
     
@@ -46057,12 +47145,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                UninterpretedOption.encode = function encode(message, writer) {
+                UninterpretedOption.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && message.name.length)
                         for (var i = 0; i < message.name.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.NamePart.encode(message.name[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.NamePart.encode(message.name[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.identifierValue != null && Object.hasOwnProperty.call(message, "identifierValue"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.identifierValue);
                     if (message.positiveIntValue != null && Object.hasOwnProperty.call(message, "positiveIntValue"))
@@ -46244,7 +47336,7 @@
                         message.identifierValue = String(object.identifierValue);
                     if (object.positiveIntValue != null)
                         if ($util.Long)
-                            (message.positiveIntValue = $util.Long.fromValue(object.positiveIntValue)).unsigned = true;
+                            message.positiveIntValue = $util.Long.fromValue(object.positiveIntValue, true);
                         else if (typeof object.positiveIntValue === "string")
                             message.positiveIntValue = parseInt(object.positiveIntValue, 10);
                         else if (typeof object.positiveIntValue === "number")
@@ -46253,7 +47345,7 @@
                             message.positiveIntValue = new $util.LongBits(object.positiveIntValue.low >>> 0, object.positiveIntValue.high >>> 0).toNumber(true);
                     if (object.negativeIntValue != null)
                         if ($util.Long)
-                            (message.negativeIntValue = $util.Long.fromValue(object.negativeIntValue)).unsigned = false;
+                            message.negativeIntValue = $util.Long.fromValue(object.negativeIntValue, false);
                         else if (typeof object.negativeIntValue === "string")
                             message.negativeIntValue = parseInt(object.negativeIntValue, 10);
                         else if (typeof object.negativeIntValue === "number")
@@ -46281,9 +47373,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                UninterpretedOption.toObject = function toObject(message, options) {
+                UninterpretedOption.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.name = [];
@@ -46291,14 +47387,14 @@
                         object.identifierValue = "";
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, true);
-                            object.positiveIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.positiveIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.positiveIntValue = options.longs === String ? "0" : 0;
+                            object.positiveIntValue = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.negativeIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.negativeIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.negativeIntValue = options.longs === String ? "0" : 0;
+                            object.negativeIntValue = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.doubleValue = 0;
                         if (options.bytes === String)
                             object.stringValue = "";
@@ -46312,17 +47408,21 @@
                     if (message.name && message.name.length) {
                         object.name = [];
                         for (var j = 0; j < message.name.length; ++j)
-                            object.name[j] = $root.google.protobuf.UninterpretedOption.NamePart.toObject(message.name[j], options);
+                            object.name[j] = $root.google.protobuf.UninterpretedOption.NamePart.toObject(message.name[j], options, q + 1);
                     }
                     if (message.identifierValue != null && message.hasOwnProperty("identifierValue"))
                         object.identifierValue = message.identifierValue;
                     if (message.positiveIntValue != null && message.hasOwnProperty("positiveIntValue"))
-                        if (typeof message.positiveIntValue === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.positiveIntValue = typeof message.positiveIntValue === "number" ? BigInt(message.positiveIntValue) : $util.Long.fromBits(message.positiveIntValue.low >>> 0, message.positiveIntValue.high >>> 0, true).toBigInt();
+                        else if (typeof message.positiveIntValue === "number")
                             object.positiveIntValue = options.longs === String ? String(message.positiveIntValue) : message.positiveIntValue;
                         else
                             object.positiveIntValue = options.longs === String ? $util.Long.prototype.toString.call(message.positiveIntValue) : options.longs === Number ? new $util.LongBits(message.positiveIntValue.low >>> 0, message.positiveIntValue.high >>> 0).toNumber(true) : message.positiveIntValue;
                     if (message.negativeIntValue != null && message.hasOwnProperty("negativeIntValue"))
-                        if (typeof message.negativeIntValue === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.negativeIntValue = typeof message.negativeIntValue === "number" ? BigInt(message.negativeIntValue) : $util.Long.fromBits(message.negativeIntValue.low >>> 0, message.negativeIntValue.high >>> 0, false).toBigInt();
+                        else if (typeof message.negativeIntValue === "number")
                             object.negativeIntValue = options.longs === String ? String(message.negativeIntValue) : message.negativeIntValue;
                         else
                             object.negativeIntValue = options.longs === String ? $util.Long.prototype.toString.call(message.negativeIntValue) : options.longs === Number ? new $util.LongBits(message.negativeIntValue.low >>> 0, message.negativeIntValue.high >>> 0).toNumber() : message.negativeIntValue;
@@ -46423,9 +47523,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    NamePart.encode = function encode(message, writer) {
+                    NamePart.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.namePart);
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.isExtension);
                         return writer;
@@ -46558,9 +47662,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    NamePart.toObject = function toObject(message, options) {
+                    NamePart.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.namePart = "";
@@ -46721,9 +47829,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FeatureSet.encode = function encode(message, writer) {
+                FeatureSet.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.fieldPresence);
                     if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
@@ -47129,9 +48241,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FeatureSet.toObject = function toObject(message, options) {
+                FeatureSet.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.fieldPresence = options.enums === String ? "FIELD_PRESENCE_UNKNOWN" : 0;
@@ -47346,9 +48462,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    VisibilityFeature.encode = function encode(message, writer) {
+                    VisibilityFeature.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         return writer;
                     };
     
@@ -47586,12 +48706,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FeatureSetDefaults.encode = function encode(message, writer) {
+                FeatureSetDefaults.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.defaults != null && message.defaults.length)
                         for (var i = 0; i < message.defaults.length; ++i)
-                            $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.encode(message.defaults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.encode(message.defaults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.minimumEdition != null && Object.hasOwnProperty.call(message, "minimumEdition"))
                         writer.uint32(/* id 4, wireType 0 =*/32).int32(message.minimumEdition);
                     if (message.maximumEdition != null && Object.hasOwnProperty.call(message, "maximumEdition"))
@@ -47887,9 +49011,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FeatureSetDefaults.toObject = function toObject(message, options) {
+                FeatureSetDefaults.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.defaults = [];
@@ -47900,7 +49028,7 @@
                     if (message.defaults && message.defaults.length) {
                         object.defaults = [];
                         for (var j = 0; j < message.defaults.length; ++j)
-                            object.defaults[j] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject(message.defaults[j], options);
+                            object.defaults[j] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject(message.defaults[j], options, q + 1);
                     }
                     if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
                         object.minimumEdition = options.enums === String ? $root.google.protobuf.Edition[message.minimumEdition] === undefined ? message.minimumEdition : $root.google.protobuf.Edition[message.minimumEdition] : message.minimumEdition;
@@ -48006,15 +49134,19 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    FeatureSetEditionDefault.encode = function encode(message, writer) {
+                    FeatureSetEditionDefault.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
                         if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -48231,9 +49363,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    FeatureSetEditionDefault.toObject = function toObject(message, options) {
+                    FeatureSetEditionDefault.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
@@ -48243,9 +49379,9 @@
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
                         if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
-                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options, q + 1);
                         if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
-                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options, q + 1);
                         return object;
                     };
     
@@ -48335,12 +49471,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SourceCodeInfo.encode = function encode(message, writer) {
+                SourceCodeInfo.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.location != null && message.location.length)
                         for (var i = 0; i < message.location.length; ++i)
-                            $root.google.protobuf.SourceCodeInfo.Location.encode(message.location[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.SourceCodeInfo.Location.encode(message.location[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -48476,16 +49616,20 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                SourceCodeInfo.toObject = function toObject(message, options) {
+                SourceCodeInfo.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.location = [];
                     if (message.location && message.location.length) {
                         object.location = [];
                         for (var j = 0; j < message.location.length; ++j)
-                            object.location[j] = $root.google.protobuf.SourceCodeInfo.Location.toObject(message.location[j], options);
+                            object.location[j] = $root.google.protobuf.SourceCodeInfo.Location.toObject(message.location[j], options, q + 1);
                     }
                     return object;
                 };
@@ -48608,9 +49752,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Location.encode = function encode(message, writer) {
+                    Location.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.path != null && message.path.length) {
                             writer.uint32(/* id 1, wireType 2 =*/10).fork();
                             for (var i = 0; i < message.path.length; ++i)
@@ -48828,9 +49976,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Location.toObject = function toObject(message, options) {
+                    Location.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults) {
                             object.path = [];
@@ -48949,12 +50101,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                GeneratedCodeInfo.encode = function encode(message, writer) {
+                GeneratedCodeInfo.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.annotation != null && message.annotation.length)
                         for (var i = 0; i < message.annotation.length; ++i)
-                            $root.google.protobuf.GeneratedCodeInfo.Annotation.encode(message.annotation[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.GeneratedCodeInfo.Annotation.encode(message.annotation[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -49090,16 +50246,20 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                GeneratedCodeInfo.toObject = function toObject(message, options) {
+                GeneratedCodeInfo.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.annotation = [];
                     if (message.annotation && message.annotation.length) {
                         object.annotation = [];
                         for (var j = 0; j < message.annotation.length; ++j)
-                            object.annotation[j] = $root.google.protobuf.GeneratedCodeInfo.Annotation.toObject(message.annotation[j], options);
+                            object.annotation[j] = $root.google.protobuf.GeneratedCodeInfo.Annotation.toObject(message.annotation[j], options, q + 1);
                     }
                     return object;
                 };
@@ -49220,9 +50380,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Annotation.encode = function encode(message, writer) {
+                    Annotation.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.path != null && message.path.length) {
                             writer.uint32(/* id 1, wireType 2 =*/10).fork();
                             for (var i = 0; i < message.path.length; ++i)
@@ -49432,9 +50596,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Annotation.toObject = function toObject(message, options) {
+                    Annotation.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.path = [];
@@ -49586,9 +50754,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Duration.encode = function encode(message, writer) {
+                Duration.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
                     if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
@@ -49707,7 +50879,7 @@
                     var message = new $root.google.protobuf.Duration();
                     if (object.seconds != null)
                         if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                            message.seconds = $util.Long.fromValue(object.seconds, false);
                         else if (typeof object.seconds === "string")
                             message.seconds = parseInt(object.seconds, 10);
                         else if (typeof object.seconds === "number")
@@ -49728,20 +50900,26 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Duration.toObject = function toObject(message, options) {
+                Duration.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.seconds = options.longs === String ? "0" : 0;
+                            object.seconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.nanos = 0;
                     }
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.seconds = typeof message.seconds === "number" ? BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
+                        else if (typeof message.seconds === "number")
                             object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
                         else
                             object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
@@ -49823,9 +51001,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Empty.encode = function encode(message, writer) {
+                Empty.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     return writer;
                 };
     
@@ -50022,9 +51204,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FieldMask.encode = function encode(message, writer) {
+                FieldMask.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.paths != null && message.paths.length)
                         for (var i = 0; i < message.paths.length; ++i)
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
@@ -50158,9 +51344,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FieldMask.toObject = function toObject(message, options) {
+                FieldMask.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.paths = [];
@@ -50255,13 +51445,17 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Struct.encode = function encode(message, writer) {
+                Struct.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.fields != null && Object.hasOwnProperty.call(message, "fields"))
                         for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
                             writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                            $root.google.protobuf.Value.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            $root.google.protobuf.Value.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim().ldelim();
                         }
                     return writer;
                 };
@@ -50420,9 +51614,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Struct.toObject = function toObject(message, options) {
+                Struct.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.objects || options.defaults)
                         object.fields = {};
@@ -50432,7 +51630,7 @@
                         for (var j = 0; j < keys2.length; ++j) {
                             if (keys2[j] === "__proto__")
                                 $util.makeProp(object.fields, keys2[j]);
-                            object.fields[keys2[j]] = $root.google.protobuf.Value.toObject(message.fields[keys2[j]], options);
+                            object.fields[keys2[j]] = $root.google.protobuf.Value.toObject(message.fields[keys2[j]], options, q + 1);
                         }
                     }
                     return object;
@@ -50579,9 +51777,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Value.encode = function encode(message, writer) {
+                Value.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.nullValue != null && Object.hasOwnProperty.call(message, "nullValue"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nullValue);
                     if (message.numberValue != null && Object.hasOwnProperty.call(message, "numberValue"))
@@ -50591,9 +51793,9 @@
                     if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
                         writer.uint32(/* id 4, wireType 0 =*/32).bool(message.boolValue);
                     if (message.structValue != null && Object.hasOwnProperty.call(message, "structValue"))
-                        $root.google.protobuf.Struct.encode(message.structValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        $root.google.protobuf.Struct.encode(message.structValue, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                     if (message.listValue != null && Object.hasOwnProperty.call(message, "listValue"))
-                        $root.google.protobuf.ListValue.encode(message.listValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        $root.google.protobuf.ListValue.encode(message.listValue, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -50807,9 +52009,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Value.toObject = function toObject(message, options) {
+                Value.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
                         object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
@@ -50832,12 +52038,12 @@
                             object.kind = "boolValue";
                     }
                     if (message.structValue != null && message.hasOwnProperty("structValue")) {
-                        object.structValue = $root.google.protobuf.Struct.toObject(message.structValue, options);
+                        object.structValue = $root.google.protobuf.Struct.toObject(message.structValue, options, q + 1);
                         if (options.oneofs)
                             object.kind = "structValue";
                     }
                     if (message.listValue != null && message.hasOwnProperty("listValue")) {
-                        object.listValue = $root.google.protobuf.ListValue.toObject(message.listValue, options);
+                        object.listValue = $root.google.protobuf.ListValue.toObject(message.listValue, options, q + 1);
                         if (options.oneofs)
                             object.kind = "listValue";
                     }
@@ -50939,12 +52145,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ListValue.encode = function encode(message, writer) {
+                ListValue.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.values != null && message.values.length)
                         for (var i = 0; i < message.values.length; ++i)
-                            $root.google.protobuf.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -51080,16 +52290,20 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ListValue.toObject = function toObject(message, options) {
+                ListValue.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.values = [];
                     if (message.values && message.values.length) {
                         object.values = [];
                         for (var j = 0; j < message.values.length; ++j)
-                            object.values[j] = $root.google.protobuf.Value.toObject(message.values[j], options);
+                            object.values[j] = $root.google.protobuf.Value.toObject(message.values[j], options, q + 1);
                     }
                     return object;
                 };
@@ -51185,9 +52399,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Timestamp.encode = function encode(message, writer) {
+                Timestamp.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
                     if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
@@ -51306,7 +52524,7 @@
                     var message = new $root.google.protobuf.Timestamp();
                     if (object.seconds != null)
                         if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                            message.seconds = $util.Long.fromValue(object.seconds, false);
                         else if (typeof object.seconds === "string")
                             message.seconds = parseInt(object.seconds, 10);
                         else if (typeof object.seconds === "number")
@@ -51327,20 +52545,26 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Timestamp.toObject = function toObject(message, options) {
+                Timestamp.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.seconds = options.longs === String ? "0" : 0;
+                            object.seconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.nanos = 0;
                     }
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.seconds = typeof message.seconds === "number" ? BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
+                        else if (typeof message.seconds === "number")
                             object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
                         else
                             object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;

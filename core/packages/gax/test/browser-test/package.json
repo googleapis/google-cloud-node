@@ -26,7 +26,7 @@
   "devDependencies": {
     "@types/mocha": "^9.1.1",
     "@types/node": "^20.5.0",
-    "@types/sinon": "21.0.3",
+    "@types/sinon": "21.0.1",
     "assert": "^2.1.0",
     "browserify-zlib": "^0.2.0",
     "core-js": "^3.40.0",
