@@ -42,8 +42,6 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
@@ -70,7 +68,6 @@
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^4.0.0",
     "jsdoc-region-tag": "^3.0.0",
-    "linkinator": "^6.1.2",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
     "proxyquire": "^2.1.3",
