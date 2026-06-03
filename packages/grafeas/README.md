@@ -175,4 +175,5 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
 
 
-[//]: # "partials.introduction"
+A [Grafeas API Client](https://grafeas.io/) compatible with the Google Cloud
+[Container Analysis API](https://cloud.google.com/container-registry/docs/container-analysis).
