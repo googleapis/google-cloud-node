@@ -62,7 +62,6 @@
     "@google-cloud/monitoring": "^5.0.0",
     "@google-cloud/opentelemetry-resource-util": "^2.4.0",
     "@google-cloud/precise-date": "^5.0.0",
-    "@google-cloud/projectify": "^5.0.0",
     "@google-cloud/promisify": "^5.0.0",
     "@grpc/grpc-js": "^1.13.2",
     "@grpc/proto-loader": "^0.8.0",
