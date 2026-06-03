@@ -11,6 +11,11 @@
   ],
   "prCreation": "not-recreate",
   "gitAuthor": null,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 5am on monday"],
+    "groupName": "lockfile maintenance"
+  },
   "packageRules": [
     {
       "extends": "packages:linters",

@@ -1,0 +1,7 @@
+packages:
+  - 'core'
+  - 'core/packages/*'
+  - 'core/dev-packages/*'
+  - 'packages/*'
+  - 'handwritten/*'
+  - 'containers/*'

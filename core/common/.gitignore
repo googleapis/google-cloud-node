@@ -6,9 +6,6 @@ docs/
 out/
 system-test/secrets.js
 system-test/*key.json
-*.lock
-*-lock.js*
 build/
 .vscode
-package-lock.json
 __pycache__
