@@ -22,7 +22,6 @@ import {common as protobuf} from 'protobufjs';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {PassThrough} from 'stream';
-import * as crypto from 'crypto';
 import * as opentelemetry from '@opentelemetry/api';
 import {google} from '../protos/protos';
 import * as defer from 'p-defer';

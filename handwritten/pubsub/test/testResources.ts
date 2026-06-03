@@ -16,8 +16,6 @@
 // across the two test structures, but because of the tangle of rootDirs
 // and package.json "files", it's hard to avoid it.
 
-import * as crypto from 'crypto';
-
 // Returns a shortened UUID that can be used to identify a
 // specific run of a specific test.
 function shortUUID() {

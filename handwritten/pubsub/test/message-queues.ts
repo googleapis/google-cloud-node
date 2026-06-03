@@ -19,7 +19,6 @@ import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
 import {CallOptions, GoogleError, loggingUtils, Status} from 'google-gax';
 import * as sinon from 'sinon';
-import * as crypto from 'crypto';
 import defer = require('p-defer');
 
 import * as messageTypes from '../src/message-queues';

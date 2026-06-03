@@ -20,7 +20,6 @@ import {grpc} from 'google-gax';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {Duplex, PassThrough} from 'stream';
-import * as crypto from 'crypto';
 import * as defer from 'p-defer';
 import {promisify} from 'util';
 
