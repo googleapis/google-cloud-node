@@ -2,6 +2,8 @@ packages:
   - 'core/*'
   - 'core/packages/*'
   - 'core/dev-packages/*'
+  - 'core/generator/*'
   - 'packages/*'
   - 'handwritten/*'
   - 'containers/*'
+
