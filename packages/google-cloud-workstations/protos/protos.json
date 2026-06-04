@@ -499,7 +499,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -512,6 +515,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -594,6 +598,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "domainConfig": {
+                          "type": "DomainConfig",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "degraded": {
                           "type": "bool",
                           "id": 13,
@@ -607,6 +618,35 @@
                           "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gatewayConfig": {
+                          "type": "GatewayConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "workstationAuthorizationUrl": {
+                          "type": "string",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "workstationLaunchUrl": {
+                          "type": "string",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -643,6 +683,28 @@
                               }
                             }
                           }
+                        },
+                        "DomainConfig": {
+                          "fields": {
+                            "domain": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            }
+                          }
+                        },
+                        "GatewayConfig": {
+                          "fields": {
+                            "http2Enabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -657,7 +719,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -670,6 +735,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -738,6 +804,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "maxUsableWorkstations": {
+                          "type": "int32",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "host": {
                           "type": "Host",
                           "id": 12,
@@ -749,6 +822,14 @@
                           "rule": "repeated",
                           "type": "PersistentDirectory",
                           "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ephemeralDirectories": {
+                          "rule": "repeated",
+                          "type": "EphemeralDirectory",
+                          "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -796,6 +877,35 @@
                           "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "enableAuditAgent": {
+                          "type": "bool",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "disableTcpConnections": {
+                          "type": "bool",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowedPorts": {
+                          "rule": "repeated",
+                          "type": "PortRange",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "grantWorkstationAdminRoleOnCreate": {
+                          "type": "bool",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -895,6 +1005,52 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "accelerators": {
+                                  "rule": "repeated",
+                                  "type": "Accelerator",
+                                  "id": 11,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "boostConfigs": {
+                                  "rule": "repeated",
+                                  "type": "BoostConfig",
+                                  "id": 25,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "disableSsh": {
+                                  "type": "bool",
+                                  "id": 13,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "vmTags": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 14,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "startupScriptUri": {
+                                  "type": "string",
+                                  "id": 26,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "instanceMetadata": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 27,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               },
                               "nested": {
@@ -933,6 +1089,71 @@
                                       }
                                     }
                                   }
+                                },
+                                "Accelerator": {
+                                  "fields": {
+                                    "type": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "count": {
+                                      "type": "int32",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                },
+                                "BoostConfig": {
+                                  "fields": {
+                                    "id": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "machineType": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "accelerators": {
+                                      "rule": "repeated",
+                                      "type": "Accelerator",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "bootDiskSizeGb": {
+                                      "type": "int32",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "enableNestedVirtualization": {
+                                      "type": "bool",
+                                      "id": 7,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "poolSize": {
+                                      "type": "int32",
+                                      "id": 5,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -942,7 +1163,8 @@
                           "oneofs": {
                             "directoryType": {
                               "oneof": [
-                                "gcePd"
+                                "gcePd",
+                                "gceHd"
                               ]
                             }
                           },
@@ -950,6 +1172,10 @@
                             "gcePd": {
                               "type": "GceRegionalPersistentDisk",
                               "id": 2
+                            },
+                            "gceHd": {
+                              "type": "GceHyperdiskBalancedHighAvailability",
+                              "id": 3
                             },
                             "mountPath": {
                               "type": "string",
@@ -965,6 +1191,13 @@
                                 "sizeGb": {
                                   "type": "int32",
                                   "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "maxSizeGb": {
+                                  "type": "int32",
+                                  "id": 7,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -996,6 +1229,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "archiveTimeout": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               },
                               "nested": {
@@ -1004,6 +1244,110 @@
                                     "RECLAIM_POLICY_UNSPECIFIED": 0,
                                     "DELETE": 1,
                                     "RETAIN": 2
+                                  }
+                                }
+                              }
+                            },
+                            "GceHyperdiskBalancedHighAvailability": {
+                              "fields": {
+                                "sizeGb": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "maxSizeGb": {
+                                  "type": "int32",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "sourceSnapshot": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "reclaimPolicy": {
+                                  "type": "ReclaimPolicy",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "archiveTimeout": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "ReclaimPolicy": {
+                                  "values": {
+                                    "RECLAIM_POLICY_UNSPECIFIED": 0,
+                                    "DELETE": 1,
+                                    "RETAIN": 2
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "EphemeralDirectory": {
+                          "oneofs": {
+                            "directoryType": {
+                              "oneof": [
+                                "gcePd"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "gcePd": {
+                              "type": "GcePersistentDisk",
+                              "id": 3
+                            },
+                            "mountPath": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "GcePersistentDisk": {
+                              "fields": {
+                                "diskType": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "sourceSnapshot": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "sourceImage": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "readOnly": {
+                                  "type": "bool",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -1094,6 +1438,24 @@
                               }
                             }
                           }
+                        },
+                        "PortRange": {
+                          "fields": {
+                            "first": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "last": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -1108,7 +1470,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -1121,6 +1486,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -1182,6 +1548,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "persistentDirectories": {
+                          "rule": "repeated",
+                          "type": "WorkstationPersistentDirectory",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "state": {
                           "type": "State",
                           "id": 10,
@@ -1195,9 +1569,98 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "env": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sourceWorkstation": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "runtimeHost": {
+                          "type": "RuntimeHost",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "WorkstationPersistentDirectory": {
+                          "fields": {
+                            "mountPath": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sizeGb": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "RuntimeHost": {
+                          "oneofs": {
+                            "hostType": {
+                              "oneof": [
+                                "gceInstanceHost"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "gceInstanceHost": {
+                              "type": "GceInstanceHost",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "GceInstanceHost": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "zone": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
@@ -1241,6 +1704,13 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1395,6 +1865,13 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1596,6 +2073,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1781,6 +2265,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "boostConfig": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1834,6 +2325,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "workstations.googleapis.com/Workstation"
+                          }
+                        },
+                        "port": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4559,7 +5057,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldInfoProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI"
           },
@@ -5021,6 +5519,43 @@
                 "IDENTIFIER": 8
               }
             },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                },
+                "referencedTypes": {
+                  "rule": "repeated",
+                  "type": "TypeReference",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
+              }
+            },
+            "TypeReference": {
+              "fields": {
+                "typeName": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -5095,43 +5630,6 @@
                 "childType": {
                   "type": "string",
                   "id": 2
-                }
-              }
-            },
-            "fieldInfo": {
-              "type": "google.api.FieldInfo",
-              "id": 291403980,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldInfo": {
-              "fields": {
-                "format": {
-                  "type": "Format",
-                  "id": 1
-                },
-                "referencedTypes": {
-                  "rule": "repeated",
-                  "type": "TypeReference",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "Format": {
-                  "values": {
-                    "FORMAT_UNSPECIFIED": 0,
-                    "UUID4": 1,
-                    "IPV4": 2,
-                    "IPV6": 3,
-                    "IPV4_OR_IPV6": 4
-                  }
-                }
-              }
-            },
-            "TypeReference": {
-              "fields": {
-                "typeName": {
-                  "type": "string",
-                  "id": 1
                 }
               }
             }

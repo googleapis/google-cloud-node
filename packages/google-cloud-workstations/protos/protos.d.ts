@@ -515,11 +515,26 @@ export namespace google {
                     /** WorkstationCluster privateClusterConfig */
                     privateClusterConfig?: (google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null);
 
+                    /** WorkstationCluster domainConfig */
+                    domainConfig?: (google.cloud.workstations.v1.WorkstationCluster.IDomainConfig|null);
+
                     /** WorkstationCluster degraded */
                     degraded?: (boolean|null);
 
                     /** WorkstationCluster conditions */
                     conditions?: (google.rpc.IStatus[]|null);
+
+                    /** WorkstationCluster tags */
+                    tags?: ({ [k: string]: string }|null);
+
+                    /** WorkstationCluster gatewayConfig */
+                    gatewayConfig?: (google.cloud.workstations.v1.WorkstationCluster.IGatewayConfig|null);
+
+                    /** WorkstationCluster workstationAuthorizationUrl */
+                    workstationAuthorizationUrl?: (string|null);
+
+                    /** WorkstationCluster workstationLaunchUrl */
+                    workstationLaunchUrl?: (string|null);
                 }
 
                 /** Represents a WorkstationCluster. */
@@ -573,11 +588,26 @@ export namespace google {
                     /** WorkstationCluster privateClusterConfig. */
                     public privateClusterConfig?: (google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null);
 
+                    /** WorkstationCluster domainConfig. */
+                    public domainConfig?: (google.cloud.workstations.v1.WorkstationCluster.IDomainConfig|null);
+
                     /** WorkstationCluster degraded. */
                     public degraded: boolean;
 
                     /** WorkstationCluster conditions. */
                     public conditions: google.rpc.IStatus[];
+
+                    /** WorkstationCluster tags. */
+                    public tags: { [k: string]: string };
+
+                    /** WorkstationCluster gatewayConfig. */
+                    public gatewayConfig?: (google.cloud.workstations.v1.WorkstationCluster.IGatewayConfig|null);
+
+                    /** WorkstationCluster workstationAuthorizationUrl. */
+                    public workstationAuthorizationUrl: string;
+
+                    /** WorkstationCluster workstationLaunchUrl. */
+                    public workstationLaunchUrl: string;
 
                     /**
                      * Creates a new WorkstationCluster instance using the specified properties.
@@ -773,6 +803,200 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a DomainConfig. */
+                    interface IDomainConfig {
+
+                        /** DomainConfig domain */
+                        domain?: (string|null);
+                    }
+
+                    /** Represents a DomainConfig. */
+                    class DomainConfig implements IDomainConfig {
+
+                        /**
+                         * Constructs a new DomainConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.WorkstationCluster.IDomainConfig);
+
+                        /** DomainConfig domain. */
+                        public domain: string;
+
+                        /**
+                         * Creates a new DomainConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DomainConfig instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.WorkstationCluster.IDomainConfig): google.cloud.workstations.v1.WorkstationCluster.DomainConfig;
+
+                        /**
+                         * Encodes the specified DomainConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.DomainConfig.verify|verify} messages.
+                         * @param message DomainConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.WorkstationCluster.IDomainConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DomainConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.DomainConfig.verify|verify} messages.
+                         * @param message DomainConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationCluster.IDomainConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DomainConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DomainConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationCluster.DomainConfig;
+
+                        /**
+                         * Decodes a DomainConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DomainConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationCluster.DomainConfig;
+
+                        /**
+                         * Verifies a DomainConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DomainConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DomainConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationCluster.DomainConfig;
+
+                        /**
+                         * Creates a plain object from a DomainConfig message. Also converts values to other types if specified.
+                         * @param message DomainConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.WorkstationCluster.DomainConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DomainConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DomainConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GatewayConfig. */
+                    interface IGatewayConfig {
+
+                        /** GatewayConfig http2Enabled */
+                        http2Enabled?: (boolean|null);
+                    }
+
+                    /** Represents a GatewayConfig. */
+                    class GatewayConfig implements IGatewayConfig {
+
+                        /**
+                         * Constructs a new GatewayConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.WorkstationCluster.IGatewayConfig);
+
+                        /** GatewayConfig http2Enabled. */
+                        public http2Enabled: boolean;
+
+                        /**
+                         * Creates a new GatewayConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GatewayConfig instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.WorkstationCluster.IGatewayConfig): google.cloud.workstations.v1.WorkstationCluster.GatewayConfig;
+
+                        /**
+                         * Encodes the specified GatewayConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.GatewayConfig.verify|verify} messages.
+                         * @param message GatewayConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.WorkstationCluster.IGatewayConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GatewayConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.GatewayConfig.verify|verify} messages.
+                         * @param message GatewayConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationCluster.IGatewayConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GatewayConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GatewayConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationCluster.GatewayConfig;
+
+                        /**
+                         * Decodes a GatewayConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GatewayConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationCluster.GatewayConfig;
+
+                        /**
+                         * Verifies a GatewayConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GatewayConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GatewayConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationCluster.GatewayConfig;
+
+                        /**
+                         * Creates a plain object from a GatewayConfig message. Also converts values to other types if specified.
+                         * @param message GatewayConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.WorkstationCluster.GatewayConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GatewayConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GatewayConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a WorkstationConfig. */
@@ -814,11 +1038,17 @@ export namespace google {
                     /** WorkstationConfig runningTimeout */
                     runningTimeout?: (google.protobuf.IDuration|null);
 
+                    /** WorkstationConfig maxUsableWorkstations */
+                    maxUsableWorkstations?: (number|null);
+
                     /** WorkstationConfig host */
                     host?: (google.cloud.workstations.v1.WorkstationConfig.IHost|null);
 
                     /** WorkstationConfig persistentDirectories */
                     persistentDirectories?: (google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory[]|null);
+
+                    /** WorkstationConfig ephemeralDirectories */
+                    ephemeralDirectories?: (google.cloud.workstations.v1.WorkstationConfig.IEphemeralDirectory[]|null);
 
                     /** WorkstationConfig container */
                     container?: (google.cloud.workstations.v1.WorkstationConfig.IContainer|null);
@@ -837,6 +1067,18 @@ export namespace google {
 
                     /** WorkstationConfig conditions */
                     conditions?: (google.rpc.IStatus[]|null);
+
+                    /** WorkstationConfig enableAuditAgent */
+                    enableAuditAgent?: (boolean|null);
+
+                    /** WorkstationConfig disableTcpConnections */
+                    disableTcpConnections?: (boolean|null);
+
+                    /** WorkstationConfig allowedPorts */
+                    allowedPorts?: (google.cloud.workstations.v1.WorkstationConfig.IPortRange[]|null);
+
+                    /** WorkstationConfig grantWorkstationAdminRoleOnCreate */
+                    grantWorkstationAdminRoleOnCreate?: (boolean|null);
                 }
 
                 /** Represents a WorkstationConfig. */
@@ -884,11 +1126,17 @@ export namespace google {
                     /** WorkstationConfig runningTimeout. */
                     public runningTimeout?: (google.protobuf.IDuration|null);
 
+                    /** WorkstationConfig maxUsableWorkstations. */
+                    public maxUsableWorkstations: number;
+
                     /** WorkstationConfig host. */
                     public host?: (google.cloud.workstations.v1.WorkstationConfig.IHost|null);
 
                     /** WorkstationConfig persistentDirectories. */
                     public persistentDirectories: google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory[];
+
+                    /** WorkstationConfig ephemeralDirectories. */
+                    public ephemeralDirectories: google.cloud.workstations.v1.WorkstationConfig.IEphemeralDirectory[];
 
                     /** WorkstationConfig container. */
                     public container?: (google.cloud.workstations.v1.WorkstationConfig.IContainer|null);
@@ -907,6 +1155,18 @@ export namespace google {
 
                     /** WorkstationConfig conditions. */
                     public conditions: google.rpc.IStatus[];
+
+                    /** WorkstationConfig enableAuditAgent. */
+                    public enableAuditAgent: boolean;
+
+                    /** WorkstationConfig disableTcpConnections. */
+                    public disableTcpConnections: boolean;
+
+                    /** WorkstationConfig allowedPorts. */
+                    public allowedPorts: google.cloud.workstations.v1.WorkstationConfig.IPortRange[];
+
+                    /** WorkstationConfig grantWorkstationAdminRoleOnCreate. */
+                    public grantWorkstationAdminRoleOnCreate: boolean;
 
                     /**
                      * Creates a new WorkstationConfig instance using the specified properties.
@@ -1125,6 +1385,24 @@ export namespace google {
 
                             /** GceInstance bootDiskSizeGb */
                             bootDiskSizeGb?: (number|null);
+
+                            /** GceInstance accelerators */
+                            accelerators?: (google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IAccelerator[]|null);
+
+                            /** GceInstance boostConfigs */
+                            boostConfigs?: (google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IBoostConfig[]|null);
+
+                            /** GceInstance disableSsh */
+                            disableSsh?: (boolean|null);
+
+                            /** GceInstance vmTags */
+                            vmTags?: ({ [k: string]: string }|null);
+
+                            /** GceInstance startupScriptUri */
+                            startupScriptUri?: (string|null);
+
+                            /** GceInstance instanceMetadata */
+                            instanceMetadata?: ({ [k: string]: string }|null);
                         }
 
                         /** Represents a GceInstance. */
@@ -1168,6 +1446,24 @@ export namespace google {
 
                             /** GceInstance bootDiskSizeGb. */
                             public bootDiskSizeGb: number;
+
+                            /** GceInstance accelerators. */
+                            public accelerators: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IAccelerator[];
+
+                            /** GceInstance boostConfigs. */
+                            public boostConfigs: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IBoostConfig[];
+
+                            /** GceInstance disableSsh. */
+                            public disableSsh: boolean;
+
+                            /** GceInstance vmTags. */
+                            public vmTags: { [k: string]: string };
+
+                            /** GceInstance startupScriptUri. */
+                            public startupScriptUri: string;
+
+                            /** GceInstance instanceMetadata. */
+                            public instanceMetadata: { [k: string]: string };
 
                             /**
                              * Creates a new GceInstance instance using the specified properties.
@@ -1454,6 +1750,236 @@ export namespace google {
                                  */
                                 public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
+
+                            /** Properties of an Accelerator. */
+                            interface IAccelerator {
+
+                                /** Accelerator type */
+                                type?: (string|null);
+
+                                /** Accelerator count */
+                                count?: (number|null);
+                            }
+
+                            /** Represents an Accelerator. */
+                            class Accelerator implements IAccelerator {
+
+                                /**
+                                 * Constructs a new Accelerator.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IAccelerator);
+
+                                /** Accelerator type. */
+                                public type: string;
+
+                                /** Accelerator count. */
+                                public count: number;
+
+                                /**
+                                 * Creates a new Accelerator instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Accelerator instance
+                                 */
+                                public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IAccelerator): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.Accelerator;
+
+                                /**
+                                 * Encodes the specified Accelerator message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.Accelerator.verify|verify} messages.
+                                 * @param message Accelerator message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IAccelerator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Accelerator message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.Accelerator.verify|verify} messages.
+                                 * @param message Accelerator message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IAccelerator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an Accelerator message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Accelerator
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.Accelerator;
+
+                                /**
+                                 * Decodes an Accelerator message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Accelerator
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.Accelerator;
+
+                                /**
+                                 * Verifies an Accelerator message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an Accelerator message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Accelerator
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.Accelerator;
+
+                                /**
+                                 * Creates a plain object from an Accelerator message. Also converts values to other types if specified.
+                                 * @param message Accelerator
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.Accelerator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Accelerator to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Accelerator
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a BoostConfig. */
+                            interface IBoostConfig {
+
+                                /** BoostConfig id */
+                                id?: (string|null);
+
+                                /** BoostConfig machineType */
+                                machineType?: (string|null);
+
+                                /** BoostConfig accelerators */
+                                accelerators?: (google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IAccelerator[]|null);
+
+                                /** BoostConfig bootDiskSizeGb */
+                                bootDiskSizeGb?: (number|null);
+
+                                /** BoostConfig enableNestedVirtualization */
+                                enableNestedVirtualization?: (boolean|null);
+
+                                /** BoostConfig poolSize */
+                                poolSize?: (number|null);
+                            }
+
+                            /** Represents a BoostConfig. */
+                            class BoostConfig implements IBoostConfig {
+
+                                /**
+                                 * Constructs a new BoostConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IBoostConfig);
+
+                                /** BoostConfig id. */
+                                public id: string;
+
+                                /** BoostConfig machineType. */
+                                public machineType: string;
+
+                                /** BoostConfig accelerators. */
+                                public accelerators: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IAccelerator[];
+
+                                /** BoostConfig bootDiskSizeGb. */
+                                public bootDiskSizeGb: number;
+
+                                /** BoostConfig enableNestedVirtualization. */
+                                public enableNestedVirtualization: boolean;
+
+                                /** BoostConfig poolSize. */
+                                public poolSize: number;
+
+                                /**
+                                 * Creates a new BoostConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns BoostConfig instance
+                                 */
+                                public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IBoostConfig): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.BoostConfig;
+
+                                /**
+                                 * Encodes the specified BoostConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.BoostConfig.verify|verify} messages.
+                                 * @param message BoostConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IBoostConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified BoostConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.BoostConfig.verify|verify} messages.
+                                 * @param message BoostConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IBoostConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a BoostConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns BoostConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.BoostConfig;
+
+                                /**
+                                 * Decodes a BoostConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns BoostConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.BoostConfig;
+
+                                /**
+                                 * Verifies a BoostConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a BoostConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns BoostConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.BoostConfig;
+
+                                /**
+                                 * Creates a plain object from a BoostConfig message. Also converts values to other types if specified.
+                                 * @param message BoostConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.BoostConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this BoostConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for BoostConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
                         }
                     }
 
@@ -1462,6 +1988,9 @@ export namespace google {
 
                         /** PersistentDirectory gcePd */
                         gcePd?: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk|null);
+
+                        /** PersistentDirectory gceHd */
+                        gceHd?: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceHyperdiskBalancedHighAvailability|null);
 
                         /** PersistentDirectory mountPath */
                         mountPath?: (string|null);
@@ -1479,11 +2008,14 @@ export namespace google {
                         /** PersistentDirectory gcePd. */
                         public gcePd?: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk|null);
 
+                        /** PersistentDirectory gceHd. */
+                        public gceHd?: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceHyperdiskBalancedHighAvailability|null);
+
                         /** PersistentDirectory mountPath. */
                         public mountPath: string;
 
                         /** PersistentDirectory directoryType. */
-                        public directoryType?: "gcePd";
+                        public directoryType?: ("gcePd"|"gceHd");
 
                         /**
                          * Creates a new PersistentDirectory instance using the specified properties.
@@ -1571,6 +2103,9 @@ export namespace google {
                             /** GceRegionalPersistentDisk sizeGb */
                             sizeGb?: (number|null);
 
+                            /** GceRegionalPersistentDisk maxSizeGb */
+                            maxSizeGb?: (number|null);
+
                             /** GceRegionalPersistentDisk fsType */
                             fsType?: (string|null);
 
@@ -1582,6 +2117,9 @@ export namespace google {
 
                             /** GceRegionalPersistentDisk reclaimPolicy */
                             reclaimPolicy?: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy|keyof typeof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy|null);
+
+                            /** GceRegionalPersistentDisk archiveTimeout */
+                            archiveTimeout?: (google.protobuf.IDuration|null);
                         }
 
                         /** Represents a GceRegionalPersistentDisk. */
@@ -1596,6 +2134,9 @@ export namespace google {
                             /** GceRegionalPersistentDisk sizeGb. */
                             public sizeGb: number;
 
+                            /** GceRegionalPersistentDisk maxSizeGb. */
+                            public maxSizeGb: number;
+
                             /** GceRegionalPersistentDisk fsType. */
                             public fsType: string;
 
@@ -1607,6 +2148,9 @@ export namespace google {
 
                             /** GceRegionalPersistentDisk reclaimPolicy. */
                             public reclaimPolicy: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy|keyof typeof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy);
+
+                            /** GceRegionalPersistentDisk archiveTimeout. */
+                            public archiveTimeout?: (google.protobuf.IDuration|null);
 
                             /**
                              * Creates a new GceRegionalPersistentDisk instance using the specified properties.
@@ -1694,6 +2238,361 @@ export namespace google {
                                 DELETE = 1,
                                 RETAIN = 2
                             }
+                        }
+
+                        /** Properties of a GceHyperdiskBalancedHighAvailability. */
+                        interface IGceHyperdiskBalancedHighAvailability {
+
+                            /** GceHyperdiskBalancedHighAvailability sizeGb */
+                            sizeGb?: (number|null);
+
+                            /** GceHyperdiskBalancedHighAvailability maxSizeGb */
+                            maxSizeGb?: (number|null);
+
+                            /** GceHyperdiskBalancedHighAvailability sourceSnapshot */
+                            sourceSnapshot?: (string|null);
+
+                            /** GceHyperdiskBalancedHighAvailability reclaimPolicy */
+                            reclaimPolicy?: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability.ReclaimPolicy|keyof typeof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability.ReclaimPolicy|null);
+
+                            /** GceHyperdiskBalancedHighAvailability archiveTimeout */
+                            archiveTimeout?: (google.protobuf.IDuration|null);
+                        }
+
+                        /** Represents a GceHyperdiskBalancedHighAvailability. */
+                        class GceHyperdiskBalancedHighAvailability implements IGceHyperdiskBalancedHighAvailability {
+
+                            /**
+                             * Constructs a new GceHyperdiskBalancedHighAvailability.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceHyperdiskBalancedHighAvailability);
+
+                            /** GceHyperdiskBalancedHighAvailability sizeGb. */
+                            public sizeGb: number;
+
+                            /** GceHyperdiskBalancedHighAvailability maxSizeGb. */
+                            public maxSizeGb: number;
+
+                            /** GceHyperdiskBalancedHighAvailability sourceSnapshot. */
+                            public sourceSnapshot: string;
+
+                            /** GceHyperdiskBalancedHighAvailability reclaimPolicy. */
+                            public reclaimPolicy: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability.ReclaimPolicy|keyof typeof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability.ReclaimPolicy);
+
+                            /** GceHyperdiskBalancedHighAvailability archiveTimeout. */
+                            public archiveTimeout?: (google.protobuf.IDuration|null);
+
+                            /**
+                             * Creates a new GceHyperdiskBalancedHighAvailability instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GceHyperdiskBalancedHighAvailability instance
+                             */
+                            public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceHyperdiskBalancedHighAvailability): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability;
+
+                            /**
+                             * Encodes the specified GceHyperdiskBalancedHighAvailability message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability.verify|verify} messages.
+                             * @param message GceHyperdiskBalancedHighAvailability message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceHyperdiskBalancedHighAvailability, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GceHyperdiskBalancedHighAvailability message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability.verify|verify} messages.
+                             * @param message GceHyperdiskBalancedHighAvailability message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceHyperdiskBalancedHighAvailability, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GceHyperdiskBalancedHighAvailability message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GceHyperdiskBalancedHighAvailability
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability;
+
+                            /**
+                             * Decodes a GceHyperdiskBalancedHighAvailability message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GceHyperdiskBalancedHighAvailability
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability;
+
+                            /**
+                             * Verifies a GceHyperdiskBalancedHighAvailability message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GceHyperdiskBalancedHighAvailability message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GceHyperdiskBalancedHighAvailability
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability;
+
+                            /**
+                             * Creates a plain object from a GceHyperdiskBalancedHighAvailability message. Also converts values to other types if specified.
+                             * @param message GceHyperdiskBalancedHighAvailability
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GceHyperdiskBalancedHighAvailability to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GceHyperdiskBalancedHighAvailability
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace GceHyperdiskBalancedHighAvailability {
+
+                            /** ReclaimPolicy enum. */
+                            enum ReclaimPolicy {
+                                RECLAIM_POLICY_UNSPECIFIED = 0,
+                                DELETE = 1,
+                                RETAIN = 2
+                            }
+                        }
+                    }
+
+                    /** Properties of an EphemeralDirectory. */
+                    interface IEphemeralDirectory {
+
+                        /** EphemeralDirectory gcePd */
+                        gcePd?: (google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk|null);
+
+                        /** EphemeralDirectory mountPath */
+                        mountPath?: (string|null);
+                    }
+
+                    /** Represents an EphemeralDirectory. */
+                    class EphemeralDirectory implements IEphemeralDirectory {
+
+                        /**
+                         * Constructs a new EphemeralDirectory.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.IEphemeralDirectory);
+
+                        /** EphemeralDirectory gcePd. */
+                        public gcePd?: (google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk|null);
+
+                        /** EphemeralDirectory mountPath. */
+                        public mountPath: string;
+
+                        /** EphemeralDirectory directoryType. */
+                        public directoryType?: "gcePd";
+
+                        /**
+                         * Creates a new EphemeralDirectory instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EphemeralDirectory instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.IEphemeralDirectory): google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory;
+
+                        /**
+                         * Encodes the specified EphemeralDirectory message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.verify|verify} messages.
+                         * @param message EphemeralDirectory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.WorkstationConfig.IEphemeralDirectory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EphemeralDirectory message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.verify|verify} messages.
+                         * @param message EphemeralDirectory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.IEphemeralDirectory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EphemeralDirectory message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EphemeralDirectory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory;
+
+                        /**
+                         * Decodes an EphemeralDirectory message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EphemeralDirectory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory;
+
+                        /**
+                         * Verifies an EphemeralDirectory message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EphemeralDirectory message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EphemeralDirectory
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory;
+
+                        /**
+                         * Creates a plain object from an EphemeralDirectory message. Also converts values to other types if specified.
+                         * @param message EphemeralDirectory
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EphemeralDirectory to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EphemeralDirectory
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace EphemeralDirectory {
+
+                        /** Properties of a GcePersistentDisk. */
+                        interface IGcePersistentDisk {
+
+                            /** GcePersistentDisk diskType */
+                            diskType?: (string|null);
+
+                            /** GcePersistentDisk sourceSnapshot */
+                            sourceSnapshot?: (string|null);
+
+                            /** GcePersistentDisk sourceImage */
+                            sourceImage?: (string|null);
+
+                            /** GcePersistentDisk readOnly */
+                            readOnly?: (boolean|null);
+                        }
+
+                        /** Represents a GcePersistentDisk. */
+                        class GcePersistentDisk implements IGcePersistentDisk {
+
+                            /**
+                             * Constructs a new GcePersistentDisk.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk);
+
+                            /** GcePersistentDisk diskType. */
+                            public diskType: string;
+
+                            /** GcePersistentDisk sourceSnapshot. */
+                            public sourceSnapshot: string;
+
+                            /** GcePersistentDisk sourceImage. */
+                            public sourceImage: string;
+
+                            /** GcePersistentDisk readOnly. */
+                            public readOnly: boolean;
+
+                            /**
+                             * Creates a new GcePersistentDisk instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GcePersistentDisk instance
+                             */
+                            public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk): google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.GcePersistentDisk;
+
+                            /**
+                             * Encodes the specified GcePersistentDisk message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.GcePersistentDisk.verify|verify} messages.
+                             * @param message GcePersistentDisk message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GcePersistentDisk message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.GcePersistentDisk.verify|verify} messages.
+                             * @param message GcePersistentDisk message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GcePersistentDisk message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GcePersistentDisk
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.GcePersistentDisk;
+
+                            /**
+                             * Decodes a GcePersistentDisk message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GcePersistentDisk
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.GcePersistentDisk;
+
+                            /**
+                             * Verifies a GcePersistentDisk message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GcePersistentDisk message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GcePersistentDisk
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.GcePersistentDisk;
+
+                            /**
+                             * Creates a plain object from a GcePersistentDisk message. Also converts values to other types if specified.
+                             * @param message GcePersistentDisk
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.EphemeralDirectory.GcePersistentDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GcePersistentDisk to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GcePersistentDisk
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -2029,6 +2928,109 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a PortRange. */
+                    interface IPortRange {
+
+                        /** PortRange first */
+                        first?: (number|null);
+
+                        /** PortRange last */
+                        last?: (number|null);
+                    }
+
+                    /** Represents a PortRange. */
+                    class PortRange implements IPortRange {
+
+                        /**
+                         * Constructs a new PortRange.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.IPortRange);
+
+                        /** PortRange first. */
+                        public first: number;
+
+                        /** PortRange last. */
+                        public last: number;
+
+                        /**
+                         * Creates a new PortRange instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PortRange instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.IPortRange): google.cloud.workstations.v1.WorkstationConfig.PortRange;
+
+                        /**
+                         * Encodes the specified PortRange message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PortRange.verify|verify} messages.
+                         * @param message PortRange message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.WorkstationConfig.IPortRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PortRange message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PortRange.verify|verify} messages.
+                         * @param message PortRange message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.IPortRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PortRange message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PortRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.PortRange;
+
+                        /**
+                         * Decodes a PortRange message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PortRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.PortRange;
+
+                        /**
+                         * Verifies a PortRange message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PortRange message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PortRange
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.PortRange;
+
+                        /**
+                         * Creates a plain object from a PortRange message. Also converts values to other types if specified.
+                         * @param message PortRange
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.PortRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PortRange to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PortRange
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a Workstation. */
@@ -2067,11 +3069,26 @@ export namespace google {
                     /** Workstation etag */
                     etag?: (string|null);
 
+                    /** Workstation persistentDirectories */
+                    persistentDirectories?: (google.cloud.workstations.v1.Workstation.IWorkstationPersistentDirectory[]|null);
+
                     /** Workstation state */
                     state?: (google.cloud.workstations.v1.Workstation.State|keyof typeof google.cloud.workstations.v1.Workstation.State|null);
 
                     /** Workstation host */
                     host?: (string|null);
+
+                    /** Workstation env */
+                    env?: ({ [k: string]: string }|null);
+
+                    /** Workstation kmsKey */
+                    kmsKey?: (string|null);
+
+                    /** Workstation sourceWorkstation */
+                    sourceWorkstation?: (string|null);
+
+                    /** Workstation runtimeHost */
+                    runtimeHost?: (google.cloud.workstations.v1.Workstation.IRuntimeHost|null);
                 }
 
                 /** Represents a Workstation. */
@@ -2116,11 +3133,26 @@ export namespace google {
                     /** Workstation etag. */
                     public etag: string;
 
+                    /** Workstation persistentDirectories. */
+                    public persistentDirectories: google.cloud.workstations.v1.Workstation.IWorkstationPersistentDirectory[];
+
                     /** Workstation state. */
                     public state: (google.cloud.workstations.v1.Workstation.State|keyof typeof google.cloud.workstations.v1.Workstation.State);
 
                     /** Workstation host. */
                     public host: string;
+
+                    /** Workstation env. */
+                    public env: { [k: string]: string };
+
+                    /** Workstation kmsKey. */
+                    public kmsKey: string;
+
+                    /** Workstation sourceWorkstation. */
+                    public sourceWorkstation: string;
+
+                    /** Workstation runtimeHost. */
+                    public runtimeHost?: (google.cloud.workstations.v1.Workstation.IRuntimeHost|null);
 
                     /**
                      * Creates a new Workstation instance using the specified properties.
@@ -2201,6 +3233,321 @@ export namespace google {
                 }
 
                 namespace Workstation {
+
+                    /** Properties of a WorkstationPersistentDirectory. */
+                    interface IWorkstationPersistentDirectory {
+
+                        /** WorkstationPersistentDirectory mountPath */
+                        mountPath?: (string|null);
+
+                        /** WorkstationPersistentDirectory sizeGb */
+                        sizeGb?: (number|null);
+                    }
+
+                    /** Represents a WorkstationPersistentDirectory. */
+                    class WorkstationPersistentDirectory implements IWorkstationPersistentDirectory {
+
+                        /**
+                         * Constructs a new WorkstationPersistentDirectory.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.Workstation.IWorkstationPersistentDirectory);
+
+                        /** WorkstationPersistentDirectory mountPath. */
+                        public mountPath: string;
+
+                        /** WorkstationPersistentDirectory sizeGb. */
+                        public sizeGb: number;
+
+                        /**
+                         * Creates a new WorkstationPersistentDirectory instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WorkstationPersistentDirectory instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.Workstation.IWorkstationPersistentDirectory): google.cloud.workstations.v1.Workstation.WorkstationPersistentDirectory;
+
+                        /**
+                         * Encodes the specified WorkstationPersistentDirectory message. Does not implicitly {@link google.cloud.workstations.v1.Workstation.WorkstationPersistentDirectory.verify|verify} messages.
+                         * @param message WorkstationPersistentDirectory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.Workstation.IWorkstationPersistentDirectory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WorkstationPersistentDirectory message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.Workstation.WorkstationPersistentDirectory.verify|verify} messages.
+                         * @param message WorkstationPersistentDirectory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.Workstation.IWorkstationPersistentDirectory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WorkstationPersistentDirectory message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WorkstationPersistentDirectory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.Workstation.WorkstationPersistentDirectory;
+
+                        /**
+                         * Decodes a WorkstationPersistentDirectory message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WorkstationPersistentDirectory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.Workstation.WorkstationPersistentDirectory;
+
+                        /**
+                         * Verifies a WorkstationPersistentDirectory message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WorkstationPersistentDirectory message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WorkstationPersistentDirectory
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.Workstation.WorkstationPersistentDirectory;
+
+                        /**
+                         * Creates a plain object from a WorkstationPersistentDirectory message. Also converts values to other types if specified.
+                         * @param message WorkstationPersistentDirectory
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.Workstation.WorkstationPersistentDirectory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WorkstationPersistentDirectory to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WorkstationPersistentDirectory
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RuntimeHost. */
+                    interface IRuntimeHost {
+
+                        /** RuntimeHost gceInstanceHost */
+                        gceInstanceHost?: (google.cloud.workstations.v1.Workstation.RuntimeHost.IGceInstanceHost|null);
+                    }
+
+                    /** Represents a RuntimeHost. */
+                    class RuntimeHost implements IRuntimeHost {
+
+                        /**
+                         * Constructs a new RuntimeHost.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.Workstation.IRuntimeHost);
+
+                        /** RuntimeHost gceInstanceHost. */
+                        public gceInstanceHost?: (google.cloud.workstations.v1.Workstation.RuntimeHost.IGceInstanceHost|null);
+
+                        /** RuntimeHost hostType. */
+                        public hostType?: "gceInstanceHost";
+
+                        /**
+                         * Creates a new RuntimeHost instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RuntimeHost instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.Workstation.IRuntimeHost): google.cloud.workstations.v1.Workstation.RuntimeHost;
+
+                        /**
+                         * Encodes the specified RuntimeHost message. Does not implicitly {@link google.cloud.workstations.v1.Workstation.RuntimeHost.verify|verify} messages.
+                         * @param message RuntimeHost message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.Workstation.IRuntimeHost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RuntimeHost message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.Workstation.RuntimeHost.verify|verify} messages.
+                         * @param message RuntimeHost message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.Workstation.IRuntimeHost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RuntimeHost message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RuntimeHost
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.Workstation.RuntimeHost;
+
+                        /**
+                         * Decodes a RuntimeHost message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RuntimeHost
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.Workstation.RuntimeHost;
+
+                        /**
+                         * Verifies a RuntimeHost message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RuntimeHost message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RuntimeHost
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.Workstation.RuntimeHost;
+
+                        /**
+                         * Creates a plain object from a RuntimeHost message. Also converts values to other types if specified.
+                         * @param message RuntimeHost
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.Workstation.RuntimeHost, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RuntimeHost to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RuntimeHost
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RuntimeHost {
+
+                        /** Properties of a GceInstanceHost. */
+                        interface IGceInstanceHost {
+
+                            /** GceInstanceHost name */
+                            name?: (string|null);
+
+                            /** GceInstanceHost id */
+                            id?: (string|null);
+
+                            /** GceInstanceHost zone */
+                            zone?: (string|null);
+                        }
+
+                        /** Represents a GceInstanceHost. */
+                        class GceInstanceHost implements IGceInstanceHost {
+
+                            /**
+                             * Constructs a new GceInstanceHost.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.workstations.v1.Workstation.RuntimeHost.IGceInstanceHost);
+
+                            /** GceInstanceHost name. */
+                            public name: string;
+
+                            /** GceInstanceHost id. */
+                            public id: string;
+
+                            /** GceInstanceHost zone. */
+                            public zone: string;
+
+                            /**
+                             * Creates a new GceInstanceHost instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GceInstanceHost instance
+                             */
+                            public static create(properties?: google.cloud.workstations.v1.Workstation.RuntimeHost.IGceInstanceHost): google.cloud.workstations.v1.Workstation.RuntimeHost.GceInstanceHost;
+
+                            /**
+                             * Encodes the specified GceInstanceHost message. Does not implicitly {@link google.cloud.workstations.v1.Workstation.RuntimeHost.GceInstanceHost.verify|verify} messages.
+                             * @param message GceInstanceHost message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.workstations.v1.Workstation.RuntimeHost.IGceInstanceHost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GceInstanceHost message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.Workstation.RuntimeHost.GceInstanceHost.verify|verify} messages.
+                             * @param message GceInstanceHost message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.workstations.v1.Workstation.RuntimeHost.IGceInstanceHost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GceInstanceHost message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GceInstanceHost
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.Workstation.RuntimeHost.GceInstanceHost;
+
+                            /**
+                             * Decodes a GceInstanceHost message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GceInstanceHost
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.Workstation.RuntimeHost.GceInstanceHost;
+
+                            /**
+                             * Verifies a GceInstanceHost message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GceInstanceHost message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GceInstanceHost
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.Workstation.RuntimeHost.GceInstanceHost;
+
+                            /**
+                             * Creates a plain object from a GceInstanceHost message. Also converts values to other types if specified.
+                             * @param message GceInstanceHost
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.workstations.v1.Workstation.RuntimeHost.GceInstanceHost, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GceInstanceHost to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GceInstanceHost
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
 
                     /** State enum. */
                     enum State {
@@ -2320,6 +3667,9 @@ export namespace google {
 
                     /** ListWorkstationClustersRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListWorkstationClustersRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListWorkstationClustersRequest. */
@@ -2339,6 +3689,9 @@ export namespace google {
 
                     /** ListWorkstationClustersRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListWorkstationClustersRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListWorkstationClustersRequest instance using the specified properties.
@@ -2980,6 +4333,9 @@ export namespace google {
 
                     /** ListWorkstationConfigsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListWorkstationConfigsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListWorkstationConfigsRequest. */
@@ -2999,6 +4355,9 @@ export namespace google {
 
                     /** ListWorkstationConfigsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListWorkstationConfigsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListWorkstationConfigsRequest instance using the specified properties.
@@ -3858,6 +5217,9 @@ export namespace google {
 
                     /** ListWorkstationsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListWorkstationsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListWorkstationsRequest. */
@@ -3877,6 +5239,9 @@ export namespace google {
 
                     /** ListWorkstationsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListWorkstationsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListWorkstationsRequest instance using the specified properties.
@@ -4633,6 +5998,9 @@ export namespace google {
 
                     /** StartWorkstationRequest etag */
                     etag?: (string|null);
+
+                    /** StartWorkstationRequest boostConfig */
+                    boostConfig?: (string|null);
                 }
 
                 /** Represents a StartWorkstationRequest. */
@@ -4652,6 +6020,9 @@ export namespace google {
 
                     /** StartWorkstationRequest etag. */
                     public etag: string;
+
+                    /** StartWorkstationRequest boostConfig. */
+                    public boostConfig: string;
 
                     /**
                      * Creates a new StartWorkstationRequest instance using the specified properties.
@@ -4851,6 +6222,9 @@ export namespace google {
 
                     /** GenerateAccessTokenRequest workstation */
                     workstation?: (string|null);
+
+                    /** GenerateAccessTokenRequest port */
+                    port?: (number|null);
                 }
 
                 /** Represents a GenerateAccessTokenRequest. */
@@ -4870,6 +6244,9 @@ export namespace google {
 
                     /** GenerateAccessTokenRequest workstation. */
                     public workstation: string;
+
+                    /** GenerateAccessTokenRequest port. */
+                    public port: number;
 
                     /** GenerateAccessTokenRequest expiration. */
                     public expiration?: ("expireTime"|"ttl");
@@ -14573,6 +15950,218 @@ export namespace google {
             IDENTIFIER = 8
         }
 
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a ResourceDescriptor. */
         interface IResourceDescriptor {
 
@@ -14819,218 +16408,6 @@ export namespace google {
 
             /**
              * Gets the default type url for ResourceReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FieldInfo. */
-        interface IFieldInfo {
-
-            /** FieldInfo format */
-            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
-
-            /** FieldInfo referencedTypes */
-            referencedTypes?: (google.api.ITypeReference[]|null);
-        }
-
-        /** Represents a FieldInfo. */
-        class FieldInfo implements IFieldInfo {
-
-            /**
-             * Constructs a new FieldInfo.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IFieldInfo);
-
-            /** FieldInfo format. */
-            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
-
-            /** FieldInfo referencedTypes. */
-            public referencedTypes: google.api.ITypeReference[];
-
-            /**
-             * Creates a new FieldInfo instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldInfo instance
-             */
-            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
-
-            /**
-             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
-
-            /**
-             * Verifies a FieldInfo message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldInfo
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
-
-            /**
-             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
-             * @param message FieldInfo
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldInfo to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FieldInfo {
-
-            /** Format enum. */
-            enum Format {
-                FORMAT_UNSPECIFIED = 0,
-                UUID4 = 1,
-                IPV4 = 2,
-                IPV6 = 3,
-                IPV4_OR_IPV6 = 4
-            }
-        }
-
-        /** Properties of a TypeReference. */
-        interface ITypeReference {
-
-            /** TypeReference typeName */
-            typeName?: (string|null);
-        }
-
-        /** Represents a TypeReference. */
-        class TypeReference implements ITypeReference {
-
-            /**
-             * Constructs a new TypeReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ITypeReference);
-
-            /** TypeReference typeName. */
-            public typeName: string;
-
-            /**
-             * Creates a new TypeReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns TypeReference instance
-             */
-            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
-
-            /**
-             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-             * @param message TypeReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-             * @param message TypeReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a TypeReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns TypeReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
-
-            /**
-             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns TypeReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
-
-            /**
-             * Verifies a TypeReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns TypeReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
-
-            /**
-             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
-             * @param message TypeReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this TypeReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for TypeReference
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -17230,11 +18607,11 @@ export namespace google {
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
 
-            /** FieldOptions .google.api.resourceReference */
-            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
-
             /** FieldOptions .google.api.fieldInfo */
             ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */
