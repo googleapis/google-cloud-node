@@ -191,6 +191,8 @@ describe('Bucket', () => {
   let Bucket: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let bucket: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let ComposeCleanupError: any;
 
   const STORAGE = {
     createBucket: util.noop,
@@ -211,7 +213,7 @@ describe('Bucket', () => {
   const BUCKET_NAME = 'test-bucket';
 
   before(() => {
-    Bucket = proxyquire('../src/bucket.js', {
+    const bucketModule = proxyquire('../src/bucket.js', {
       fs: fakeFs,
       'p-limit': fakePLimit,
       '@google-cloud/promisify': fakePromisify,
@@ -225,7 +227,9 @@ describe('Bucket', () => {
       './iam.js': {Iam: FakeIam},
       './notification.js': {Notification: FakeNotification},
       './signer.js': fakeSigner,
-    }).Bucket;
+    });
+    Bucket = bucketModule.Bucket;
+    ComposeCleanupError = bucketModule.ComposeCleanupError;
   });
 
   beforeEach(() => {
@@ -806,7 +810,7 @@ describe('Bucket', () => {
       const destination = bucket.file('destination.txt');
 
       destination.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs, options);
+        assert.deepStrictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -915,6 +919,120 @@ describe('Bucket', () => {
       };
 
       bucket.combine(sources, destination, done);
+    });
+
+    it('should delete source objects if deleteSourceObjects is true', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+
+      let deletedCount = 0;
+      sources.forEach(source => {
+        source.delete = async () => {
+          deletedCount++;
+          return [{}];
+        };
+      });
+
+      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        assert.strictEqual(reqOpts.qs.deleteSourceObjects, undefined);
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, true);
+        callback(null, {});
+      };
+
+      bucket.combine(sources, destination, {deleteSourceObjects: true}, (err: any) => {
+        assert.ifError(err);
+        assert.strictEqual(deletedCount, 2);
+        done();
+      });
+    });
+
+    it('should not delete source objects if deleteSourceObjects is false/omitted', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+
+      let deletedCount = 0;
+      sources.forEach(source => {
+        source.delete = async () => {
+          deletedCount++;
+          return [{}];
+        };
+      });
+
+      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
+        callback(null, {});
+      };
+
+      bucket.combine(sources, destination, (err: any) => {
+        assert.ifError(err);
+        assert.strictEqual(deletedCount, 0);
+        done();
+      });
+    });
+
+    it('should not delete source objects if compose operation fails', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+      const composeError = new Error('Compose failed.');
+
+      let deletedCount = 0;
+      sources.forEach(source => {
+        source.delete = async () => {
+          deletedCount++;
+          return [{}];
+        };
+      });
+
+      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, true);
+        callback(composeError);
+      };
+
+      bucket.combine(sources, destination, {deleteSourceObjects: true}, (err: any) => {
+        assert.strictEqual(err, composeError);
+        assert.strictEqual(deletedCount, 0);
+        done();
+      });
+    });
+
+    it('should return ComposeCleanupError if deleting source objects fails', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+      const deleteError = new Error('Delete failed.');
+
+      sources[0].delete = async () => {
+        throw deleteError;
+      };
+      sources[1].delete = async () => {
+        return [{}];
+      };
+
+      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, true);
+        callback(null, {success: true});
+      };
+
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true},
+        (err: any, newFile: any, apiResponse: any) => {
+          try {
+            assert.ok(err instanceof ComposeCleanupError);
+            assert.strictEqual(err.name, 'ComposeCleanupError');
+            assert.deepStrictEqual((err as any).errors, [deleteError]);
+            assert.strictEqual((err as any).newFile, destination);
+            assert.deepStrictEqual((err as any).apiResponse, {success: true});
+
+            // Also check callback arguments
+            assert.strictEqual(newFile, destination);
+            assert.deepStrictEqual(apiResponse, {success: true});
+            done();
+          } catch (assertErr) {
+            done(assertErr);
+          }
+        }
+      );
     });
   });
 
