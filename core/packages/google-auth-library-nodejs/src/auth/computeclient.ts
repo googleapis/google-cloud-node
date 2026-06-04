@@ -15,6 +15,7 @@
 import {GaxiosError} from 'gaxios';
 import * as gcpMetadata from 'gcp-metadata';
 
+import {AuthClient} from './authclient';
 import {CredentialRequest, Credentials} from './credentials';
 import {
   GetTokenResponse,
@@ -40,6 +41,8 @@ export interface ComputeOptions extends OAuth2ClientOptions {
 export class Compute extends OAuth2Client {
   readonly serviceAccountEmail: string;
   scopes: string[];
+  private rabLookupSkippedWarningLogged = false;
+  private resolvedServiceAccountEmail?: string;
 
   /**
    * Google Compute Engine service account credentials.
@@ -151,6 +154,12 @@ export class Compute extends OAuth2Client {
     const email = await this.resolveServiceAccountEmail();
     const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
     if (!email || !emailRegex.test(email)) {
+      if (!this.rabLookupSkippedWarningLogged) {
+        AuthClient.log.info(
+          `RegionalAccessBoundary: Service account email "${email}" is not in a valid email format. Skipping regional access boundary lookup.`
+        );
+        this.rabLookupSkippedWarningLogged = true;
+      }
       return null;
     }
     const regionalAccessBoundaryUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
@@ -171,9 +180,17 @@ export class Compute extends OAuth2Client {
       return this.serviceAccountEmail;
     }
 
+    if (this.resolvedServiceAccountEmail !== undefined) {
+      return this.resolvedServiceAccountEmail;
+    }
+
     // Otherwise, fetch the default email from the metadata server.
     try {
-      return await gcpMetadata.instance('service-accounts/default/email');
+      const email = await gcpMetadata.instance<string>(
+        'service-accounts/default/email'
+      );
+      this.resolvedServiceAccountEmail = email;
+      return email;
     } catch (e) {
       throw new Error(
         'RegionalAccessBoundary: Failed to retrieve default service account email from metadata server.',

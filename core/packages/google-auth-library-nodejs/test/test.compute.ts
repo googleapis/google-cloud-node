@@ -415,5 +415,25 @@ describe('compute', () => {
 
       tokenScope.done();
     });
+
+    it('should cache the service account email and avoid repeated metadata server calls when email is invalid', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'not-a-valid-email';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      // Call it the first time
+      let url = await compute.getRegionalAccessBoundaryUrl();
+      assert.strictEqual(url, null);
+      assert.strictEqual(metadataStub.callCount, 1);
+
+      // Call it a second time - should use cache and not call MDS again
+      url = await compute.getRegionalAccessBoundaryUrl();
+      assert.strictEqual(url, null);
+      assert.strictEqual(metadataStub.callCount, 1);
+    });
   });
 });
