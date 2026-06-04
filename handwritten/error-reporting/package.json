@@ -30,8 +30,6 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "license-check": "jsgl --local .",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "precompile": "gts clean"
   },
   "dependencies": {
@@ -60,7 +58,6 @@
     "js-green-licenses": "^4.0.0",
     "json-stable-stringify": "^1.3.0",
     "koa": "^3.1.1",
-    "linkinator": "^6.1.2",
     "mocha": "^11.7.5",
     "nock": "^14.0.10",
     "pack-n-play": "^2.0.0",

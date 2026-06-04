@@ -42,8 +42,7 @@
     "test": "mocha build/typescript/test/unit",
     "system-test": "echo 'no system test'",
     "samples-test": "echo 'no samples test'",
-    "docs": "echo no docs needed",
-    "docs-test": "echo no docs tests"
+    "docs": "echo no docs needed"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.9",

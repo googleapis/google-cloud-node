@@ -124,25 +124,29 @@ export class MultiplexedSession
         opts: this._observabilityOptions,
         dbName: this.database.formattedName_,
       };
-      return startTrace(
-        'MultiplexedSession.createSession',
-        traceConfig,
-        async span => {
-          span.addEvent('Requesting a multiplexed session');
-          try {
-            const [createSessionResponse] = await this.database.createSession({
-              multiplexed: true,
-            });
-            this._multiplexedSession = createSessionResponse;
-            span.addEvent('Created a multiplexed session');
-          } catch (e) {
-            setSpanError(span, e as Error);
-            throw e;
-          } finally {
-            span.end();
-          }
-        },
-      );
+      return context.with(ROOT_CONTEXT, () => {
+        return startTrace(
+          'MultiplexedSession.createSession',
+          traceConfig,
+          async span => {
+            span.addEvent('Requesting a multiplexed session');
+            try {
+              const [createSessionResponse] = await this.database.createSession(
+                {
+                  multiplexed: true,
+                },
+              );
+              this._multiplexedSession = createSessionResponse;
+              span.addEvent('Created a multiplexed session');
+            } catch (e) {
+              setSpanError(span, e as Error);
+              throw e;
+            } finally {
+              span.end();
+            }
+          },
+        );
+      });
     };
 
     // Assign the running task to the shared promise variable, and ensure
