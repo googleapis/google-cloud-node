@@ -232,13 +232,7 @@ export class SecretManagerServiceClient {
         'projects/{project}/secrets/{secret}',
       ),
       topicPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/topics/{topic}'
-      ),
-      secretPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}'
-      ),
-      secretVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}/versions/{secret_version}'
+        'projects/{project}/topics/{topic}',
       ),
     };
 
@@ -3310,7 +3304,7 @@ export class SecretManagerServiceClient {
    *   A fully-qualified path representing SecretVersion resource.
    * @returns {string} A string representing the secret.
    */
-  matchSecretFromSecretVersionName(secretVersionName: string) {
+    matchSecretFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret;
   }

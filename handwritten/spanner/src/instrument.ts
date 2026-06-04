@@ -97,26 +97,23 @@ const {
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
 
-let contextManagerInstallAttempted = false;
-
 /*
- * If no global ContextManager is registered, install an AsyncHooksContextManager
- * so that async/await trace context propagation works for apps that haven't
- * configured OpenTelemetry themselves. If the host app has already installed a
- * ContextManager, leave it alone — tearing down a working manager breaks the
- * host's baggage and span parentage on the next gRPC call.
- *
- * setGlobalContextManager() returns false when a manager is already registered,
- * which is the documented signal that we shouldn't replace it. The
- * `contextManagerInstallAttempted` latch makes the call idempotent so we don't
- * allocate a new AsyncHooksContextManager on each Spanner client construction.
+ * This function ensures that async/await works correctly by
+ * checking if context.active() returns an invalid/unset context
+ * and if so, sets a global AsyncHooksContextManager otherwise
+ * spans resulting from async/await invocations won't be correctly
+ * associated in their respective hierarchies.
  */
 function ensureInitialContextManagerSet() {
-  if (contextManagerInstallAttempted) return;
-  contextManagerInstallAttempted = true;
-  const contextManager = new AsyncHooksContextManager();
-  if (context.setGlobalContextManager(contextManager)) {
+  if (!context['_contextManager'] || context.active() === ROOT_CONTEXT) {
+    // If no context manager is currently set, or if the active context is the ROOT_CONTEXT,
+    // trace context propagation cannot
+    // function correctly with async/await for OpenTelemetry
+    // See {@link https://opentelemetry.io/docs/languages/js/context/#active-context}
+    context.disable(); // Disable any prior contextManager.
+    const contextManager = new AsyncHooksContextManager();
     contextManager.enable();
+    context.setGlobalContextManager(contextManager);
   }
 }
 

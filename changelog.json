@@ -5,23 +5,6 @@
       "changes": [
         {
           "type": "feat",
-          "sha": "75f148ca83618193c884e139ff8ed76e28854d2d",
-          "message": "Port GDCH credentials support to Node.js Auth SDK",
-          "issues": [
-            "8301"
-          ]
-        }
-      ],
-      "version": "10.7.0",
-      "language": "JAVASCRIPT",
-      "artifactName": "google-auth-library",
-      "id": "c0798cea-e5bb-4f98-b15a-da5098ced3c0",
-      "createTime": "2026-06-03T21:14:03.065Z"
-    },
-    {
-      "changes": [
-        {
-          "type": "feat",
           "sha": "d25b276be2d154b68d0e6bce62244c15a5103f7a",
           "message": "[databasecenter] add a AggregateQueryStats  API",
           "issues": [
@@ -80025,5 +80008,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-03T21:14:03.065Z"
+  "updateTime": "2026-06-01T19:22:56.778Z"
 }
