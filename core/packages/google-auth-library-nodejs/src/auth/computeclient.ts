@@ -147,8 +147,12 @@ export class Compute extends OAuth2Client {
    * @return The regional access boundary URL string.
    * @internal
    */
-  public async getRegionalAccessBoundaryUrl(): Promise<string> {
+  public async getRegionalAccessBoundaryUrl(): Promise<string | null> {
     const email = await this.resolveServiceAccountEmail();
+    const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      return null;
+    }
     const regionalAccessBoundaryUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
       '{service_account_email}',
       encodeURIComponent(email),

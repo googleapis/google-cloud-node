@@ -370,5 +370,50 @@ describe('compute', () => {
         /RegionalAccessBoundary: Failed to retrieve default service account email from metadata server./,
       );
     });
+
+    it('should return null from getRegionalAccessBoundaryUrl if email returned from metadata server is not a valid email format', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'not-a-valid-email';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      const url = await compute.getRegionalAccessBoundaryUrl();
+      assert.strictEqual(url, null);
+    });
+
+    it('should return null from getRegionalAccessBoundaryUrl if custom serviceAccountEmail is not a valid email format', async () => {
+      const compute = new Compute({serviceAccountEmail: 'not-an-email'});
+      const url = await compute.getRegionalAccessBoundaryUrl();
+      assert.strictEqual(url, null);
+    });
+
+    it('should NOT trigger asynchronous RAB refresh and NOT attach RAB header if email from metadata server is not a valid email format', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'not-a-valid-email';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      const tokenScope = setupTokenNock('default');
+
+      const url = 'https://pubsub.googleapis.com';
+      const headers = await compute.getRequestHeaders(url);
+
+      // Headers should NOT have RAB
+      assert.strictEqual(headers.get('x-allowed-locations'), null);
+
+      // Wait a little bit for any background task to run
+      await new Promise(r => setTimeout(r, 500));
+
+      // Regional access boundary data should remain null
+      assert.strictEqual(compute.getRegionalAccessBoundary(), null);
+
+      tokenScope.done();
+    });
   });
 });
