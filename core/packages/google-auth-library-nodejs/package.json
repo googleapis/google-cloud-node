@@ -83,8 +83,6 @@
     "presystem-test": "npm run compile -- --sourceMap",
     "webpack": "webpack",
     "browser-test": "karma start",
-    "docs-test": "echo 'disabled until linkinator is fixed'",
-    "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install"
   },
   "license": "Apache-2.0",

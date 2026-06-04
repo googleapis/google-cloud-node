@@ -18,8 +18,7 @@
     "precompile": "gts clean",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "system-test": "echo no system tests 🙀",
-    "docs": "echo no docs needed",
-    "docs-test": "echo no docs tests"
+    "docs": "echo no docs needed"
   },
   "author": "Google API Authors",
   "license": "Apache-2.0",
