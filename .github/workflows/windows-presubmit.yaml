@@ -18,6 +18,8 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: ^10.0.0
+      - name: Install Workspace Dependencies (Frozen Lockfile)
+        run: pnpm install --frozen-lockfile --ignore-scripts
       - run: node --version
       - run: bash ci/run_conditional_tests.sh
         name: Run windows unit tests
