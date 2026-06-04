@@ -16,8 +16,6 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
-    "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs",
     "system-test": "echo no system test",
     "samples-test": "echo no samples",
     "precompile": "gts clean"
@@ -58,7 +56,6 @@
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^5.0.0",
     "jsdoc-region-tag": "^3.0.0",
-    "linkinator": "^6.1.2",
     "mocha": "^11.1.0",
     "nock": "^14.0.1",
     "sinon": "^19.0.2",
