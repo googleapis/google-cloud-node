@@ -22,8 +22,6 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "license-check": "jsgl --local .",
-    "docs-test": "echo 'skipping tests for time being'",
-    "predocs-test": "npm run docs",
     "precompile": "gts clean"
   },
   "author": {
@@ -64,7 +62,6 @@
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
-    "linkinator": "^5.0.0",
     "long": "^5.3.2",
     "mocha": "^9.2.2",
     "nock": "^13.0.0",
