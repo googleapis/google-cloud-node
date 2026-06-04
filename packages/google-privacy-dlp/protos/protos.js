@@ -6333,6 +6333,7 @@
                          * @property {google.privacy.dlp.v2.ITable|null} [table] ContentItem table
                          * @property {google.privacy.dlp.v2.IByteContentItem|null} [byteItem] ContentItem byteItem
                          * @property {google.privacy.dlp.v2.IConversation|null} [conversation] ContentItem conversation
+                         * @property {google.privacy.dlp.v2.IBatchContentItem|null} [batchContentItem] ContentItem batchContentItem
                          * @property {google.privacy.dlp.v2.IContentMetadata|null} [contentMetadata] ContentItem contentMetadata
                          */
     
@@ -6384,6 +6385,14 @@
                         ContentItem.prototype.conversation = null;
     
                         /**
+                         * ContentItem batchContentItem.
+                         * @member {google.privacy.dlp.v2.IBatchContentItem|null|undefined} batchContentItem
+                         * @memberof google.privacy.dlp.v2.ContentItem
+                         * @instance
+                         */
+                        ContentItem.prototype.batchContentItem = null;
+    
+                        /**
                          * ContentItem contentMetadata.
                          * @member {google.privacy.dlp.v2.IContentMetadata|null|undefined} contentMetadata
                          * @memberof google.privacy.dlp.v2.ContentItem
@@ -6396,12 +6405,12 @@
     
                         /**
                          * ContentItem dataItem.
-                         * @member {"value"|"table"|"byteItem"|"conversation"|undefined} dataItem
+                         * @member {"value"|"table"|"byteItem"|"conversation"|"batchContentItem"|undefined} dataItem
                          * @memberof google.privacy.dlp.v2.ContentItem
                          * @instance
                          */
                         Object.defineProperty(ContentItem.prototype, "dataItem", {
-                            get: $util.oneOfGetter($oneOfFields = ["value", "table", "byteItem", "conversation"]),
+                            get: $util.oneOfGetter($oneOfFields = ["value", "table", "byteItem", "conversation", "batchContentItem"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -6439,6 +6448,8 @@
                                 $root.google.privacy.dlp.v2.ContentMetadata.encode(message.contentMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.conversation != null && Object.hasOwnProperty.call(message, "conversation"))
                                 $root.google.privacy.dlp.v2.Conversation.encode(message.conversation, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.batchContentItem != null && Object.hasOwnProperty.call(message, "batchContentItem"))
+                                $root.google.privacy.dlp.v2.BatchContentItem.encode(message.batchContentItem, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -6489,6 +6500,10 @@
                                     }
                                 case 7: {
                                         message.conversation = $root.google.privacy.dlp.v2.Conversation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.batchContentItem = $root.google.privacy.dlp.v2.BatchContentItem.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -6566,6 +6581,16 @@
                                         return "conversation." + error;
                                 }
                             }
+                            if (message.batchContentItem != null && message.hasOwnProperty("batchContentItem")) {
+                                if (properties.dataItem === 1)
+                                    return "dataItem: multiple values";
+                                properties.dataItem = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.BatchContentItem.verify(message.batchContentItem);
+                                    if (error)
+                                        return "batchContentItem." + error;
+                                }
+                            }
                             if (message.contentMetadata != null && message.hasOwnProperty("contentMetadata")) {
                                 var error = $root.google.privacy.dlp.v2.ContentMetadata.verify(message.contentMetadata);
                                 if (error)
@@ -6602,6 +6627,11 @@
                                 if (typeof object.conversation !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.ContentItem.conversation: object expected");
                                 message.conversation = $root.google.privacy.dlp.v2.Conversation.fromObject(object.conversation);
+                            }
+                            if (object.batchContentItem != null) {
+                                if (typeof object.batchContentItem !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ContentItem.batchContentItem: object expected");
+                                message.batchContentItem = $root.google.privacy.dlp.v2.BatchContentItem.fromObject(object.batchContentItem);
                             }
                             if (object.contentMetadata != null) {
                                 if (typeof object.contentMetadata !== "object")
@@ -6647,6 +6677,11 @@
                                 object.conversation = $root.google.privacy.dlp.v2.Conversation.toObject(message.conversation, options);
                                 if (options.oneofs)
                                     object.dataItem = "conversation";
+                            }
+                            if (message.batchContentItem != null && message.hasOwnProperty("batchContentItem")) {
+                                object.batchContentItem = $root.google.privacy.dlp.v2.BatchContentItem.toObject(message.batchContentItem, options);
+                                if (options.oneofs)
+                                    object.dataItem = "batchContentItem";
                             }
                             return object;
                         };
@@ -7422,6 +7457,456 @@
                         })();
     
                         return ConversationMessage;
+                    })();
+    
+                    v2.BatchContentItem = (function() {
+    
+                        /**
+                         * Properties of a BatchContentItem.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IBatchContentItem
+                         * @property {google.privacy.dlp.v2.IStringValueBatch|null} [stringValueBatch] BatchContentItem stringValueBatch
+                         */
+    
+                        /**
+                         * Constructs a new BatchContentItem.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a BatchContentItem.
+                         * @implements IBatchContentItem
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IBatchContentItem=} [properties] Properties to set
+                         */
+                        function BatchContentItem(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchContentItem stringValueBatch.
+                         * @member {google.privacy.dlp.v2.IStringValueBatch|null|undefined} stringValueBatch
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @instance
+                         */
+                        BatchContentItem.prototype.stringValueBatch = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BatchContentItem batch.
+                         * @member {"stringValueBatch"|undefined} batch
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @instance
+                         */
+                        Object.defineProperty(BatchContentItem.prototype, "batch", {
+                            get: $util.oneOfGetter($oneOfFields = ["stringValueBatch"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BatchContentItem instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @static
+                         * @param {google.privacy.dlp.v2.IBatchContentItem=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.BatchContentItem} BatchContentItem instance
+                         */
+                        BatchContentItem.create = function create(properties) {
+                            return new BatchContentItem(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchContentItem message. Does not implicitly {@link google.privacy.dlp.v2.BatchContentItem.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @static
+                         * @param {google.privacy.dlp.v2.IBatchContentItem} message BatchContentItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchContentItem.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.stringValueBatch != null && Object.hasOwnProperty.call(message, "stringValueBatch"))
+                                $root.google.privacy.dlp.v2.StringValueBatch.encode(message.stringValueBatch, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchContentItem message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.BatchContentItem.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @static
+                         * @param {google.privacy.dlp.v2.IBatchContentItem} message BatchContentItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchContentItem.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchContentItem message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.BatchContentItem} BatchContentItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchContentItem.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BatchContentItem();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.stringValueBatch = $root.google.privacy.dlp.v2.StringValueBatch.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchContentItem message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.BatchContentItem} BatchContentItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchContentItem.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchContentItem message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchContentItem.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.stringValueBatch != null && message.hasOwnProperty("stringValueBatch")) {
+                                properties.batch = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.StringValueBatch.verify(message.stringValueBatch);
+                                    if (error)
+                                        return "stringValueBatch." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchContentItem message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.BatchContentItem} BatchContentItem
+                         */
+                        BatchContentItem.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.BatchContentItem)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.BatchContentItem();
+                            if (object.stringValueBatch != null) {
+                                if (typeof object.stringValueBatch !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.BatchContentItem.stringValueBatch: object expected");
+                                message.stringValueBatch = $root.google.privacy.dlp.v2.StringValueBatch.fromObject(object.stringValueBatch);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchContentItem message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @static
+                         * @param {google.privacy.dlp.v2.BatchContentItem} message BatchContentItem
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchContentItem.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.stringValueBatch != null && message.hasOwnProperty("stringValueBatch")) {
+                                object.stringValueBatch = $root.google.privacy.dlp.v2.StringValueBatch.toObject(message.stringValueBatch, options);
+                                if (options.oneofs)
+                                    object.batch = "stringValueBatch";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchContentItem to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchContentItem.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchContentItem
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.BatchContentItem
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchContentItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.BatchContentItem";
+                        };
+    
+                        return BatchContentItem;
+                    })();
+    
+                    v2.StringValueBatch = (function() {
+    
+                        /**
+                         * Properties of a StringValueBatch.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IStringValueBatch
+                         * @property {Array.<string>|null} [values] StringValueBatch values
+                         */
+    
+                        /**
+                         * Constructs a new StringValueBatch.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a StringValueBatch.
+                         * @implements IStringValueBatch
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IStringValueBatch=} [properties] Properties to set
+                         */
+                        function StringValueBatch(properties) {
+                            this.values = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StringValueBatch values.
+                         * @member {Array.<string>} values
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @instance
+                         */
+                        StringValueBatch.prototype.values = $util.emptyArray;
+    
+                        /**
+                         * Creates a new StringValueBatch instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @static
+                         * @param {google.privacy.dlp.v2.IStringValueBatch=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.StringValueBatch} StringValueBatch instance
+                         */
+                        StringValueBatch.create = function create(properties) {
+                            return new StringValueBatch(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StringValueBatch message. Does not implicitly {@link google.privacy.dlp.v2.StringValueBatch.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @static
+                         * @param {google.privacy.dlp.v2.IStringValueBatch} message StringValueBatch message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StringValueBatch.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.values != null && message.values.length)
+                                for (var i = 0; i < message.values.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.values[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StringValueBatch message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.StringValueBatch.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @static
+                         * @param {google.privacy.dlp.v2.IStringValueBatch} message StringValueBatch message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StringValueBatch.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StringValueBatch message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.StringValueBatch} StringValueBatch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StringValueBatch.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StringValueBatch();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.values && message.values.length))
+                                            message.values = [];
+                                        message.values.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StringValueBatch message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.StringValueBatch} StringValueBatch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StringValueBatch.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StringValueBatch message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StringValueBatch.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.values != null && message.hasOwnProperty("values")) {
+                                if (!Array.isArray(message.values))
+                                    return "values: array expected";
+                                for (var i = 0; i < message.values.length; ++i)
+                                    if (!$util.isString(message.values[i]))
+                                        return "values: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StringValueBatch message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.StringValueBatch} StringValueBatch
+                         */
+                        StringValueBatch.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.StringValueBatch)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.StringValueBatch();
+                            if (object.values) {
+                                if (!Array.isArray(object.values))
+                                    throw TypeError(".google.privacy.dlp.v2.StringValueBatch.values: array expected");
+                                message.values = [];
+                                for (var i = 0; i < object.values.length; ++i)
+                                    message.values[i] = String(object.values[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StringValueBatch message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @static
+                         * @param {google.privacy.dlp.v2.StringValueBatch} message StringValueBatch
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StringValueBatch.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.values = [];
+                            if (message.values && message.values.length) {
+                                object.values = [];
+                                for (var j = 0; j < message.values.length; ++j)
+                                    object.values[j] = message.values[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StringValueBatch to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StringValueBatch.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StringValueBatch
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.StringValueBatch
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StringValueBatch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.StringValueBatch";
+                        };
+    
+                        return StringValueBatch;
                     })();
     
                     v2.Table = (function() {
@@ -9306,6 +9791,7 @@
                          * @property {google.privacy.dlp.v2.IDocumentLocation|null} [documentLocation] ContentLocation documentLocation
                          * @property {google.privacy.dlp.v2.IMetadataLocation|null} [metadataLocation] ContentLocation metadataLocation
                          * @property {google.privacy.dlp.v2.IConversationLocation|null} [conversationLocation] ContentLocation conversationLocation
+                         * @property {google.privacy.dlp.v2.IBatchContentLocation|null} [batchContentLocation] ContentLocation batchContentLocation
                          * @property {google.protobuf.ITimestamp|null} [containerTimestamp] ContentLocation containerTimestamp
                          * @property {string|null} [containerVersion] ContentLocation containerVersion
                          */
@@ -9374,6 +9860,14 @@
                         ContentLocation.prototype.conversationLocation = null;
     
                         /**
+                         * ContentLocation batchContentLocation.
+                         * @member {google.privacy.dlp.v2.IBatchContentLocation|null|undefined} batchContentLocation
+                         * @memberof google.privacy.dlp.v2.ContentLocation
+                         * @instance
+                         */
+                        ContentLocation.prototype.batchContentLocation = null;
+    
+                        /**
                          * ContentLocation containerTimestamp.
                          * @member {google.protobuf.ITimestamp|null|undefined} containerTimestamp
                          * @memberof google.privacy.dlp.v2.ContentLocation
@@ -9394,12 +9888,12 @@
     
                         /**
                          * ContentLocation location.
-                         * @member {"recordLocation"|"imageLocation"|"documentLocation"|"metadataLocation"|"conversationLocation"|undefined} location
+                         * @member {"recordLocation"|"imageLocation"|"documentLocation"|"metadataLocation"|"conversationLocation"|"batchContentLocation"|undefined} location
                          * @memberof google.privacy.dlp.v2.ContentLocation
                          * @instance
                          */
                         Object.defineProperty(ContentLocation.prototype, "location", {
-                            get: $util.oneOfGetter($oneOfFields = ["recordLocation", "imageLocation", "documentLocation", "metadataLocation", "conversationLocation"]),
+                            get: $util.oneOfGetter($oneOfFields = ["recordLocation", "imageLocation", "documentLocation", "metadataLocation", "conversationLocation", "batchContentLocation"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -9443,6 +9937,8 @@
                                 $root.google.privacy.dlp.v2.MetadataLocation.encode(message.metadataLocation, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.conversationLocation != null && Object.hasOwnProperty.call(message, "conversationLocation"))
                                 $root.google.privacy.dlp.v2.ConversationLocation.encode(message.conversationLocation, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.batchContentLocation != null && Object.hasOwnProperty.call(message, "batchContentLocation"))
+                                $root.google.privacy.dlp.v2.BatchContentLocation.encode(message.batchContentLocation, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -9501,6 +9997,10 @@
                                     }
                                 case 10: {
                                         message.conversationLocation = $root.google.privacy.dlp.v2.ConversationLocation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.batchContentLocation = $root.google.privacy.dlp.v2.BatchContentLocation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -9598,6 +10098,16 @@
                                         return "conversationLocation." + error;
                                 }
                             }
+                            if (message.batchContentLocation != null && message.hasOwnProperty("batchContentLocation")) {
+                                if (properties.location === 1)
+                                    return "location: multiple values";
+                                properties.location = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.BatchContentLocation.verify(message.batchContentLocation);
+                                    if (error)
+                                        return "batchContentLocation." + error;
+                                }
+                            }
                             if (message.containerTimestamp != null && message.hasOwnProperty("containerTimestamp")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.containerTimestamp);
                                 if (error)
@@ -9647,6 +10157,11 @@
                                 if (typeof object.conversationLocation !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.ContentLocation.conversationLocation: object expected");
                                 message.conversationLocation = $root.google.privacy.dlp.v2.ConversationLocation.fromObject(object.conversationLocation);
+                            }
+                            if (object.batchContentLocation != null) {
+                                if (typeof object.batchContentLocation !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ContentLocation.batchContentLocation: object expected");
+                                message.batchContentLocation = $root.google.privacy.dlp.v2.BatchContentLocation.fromObject(object.batchContentLocation);
                             }
                             if (object.containerTimestamp != null) {
                                 if (typeof object.containerTimestamp !== "object")
@@ -9706,6 +10221,11 @@
                                 object.conversationLocation = $root.google.privacy.dlp.v2.ConversationLocation.toObject(message.conversationLocation, options);
                                 if (options.oneofs)
                                     object.location = "conversationLocation";
+                            }
+                            if (message.batchContentLocation != null && message.hasOwnProperty("batchContentLocation")) {
+                                object.batchContentLocation = $root.google.privacy.dlp.v2.BatchContentLocation.toObject(message.batchContentLocation, options);
+                                if (options.oneofs)
+                                    object.location = "batchContentLocation";
                             }
                             return object;
                         };
@@ -10172,6 +10692,211 @@
                         })();
     
                         return ConversationLocation;
+                    })();
+    
+                    v2.BatchContentLocation = (function() {
+    
+                        /**
+                         * Properties of a BatchContentLocation.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IBatchContentLocation
+                         * @property {number|null} [itemIndex] BatchContentLocation itemIndex
+                         */
+    
+                        /**
+                         * Constructs a new BatchContentLocation.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a BatchContentLocation.
+                         * @implements IBatchContentLocation
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IBatchContentLocation=} [properties] Properties to set
+                         */
+                        function BatchContentLocation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchContentLocation itemIndex.
+                         * @member {number} itemIndex
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @instance
+                         */
+                        BatchContentLocation.prototype.itemIndex = 0;
+    
+                        /**
+                         * Creates a new BatchContentLocation instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IBatchContentLocation=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.BatchContentLocation} BatchContentLocation instance
+                         */
+                        BatchContentLocation.create = function create(properties) {
+                            return new BatchContentLocation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchContentLocation message. Does not implicitly {@link google.privacy.dlp.v2.BatchContentLocation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IBatchContentLocation} message BatchContentLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchContentLocation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.itemIndex != null && Object.hasOwnProperty.call(message, "itemIndex"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.itemIndex);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchContentLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.BatchContentLocation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IBatchContentLocation} message BatchContentLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchContentLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchContentLocation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.BatchContentLocation} BatchContentLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchContentLocation.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BatchContentLocation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.itemIndex = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchContentLocation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.BatchContentLocation} BatchContentLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchContentLocation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchContentLocation message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchContentLocation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.itemIndex != null && message.hasOwnProperty("itemIndex"))
+                                if (!$util.isInteger(message.itemIndex))
+                                    return "itemIndex: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchContentLocation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.BatchContentLocation} BatchContentLocation
+                         */
+                        BatchContentLocation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.BatchContentLocation)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.BatchContentLocation();
+                            if (object.itemIndex != null)
+                                message.itemIndex = object.itemIndex | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchContentLocation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.BatchContentLocation} message BatchContentLocation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchContentLocation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.itemIndex = 0;
+                            if (message.itemIndex != null && message.hasOwnProperty("itemIndex"))
+                                object.itemIndex = message.itemIndex;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchContentLocation to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchContentLocation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchContentLocation
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.BatchContentLocation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchContentLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.BatchContentLocation";
+                        };
+    
+                        return BatchContentLocation;
                     })();
     
                     v2.MetadataLocation = (function() {
