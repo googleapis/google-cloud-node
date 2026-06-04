@@ -39,6 +39,7 @@ export interface ComputeOptions extends OAuth2ClientOptions {
 }
 
 export class Compute extends OAuth2Client {
+  private static readonly EMAIL_REGEX = /^[^@]+@[^@]+\.[^@]+$/;
   readonly serviceAccountEmail: string;
   scopes: string[];
   private rabLookupSkippedWarningLogged = false;
@@ -152,11 +153,10 @@ export class Compute extends OAuth2Client {
    */
   public async getRegionalAccessBoundaryUrl(): Promise<string | null> {
     const email = await this.resolveServiceAccountEmail();
-    const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
-    if (!email || !emailRegex.test(email)) {
+    if (!email || !Compute.EMAIL_REGEX.test(email)) {
       if (!this.rabLookupSkippedWarningLogged) {
         AuthClient.log.info(
-          `RegionalAccessBoundary: Service account email "${email}" is not in a valid email format. Skipping regional access boundary lookup.`
+          `RegionalAccessBoundary: Service account email "${email}" is not in a valid email format. Skipping regional access boundary lookup.`,
         );
         this.rabLookupSkippedWarningLogged = true;
       }
@@ -187,7 +187,7 @@ export class Compute extends OAuth2Client {
     // Otherwise, fetch the default email from the metadata server.
     try {
       const email = await gcpMetadata.instance<string>(
-        'service-accounts/default/email'
+        'service-accounts/default/email',
       );
       this.resolvedServiceAccountEmail = email;
       return email;
