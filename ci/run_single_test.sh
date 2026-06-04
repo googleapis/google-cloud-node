@@ -41,7 +41,7 @@ fi
 
 # Dependencies are pre-installed globally at the workspace root.
 # We only execute compilation / prep if required by the package.
-pnpm --filter ...{.} run compile --if-present
+pnpm --filter ...{.} run --if-present compile
 
 
 retval=0
