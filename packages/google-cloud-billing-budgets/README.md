@@ -50,7 +50,9 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/billing-budgets
 ```
 
-[//]: # "partials.body"
+### Using TypeScript
+
+`@google-cloud/billing-budgets` provides TypeScript type definitions.
 
 ## Samples
 
