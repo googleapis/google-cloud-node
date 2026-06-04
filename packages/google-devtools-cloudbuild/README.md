@@ -49,7 +49,9 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/cloudbuild
 ```
 
-[//]: # "partials.body"
+### Using TypeScript
+
+`@google-cloud/cloudbuild` provides TypeScript type definitions.
 
 ## Samples
 
