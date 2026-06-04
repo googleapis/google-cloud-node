@@ -52153,6 +52153,7 @@
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery>|null} [lookerGoldenQueries] Context lookerGoldenQueries
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IGlossaryTerm>|null} [glossaryTerms] Context glossaryTerms
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.Context.ISchemaRelationship>|null} [schemaRelationships] Context schemaRelationships
+                         * @property {google.cloud.geminidataanalytics.v1beta.IUserFunctions|null} [userFunctions] Context userFunctions
                          */
     
                         /**
@@ -52231,6 +52232,14 @@
                         Context.prototype.schemaRelationships = $util.emptyArray;
     
                         /**
+                         * Context userFunctions.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IUserFunctions|null|undefined} userFunctions
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Context
+                         * @instance
+                         */
+                        Context.prototype.userFunctions = null;
+    
+                        /**
                          * Creates a new Context instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1beta.Context
@@ -52269,6 +52278,8 @@
                             if (message.schemaRelationships != null && message.schemaRelationships.length)
                                 for (var i = 0; i < message.schemaRelationships.length; ++i)
                                     $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.encode(message.schemaRelationships[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.userFunctions != null && Object.hasOwnProperty.call(message, "userFunctions"))
+                                $root.google.cloud.geminidataanalytics.v1beta.UserFunctions.encode(message.userFunctions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.lookerGoldenQueries != null && message.lookerGoldenQueries.length)
                                 for (var i = 0; i < message.lookerGoldenQueries.length; ++i)
                                     $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.encode(message.lookerGoldenQueries[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
@@ -52342,6 +52353,10 @@
                                         if (!(message.schemaRelationships && message.schemaRelationships.length))
                                             message.schemaRelationships = [];
                                         message.schemaRelationships.push($root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 10: {
+                                        message.userFunctions = $root.google.cloud.geminidataanalytics.v1beta.UserFunctions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -52428,6 +52443,11 @@
                                         return "schemaRelationships." + error;
                                 }
                             }
+                            if (message.userFunctions != null && message.hasOwnProperty("userFunctions")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.UserFunctions.verify(message.userFunctions);
+                                if (error)
+                                    return "userFunctions." + error;
+                            }
                             return null;
                         };
     
@@ -52495,6 +52515,11 @@
                                     message.schemaRelationships[i] = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.fromObject(object.schemaRelationships[i]);
                                 }
                             }
+                            if (object.userFunctions != null) {
+                                if (typeof object.userFunctions !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.userFunctions: object expected");
+                                message.userFunctions = $root.google.cloud.geminidataanalytics.v1beta.UserFunctions.fromObject(object.userFunctions);
+                            }
                             return message;
                         };
     
@@ -52521,6 +52546,7 @@
                                 object.systemInstruction = "";
                                 object.options = null;
                                 object.datasourceReferences = null;
+                                object.userFunctions = null;
                             }
                             if (message.systemInstruction != null && message.hasOwnProperty("systemInstruction"))
                                 object.systemInstruction = message.systemInstruction;
@@ -52543,6 +52569,8 @@
                                 for (var j = 0; j < message.schemaRelationships.length; ++j)
                                     object.schemaRelationships[j] = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.toObject(message.schemaRelationships[j], options);
                             }
+                            if (message.userFunctions != null && message.hasOwnProperty("userFunctions"))
+                                object.userFunctions = $root.google.cloud.geminidataanalytics.v1beta.UserFunctions.toObject(message.userFunctions, options);
                             if (message.lookerGoldenQueries && message.lookerGoldenQueries.length) {
                                 object.lookerGoldenQueries = [];
                                 for (var j = 0; j < message.lookerGoldenQueries.length; ++j)
@@ -53182,6 +53210,718 @@
                         return Context;
                     })();
     
+                    v1beta.UserFunctions = (function() {
+    
+                        /**
+                         * Properties of a UserFunctions.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IUserFunctions
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IBigQueryRoutine>|null} [bqRoutines] UserFunctions bqRoutines
+                         */
+    
+                        /**
+                         * Constructs a new UserFunctions.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a UserFunctions.
+                         * @implements IUserFunctions
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IUserFunctions=} [properties] Properties to set
+                         */
+                        function UserFunctions(properties) {
+                            this.bqRoutines = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UserFunctions bqRoutines.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IBigQueryRoutine>} bqRoutines
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @instance
+                         */
+                        UserFunctions.prototype.bqRoutines = $util.emptyArray;
+    
+                        /**
+                         * Creates a new UserFunctions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IUserFunctions=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.UserFunctions} UserFunctions instance
+                         */
+                        UserFunctions.create = function create(properties) {
+                            return new UserFunctions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UserFunctions message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.UserFunctions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IUserFunctions} message UserFunctions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserFunctions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bqRoutines != null && message.bqRoutines.length)
+                                for (var i = 0; i < message.bqRoutines.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutine.encode(message.bqRoutines[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UserFunctions message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.UserFunctions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IUserFunctions} message UserFunctions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserFunctions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a UserFunctions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.UserFunctions} UserFunctions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserFunctions.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.UserFunctions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.bqRoutines && message.bqRoutines.length))
+                                            message.bqRoutines = [];
+                                        message.bqRoutines.push($root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutine.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a UserFunctions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.UserFunctions} UserFunctions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserFunctions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a UserFunctions message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UserFunctions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bqRoutines != null && message.hasOwnProperty("bqRoutines")) {
+                                if (!Array.isArray(message.bqRoutines))
+                                    return "bqRoutines: array expected";
+                                for (var i = 0; i < message.bqRoutines.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutine.verify(message.bqRoutines[i]);
+                                    if (error)
+                                        return "bqRoutines." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a UserFunctions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.UserFunctions} UserFunctions
+                         */
+                        UserFunctions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.UserFunctions)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.UserFunctions();
+                            if (object.bqRoutines) {
+                                if (!Array.isArray(object.bqRoutines))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.UserFunctions.bqRoutines: array expected");
+                                message.bqRoutines = [];
+                                for (var i = 0; i < object.bqRoutines.length; ++i) {
+                                    if (typeof object.bqRoutines[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.UserFunctions.bqRoutines: object expected");
+                                    message.bqRoutines[i] = $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutine.fromObject(object.bqRoutines[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a UserFunctions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.UserFunctions} message UserFunctions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UserFunctions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.bqRoutines = [];
+                            if (message.bqRoutines && message.bqRoutines.length) {
+                                object.bqRoutines = [];
+                                for (var j = 0; j < message.bqRoutines.length; ++j)
+                                    object.bqRoutines[j] = $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutine.toObject(message.bqRoutines[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UserFunctions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UserFunctions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UserFunctions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.UserFunctions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserFunctions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.UserFunctions";
+                        };
+    
+                        return UserFunctions;
+                    })();
+    
+                    v1beta.BigQueryRoutine = (function() {
+    
+                        /**
+                         * Properties of a BigQueryRoutine.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IBigQueryRoutine
+                         * @property {google.cloud.geminidataanalytics.v1beta.IBigQueryRoutineReference|null} [routineReference] BigQueryRoutine routineReference
+                         * @property {string|null} [description] BigQueryRoutine description
+                         */
+    
+                        /**
+                         * Constructs a new BigQueryRoutine.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a BigQueryRoutine.
+                         * @implements IBigQueryRoutine
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryRoutine=} [properties] Properties to set
+                         */
+                        function BigQueryRoutine(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BigQueryRoutine routineReference.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IBigQueryRoutineReference|null|undefined} routineReference
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @instance
+                         */
+                        BigQueryRoutine.prototype.routineReference = null;
+    
+                        /**
+                         * BigQueryRoutine description.
+                         * @member {string} description
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @instance
+                         */
+                        BigQueryRoutine.prototype.description = "";
+    
+                        /**
+                         * Creates a new BigQueryRoutine instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryRoutine=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryRoutine} BigQueryRoutine instance
+                         */
+                        BigQueryRoutine.create = function create(properties) {
+                            return new BigQueryRoutine(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryRoutine message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigQueryRoutine.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryRoutine} message BigQueryRoutine message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryRoutine.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.routineReference != null && Object.hasOwnProperty.call(message, "routineReference"))
+                                $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference.encode(message.routineReference, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryRoutine message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigQueryRoutine.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryRoutine} message BigQueryRoutine message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryRoutine.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BigQueryRoutine message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryRoutine} BigQueryRoutine
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryRoutine.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutine();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.routineReference = $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BigQueryRoutine message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryRoutine} BigQueryRoutine
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryRoutine.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BigQueryRoutine message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BigQueryRoutine.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.routineReference != null && message.hasOwnProperty("routineReference")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference.verify(message.routineReference);
+                                if (error)
+                                    return "routineReference." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BigQueryRoutine message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryRoutine} BigQueryRoutine
+                         */
+                        BigQueryRoutine.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutine)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutine();
+                            if (object.routineReference != null) {
+                                if (typeof object.routineReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.BigQueryRoutine.routineReference: object expected");
+                                message.routineReference = $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference.fromObject(object.routineReference);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BigQueryRoutine message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.BigQueryRoutine} message BigQueryRoutine
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BigQueryRoutine.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.routineReference = null;
+                                object.description = "";
+                            }
+                            if (message.routineReference != null && message.hasOwnProperty("routineReference"))
+                                object.routineReference = $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference.toObject(message.routineReference, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BigQueryRoutine to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BigQueryRoutine.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BigQueryRoutine
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutine
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BigQueryRoutine.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.BigQueryRoutine";
+                        };
+    
+                        return BigQueryRoutine;
+                    })();
+    
+                    v1beta.BigQueryRoutineReference = (function() {
+    
+                        /**
+                         * Properties of a BigQueryRoutineReference.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IBigQueryRoutineReference
+                         * @property {string|null} [projectId] BigQueryRoutineReference projectId
+                         * @property {string|null} [datasetId] BigQueryRoutineReference datasetId
+                         * @property {string|null} [routineId] BigQueryRoutineReference routineId
+                         */
+    
+                        /**
+                         * Constructs a new BigQueryRoutineReference.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a BigQueryRoutineReference.
+                         * @implements IBigQueryRoutineReference
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryRoutineReference=} [properties] Properties to set
+                         */
+                        function BigQueryRoutineReference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BigQueryRoutineReference projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @instance
+                         */
+                        BigQueryRoutineReference.prototype.projectId = "";
+    
+                        /**
+                         * BigQueryRoutineReference datasetId.
+                         * @member {string} datasetId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @instance
+                         */
+                        BigQueryRoutineReference.prototype.datasetId = "";
+    
+                        /**
+                         * BigQueryRoutineReference routineId.
+                         * @member {string} routineId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @instance
+                         */
+                        BigQueryRoutineReference.prototype.routineId = "";
+    
+                        /**
+                         * Creates a new BigQueryRoutineReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryRoutineReference=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference} BigQueryRoutineReference instance
+                         */
+                        BigQueryRoutineReference.create = function create(properties) {
+                            return new BigQueryRoutineReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryRoutineReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryRoutineReference} message BigQueryRoutineReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryRoutineReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.datasetId != null && Object.hasOwnProperty.call(message, "datasetId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.datasetId);
+                            if (message.routineId != null && Object.hasOwnProperty.call(message, "routineId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.routineId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryRoutineReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryRoutineReference} message BigQueryRoutineReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryRoutineReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BigQueryRoutineReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference} BigQueryRoutineReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryRoutineReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.datasetId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.routineId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BigQueryRoutineReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference} BigQueryRoutineReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryRoutineReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BigQueryRoutineReference message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BigQueryRoutineReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                if (!$util.isString(message.datasetId))
+                                    return "datasetId: string expected";
+                            if (message.routineId != null && message.hasOwnProperty("routineId"))
+                                if (!$util.isString(message.routineId))
+                                    return "routineId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BigQueryRoutineReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference} BigQueryRoutineReference
+                         */
+                        BigQueryRoutineReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.datasetId != null)
+                                message.datasetId = String(object.datasetId);
+                            if (object.routineId != null)
+                                message.routineId = String(object.routineId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BigQueryRoutineReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference} message BigQueryRoutineReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BigQueryRoutineReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.datasetId = "";
+                                object.routineId = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                object.datasetId = message.datasetId;
+                            if (message.routineId != null && message.hasOwnProperty("routineId"))
+                                object.routineId = message.routineId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BigQueryRoutineReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BigQueryRoutineReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BigQueryRoutineReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BigQueryRoutineReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.BigQueryRoutineReference";
+                        };
+    
+                        return BigQueryRoutineReference;
+                    })();
+    
                     v1beta.ExampleQuery = (function() {
     
                         /**
@@ -53190,6 +53930,7 @@
                          * @interface IExampleQuery
                          * @property {string|null} [sqlQuery] ExampleQuery sqlQuery
                          * @property {string|null} [naturalLanguageQuestion] ExampleQuery naturalLanguageQuestion
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IQueryParameter>|null} [parameters] ExampleQuery parameters
                          */
     
                         /**
@@ -53201,6 +53942,7 @@
                          * @param {google.cloud.geminidataanalytics.v1beta.IExampleQuery=} [properties] Properties to set
                          */
                         function ExampleQuery(properties) {
+                            this.parameters = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -53222,6 +53964,14 @@
                          * @instance
                          */
                         ExampleQuery.prototype.naturalLanguageQuestion = "";
+    
+                        /**
+                         * ExampleQuery parameters.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IQueryParameter>} parameters
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQuery
+                         * @instance
+                         */
+                        ExampleQuery.prototype.parameters = $util.emptyArray;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -53263,6 +54013,9 @@
                                 writer = $Writer.create();
                             if (message.naturalLanguageQuestion != null && Object.hasOwnProperty.call(message, "naturalLanguageQuestion"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.naturalLanguageQuestion);
+                            if (message.parameters != null && message.parameters.length)
+                                for (var i = 0; i < message.parameters.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.QueryParameter.encode(message.parameters[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.sqlQuery != null && Object.hasOwnProperty.call(message, "sqlQuery"))
                                 writer.uint32(/* id 101, wireType 2 =*/810).string(message.sqlQuery);
                             return writer;
@@ -53309,6 +54062,12 @@
                                         message.naturalLanguageQuestion = reader.string();
                                         break;
                                     }
+                                case 3: {
+                                        if (!(message.parameters && message.parameters.length))
+                                            message.parameters = [];
+                                        message.parameters.push($root.google.cloud.geminidataanalytics.v1beta.QueryParameter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -53353,6 +54112,15 @@
                             if (message.naturalLanguageQuestion != null && message.hasOwnProperty("naturalLanguageQuestion"))
                                 if (!$util.isString(message.naturalLanguageQuestion))
                                     return "naturalLanguageQuestion: string expected";
+                            if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                if (!Array.isArray(message.parameters))
+                                    return "parameters: array expected";
+                                for (var i = 0; i < message.parameters.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.QueryParameter.verify(message.parameters[i]);
+                                    if (error)
+                                        return "parameters." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -53372,6 +54140,16 @@
                                 message.sqlQuery = String(object.sqlQuery);
                             if (object.naturalLanguageQuestion != null)
                                 message.naturalLanguageQuestion = String(object.naturalLanguageQuestion);
+                            if (object.parameters) {
+                                if (!Array.isArray(object.parameters))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ExampleQuery.parameters: array expected");
+                                message.parameters = [];
+                                for (var i = 0; i < object.parameters.length; ++i) {
+                                    if (typeof object.parameters[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.ExampleQuery.parameters: object expected");
+                                    message.parameters[i] = $root.google.cloud.geminidataanalytics.v1beta.QueryParameter.fromObject(object.parameters[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -53388,10 +54166,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.parameters = [];
                             if (options.defaults)
                                 object.naturalLanguageQuestion = "";
                             if (message.naturalLanguageQuestion != null && message.hasOwnProperty("naturalLanguageQuestion"))
                                 object.naturalLanguageQuestion = message.naturalLanguageQuestion;
+                            if (message.parameters && message.parameters.length) {
+                                object.parameters = [];
+                                for (var j = 0; j < message.parameters.length; ++j)
+                                    object.parameters[j] = $root.google.cloud.geminidataanalytics.v1beta.QueryParameter.toObject(message.parameters[j], options);
+                            }
                             if (message.sqlQuery != null && message.hasOwnProperty("sqlQuery")) {
                                 object.sqlQuery = message.sqlQuery;
                                 if (options.oneofs)
@@ -53427,6 +54212,742 @@
                         };
     
                         return ExampleQuery;
+                    })();
+    
+                    v1beta.QueryParameter = (function() {
+    
+                        /**
+                         * Properties of a QueryParameter.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IQueryParameter
+                         * @property {string|null} [name] QueryParameter name
+                         * @property {string|null} [description] QueryParameter description
+                         * @property {string|null} [dataType] QueryParameter dataType
+                         */
+    
+                        /**
+                         * Constructs a new QueryParameter.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a QueryParameter.
+                         * @implements IQueryParameter
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IQueryParameter=} [properties] Properties to set
+                         */
+                        function QueryParameter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryParameter name.
+                         * @member {string} name
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @instance
+                         */
+                        QueryParameter.prototype.name = "";
+    
+                        /**
+                         * QueryParameter description.
+                         * @member {string} description
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @instance
+                         */
+                        QueryParameter.prototype.description = "";
+    
+                        /**
+                         * QueryParameter dataType.
+                         * @member {string} dataType
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @instance
+                         */
+                        QueryParameter.prototype.dataType = "";
+    
+                        /**
+                         * Creates a new QueryParameter instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IQueryParameter=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.QueryParameter} QueryParameter instance
+                         */
+                        QueryParameter.create = function create(properties) {
+                            return new QueryParameter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryParameter message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.QueryParameter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IQueryParameter} message QueryParameter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryParameter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.dataType != null && Object.hasOwnProperty.call(message, "dataType"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.dataType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryParameter message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.QueryParameter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IQueryParameter} message QueryParameter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryParameter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryParameter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.QueryParameter} QueryParameter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryParameter.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.QueryParameter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.dataType = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryParameter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.QueryParameter} QueryParameter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryParameter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryParameter message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryParameter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.dataType != null && message.hasOwnProperty("dataType"))
+                                if (!$util.isString(message.dataType))
+                                    return "dataType: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryParameter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.QueryParameter} QueryParameter
+                         */
+                        QueryParameter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.QueryParameter)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.QueryParameter();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.dataType != null)
+                                message.dataType = String(object.dataType);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryParameter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.QueryParameter} message QueryParameter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryParameter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.dataType = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.dataType != null && message.hasOwnProperty("dataType"))
+                                object.dataType = message.dataType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryParameter to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryParameter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryParameter
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryParameter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.QueryParameter";
+                        };
+    
+                        return QueryParameter;
+                    })();
+    
+                    v1beta.MatchedQuery = (function() {
+    
+                        /**
+                         * Properties of a MatchedQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IMatchedQuery
+                         * @property {google.cloud.geminidataanalytics.v1beta.IExampleQuery|null} [exampleQuery] MatchedQuery exampleQuery
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IQueryParameterValues>|null} [queryParameterValues] MatchedQuery queryParameterValues
+                         */
+    
+                        /**
+                         * Constructs a new MatchedQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a MatchedQuery.
+                         * @implements IMatchedQuery
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IMatchedQuery=} [properties] Properties to set
+                         */
+                        function MatchedQuery(properties) {
+                            this.queryParameterValues = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MatchedQuery exampleQuery.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IExampleQuery|null|undefined} exampleQuery
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @instance
+                         */
+                        MatchedQuery.prototype.exampleQuery = null;
+    
+                        /**
+                         * MatchedQuery queryParameterValues.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IQueryParameterValues>} queryParameterValues
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @instance
+                         */
+                        MatchedQuery.prototype.queryParameterValues = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MatchedQuery instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IMatchedQuery=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.MatchedQuery} MatchedQuery instance
+                         */
+                        MatchedQuery.create = function create(properties) {
+                            return new MatchedQuery(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MatchedQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.MatchedQuery.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IMatchedQuery} message MatchedQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MatchedQuery.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.exampleQuery != null && Object.hasOwnProperty.call(message, "exampleQuery"))
+                                $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.encode(message.exampleQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.queryParameterValues != null && message.queryParameterValues.length)
+                                for (var i = 0; i < message.queryParameterValues.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.QueryParameterValues.encode(message.queryParameterValues[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MatchedQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.MatchedQuery.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IMatchedQuery} message MatchedQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MatchedQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MatchedQuery message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.MatchedQuery} MatchedQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MatchedQuery.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.MatchedQuery();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.exampleQuery = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.queryParameterValues && message.queryParameterValues.length))
+                                            message.queryParameterValues = [];
+                                        message.queryParameterValues.push($root.google.cloud.geminidataanalytics.v1beta.QueryParameterValues.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MatchedQuery message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.MatchedQuery} MatchedQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MatchedQuery.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MatchedQuery message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MatchedQuery.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.exampleQuery != null && message.hasOwnProperty("exampleQuery")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.verify(message.exampleQuery);
+                                if (error)
+                                    return "exampleQuery." + error;
+                            }
+                            if (message.queryParameterValues != null && message.hasOwnProperty("queryParameterValues")) {
+                                if (!Array.isArray(message.queryParameterValues))
+                                    return "queryParameterValues: array expected";
+                                for (var i = 0; i < message.queryParameterValues.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.QueryParameterValues.verify(message.queryParameterValues[i]);
+                                    if (error)
+                                        return "queryParameterValues." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MatchedQuery message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.MatchedQuery} MatchedQuery
+                         */
+                        MatchedQuery.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.MatchedQuery)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.MatchedQuery();
+                            if (object.exampleQuery != null) {
+                                if (typeof object.exampleQuery !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.MatchedQuery.exampleQuery: object expected");
+                                message.exampleQuery = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.fromObject(object.exampleQuery);
+                            }
+                            if (object.queryParameterValues) {
+                                if (!Array.isArray(object.queryParameterValues))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.MatchedQuery.queryParameterValues: array expected");
+                                message.queryParameterValues = [];
+                                for (var i = 0; i < object.queryParameterValues.length; ++i) {
+                                    if (typeof object.queryParameterValues[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.MatchedQuery.queryParameterValues: object expected");
+                                    message.queryParameterValues[i] = $root.google.cloud.geminidataanalytics.v1beta.QueryParameterValues.fromObject(object.queryParameterValues[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MatchedQuery message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.MatchedQuery} message MatchedQuery
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MatchedQuery.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.queryParameterValues = [];
+                            if (options.defaults)
+                                object.exampleQuery = null;
+                            if (message.exampleQuery != null && message.hasOwnProperty("exampleQuery"))
+                                object.exampleQuery = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.toObject(message.exampleQuery, options);
+                            if (message.queryParameterValues && message.queryParameterValues.length) {
+                                object.queryParameterValues = [];
+                                for (var j = 0; j < message.queryParameterValues.length; ++j)
+                                    object.queryParameterValues[j] = $root.google.cloud.geminidataanalytics.v1beta.QueryParameterValues.toObject(message.queryParameterValues[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MatchedQuery to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MatchedQuery.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MatchedQuery
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.MatchedQuery
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MatchedQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.MatchedQuery";
+                        };
+    
+                        return MatchedQuery;
+                    })();
+    
+                    v1beta.QueryParameterValues = (function() {
+    
+                        /**
+                         * Properties of a QueryParameterValues.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IQueryParameterValues
+                         * @property {string|null} [name] QueryParameterValues name
+                         * @property {string|null} [value] QueryParameterValues value
+                         */
+    
+                        /**
+                         * Constructs a new QueryParameterValues.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a QueryParameterValues.
+                         * @implements IQueryParameterValues
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IQueryParameterValues=} [properties] Properties to set
+                         */
+                        function QueryParameterValues(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryParameterValues name.
+                         * @member {string} name
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @instance
+                         */
+                        QueryParameterValues.prototype.name = "";
+    
+                        /**
+                         * QueryParameterValues value.
+                         * @member {string} value
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @instance
+                         */
+                        QueryParameterValues.prototype.value = "";
+    
+                        /**
+                         * Creates a new QueryParameterValues instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IQueryParameterValues=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.QueryParameterValues} QueryParameterValues instance
+                         */
+                        QueryParameterValues.create = function create(properties) {
+                            return new QueryParameterValues(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryParameterValues message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.QueryParameterValues.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IQueryParameterValues} message QueryParameterValues message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryParameterValues.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryParameterValues message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.QueryParameterValues.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IQueryParameterValues} message QueryParameterValues message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryParameterValues.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryParameterValues message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.QueryParameterValues} QueryParameterValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryParameterValues.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.QueryParameterValues();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryParameterValues message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.QueryParameterValues} QueryParameterValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryParameterValues.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryParameterValues message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryParameterValues.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (!$util.isString(message.value))
+                                    return "value: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryParameterValues message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.QueryParameterValues} QueryParameterValues
+                         */
+                        QueryParameterValues.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.QueryParameterValues)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.QueryParameterValues();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.value != null)
+                                message.value = String(object.value);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryParameterValues message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.QueryParameterValues} message QueryParameterValues
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryParameterValues.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.value = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                object.value = message.value;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryParameterValues to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryParameterValues.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryParameterValues
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryParameterValues
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryParameterValues.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.QueryParameterValues";
+                        };
+    
+                        return QueryParameterValues;
                     })();
     
                     v1beta.LookerGoldenQuery = (function() {
@@ -53691,6 +55212,8 @@
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter>|null} [filters] LookerQuery filters
                          * @property {Array.<string>|null} [sorts] LookerQuery sorts
                          * @property {string|null} [limit] LookerQuery limit
+                         * @property {string|null} [queryId] LookerQuery queryId
+                         * @property {string|null} [clientId] LookerQuery clientId
                          */
     
                         /**
@@ -53759,12 +55282,40 @@
                          */
                         LookerQuery.prototype.limit = null;
     
+                        /**
+                         * LookerQuery queryId.
+                         * @member {string|null|undefined} queryId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.queryId = null;
+    
+                        /**
+                         * LookerQuery clientId.
+                         * @member {string|null|undefined} clientId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.clientId = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(LookerQuery.prototype, "_limit", {
                             get: $util.oneOfGetter($oneOfFields = ["limit"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LookerQuery.prototype, "_queryId", {
+                            get: $util.oneOfGetter($oneOfFields = ["queryId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LookerQuery.prototype, "_clientId", {
+                            get: $util.oneOfGetter($oneOfFields = ["clientId"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -53807,6 +55358,10 @@
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.sorts[i]);
                             if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.limit);
+                            if (message.queryId != null && Object.hasOwnProperty.call(message, "queryId"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.queryId);
+                            if (message.clientId != null && Object.hasOwnProperty.call(message, "clientId"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.clientId);
                             return writer;
                         };
     
@@ -53871,6 +55426,14 @@
                                     }
                                 case 6: {
                                         message.limit = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.queryId = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.clientId = reader.string();
                                         break;
                                     }
                                 default:
@@ -53943,6 +55506,16 @@
                                 if (!$util.isString(message.limit))
                                     return "limit: string expected";
                             }
+                            if (message.queryId != null && message.hasOwnProperty("queryId")) {
+                                properties._queryId = 1;
+                                if (!$util.isString(message.queryId))
+                                    return "queryId: string expected";
+                            }
+                            if (message.clientId != null && message.hasOwnProperty("clientId")) {
+                                properties._clientId = 1;
+                                if (!$util.isString(message.clientId))
+                                    return "clientId: string expected";
+                            }
                             return null;
                         };
     
@@ -53988,6 +55561,10 @@
                             }
                             if (object.limit != null)
                                 message.limit = String(object.limit);
+                            if (object.queryId != null)
+                                message.queryId = String(object.queryId);
+                            if (object.clientId != null)
+                                message.clientId = String(object.clientId);
                             return message;
                         };
     
@@ -54036,6 +55613,16 @@
                                 object.limit = message.limit;
                                 if (options.oneofs)
                                     object._limit = "limit";
+                            }
+                            if (message.queryId != null && message.hasOwnProperty("queryId")) {
+                                object.queryId = message.queryId;
+                                if (options.oneofs)
+                                    object._queryId = "queryId";
+                            }
+                            if (message.clientId != null && message.hasOwnProperty("clientId")) {
+                                object.clientId = message.clientId;
+                                if (options.oneofs)
+                                    object._clientId = "clientId";
                             }
                             return object;
                         };
@@ -54101,11 +55688,20 @@
     
                             /**
                              * Filter value.
-                             * @member {string} value
+                             * @member {string|null|undefined} value
                              * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
                              * @instance
                              */
-                            Filter.prototype.value = "";
+                            Filter.prototype.value = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Filter.prototype, "_value", {
+                                get: $util.oneOfGetter($oneOfFields = ["value"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new Filter instance using the specified properties.
@@ -54214,12 +55810,15 @@
                             Filter.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.field != null && message.hasOwnProperty("field"))
                                     if (!$util.isString(message.field))
                                         return "field: string expected";
-                                if (message.value != null && message.hasOwnProperty("value"))
+                                if (message.value != null && message.hasOwnProperty("value")) {
+                                    properties._value = 1;
                                     if (!$util.isString(message.value))
                                         return "value: string expected";
+                                }
                                 return null;
                             };
     
@@ -54255,14 +55854,15 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
+                                if (options.defaults)
                                     object.field = "";
-                                    object.value = "";
-                                }
                                 if (message.field != null && message.hasOwnProperty("field"))
                                     object.field = message.field;
-                                if (message.value != null && message.hasOwnProperty("value"))
+                                if (message.value != null && message.hasOwnProperty("value")) {
                                     object.value = message.value;
+                                    if (options.oneofs)
+                                        object._value = "value";
+                                }
                                 return object;
                             };
     
@@ -54576,6 +56176,7 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IChartOptions|null} [chart] ConversationOptions chart
                          * @property {google.cloud.geminidataanalytics.v1beta.IAnalysisOptions|null} [analysis] ConversationOptions analysis
                          * @property {google.cloud.geminidataanalytics.v1beta.IDatasourceOptions|null} [datasource] ConversationOptions datasource
+                         * @property {google.cloud.geminidataanalytics.v1beta.ConversationOptions.Model|null} [model] ConversationOptions model
                          */
     
                         /**
@@ -54618,6 +56219,23 @@
                         ConversationOptions.prototype.datasource = null;
     
                         /**
+                         * ConversationOptions model.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ConversationOptions.Model|null|undefined} model
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ConversationOptions
+                         * @instance
+                         */
+                        ConversationOptions.prototype.model = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ConversationOptions.prototype, "_model", {
+                            get: $util.oneOfGetter($oneOfFields = ["model"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new ConversationOptions instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1beta.ConversationOptions
@@ -54647,6 +56265,8 @@
                                 $root.google.cloud.geminidataanalytics.v1beta.AnalysisOptions.encode(message.analysis, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.datasource != null && Object.hasOwnProperty.call(message, "datasource"))
                                 $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions.encode(message.datasource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.model);
                             return writer;
                         };
     
@@ -54695,6 +56315,10 @@
                                         message.datasource = $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 6: {
+                                        message.model = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -54730,6 +56354,7 @@
                         ConversationOptions.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.chart != null && message.hasOwnProperty("chart")) {
                                 var error = $root.google.cloud.geminidataanalytics.v1beta.ChartOptions.verify(message.chart);
                                 if (error)
@@ -54744,6 +56369,16 @@
                                 var error = $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions.verify(message.datasource);
                                 if (error)
                                     return "datasource." + error;
+                            }
+                            if (message.model != null && message.hasOwnProperty("model")) {
+                                properties._model = 1;
+                                switch (message.model) {
+                                default:
+                                    return "model: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
                             }
                             return null;
                         };
@@ -54775,6 +56410,22 @@
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.ConversationOptions.datasource: object expected");
                                 message.datasource = $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions.fromObject(object.datasource);
                             }
+                            switch (object.model) {
+                            default:
+                                if (typeof object.model === "number") {
+                                    message.model = object.model;
+                                    break;
+                                }
+                                break;
+                            case "MODEL_UNSPECIFIED":
+                            case 0:
+                                message.model = 0;
+                                break;
+                            case "LATEST_GA_MODEL":
+                            case 1:
+                                message.model = 1;
+                                break;
+                            }
                             return message;
                         };
     
@@ -54802,6 +56453,11 @@
                                 object.analysis = $root.google.cloud.geminidataanalytics.v1beta.AnalysisOptions.toObject(message.analysis, options);
                             if (message.datasource != null && message.hasOwnProperty("datasource"))
                                 object.datasource = $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions.toObject(message.datasource, options);
+                            if (message.model != null && message.hasOwnProperty("model")) {
+                                object.model = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.ConversationOptions.Model[message.model] === undefined ? message.model : $root.google.cloud.geminidataanalytics.v1beta.ConversationOptions.Model[message.model] : message.model;
+                                if (options.oneofs)
+                                    object._model = "model";
+                            }
                             return object;
                         };
     
@@ -54830,6 +56486,20 @@
                             }
                             return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ConversationOptions";
                         };
+    
+                        /**
+                         * Model enum.
+                         * @name google.cloud.geminidataanalytics.v1beta.ConversationOptions.Model
+                         * @enum {number}
+                         * @property {number} MODEL_UNSPECIFIED=0 MODEL_UNSPECIFIED value
+                         * @property {number} LATEST_GA_MODEL=1 LATEST_GA_MODEL value
+                         */
+                        ConversationOptions.Model = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODEL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "LATEST_GA_MODEL"] = 1;
+                            return values;
+                        })();
     
                         return ConversationOptions;
                     })();
@@ -56287,6 +57957,1139 @@
                         return AnalysisOptions;
                     })();
     
+                    v1beta.Citation = (function() {
+    
+                        /**
+                         * Properties of a Citation.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface ICitation
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.ICitationSource>|null} [sources] Citation sources
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.ICitationAnchor>|null} [anchors] Citation anchors
+                         */
+    
+                        /**
+                         * Constructs a new Citation.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a Citation.
+                         * @implements ICitation
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitation=} [properties] Properties to set
+                         */
+                        function Citation(properties) {
+                            this.sources = [];
+                            this.anchors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Citation sources.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.ICitationSource>} sources
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @instance
+                         */
+                        Citation.prototype.sources = $util.emptyArray;
+    
+                        /**
+                         * Citation anchors.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.ICitationAnchor>} anchors
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @instance
+                         */
+                        Citation.prototype.anchors = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Citation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitation=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.Citation} Citation instance
+                         */
+                        Citation.create = function create(properties) {
+                            return new Citation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Citation message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.Citation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitation} message Citation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Citation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sources != null && message.sources.length)
+                                for (var i = 0; i < message.sources.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.CitationSource.encode(message.sources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.anchors != null && message.anchors.length)
+                                for (var i = 0; i < message.anchors.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.encode(message.anchors[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Citation message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.Citation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitation} message Citation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Citation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Citation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.Citation} Citation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Citation.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.Citation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.sources && message.sources.length))
+                                            message.sources = [];
+                                        message.sources.push($root.google.cloud.geminidataanalytics.v1beta.CitationSource.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.anchors && message.anchors.length))
+                                            message.anchors = [];
+                                        message.anchors.push($root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Citation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.Citation} Citation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Citation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Citation message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Citation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sources != null && message.hasOwnProperty("sources")) {
+                                if (!Array.isArray(message.sources))
+                                    return "sources: array expected";
+                                for (var i = 0; i < message.sources.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.CitationSource.verify(message.sources[i]);
+                                    if (error)
+                                        return "sources." + error;
+                                }
+                            }
+                            if (message.anchors != null && message.hasOwnProperty("anchors")) {
+                                if (!Array.isArray(message.anchors))
+                                    return "anchors: array expected";
+                                for (var i = 0; i < message.anchors.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.verify(message.anchors[i]);
+                                    if (error)
+                                        return "anchors." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Citation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.Citation} Citation
+                         */
+                        Citation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.Citation)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.Citation();
+                            if (object.sources) {
+                                if (!Array.isArray(object.sources))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.Citation.sources: array expected");
+                                message.sources = [];
+                                for (var i = 0; i < object.sources.length; ++i) {
+                                    if (typeof object.sources[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.Citation.sources: object expected");
+                                    message.sources[i] = $root.google.cloud.geminidataanalytics.v1beta.CitationSource.fromObject(object.sources[i]);
+                                }
+                            }
+                            if (object.anchors) {
+                                if (!Array.isArray(object.anchors))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.Citation.anchors: array expected");
+                                message.anchors = [];
+                                for (var i = 0; i < object.anchors.length; ++i) {
+                                    if (typeof object.anchors[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.Citation.anchors: object expected");
+                                    message.anchors[i] = $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.fromObject(object.anchors[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Citation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.Citation} message Citation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Citation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.sources = [];
+                                object.anchors = [];
+                            }
+                            if (message.sources && message.sources.length) {
+                                object.sources = [];
+                                for (var j = 0; j < message.sources.length; ++j)
+                                    object.sources[j] = $root.google.cloud.geminidataanalytics.v1beta.CitationSource.toObject(message.sources[j], options);
+                            }
+                            if (message.anchors && message.anchors.length) {
+                                object.anchors = [];
+                                for (var j = 0; j < message.anchors.length; ++j)
+                                    object.anchors[j] = $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.toObject(message.anchors[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Citation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Citation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Citation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Citation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Citation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.Citation";
+                        };
+    
+                        return Citation;
+                    })();
+    
+                    v1beta.CitationSource = (function() {
+    
+                        /**
+                         * Properties of a CitationSource.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface ICitationSource
+                         * @property {string|null} [uri] CitationSource uri
+                         * @property {google.cloud.geminidataanalytics.v1beta.IExampleQuery|null} [exampleQuery] CitationSource exampleQuery
+                         * @property {google.cloud.geminidataanalytics.v1beta.IGlossaryTerm|null} [glossaryTerm] CitationSource glossaryTerm
+                         * @property {string|null} [id] CitationSource id
+                         * @property {string|null} [title] CitationSource title
+                         */
+    
+                        /**
+                         * Constructs a new CitationSource.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a CitationSource.
+                         * @implements ICitationSource
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitationSource=} [properties] Properties to set
+                         */
+                        function CitationSource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CitationSource uri.
+                         * @member {string|null|undefined} uri
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @instance
+                         */
+                        CitationSource.prototype.uri = null;
+    
+                        /**
+                         * CitationSource exampleQuery.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IExampleQuery|null|undefined} exampleQuery
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @instance
+                         */
+                        CitationSource.prototype.exampleQuery = null;
+    
+                        /**
+                         * CitationSource glossaryTerm.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IGlossaryTerm|null|undefined} glossaryTerm
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @instance
+                         */
+                        CitationSource.prototype.glossaryTerm = null;
+    
+                        /**
+                         * CitationSource id.
+                         * @member {string} id
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @instance
+                         */
+                        CitationSource.prototype.id = "";
+    
+                        /**
+                         * CitationSource title.
+                         * @member {string} title
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @instance
+                         */
+                        CitationSource.prototype.title = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CitationSource sourceType.
+                         * @member {"uri"|"exampleQuery"|"glossaryTerm"|undefined} sourceType
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @instance
+                         */
+                        Object.defineProperty(CitationSource.prototype, "sourceType", {
+                            get: $util.oneOfGetter($oneOfFields = ["uri", "exampleQuery", "glossaryTerm"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CitationSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitationSource=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.CitationSource} CitationSource instance
+                         */
+                        CitationSource.create = function create(properties) {
+                            return new CitationSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CitationSource message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.CitationSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitationSource} message CitationSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CitationSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.uri);
+                            if (message.exampleQuery != null && Object.hasOwnProperty.call(message, "exampleQuery"))
+                                $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.encode(message.exampleQuery, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.glossaryTerm != null && Object.hasOwnProperty.call(message, "glossaryTerm"))
+                                $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm.encode(message.glossaryTerm, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CitationSource message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.CitationSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitationSource} message CitationSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CitationSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CitationSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.CitationSource} CitationSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CitationSource.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.CitationSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.exampleQuery = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.glossaryTerm = $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.title = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CitationSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.CitationSource} CitationSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CitationSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CitationSource message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CitationSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.uri != null && message.hasOwnProperty("uri")) {
+                                properties.sourceType = 1;
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            }
+                            if (message.exampleQuery != null && message.hasOwnProperty("exampleQuery")) {
+                                if (properties.sourceType === 1)
+                                    return "sourceType: multiple values";
+                                properties.sourceType = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.verify(message.exampleQuery);
+                                    if (error)
+                                        return "exampleQuery." + error;
+                                }
+                            }
+                            if (message.glossaryTerm != null && message.hasOwnProperty("glossaryTerm")) {
+                                if (properties.sourceType === 1)
+                                    return "sourceType: multiple values";
+                                properties.sourceType = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm.verify(message.glossaryTerm);
+                                    if (error)
+                                        return "glossaryTerm." + error;
+                                }
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                if (!$util.isString(message.title))
+                                    return "title: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CitationSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.CitationSource} CitationSource
+                         */
+                        CitationSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.CitationSource)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.CitationSource();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.exampleQuery != null) {
+                                if (typeof object.exampleQuery !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.CitationSource.exampleQuery: object expected");
+                                message.exampleQuery = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.fromObject(object.exampleQuery);
+                            }
+                            if (object.glossaryTerm != null) {
+                                if (typeof object.glossaryTerm !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.CitationSource.glossaryTerm: object expected");
+                                message.glossaryTerm = $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm.fromObject(object.glossaryTerm);
+                            }
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.title != null)
+                                message.title = String(object.title);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CitationSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.CitationSource} message CitationSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CitationSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.id = "";
+                                object.title = "";
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                object.title = message.title;
+                            if (message.uri != null && message.hasOwnProperty("uri")) {
+                                object.uri = message.uri;
+                                if (options.oneofs)
+                                    object.sourceType = "uri";
+                            }
+                            if (message.exampleQuery != null && message.hasOwnProperty("exampleQuery")) {
+                                object.exampleQuery = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.toObject(message.exampleQuery, options);
+                                if (options.oneofs)
+                                    object.sourceType = "exampleQuery";
+                            }
+                            if (message.glossaryTerm != null && message.hasOwnProperty("glossaryTerm")) {
+                                object.glossaryTerm = $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm.toObject(message.glossaryTerm, options);
+                                if (options.oneofs)
+                                    object.sourceType = "glossaryTerm";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CitationSource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CitationSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CitationSource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CitationSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.CitationSource";
+                        };
+    
+                        return CitationSource;
+                    })();
+    
+                    v1beta.CitationAnchor = (function() {
+    
+                        /**
+                         * Properties of a CitationAnchor.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface ICitationAnchor
+                         * @property {google.cloud.geminidataanalytics.v1beta.CitationAnchor.ITextMessageCitationAnchor|null} [textMessageAnchor] CitationAnchor textMessageAnchor
+                         */
+    
+                        /**
+                         * Constructs a new CitationAnchor.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a CitationAnchor.
+                         * @implements ICitationAnchor
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitationAnchor=} [properties] Properties to set
+                         */
+                        function CitationAnchor(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CitationAnchor textMessageAnchor.
+                         * @member {google.cloud.geminidataanalytics.v1beta.CitationAnchor.ITextMessageCitationAnchor|null|undefined} textMessageAnchor
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @instance
+                         */
+                        CitationAnchor.prototype.textMessageAnchor = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CitationAnchor anchorType.
+                         * @member {"textMessageAnchor"|undefined} anchorType
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @instance
+                         */
+                        Object.defineProperty(CitationAnchor.prototype, "anchorType", {
+                            get: $util.oneOfGetter($oneOfFields = ["textMessageAnchor"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CitationAnchor instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitationAnchor=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.CitationAnchor} CitationAnchor instance
+                         */
+                        CitationAnchor.create = function create(properties) {
+                            return new CitationAnchor(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CitationAnchor message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.CitationAnchor.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitationAnchor} message CitationAnchor message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CitationAnchor.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.textMessageAnchor != null && Object.hasOwnProperty.call(message, "textMessageAnchor"))
+                                $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor.encode(message.textMessageAnchor, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CitationAnchor message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.CitationAnchor.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICitationAnchor} message CitationAnchor message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CitationAnchor.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CitationAnchor message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.CitationAnchor} CitationAnchor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CitationAnchor.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.textMessageAnchor = $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CitationAnchor message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.CitationAnchor} CitationAnchor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CitationAnchor.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CitationAnchor message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CitationAnchor.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.textMessageAnchor != null && message.hasOwnProperty("textMessageAnchor")) {
+                                properties.anchorType = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor.verify(message.textMessageAnchor);
+                                    if (error)
+                                        return "textMessageAnchor." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CitationAnchor message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.CitationAnchor} CitationAnchor
+                         */
+                        CitationAnchor.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor();
+                            if (object.textMessageAnchor != null) {
+                                if (typeof object.textMessageAnchor !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.CitationAnchor.textMessageAnchor: object expected");
+                                message.textMessageAnchor = $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor.fromObject(object.textMessageAnchor);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CitationAnchor message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.CitationAnchor} message CitationAnchor
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CitationAnchor.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.textMessageAnchor != null && message.hasOwnProperty("textMessageAnchor")) {
+                                object.textMessageAnchor = $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor.toObject(message.textMessageAnchor, options);
+                                if (options.oneofs)
+                                    object.anchorType = "textMessageAnchor";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CitationAnchor to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CitationAnchor.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CitationAnchor
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CitationAnchor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.CitationAnchor";
+                        };
+    
+                        CitationAnchor.TextMessageCitationAnchor = (function() {
+    
+                            /**
+                             * Properties of a TextMessageCitationAnchor.
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                             * @interface ITextMessageCitationAnchor
+                             * @property {number|null} [partIndex] TextMessageCitationAnchor partIndex
+                             * @property {number|null} [startOffsetBytes] TextMessageCitationAnchor startOffsetBytes
+                             * @property {number|null} [endOffsetBytes] TextMessageCitationAnchor endOffsetBytes
+                             * @property {Array.<string>|null} [sourceIds] TextMessageCitationAnchor sourceIds
+                             */
+    
+                            /**
+                             * Constructs a new TextMessageCitationAnchor.
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor
+                             * @classdesc Represents a TextMessageCitationAnchor.
+                             * @implements ITextMessageCitationAnchor
+                             * @constructor
+                             * @param {google.cloud.geminidataanalytics.v1beta.CitationAnchor.ITextMessageCitationAnchor=} [properties] Properties to set
+                             */
+                            function TextMessageCitationAnchor(properties) {
+                                this.sourceIds = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TextMessageCitationAnchor partIndex.
+                             * @member {number} partIndex
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @instance
+                             */
+                            TextMessageCitationAnchor.prototype.partIndex = 0;
+    
+                            /**
+                             * TextMessageCitationAnchor startOffsetBytes.
+                             * @member {number} startOffsetBytes
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @instance
+                             */
+                            TextMessageCitationAnchor.prototype.startOffsetBytes = 0;
+    
+                            /**
+                             * TextMessageCitationAnchor endOffsetBytes.
+                             * @member {number} endOffsetBytes
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @instance
+                             */
+                            TextMessageCitationAnchor.prototype.endOffsetBytes = 0;
+    
+                            /**
+                             * TextMessageCitationAnchor sourceIds.
+                             * @member {Array.<string>} sourceIds
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @instance
+                             */
+                            TextMessageCitationAnchor.prototype.sourceIds = $util.emptyArray;
+    
+                            /**
+                             * Creates a new TextMessageCitationAnchor instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.CitationAnchor.ITextMessageCitationAnchor=} [properties] Properties to set
+                             * @returns {google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor} TextMessageCitationAnchor instance
+                             */
+                            TextMessageCitationAnchor.create = function create(properties) {
+                                return new TextMessageCitationAnchor(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TextMessageCitationAnchor message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.CitationAnchor.ITextMessageCitationAnchor} message TextMessageCitationAnchor message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TextMessageCitationAnchor.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.partIndex != null && Object.hasOwnProperty.call(message, "partIndex"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.partIndex);
+                                if (message.startOffsetBytes != null && Object.hasOwnProperty.call(message, "startOffsetBytes"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.startOffsetBytes);
+                                if (message.endOffsetBytes != null && Object.hasOwnProperty.call(message, "endOffsetBytes"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.endOffsetBytes);
+                                if (message.sourceIds != null && message.sourceIds.length)
+                                    for (var i = 0; i < message.sourceIds.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.sourceIds[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TextMessageCitationAnchor message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.CitationAnchor.ITextMessageCitationAnchor} message TextMessageCitationAnchor message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TextMessageCitationAnchor.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TextMessageCitationAnchor message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor} TextMessageCitationAnchor
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TextMessageCitationAnchor.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.partIndex = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.startOffsetBytes = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.endOffsetBytes = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.sourceIds && message.sourceIds.length))
+                                                message.sourceIds = [];
+                                            message.sourceIds.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TextMessageCitationAnchor message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor} TextMessageCitationAnchor
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TextMessageCitationAnchor.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TextMessageCitationAnchor message.
+                             * @function verify
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TextMessageCitationAnchor.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.partIndex != null && message.hasOwnProperty("partIndex"))
+                                    if (!$util.isInteger(message.partIndex))
+                                        return "partIndex: integer expected";
+                                if (message.startOffsetBytes != null && message.hasOwnProperty("startOffsetBytes"))
+                                    if (!$util.isInteger(message.startOffsetBytes))
+                                        return "startOffsetBytes: integer expected";
+                                if (message.endOffsetBytes != null && message.hasOwnProperty("endOffsetBytes"))
+                                    if (!$util.isInteger(message.endOffsetBytes))
+                                        return "endOffsetBytes: integer expected";
+                                if (message.sourceIds != null && message.hasOwnProperty("sourceIds")) {
+                                    if (!Array.isArray(message.sourceIds))
+                                        return "sourceIds: array expected";
+                                    for (var i = 0; i < message.sourceIds.length; ++i)
+                                        if (!$util.isString(message.sourceIds[i]))
+                                            return "sourceIds: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TextMessageCitationAnchor message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor} TextMessageCitationAnchor
+                             */
+                            TextMessageCitationAnchor.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor)
+                                    return object;
+                                var message = new $root.google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor();
+                                if (object.partIndex != null)
+                                    message.partIndex = object.partIndex | 0;
+                                if (object.startOffsetBytes != null)
+                                    message.startOffsetBytes = object.startOffsetBytes | 0;
+                                if (object.endOffsetBytes != null)
+                                    message.endOffsetBytes = object.endOffsetBytes | 0;
+                                if (object.sourceIds) {
+                                    if (!Array.isArray(object.sourceIds))
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor.sourceIds: array expected");
+                                    message.sourceIds = [];
+                                    for (var i = 0; i < object.sourceIds.length; ++i)
+                                        message.sourceIds[i] = String(object.sourceIds[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TextMessageCitationAnchor message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor} message TextMessageCitationAnchor
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TextMessageCitationAnchor.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.sourceIds = [];
+                                if (options.defaults) {
+                                    object.partIndex = 0;
+                                    object.startOffsetBytes = 0;
+                                    object.endOffsetBytes = 0;
+                                }
+                                if (message.partIndex != null && message.hasOwnProperty("partIndex"))
+                                    object.partIndex = message.partIndex;
+                                if (message.startOffsetBytes != null && message.hasOwnProperty("startOffsetBytes"))
+                                    object.startOffsetBytes = message.startOffsetBytes;
+                                if (message.endOffsetBytes != null && message.hasOwnProperty("endOffsetBytes"))
+                                    object.endOffsetBytes = message.endOffsetBytes;
+                                if (message.sourceIds && message.sourceIds.length) {
+                                    object.sourceIds = [];
+                                    for (var j = 0; j < message.sourceIds.length; ++j)
+                                        object.sourceIds[j] = message.sourceIds[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TextMessageCitationAnchor to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TextMessageCitationAnchor.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TextMessageCitationAnchor
+                             * @function getTypeUrl
+                             * @memberof google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TextMessageCitationAnchor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.CitationAnchor.TextMessageCitationAnchor";
+                            };
+    
+                            return TextMessageCitationAnchor;
+                        })();
+    
+                        return CitationAnchor;
+                    })();
+    
                     /**
                      * DataFilterType enum.
                      * @name google.cloud.geminidataanalytics.v1beta.DataFilterType
@@ -56712,6 +59515,7 @@
                          * @memberof google.cloud.geminidataanalytics.v1beta
                          * @interface IBigQueryTableReferences
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IBigQueryTableReference>|null} [tableReferences] BigQueryTableReferences tableReferences
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference>|null} [propertyGraphReferences] BigQueryTableReferences propertyGraphReferences
                          */
     
                         /**
@@ -56724,6 +59528,7 @@
                          */
                         function BigQueryTableReferences(properties) {
                             this.tableReferences = [];
+                            this.propertyGraphReferences = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -56737,6 +59542,14 @@
                          * @instance
                          */
                         BigQueryTableReferences.prototype.tableReferences = $util.emptyArray;
+    
+                        /**
+                         * BigQueryTableReferences propertyGraphReferences.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference>} propertyGraphReferences
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryTableReferences
+                         * @instance
+                         */
+                        BigQueryTableReferences.prototype.propertyGraphReferences = $util.emptyArray;
     
                         /**
                          * Creates a new BigQueryTableReferences instance using the specified properties.
@@ -56765,6 +59578,9 @@
                             if (message.tableReferences != null && message.tableReferences.length)
                                 for (var i = 0; i < message.tableReferences.length; ++i)
                                     $root.google.cloud.geminidataanalytics.v1beta.BigQueryTableReference.encode(message.tableReferences[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.propertyGraphReferences != null && message.propertyGraphReferences.length)
+                                for (var i = 0; i < message.propertyGraphReferences.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.encode(message.propertyGraphReferences[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -56805,6 +59621,12 @@
                                         if (!(message.tableReferences && message.tableReferences.length))
                                             message.tableReferences = [];
                                         message.tableReferences.push($root.google.cloud.geminidataanalytics.v1beta.BigQueryTableReference.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.propertyGraphReferences && message.propertyGraphReferences.length))
+                                            message.propertyGraphReferences = [];
+                                        message.propertyGraphReferences.push($root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -56851,6 +59673,15 @@
                                         return "tableReferences." + error;
                                 }
                             }
+                            if (message.propertyGraphReferences != null && message.hasOwnProperty("propertyGraphReferences")) {
+                                if (!Array.isArray(message.propertyGraphReferences))
+                                    return "propertyGraphReferences: array expected";
+                                for (var i = 0; i < message.propertyGraphReferences.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.verify(message.propertyGraphReferences[i]);
+                                    if (error)
+                                        return "propertyGraphReferences." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -56876,6 +59707,16 @@
                                     message.tableReferences[i] = $root.google.cloud.geminidataanalytics.v1beta.BigQueryTableReference.fromObject(object.tableReferences[i]);
                                 }
                             }
+                            if (object.propertyGraphReferences) {
+                                if (!Array.isArray(object.propertyGraphReferences))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.BigQueryTableReferences.propertyGraphReferences: array expected");
+                                message.propertyGraphReferences = [];
+                                for (var i = 0; i < object.propertyGraphReferences.length; ++i) {
+                                    if (typeof object.propertyGraphReferences[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.BigQueryTableReferences.propertyGraphReferences: object expected");
+                                    message.propertyGraphReferences[i] = $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.fromObject(object.propertyGraphReferences[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -56892,12 +59733,19 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.tableReferences = [];
+                                object.propertyGraphReferences = [];
+                            }
                             if (message.tableReferences && message.tableReferences.length) {
                                 object.tableReferences = [];
                                 for (var j = 0; j < message.tableReferences.length; ++j)
                                     object.tableReferences[j] = $root.google.cloud.geminidataanalytics.v1beta.BigQueryTableReference.toObject(message.tableReferences[j], options);
+                            }
+                            if (message.propertyGraphReferences && message.propertyGraphReferences.length) {
+                                object.propertyGraphReferences = [];
+                                for (var j = 0; j < message.propertyGraphReferences.length; ++j)
+                                    object.propertyGraphReferences[j] = $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.toObject(message.propertyGraphReferences[j], options);
                             }
                             return object;
                         };
@@ -57881,6 +60729,240 @@
                         return AlloyDbReference;
                     })();
     
+                    v1beta.DatabaseTableReference = (function() {
+    
+                        /**
+                         * Properties of a DatabaseTableReference.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IDatabaseTableReference
+                         * @property {string|null} [tableId] DatabaseTableReference tableId
+                         * @property {google.cloud.geminidataanalytics.v1beta.ISchema|null} [schema] DatabaseTableReference schema
+                         */
+    
+                        /**
+                         * Constructs a new DatabaseTableReference.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a DatabaseTableReference.
+                         * @implements IDatabaseTableReference
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference=} [properties] Properties to set
+                         */
+                        function DatabaseTableReference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DatabaseTableReference tableId.
+                         * @member {string} tableId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @instance
+                         */
+                        DatabaseTableReference.prototype.tableId = "";
+    
+                        /**
+                         * DatabaseTableReference schema.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ISchema|null|undefined} schema
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @instance
+                         */
+                        DatabaseTableReference.prototype.schema = null;
+    
+                        /**
+                         * Creates a new DatabaseTableReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DatabaseTableReference} DatabaseTableReference instance
+                         */
+                        DatabaseTableReference.create = function create(properties) {
+                            return new DatabaseTableReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DatabaseTableReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference} message DatabaseTableReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatabaseTableReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tableId != null && Object.hasOwnProperty.call(message, "tableId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.tableId);
+                            if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
+                                $root.google.cloud.geminidataanalytics.v1beta.Schema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DatabaseTableReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference} message DatabaseTableReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatabaseTableReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DatabaseTableReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DatabaseTableReference} DatabaseTableReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatabaseTableReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.tableId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.schema = $root.google.cloud.geminidataanalytics.v1beta.Schema.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DatabaseTableReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DatabaseTableReference} DatabaseTableReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatabaseTableReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DatabaseTableReference message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DatabaseTableReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tableId != null && message.hasOwnProperty("tableId"))
+                                if (!$util.isString(message.tableId))
+                                    return "tableId: string expected";
+                            if (message.schema != null && message.hasOwnProperty("schema")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.Schema.verify(message.schema);
+                                if (error)
+                                    return "schema." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DatabaseTableReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DatabaseTableReference} DatabaseTableReference
+                         */
+                        DatabaseTableReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference();
+                            if (object.tableId != null)
+                                message.tableId = String(object.tableId);
+                            if (object.schema != null) {
+                                if (typeof object.schema !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.schema: object expected");
+                                message.schema = $root.google.cloud.geminidataanalytics.v1beta.Schema.fromObject(object.schema);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DatabaseTableReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.DatabaseTableReference} message DatabaseTableReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DatabaseTableReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.tableId = "";
+                                object.schema = null;
+                            }
+                            if (message.tableId != null && message.hasOwnProperty("tableId"))
+                                object.tableId = message.tableId;
+                            if (message.schema != null && message.hasOwnProperty("schema"))
+                                object.schema = $root.google.cloud.geminidataanalytics.v1beta.Schema.toObject(message.schema, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DatabaseTableReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DatabaseTableReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DatabaseTableReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatabaseTableReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DatabaseTableReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.DatabaseTableReference";
+                        };
+    
+                        return DatabaseTableReference;
+                    })();
+    
                     v1beta.AlloyDbDatabaseReference = (function() {
     
                         /**
@@ -57893,6 +60975,7 @@
                          * @property {string|null} [instanceId] AlloyDbDatabaseReference instanceId
                          * @property {string|null} [databaseId] AlloyDbDatabaseReference databaseId
                          * @property {Array.<string>|null} [tableIds] AlloyDbDatabaseReference tableIds
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference>|null} [databaseTableReferences] AlloyDbDatabaseReference databaseTableReferences
                          */
     
                         /**
@@ -57905,6 +60988,7 @@
                          */
                         function AlloyDbDatabaseReference(properties) {
                             this.tableIds = [];
+                            this.databaseTableReferences = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -57960,6 +61044,14 @@
                         AlloyDbDatabaseReference.prototype.tableIds = $util.emptyArray;
     
                         /**
+                         * AlloyDbDatabaseReference databaseTableReferences.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference>} databaseTableReferences
+                         * @memberof google.cloud.geminidataanalytics.v1beta.AlloyDbDatabaseReference
+                         * @instance
+                         */
+                        AlloyDbDatabaseReference.prototype.databaseTableReferences = $util.emptyArray;
+    
+                        /**
                          * Creates a new AlloyDbDatabaseReference instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1beta.AlloyDbDatabaseReference
@@ -57996,6 +61088,9 @@
                             if (message.tableIds != null && message.tableIds.length)
                                 for (var i = 0; i < message.tableIds.length; ++i)
                                     writer.uint32(/* id 6, wireType 2 =*/50).string(message.tableIds[i]);
+                            if (message.databaseTableReferences != null && message.databaseTableReferences.length)
+                                for (var i = 0; i < message.databaseTableReferences.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.encode(message.databaseTableReferences[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -58058,6 +61153,12 @@
                                         message.tableIds.push(reader.string());
                                         break;
                                     }
+                                case 7: {
+                                        if (!(message.databaseTableReferences && message.databaseTableReferences.length))
+                                            message.databaseTableReferences = [];
+                                        message.databaseTableReferences.push($root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -58115,6 +61216,15 @@
                                     if (!$util.isString(message.tableIds[i]))
                                         return "tableIds: string[] expected";
                             }
+                            if (message.databaseTableReferences != null && message.hasOwnProperty("databaseTableReferences")) {
+                                if (!Array.isArray(message.databaseTableReferences))
+                                    return "databaseTableReferences: array expected";
+                                for (var i = 0; i < message.databaseTableReferences.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.verify(message.databaseTableReferences[i]);
+                                    if (error)
+                                        return "databaseTableReferences." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -58147,6 +61257,16 @@
                                 for (var i = 0; i < object.tableIds.length; ++i)
                                     message.tableIds[i] = String(object.tableIds[i]);
                             }
+                            if (object.databaseTableReferences) {
+                                if (!Array.isArray(object.databaseTableReferences))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.AlloyDbDatabaseReference.databaseTableReferences: array expected");
+                                message.databaseTableReferences = [];
+                                for (var i = 0; i < object.databaseTableReferences.length; ++i) {
+                                    if (typeof object.databaseTableReferences[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.AlloyDbDatabaseReference.databaseTableReferences: object expected");
+                                    message.databaseTableReferences[i] = $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.fromObject(object.databaseTableReferences[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -58163,8 +61283,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.tableIds = [];
+                                object.databaseTableReferences = [];
+                            }
                             if (options.defaults) {
                                 object.projectId = "";
                                 object.region = "";
@@ -58186,6 +61308,11 @@
                                 object.tableIds = [];
                                 for (var j = 0; j < message.tableIds.length; ++j)
                                     object.tableIds[j] = message.tableIds[j];
+                            }
+                            if (message.databaseTableReferences && message.databaseTableReferences.length) {
+                                object.databaseTableReferences = [];
+                                for (var j = 0; j < message.databaseTableReferences.length; ++j)
+                                    object.databaseTableReferences[j] = $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.toObject(message.databaseTableReferences[j], options);
                             }
                             return object;
                         };
@@ -58466,10 +61593,12 @@
                          * @interface ISpannerDatabaseReference
                          * @property {google.cloud.geminidataanalytics.v1beta.SpannerDatabaseReference.Engine|null} [engine] SpannerDatabaseReference engine
                          * @property {string|null} [projectId] SpannerDatabaseReference projectId
-                         * @property {string|null} [region] SpannerDatabaseReference region
                          * @property {string|null} [instanceId] SpannerDatabaseReference instanceId
                          * @property {string|null} [databaseId] SpannerDatabaseReference databaseId
                          * @property {Array.<string>|null} [tableIds] SpannerDatabaseReference tableIds
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference>|null} [databaseTableReferences] SpannerDatabaseReference databaseTableReferences
+                         * @property {string|null} [priority] SpannerDatabaseReference priority
+                         * @property {string|null} [requestTag] SpannerDatabaseReference requestTag
                          */
     
                         /**
@@ -58482,6 +61611,7 @@
                          */
                         function SpannerDatabaseReference(properties) {
                             this.tableIds = [];
+                            this.databaseTableReferences = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -58503,14 +61633,6 @@
                          * @instance
                          */
                         SpannerDatabaseReference.prototype.projectId = "";
-    
-                        /**
-                         * SpannerDatabaseReference region.
-                         * @member {string} region
-                         * @memberof google.cloud.geminidataanalytics.v1beta.SpannerDatabaseReference
-                         * @instance
-                         */
-                        SpannerDatabaseReference.prototype.region = "";
     
                         /**
                          * SpannerDatabaseReference instanceId.
@@ -58535,6 +61657,30 @@
                          * @instance
                          */
                         SpannerDatabaseReference.prototype.tableIds = $util.emptyArray;
+    
+                        /**
+                         * SpannerDatabaseReference databaseTableReferences.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference>} databaseTableReferences
+                         * @memberof google.cloud.geminidataanalytics.v1beta.SpannerDatabaseReference
+                         * @instance
+                         */
+                        SpannerDatabaseReference.prototype.databaseTableReferences = $util.emptyArray;
+    
+                        /**
+                         * SpannerDatabaseReference priority.
+                         * @member {string} priority
+                         * @memberof google.cloud.geminidataanalytics.v1beta.SpannerDatabaseReference
+                         * @instance
+                         */
+                        SpannerDatabaseReference.prototype.priority = "";
+    
+                        /**
+                         * SpannerDatabaseReference requestTag.
+                         * @member {string} requestTag
+                         * @memberof google.cloud.geminidataanalytics.v1beta.SpannerDatabaseReference
+                         * @instance
+                         */
+                        SpannerDatabaseReference.prototype.requestTag = "";
     
                         /**
                          * Creates a new SpannerDatabaseReference instance using the specified properties.
@@ -58562,8 +61708,6 @@
                                 writer = $Writer.create();
                             if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
-                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.region);
                             if (message.instanceId != null && Object.hasOwnProperty.call(message, "instanceId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.instanceId);
                             if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
@@ -58573,6 +61717,13 @@
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.tableIds[i]);
                             if (message.engine != null && Object.hasOwnProperty.call(message, "engine"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.engine);
+                            if (message.databaseTableReferences != null && message.databaseTableReferences.length)
+                                for (var i = 0; i < message.databaseTableReferences.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.encode(message.databaseTableReferences[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.priority != null && Object.hasOwnProperty.call(message, "priority"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.priority);
+                            if (message.requestTag != null && Object.hasOwnProperty.call(message, "requestTag"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.requestTag);
                             return writer;
                         };
     
@@ -58617,10 +61768,6 @@
                                         message.projectId = reader.string();
                                         break;
                                     }
-                                case 2: {
-                                        message.region = reader.string();
-                                        break;
-                                    }
                                 case 3: {
                                         message.instanceId = reader.string();
                                         break;
@@ -58633,6 +61780,20 @@
                                         if (!(message.tableIds && message.tableIds.length))
                                             message.tableIds = [];
                                         message.tableIds.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.databaseTableReferences && message.databaseTableReferences.length))
+                                            message.databaseTableReferences = [];
+                                        message.databaseTableReferences.push($root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 8: {
+                                        message.priority = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.requestTag = reader.string();
                                         break;
                                     }
                                 default:
@@ -58682,9 +61843,6 @@
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 if (!$util.isString(message.projectId))
                                     return "projectId: string expected";
-                            if (message.region != null && message.hasOwnProperty("region"))
-                                if (!$util.isString(message.region))
-                                    return "region: string expected";
                             if (message.instanceId != null && message.hasOwnProperty("instanceId"))
                                 if (!$util.isString(message.instanceId))
                                     return "instanceId: string expected";
@@ -58698,6 +61856,21 @@
                                     if (!$util.isString(message.tableIds[i]))
                                         return "tableIds: string[] expected";
                             }
+                            if (message.databaseTableReferences != null && message.hasOwnProperty("databaseTableReferences")) {
+                                if (!Array.isArray(message.databaseTableReferences))
+                                    return "databaseTableReferences: array expected";
+                                for (var i = 0; i < message.databaseTableReferences.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.verify(message.databaseTableReferences[i]);
+                                    if (error)
+                                        return "databaseTableReferences." + error;
+                                }
+                            }
+                            if (message.priority != null && message.hasOwnProperty("priority"))
+                                if (!$util.isString(message.priority))
+                                    return "priority: string expected";
+                            if (message.requestTag != null && message.hasOwnProperty("requestTag"))
+                                if (!$util.isString(message.requestTag))
+                                    return "requestTag: string expected";
                             return null;
                         };
     
@@ -58735,8 +61908,6 @@
                             }
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
-                            if (object.region != null)
-                                message.region = String(object.region);
                             if (object.instanceId != null)
                                 message.instanceId = String(object.instanceId);
                             if (object.databaseId != null)
@@ -58748,6 +61919,20 @@
                                 for (var i = 0; i < object.tableIds.length; ++i)
                                     message.tableIds[i] = String(object.tableIds[i]);
                             }
+                            if (object.databaseTableReferences) {
+                                if (!Array.isArray(object.databaseTableReferences))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.SpannerDatabaseReference.databaseTableReferences: array expected");
+                                message.databaseTableReferences = [];
+                                for (var i = 0; i < object.databaseTableReferences.length; ++i) {
+                                    if (typeof object.databaseTableReferences[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.SpannerDatabaseReference.databaseTableReferences: object expected");
+                                    message.databaseTableReferences[i] = $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.fromObject(object.databaseTableReferences[i]);
+                                }
+                            }
+                            if (object.priority != null)
+                                message.priority = String(object.priority);
+                            if (object.requestTag != null)
+                                message.requestTag = String(object.requestTag);
                             return message;
                         };
     
@@ -58764,19 +61949,20 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.tableIds = [];
+                                object.databaseTableReferences = [];
+                            }
                             if (options.defaults) {
                                 object.projectId = "";
-                                object.region = "";
                                 object.instanceId = "";
                                 object.databaseId = "";
                                 object.engine = options.enums === String ? "ENGINE_UNSPECIFIED" : 0;
+                                object.priority = "";
+                                object.requestTag = "";
                             }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
-                            if (message.region != null && message.hasOwnProperty("region"))
-                                object.region = message.region;
                             if (message.instanceId != null && message.hasOwnProperty("instanceId"))
                                 object.instanceId = message.instanceId;
                             if (message.databaseId != null && message.hasOwnProperty("databaseId"))
@@ -58788,6 +61974,15 @@
                             }
                             if (message.engine != null && message.hasOwnProperty("engine"))
                                 object.engine = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.SpannerDatabaseReference.Engine[message.engine] === undefined ? message.engine : $root.google.cloud.geminidataanalytics.v1beta.SpannerDatabaseReference.Engine[message.engine] : message.engine;
+                            if (message.databaseTableReferences && message.databaseTableReferences.length) {
+                                object.databaseTableReferences = [];
+                                for (var j = 0; j < message.databaseTableReferences.length; ++j)
+                                    object.databaseTableReferences[j] = $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.toObject(message.databaseTableReferences[j], options);
+                            }
+                            if (message.priority != null && message.hasOwnProperty("priority"))
+                                object.priority = message.priority;
+                            if (message.requestTag != null && message.hasOwnProperty("requestTag"))
+                                object.requestTag = message.requestTag;
                             return object;
                         };
     
@@ -59087,6 +62282,7 @@
                          * @property {string|null} [instanceId] CloudSqlDatabaseReference instanceId
                          * @property {string|null} [databaseId] CloudSqlDatabaseReference databaseId
                          * @property {Array.<string>|null} [tableIds] CloudSqlDatabaseReference tableIds
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference>|null} [databaseTableReferences] CloudSqlDatabaseReference databaseTableReferences
                          */
     
                         /**
@@ -59099,6 +62295,7 @@
                          */
                         function CloudSqlDatabaseReference(properties) {
                             this.tableIds = [];
+                            this.databaseTableReferences = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -59154,6 +62351,14 @@
                         CloudSqlDatabaseReference.prototype.tableIds = $util.emptyArray;
     
                         /**
+                         * CloudSqlDatabaseReference databaseTableReferences.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference>} databaseTableReferences
+                         * @memberof google.cloud.geminidataanalytics.v1beta.CloudSqlDatabaseReference
+                         * @instance
+                         */
+                        CloudSqlDatabaseReference.prototype.databaseTableReferences = $util.emptyArray;
+    
+                        /**
                          * Creates a new CloudSqlDatabaseReference instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1beta.CloudSqlDatabaseReference
@@ -59190,6 +62395,9 @@
                             if (message.tableIds != null && message.tableIds.length)
                                 for (var i = 0; i < message.tableIds.length; ++i)
                                     writer.uint32(/* id 7, wireType 2 =*/58).string(message.tableIds[i]);
+                            if (message.databaseTableReferences != null && message.databaseTableReferences.length)
+                                for (var i = 0; i < message.databaseTableReferences.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.encode(message.databaseTableReferences[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -59250,6 +62458,12 @@
                                         if (!(message.tableIds && message.tableIds.length))
                                             message.tableIds = [];
                                         message.tableIds.push(reader.string());
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.databaseTableReferences && message.databaseTableReferences.length))
+                                            message.databaseTableReferences = [];
+                                        message.databaseTableReferences.push($root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -59315,6 +62529,15 @@
                                     if (!$util.isString(message.tableIds[i]))
                                         return "tableIds: string[] expected";
                             }
+                            if (message.databaseTableReferences != null && message.hasOwnProperty("databaseTableReferences")) {
+                                if (!Array.isArray(message.databaseTableReferences))
+                                    return "databaseTableReferences: array expected";
+                                for (var i = 0; i < message.databaseTableReferences.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.verify(message.databaseTableReferences[i]);
+                                    if (error)
+                                        return "databaseTableReferences." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -59365,6 +62588,16 @@
                                 for (var i = 0; i < object.tableIds.length; ++i)
                                     message.tableIds[i] = String(object.tableIds[i]);
                             }
+                            if (object.databaseTableReferences) {
+                                if (!Array.isArray(object.databaseTableReferences))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.CloudSqlDatabaseReference.databaseTableReferences: array expected");
+                                message.databaseTableReferences = [];
+                                for (var i = 0; i < object.databaseTableReferences.length; ++i) {
+                                    if (typeof object.databaseTableReferences[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.CloudSqlDatabaseReference.databaseTableReferences: object expected");
+                                    message.databaseTableReferences[i] = $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.fromObject(object.databaseTableReferences[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -59381,8 +62614,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.tableIds = [];
+                                object.databaseTableReferences = [];
+                            }
                             if (options.defaults) {
                                 object.engine = options.enums === String ? "ENGINE_UNSPECIFIED" : 0;
                                 object.projectId = "";
@@ -59404,6 +62639,11 @@
                                 object.tableIds = [];
                                 for (var j = 0; j < message.tableIds.length; ++j)
                                     object.tableIds[j] = message.tableIds[j];
+                            }
+                            if (message.databaseTableReferences && message.databaseTableReferences.length) {
+                                object.databaseTableReferences = [];
+                                for (var j = 0; j < message.databaseTableReferences.length; ++j)
+                                    object.databaseTableReferences[j] = $root.google.cloud.geminidataanalytics.v1beta.DatabaseTableReference.toObject(message.databaseTableReferences[j], options);
                             }
                             return object;
                         };
@@ -60042,6 +63282,258 @@
                         return LookerExploreReference;
                     })();
     
+                    v1beta.BigQueryPropertyGraphReference = (function() {
+    
+                        /**
+                         * Properties of a BigQueryPropertyGraphReference.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IBigQueryPropertyGraphReference
+                         * @property {string|null} [projectId] BigQueryPropertyGraphReference projectId
+                         * @property {string|null} [datasetId] BigQueryPropertyGraphReference datasetId
+                         * @property {string|null} [propertyGraphId] BigQueryPropertyGraphReference propertyGraphId
+                         */
+    
+                        /**
+                         * Constructs a new BigQueryPropertyGraphReference.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a BigQueryPropertyGraphReference.
+                         * @implements IBigQueryPropertyGraphReference
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference=} [properties] Properties to set
+                         */
+                        function BigQueryPropertyGraphReference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BigQueryPropertyGraphReference projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @instance
+                         */
+                        BigQueryPropertyGraphReference.prototype.projectId = "";
+    
+                        /**
+                         * BigQueryPropertyGraphReference datasetId.
+                         * @member {string} datasetId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @instance
+                         */
+                        BigQueryPropertyGraphReference.prototype.datasetId = "";
+    
+                        /**
+                         * BigQueryPropertyGraphReference propertyGraphId.
+                         * @member {string} propertyGraphId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @instance
+                         */
+                        BigQueryPropertyGraphReference.prototype.propertyGraphId = "";
+    
+                        /**
+                         * Creates a new BigQueryPropertyGraphReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference} BigQueryPropertyGraphReference instance
+                         */
+                        BigQueryPropertyGraphReference.create = function create(properties) {
+                            return new BigQueryPropertyGraphReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryPropertyGraphReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference} message BigQueryPropertyGraphReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryPropertyGraphReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.datasetId != null && Object.hasOwnProperty.call(message, "datasetId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.datasetId);
+                            if (message.propertyGraphId != null && Object.hasOwnProperty.call(message, "propertyGraphId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.propertyGraphId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryPropertyGraphReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference} message BigQueryPropertyGraphReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryPropertyGraphReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BigQueryPropertyGraphReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference} BigQueryPropertyGraphReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryPropertyGraphReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.datasetId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.propertyGraphId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BigQueryPropertyGraphReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference} BigQueryPropertyGraphReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryPropertyGraphReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BigQueryPropertyGraphReference message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BigQueryPropertyGraphReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                if (!$util.isString(message.datasetId))
+                                    return "datasetId: string expected";
+                            if (message.propertyGraphId != null && message.hasOwnProperty("propertyGraphId"))
+                                if (!$util.isString(message.propertyGraphId))
+                                    return "propertyGraphId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BigQueryPropertyGraphReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference} BigQueryPropertyGraphReference
+                         */
+                        BigQueryPropertyGraphReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.datasetId != null)
+                                message.datasetId = String(object.datasetId);
+                            if (object.propertyGraphId != null)
+                                message.propertyGraphId = String(object.propertyGraphId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BigQueryPropertyGraphReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference} message BigQueryPropertyGraphReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BigQueryPropertyGraphReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.datasetId = "";
+                                object.propertyGraphId = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                object.datasetId = message.datasetId;
+                            if (message.propertyGraphId != null && message.hasOwnProperty("propertyGraphId"))
+                                object.propertyGraphId = message.propertyGraphId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BigQueryPropertyGraphReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BigQueryPropertyGraphReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BigQueryPropertyGraphReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BigQueryPropertyGraphReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference";
+                        };
+    
+                        return BigQueryPropertyGraphReference;
+                    })();
+    
                     v1beta.PrivateLookerInstanceInfo = (function() {
     
                         /**
@@ -60283,6 +63775,7 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IAlloyDbReference|null} [alloyDbReference] Datasource alloyDbReference
                          * @property {google.cloud.geminidataanalytics.v1beta.ISpannerReference|null} [spannerReference] Datasource spannerReference
                          * @property {google.cloud.geminidataanalytics.v1beta.ICloudSqlReference|null} [cloudSqlReference] Datasource cloudSqlReference
+                         * @property {google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference|null} [bigqueryPropertyGraphReference] Datasource bigqueryPropertyGraphReference
                          * @property {google.cloud.geminidataanalytics.v1beta.ISchema|null} [schema] Datasource schema
                          * @property {google.protobuf.IStruct|null} [structSchema] Datasource structSchema
                          */
@@ -60351,6 +63844,14 @@
                         Datasource.prototype.cloudSqlReference = null;
     
                         /**
+                         * Datasource bigqueryPropertyGraphReference.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference|null|undefined} bigqueryPropertyGraphReference
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Datasource
+                         * @instance
+                         */
+                        Datasource.prototype.bigqueryPropertyGraphReference = null;
+    
+                        /**
                          * Datasource schema.
                          * @member {google.cloud.geminidataanalytics.v1beta.ISchema|null|undefined} schema
                          * @memberof google.cloud.geminidataanalytics.v1beta.Datasource
@@ -60371,12 +63872,12 @@
     
                         /**
                          * Datasource reference.
-                         * @member {"bigqueryTableReference"|"studioDatasourceId"|"lookerExploreReference"|"alloyDbReference"|"spannerReference"|"cloudSqlReference"|undefined} reference
+                         * @member {"bigqueryTableReference"|"studioDatasourceId"|"lookerExploreReference"|"alloyDbReference"|"spannerReference"|"cloudSqlReference"|"bigqueryPropertyGraphReference"|undefined} reference
                          * @memberof google.cloud.geminidataanalytics.v1beta.Datasource
                          * @instance
                          */
                         Object.defineProperty(Datasource.prototype, "reference", {
-                            get: $util.oneOfGetter($oneOfFields = ["bigqueryTableReference", "studioDatasourceId", "lookerExploreReference", "alloyDbReference", "spannerReference", "cloudSqlReference"]),
+                            get: $util.oneOfGetter($oneOfFields = ["bigqueryTableReference", "studioDatasourceId", "lookerExploreReference", "alloyDbReference", "spannerReference", "cloudSqlReference", "bigqueryPropertyGraphReference"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -60420,6 +63921,8 @@
                                 $root.google.cloud.geminidataanalytics.v1beta.SpannerReference.encode(message.spannerReference, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             if (message.cloudSqlReference != null && Object.hasOwnProperty.call(message, "cloudSqlReference"))
                                 $root.google.cloud.geminidataanalytics.v1beta.CloudSqlReference.encode(message.cloudSqlReference, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.bigqueryPropertyGraphReference != null && Object.hasOwnProperty.call(message, "bigqueryPropertyGraphReference"))
+                                $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.encode(message.bigqueryPropertyGraphReference, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             return writer;
                         };
     
@@ -60478,6 +63981,10 @@
                                     }
                                 case 14: {
                                         message.cloudSqlReference = $root.google.cloud.geminidataanalytics.v1beta.CloudSqlReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.bigqueryPropertyGraphReference = $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -60579,6 +64086,16 @@
                                         return "cloudSqlReference." + error;
                                 }
                             }
+                            if (message.bigqueryPropertyGraphReference != null && message.hasOwnProperty("bigqueryPropertyGraphReference")) {
+                                if (properties.reference === 1)
+                                    return "reference: multiple values";
+                                properties.reference = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.verify(message.bigqueryPropertyGraphReference);
+                                    if (error)
+                                        return "bigqueryPropertyGraphReference." + error;
+                                }
+                            }
                             if (message.schema != null && message.hasOwnProperty("schema")) {
                                 var error = $root.google.cloud.geminidataanalytics.v1beta.Schema.verify(message.schema);
                                 if (error)
@@ -60630,6 +64147,11 @@
                                 if (typeof object.cloudSqlReference !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.Datasource.cloudSqlReference: object expected");
                                 message.cloudSqlReference = $root.google.cloud.geminidataanalytics.v1beta.CloudSqlReference.fromObject(object.cloudSqlReference);
+                            }
+                            if (object.bigqueryPropertyGraphReference != null) {
+                                if (typeof object.bigqueryPropertyGraphReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.Datasource.bigqueryPropertyGraphReference: object expected");
+                                message.bigqueryPropertyGraphReference = $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.fromObject(object.bigqueryPropertyGraphReference);
                             }
                             if (object.schema != null) {
                                 if (typeof object.schema !== "object")
@@ -60694,6 +64216,11 @@
                                 object.cloudSqlReference = $root.google.cloud.geminidataanalytics.v1beta.CloudSqlReference.toObject(message.cloudSqlReference, options);
                                 if (options.oneofs)
                                     object.reference = "cloudSqlReference";
+                            }
+                            if (message.bigqueryPropertyGraphReference != null && message.hasOwnProperty("bigqueryPropertyGraphReference")) {
+                                object.bigqueryPropertyGraphReference = $root.google.cloud.geminidataanalytics.v1beta.BigQueryPropertyGraphReference.toObject(message.bigqueryPropertyGraphReference, options);
+                                if (options.oneofs)
+                                    object.reference = "bigqueryPropertyGraphReference";
                             }
                             return object;
                         };
@@ -62801,6 +66328,8 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Conversation createTime
                          * @property {google.protobuf.ITimestamp|null} [lastUsedTime] Conversation lastUsedTime
                          * @property {Object.<string,string>|null} [labels] Conversation labels
+                         * @property {string|null} [kmsKey] Conversation kmsKey
+                         * @property {boolean|null} [memoryPaused] Conversation memoryPaused
                          */
     
                         /**
@@ -62861,6 +66390,37 @@
                         Conversation.prototype.labels = $util.emptyObject;
     
                         /**
+                         * Conversation kmsKey.
+                         * @member {string|null|undefined} kmsKey
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Conversation
+                         * @instance
+                         */
+                        Conversation.prototype.kmsKey = null;
+    
+                        /**
+                         * Conversation memoryPaused.
+                         * @member {boolean|null|undefined} memoryPaused
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Conversation
+                         * @instance
+                         */
+                        Conversation.prototype.memoryPaused = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Conversation.prototype, "_kmsKey", {
+                            get: $util.oneOfGetter($oneOfFields = ["kmsKey"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Conversation.prototype, "_memoryPaused", {
+                            get: $util.oneOfGetter($oneOfFields = ["memoryPaused"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Conversation instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1beta.Conversation
@@ -62896,6 +66456,10 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.kmsKey);
+                            if (message.memoryPaused != null && Object.hasOwnProperty.call(message, "memoryPaused"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.memoryPaused);
                             return writer;
                         };
     
@@ -62973,6 +66537,14 @@
                                         message.labels[key] = value;
                                         break;
                                     }
+                                case 10: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.memoryPaused = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -63008,6 +66580,7 @@
                         Conversation.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -63035,6 +66608,16 @@
                                 for (var i = 0; i < key.length; ++i)
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
+                            }
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey")) {
+                                properties._kmsKey = 1;
+                                if (!$util.isString(message.kmsKey))
+                                    return "kmsKey: string expected";
+                            }
+                            if (message.memoryPaused != null && message.hasOwnProperty("memoryPaused")) {
+                                properties._memoryPaused = 1;
+                                if (typeof message.memoryPaused !== "boolean")
+                                    return "memoryPaused: boolean expected";
                             }
                             return null;
                         };
@@ -63077,6 +66660,10 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.kmsKey != null)
+                                message.kmsKey = String(object.kmsKey);
+                            if (object.memoryPaused != null)
+                                message.memoryPaused = Boolean(object.memoryPaused);
                             return message;
                         };
     
@@ -63118,6 +66705,16 @@
                                 object.labels = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey")) {
+                                object.kmsKey = message.kmsKey;
+                                if (options.oneofs)
+                                    object._kmsKey = "kmsKey";
+                            }
+                            if (message.memoryPaused != null && message.hasOwnProperty("memoryPaused")) {
+                                object.memoryPaused = message.memoryPaused;
+                                if (options.oneofs)
+                                    object._memoryPaused = "memoryPaused";
                             }
                             return object;
                         };
@@ -64381,6 +67978,7 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] DataAgent updateTime
                          * @property {google.protobuf.ITimestamp|null} [deleteTime] DataAgent deleteTime
                          * @property {google.protobuf.ITimestamp|null} [purgeTime] DataAgent purgeTime
+                         * @property {string|null} [kmsKey] DataAgent kmsKey
                          */
     
                         /**
@@ -64471,6 +68069,14 @@
                          */
                         DataAgent.prototype.purgeTime = null;
     
+                        /**
+                         * DataAgent kmsKey.
+                         * @member {string|null|undefined} kmsKey
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataAgent
+                         * @instance
+                         */
+                        DataAgent.prototype.kmsKey = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -64482,6 +68088,12 @@
                          */
                         Object.defineProperty(DataAgent.prototype, "type", {
                             get: $util.oneOfGetter($oneOfFields = ["dataAnalyticsAgent"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DataAgent.prototype, "_kmsKey", {
+                            get: $util.oneOfGetter($oneOfFields = ["kmsKey"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -64526,6 +68138,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.purgeTime != null && Object.hasOwnProperty.call(message, "purgeTime"))
                                 $root.google.protobuf.Timestamp.encode(message.purgeTime, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.kmsKey);
                             if (message.dataAnalyticsAgent != null && Object.hasOwnProperty.call(message, "dataAnalyticsAgent"))
                                 $root.google.cloud.geminidataanalytics.v1beta.DataAnalyticsAgent.encode(message.dataAnalyticsAgent, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             return writer;
@@ -64619,6 +68233,10 @@
                                         message.purgeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 14: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -64700,6 +68318,11 @@
                                 if (error)
                                     return "purgeTime." + error;
                             }
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey")) {
+                                properties._kmsKey = 1;
+                                if (!$util.isString(message.kmsKey))
+                                    return "kmsKey: string expected";
+                            }
                             return null;
                         };
     
@@ -64753,6 +68376,8 @@
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.DataAgent.purgeTime: object expected");
                                 message.purgeTime = $root.google.protobuf.Timestamp.fromObject(object.purgeTime);
                             }
+                            if (object.kmsKey != null)
+                                message.kmsKey = String(object.kmsKey);
                             return message;
                         };
     
@@ -64800,6 +68425,11 @@
                                 object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
                             if (message.purgeTime != null && message.hasOwnProperty("purgeTime"))
                                 object.purgeTime = $root.google.protobuf.Timestamp.toObject(message.purgeTime, options);
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey")) {
+                                object.kmsKey = message.kmsKey;
+                                if (options.oneofs)
+                                    object._kmsKey = "kmsKey";
+                            }
                             if (message.dataAnalyticsAgent != null && message.hasOwnProperty("dataAnalyticsAgent")) {
                                 object.dataAnalyticsAgent = $root.google.cloud.geminidataanalytics.v1beta.DataAnalyticsAgent.toObject(message.dataAnalyticsAgent, options);
                                 if (options.oneofs)
@@ -69195,7 +72825,7 @@
                          * Properties of a ParameterizedSecureViewParameters.
                          * @memberof google.cloud.geminidataanalytics.v1beta
                          * @interface IParameterizedSecureViewParameters
-                         * @property {Object.<string,string>|null} [parameters] ParameterizedSecureViewParameters parameters
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.IParameter>|null} [parameters] ParameterizedSecureViewParameters parameters
                          */
     
                         /**
@@ -69207,7 +72837,7 @@
                          * @param {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters=} [properties] Properties to set
                          */
                         function ParameterizedSecureViewParameters(properties) {
-                            this.parameters = {};
+                            this.parameters = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -69216,11 +72846,11 @@
     
                         /**
                          * ParameterizedSecureViewParameters parameters.
-                         * @member {Object.<string,string>} parameters
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.IParameter>} parameters
                          * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
                          * @instance
                          */
-                        ParameterizedSecureViewParameters.prototype.parameters = $util.emptyObject;
+                        ParameterizedSecureViewParameters.prototype.parameters = $util.emptyArray;
     
                         /**
                          * Creates a new ParameterizedSecureViewParameters instance using the specified properties.
@@ -69246,9 +72876,9 @@
                         ParameterizedSecureViewParameters.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
-                                for (var keys = Object.keys(message.parameters), i = 0; i < keys.length; ++i)
-                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.parameters[keys[i]]).ldelim();
+                            if (message.parameters != null && message.parameters.length)
+                                for (var i = 0; i < message.parameters.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter.encode(message.parameters[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             return writer;
                         };
     
@@ -69279,33 +72909,16 @@
                         ParameterizedSecureViewParameters.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters(), key, value;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
                                 case 1: {
-                                        if (message.parameters === $util.emptyObject)
-                                            message.parameters = {};
-                                        var end2 = reader.uint32() + reader.pos;
-                                        key = "";
-                                        value = "";
-                                        while (reader.pos < end2) {
-                                            var tag2 = reader.uint32();
-                                            switch (tag2 >>> 3) {
-                                            case 1:
-                                                key = reader.string();
-                                                break;
-                                            case 2:
-                                                value = reader.string();
-                                                break;
-                                            default:
-                                                reader.skipType(tag2 & 7);
-                                                break;
-                                            }
-                                        }
-                                        message.parameters[key] = value;
+                                        if (!(message.parameters && message.parameters.length))
+                                            message.parameters = [];
+                                        message.parameters.push($root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -69344,12 +72957,13 @@
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.parameters != null && message.hasOwnProperty("parameters")) {
-                                if (!$util.isObject(message.parameters))
-                                    return "parameters: object expected";
-                                var key = Object.keys(message.parameters);
-                                for (var i = 0; i < key.length; ++i)
-                                    if (!$util.isString(message.parameters[key[i]]))
-                                        return "parameters: string{k:string} expected";
+                                if (!Array.isArray(message.parameters))
+                                    return "parameters: array expected";
+                                for (var i = 0; i < message.parameters.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter.verify(message.parameters[i]);
+                                    if (error)
+                                        return "parameters." + error;
+                                }
                             }
                             return null;
                         };
@@ -69367,11 +72981,14 @@
                                 return object;
                             var message = new $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters();
                             if (object.parameters) {
-                                if (typeof object.parameters !== "object")
-                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.parameters: object expected");
-                                message.parameters = {};
-                                for (var keys = Object.keys(object.parameters), i = 0; i < keys.length; ++i)
-                                    message.parameters[keys[i]] = String(object.parameters[keys[i]]);
+                                if (!Array.isArray(object.parameters))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.parameters: array expected");
+                                message.parameters = [];
+                                for (var i = 0; i < object.parameters.length; ++i) {
+                                    if (typeof object.parameters[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.parameters: object expected");
+                                    message.parameters[i] = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter.fromObject(object.parameters[i]);
+                                }
                             }
                             return message;
                         };
@@ -69389,13 +73006,12 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.objects || options.defaults)
-                                object.parameters = {};
-                            var keys2;
-                            if (message.parameters && (keys2 = Object.keys(message.parameters)).length) {
-                                object.parameters = {};
-                                for (var j = 0; j < keys2.length; ++j)
-                                    object.parameters[keys2[j]] = message.parameters[keys2[j]];
+                            if (options.arrays || options.defaults)
+                                object.parameters = [];
+                            if (message.parameters && message.parameters.length) {
+                                object.parameters = [];
+                                for (var j = 0; j < message.parameters.length; ++j)
+                                    object.parameters[j] = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter.toObject(message.parameters[j], options);
                             }
                             return object;
                         };
@@ -69425,6 +73041,235 @@
                             }
                             return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters";
                         };
+    
+                        ParameterizedSecureViewParameters.Parameter = (function() {
+    
+                            /**
+                             * Properties of a Parameter.
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                             * @interface IParameter
+                             * @property {string|null} [key] Parameter key
+                             * @property {string|null} [value] Parameter value
+                             */
+    
+                            /**
+                             * Constructs a new Parameter.
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                             * @classdesc Represents a Parameter.
+                             * @implements IParameter
+                             * @constructor
+                             * @param {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.IParameter=} [properties] Properties to set
+                             */
+                            function Parameter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Parameter key.
+                             * @member {string} key
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @instance
+                             */
+                            Parameter.prototype.key = "";
+    
+                            /**
+                             * Parameter value.
+                             * @member {string} value
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @instance
+                             */
+                            Parameter.prototype.value = "";
+    
+                            /**
+                             * Creates a new Parameter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.IParameter=} [properties] Properties to set
+                             * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter} Parameter instance
+                             */
+                            Parameter.create = function create(properties) {
+                                return new Parameter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Parameter message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.IParameter} message Parameter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Parameter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Parameter message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.IParameter} message Parameter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Parameter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Parameter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter} Parameter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Parameter.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.key = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Parameter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter} Parameter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Parameter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Parameter message.
+                             * @function verify
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Parameter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    if (!$util.isString(message.key))
+                                        return "key: string expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Parameter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter} Parameter
+                             */
+                            Parameter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter)
+                                    return object;
+                                var message = new $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter();
+                                if (object.key != null)
+                                    message.key = String(object.key);
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Parameter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter} message Parameter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Parameter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.key = "";
+                                    object.value = "";
+                                }
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    object.key = message.key;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Parameter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Parameter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Parameter
+                             * @function getTypeUrl
+                             * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Parameter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.Parameter";
+                            };
+    
+                            return Parameter;
+                        })();
     
                         return ParameterizedSecureViewParameters;
                     })();
@@ -71534,10 +75379,13 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IConversationReference|null} [conversationReference] ChatRequest conversationReference
                          * @property {google.cloud.geminidataanalytics.v1beta.IDataAgentContext|null} [dataAgentContext] ChatRequest dataAgentContext
                          * @property {google.cloud.geminidataanalytics.v1beta.IClientManagedResourceContext|null} [clientManagedResourceContext] ChatRequest clientManagedResourceContext
+                         * @property {google.cloud.geminidataanalytics.v1beta.ILookerSettings|null} [lookerSettings] ChatRequest lookerSettings
                          * @property {string|null} [project] ChatRequest project
                          * @property {string|null} [parent] ChatRequest parent
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IMessage>|null} [messages] ChatRequest messages
+                         * @property {google.cloud.geminidataanalytics.v1beta.ICredentials|null} [credentials] ChatRequest credentials
                          * @property {google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode|null} [thinkingMode] ChatRequest thinkingMode
+                         * @property {google.cloud.geminidataanalytics.v1beta.ChatRequest.Model|null} [model] ChatRequest model
                          */
     
                         /**
@@ -71589,6 +75437,14 @@
                         ChatRequest.prototype.clientManagedResourceContext = null;
     
                         /**
+                         * ChatRequest lookerSettings.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ILookerSettings|null|undefined} lookerSettings
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
+                         * @instance
+                         */
+                        ChatRequest.prototype.lookerSettings = null;
+    
+                        /**
                          * ChatRequest project.
                          * @member {string} project
                          * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
@@ -71613,12 +75469,28 @@
                         ChatRequest.prototype.messages = $util.emptyArray;
     
                         /**
+                         * ChatRequest credentials.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ICredentials|null|undefined} credentials
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
+                         * @instance
+                         */
+                        ChatRequest.prototype.credentials = null;
+    
+                        /**
                          * ChatRequest thinkingMode.
                          * @member {google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode} thinkingMode
                          * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
                          * @instance
                          */
                         ChatRequest.prototype.thinkingMode = 0;
+    
+                        /**
+                         * ChatRequest model.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ChatRequest.Model} model
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
+                         * @instance
+                         */
+                        ChatRequest.prototype.model = 0;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -71631,6 +75503,17 @@
                          */
                         Object.defineProperty(ChatRequest.prototype, "contextProvider", {
                             get: $util.oneOfGetter($oneOfFields = ["inlineContext", "conversationReference", "dataAgentContext", "clientManagedResourceContext"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * ChatRequest datasourceSettings.
+                         * @member {"lookerSettings"|undefined} datasourceSettings
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ChatRequest.prototype, "datasourceSettings", {
+                            get: $util.oneOfGetter($oneOfFields = ["lookerSettings"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -71665,8 +75548,14 @@
                                     $root.google.cloud.geminidataanalytics.v1beta.Message.encode(message.messages[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.parent);
+                            if (message.credentials != null && Object.hasOwnProperty.call(message, "credentials"))
+                                $root.google.cloud.geminidataanalytics.v1beta.Credentials.encode(message.credentials, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.thinkingMode != null && Object.hasOwnProperty.call(message, "thinkingMode"))
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.thinkingMode);
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.model);
+                            if (message.lookerSettings != null && Object.hasOwnProperty.call(message, "lookerSettings"))
+                                $root.google.cloud.geminidataanalytics.v1beta.LookerSettings.encode(message.lookerSettings, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             if (message.inlineContext != null && Object.hasOwnProperty.call(message, "inlineContext"))
                                 $root.google.cloud.geminidataanalytics.v1beta.Context.encode(message.inlineContext, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             if (message.conversationReference != null && Object.hasOwnProperty.call(message, "conversationReference"))
@@ -71727,6 +75616,10 @@
                                         message.clientManagedResourceContext = $root.google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 13: {
+                                        message.lookerSettings = $root.google.cloud.geminidataanalytics.v1beta.LookerSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 1: {
                                         message.project = reader.string();
                                         break;
@@ -71741,8 +75634,16 @@
                                         message.messages.push($root.google.cloud.geminidataanalytics.v1beta.Message.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 7: {
+                                        message.credentials = $root.google.cloud.geminidataanalytics.v1beta.Credentials.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 9: {
                                         message.thinkingMode = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.model = reader.int32();
                                         break;
                                     }
                                 default:
@@ -71819,6 +75720,14 @@
                                         return "clientManagedResourceContext." + error;
                                 }
                             }
+                            if (message.lookerSettings != null && message.hasOwnProperty("lookerSettings")) {
+                                properties.datasourceSettings = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.LookerSettings.verify(message.lookerSettings);
+                                    if (error)
+                                        return "lookerSettings." + error;
+                                }
+                            }
                             if (message.project != null && message.hasOwnProperty("project"))
                                 if (!$util.isString(message.project))
                                     return "project: string expected";
@@ -71834,6 +75743,11 @@
                                         return "messages." + error;
                                 }
                             }
+                            if (message.credentials != null && message.hasOwnProperty("credentials")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.Credentials.verify(message.credentials);
+                                if (error)
+                                    return "credentials." + error;
+                            }
                             if (message.thinkingMode != null && message.hasOwnProperty("thinkingMode"))
                                 switch (message.thinkingMode) {
                                 default:
@@ -71841,6 +75755,14 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                    break;
+                                }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                switch (message.model) {
+                                default:
+                                    return "model: enum value expected";
+                                case 0:
+                                case 1:
                                     break;
                                 }
                             return null;
@@ -71878,6 +75800,11 @@
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.ChatRequest.clientManagedResourceContext: object expected");
                                 message.clientManagedResourceContext = $root.google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext.fromObject(object.clientManagedResourceContext);
                             }
+                            if (object.lookerSettings != null) {
+                                if (typeof object.lookerSettings !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ChatRequest.lookerSettings: object expected");
+                                message.lookerSettings = $root.google.cloud.geminidataanalytics.v1beta.LookerSettings.fromObject(object.lookerSettings);
+                            }
                             if (object.project != null)
                                 message.project = String(object.project);
                             if (object.parent != null)
@@ -71891,6 +75818,11 @@
                                         throw TypeError(".google.cloud.geminidataanalytics.v1beta.ChatRequest.messages: object expected");
                                     message.messages[i] = $root.google.cloud.geminidataanalytics.v1beta.Message.fromObject(object.messages[i]);
                                 }
+                            }
+                            if (object.credentials != null) {
+                                if (typeof object.credentials !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ChatRequest.credentials: object expected");
+                                message.credentials = $root.google.cloud.geminidataanalytics.v1beta.Credentials.fromObject(object.credentials);
                             }
                             switch (object.thinkingMode) {
                             default:
@@ -71910,6 +75842,22 @@
                             case "THINKING":
                             case 2:
                                 message.thinkingMode = 2;
+                                break;
+                            }
+                            switch (object.model) {
+                            default:
+                                if (typeof object.model === "number") {
+                                    message.model = object.model;
+                                    break;
+                                }
+                                break;
+                            case "MODEL_UNSPECIFIED":
+                            case 0:
+                                message.model = 0;
+                                break;
+                            case "LATEST_GA_MODEL":
+                            case 1:
+                                message.model = 1;
                                 break;
                             }
                             return message;
@@ -71933,7 +75881,9 @@
                             if (options.defaults) {
                                 object.project = "";
                                 object.parent = "";
+                                object.credentials = null;
                                 object.thinkingMode = options.enums === String ? "THINKING_MODE_UNSPECIFIED" : 0;
+                                object.model = options.enums === String ? "MODEL_UNSPECIFIED" : 0;
                             }
                             if (message.project != null && message.hasOwnProperty("project"))
                                 object.project = message.project;
@@ -71944,8 +75894,17 @@
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.credentials != null && message.hasOwnProperty("credentials"))
+                                object.credentials = $root.google.cloud.geminidataanalytics.v1beta.Credentials.toObject(message.credentials, options);
                             if (message.thinkingMode != null && message.hasOwnProperty("thinkingMode"))
                                 object.thinkingMode = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode[message.thinkingMode] === undefined ? message.thinkingMode : $root.google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode[message.thinkingMode] : message.thinkingMode;
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.ChatRequest.Model[message.model] === undefined ? message.model : $root.google.cloud.geminidataanalytics.v1beta.ChatRequest.Model[message.model] : message.model;
+                            if (message.lookerSettings != null && message.hasOwnProperty("lookerSettings")) {
+                                object.lookerSettings = $root.google.cloud.geminidataanalytics.v1beta.LookerSettings.toObject(message.lookerSettings, options);
+                                if (options.oneofs)
+                                    object.datasourceSettings = "lookerSettings";
+                            }
                             if (message.inlineContext != null && message.hasOwnProperty("inlineContext")) {
                                 object.inlineContext = $root.google.cloud.geminidataanalytics.v1beta.Context.toObject(message.inlineContext, options);
                                 if (options.oneofs)
@@ -72008,6 +75967,20 @@
                             values[valuesById[0] = "THINKING_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "FAST"] = 1;
                             values[valuesById[2] = "THINKING"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Model enum.
+                         * @name google.cloud.geminidataanalytics.v1beta.ChatRequest.Model
+                         * @enum {number}
+                         * @property {number} MODEL_UNSPECIFIED=0 MODEL_UNSPECIFIED value
+                         * @property {number} LATEST_GA_MODEL=1 LATEST_GA_MODEL value
+                         */
+                        ChatRequest.Model = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODEL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "LATEST_GA_MODEL"] = 1;
                             return values;
                         })();
     
@@ -73119,6 +77092,211 @@
                         return Message;
                     })();
     
+                    v1beta.LookerSettings = (function() {
+    
+                        /**
+                         * Properties of a LookerSettings.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface ILookerSettings
+                         * @property {boolean|null} [enableDevMode] LookerSettings enableDevMode
+                         */
+    
+                        /**
+                         * Constructs a new LookerSettings.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a LookerSettings.
+                         * @implements ILookerSettings
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerSettings=} [properties] Properties to set
+                         */
+                        function LookerSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LookerSettings enableDevMode.
+                         * @member {boolean} enableDevMode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @instance
+                         */
+                        LookerSettings.prototype.enableDevMode = false;
+    
+                        /**
+                         * Creates a new LookerSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerSettings=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerSettings} LookerSettings instance
+                         */
+                        LookerSettings.create = function create(properties) {
+                            return new LookerSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LookerSettings message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerSettings} message LookerSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enableDevMode != null && Object.hasOwnProperty.call(message, "enableDevMode"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableDevMode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LookerSettings message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerSettings} message LookerSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LookerSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerSettings} LookerSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerSettings.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enableDevMode = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LookerSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerSettings} LookerSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LookerSettings message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LookerSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enableDevMode != null && message.hasOwnProperty("enableDevMode"))
+                                if (typeof message.enableDevMode !== "boolean")
+                                    return "enableDevMode: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LookerSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerSettings} LookerSettings
+                         */
+                        LookerSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerSettings)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerSettings();
+                            if (object.enableDevMode != null)
+                                message.enableDevMode = Boolean(object.enableDevMode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LookerSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.LookerSettings} message LookerSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LookerSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enableDevMode = false;
+                            if (message.enableDevMode != null && message.hasOwnProperty("enableDevMode"))
+                                object.enableDevMode = message.enableDevMode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LookerSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LookerSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LookerSettings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LookerSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerSettings";
+                        };
+    
+                        return LookerSettings;
+                    })();
+    
                     v1beta.UserMessage = (function() {
     
                         /**
@@ -73357,6 +77535,7 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IExampleQueries|null} [exampleQueries] SystemMessage exampleQueries
                          * @property {google.cloud.geminidataanalytics.v1beta.IClarificationMessage|null} [clarification] SystemMessage clarification
                          * @property {number|null} [groupId] SystemMessage groupId
+                         * @property {google.cloud.geminidataanalytics.v1beta.ICitation|null} [citation] SystemMessage citation
                          */
     
                         /**
@@ -73446,6 +77625,14 @@
                          */
                         SystemMessage.prototype.groupId = null;
     
+                        /**
+                         * SystemMessage citation.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ICitation|null|undefined} citation
+                         * @memberof google.cloud.geminidataanalytics.v1beta.SystemMessage
+                         * @instance
+                         */
+                        SystemMessage.prototype.citation = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -73508,6 +77695,8 @@
                                 $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.encode(message.exampleQueries, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             if (message.clarification != null && Object.hasOwnProperty.call(message, "clarification"))
                                 $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.encode(message.clarification, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.citation != null && Object.hasOwnProperty.call(message, "citation"))
+                                $root.google.cloud.geminidataanalytics.v1beta.Citation.encode(message.citation, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -73578,6 +77767,10 @@
                                     }
                                 case 12: {
                                         message.groupId = reader.int32();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.citation = $root.google.cloud.geminidataanalytics.v1beta.Citation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -73699,6 +77892,11 @@
                                 if (!$util.isInteger(message.groupId))
                                     return "groupId: integer expected";
                             }
+                            if (message.citation != null && message.hasOwnProperty("citation")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.Citation.verify(message.citation);
+                                if (error)
+                                    return "citation." + error;
+                            }
                             return null;
                         };
     
@@ -73756,6 +77954,11 @@
                             }
                             if (object.groupId != null)
                                 message.groupId = object.groupId | 0;
+                            if (object.citation != null) {
+                                if (typeof object.citation !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.SystemMessage.citation: object expected");
+                                message.citation = $root.google.cloud.geminidataanalytics.v1beta.Citation.fromObject(object.citation);
+                            }
                             return message;
                         };
     
@@ -73772,6 +77975,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.citation = null;
                             if (message.text != null && message.hasOwnProperty("text")) {
                                 object.text = $root.google.cloud.geminidataanalytics.v1beta.TextMessage.toObject(message.text, options);
                                 if (options.oneofs)
@@ -73817,6 +78022,8 @@
                                 if (options.oneofs)
                                     object.kind = "clarification";
                             }
+                            if (message.citation != null && message.hasOwnProperty("citation"))
+                                object.citation = $root.google.cloud.geminidataanalytics.v1beta.Citation.toObject(message.citation, options);
                             return object;
                         };
     
@@ -74031,6 +78238,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
@@ -74080,6 +78288,10 @@
                             case "PROGRESS":
                             case 3:
                                 message.textType = 3;
+                                break;
+                            case "FOLLOWUP_QUESTIONS":
+                            case 4:
+                                message.textType = 4;
                                 break;
                             }
                             if (object.thoughtSignature != null)
@@ -74161,6 +78373,7 @@
                          * @property {number} FINAL_RESPONSE=1 FINAL_RESPONSE value
                          * @property {number} THOUGHT=2 THOUGHT value
                          * @property {number} PROGRESS=3 PROGRESS value
+                         * @property {number} FOLLOWUP_QUESTIONS=4 FOLLOWUP_QUESTIONS value
                          */
                         TextMessage.TextType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -74168,6 +78381,7 @@
                             values[valuesById[1] = "FINAL_RESPONSE"] = 1;
                             values[valuesById[2] = "THOUGHT"] = 2;
                             values[valuesById[3] = "PROGRESS"] = 3;
+                            values[valuesById[4] = "FOLLOWUP_QUESTIONS"] = 4;
                             return values;
                         })();
     
@@ -74880,6 +79094,7 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IDataResult|null} [result] DataMessage result
                          * @property {google.cloud.geminidataanalytics.v1beta.ILookerQuery|null} [generatedLookerQuery] DataMessage generatedLookerQuery
                          * @property {google.cloud.geminidataanalytics.v1beta.IBigQueryJob|null} [bigQueryJob] DataMessage bigQueryJob
+                         * @property {google.cloud.geminidataanalytics.v1beta.IMatchedQuery|null} [matchedQuery] DataMessage matchedQuery
                          */
     
                         /**
@@ -74937,17 +79152,25 @@
                          */
                         DataMessage.prototype.bigQueryJob = null;
     
+                        /**
+                         * DataMessage matchedQuery.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IMatchedQuery|null|undefined} matchedQuery
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataMessage
+                         * @instance
+                         */
+                        DataMessage.prototype.matchedQuery = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * DataMessage kind.
-                         * @member {"query"|"generatedSql"|"result"|"generatedLookerQuery"|"bigQueryJob"|undefined} kind
+                         * @member {"query"|"generatedSql"|"result"|"generatedLookerQuery"|"bigQueryJob"|"matchedQuery"|undefined} kind
                          * @memberof google.cloud.geminidataanalytics.v1beta.DataMessage
                          * @instance
                          */
                         Object.defineProperty(DataMessage.prototype, "kind", {
-                            get: $util.oneOfGetter($oneOfFields = ["query", "generatedSql", "result", "generatedLookerQuery", "bigQueryJob"]),
+                            get: $util.oneOfGetter($oneOfFields = ["query", "generatedSql", "result", "generatedLookerQuery", "bigQueryJob", "matchedQuery"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -74985,6 +79208,8 @@
                                 $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.encode(message.generatedLookerQuery, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.bigQueryJob != null && Object.hasOwnProperty.call(message, "bigQueryJob"))
                                 $root.google.cloud.geminidataanalytics.v1beta.BigQueryJob.encode(message.bigQueryJob, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.matchedQuery != null && Object.hasOwnProperty.call(message, "matchedQuery"))
+                                $root.google.cloud.geminidataanalytics.v1beta.MatchedQuery.encode(message.matchedQuery, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -75039,6 +79264,10 @@
                                     }
                                 case 5: {
                                         message.bigQueryJob = $root.google.cloud.geminidataanalytics.v1beta.BigQueryJob.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.matchedQuery = $root.google.cloud.geminidataanalytics.v1beta.MatchedQuery.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -75122,6 +79351,16 @@
                                         return "bigQueryJob." + error;
                                 }
                             }
+                            if (message.matchedQuery != null && message.hasOwnProperty("matchedQuery")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.MatchedQuery.verify(message.matchedQuery);
+                                    if (error)
+                                        return "matchedQuery." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -75158,6 +79397,11 @@
                                 if (typeof object.bigQueryJob !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.DataMessage.bigQueryJob: object expected");
                                 message.bigQueryJob = $root.google.cloud.geminidataanalytics.v1beta.BigQueryJob.fromObject(object.bigQueryJob);
+                            }
+                            if (object.matchedQuery != null) {
+                                if (typeof object.matchedQuery !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.DataMessage.matchedQuery: object expected");
+                                message.matchedQuery = $root.google.cloud.geminidataanalytics.v1beta.MatchedQuery.fromObject(object.matchedQuery);
                             }
                             return message;
                         };
@@ -75199,6 +79443,11 @@
                                 object.bigQueryJob = $root.google.cloud.geminidataanalytics.v1beta.BigQueryJob.toObject(message.bigQueryJob, options);
                                 if (options.oneofs)
                                     object.kind = "bigQueryJob";
+                            }
+                            if (message.matchedQuery != null && message.hasOwnProperty("matchedQuery")) {
+                                object.matchedQuery = $root.google.cloud.geminidataanalytics.v1beta.MatchedQuery.toObject(message.matchedQuery, options);
+                                if (options.oneofs)
+                                    object.kind = "matchedQuery";
                             }
                             return object;
                         };
