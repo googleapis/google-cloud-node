@@ -927,7 +927,8 @@ describe('Bucket', () => {
 
       let deletedCount = 0;
       sources.forEach(source => {
-        source.delete = async () => {
+        source.delete = async (opts?: any) => {
+          assert.strictEqual(opts?.userProject, 'user-project-id');
           deletedCount++;
           return [{}];
         };
@@ -935,15 +936,20 @@ describe('Bucket', () => {
 
       destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.strictEqual(reqOpts.qs.deleteSourceObjects, undefined);
-        assert.strictEqual(reqOpts.json.deleteSourceObjects, true);
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         callback(null, {});
       };
 
-      bucket.combine(sources, destination, {deleteSourceObjects: true}, (err: any) => {
-        assert.ifError(err);
-        assert.strictEqual(deletedCount, 2);
-        done();
-      });
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true, userProject: 'user-project-id'},
+        (err: any) => {
+          assert.ifError(err);
+          assert.strictEqual(deletedCount, 2);
+          done();
+        }
+      );
     });
 
     it('should not delete source objects if deleteSourceObjects is false/omitted', done => {
@@ -984,7 +990,7 @@ describe('Bucket', () => {
       });
 
       destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        assert.strictEqual(reqOpts.json.deleteSourceObjects, true);
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         callback(composeError);
       };
 
@@ -1000,22 +1006,24 @@ describe('Bucket', () => {
       const destination = bucket.file('destination.foo');
       const deleteError = new Error('Delete failed.');
 
-      sources[0].delete = async () => {
+      sources[0].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
         throw deleteError;
       };
-      sources[1].delete = async () => {
+      sources[1].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
         return [{}];
       };
 
       destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        assert.strictEqual(reqOpts.json.deleteSourceObjects, true);
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         callback(null, {success: true});
       };
 
       bucket.combine(
         sources,
         destination,
-        {deleteSourceObjects: true},
+        {deleteSourceObjects: true, userProject: 'user-project-id'},
         (err: any, newFile: any, apiResponse: any) => {
           try {
             assert.ok(err instanceof ComposeCleanupError);

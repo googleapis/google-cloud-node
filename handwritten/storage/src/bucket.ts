@@ -1750,30 +1750,27 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         method: 'POST',
         uri: '/compose',
         maxRetries,
-        json: Object.assign(
-          {
-            destination: {
-              contentType: destinationFile.metadata.contentType,
-              contentEncoding: destinationFile.metadata.contentEncoding,
-              contexts:
-                requestQueryObject.contexts || destinationFile.metadata.contexts,
-            },
-            sourceObjects: (sources as File[]).map(source => {
-              const sourceObject = {
-                name: source.name,
-              } as SourceObject;
-
-              if (source.metadata && source.metadata.generation) {
-                sourceObject.generation = parseInt(
-                  source.metadata.generation.toString()
-                );
-              }
-
-              return sourceObject;
-            }),
+        json: {
+          destination: {
+            contentType: destinationFile.metadata.contentType,
+            contentEncoding: destinationFile.metadata.contentEncoding,
+            contexts:
+              requestQueryObject.contexts || destinationFile.metadata.contexts,
           },
-          deleteSourceObjects !== undefined ? {deleteSourceObjects} : {}
-        ),
+          sourceObjects: (sources as File[]).map(source => {
+            const sourceObject = {
+              name: source.name,
+            } as SourceObject;
+
+            if (source.metadata && source.metadata.generation) {
+              sourceObject.generation = parseInt(
+                source.metadata.generation.toString()
+              );
+            }
+
+            return sourceObject;
+          }),
+        },
         qs: requestQueryObject,
       },
       async (err, resp) => {
@@ -1786,7 +1783,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         if (deleteSourceObjects) {
           const deletePromises = (sources as File[]).map(async source => {
             try {
-              await source.delete();
+              await source.delete({
+                userProject: options.userProject,
+              });
             } catch (deleteErr) {
               return deleteErr as Error;
             }
