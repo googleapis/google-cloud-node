@@ -53,7 +53,6 @@
       "tablesort": "5.6.0",
       "cheerio": "1.0.0",
       "gcp-metadata": "^7.0.1",
-      "googleapis-common>gaxios": "7.1.4",
       "gapic-node-processing>@sinonjs/fake-timers": "15.2.1",
       "@google-cloud/typeless-sample-bot>@sinonjs/fake-timers": "15.2.1",
       "@google-cloud/error-reporting>undici": "5.28.4",
