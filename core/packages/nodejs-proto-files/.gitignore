@@ -3,10 +3,13 @@
 .coverage
 .nyc_output
 docs/
+*.lock
+*-lock.js*
 google/
 grafeas/
 storage/
 gapic/
+package-lock.json
 build/
 .vscode/
 __pycache__

@@ -40,7 +40,9 @@
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
-    "gts": "^6.0.2"
+    "gts": "^6.0.2",
+    "@babel/template": "^7.26.8",
+    "@types/babel__template": "^7.4.4"
   },
   "engines": {
     "node": ">=18"

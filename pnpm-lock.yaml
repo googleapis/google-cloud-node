@@ -262,6 +262,12 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
     devDependencies:
+      '@babel/template':
+        specifier: ^7.26.8
+        version: 7.29.7
+      '@types/babel__template':
+        specifier: ^7.4.4
+        version: 7.4.4
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -1401,9 +1407,6 @@ importers:
       '@babel/core':
         specifier: ^7.26.8
         version: 7.27.7
-      '@babel/template':
-        specifier: ^7.26.8
-        version: 7.29.7
       '@babel/traverse':
         specifier: ^7.26.8
         version: 7.27.7
@@ -1435,9 +1438,6 @@ importers:
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
-      '@types/babel__template':
-        specifier: ^7.4.4
-        version: 7.4.4
       '@types/babel__traverse':
         specifier: ^7.20.6
         version: 7.28.0
@@ -27159,7 +27159,7 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.107.2)':
     dependencies:
-      webpack: 5.107.2(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.107.2(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.107.2)
 
   '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.107.2)':
@@ -27169,7 +27169,7 @@ snapshots:
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.107.2)':
     dependencies:
-      webpack: 5.107.2(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.107.2(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.107.2)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.107.2)':
@@ -27179,7 +27179,7 @@ snapshots:
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.107.2)':
     dependencies:
-      webpack: 5.107.2(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.107.2(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.107.2)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -32282,7 +32282,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.107.2(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.107.2(webpack-cli@6.0.1)
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -34478,7 +34478,7 @@ snapshots:
       semver: 7.8.1
       source-map: 0.7.6
       typescript: 5.8.3
-      webpack: 5.107.2(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.107.2(webpack-cli@6.0.1)
     optionalDependencies:
       loader-utils: 2.0.4
 
@@ -34927,7 +34927,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.107.2(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.107.2(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-merge@4.2.2:

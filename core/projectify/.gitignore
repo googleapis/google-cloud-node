@@ -1,6 +1,7 @@
 node_modules
 .nyc_output
 build
+package-lock.json
 docs
 .vscode
 .coverage

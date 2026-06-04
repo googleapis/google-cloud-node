@@ -8,3 +8,4 @@ yarn.lock
 dist/
 __pycache__
 .coverage
+package-lock.json
