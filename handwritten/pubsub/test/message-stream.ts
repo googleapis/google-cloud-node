@@ -564,8 +564,8 @@ describe('MessageStream', () => {
 
         const cancelSpies = client.streams.map(s => sandbox.spy(s, 'cancel'));
 
-        // wait for keepalive ping (30s) + 21s timeout to pass two 10s polling intervals
-        sandbox.clock.tick(51000);
+        // wait for keepalive ping (30s) + 15s timeout
+        sandbox.clock.tick(45000);
 
         cancelSpies.forEach(spy => {
           assert.strictEqual(spy.callCount, 1);
@@ -587,8 +587,8 @@ describe('MessageStream', () => {
         // Simulating data prevents timeout
         client.streams.forEach(s => s.emit('data', {}));
 
-        // Wait for two 10s polling intervals to pass
-        sandbox.clock.tick(21000);
+        // Wait for 15s timeout to pass
+        sandbox.clock.tick(15000);
 
         cancelSpies.forEach(spy => {
           assert.strictEqual(spy.callCount, 0);
