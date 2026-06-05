@@ -261,7 +261,6 @@ export class MessageStream extends PassThrough {
     tracker.stream = stream;
     tracker.receivedStatus = false;
     tracker.lastResponseTime = Date.now();
-    this._setAliveTimer(index);
 
     stream
       .on('error', err => this._onError(index, err))
