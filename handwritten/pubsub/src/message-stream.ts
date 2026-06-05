@@ -232,7 +232,7 @@ export class MessageStream extends PassThrough {
     for (let i = 0; i < this._streams.length; i++) {
       const tracker = this._streams[i];
       if (tracker.aliveTimer) {
-        clearInterval(tracker.aliveTimer);
+        this._clearAliveTimer(tracker);
       }
       if (tracker.stream) {
         this._removeStream(i, 'overall message stream destroyed', 'n/a');
