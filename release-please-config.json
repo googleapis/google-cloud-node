@@ -4,7 +4,6 @@
   "separate-pull-requests": false,
   "commit-batch-size": 10,
   "packages": {
-    "packages/gapic-node-processing": {},
     "packages/google-ads-admanager": {},
     "packages/google-ads-datamanager": {},
     "packages/google-ai-generativelanguage": {},
@@ -81,7 +80,6 @@
     "packages/google-cloud-dialogflow": {},
     "packages/google-cloud-dialogflow-cx": {},
     "packages/google-cloud-discoveryengine": {},
-    "packages/google-cloud-dns": {},
     "packages/google-cloud-documentai": {},
     "packages/google-cloud-domains": {},
     "packages/google-cloud-edgecontainer": {},
@@ -222,7 +220,6 @@
     "packages/google-storagetransfer": {},
     "packages/google-streetview-publish": {},
     "packages/grafeas": {},
-    "packages/typeless-sample-bot": {},
     "packages/google-cloud-workflows": {},
     "packages/google-cloud-visionai": {},
     "packages/google-cloud-workloadmanager": {},
@@ -231,6 +228,7 @@
     "packages/google-cloud-auditmanager": {},
     "packages/google-maps-geocode": {},
     "packages/google-cloud-datacatalog-lineage-configmanagement": {},
+    "packages/google-maps-mapmanagement": {},
     "packages/google-cloud-appoptimize": {},
     "packages/google-devicesandservices-health": {},
     "packages/google-cloud-databasecenter": {}
