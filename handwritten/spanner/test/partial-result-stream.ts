@@ -26,9 +26,70 @@ import {Transform} from 'stream';
 import * as through from 'through2';
 
 import {codec} from '../src/codec';
+import {PreciseDate} from '@google-cloud/precise-date';
 import * as prs from '../src/partial-result-stream';
 import {grpc} from 'google-gax';
 import {Row} from '../src/partial-result-stream';
+
+/**
+ * Helper to convert fully decoded Spanner custom wrapper classes (like PreciseDate,
+ * SpannerDate, Int, Float, Struct, and Buffer) back into their raw JSON/wire primitives.
+ *
+ * Why this is needed:
+ * The Spanner cross-language acceptance test suite definition file
+ * (streaming-read-acceptance-test.json) defines expected result values as raw JSON primitives.
+ * Previously, the tests stubbed out `codec.decode` to bypass decoding entirely.
+ *
+ * To ensure that the tests execute the EXACT same optimized cached decoders and fast-path date
+ * parsers as production, we removed the stubbing of `codec.decode`. Since the stream now yields
+ * fully-decoded custom classes (e.g. `Int` instead of primitive string numbers, or `Buffer`
+ * instead of base64 strings), this helper converts those instances back to language-agnostic
+ * JSON primitives so they can be compared against the expected acceptance test outputs.
+ *
+ * @private
+ * @param {*} value The decoded Spanner cell value.
+ * @returns {*} The raw JSON primitive representation.
+ */
+function toRawValue(value: any): any {
+  if (value === null || value === undefined) {
+    return null;
+  }
+  if (value instanceof Buffer) {
+    return value.toString('base64');
+  }
+  if (value instanceof codec.SpannerDate) {
+    return value.toJSON();
+  }
+  if (value instanceof PreciseDate) {
+    return value.toISOString();
+  }
+  if (value instanceof codec.Struct) {
+    return Array.from(value).map((field: any) => toRawValue(field.value));
+  }
+  if (value instanceof codec.Int) {
+    return value.value;
+  }
+  if (value instanceof codec.Float) {
+    const num = value.valueOf();
+    if (Number.isNaN(num) || num === Infinity || num === -Infinity) {
+      return String(num);
+    }
+    return num;
+  }
+  if (value instanceof codec.Numeric) {
+    return value.value;
+  }
+  if (value instanceof codec.PGNumeric) {
+    return value.value;
+  }
+  if (value instanceof codec.PGOid) {
+    return value.value;
+  }
+  if (Array.isArray(value)) {
+    return value.map(toRawValue);
+  }
+  return value;
+}
 
 describe('PartialResultStream', () => {
   const sandbox = sinon.createSandbox();
@@ -75,10 +136,6 @@ describe('PartialResultStream', () => {
     const TESTS =
       require('../../test/data/streaming-read-acceptance-test.json').tests;
 
-    beforeEach(() => {
-      sandbox.stub(codec, 'decode').callsFake(value => value);
-    });
-
     TESTS.forEach(test => {
       it(`should pass acceptance test: ${test.name}`, done => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -88,7 +145,7 @@ describe('PartialResultStream', () => {
         stream
           .on('error', done)
           .on('data', row => {
-            values.push(row.map(({value}) => value));
+            values.push(row.map(({value}) => toRawValue(value)));
           })
           .on('end', () => {
             assert.deepStrictEqual(values, test.result.value);

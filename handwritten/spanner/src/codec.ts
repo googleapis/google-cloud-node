@@ -125,6 +125,22 @@ export class SpannerDate extends Date {
   constructor(...dateFields: Array<string | number | undefined>) {
     const yearOrDateString = dateFields[0];
 
+    // Fast-path parsing for standard YYYY-MM-DD date strings.
+    // This avoids RegExp matching, array split allocations, and local timezone conversions
+    // by directly parsing date components and invoking the Date constructor in local time.
+    if (
+      typeof yearOrDateString === 'string' &&
+      yearOrDateString.length === 10 &&
+      yearOrDateString[4] === '-' &&
+      yearOrDateString[7] === '-'
+    ) {
+      const year = parseInt(yearOrDateString.substring(0, 4), 10);
+      const month = parseInt(yearOrDateString.substring(5, 7), 10) - 1;
+      const date = parseInt(yearOrDateString.substring(8, 10), 10);
+      super(year, month, date);
+      return;
+    }
+
     // yearOrDateString could be 0 (number).
     if (yearOrDateString === null || yearOrDateString === undefined) {
       dateFields[0] = new Date().toDateString();
@@ -746,26 +762,34 @@ export class Interval {
  * @param {JSONOptions} [options] JSON options.
  * @returns {object}
  */
+const DEFAULT_JSON_OPTIONS: JSONOptions = {
+  wrapNumbers: false,
+  wrapStructs: false,
+  includeNameless: false,
+};
+
 function convertFieldsToJson(fields: Field[], options?: JSONOptions): Json {
   const json: Json = {};
 
-  const defaultOptions = {
-    wrapNumbers: false,
-    wrapStructs: false,
-    includeNameless: false,
-  };
-
-  options = Object.assign(defaultOptions, options);
+  const resolvedOptions = options
+    ? {
+        wrapNumbers: !!options.wrapNumbers,
+        wrapStructs: !!options.wrapStructs,
+        includeNameless: !!options.includeNameless,
+      }
+    : DEFAULT_JSON_OPTIONS;
 
   let index = 0;
-  for (const {name, value} of fields) {
-    if (!name && !options.includeNameless) {
+  for (let i = 0; i < fields.length; i++) {
+    const field = fields[i];
+    const name = field.name;
+    if (!name && !resolvedOptions.includeNameless) {
       continue;
     }
     const fieldName = name ? name : `_${index}`;
 
     try {
-      json[fieldName] = convertValueToJson(value, options);
+      json[fieldName] = convertValueToJson(field.value, resolvedOptions);
     } catch (e) {
       (e as Error).message = [
         `Serializing column "${fieldName}" encountered an error: ${
@@ -791,6 +815,10 @@ function convertFieldsToJson(fields: Field[], options?: JSONOptions): Json {
  * @return {*}
  */
 function convertValueToJson(value: Value, options: JSONOptions): Value {
+  if (value === null || typeof value !== 'object') {
+    return value;
+  }
+
   if (!options.wrapNumbers && value instanceof WrappedNumber) {
     return value.valueOf();
   }
@@ -832,43 +860,123 @@ function decode(
   type: spannerClient.spanner.v1.Type,
   columnMetadata?: object,
 ): Value {
-  if (isNull(value)) {
-    return null;
+  return createDecoder(type, columnMetadata)(value);
+}
+
+/**
+ * Fast-path parser for RFC 3339 formatted Spanner UTC timestamp strings.
+ *
+ * This completely avoids the overhead of the `@google-cloud/precise-date` string
+ * constructor which performs multiple RegExp executions and internally allocates a second
+ * helper Date instance.
+ *
+ * @private
+ * @param {string} isoString The Zulu timestamp string (e.g. "2021-05-11T16:46:04.872345678Z").
+ * @returns {PreciseDate} The parsed PreciseDate instance.
+ */
+function parsePreciseDate(isoString: string): PreciseDate {
+  if (
+    isoString.length >= 20 &&
+    (isoString[isoString.length - 1] === 'Z' || isoString[isoString.length - 1] === 'z') &&
+    isoString[4] === '-' &&
+    isoString[7] === '-' &&
+    isoString[10] === 'T' &&
+    isoString[13] === ':' &&
+    isoString[16] === ':'
+  ) {
+    const year = parseInt(isoString.substring(0, 4), 10);
+    const month = parseInt(isoString.substring(5, 7), 10) - 1;
+    const day = parseInt(isoString.substring(8, 10), 10);
+    const hours = parseInt(isoString.substring(11, 13), 10);
+    const minutes = parseInt(isoString.substring(14, 16), 10);
+    const seconds = parseInt(isoString.substring(17, 19), 10);
+
+    let milliseconds = 0;
+    let microseconds = 0;
+    let nanoseconds = 0;
+
+    const dotIndex = isoString.indexOf('.', 19);
+    if (dotIndex !== -1) {
+      const subSecondsStr = isoString.substring(dotIndex + 1, isoString.length - 1);
+      const padded = subSecondsStr.padEnd(9, '0');
+      milliseconds = parseInt(padded.substring(0, 3), 10);
+      microseconds = parseInt(padded.substring(3, 6), 10);
+      nanoseconds = parseInt(padded.substring(6, 9), 10);
+    }
+
+    const utcMillis = Date.UTC(
+      year,
+      month,
+      day,
+      hours,
+      minutes,
+      seconds,
+      milliseconds,
+    );
+
+    const preciseDate = new PreciseDate(utcMillis);
+    preciseDate.setMicroseconds(microseconds);
+    preciseDate.setNanoseconds(nanoseconds);
+    return preciseDate;
   }
 
-  let decoded = value;
-  let fields;
+  return new PreciseDate(isoString);
+}
+
+/**
+ * Compiles a specialized cell decoding closure for a given column type and metadata.
+ *
+ * This allows the client to resolve annotations, array layouts, and struct field definitions
+ * exactly once at stream start, returning a specialized decoding function for all subsequent rows.
+ *
+ * @private
+ * @param {spannerClient.spanner.v1.Type} type The column type metadata.
+ * @param {object} [columnMetadata] Custom metadata to deserialize the column.
+ * @returns {function} The specialized cell decoder function.
+ */
+function createDecoder(
+  type: spannerClient.spanner.v1.Type,
+  columnMetadata?: object,
+): (value: Value) => Value {
+  if (!type) {
+    return value => value;
+  }
 
   switch (type.code) {
     case spannerClient.spanner.v1.TypeCode.BYTES:
     case 'BYTES':
-      decoded = Buffer.from(decoded, 'base64');
-      break;
+      return value => (isNull(value) ? null : Buffer.from(value, 'base64'));
+
     case spannerClient.spanner.v1.TypeCode.PROTO:
     case 'PROTO':
-      decoded = Buffer.from(decoded, 'base64');
-      decoded = new ProtoMessage({
-        value: decoded,
-        fullName: type.protoTypeFqn,
-        messageFunction: columnMetadata as Function,
-      });
-      break;
+      return value =>
+        isNull(value)
+          ? null
+          : new ProtoMessage({
+              value: Buffer.from(value, 'base64'),
+              fullName: type.protoTypeFqn!,
+              messageFunction: columnMetadata as Function,
+            });
+
     case spannerClient.spanner.v1.TypeCode.ENUM:
     case 'ENUM':
-      decoded = new ProtoEnum({
-        value: decoded,
-        fullName: type.protoTypeFqn,
-        enumObject: columnMetadata as object,
-      });
-      break;
+      return value =>
+        isNull(value)
+          ? null
+          : new ProtoEnum({
+              value,
+              fullName: type.protoTypeFqn!,
+              enumObject: columnMetadata as object,
+            });
+
     case spannerClient.spanner.v1.TypeCode.FLOAT32:
     case 'FLOAT32':
-      decoded = new Float32(decoded);
-      break;
+      return value => (isNull(value) ? null : new Float32(value));
+
     case spannerClient.spanner.v1.TypeCode.FLOAT64:
     case 'FLOAT64':
-      decoded = new Float(decoded);
-      break;
+      return value => (isNull(value) ? null : new Float(value));
+
     case spannerClient.spanner.v1.TypeCode.INT64:
     case 'INT64':
       if (
@@ -876,11 +984,10 @@ function decode(
           spannerClient.spanner.v1.TypeAnnotationCode.PG_OID ||
         type.typeAnnotation === 'PG_OID'
       ) {
-        decoded = new PGOid(decoded);
-        break;
+        return value => (isNull(value) ? null : new PGOid(value));
       }
-      decoded = new Int(decoded);
-      break;
+      return value => (isNull(value) ? null : new Int(value));
+
     case spannerClient.spanner.v1.TypeCode.NUMERIC:
     case 'NUMERIC':
       if (
@@ -888,19 +995,18 @@ function decode(
           spannerClient.spanner.v1.TypeAnnotationCode.PG_NUMERIC ||
         type.typeAnnotation === 'PG_NUMERIC'
       ) {
-        decoded = new PGNumeric(decoded);
-        break;
+        return value => (isNull(value) ? null : new PGNumeric(value));
       }
-      decoded = new Numeric(decoded);
-      break;
+      return value => (isNull(value) ? null : new Numeric(value));
+
     case spannerClient.spanner.v1.TypeCode.TIMESTAMP:
     case 'TIMESTAMP':
-      decoded = new PreciseDate(decoded);
-      break;
+      return value => (isNull(value) ? null : parsePreciseDate(value));
+
     case spannerClient.spanner.v1.TypeCode.DATE:
     case 'DATE':
-      decoded = new SpannerDate(decoded);
-      break;
+      return value => (isNull(value) ? null : new SpannerDate(value));
+
     case spannerClient.spanner.v1.TypeCode.JSON:
     case 'JSON':
       if (
@@ -908,43 +1014,56 @@ function decode(
           spannerClient.spanner.v1.TypeAnnotationCode.PG_JSONB ||
         type.typeAnnotation === 'PG_JSONB'
       ) {
-        decoded = new PGJsonb(decoded);
-        break;
+        return value => (isNull(value) ? null : new PGJsonb(value));
       }
-      decoded = JSON.parse(decoded);
-      break;
+      return value => (isNull(value) ? null : JSON.parse(value));
+
     case spannerClient.spanner.v1.TypeCode.INTERVAL:
     case 'INTERVAL':
-      decoded = Interval.fromISO8601(decoded);
-      break;
-    case spannerClient.spanner.v1.TypeCode.ARRAY:
-    case 'ARRAY':
-      decoded = decoded.map(value => {
-        return decode(
-          value,
-          type.arrayElementType! as spannerClient.spanner.v1.Type,
-          columnMetadata,
-        );
-      });
-      break;
-    case spannerClient.spanner.v1.TypeCode.STRUCT:
-    case 'STRUCT':
-      fields = type.structType!.fields!.map(({name, type}, index) => {
-        const value = decode(
-          (!Array.isArray(decoded) && decoded[name!]) || decoded[index],
-          type as spannerClient.spanner.v1.Type,
-          columnMetadata,
-        );
-        return {name, value};
-      });
-      decoded = Struct.fromArray(fields as Field[]);
-      break;
-    default:
-      break;
-  }
+      return value => (isNull(value) ? null : Interval.fromISO8601(value));
 
-  return decoded;
+    case spannerClient.spanner.v1.TypeCode.ARRAY:
+    case 'ARRAY': {
+      const elementDecoder = createDecoder(
+        type.arrayElementType! as spannerClient.spanner.v1.Type,
+        columnMetadata,
+      );
+      return value =>
+        isNull(value) ? null : value.map(elementDecoder);
+    }
+
+    case spannerClient.spanner.v1.TypeCode.STRUCT:
+    case 'STRUCT': {
+      const structFields = type.structType!.fields!.map(({name, type}, index) => {
+        return {
+          name,
+          decoder: createDecoder(
+            type! as spannerClient.spanner.v1.Type,
+            columnMetadata,
+          ),
+          index,
+        };
+      });
+      return value => {
+        if (isNull(value)) {
+          return null;
+        }
+        const fields = structFields.map(({name, decoder, index}) => {
+          const rawValue = (!Array.isArray(value) && value[name!]) || value[index];
+          return {
+            name: name!,
+            value: decoder(rawValue),
+          };
+        });
+        return Struct.fromArray(fields);
+      };
+    }
+
+    default:
+      return value => value;
+  }
 }
+
 
 /**
  * Encode a value in the format the API expects.
@@ -1342,6 +1461,7 @@ export const codec = {
   Interval,
   convertFieldsToJson,
   decode,
+  createDecoder,
   encode,
   getType,
   Struct,

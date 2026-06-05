@@ -25,6 +25,7 @@ import {grpc, CallOptions} from 'google-gax';
 import {DeadlineError, isRetryableInternalError} from './transaction-runner';
 
 import {codec, JSONOptions, Json, Field, Value} from './codec';
+
 import {google} from '../protos/protos';
 import * as stream from 'stream';
 import {isDefined, isEmpty, isString} from './helper';
@@ -183,6 +184,7 @@ interface ResultEvents {
 export class PartialResultStream extends Transform implements ResultEvents {
   private _destroyed: boolean;
   private _fields!: google.spanner.v1.StructType.Field[];
+  private _decoders?: Function[];
   private _options: RowOptions;
   private _pendingValue?: p.IValue;
   private _pendingValueForResume?: p.IValue;
@@ -238,6 +240,13 @@ export class PartialResultStream extends Transform implements ResultEvents {
     if (!this._fields && chunk.metadata) {
       this._fields = chunk.metadata.rowType!
         .fields as google.spanner.v1.StructType.Field[];
+      this._decoders = this._fields.map(({name, type}) => {
+        const columnMetadata = this._options.columnsMetadata?.[name!];
+        return codec.createDecoder(
+          type as google.spanner.v1.Type,
+          columnMetadata,
+        );
+      });
     }
 
     let res = true;
@@ -379,18 +388,16 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @returns {Row}
    */
   private _createRow(values: Value[]): Row {
-    const fields = values.map((value, index) => {
-      const {name, type} = this._fields[index];
-      const columnMetadata = this._options.columnsMetadata?.[name];
-      return {
-        name,
-        value: codec.decode(
-          value,
-          type as google.spanner.v1.Type,
-          columnMetadata,
-        ),
+    const fields: Field[] = new Array(values.length);
+    for (let index = 0; index < values.length; index++) {
+      const value = values[index];
+      const fieldSchema = this._fields[index];
+      const decoder = this._decoders![index];
+      fields[index] = {
+        name: fieldSchema.name!,
+        value: decoder(value),
       };
-    });
+    }
 
     Object.defineProperty(fields, 'toJSON', {
       value: (options?: JSONOptions): Json => {
