@@ -25,6 +25,7 @@ import {PassThrough} from 'stream';
 import * as opentelemetry from '@opentelemetry/api';
 import {google} from '../protos/protos';
 import * as defer from 'p-defer';
+import * as crypto from 'node:crypto';
 
 import {HistogramOptions} from '../src/histogram';
 import {FlowControlOptions, LeaseManager} from '../src/lease-manager';

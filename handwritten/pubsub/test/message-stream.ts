@@ -22,6 +22,7 @@ import * as sinon from 'sinon';
 import {Duplex, PassThrough} from 'stream';
 import * as defer from 'p-defer';
 import {promisify} from 'util';
+import * as crypto from 'node:crypto';
 
 import * as messageTypes from '../src/message-stream';
 import {Subscriber} from '../src/subscriber';
