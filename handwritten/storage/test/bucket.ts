@@ -925,14 +925,24 @@ describe('Bucket', () => {
       const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
       const destination = bucket.file('destination.foo');
 
+      // Set generation on the first file and leave second file without generation
+      sources[0].generation = 12345;
+
       let deletedCount = 0;
-      sources.forEach(source => {
-        source.delete = async (opts?: any) => {
-          assert.strictEqual(opts?.userProject, 'user-project-id');
-          deletedCount++;
-          return [{}];
-        };
-      });
+      sources[0].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        assert.strictEqual(opts?.ifGenerationMatch, 12345);
+        deletedCount++;
+        return [{}];
+      };
+      sources[1].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        assert.strictEqual(opts?.ifGenerationMatch, undefined);
+        deletedCount++;
+        return [{}];
+      };
 
       destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.strictEqual(reqOpts.qs.deleteSourceObjects, undefined);
@@ -1008,10 +1018,12 @@ describe('Bucket', () => {
 
       sources[0].delete = async (opts?: any) => {
         assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
         throw deleteError;
       };
       sources[1].delete = async (opts?: any) => {
         assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
         return [{}];
       };
 

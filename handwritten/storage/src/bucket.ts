@@ -67,6 +67,7 @@ import {CRC32CValidatorGenerator} from './crc32c.js';
 import {URL} from 'url';
 import {
   BaseMetadata,
+  DeleteOptions,
   SetMetadataOptions,
 } from './nodejs-common/service-object.js';
 
@@ -1782,10 +1783,18 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
         if (deleteSourceObjects) {
           const deletePromises = (sources as File[]).map(async source => {
+            const deleteOptions: DeleteOptions = {
+              ignoreNotFound: true,
+              userProject: options.userProject,
+            };
+
+            const generation = source.generation ?? source.metadata?.generation;
+            if (generation !== undefined) {
+              deleteOptions.ifGenerationMatch = generation;
+            }
+
             try {
-              await source.delete({
-                userProject: options.userProject,
-              });
+              await source.delete(deleteOptions);
             } catch (deleteErr) {
               return deleteErr as Error;
             }
