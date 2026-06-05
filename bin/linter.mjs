@@ -21,28 +21,9 @@ import path from 'path';
 // Define the base branch to compare against
 const baseBranch = process.env.GITHUB_BASE_REF || 'main';
 
-// Extensions to check with Prettier
+// Extensions to check for Prettier and ESLint/GTS
 const targetExtensions = new Set([
-  '.js',
-  '.mjs',
-  '.cjs',
   '.ts',
-  '.mts',
-  '.cts',
-  '.json',
-  '.md',
-  '.yaml',
-  '.yml',
-]);
-
-// Extensions to check with ESLint
-const eslintExtensions = new Set([
-  '.js',
-  '.mjs',
-  '.cjs',
-  '.ts',
-  '.mts',
-  '.cts',
 ]);
 
 function getChangedFiles() {
@@ -55,7 +36,7 @@ function getChangedFiles() {
     return output
       .split('\n')
       .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
+      .filter(f => f.length > 0 && targetExtensions.has(path.extname(f).toLowerCase()) && existsSync(f));
   } catch (err) {
     console.error(
       `Error finding changed files against ${baseBranch}:`,
@@ -65,12 +46,7 @@ function getChangedFiles() {
   }
 }
 
-function checkPrettierFormatting() {
-  const filesToCheck = getChangedFiles().filter(file => {
-    const ext = path.extname(file).toLowerCase();
-    return targetExtensions.has(ext);
-  });
-
+function checkPrettierFormatting(filesToCheck) {
   if (filesToCheck.length === 0) {
     return;
   }
@@ -95,21 +71,20 @@ function checkPrettierFormatting() {
   }
 }
 
-function checkEslint() {
-  const filesToCheck = getChangedFiles().filter(file => {
-    const ext = path.extname(file).toLowerCase();
-    return eslintExtensions.has(ext);
-  });
-
+function checkEslint(filesToCheck) {
   if (filesToCheck.length === 0) {
     return;
   }
 
   try {
-    // Run eslint check in quiet mode (only output errors, suppress warnings)
-    execFileSync('npx', ['eslint', '--quiet', ...filesToCheck], {
-      stdio: 'inherit',
-    });
+    // Run eslint check in quiet mode using local eslint binary directly
+    execFileSync(
+      'node',
+      ['node_modules/eslint/bin/eslint.js', '--quiet', ...filesToCheck],
+      {
+        stdio: 'inherit',
+      },
+    );
   } catch (err) {
     console.warn(
       '\n[WARNING] ESLint issues were detected in touched files:',
@@ -123,6 +98,6 @@ function checkEslint() {
   }
 }
 
-checkPrettierFormatting();
-checkEslint();
-
+const changedTsFiles = getChangedFiles();
+checkPrettierFormatting(changedTsFiles);
+checkEslint(changedTsFiles);
