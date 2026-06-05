@@ -384,10 +384,32 @@ describe('compute', () => {
       assert.strictEqual(url, null);
     });
 
-    it('should return null from getRegionalAccessBoundaryUrl if custom serviceAccountEmail is not a valid email format', async () => {
-      const compute = new Compute({serviceAccountEmail: 'not-an-email'});
+    it('should return valid URL from getRegionalAccessBoundaryUrl if custom serviceAccountEmail is set', async () => {
+      const email = 'custom-sa@example.com';
+      const compute = new Compute({serviceAccountEmail: email});
       const url = await compute.getRegionalAccessBoundaryUrl();
-      assert.strictEqual(url, null);
+      const expectedUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(email),
+      );
+      assert.strictEqual(url, expectedUrl);
+    });
+
+    it('should return valid URL from getRegionalAccessBoundaryUrl when MDS returns a valid default service account email', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'fake-default-sa@developer.gserviceaccount.com';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      const url = await compute.getRegionalAccessBoundaryUrl();
+      const expectedUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(fakeEmail),
+      );
+      assert.strictEqual(url, expectedUrl);
     });
 
     it('should NOT trigger asynchronous RAB refresh and NOT attach RAB header if email from metadata server is not a valid email format', async () => {
