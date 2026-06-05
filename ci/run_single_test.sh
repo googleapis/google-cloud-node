@@ -39,9 +39,9 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER=xunit
 fi
 
-# Install dependencies
-echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
-pnpm install --ignore-scripts --engine-strict --prod; pnpm install
+# Dependencies are pre-installed globally at the workspace root.
+# We only execute compilation / prep if required by the package.
+pnpm --filter ...{.} run --if-present compile
 
 
 retval=0
