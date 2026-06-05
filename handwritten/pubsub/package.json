@@ -69,10 +69,9 @@
     "p-defer": "^3.0.0"
   },
   "devDependencies": {
-    "@google-cloud/opentelemetry-cloud-trace-exporter": "^2.4.1",
     "@grpc/proto-loader": "^0.8.0",
     "@opentelemetry/sdk-trace-base": "^1.17.0",
-    "@opentelemetry/sdk-trace-node": "^2.7.0",
+    "@opentelemetry/sdk-trace-node": "^1.17.0",
     "@types/chai": "^5.2.3",
     "@types/duplexify": "^3.6.4",
     "@types/extend": "^3.0.4",

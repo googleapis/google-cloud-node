@@ -12,27 +12,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Message, PubSub} from '../src';
+import {Message, PubSub, Subscription, Topic} from '../src';
 import * as assert from 'assert';
 import {describe, it, after, before} from 'mocha';
 import {TestResources} from './testResources';
-import {BasicTracerProvider, SimpleSpanProcessor, InMemorySpanExporter} from '@opentelemetry/sdk-trace-base';
+import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
+import {SimpleSpanProcessor, InMemorySpanExporter} from '@opentelemetry/sdk-trace-base';
 
 describe('OpenTelemetry Samples System Tests', () => {
   const pubsub = new PubSub({enableOpenTelemetryTracing: true});
   const resources = new TestResources('ps-sys-otel');
-  const exporter = new InMemorySpanExporter();
 
   let topicName: string;
   let subName: string;
-  let provider: BasicTracerProvider;
+  let topic: Topic;
+  let subscription: Subscription;
   let processor: SimpleSpanProcessor;
+  let provider: NodeTracerProvider;
+  let exporter: InMemorySpanExporter;
 
   before(async () => {
-    topicName = resources.generateName('topic');
-    subName = resources.generateName('sub');
+    topicName = resources.generateName('ot');
+    subName = resources.generateName('ot');
+    topic = (await pubsub.createTopic(topicName))[0];
+    subscription = (await topic.createSubscription(subName))[0];
 
-    provider = new BasicTracerProvider();
+    exporter = new InMemorySpanExporter();
+
+    // Build a tracer provider and a span processor to do
+    // something with the spans we're generating.
+    provider = new NodeTracerProvider();
     processor = new SimpleSpanProcessor(exporter);
     provider.addSpanProcessor(processor);
     provider.register();
@@ -51,9 +60,6 @@ describe('OpenTelemetry Samples System Tests', () => {
   });
 
   it('should publish and listen with OpenTelemetry tracing', async () => {
-    const [topic] = await pubsub.createTopic(topicName);
-    const [subscription] = await topic.createSubscription(subName);
-
     const data = 'Hello, world!';
     const dataBuffer = Buffer.from(data);
 
