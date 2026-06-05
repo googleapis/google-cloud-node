@@ -78,6 +78,8 @@ const DEFAULT_OPTIONS: MessageStreamOptions = {
   retryMaxBackoff: Duration.from({seconds: 60}),
 };
 
+const SERVER_KEEP_ALIVE_INTERVAL = 15000;
+
 interface StreamState {
   highWaterMark: number;
 }
@@ -308,7 +310,7 @@ export class MessageStream extends PassThrough {
 
     tracker.aliveTimer = setTimeout(() => {
       this._checkAliveTimer(index);
-    }, 15000);
+    }, SERVER_KEEP_ALIVE_INTERVAL);
   }
 
   /**
