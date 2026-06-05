@@ -20,18 +20,18 @@ import {AckError, Message, Subscriber} from './subscriber';
 import {defaultOptions} from './default-options';
 import {Duration} from './temporal';
 import {DebugMessage} from './debug';
-import {logs as baseLogs, LoggingFunction} from './logs';
+import {logs as baseLogs, Loggers} from './logs';
 
 /**
  * Loggers. Exported for unit tests.
  *
  * @private
  */
-export const logs = {
-  callbackDelivery: baseLogs.pubsub.sublog('callback-delivery') as LoggingFunction,
-  callbackExceptions: baseLogs.pubsub.sublog('callback-exceptions') as LoggingFunction,
-  expiry: baseLogs.pubsub.sublog('expiry') as LoggingFunction,
-  subscriberFlowControl: baseLogs.pubsub.sublog('subscriber-flow-control') as LoggingFunction,
+export const logs: Loggers = {
+  callbackDelivery: baseLogs.pubsub.sublog('callback-delivery'),
+  callbackExceptions: baseLogs.pubsub.sublog('callback-exceptions'),
+  expiry: baseLogs.pubsub.sublog('expiry'),
+  subscriberFlowControl: baseLogs.pubsub.sublog('subscriber-flow-control'),
 };
 
 export interface FlowControlOptions {

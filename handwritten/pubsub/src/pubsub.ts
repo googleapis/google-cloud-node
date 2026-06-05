@@ -17,7 +17,7 @@
 import {paginator} from '@google-cloud/paginator';
 import {replaceProjectIdToken} from '@google-cloud/projectify';
 import * as extend from 'extend';
-import {AuthClient, GoogleAuth} from 'google-auth-library';
+import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import * as gax from 'google-gax';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -335,7 +335,7 @@ export class PubSub {
     this.isEmulator = false;
     this.determineBaseUrl_();
     this.api = {};
-    this.auth = new GoogleAuth(this.options as gax.GoogleAuthOptions<AuthClient>);
+    this.auth = new GoogleAuth(this.options as GoogleAuthOptions<AuthClient>);
     this.projectId = this.options.projectId || PROJECT_ID_PLACEHOLDER;
     if (this.projectId !== PROJECT_ID_PLACEHOLDER) {
       this.name = PubSub.formatName_(this.projectId);

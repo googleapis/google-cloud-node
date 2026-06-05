@@ -26,16 +26,15 @@ import {defaultOptions} from './default-options';
 import {Duration} from './temporal';
 import {ExponentialRetry} from './exponential-retry';
 import {DebugMessage} from './debug';
-import {randomUUID} from 'crypto';
-import {logs as baseLogs, LoggingFunction} from './logs';
+import {logs as baseLogs, Loggers} from './logs';
 
 /**
  * Loggers. Exported for unit tests.
  *
  * @private
  */
-export const logs = {
-  subscriberStreams: baseLogs.pubsub.sublog('subscriber-streams') as LoggingFunction,
+export const logs: Loggers = {
+  subscriberStreams: baseLogs.pubsub.sublog('subscriber-streams'),
 };
 
 /*!

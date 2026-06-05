@@ -34,15 +34,15 @@ import {Duration} from './temporal';
 import {addToBucket} from './util';
 import {DebugMessage} from './debug';
 import * as tracing from './telemetry-tracing';
-import {logs as baseLogs, LoggingFunction} from './logs';
+import {logs as baseLogs, Loggers} from './logs';
 
 /**
  * Loggers. Exported for unit tests.
  *
  * @private
  */
-export const logs = {
-  ackBatch: baseLogs.pubsub.sublog('ack-batch') as LoggingFunction,
+export const logs: Loggers = {
+  ackBatch: baseLogs.pubsub.sublog('ack-batch'),
 };
 
 export interface ReducedMessage {
