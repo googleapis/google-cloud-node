@@ -280,41 +280,36 @@ export class MessageStream extends PassThrough {
 
   private _clearAliveTimer(tracker: StreamTracked): void {
     if (tracker.aliveTimer) {
-      clearInterval(tracker.aliveTimer);
+      clearTimeout(tracker.aliveTimer);
       tracker.aliveTimer = undefined;
     }
   }
 
   private _checkAliveTimer(index: number): void {
     const tracker = this._streams[index];
-    const now = Date.now();
     const lastPingTime = tracker.lastPingTime ?? -1;
     const lastResponseTime = tracker.lastResponseTime ?? 0;
     if (lastPingTime <= lastResponseTime) {
       return;
     }
 
-    const elapsedSincePing = now - lastPingTime;
-
-    if (elapsedSincePing > 15000) {
-      this._removeStream(
-        index,
-        'no keepalive response from server within 15 seconds',
-        'will be retried',
-      );
-      this._retrier.retryLater(tracker, () =>
-        this._fillOne(index, undefined, 'retry'),
-      );
-    }
+    this._removeStream(
+      index,
+      'no keepalive response from server within 15 seconds',
+      'will be retried',
+    );
+    this._retrier.retryLater(tracker, () =>
+      this._fillOne(index, undefined, 'retry'),
+    );
   }
 
   private _setAliveTimer(index: number): void {
     const tracker = this._streams[index];
     this._clearAliveTimer(tracker);
 
-    tracker.aliveTimer = setInterval(() => {
+    tracker.aliveTimer = setTimeout(() => {
       this._checkAliveTimer(index);
-    }, 10000);
+    }, 15000);
   }
 
   /**
