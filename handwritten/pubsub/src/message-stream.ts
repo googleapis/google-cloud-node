@@ -560,8 +560,7 @@ export class MessageStream extends PassThrough {
   ): void {
     const tracker = this._streams[index];
     if (tracker.aliveTimer) {
-      clearInterval(tracker.aliveTimer);
-      tracker.aliveTimer = undefined;
+      this._clearAliveTimer(tracker);
     }
     if (tracker.stream) {
       logs.subscriberStreams.info(
