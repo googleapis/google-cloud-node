@@ -49033,6 +49033,7 @@
                      * @property {string|null} [authorizedViewName] SampleRowKeysRequest authorizedViewName
                      * @property {string|null} [materializedViewName] SampleRowKeysRequest materializedViewName
                      * @property {string|null} [appProfileId] SampleRowKeysRequest appProfileId
+                     * @property {google.bigtable.v2.IRowRange|null} [rowRange] SampleRowKeysRequest rowRange
                      */
     
                     /**
@@ -49083,6 +49084,14 @@
                     SampleRowKeysRequest.prototype.appProfileId = "";
     
                     /**
+                     * SampleRowKeysRequest rowRange.
+                     * @member {google.bigtable.v2.IRowRange|null|undefined} rowRange
+                     * @memberof google.bigtable.v2.SampleRowKeysRequest
+                     * @instance
+                     */
+                    SampleRowKeysRequest.prototype.rowRange = null;
+    
+                    /**
                      * Creates a new SampleRowKeysRequest instance using the specified properties.
                      * @function create
                      * @memberof google.bigtable.v2.SampleRowKeysRequest
@@ -49114,6 +49123,8 @@
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.authorizedViewName);
                         if (message.materializedViewName != null && Object.hasOwnProperty.call(message, "materializedViewName"))
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.materializedViewName);
+                        if (message.rowRange != null && Object.hasOwnProperty.call(message, "rowRange"))
+                            $root.google.bigtable.v2.RowRange.encode(message.rowRange, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -49170,6 +49181,10 @@
                                     message.appProfileId = reader.string();
                                     break;
                                 }
+                            case 6: {
+                                    message.rowRange = $root.google.bigtable.v2.RowRange.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7, long);
                                 break;
@@ -49221,6 +49236,11 @@
                         if (message.appProfileId != null && message.hasOwnProperty("appProfileId"))
                             if (!$util.isString(message.appProfileId))
                                 return "appProfileId: string expected";
+                        if (message.rowRange != null && message.hasOwnProperty("rowRange")) {
+                            var error = $root.google.bigtable.v2.RowRange.verify(message.rowRange, long + 1);
+                            if (error)
+                                return "rowRange." + error;
+                        }
                         return null;
                     };
     
@@ -49248,6 +49268,11 @@
                             message.materializedViewName = String(object.materializedViewName);
                         if (object.appProfileId != null)
                             message.appProfileId = String(object.appProfileId);
+                        if (object.rowRange != null) {
+                            if (typeof object.rowRange !== "object")
+                                throw TypeError(".google.bigtable.v2.SampleRowKeysRequest.rowRange: object expected");
+                            message.rowRange = $root.google.bigtable.v2.RowRange.fromObject(object.rowRange, long + 1);
+                        }
                         return message;
                     };
     
@@ -49269,6 +49294,7 @@
                             object.appProfileId = "";
                             object.authorizedViewName = "";
                             object.materializedViewName = "";
+                            object.rowRange = null;
                         }
                         if (message.tableName != null && message.hasOwnProperty("tableName"))
                             object.tableName = message.tableName;
@@ -49278,6 +49304,8 @@
                             object.authorizedViewName = message.authorizedViewName;
                         if (message.materializedViewName != null && message.hasOwnProperty("materializedViewName"))
                             object.materializedViewName = message.materializedViewName;
+                        if (message.rowRange != null && message.hasOwnProperty("rowRange"))
+                            object.rowRange = $root.google.bigtable.v2.RowRange.toObject(message.rowRange, options);
                         return object;
                     };
     

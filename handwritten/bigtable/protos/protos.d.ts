@@ -20071,6 +20071,9 @@ export namespace google {
 
                 /** SampleRowKeysRequest appProfileId */
                 appProfileId?: (string|null);
+
+                /** SampleRowKeysRequest rowRange */
+                rowRange?: (google.bigtable.v2.IRowRange|null);
             }
 
             /** Represents a SampleRowKeysRequest. */
@@ -20093,6 +20096,9 @@ export namespace google {
 
                 /** SampleRowKeysRequest appProfileId. */
                 public appProfileId: string;
+
+                /** SampleRowKeysRequest rowRange. */
+                public rowRange?: (google.bigtable.v2.IRowRange|null);
 
                 /**
                  * Creates a new SampleRowKeysRequest instance using the specified properties.
