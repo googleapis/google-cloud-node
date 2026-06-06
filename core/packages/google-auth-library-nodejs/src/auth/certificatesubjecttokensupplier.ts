@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import {SubjectTokenSupplier} from './identitypoolclient';
-import {isValidFile} from '../util';
 import * as fs from 'fs';
 import {X509Certificate} from 'crypto';
 import * as https from 'https';
@@ -47,21 +46,6 @@ export interface CertificateSubjectTokenSupplierOptions {
  * Represents the "workload" block within the certificate configuration file.
  * @internal
  */
-interface WorkloadCertConfigJson {
-  cert_path: string;
-  key_path: string;
-}
-
-/**
- * Represents the structure of the certificate_config.json file.
- * @internal
- */
-interface CertificateConfigFileJson {
-  version: number;
-  cert_configs: {
-    workload?: WorkloadCertConfigJson;
-  };
-}
 
 /**
  * A subject token supplier that uses a client certificate for authentication.
@@ -113,7 +97,9 @@ export class CertificateSubjectTokenSupplier implements SubjectTokenSupplier {
     // The "subject token" in this context is the processed certificate chain.
 
     // getClientCertAndKey handles path resolution, file reading, and validation
-    ({cert: this.cert, key: this.key} = await getClientCertAndKey(this.certificateConfigPath));
+    ({cert: this.cert, key: this.key} = await getClientCertAndKey(
+      this.certificateConfigPath,
+    ));
 
     return await this.#processChainFromPaths(this.cert);
   }

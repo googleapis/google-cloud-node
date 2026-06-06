@@ -16,6 +16,18 @@ import * as fs from 'fs';
 import {createPrivateKey, X509Certificate} from 'crypto';
 import {getWellKnownCertificateConfigFileLocation, isValidFile} from '../util';
 
+interface WorkloadCertConfigJson {
+  cert_path: string;
+  key_path: string;
+}
+
+interface CertificateConfigFileJson {
+  version: number;
+  cert_configs: {
+    workload?: WorkloadCertConfigJson;
+  };
+}
+
 export const CERTIFICATE_CONFIGURATION_ENV_VARIABLE =
   'GOOGLE_API_CERTIFICATE_CONFIG';
 
@@ -52,7 +64,7 @@ export enum MtlsEndpointUsagePolicy {
 /**
  * Resolves the mTLS endpoint usage policy based on the `GOOGLE_API_USE_MTLS_ENDPOINT`
  * environment variable.
- * 
+ *
  * @returns The resolved MtlsEndpointUsagePolicy.
  */
 export function getMtlsEndpointUsagePolicy(): MtlsEndpointUsagePolicy {
@@ -67,14 +79,16 @@ export function getMtlsEndpointUsagePolicy(): MtlsEndpointUsagePolicy {
 
 /**
  * Centralized helper method to determine if mutual TLS (mTLS) can be enabled.
- * 
+ *
  * Checks for the environment policy constraints and parses the certificate configuration file.
- * 
+ *
  * @param certConfigPathOverride Optional path to override the certificate configuration file.
  * @returns A promise that resolves to `true` if mTLS can be enabled, `false` otherwise.
  * @throws {Error} If a configuration file is resolved but contains malformed contents or missing files.
  */
-export async function canMtlsBeEnabled(certConfigPathOverride?: string): Promise<boolean> {
+export async function canMtlsBeEnabled(
+  certConfigPathOverride?: string,
+): Promise<boolean> {
   if (process.env.GOOGLE_API_USE_CLIENT_CERTIFICATE === 'false') {
     return false;
   }
@@ -93,10 +107,11 @@ export async function canMtlsBeEnabled(certConfigPathOverride?: string): Promise
 
   // Config file exists / was specified. We must validate it.
   // Any failure here must propagate as a hard error.
-  const {certPath, keyPath} = await getCertAndKeyFilePathsFromConfig(configPath);
+  const {certPath, keyPath} =
+    await getCertAndKeyFilePathsFromConfig(configPath);
   if (!(await isValidFile(certPath)) || !(await isValidFile(keyPath))) {
     throw new Error(
-      `Certificate configuration exists but referenced files are missing: cert_path=${certPath}, key_path=${keyPath}`
+      `Certificate configuration exists but referenced files are missing: cert_path=${certPath}, key_path=${keyPath}`,
     );
   }
   return true;
@@ -105,13 +120,13 @@ export async function canMtlsBeEnabled(certConfigPathOverride?: string): Promise
 /**
  * Resolves the path to the certificate configuration JSON file.
  * Checks the override path, standard environment variable, and well-known location.
- * 
+ *
  * @param certConfigPathOverride Optional override path.
  * @returns The resolved absolute path to the configuration file.
  * @throws {CertificateSourceUnavailableError} If the configuration file cannot be found.
  */
 export async function resolveCertificateConfigFilePath(
-  certConfigPathOverride?: string
+  certConfigPathOverride?: string,
 ): Promise<string> {
   // Step 1: Check if an override path was passed directly (highest precedence)
   if (certConfigPathOverride) {
@@ -150,14 +165,14 @@ export async function resolveCertificateConfigFilePath(
 /**
  * Reads and parses the certificate configuration JSON file to extract the
  * certificate and private key file paths from the workload configuration block.
- * 
+ *
  * @param configPath Absolute path to the certificate config file.
  * @returns The file paths to the certificate and key.
  * @throws {CertificateSourceUnavailableError} If the configuration file is unreadable.
  * @throws {InvalidConfigurationError} If the JSON contents are invalid or missing required paths.
  */
 export async function getCertAndKeyFilePathsFromConfig(
-  configPath: string
+  configPath: string,
 ): Promise<{certPath: string; keyPath: string}> {
   let fileContents: string;
   try {
@@ -169,7 +184,7 @@ export async function getCertAndKeyFilePathsFromConfig(
   }
 
   try {
-    const config = JSON.parse(fileContents);
+    const config = JSON.parse(fileContents) as CertificateConfigFileJson;
     const certPath = config?.cert_configs?.workload?.cert_path;
     const keyPath = config?.cert_configs?.workload?.key_path;
 
@@ -180,7 +195,10 @@ export async function getCertAndKeyFilePathsFromConfig(
     }
     return {certPath, keyPath};
   } catch (e) {
-    if (e instanceof InvalidConfigurationError || e instanceof CertificateSourceUnavailableError) {
+    if (
+      e instanceof InvalidConfigurationError ||
+      e instanceof CertificateSourceUnavailableError
+    ) {
       throw e;
     }
     throw new InvalidConfigurationError(
@@ -194,17 +212,20 @@ export async function getCertAndKeyFilePathsFromConfig(
 /**
  * Loads the actual certificate and private key bytes from disk.
  * Prioritizes the configuration file. Validates the loaded files are in the correct format.
- * 
+ *
  * @param certConfigPathOverride Optional override path.
  * @returns The loaded cert and private key buffers.
  * @throws {Error} If no credentials could be resolved or if validation fails.
  */
 export async function getClientCertAndKey(
-  certConfigPathOverride?: string
+  certConfigPathOverride?: string,
 ): Promise<{cert: Buffer; key: Buffer}> {
-  const configPath = await resolveCertificateConfigFilePath(certConfigPathOverride);
-  const {certPath, keyPath} = await getCertAndKeyFilePathsFromConfig(configPath);
-  
+  const configPath = await resolveCertificateConfigFilePath(
+    certConfigPathOverride,
+  );
+  const {certPath, keyPath} =
+    await getCertAndKeyFilePathsFromConfig(configPath);
+
   let cert, key;
   try {
     cert = await fs.promises.readFile(certPath);

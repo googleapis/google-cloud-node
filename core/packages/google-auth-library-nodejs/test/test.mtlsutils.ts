@@ -18,10 +18,7 @@ import * as sinon from 'sinon';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
-import {
-  canMtlsBeEnabled,
-  getClientCertAndKey,
-} from '../src/auth/mtlsutils';
+import {canMtlsBeEnabled, getClientCertAndKey} from '../src/auth/mtlsutils';
 import * as util from '../src/util';
 
 describe('mtlsutils', () => {
@@ -30,7 +27,7 @@ describe('mtlsutils', () => {
 
   beforeEach(async () => {
     sandbox = sinon.createSandbox();
-    sandbox.stub(process, 'env').value({ ...process.env });
+    sandbox.stub(process, 'env').value({...process.env});
     tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'mtls-tests-'));
   });
 
@@ -73,9 +70,9 @@ describe('mtlsutils', () => {
 
     it('returns false if no config is present', async () => {
       delete process.env.GOOGLE_API_CERTIFICATE_CONFIG;
-      sandbox.stub(util, 'getWellKnownCertificateConfigFileLocation').returns(
-        path.join(tempDir, 'non_existent.json')
-      );
+      sandbox
+        .stub(util, 'getWellKnownCertificateConfigFileLocation')
+        .returns(path.join(tempDir, 'non_existent.json'));
       const result = await canMtlsBeEnabled();
       assert.strictEqual(result, false);
     });
@@ -84,7 +81,7 @@ describe('mtlsutils', () => {
   describe('getClientCertAndKey', () => {
     it('loads cert and key from config successfully', async () => {
       const result = await getClientCertAndKey(
-        './test/fixtures/external-account-cert/cert_config.json'
+        './test/fixtures/external-account-cert/cert_config.json',
       );
       assert.ok(result.cert);
       assert.ok(result.key);
@@ -93,8 +90,8 @@ describe('mtlsutils', () => {
     it('throws error if files resolved by config are malformed', async () => {
       await assert.rejects(
         getClientCertAndKey(
-          './test/fixtures/external-account-cert/cert_config_with_malformed_key.json'
-        )
+          './test/fixtures/external-account-cert/cert_config_with_malformed_key.json',
+        ),
       );
     });
   });

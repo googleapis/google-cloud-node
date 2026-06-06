@@ -369,16 +369,16 @@ describe('compute', () => {
         './test/fixtures/external-account-cert/cert_config.json';
 
       const tokenScope = setupTokenNock('default');
-      
+
       // The lookup url should be replaced with iamcredentials.mtls.googleapis.com
       const lookupUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
         '{service_account_email}',
         encodeURIComponent(fakeEmail),
       ).replace(
         'iamcredentials.googleapis.com',
-        'iamcredentials.mtls.googleapis.com'
+        'iamcredentials.mtls.googleapis.com',
       );
-      
+
       const rabScope = nock(new URL(lookupUrl).origin)
         .get(new URL(lookupUrl).pathname)
         .matchHeader('authorization', MOCK_AUTH_HEADER)
