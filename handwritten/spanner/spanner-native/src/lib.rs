@@ -431,25 +431,29 @@ pub fn execute_streaming_sql_native(
                                 }
                             }
 
-                            let mut values = chunk.values;
+                            let mut values_iter = chunk.values.into_iter();
 
                             if let Some(pending) = pending_value.take() {
-                                if !values.is_empty() {
-                                    let first = values.remove(0);
+                                if let Some(first) = values_iter.next() {
                                     let merged = merge_proto_values(pending, first);
-                                    values.insert(0, merged);
+                                    current_row.push(proto_value_to_string(&merged));
+                                    if num_fields > 0 && current_row.len() == num_fields {
+                                        rows.push(std::mem::take(&mut current_row));
+                                    }
                                 } else {
                                     pending_value = Some(pending);
                                 }
                             }
 
+                            let mut remaining_values: Vec<prost_types::Value> = values_iter.collect();
+
                             if chunk.chunked_value {
-                                if !values.is_empty() {
-                                    pending_value = values.pop();
+                                if !remaining_values.is_empty() {
+                                    pending_value = remaining_values.pop();
                                 }
                             }
 
-                            for val in values {
+                            for val in remaining_values {
                                 current_row.push(proto_value_to_string(&val));
                                 if num_fields > 0 && current_row.len() == num_fields {
                                     rows.push(std::mem::take(&mut current_row));
