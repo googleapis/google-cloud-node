@@ -50,7 +50,7 @@ pub mod google {
 }
 
 use google::spanner::v1::spanner_client::SpannerClient;
-use google::spanner::v1::{ExecuteSqlRequest, ResultSet};
+use google::spanner::v1::{ExecuteSqlRequest, ResultSet, PartialResultSet};
 
 /// Shared multi-threaded Tokio runtime used to drive async tonic gRPC calls.
 /// Dynamically scaled to match the physical CPU core count of the VM for zero work-stealing delays.
@@ -160,6 +160,37 @@ fn decode_result_set(rs: ResultSet) -> Vec<Vec<String>> {
         rows.push(values);
     }
     rows
+}
+
+/// Helper to merge chunked Protobuf values recursively according to Spanner streaming specification
+fn merge_proto_values(mut head: prost_types::Value, tail: prost_types::Value) -> prost_types::Value {
+    use prost_types::value::Kind;
+    match (&mut head.kind, tail.kind) {
+        (Some(Kind::StringValue(h_str)), Some(Kind::StringValue(t_str))) => {
+            h_str.push_str(&t_str);
+        }
+        (Some(Kind::ListValue(h_list)), Some(Kind::ListValue(t_list))) => {
+            let mut tail_vals = t_list.values;
+            if !h_list.values.is_empty() && !tail_vals.is_empty() {
+                let h_last = h_list.values.pop().unwrap();
+                let t_first = tail_vals.remove(0);
+                let merged = merge_proto_values(h_last, t_first);
+                h_list.values.push(merged);
+            }
+            h_list.values.extend(tail_vals);
+        }
+        (Some(Kind::StructValue(h_struct)), Some(Kind::StructValue(t_struct))) => {
+            for (k, v) in t_struct.fields {
+                if let Some(existing_val) = h_struct.fields.remove(&k) {
+                    h_struct.fields.insert(k, merge_proto_values(existing_val, v));
+                } else {
+                    h_struct.fields.insert(k, v);
+                }
+            }
+        }
+        _ => {}
+    }
+    head
 }
 
 /// Simple converter for prost well-known kinds to basic string representations
@@ -294,3 +325,179 @@ pub fn execute_sql_native(
 
     Ok(())
 }
+
+/// Asynchronously executes Spanner SQL query via gRPC streaming, returning results via a JavaScript callback.
+/// Bypasses libuv thread pool completely by spawning task directly to static Tokio RUNTIME.
+/// Perfect for larger payloads (e.g. LIMIT 1000) for clean comparison.
+#[napi]
+pub fn execute_streaming_sql_native(
+    env: Env,
+    session_name: String,
+    sql: String,
+    channel_count: i32,
+    callback: JsFunction,
+) -> napi::Result<()> {
+    // Force eager evaluation of connection channels pool and authentication static
+    let _ = &*CHANNELS;
+
+    // Create a ThreadsafeFunction from the JS callback.
+    let tsfn: ThreadsafeFunction<
+        Vec<Vec<String>>,
+        ErrorStrategy::CalleeHandled
+    > = callback.create_threadsafe_function(
+        0,
+        |ctx: ThreadSafeCallContext<Vec<Vec<String>>>| {
+            let rows = ctx.value;
+            let mut outer = ctx.env.create_array_with_length(rows.len())?;
+            for (i, row) in rows.into_iter().enumerate() {
+                let mut inner = ctx.env.create_array_with_length(row.len())?;
+                for (j, cell) in row.into_iter().enumerate() {
+                    let js_str = ctx.env.create_string(&cell)?;
+                    inner.set_element(j as u32, js_str)?;
+                }
+                outer.set_element(i as u32, inner)?;
+            }
+            Ok(vec![outer])
+        }
+    )?;
+
+    let session_clone = session_name.clone();
+    let sql_clone = sql.clone();
+
+    // Spawn task DIRECTLY onto the multi-threaded static Tokio runtime
+    RUNTIME.spawn(async move {
+        // 1. Retrieve pre-initialized provider from OnceCell and fetch access token
+        let provider = match AUTH_PROVIDER.get() {
+            Some(p) => p,
+            None => {
+                tsfn.call(
+                    Err(napi::Error::from_reason("GCP Authentication Provider was not initialized at startup")),
+                    ThreadsafeFunctionCallMode::NonBlocking
+                );
+                return;
+            }
+        };
+
+        let token_struct = match provider.token(&["https://www.googleapis.com/auth/spanner.data"]).await {
+            Ok(t) => t,
+            Err(e) => {
+                tsfn.call(
+                    Err(napi::Error::from_reason(format!("Failed to fetch GCP token in Rust: {}", e))),
+                    ThreadsafeFunctionCallMode::NonBlocking
+                );
+                return;
+            }
+        };
+        let token_str = token_struct.as_str().to_string();
+
+        // 2. Channel selection round-robin
+        let count = channel_count.max(1) as usize;
+        let idx = REQUEST_COUNTER.fetch_add(1, Ordering::Relaxed) % count.min(CHANNELS.len());
+        let channel = CHANNELS[idx].clone();
+
+        // 3. Build AuthInterceptor and Client
+        let interceptor = AuthInterceptor {
+            token: token_str,
+            session_name: session_clone.clone(),
+        };
+        let mut client = SpannerClient::with_interceptor(channel, interceptor);
+
+        let request = ExecuteSqlRequest {
+            session: session_clone,
+            sql: sql_clone,
+            ..Default::default()
+        };
+
+        // 4. Execute gRPC streaming call on Tokio thread pool asynchronously
+        let result = client.execute_streaming_sql(request).await;
+
+        // 5. Stream messages and stitch them
+        match result {
+            Ok(response) => {
+                let mut stream = response.into_inner();
+                let mut rows = Vec::new();
+                let mut current_row = Vec::new();
+                let mut num_fields = 0;
+                let mut pending_value: Option<prost_types::Value> = None;
+
+                loop {
+                    match stream.message().await {
+                        Ok(Some(chunk)) => {
+                            if num_fields == 0 {
+                                if let Some(metadata) = &chunk.metadata {
+                                    if let Some(row_type) = &metadata.row_type {
+                                        num_fields = row_type.fields.len();
+                                    }
+                                }
+                            }
+
+                            let mut values = chunk.values;
+
+                            if let Some(pending) = pending_value.take() {
+                                if !values.is_empty() {
+                                    let first = values.remove(0);
+                                    let merged = merge_proto_values(pending, first);
+                                    values.insert(0, merged);
+                                } else {
+                                    pending_value = Some(pending);
+                                }
+                            }
+
+                            if chunk.chunked_value {
+                                if !values.is_empty() {
+                                    pending_value = values.pop();
+                                }
+                            }
+
+                            for val in values {
+                                current_row.push(proto_value_to_string(&val));
+                                if num_fields > 0 && current_row.len() == num_fields {
+                                    rows.push(std::mem::take(&mut current_row));
+                                }
+                            }
+                        }
+                        Ok(None) => {
+                            break;
+                        }
+                        Err(status) => {
+                            tsfn.call(
+                                Err(napi::Error::from_reason(format!(
+                                    "gRPC streaming failed during read: status = {:?}, msg = {}",
+                                    status.code(),
+                                    status.message()
+                                ))),
+                                ThreadsafeFunctionCallMode::NonBlocking
+                            );
+                            return;
+                        }
+                    }
+                }
+
+                if let Some(pending) = pending_value {
+                    current_row.push(proto_value_to_string(&pending));
+                }
+                if !current_row.is_empty() {
+                    rows.push(current_row);
+                }
+
+                tsfn.call(
+                    Ok(rows),
+                    ThreadsafeFunctionCallMode::NonBlocking
+                );
+            }
+            Err(status) => {
+                tsfn.call(
+                    Err(napi::Error::from_reason(format!(
+                        "gRPC execute_streaming_sql failed: status = {:?}, msg = {}",
+                        status.code(),
+                        status.message()
+                    ))),
+                    ThreadsafeFunctionCallMode::NonBlocking
+                );
+            }
+        }
+    });
+
+    Ok(())
+}
+

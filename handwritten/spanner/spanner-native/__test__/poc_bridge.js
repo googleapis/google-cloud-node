@@ -74,7 +74,7 @@ class NativeSpannerDatabase {
     const sessionName = await this._getSessionName();
 
     return new Promise((resolve, reject) => {
-      spannerNative.executeSqlNative(
+      spannerNative.executeStreamingSqlNative(
         sessionName,
         sql,
         channelCount,
