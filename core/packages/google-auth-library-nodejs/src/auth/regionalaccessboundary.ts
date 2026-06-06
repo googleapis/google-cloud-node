@@ -14,6 +14,8 @@
 
 import { Gaxios, GaxiosOptions } from 'gaxios';
 import { log as makeLog } from 'google-logging-utils';
+import * as https from 'https';
+import { canMtlsBeEnabled, getClientCertAndKey } from './mtlsutils';
 
 const log = makeLog('auth');
 
@@ -253,6 +255,20 @@ export class RegionalAccessBoundaryManager {
       headers,
       url: this.lookupUrl,
     };
+
+    // If mTLS can be enabled, use mTLS agent and switch to the mTLS endpoint
+    try {
+      if (await canMtlsBeEnabled()) {
+        const { cert, key } = await getClientCertAndKey();
+        opts.agent = new https.Agent({ cert, key });
+        opts.url = this.lookupUrl.replace(
+          'iamcredentials.googleapis.com',
+          'iamcredentials.mtls.googleapis.com',
+        );
+      }
+    } catch (e) {
+      log.error('RegionalAccessBoundary: Failed to initialize mTLS: ', e);
+    }
 
     const { data: regionalAccessBoundaryData } =
       await this.options.transporter.request<RegionalAccessBoundaryData>(opts);

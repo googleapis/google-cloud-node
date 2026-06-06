@@ -75,6 +75,11 @@ interface ImpersonatedCredentialRequest {
 
 describe('impersonated', () => {
   beforeEach(() => {
+    sinon.stub(process, 'env').value({
+      ...process.env,
+      GOOGLE_API_USE_CLIENT_CERTIFICATE: undefined,
+      GOOGLE_API_CERTIFICATE_CONFIG: undefined,
+    });
     sinon
       .stub(Impersonated.prototype, 'getRegionalAccessBoundaryUrl')
       .resolves(undefined);
