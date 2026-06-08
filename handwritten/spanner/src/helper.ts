@@ -14,6 +14,7 @@
  */
 
 import {grpc} from 'google-gax';
+import {Stream} from 'stream';
 /**
  * Checks whether the given error is a 'Database not found' error.
  * @param {Error} error The error to check.
@@ -289,4 +290,92 @@ export function isUuid(value: any): boolean {
       value,
     )
   );
+}
+
+const PROJECT_ID_TOKEN = '{{projectId}}';
+const PROJECT_ID_TOKEN_REGEX = /{{projectId}}/g;
+
+// Whitelisted request properties that contain, or lead to, resource name strings with project ID placeholders.
+const KEYS_TO_SCAN = new Set([
+  'database',
+  'session',
+  'name',
+  'parent',
+  'instance',
+  'resource',
+  'backup',
+  'instanceConfig',
+  'baseConfig',
+  'kmsKeyName',
+  // Intermediate object keys that must be traversed to reach the above leaves
+  'config',
+  'encryptionConfig',
+]);
+
+/**
+ * Populate the `{{projectId}}` placeholder.
+ *
+ * @throws {Error} If a projectId is required, but one is not provided.
+ *
+ * @param {*} - Any input value that may contain a placeholder. Arrays and objects will be looped.
+ * @param {string} projectId - A projectId. If not provided
+ * @return {*} - The original argument with all placeholders populated.
+ */
+export function replaceProjectIdToken(value: any, projectId: string): any {
+  if (typeof value === 'string') {
+    if (value.includes(PROJECT_ID_TOKEN)) {
+      if (!projectId || projectId === PROJECT_ID_TOKEN) {
+        throw new MissingProjectIdError();
+      }
+      return value.replace(PROJECT_ID_TOKEN_REGEX, projectId);
+    }
+    return value;
+  }
+
+  if (value === null || typeof value !== 'object') {
+    return value;
+  }
+
+  if (Array.isArray(value)) {
+    for (let i = 0; i < value.length; i++) {
+      const original = value[i];
+      const processed = replaceProjectIdToken(original, projectId);
+      if (processed !== original) {
+        value[i] = processed;
+      }
+    }
+    return value;
+  }
+
+  if (value instanceof Buffer || value instanceof Stream || isDate(value)) {
+    return value;
+  }
+
+  for (const key in value) {
+    if (Object.prototype.hasOwnProperty.call(value, key)) {
+      if (!KEYS_TO_SCAN.has(key)) {
+        continue;
+      }
+      const original = value[key];
+      const processed = replaceProjectIdToken(original, projectId);
+      if (processed !== original) {
+        value[key] = processed;
+      }
+    }
+  }
+
+  return value;
+}
+
+/**
+ * Custom error type for missing project ID errors.
+ */
+class MissingProjectIdError extends Error {
+  constructor() {
+    super(
+      `Sorry, we cannot connect to Cloud Services without a project
+    ID. You may specify one with an environment variable named
+    "GOOGLE_CLOUD_PROJECT".`.replace(/ +/g, ' '),
+    );
+  }
 }
