@@ -26,9 +26,51 @@ import {Transform} from 'stream';
 import * as through from 'through2';
 
 import {codec} from '../src/codec';
+import {PreciseDate} from '@google-cloud/precise-date';
 import * as prs from '../src/partial-result-stream';
 import {grpc} from 'google-gax';
 import {Row} from '../src/partial-result-stream';
+
+function toRawValue(value: any): any {
+  if (value === null || value === undefined) {
+    return null;
+  }
+  if (value instanceof Buffer) {
+    return value.toString('base64');
+  }
+  if (value instanceof codec.SpannerDate) {
+    return value.toJSON();
+  }
+  if (value instanceof PreciseDate) {
+    return value.toISOString();
+  }
+  if (value instanceof codec.Struct) {
+    return Array.from(value).map((field: any) => toRawValue(field.value));
+  }
+  if (value instanceof codec.Int) {
+    return value.value;
+  }
+  if (value instanceof codec.Float) {
+    const num = value.valueOf();
+    if (Number.isNaN(num) || num === Infinity || num === -Infinity) {
+      return String(num);
+    }
+    return num;
+  }
+  if (value instanceof codec.Numeric) {
+    return value.value;
+  }
+  if (value instanceof codec.PGNumeric) {
+    return value.value;
+  }
+  if (value instanceof codec.PGOid) {
+    return value.value;
+  }
+  if (Array.isArray(value)) {
+    return value.map(toRawValue);
+  }
+  return value;
+}
 
 describe('PartialResultStream', () => {
   const sandbox = sinon.createSandbox();
@@ -75,10 +117,6 @@ describe('PartialResultStream', () => {
     const TESTS =
       require('../../test/data/streaming-read-acceptance-test.json').tests;
 
-    beforeEach(() => {
-      sandbox.stub(codec, 'decode').callsFake(value => value);
-    });
-
     TESTS.forEach(test => {
       it(`should pass acceptance test: ${test.name}`, done => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -88,7 +126,7 @@ describe('PartialResultStream', () => {
         stream
           .on('error', done)
           .on('data', row => {
-            values.push(row.map(({value}) => value));
+            values.push(row.map(({value}) => toRawValue(value)));
           })
           .on('end', () => {
             assert.deepStrictEqual(values, test.result.value);
@@ -181,6 +219,82 @@ describe('PartialResultStream', () => {
       });
 
       stream.write(RESULT);
+    });
+
+    describe('JSON mode with options', () => {
+      const complexResult = {
+        metadata: {
+          rowType: {
+            fields: [
+              {
+                name: 'id',
+                type: {code: 'INT64'},
+              },
+              {
+                name: 'info',
+                type: {
+                  code: 'STRUCT',
+                  structType: {
+                    fields: [
+                      {
+                        name: 'age',
+                        type: {code: 'INT64'},
+                      },
+                      {
+                        name: 'name',
+                        type: {code: 'STRING'},
+                      },
+                    ],
+                  },
+                },
+              },
+            ],
+          },
+        },
+        values: [convertToIValue('123'), convertToIValue(['30', 'Alice'])],
+      };
+
+      it('should return native values when wrapNumbers/wrapStructs are false', done => {
+        const stream = new PartialResultStream({
+          json: true,
+          jsonOptions: {wrapNumbers: false, wrapStructs: false},
+        });
+
+        stream.on('error', done).on('data', json => {
+          assert.deepStrictEqual(json, {
+            id: 123,
+            info: {
+              age: 30,
+              name: 'Alice',
+            },
+          });
+          done();
+        });
+
+        stream.write(complexResult);
+        stream.end();
+      });
+
+      it('should wrap numbers and structs when wrapNumbers/wrapStructs are true', done => {
+        const stream = new PartialResultStream({
+          json: true,
+          jsonOptions: {wrapNumbers: true, wrapStructs: true},
+        });
+
+        stream.on('error', done).on('data', json => {
+          assert.deepStrictEqual(json, {
+            id: new codec.Int('123'),
+            info: new codec.Struct(
+              {name: 'age', value: new codec.Int('30')},
+              {name: 'name', value: 'Alice'},
+            ),
+          });
+          done();
+        });
+
+        stream.write(complexResult);
+        stream.end();
+      });
     });
 
     describe('destroy', () => {

@@ -243,11 +243,6 @@ export class PartialResultStream extends Transform implements ResultEvents {
       this._fields = chunk.metadata.rowType!
         .fields as google.spanner.v1.StructType.Field[];
 
-      const wrapNumbers =
-        !this._options.json || !!this._options.jsonOptions?.wrapNumbers;
-      const wrapStructs =
-        !this._options.json || !!this._options.jsonOptions?.wrapStructs;
-
       this._decoders = this._fields.map(({name, type}) => {
         const columnMetadata = this._options.columnsMetadata?.[name!];
         if (codec.decode !== originalDecode) {
@@ -257,11 +252,7 @@ export class PartialResultStream extends Transform implements ResultEvents {
         return codec.getDecoder(
           type as google.spanner.v1.Type,
           columnMetadata,
-          {
-            wrapNumbers,
-            wrapStructs,
-            json: this._options.json,
-          },
+          this._options.json ? this._options.jsonOptions || {} : undefined,
         );
       });
     }
