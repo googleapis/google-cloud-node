@@ -71,7 +71,7 @@
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test"
   },
   "dependencies": {
-    "google-gax": "^5.0.6"
+    "google-gax": "^5.0.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.3",

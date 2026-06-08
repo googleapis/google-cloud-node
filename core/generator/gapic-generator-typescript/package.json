@@ -66,7 +66,7 @@
     "espower-typescript": "^10.0.1",
     "gapic-node-processing": "^0.1.6",
     "gapic-tools": "^1.0.3",
-    "google-gax": "^5.0.6",
+    "google-gax": "^5.0.7",
     "gts": "^6.0.2",
     "mocha": "^11.7.5",
     "nunjucks": "^3.2.4",

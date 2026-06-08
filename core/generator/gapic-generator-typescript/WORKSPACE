@@ -45,11 +45,6 @@ load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock", "pnpm_repos
 
 pnpm_repository(name = "pnpm")
 
-load("//:pnpm_install.bzl", "pnpm_install")
-pnpm_install(name = "pnpm_install_lockfile")
-
-load("@pnpm_install_lockfile//:pnpm_install.bzl", "PNPM_INSTALL_STATUS")
-
 npm_translate_lock(
     name = "npm",
     pnpm_lock = "//:pnpm-lock.yaml",
