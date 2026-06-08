@@ -877,7 +877,8 @@ function decode(
 function parsePreciseDate(isoString: string): PreciseDate {
   if (
     isoString.length >= 20 &&
-    (isoString[isoString.length - 1] === 'Z' || isoString[isoString.length - 1] === 'z') &&
+    (isoString[isoString.length - 1] === 'Z' ||
+      isoString[isoString.length - 1] === 'z') &&
     isoString[4] === '-' &&
     isoString[7] === '-' &&
     isoString[10] === 'T' &&
@@ -897,7 +898,10 @@ function parsePreciseDate(isoString: string): PreciseDate {
 
     const dotIndex = isoString.indexOf('.', 19);
     if (dotIndex !== -1) {
-      const subSecondsStr = isoString.substring(dotIndex + 1, isoString.length - 1);
+      const subSecondsStr = isoString.substring(
+        dotIndex + 1,
+        isoString.length - 1,
+      );
       const padded = subSecondsStr.padEnd(9, '0');
       milliseconds = parseInt(padded.substring(0, 3), 10);
       microseconds = parseInt(padded.substring(3, 6), 10);
@@ -1028,28 +1032,30 @@ function createDecoder(
         type.arrayElementType! as spannerClient.spanner.v1.Type,
         columnMetadata,
       );
-      return value =>
-        isNull(value) ? null : value.map(elementDecoder);
+      return value => (isNull(value) ? null : value.map(elementDecoder));
     }
 
     case spannerClient.spanner.v1.TypeCode.STRUCT:
     case 'STRUCT': {
-      const structFields = type.structType!.fields!.map(({name, type}, index) => {
-        return {
-          name,
-          decoder: createDecoder(
-            type! as spannerClient.spanner.v1.Type,
-            columnMetadata,
-          ),
-          index,
-        };
-      });
+      const structFields = type.structType!.fields!.map(
+        ({name, type}, index) => {
+          return {
+            name,
+            decoder: createDecoder(
+              type! as spannerClient.spanner.v1.Type,
+              columnMetadata,
+            ),
+            index,
+          };
+        },
+      );
       return value => {
         if (isNull(value)) {
           return null;
         }
         const fields = structFields.map(({name, decoder, index}) => {
-          const rawValue = (!Array.isArray(value) && value[name!]) || value[index];
+          const rawValue =
+            (!Array.isArray(value) && value[name!]) || value[index];
           return {
             name: name!,
             value: decoder(rawValue),
@@ -1063,7 +1069,6 @@ function createDecoder(
       return value => value;
   }
 }
-
 
 /**
  * Encode a value in the format the API expects.
