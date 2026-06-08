@@ -20,6 +20,7 @@ sources:
     sha256: 13dc3b1a01767be8d486980d3ddcb7fe6f6b89c3da8d41c358d5c2536c86de3c
 default:
   keep:
+    - librarian.js
     - package.json
     - samples/package.json
     - README.md
