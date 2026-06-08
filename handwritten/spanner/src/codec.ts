@@ -1049,7 +1049,7 @@ function createDecoder(
           return null;
         }
         const fields = structFields.map(({name, decoder, index}) => {
-          const rawValue = (!Array.isArray(value) && value[name!]) || value[index];
+          const rawValue = Array.isArray(value) ? value[index] : value[name!];
           return {
             name: name!,
             value: decoder(rawValue),

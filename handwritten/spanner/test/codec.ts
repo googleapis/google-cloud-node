@@ -1479,6 +1479,91 @@ describe('codec', () => {
       assert.deepStrictEqual(decoded, expectedStruct);
     });
 
+    it('should decode object STRUCT value and inner members with falsy values', () => {
+      const value = {
+        intField: '0',
+        boolField: false,
+        stringField: '',
+        floatField: 0.0,
+        nullField: null,
+        nanField: NaN,
+      };
+
+      const decoded = codec.decode(value, {
+        code: google.spanner.v1.TypeCode.STRUCT,
+        structType: {
+          fields: [
+            {
+              name: 'intField',
+              type: {
+                code: google.spanner.v1.TypeCode.INT64,
+              },
+            },
+            {
+              name: 'boolField',
+              type: {
+                code: google.spanner.v1.TypeCode.BOOL,
+              },
+            },
+            {
+              name: 'stringField',
+              type: {
+                code: google.spanner.v1.TypeCode.STRING,
+              },
+            },
+            {
+              name: 'floatField',
+              type: {
+                code: google.spanner.v1.TypeCode.FLOAT64,
+              },
+            },
+            {
+              name: 'nullField',
+              type: {
+                code: google.spanner.v1.TypeCode.STRING,
+              },
+            },
+            {
+              name: 'nanField',
+              type: {
+                code: google.spanner.v1.TypeCode.FLOAT64,
+              },
+            },
+          ],
+        },
+      });
+
+      const expectedStruct = new codec.Struct(
+        {
+          name: 'intField',
+          value: new codec.Int('0'),
+        },
+        {
+          name: 'boolField',
+          value: false,
+        },
+        {
+          name: 'stringField',
+          value: '',
+        },
+        {
+          name: 'floatField',
+          value: new codec.Float(0.0),
+        },
+        {
+          name: 'nullField',
+          value: null,
+        },
+        {
+          name: 'nanField',
+          value: new codec.Float(NaN),
+        },
+      );
+
+      assert(decoded instanceof codec.Struct);
+      assert.deepStrictEqual(decoded, expectedStruct);
+    });
+
     it('should decode array STRUCT value and inner members', () => {
       const value = ['1', '2'];
 
