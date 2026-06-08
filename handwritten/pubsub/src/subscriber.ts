@@ -32,7 +32,7 @@ import {Duration, atMost as durationAtMost} from './temporal';
 import {EventEmitter} from 'events';
 
 import {awaitWithTimeout} from './util';
-import {logs as baseLogs} from './logs';
+import {logs as baseLogs, Loggers} from './logs';
 
 export {StatusError} from './message-stream';
 
@@ -41,7 +41,7 @@ export {StatusError} from './message-stream';
  *
  * @private
  */
-export const logs = {
+export const logs: Loggers = {
   slowAck: baseLogs.pubsub.sublog('slow-ack'),
   ackNack: baseLogs.pubsub.sublog('ack-nack'),
   debug: baseLogs.pubsub.sublog('debug'),

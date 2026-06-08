@@ -20,14 +20,14 @@ import {AckError, Message, Subscriber} from './subscriber';
 import {defaultOptions} from './default-options';
 import {Duration} from './temporal';
 import {DebugMessage} from './debug';
-import {logs as baseLogs} from './logs';
+import {logs as baseLogs, Loggers} from './logs';
 
 /**
  * Loggers. Exported for unit tests.
  *
  * @private
  */
-export const logs = {
+export const logs: Loggers = {
   callbackDelivery: baseLogs.pubsub.sublog('callback-delivery'),
   callbackExceptions: baseLogs.pubsub.sublog('callback-exceptions'),
   expiry: baseLogs.pubsub.sublog('expiry'),
