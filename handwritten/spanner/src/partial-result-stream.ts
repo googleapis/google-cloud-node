@@ -244,7 +244,16 @@ export class PartialResultStream extends Transform implements ResultEvents {
         .fields as google.spanner.v1.StructType.Field[];
 
       this._decoders = this._fields.map(({name, type}) => {
-        const columnMetadata = this._options.columnsMetadata?.[name!];
+        const columnMetadata =
+          this._options.columnsMetadata &&
+          name !== null &&
+          name !== undefined &&
+          Object.prototype.hasOwnProperty.call(
+            this._options.columnsMetadata,
+            name,
+          )
+            ? (this._options.columnsMetadata as any)[name]
+            : undefined;
         if (codec.decode !== originalDecode) {
           return val =>
             codec.decode(val, type as google.spanner.v1.Type, columnMetadata);
@@ -259,7 +268,12 @@ export class PartialResultStream extends Transform implements ResultEvents {
 
     let res = true;
     if (!isEmpty(chunk.values)) {
-      res = this._addChunk(chunk);
+      try {
+        res = this._addChunk(chunk);
+      } catch (err) {
+        next(err as Error);
+        return;
+      }
     }
 
     if (chunk.last) {
@@ -423,7 +437,17 @@ export class PartialResultStream extends Transform implements ResultEvents {
         continue;
       }
       const fieldName = name ? name : `_${i}`;
-      json[fieldName] = decoders[i](values[i]);
+      try {
+        json[fieldName] = decoders[i](values[i]);
+      } catch (e) {
+        (e as Error).message = [
+          `Serializing column "${fieldName}" encountered an error: ${
+            (e as Error).message
+          }`,
+          'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
+        ].join(' ');
+        throw e;
+      }
     }
     return json;
   }

@@ -127,6 +127,7 @@ export class SpannerDate extends Date {
   constructor(year: number, month: number, date: number);
   constructor(...dateFields: Array<string | number | undefined>) {
     const yearOrDateString = dateFields[0];
+    let customYear: number | undefined;
 
     // Fast-path parsing for standard YYYY-MM-DD date strings.
     // This avoids RegExp matching, array split allocations, and local timezone conversions
@@ -137,11 +138,26 @@ export class SpannerDate extends Date {
       yearOrDateString[4] === '-' &&
       yearOrDateString[7] === '-'
     ) {
-      const year = parseInt(yearOrDateString.substring(0, 4), 10);
-      const month = parseInt(yearOrDateString.substring(5, 7), 10) - 1;
-      const date = parseInt(yearOrDateString.substring(8, 10), 10);
-      super(year, month, date);
-      return;
+      const year = Number(yearOrDateString.substring(0, 4));
+      const month = Number(yearOrDateString.substring(5, 7)) - 1;
+      const date = Number(yearOrDateString.substring(8, 10));
+      if (
+        year >= 1970 &&
+        !Number.isNaN(year) &&
+        !Number.isNaN(month) &&
+        !Number.isNaN(date)
+      ) {
+        super(year, month, date);
+        return;
+      }
+    }
+
+    if (
+      typeof yearOrDateString === 'number' &&
+      yearOrDateString > 0 &&
+      yearOrDateString < 100
+    ) {
+      customYear = yearOrDateString;
     }
 
     // yearOrDateString could be 0 (number).
@@ -151,12 +167,23 @@ export class SpannerDate extends Date {
 
     // JavaScript Date objects will interpret ISO date strings as Zulu time,
     // but by formatting it, we can infer local time.
-    if (DATE_REGEX.test(yearOrDateString as string)) {
-      const [year, month, date] = (yearOrDateString as string).split(/-|T/);
-      dateFields = [`${month}-${date}-${year}`];
+    if (
+      typeof yearOrDateString === 'string' &&
+      DATE_REGEX.test(yearOrDateString)
+    ) {
+      const [yearStr, monthStr, dateStr] = yearOrDateString.split(/-|T/);
+      const year = parseInt(yearStr, 10);
+      if (year < 100) {
+        customYear = year;
+      }
+      dateFields = [`${monthStr}-${dateStr}-${yearStr}`];
     }
 
     super(...(dateFields.slice(0, 3) as DateFields));
+
+    if (customYear !== undefined) {
+      this.setFullYear(customYear);
+    }
   }
   /**
    * Returns the date in ISO date format.
@@ -782,14 +809,13 @@ function convertFieldsToJson(fields: Field[], options?: JSONOptions): Json {
       }
     : DEFAULT_JSON_OPTIONS;
 
-  let index = 0;
   for (let i = 0; i < fields.length; i++) {
     const field = fields[i];
     const name = field.name;
     if (!name && !resolvedOptions.includeNameless) {
       continue;
     }
-    const fieldName = name ? name : `_${index}`;
+    const fieldName = name ? name : `_${i}`;
 
     try {
       json[fieldName] = convertValueToJson(field.value, resolvedOptions);
@@ -802,7 +828,6 @@ function convertFieldsToJson(fields: Field[], options?: JSONOptions): Json {
       ].join(' ');
       throw e;
     }
-    index++;
   }
 
   return json;
@@ -918,7 +943,10 @@ export function getDecoder(
           let enumVal: string;
           if (DIGITS_REGEX.test(val.toString())) {
             enumVal = val.toString();
-          } else if (columnMetadata && (columnMetadata as any)[val]) {
+          } else if (
+            columnMetadata &&
+            Object.prototype.hasOwnProperty.call(columnMetadata, val)
+          ) {
             enumVal = (columnMetadata as any)[val];
           } else {
             throw new GoogleError(
@@ -927,9 +955,16 @@ export function getDecoder(
           }
           if (columnMetadata) {
             const proto = Object.getPrototypeOf(columnMetadata);
-            return proto && proto[enumVal] !== undefined
-              ? proto[enumVal]
-              : (columnMetadata as any)[enumVal];
+            if (
+              proto &&
+              proto !== Object.prototype &&
+              proto[enumVal] !== undefined
+            ) {
+              return proto[enumVal];
+            }
+            if (Object.prototype.hasOwnProperty.call(columnMetadata, enumVal)) {
+              return (columnMetadata as any)[enumVal];
+            }
           }
           return enumVal;
         };
@@ -1054,31 +1089,59 @@ export function getDecoder(
 
     case spannerClient.spanner.v1.TypeCode.STRUCT:
     case 'STRUCT': {
-      const fieldDecoders = type.structType!.fields!.map(({name, type}) => ({
-        name,
-        decoder: getDecoder(
-          type! as spannerClient.spanner.v1.Type,
-          columnMetadata,
-          options,
-        ),
-      }));
+      const includeNameless = options?.includeNameless === true;
+      const fields = type.structType!.fields!;
+      const fieldDecoders: Array<{
+        name: string | null | undefined;
+        decodedName: string | null | undefined;
+        decoder: (value: Value) => Value;
+        index: number;
+      }> = [];
+
+      for (let i = 0; i < fields.length; i++) {
+        const {name, type: fieldType} = fields[i];
+        if (!wrapStructs && !name && !includeNameless) {
+          continue;
+        }
+        const decodedName = wrapStructs ? name : name ? name : `_${i}`;
+        fieldDecoders.push({
+          name,
+          decodedName,
+          decoder: getDecoder(
+            fieldType! as spannerClient.spanner.v1.Type,
+            columnMetadata &&
+              name !== null &&
+              name !== undefined &&
+              Object.prototype.hasOwnProperty.call(columnMetadata, name)
+              ? (columnMetadata as any)[name]
+              : undefined,
+            options,
+          ),
+          index: i,
+        });
+      }
+
       if (wrapStructs) {
         return val => {
           if (val === null || val === undefined) {
             return null;
           }
           const isArr = Array.isArray(val);
-          const fields = fieldDecoders.map(({name, decoder}, index) => {
-            const value = decoder(
-              isArr
-                ? val[index]
-                : name && val[name] !== undefined
-                  ? val[name]
-                  : val[index],
-            );
-            return {name, value};
-          });
-          return Struct.fromArray(fields as Field[]);
+          const structFields = fieldDecoders.map(
+            ({name, decodedName, decoder, index}) => {
+              const value = decoder(
+                isArr
+                  ? val[index]
+                  : name !== null &&
+                      name !== undefined &&
+                      Object.prototype.hasOwnProperty.call(val, name)
+                    ? val[name]
+                    : val[index],
+              );
+              return {name: decodedName, value};
+            },
+          );
+          return Struct.fromArray(structFields as Field[]);
         };
       } else {
         return val => {
@@ -1089,13 +1152,15 @@ export function getDecoder(
           const structObj: Json = {};
           const len = fieldDecoders.length;
           for (let i = 0; i < len; i++) {
-            const {name, decoder} = fieldDecoders[i];
-            structObj[name!] = decoder(
+            const {name, decodedName, decoder, index} = fieldDecoders[i];
+            structObj[decodedName!] = decoder(
               isArr
-                ? val[i]
-                : name && val[name] !== undefined
+                ? val[index]
+                : name !== null &&
+                    name !== undefined &&
+                    Object.prototype.hasOwnProperty.call(val, name)
                   ? val[name]
-                  : val[i],
+                  : val[index],
             );
           }
           return structObj;
@@ -1148,15 +1213,24 @@ function parsePreciseDate(isoString: string): PreciseDate {
     isoString[13] === ':' &&
     isoString[16] === ':'
   ) {
-    const year = parseInt(isoString.substring(0, 4), 10);
-    if (year < 1970) {
+    const year = Number(isoString.substring(0, 4));
+    const month = Number(isoString.substring(5, 7)) - 1;
+    const day = Number(isoString.substring(8, 10));
+    const hours = Number(isoString.substring(11, 13));
+    const minutes = Number(isoString.substring(14, 16));
+    const seconds = Number(isoString.substring(17, 19));
+
+    if (
+      Number.isNaN(year) ||
+      year < 1970 ||
+      Number.isNaN(month) ||
+      Number.isNaN(day) ||
+      Number.isNaN(hours) ||
+      Number.isNaN(minutes) ||
+      Number.isNaN(seconds)
+    ) {
       return new PreciseDate(isoString);
     }
-    const month = parseInt(isoString.substring(5, 7), 10) - 1;
-    const day = parseInt(isoString.substring(8, 10), 10);
-    const hours = parseInt(isoString.substring(11, 13), 10);
-    const minutes = parseInt(isoString.substring(14, 16), 10);
-    const seconds = parseInt(isoString.substring(17, 19), 10);
 
     let milliseconds = 0;
     let microseconds = 0;
@@ -1169,9 +1243,17 @@ function parsePreciseDate(isoString: string): PreciseDate {
         isoString.length - 1,
       );
       const padded = subSecondsStr.padEnd(9, '0');
-      milliseconds = parseInt(padded.substring(0, 3), 10);
-      microseconds = parseInt(padded.substring(3, 6), 10);
-      nanoseconds = parseInt(padded.substring(6, 9), 10);
+      milliseconds = Number(padded.substring(0, 3));
+      microseconds = Number(padded.substring(3, 6));
+      nanoseconds = Number(padded.substring(6, 9));
+
+      if (
+        Number.isNaN(milliseconds) ||
+        Number.isNaN(microseconds) ||
+        Number.isNaN(nanoseconds)
+      ) {
+        return new PreciseDate(isoString);
+      }
     }
 
     const utcMillis = Date.UTC(

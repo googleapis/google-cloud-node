@@ -295,6 +295,227 @@ describe('PartialResultStream', () => {
         stream.write(complexResult);
         stream.end();
       });
+
+      it('should safely handle prototype properties like "toString" in columnsMetadata and not pollute resolution', done => {
+        const type = {
+          code: 'PROTO',
+          protoTypeFqn: 'examples.spanner.music.SingerInfo',
+        };
+
+        const mockMetadata = Object.create({
+          toString: 'mocked_metadata_value',
+        });
+
+        // The column name matches the prototype property name
+        const resultWithProto = {
+          metadata: {
+            rowType: {
+              fields: [
+                {
+                  name: 'toString',
+                  type: type,
+                },
+              ],
+            },
+          },
+          values: [convertToIValue('bytes_base64')],
+        };
+
+        const stream = new PartialResultStream({
+          columnsMetadata: mockMetadata,
+        });
+
+        const getDecoderSpy = sandbox.spy(codec, 'getDecoder');
+
+        stream.on('error', done).on('data', () => {
+          const [, columnMetadataArg] = getDecoderSpy.lastCall.args;
+          // columnMetadata should be undefined because "toString" was on prototype, not own property
+          assert.strictEqual(columnMetadataArg, undefined);
+          done();
+        });
+
+        stream.write(resultWithProto);
+        stream.end();
+      });
+
+      it('should wrap decoding errors with column-specific diagnostic context', done => {
+        const stream = new PartialResultStream({
+          json: true,
+          jsonOptions: {wrapNumbers: false},
+        });
+
+        const unsafeResult = {
+          metadata: {
+            rowType: {
+              fields: [
+                {
+                  name: 'large_id',
+                  type: {code: 'INT64'},
+                },
+              ],
+            },
+          },
+          values: [convertToIValue('9223372036854775807')],
+        };
+
+        stream
+          .on('error', err => {
+            assert(
+              err.message.includes(
+                'Serializing column "large_id" encountered an error:',
+              ),
+            );
+            assert(
+              err.message.includes(
+                'Integer 9223372036854775807 is out of bounds.',
+              ),
+            );
+            assert(
+              err.message.includes(
+                'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
+              ),
+            );
+            done();
+          })
+          .on('data', () => {
+            done(new Error('Should have failed.'));
+          });
+
+        stream.write(unsafeResult);
+        stream.end();
+      });
+
+      it('should name nameless fields using the actual loop index consistently in both JSON mode and standard toJSON', done => {
+        const streamJson = new PartialResultStream({
+          json: true,
+          jsonOptions: {includeNameless: true},
+        });
+        const streamStandard = new PartialResultStream({
+          json: false,
+        });
+
+        const mixedResult = {
+          metadata: {
+            rowType: {
+              fields: [
+                {name: 'first_col', type: {code: 'STRING'}},
+                {name: '', type: {code: 'STRING'}}, // Nameless at index 1
+                {name: 'second_col', type: {code: 'STRING'}},
+                {name: '', type: {code: 'STRING'}}, // Nameless at index 3
+              ],
+            },
+          },
+          values: [
+            convertToIValue('val1'),
+            convertToIValue('val2'),
+            convertToIValue('val3'),
+            convertToIValue('val4'),
+          ],
+        };
+
+        const jsonRows: any[] = [];
+        const standardRows: any[] = [];
+
+        let jsonDone = false;
+        let standardDone = false;
+
+        const checkCompletion = () => {
+          if (jsonDone && standardDone) {
+            // Assert JSON mode names nameless fields using the actual index
+            assert.deepStrictEqual(jsonRows[0], {
+              first_col: 'val1',
+              _1: 'val2',
+              second_col: 'val3',
+              _3: 'val4',
+            });
+
+            // Assert Standard mode row.toJSON() names nameless fields using the actual index
+            const serializedStandard = standardRows[0].toJSON({
+              includeNameless: true,
+            });
+            assert.deepStrictEqual(serializedStandard, {
+              first_col: 'val1',
+              _1: 'val2',
+              second_col: 'val3',
+              _3: 'val4',
+            });
+
+            done();
+          }
+        };
+
+        streamJson
+          .on('error', done)
+          .on('data', row => jsonRows.push(row))
+          .on('end', () => {
+            jsonDone = true;
+            checkCompletion();
+          });
+
+        streamStandard
+          .on('error', done)
+          .on('data', row => standardRows.push(row))
+          .on('end', () => {
+            standardDone = true;
+            checkCompletion();
+          });
+
+        streamJson.write(mixedResult);
+        streamJson.end();
+
+        streamStandard.write(mixedResult);
+        streamStandard.end();
+      });
+    });
+
+    describe('Multiple metadata chunks', () => {
+      it('should respect the first metadata chunk and ignore subsequent ones', done => {
+        const stream = new PartialResultStream({json: true});
+        const rows: any[] = [];
+
+        stream
+          .on('error', done)
+          .on('data', row => {
+            rows.push(row);
+          })
+          .on('end', () => {
+            assert.deepStrictEqual(rows, [
+              {first_col: 'hello'},
+              {first_col: '123'},
+            ]);
+            done();
+          });
+
+        stream.write({
+          metadata: {
+            rowType: {
+              fields: [
+                {
+                  name: 'first_col',
+                  type: {code: 'STRING'},
+                },
+              ],
+            },
+          },
+          values: [convertToIValue('hello')],
+        });
+
+        stream.write({
+          metadata: {
+            rowType: {
+              fields: [
+                {
+                  name: 'second_col',
+                  type: {code: 'INT64'},
+                },
+              ],
+            },
+          },
+          values: [convertToIValue('123')],
+        });
+
+        stream.end();
+      });
     });
 
     describe('destroy', () => {
