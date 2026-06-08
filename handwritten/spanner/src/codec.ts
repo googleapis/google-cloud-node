@@ -886,6 +886,9 @@ function parsePreciseDate(isoString: string): PreciseDate {
     isoString[16] === ':'
   ) {
     const year = parseInt(isoString.substring(0, 4), 10);
+    if (year < 1970) {
+      return new PreciseDate(isoString);
+    }
     const month = parseInt(isoString.substring(5, 7), 10) - 1;
     const day = parseInt(isoString.substring(8, 10), 10);
     const hours = parseInt(isoString.substring(11, 13), 10);

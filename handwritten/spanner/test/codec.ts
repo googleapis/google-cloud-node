@@ -1404,6 +1404,16 @@ describe('codec', () => {
       assert.deepStrictEqual(decoded, expected);
     });
 
+    it('should decode pre-1970 TIMESTAMP preserving -0 nanosecond sign correctness', () => {
+      const timestampStr = '1933-03-03T00:00:00.000Z';
+      const expected = new PreciseDate(timestampStr);
+      const decoded = codec.decode(timestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+
+      assert.deepStrictEqual(decoded, expected);
+    });
+
     it('should decode DATE', () => {
       const value = new Date();
       const expected = new codec.SpannerDate(value.toISOString());
