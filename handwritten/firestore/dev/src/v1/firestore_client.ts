@@ -151,7 +151,21 @@ export class FirestoreClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // TODO(dlarocque): Remove this if we decide not to increase the default.
+    const windowSize = 10485760;
+    opts = Object.assign(
+      {
+        servicePath,
+        port,
+        clientConfig,
+        fallback,
+      },
+      opts,
+    );
+    const channelOptions: gax.grpc.ChannelOptions = {
+      'grpc-node.flow_control_window': 10485760,
+    };
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -301,16 +315,25 @@ export class FirestoreClient {
       return this.firestoreStub;
     }
 
-    // Put together the "service stub" for
-    // google.firestore.v1.Firestore.
+    // Clone the existing options to avoid mutating shared state
+    const clientOpts: ClientOptions = Object.assign({}, this._opts);
+
+    // Inject @grpc/grpc-js arguments
+    // TODO(dlarocque): verify that users can override the flow control window size.
+    clientOpts.grpcOptions = Object.assign({}, clientOpts.grpcOptions, {
+      'grpc.max_receive_message_length': 17 * 1024 * 1024, // 17MB
+      'grpc.max_send_message_length': 17 * 1024 * 1024, // 17MB
+      'grpc-node.flow_control_window': 1024 * 1024, // 1MB
+    });
+
+    // Pass the updated options into the stub creator
     this.firestoreStub = this._gaxGrpc.createStub(
-      this._opts.fallback
+      clientOpts.fallback
         ? (this._protos as protobuf.Root).lookupService(
             'google.firestore.v1.Firestore',
           )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.firestore.v1.Firestore,
-      this._opts,
+        : (this._protos as any).google.firestore.v1.Firestore,
+      clientOpts,
       this._providedCustomServicePath,
     ) as Promise<{[method: string]: Function}>;
 
