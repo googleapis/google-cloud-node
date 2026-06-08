@@ -3507,5 +3507,75 @@ describe('Bucket', () => {
         bucket.setMetadata(clearMetadata, assert.ifError);
       });
     });
+
+    describe('ipFilter', () => {
+      it('should enable and set ipFilter', done => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Enabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['192.168.1.1/32'],
+            },
+          },
+        };
+
+        bucket.setMetadata = (metadata_: BucketMetadata) => {
+          assert.deepStrictEqual(metadata_.ipFilter, metadata.ipFilter);
+          done();
+        };
+
+        bucket.setMetadata(metadata, assert.ifError);
+      });
+
+      it('should update ipFilter', done => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Enabled',
+            vpcNetworkSources: [
+              {
+                network: 'projects/my-project/global/networks/my-vpc',
+                allowedIpCidrRanges: ['10.0.0.0/8'],
+              },
+            ],
+          },
+        };
+
+        bucket.setMetadata = (metadata_: BucketMetadata) => {
+          assert.deepStrictEqual(metadata_.ipFilter, metadata.ipFilter);
+          done();
+        };
+
+        bucket.setMetadata(metadata, assert.ifError);
+      });
+
+      it('should get ipFilter', done => {
+        const ipFilter = {
+          mode: 'Enabled',
+        };
+
+        bucket.getMetadata = () => {
+          return Promise.resolve([{ipFilter}]);
+        };
+
+        bucket.getMetadata().then((data: any) => {
+          const [metadata] = data;
+          assert.deepStrictEqual(metadata.ipFilter, ipFilter);
+          done();
+        });
+      });
+
+      it('should delete and clear ipFilter', done => {
+        const metadata = {
+          ipFilter: null,
+        };
+
+        bucket.setMetadata = (metadata_: BucketMetadata) => {
+          assert.strictEqual(metadata_.ipFilter, null);
+          done();
+        };
+
+        bucket.setMetadata(metadata, assert.ifError);
+      });
+    });
   });
 });
