@@ -1756,7 +1756,8 @@
                           "oneof": [
                             "value",
                             "table",
-                            "byteItem"
+                            "byteItem",
+                            "conversation"
                           ]
                         }
                       },
@@ -1773,6 +1774,10 @@
                           "type": "ByteContentItem",
                           "id": 5
                         },
+                        "conversation": {
+                          "type": "Conversation",
+                          "id": 7
+                        },
                         "contentMetadata": {
                           "type": "ContentMetadata",
                           "id": 6
@@ -1785,6 +1790,40 @@
                           "rule": "repeated",
                           "type": "KeyValueMetadataProperty",
                           "id": 2
+                        }
+                      }
+                    },
+                    "Conversation": {
+                      "fields": {
+                        "messages": {
+                          "rule": "repeated",
+                          "type": "ConversationMessage",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ConversationMessage": {
+                      "fields": {
+                        "content": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "messageType": {
+                          "type": "MessageType",
+                          "id": 2
+                        },
+                        "participantId": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "MessageType": {
+                          "values": {
+                            "MESSAGE_TYPE_UNSPECIFIED": 0,
+                            "CONTENT": 1,
+                            "CONTEXT": 2
+                          }
                         }
                       }
                     },
@@ -1936,7 +1975,8 @@
                             "recordLocation",
                             "imageLocation",
                             "documentLocation",
-                            "metadataLocation"
+                            "metadataLocation",
+                            "conversationLocation"
                           ]
                         }
                       },
@@ -1961,6 +2001,10 @@
                           "type": "MetadataLocation",
                           "id": 8
                         },
+                        "conversationLocation": {
+                          "type": "ConversationLocation",
+                          "id": 10
+                        },
                         "containerTimestamp": {
                           "type": "google.protobuf.Timestamp",
                           "id": 6
@@ -1968,6 +2012,31 @@
                         "containerVersion": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "ConversationLocation": {
+                      "oneofs": {
+                        "location": {
+                          "oneof": [
+                            "messageIndex",
+                            "allMessages"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "messageIndex": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "allMessages": {
+                          "type": "AllMessages",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "AllMessages": {
+                          "fields": {}
                         }
                       }
                     },

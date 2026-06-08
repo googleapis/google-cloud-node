@@ -74,14 +74,19 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update dns threat detector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/dns_threat_detector_service.update_dns_threat_detector.js) |
 | create firewall endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.create_firewall_endpoint.js) |
 | create firewall endpoint association | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.create_firewall_endpoint_association.js) |
+| create project firewall endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.create_project_firewall_endpoint.js) |
 | delete firewall endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.delete_firewall_endpoint.js) |
 | delete firewall endpoint association | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.delete_firewall_endpoint_association.js) |
+| delete project firewall endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.delete_project_firewall_endpoint.js) |
 | get firewall endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.get_firewall_endpoint.js) |
 | get firewall endpoint association | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.get_firewall_endpoint_association.js) |
+| get project firewall endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.get_project_firewall_endpoint.js) |
 | list firewall endpoint associations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.list_firewall_endpoint_associations.js) |
 | list firewall endpoints | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.list_firewall_endpoints.js) |
+| list project firewall endpoints | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.list_project_firewall_endpoints.js) |
 | update firewall endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.update_firewall_endpoint.js) |
 | update firewall endpoint association | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.update_firewall_endpoint_association.js) |
+| update project firewall endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/firewall_activation.update_project_firewall_endpoint.js) |
 | create intercept deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/intercept.create_intercept_deployment.js) |
 | create intercept deployment group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/intercept.create_intercept_deployment_group.js) |
 | create intercept endpoint group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/intercept.create_intercept_endpoint_group.js) |
@@ -186,6 +191,24 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list security profiles | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_security_profile_group_service.list_security_profiles.js) |
 | update security profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_security_profile_group_service.update_security_profile.js) |
 | update security profile group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_security_profile_group_service.update_security_profile_group.js) |
+| create s a c attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/s_s_e_realm_service.create_s_a_c_attachment.js) |
+| create s a c realm | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/s_s_e_realm_service.create_s_a_c_realm.js) |
+| delete s a c attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/s_s_e_realm_service.delete_s_a_c_attachment.js) |
+| delete s a c realm | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/s_s_e_realm_service.delete_s_a_c_realm.js) |
+| get s a c attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/s_s_e_realm_service.get_s_a_c_attachment.js) |
+| get s a c realm | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/s_s_e_realm_service.get_s_a_c_realm.js) |
+| list s a c attachments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/s_s_e_realm_service.list_s_a_c_attachments.js) |
+| list s a c realms | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/s_s_e_realm_service.list_s_a_c_realms.js) |
+| create security profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.create_security_profile.js) |
+| create security profile group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.create_security_profile_group.js) |
+| delete security profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.delete_security_profile.js) |
+| delete security profile group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.delete_security_profile_group.js) |
+| get security profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.get_security_profile.js) |
+| get security profile group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.get_security_profile_group.js) |
+| list security profile groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.list_security_profile_groups.js) |
+| list security profiles | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.list_security_profiles.js) |
+| update security profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.update_security_profile.js) |
+| update security profile group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.update_security_profile_group.js) |
 | cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/snippet_metadata_google.cloud.networksecurity.v1.json) |
 | create dns threat detector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/dns_threat_detector_service.create_dns_threat_detector.js) |
 | delete dns threat detector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/dns_threat_detector_service.delete_dns_threat_detector.js) |
@@ -371,7 +394,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -381,7 +404,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

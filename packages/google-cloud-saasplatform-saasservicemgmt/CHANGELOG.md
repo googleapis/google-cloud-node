@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/saasservicemgmt-v0.2.1...saasservicemgmt-v0.3.0) (2026-06-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* [saasservicemgmt] Changed field behavior for an existing field `rollout_kind` in message `.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout` ([#8352](https://github.com/googleapis/google-cloud-node/issues/8352))
+
+### Bug Fixes
+
+* [saasservicemgmt] Changed field behavior for an existing field `rollout_kind` in message `.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout` ([#8352](https://github.com/googleapis/google-cloud-node/issues/8352)) ([e87fb09](https://github.com/googleapis/google-cloud-node/commit/e87fb095fc4678b3f44d6d6af285ed5614c64c51))
+
 ## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/saasservicemgmt-v0.2.0...saasservicemgmt-v0.2.1) (2026-05-01)
 
 

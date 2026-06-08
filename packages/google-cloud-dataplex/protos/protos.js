@@ -12228,6 +12228,1553 @@
                         return values;
                     })();
     
+                    v1.ChangeRequest = (function() {
+    
+                        /**
+                         * Properties of a ChangeRequest.
+                         * @memberof google.cloud.dataplex.v1
+                         * @interface IChangeRequest
+                         * @property {string|null} [name] ChangeRequest name
+                         * @property {string|null} [uid] ChangeRequest uid
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ChangeRequest createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ChangeRequest updateTime
+                         * @property {string|null} [justification] ChangeRequest justification
+                         * @property {Object.<string,string>|null} [labels] ChangeRequest labels
+                         * @property {string|null} [author] ChangeRequest author
+                         * @property {google.cloud.dataplex.v1.ChangeRequest.State|null} [state] ChangeRequest state
+                         * @property {string|null} [resource] ChangeRequest resource
+                         * @property {google.cloud.dataplex.v1.ICreateEntryRequest|null} [createEntry] ChangeRequest createEntry
+                         * @property {google.cloud.dataplex.v1.IUpdateEntryRequest|null} [updateEntry] ChangeRequest updateEntry
+                         * @property {google.cloud.dataplex.v1.IDeleteEntryRequest|null} [deleteEntry] ChangeRequest deleteEntry
+                         * @property {google.cloud.dataplex.v1.ICreateEntryLinkRequest|null} [createEntryLink] ChangeRequest createEntryLink
+                         * @property {google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null} [deleteEntryLink] ChangeRequest deleteEntryLink
+                         * @property {google.cloud.dataplex.v1.ICreateGlossaryRequest|null} [createGlossary] ChangeRequest createGlossary
+                         * @property {google.cloud.dataplex.v1.IUpdateGlossaryRequest|null} [updateGlossary] ChangeRequest updateGlossary
+                         * @property {google.cloud.dataplex.v1.IDeleteGlossaryRequest|null} [deleteGlossary] ChangeRequest deleteGlossary
+                         * @property {google.cloud.dataplex.v1.ICreateGlossaryCategoryRequest|null} [createGlossaryCategory] ChangeRequest createGlossaryCategory
+                         * @property {google.cloud.dataplex.v1.IUpdateGlossaryCategoryRequest|null} [updateGlossaryCategory] ChangeRequest updateGlossaryCategory
+                         * @property {google.cloud.dataplex.v1.IDeleteGlossaryCategoryRequest|null} [deleteGlossaryCategory] ChangeRequest deleteGlossaryCategory
+                         * @property {google.cloud.dataplex.v1.ICreateGlossaryTermRequest|null} [createGlossaryTerm] ChangeRequest createGlossaryTerm
+                         * @property {google.cloud.dataplex.v1.IUpdateGlossaryTermRequest|null} [updateGlossaryTerm] ChangeRequest updateGlossaryTerm
+                         * @property {google.cloud.dataplex.v1.IDeleteGlossaryTermRequest|null} [deleteGlossaryTerm] ChangeRequest deleteGlossaryTerm
+                         * @property {google.cloud.dataplex.v1.IDataProductAccessRequest|null} [dataProductAccessRequest] ChangeRequest dataProductAccessRequest
+                         * @property {google.cloud.dataplex.v1.ChangeRequest.ChangeType|null} [changeType] ChangeRequest changeType
+                         * @property {string|null} [rejectionComment] ChangeRequest rejectionComment
+                         * @property {string|null} [approver] ChangeRequest approver
+                         * @property {string|null} [etag] ChangeRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new ChangeRequest.
+                         * @memberof google.cloud.dataplex.v1
+                         * @classdesc Represents a ChangeRequest.
+                         * @implements IChangeRequest
+                         * @constructor
+                         * @param {google.cloud.dataplex.v1.IChangeRequest=} [properties] Properties to set
+                         */
+                        function ChangeRequest(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ChangeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.name = "";
+    
+                        /**
+                         * ChangeRequest uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.uid = "";
+    
+                        /**
+                         * ChangeRequest createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.createTime = null;
+    
+                        /**
+                         * ChangeRequest updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.updateTime = null;
+    
+                        /**
+                         * ChangeRequest justification.
+                         * @member {string} justification
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.justification = "";
+    
+                        /**
+                         * ChangeRequest labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * ChangeRequest author.
+                         * @member {string} author
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.author = "";
+    
+                        /**
+                         * ChangeRequest state.
+                         * @member {google.cloud.dataplex.v1.ChangeRequest.State} state
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.state = 0;
+    
+                        /**
+                         * ChangeRequest resource.
+                         * @member {string} resource
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.resource = "";
+    
+                        /**
+                         * ChangeRequest createEntry.
+                         * @member {google.cloud.dataplex.v1.ICreateEntryRequest|null|undefined} createEntry
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.createEntry = null;
+    
+                        /**
+                         * ChangeRequest updateEntry.
+                         * @member {google.cloud.dataplex.v1.IUpdateEntryRequest|null|undefined} updateEntry
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.updateEntry = null;
+    
+                        /**
+                         * ChangeRequest deleteEntry.
+                         * @member {google.cloud.dataplex.v1.IDeleteEntryRequest|null|undefined} deleteEntry
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.deleteEntry = null;
+    
+                        /**
+                         * ChangeRequest createEntryLink.
+                         * @member {google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined} createEntryLink
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.createEntryLink = null;
+    
+                        /**
+                         * ChangeRequest deleteEntryLink.
+                         * @member {google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined} deleteEntryLink
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.deleteEntryLink = null;
+    
+                        /**
+                         * ChangeRequest createGlossary.
+                         * @member {google.cloud.dataplex.v1.ICreateGlossaryRequest|null|undefined} createGlossary
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.createGlossary = null;
+    
+                        /**
+                         * ChangeRequest updateGlossary.
+                         * @member {google.cloud.dataplex.v1.IUpdateGlossaryRequest|null|undefined} updateGlossary
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.updateGlossary = null;
+    
+                        /**
+                         * ChangeRequest deleteGlossary.
+                         * @member {google.cloud.dataplex.v1.IDeleteGlossaryRequest|null|undefined} deleteGlossary
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.deleteGlossary = null;
+    
+                        /**
+                         * ChangeRequest createGlossaryCategory.
+                         * @member {google.cloud.dataplex.v1.ICreateGlossaryCategoryRequest|null|undefined} createGlossaryCategory
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.createGlossaryCategory = null;
+    
+                        /**
+                         * ChangeRequest updateGlossaryCategory.
+                         * @member {google.cloud.dataplex.v1.IUpdateGlossaryCategoryRequest|null|undefined} updateGlossaryCategory
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.updateGlossaryCategory = null;
+    
+                        /**
+                         * ChangeRequest deleteGlossaryCategory.
+                         * @member {google.cloud.dataplex.v1.IDeleteGlossaryCategoryRequest|null|undefined} deleteGlossaryCategory
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.deleteGlossaryCategory = null;
+    
+                        /**
+                         * ChangeRequest createGlossaryTerm.
+                         * @member {google.cloud.dataplex.v1.ICreateGlossaryTermRequest|null|undefined} createGlossaryTerm
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.createGlossaryTerm = null;
+    
+                        /**
+                         * ChangeRequest updateGlossaryTerm.
+                         * @member {google.cloud.dataplex.v1.IUpdateGlossaryTermRequest|null|undefined} updateGlossaryTerm
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.updateGlossaryTerm = null;
+    
+                        /**
+                         * ChangeRequest deleteGlossaryTerm.
+                         * @member {google.cloud.dataplex.v1.IDeleteGlossaryTermRequest|null|undefined} deleteGlossaryTerm
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.deleteGlossaryTerm = null;
+    
+                        /**
+                         * ChangeRequest dataProductAccessRequest.
+                         * @member {google.cloud.dataplex.v1.IDataProductAccessRequest|null|undefined} dataProductAccessRequest
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.dataProductAccessRequest = null;
+    
+                        /**
+                         * ChangeRequest changeType.
+                         * @member {google.cloud.dataplex.v1.ChangeRequest.ChangeType} changeType
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.changeType = 0;
+    
+                        /**
+                         * ChangeRequest rejectionComment.
+                         * @member {string} rejectionComment
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.rejectionComment = "";
+    
+                        /**
+                         * ChangeRequest approver.
+                         * @member {string} approver
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.approver = "";
+    
+                        /**
+                         * ChangeRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        ChangeRequest.prototype.etag = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ChangeRequest changePayload.
+                         * @member {"createEntry"|"updateEntry"|"deleteEntry"|"createEntryLink"|"deleteEntryLink"|"createGlossary"|"updateGlossary"|"deleteGlossary"|"createGlossaryCategory"|"updateGlossaryCategory"|"deleteGlossaryCategory"|"createGlossaryTerm"|"updateGlossaryTerm"|"deleteGlossaryTerm"|"dataProductAccessRequest"|undefined} changePayload
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ChangeRequest.prototype, "changePayload", {
+                            get: $util.oneOfGetter($oneOfFields = ["createEntry", "updateEntry", "deleteEntry", "createEntryLink", "deleteEntryLink", "createGlossary", "updateGlossary", "deleteGlossary", "createGlossaryCategory", "updateGlossaryCategory", "deleteGlossaryCategory", "createGlossaryTerm", "updateGlossaryTerm", "deleteGlossaryTerm", "dataProductAccessRequest"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ChangeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IChangeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataplex.v1.ChangeRequest} ChangeRequest instance
+                         */
+                        ChangeRequest.create = function create(properties) {
+                            return new ChangeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ChangeRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ChangeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IChangeRequest} message ChangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChangeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.justification != null && Object.hasOwnProperty.call(message, "justification"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.justification);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.author != null && Object.hasOwnProperty.call(message, "author"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.author);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.state);
+                            if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.resource);
+                            if (message.createEntry != null && Object.hasOwnProperty.call(message, "createEntry"))
+                                $root.google.cloud.dataplex.v1.CreateEntryRequest.encode(message.createEntry, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.updateEntry != null && Object.hasOwnProperty.call(message, "updateEntry"))
+                                $root.google.cloud.dataplex.v1.UpdateEntryRequest.encode(message.updateEntry, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.deleteEntry != null && Object.hasOwnProperty.call(message, "deleteEntry"))
+                                $root.google.cloud.dataplex.v1.DeleteEntryRequest.encode(message.deleteEntry, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.createEntryLink != null && Object.hasOwnProperty.call(message, "createEntryLink"))
+                                $root.google.cloud.dataplex.v1.CreateEntryLinkRequest.encode(message.createEntryLink, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.deleteEntryLink != null && Object.hasOwnProperty.call(message, "deleteEntryLink"))
+                                $root.google.cloud.dataplex.v1.DeleteEntryLinkRequest.encode(message.deleteEntryLink, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.rejectionComment != null && Object.hasOwnProperty.call(message, "rejectionComment"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.rejectionComment);
+                            if (message.approver != null && Object.hasOwnProperty.call(message, "approver"))
+                                writer.uint32(/* id 17, wireType 2 =*/138).string(message.approver);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.etag);
+                            if (message.changeType != null && Object.hasOwnProperty.call(message, "changeType"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).int32(message.changeType);
+                            if (message.createGlossary != null && Object.hasOwnProperty.call(message, "createGlossary"))
+                                $root.google.cloud.dataplex.v1.CreateGlossaryRequest.encode(message.createGlossary, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.updateGlossary != null && Object.hasOwnProperty.call(message, "updateGlossary"))
+                                $root.google.cloud.dataplex.v1.UpdateGlossaryRequest.encode(message.updateGlossary, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.deleteGlossary != null && Object.hasOwnProperty.call(message, "deleteGlossary"))
+                                $root.google.cloud.dataplex.v1.DeleteGlossaryRequest.encode(message.deleteGlossary, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.createGlossaryCategory != null && Object.hasOwnProperty.call(message, "createGlossaryCategory"))
+                                $root.google.cloud.dataplex.v1.CreateGlossaryCategoryRequest.encode(message.createGlossaryCategory, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.updateGlossaryCategory != null && Object.hasOwnProperty.call(message, "updateGlossaryCategory"))
+                                $root.google.cloud.dataplex.v1.UpdateGlossaryCategoryRequest.encode(message.updateGlossaryCategory, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.deleteGlossaryCategory != null && Object.hasOwnProperty.call(message, "deleteGlossaryCategory"))
+                                $root.google.cloud.dataplex.v1.DeleteGlossaryCategoryRequest.encode(message.deleteGlossaryCategory, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                            if (message.createGlossaryTerm != null && Object.hasOwnProperty.call(message, "createGlossaryTerm"))
+                                $root.google.cloud.dataplex.v1.CreateGlossaryTermRequest.encode(message.createGlossaryTerm, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                            if (message.updateGlossaryTerm != null && Object.hasOwnProperty.call(message, "updateGlossaryTerm"))
+                                $root.google.cloud.dataplex.v1.UpdateGlossaryTermRequest.encode(message.updateGlossaryTerm, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                            if (message.deleteGlossaryTerm != null && Object.hasOwnProperty.call(message, "deleteGlossaryTerm"))
+                                $root.google.cloud.dataplex.v1.DeleteGlossaryTermRequest.encode(message.deleteGlossaryTerm, writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
+                            if (message.dataProductAccessRequest != null && Object.hasOwnProperty.call(message, "dataProductAccessRequest"))
+                                $root.google.cloud.dataplex.v1.DataProductAccessRequest.encode(message.dataProductAccessRequest, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ChangeRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ChangeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IChangeRequest} message ChangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChangeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ChangeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataplex.v1.ChangeRequest} ChangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChangeRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.ChangeRequest(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.justification = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        message.author = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.resource = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.createEntry = $root.google.cloud.dataplex.v1.CreateEntryRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.updateEntry = $root.google.cloud.dataplex.v1.UpdateEntryRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.deleteEntry = $root.google.cloud.dataplex.v1.DeleteEntryRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.createEntryLink = $root.google.cloud.dataplex.v1.CreateEntryLinkRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.deleteEntryLink = $root.google.cloud.dataplex.v1.DeleteEntryLinkRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 20: {
+                                        message.createGlossary = $root.google.cloud.dataplex.v1.CreateGlossaryRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 21: {
+                                        message.updateGlossary = $root.google.cloud.dataplex.v1.UpdateGlossaryRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 22: {
+                                        message.deleteGlossary = $root.google.cloud.dataplex.v1.DeleteGlossaryRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 23: {
+                                        message.createGlossaryCategory = $root.google.cloud.dataplex.v1.CreateGlossaryCategoryRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.updateGlossaryCategory = $root.google.cloud.dataplex.v1.UpdateGlossaryCategoryRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 26: {
+                                        message.deleteGlossaryCategory = $root.google.cloud.dataplex.v1.DeleteGlossaryCategoryRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 27: {
+                                        message.createGlossaryTerm = $root.google.cloud.dataplex.v1.CreateGlossaryTermRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 28: {
+                                        message.updateGlossaryTerm = $root.google.cloud.dataplex.v1.UpdateGlossaryTermRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 30: {
+                                        message.deleteGlossaryTerm = $root.google.cloud.dataplex.v1.DeleteGlossaryTermRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 32: {
+                                        message.dataProductAccessRequest = $root.google.cloud.dataplex.v1.DataProductAccessRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 19: {
+                                        message.changeType = reader.int32();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.rejectionComment = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.approver = reader.string();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ChangeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataplex.v1.ChangeRequest} ChangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChangeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ChangeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ChangeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.justification != null && message.hasOwnProperty("justification"))
+                                if (!$util.isString(message.justification))
+                                    return "justification: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.author != null && message.hasOwnProperty("author"))
+                                if (!$util.isString(message.author))
+                                    return "author: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                if (!$util.isString(message.resource))
+                                    return "resource: string expected";
+                            if (message.createEntry != null && message.hasOwnProperty("createEntry")) {
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.CreateEntryRequest.verify(message.createEntry);
+                                    if (error)
+                                        return "createEntry." + error;
+                                }
+                            }
+                            if (message.updateEntry != null && message.hasOwnProperty("updateEntry")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.UpdateEntryRequest.verify(message.updateEntry);
+                                    if (error)
+                                        return "updateEntry." + error;
+                                }
+                            }
+                            if (message.deleteEntry != null && message.hasOwnProperty("deleteEntry")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.DeleteEntryRequest.verify(message.deleteEntry);
+                                    if (error)
+                                        return "deleteEntry." + error;
+                                }
+                            }
+                            if (message.createEntryLink != null && message.hasOwnProperty("createEntryLink")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.CreateEntryLinkRequest.verify(message.createEntryLink);
+                                    if (error)
+                                        return "createEntryLink." + error;
+                                }
+                            }
+                            if (message.deleteEntryLink != null && message.hasOwnProperty("deleteEntryLink")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.DeleteEntryLinkRequest.verify(message.deleteEntryLink);
+                                    if (error)
+                                        return "deleteEntryLink." + error;
+                                }
+                            }
+                            if (message.createGlossary != null && message.hasOwnProperty("createGlossary")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.CreateGlossaryRequest.verify(message.createGlossary);
+                                    if (error)
+                                        return "createGlossary." + error;
+                                }
+                            }
+                            if (message.updateGlossary != null && message.hasOwnProperty("updateGlossary")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.UpdateGlossaryRequest.verify(message.updateGlossary);
+                                    if (error)
+                                        return "updateGlossary." + error;
+                                }
+                            }
+                            if (message.deleteGlossary != null && message.hasOwnProperty("deleteGlossary")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.DeleteGlossaryRequest.verify(message.deleteGlossary);
+                                    if (error)
+                                        return "deleteGlossary." + error;
+                                }
+                            }
+                            if (message.createGlossaryCategory != null && message.hasOwnProperty("createGlossaryCategory")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.CreateGlossaryCategoryRequest.verify(message.createGlossaryCategory);
+                                    if (error)
+                                        return "createGlossaryCategory." + error;
+                                }
+                            }
+                            if (message.updateGlossaryCategory != null && message.hasOwnProperty("updateGlossaryCategory")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.UpdateGlossaryCategoryRequest.verify(message.updateGlossaryCategory);
+                                    if (error)
+                                        return "updateGlossaryCategory." + error;
+                                }
+                            }
+                            if (message.deleteGlossaryCategory != null && message.hasOwnProperty("deleteGlossaryCategory")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.DeleteGlossaryCategoryRequest.verify(message.deleteGlossaryCategory);
+                                    if (error)
+                                        return "deleteGlossaryCategory." + error;
+                                }
+                            }
+                            if (message.createGlossaryTerm != null && message.hasOwnProperty("createGlossaryTerm")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.CreateGlossaryTermRequest.verify(message.createGlossaryTerm);
+                                    if (error)
+                                        return "createGlossaryTerm." + error;
+                                }
+                            }
+                            if (message.updateGlossaryTerm != null && message.hasOwnProperty("updateGlossaryTerm")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.UpdateGlossaryTermRequest.verify(message.updateGlossaryTerm);
+                                    if (error)
+                                        return "updateGlossaryTerm." + error;
+                                }
+                            }
+                            if (message.deleteGlossaryTerm != null && message.hasOwnProperty("deleteGlossaryTerm")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.DeleteGlossaryTermRequest.verify(message.deleteGlossaryTerm);
+                                    if (error)
+                                        return "deleteGlossaryTerm." + error;
+                                }
+                            }
+                            if (message.dataProductAccessRequest != null && message.hasOwnProperty("dataProductAccessRequest")) {
+                                if (properties.changePayload === 1)
+                                    return "changePayload: multiple values";
+                                properties.changePayload = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.DataProductAccessRequest.verify(message.dataProductAccessRequest);
+                                    if (error)
+                                        return "dataProductAccessRequest." + error;
+                                }
+                            }
+                            if (message.changeType != null && message.hasOwnProperty("changeType"))
+                                switch (message.changeType) {
+                                default:
+                                    return "changeType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 17:
+                                case 33:
+                                    break;
+                                }
+                            if (message.rejectionComment != null && message.hasOwnProperty("rejectionComment"))
+                                if (!$util.isString(message.rejectionComment))
+                                    return "rejectionComment: string expected";
+                            if (message.approver != null && message.hasOwnProperty("approver"))
+                                if (!$util.isString(message.approver))
+                                    return "approver: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ChangeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataplex.v1.ChangeRequest} ChangeRequest
+                         */
+                        ChangeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataplex.v1.ChangeRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataplex.v1.ChangeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.justification != null)
+                                message.justification = String(object.justification);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.author != null)
+                                message.author = String(object.author);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "NEW":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "APPROVED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "REJECTED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "EXPIRED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "REVOKED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.resource != null)
+                                message.resource = String(object.resource);
+                            if (object.createEntry != null) {
+                                if (typeof object.createEntry !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.createEntry: object expected");
+                                message.createEntry = $root.google.cloud.dataplex.v1.CreateEntryRequest.fromObject(object.createEntry);
+                            }
+                            if (object.updateEntry != null) {
+                                if (typeof object.updateEntry !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.updateEntry: object expected");
+                                message.updateEntry = $root.google.cloud.dataplex.v1.UpdateEntryRequest.fromObject(object.updateEntry);
+                            }
+                            if (object.deleteEntry != null) {
+                                if (typeof object.deleteEntry !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.deleteEntry: object expected");
+                                message.deleteEntry = $root.google.cloud.dataplex.v1.DeleteEntryRequest.fromObject(object.deleteEntry);
+                            }
+                            if (object.createEntryLink != null) {
+                                if (typeof object.createEntryLink !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.createEntryLink: object expected");
+                                message.createEntryLink = $root.google.cloud.dataplex.v1.CreateEntryLinkRequest.fromObject(object.createEntryLink);
+                            }
+                            if (object.deleteEntryLink != null) {
+                                if (typeof object.deleteEntryLink !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.deleteEntryLink: object expected");
+                                message.deleteEntryLink = $root.google.cloud.dataplex.v1.DeleteEntryLinkRequest.fromObject(object.deleteEntryLink);
+                            }
+                            if (object.createGlossary != null) {
+                                if (typeof object.createGlossary !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.createGlossary: object expected");
+                                message.createGlossary = $root.google.cloud.dataplex.v1.CreateGlossaryRequest.fromObject(object.createGlossary);
+                            }
+                            if (object.updateGlossary != null) {
+                                if (typeof object.updateGlossary !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.updateGlossary: object expected");
+                                message.updateGlossary = $root.google.cloud.dataplex.v1.UpdateGlossaryRequest.fromObject(object.updateGlossary);
+                            }
+                            if (object.deleteGlossary != null) {
+                                if (typeof object.deleteGlossary !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.deleteGlossary: object expected");
+                                message.deleteGlossary = $root.google.cloud.dataplex.v1.DeleteGlossaryRequest.fromObject(object.deleteGlossary);
+                            }
+                            if (object.createGlossaryCategory != null) {
+                                if (typeof object.createGlossaryCategory !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.createGlossaryCategory: object expected");
+                                message.createGlossaryCategory = $root.google.cloud.dataplex.v1.CreateGlossaryCategoryRequest.fromObject(object.createGlossaryCategory);
+                            }
+                            if (object.updateGlossaryCategory != null) {
+                                if (typeof object.updateGlossaryCategory !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.updateGlossaryCategory: object expected");
+                                message.updateGlossaryCategory = $root.google.cloud.dataplex.v1.UpdateGlossaryCategoryRequest.fromObject(object.updateGlossaryCategory);
+                            }
+                            if (object.deleteGlossaryCategory != null) {
+                                if (typeof object.deleteGlossaryCategory !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.deleteGlossaryCategory: object expected");
+                                message.deleteGlossaryCategory = $root.google.cloud.dataplex.v1.DeleteGlossaryCategoryRequest.fromObject(object.deleteGlossaryCategory);
+                            }
+                            if (object.createGlossaryTerm != null) {
+                                if (typeof object.createGlossaryTerm !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.createGlossaryTerm: object expected");
+                                message.createGlossaryTerm = $root.google.cloud.dataplex.v1.CreateGlossaryTermRequest.fromObject(object.createGlossaryTerm);
+                            }
+                            if (object.updateGlossaryTerm != null) {
+                                if (typeof object.updateGlossaryTerm !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.updateGlossaryTerm: object expected");
+                                message.updateGlossaryTerm = $root.google.cloud.dataplex.v1.UpdateGlossaryTermRequest.fromObject(object.updateGlossaryTerm);
+                            }
+                            if (object.deleteGlossaryTerm != null) {
+                                if (typeof object.deleteGlossaryTerm !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.deleteGlossaryTerm: object expected");
+                                message.deleteGlossaryTerm = $root.google.cloud.dataplex.v1.DeleteGlossaryTermRequest.fromObject(object.deleteGlossaryTerm);
+                            }
+                            if (object.dataProductAccessRequest != null) {
+                                if (typeof object.dataProductAccessRequest !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ChangeRequest.dataProductAccessRequest: object expected");
+                                message.dataProductAccessRequest = $root.google.cloud.dataplex.v1.DataProductAccessRequest.fromObject(object.dataProductAccessRequest);
+                            }
+                            switch (object.changeType) {
+                            default:
+                                if (typeof object.changeType === "number") {
+                                    message.changeType = object.changeType;
+                                    break;
+                                }
+                                break;
+                            case "CHANGE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.changeType = 0;
+                                break;
+                            case "CREATE_ENTRY":
+                            case 1:
+                                message.changeType = 1;
+                                break;
+                            case "UPDATE_ENTRY":
+                            case 2:
+                                message.changeType = 2;
+                                break;
+                            case "DELETE_ENTRY":
+                            case 3:
+                                message.changeType = 3;
+                                break;
+                            case "CREATE_ENTRY_LINK":
+                            case 4:
+                                message.changeType = 4;
+                                break;
+                            case "DELETE_ENTRY_LINK":
+                            case 5:
+                                message.changeType = 5;
+                                break;
+                            case "CREATE_GLOSSARY":
+                            case 7:
+                                message.changeType = 7;
+                                break;
+                            case "UPDATE_GLOSSARY":
+                            case 8:
+                                message.changeType = 8;
+                                break;
+                            case "DELETE_GLOSSARY":
+                            case 9:
+                                message.changeType = 9;
+                                break;
+                            case "CREATE_GLOSSARY_CATEGORY":
+                            case 10:
+                                message.changeType = 10;
+                                break;
+                            case "UPDATE_GLOSSARY_CATEGORY":
+                            case 11:
+                                message.changeType = 11;
+                                break;
+                            case "DELETE_GLOSSARY_CATEGORY":
+                            case 13:
+                                message.changeType = 13;
+                                break;
+                            case "CREATE_GLOSSARY_TERM":
+                            case 14:
+                                message.changeType = 14;
+                                break;
+                            case "UPDATE_GLOSSARY_TERM":
+                            case 15:
+                                message.changeType = 15;
+                                break;
+                            case "DELETE_GLOSSARY_TERM":
+                            case 17:
+                                message.changeType = 17;
+                                break;
+                            case "REQUEST_DATA_PRODUCT_ACCESS":
+                            case 33:
+                                message.changeType = 33;
+                                break;
+                            }
+                            if (object.rejectionComment != null)
+                                message.rejectionComment = String(object.rejectionComment);
+                            if (object.approver != null)
+                                message.approver = String(object.approver);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ChangeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.ChangeRequest} message ChangeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ChangeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uid = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.justification = "";
+                                object.author = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.resource = "";
+                                object.rejectionComment = "";
+                                object.approver = "";
+                                object.etag = "";
+                                object.changeType = options.enums === String ? "CHANGE_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.justification != null && message.hasOwnProperty("justification"))
+                                object.justification = message.justification;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.author != null && message.hasOwnProperty("author"))
+                                object.author = message.author;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.ChangeRequest.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.ChangeRequest.State[message.state] : message.state;
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                object.resource = message.resource;
+                            if (message.createEntry != null && message.hasOwnProperty("createEntry")) {
+                                object.createEntry = $root.google.cloud.dataplex.v1.CreateEntryRequest.toObject(message.createEntry, options);
+                                if (options.oneofs)
+                                    object.changePayload = "createEntry";
+                            }
+                            if (message.updateEntry != null && message.hasOwnProperty("updateEntry")) {
+                                object.updateEntry = $root.google.cloud.dataplex.v1.UpdateEntryRequest.toObject(message.updateEntry, options);
+                                if (options.oneofs)
+                                    object.changePayload = "updateEntry";
+                            }
+                            if (message.deleteEntry != null && message.hasOwnProperty("deleteEntry")) {
+                                object.deleteEntry = $root.google.cloud.dataplex.v1.DeleteEntryRequest.toObject(message.deleteEntry, options);
+                                if (options.oneofs)
+                                    object.changePayload = "deleteEntry";
+                            }
+                            if (message.createEntryLink != null && message.hasOwnProperty("createEntryLink")) {
+                                object.createEntryLink = $root.google.cloud.dataplex.v1.CreateEntryLinkRequest.toObject(message.createEntryLink, options);
+                                if (options.oneofs)
+                                    object.changePayload = "createEntryLink";
+                            }
+                            if (message.deleteEntryLink != null && message.hasOwnProperty("deleteEntryLink")) {
+                                object.deleteEntryLink = $root.google.cloud.dataplex.v1.DeleteEntryLinkRequest.toObject(message.deleteEntryLink, options);
+                                if (options.oneofs)
+                                    object.changePayload = "deleteEntryLink";
+                            }
+                            if (message.rejectionComment != null && message.hasOwnProperty("rejectionComment"))
+                                object.rejectionComment = message.rejectionComment;
+                            if (message.approver != null && message.hasOwnProperty("approver"))
+                                object.approver = message.approver;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.changeType != null && message.hasOwnProperty("changeType"))
+                                object.changeType = options.enums === String ? $root.google.cloud.dataplex.v1.ChangeRequest.ChangeType[message.changeType] === undefined ? message.changeType : $root.google.cloud.dataplex.v1.ChangeRequest.ChangeType[message.changeType] : message.changeType;
+                            if (message.createGlossary != null && message.hasOwnProperty("createGlossary")) {
+                                object.createGlossary = $root.google.cloud.dataplex.v1.CreateGlossaryRequest.toObject(message.createGlossary, options);
+                                if (options.oneofs)
+                                    object.changePayload = "createGlossary";
+                            }
+                            if (message.updateGlossary != null && message.hasOwnProperty("updateGlossary")) {
+                                object.updateGlossary = $root.google.cloud.dataplex.v1.UpdateGlossaryRequest.toObject(message.updateGlossary, options);
+                                if (options.oneofs)
+                                    object.changePayload = "updateGlossary";
+                            }
+                            if (message.deleteGlossary != null && message.hasOwnProperty("deleteGlossary")) {
+                                object.deleteGlossary = $root.google.cloud.dataplex.v1.DeleteGlossaryRequest.toObject(message.deleteGlossary, options);
+                                if (options.oneofs)
+                                    object.changePayload = "deleteGlossary";
+                            }
+                            if (message.createGlossaryCategory != null && message.hasOwnProperty("createGlossaryCategory")) {
+                                object.createGlossaryCategory = $root.google.cloud.dataplex.v1.CreateGlossaryCategoryRequest.toObject(message.createGlossaryCategory, options);
+                                if (options.oneofs)
+                                    object.changePayload = "createGlossaryCategory";
+                            }
+                            if (message.updateGlossaryCategory != null && message.hasOwnProperty("updateGlossaryCategory")) {
+                                object.updateGlossaryCategory = $root.google.cloud.dataplex.v1.UpdateGlossaryCategoryRequest.toObject(message.updateGlossaryCategory, options);
+                                if (options.oneofs)
+                                    object.changePayload = "updateGlossaryCategory";
+                            }
+                            if (message.deleteGlossaryCategory != null && message.hasOwnProperty("deleteGlossaryCategory")) {
+                                object.deleteGlossaryCategory = $root.google.cloud.dataplex.v1.DeleteGlossaryCategoryRequest.toObject(message.deleteGlossaryCategory, options);
+                                if (options.oneofs)
+                                    object.changePayload = "deleteGlossaryCategory";
+                            }
+                            if (message.createGlossaryTerm != null && message.hasOwnProperty("createGlossaryTerm")) {
+                                object.createGlossaryTerm = $root.google.cloud.dataplex.v1.CreateGlossaryTermRequest.toObject(message.createGlossaryTerm, options);
+                                if (options.oneofs)
+                                    object.changePayload = "createGlossaryTerm";
+                            }
+                            if (message.updateGlossaryTerm != null && message.hasOwnProperty("updateGlossaryTerm")) {
+                                object.updateGlossaryTerm = $root.google.cloud.dataplex.v1.UpdateGlossaryTermRequest.toObject(message.updateGlossaryTerm, options);
+                                if (options.oneofs)
+                                    object.changePayload = "updateGlossaryTerm";
+                            }
+                            if (message.deleteGlossaryTerm != null && message.hasOwnProperty("deleteGlossaryTerm")) {
+                                object.deleteGlossaryTerm = $root.google.cloud.dataplex.v1.DeleteGlossaryTermRequest.toObject(message.deleteGlossaryTerm, options);
+                                if (options.oneofs)
+                                    object.changePayload = "deleteGlossaryTerm";
+                            }
+                            if (message.dataProductAccessRequest != null && message.hasOwnProperty("dataProductAccessRequest")) {
+                                object.dataProductAccessRequest = $root.google.cloud.dataplex.v1.DataProductAccessRequest.toObject(message.dataProductAccessRequest, options);
+                                if (options.oneofs)
+                                    object.changePayload = "dataProductAccessRequest";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ChangeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ChangeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ChangeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataplex.v1.ChangeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ChangeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataplex.v1.ChangeRequest";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.dataplex.v1.ChangeRequest.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} NEW=1 NEW value
+                         * @property {number} APPROVED=2 APPROVED value
+                         * @property {number} REJECTED=3 REJECTED value
+                         * @property {number} EXPIRED=4 EXPIRED value
+                         * @property {number} REVOKED=5 REVOKED value
+                         */
+                        ChangeRequest.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NEW"] = 1;
+                            values[valuesById[2] = "APPROVED"] = 2;
+                            values[valuesById[3] = "REJECTED"] = 3;
+                            values[valuesById[4] = "EXPIRED"] = 4;
+                            values[valuesById[5] = "REVOKED"] = 5;
+                            return values;
+                        })();
+    
+                        /**
+                         * ChangeType enum.
+                         * @name google.cloud.dataplex.v1.ChangeRequest.ChangeType
+                         * @enum {number}
+                         * @property {number} CHANGE_TYPE_UNSPECIFIED=0 CHANGE_TYPE_UNSPECIFIED value
+                         * @property {number} CREATE_ENTRY=1 CREATE_ENTRY value
+                         * @property {number} UPDATE_ENTRY=2 UPDATE_ENTRY value
+                         * @property {number} DELETE_ENTRY=3 DELETE_ENTRY value
+                         * @property {number} CREATE_ENTRY_LINK=4 CREATE_ENTRY_LINK value
+                         * @property {number} DELETE_ENTRY_LINK=5 DELETE_ENTRY_LINK value
+                         * @property {number} CREATE_GLOSSARY=7 CREATE_GLOSSARY value
+                         * @property {number} UPDATE_GLOSSARY=8 UPDATE_GLOSSARY value
+                         * @property {number} DELETE_GLOSSARY=9 DELETE_GLOSSARY value
+                         * @property {number} CREATE_GLOSSARY_CATEGORY=10 CREATE_GLOSSARY_CATEGORY value
+                         * @property {number} UPDATE_GLOSSARY_CATEGORY=11 UPDATE_GLOSSARY_CATEGORY value
+                         * @property {number} DELETE_GLOSSARY_CATEGORY=13 DELETE_GLOSSARY_CATEGORY value
+                         * @property {number} CREATE_GLOSSARY_TERM=14 CREATE_GLOSSARY_TERM value
+                         * @property {number} UPDATE_GLOSSARY_TERM=15 UPDATE_GLOSSARY_TERM value
+                         * @property {number} DELETE_GLOSSARY_TERM=17 DELETE_GLOSSARY_TERM value
+                         * @property {number} REQUEST_DATA_PRODUCT_ACCESS=33 REQUEST_DATA_PRODUCT_ACCESS value
+                         */
+                        ChangeRequest.ChangeType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CHANGE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATE_ENTRY"] = 1;
+                            values[valuesById[2] = "UPDATE_ENTRY"] = 2;
+                            values[valuesById[3] = "DELETE_ENTRY"] = 3;
+                            values[valuesById[4] = "CREATE_ENTRY_LINK"] = 4;
+                            values[valuesById[5] = "DELETE_ENTRY_LINK"] = 5;
+                            values[valuesById[7] = "CREATE_GLOSSARY"] = 7;
+                            values[valuesById[8] = "UPDATE_GLOSSARY"] = 8;
+                            values[valuesById[9] = "DELETE_GLOSSARY"] = 9;
+                            values[valuesById[10] = "CREATE_GLOSSARY_CATEGORY"] = 10;
+                            values[valuesById[11] = "UPDATE_GLOSSARY_CATEGORY"] = 11;
+                            values[valuesById[13] = "DELETE_GLOSSARY_CATEGORY"] = 13;
+                            values[valuesById[14] = "CREATE_GLOSSARY_TERM"] = 14;
+                            values[valuesById[15] = "UPDATE_GLOSSARY_TERM"] = 15;
+                            values[valuesById[17] = "DELETE_GLOSSARY_TERM"] = 17;
+                            values[valuesById[33] = "REQUEST_DATA_PRODUCT_ACCESS"] = 33;
+                            return values;
+                        })();
+    
+                        return ChangeRequest;
+                    })();
+    
+                    v1.DataProductAccessRequest = (function() {
+    
+                        /**
+                         * Properties of a DataProductAccessRequest.
+                         * @memberof google.cloud.dataplex.v1
+                         * @interface IDataProductAccessRequest
+                         * @property {string|null} [parent] DataProductAccessRequest parent
+                         * @property {string|null} [accessGroupId] DataProductAccessRequest accessGroupId
+                         * @property {string|null} [accessGroupDisplayName] DataProductAccessRequest accessGroupDisplayName
+                         * @property {string|null} [requestedPrincipal] DataProductAccessRequest requestedPrincipal
+                         */
+    
+                        /**
+                         * Constructs a new DataProductAccessRequest.
+                         * @memberof google.cloud.dataplex.v1
+                         * @classdesc Represents a DataProductAccessRequest.
+                         * @implements IDataProductAccessRequest
+                         * @constructor
+                         * @param {google.cloud.dataplex.v1.IDataProductAccessRequest=} [properties] Properties to set
+                         */
+                        function DataProductAccessRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataProductAccessRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @instance
+                         */
+                        DataProductAccessRequest.prototype.parent = "";
+    
+                        /**
+                         * DataProductAccessRequest accessGroupId.
+                         * @member {string} accessGroupId
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @instance
+                         */
+                        DataProductAccessRequest.prototype.accessGroupId = "";
+    
+                        /**
+                         * DataProductAccessRequest accessGroupDisplayName.
+                         * @member {string} accessGroupDisplayName
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @instance
+                         */
+                        DataProductAccessRequest.prototype.accessGroupDisplayName = "";
+    
+                        /**
+                         * DataProductAccessRequest requestedPrincipal.
+                         * @member {string|null|undefined} requestedPrincipal
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @instance
+                         */
+                        DataProductAccessRequest.prototype.requestedPrincipal = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DataProductAccessRequest.prototype, "_requestedPrincipal", {
+                            get: $util.oneOfGetter($oneOfFields = ["requestedPrincipal"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DataProductAccessRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IDataProductAccessRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataplex.v1.DataProductAccessRequest} DataProductAccessRequest instance
+                         */
+                        DataProductAccessRequest.create = function create(properties) {
+                            return new DataProductAccessRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataProductAccessRequest message. Does not implicitly {@link google.cloud.dataplex.v1.DataProductAccessRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IDataProductAccessRequest} message DataProductAccessRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataProductAccessRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.accessGroupId != null && Object.hasOwnProperty.call(message, "accessGroupId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.accessGroupId);
+                            if (message.requestedPrincipal != null && Object.hasOwnProperty.call(message, "requestedPrincipal"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestedPrincipal);
+                            if (message.accessGroupDisplayName != null && Object.hasOwnProperty.call(message, "accessGroupDisplayName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.accessGroupDisplayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataProductAccessRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataProductAccessRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IDataProductAccessRequest} message DataProductAccessRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataProductAccessRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataProductAccessRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataplex.v1.DataProductAccessRequest} DataProductAccessRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataProductAccessRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataProductAccessRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.accessGroupId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.accessGroupDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestedPrincipal = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataProductAccessRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataplex.v1.DataProductAccessRequest} DataProductAccessRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataProductAccessRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataProductAccessRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataProductAccessRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.accessGroupId != null && message.hasOwnProperty("accessGroupId"))
+                                if (!$util.isString(message.accessGroupId))
+                                    return "accessGroupId: string expected";
+                            if (message.accessGroupDisplayName != null && message.hasOwnProperty("accessGroupDisplayName"))
+                                if (!$util.isString(message.accessGroupDisplayName))
+                                    return "accessGroupDisplayName: string expected";
+                            if (message.requestedPrincipal != null && message.hasOwnProperty("requestedPrincipal")) {
+                                properties._requestedPrincipal = 1;
+                                if (!$util.isString(message.requestedPrincipal))
+                                    return "requestedPrincipal: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataProductAccessRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataplex.v1.DataProductAccessRequest} DataProductAccessRequest
+                         */
+                        DataProductAccessRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataplex.v1.DataProductAccessRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataplex.v1.DataProductAccessRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.accessGroupId != null)
+                                message.accessGroupId = String(object.accessGroupId);
+                            if (object.accessGroupDisplayName != null)
+                                message.accessGroupDisplayName = String(object.accessGroupDisplayName);
+                            if (object.requestedPrincipal != null)
+                                message.requestedPrincipal = String(object.requestedPrincipal);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataProductAccessRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.DataProductAccessRequest} message DataProductAccessRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataProductAccessRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.accessGroupId = "";
+                                object.accessGroupDisplayName = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.accessGroupId != null && message.hasOwnProperty("accessGroupId"))
+                                object.accessGroupId = message.accessGroupId;
+                            if (message.requestedPrincipal != null && message.hasOwnProperty("requestedPrincipal")) {
+                                object.requestedPrincipal = message.requestedPrincipal;
+                                if (options.oneofs)
+                                    object._requestedPrincipal = "requestedPrincipal";
+                            }
+                            if (message.accessGroupDisplayName != null && message.hasOwnProperty("accessGroupDisplayName"))
+                                object.accessGroupDisplayName = message.accessGroupDisplayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataProductAccessRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataProductAccessRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataProductAccessRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataplex.v1.DataProductAccessRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataProductAccessRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataplex.v1.DataProductAccessRequest";
+                        };
+    
+                        return DataProductAccessRequest;
+                    })();
+    
                     v1.BusinessGlossaryService = (function() {
     
                         /**
@@ -33280,6 +34827,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.dataplex.v1.CatalogService|modifyEntry}.
+                         * @memberof google.cloud.dataplex.v1.CatalogService
+                         * @typedef ModifyEntryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataplex.v1.Entry} [response] Entry
+                         */
+    
+                        /**
+                         * Calls ModifyEntry.
+                         * @function modifyEntry
+                         * @memberof google.cloud.dataplex.v1.CatalogService
+                         * @instance
+                         * @param {google.cloud.dataplex.v1.IModifyEntryRequest} request ModifyEntryRequest message or plain object
+                         * @param {google.cloud.dataplex.v1.CatalogService.ModifyEntryCallback} callback Node-style callback called with the error, if any, and Entry
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CatalogService.prototype.modifyEntry = function modifyEntry(request, callback) {
+                            return this.rpcCall(modifyEntry, $root.google.cloud.dataplex.v1.ModifyEntryRequest, $root.google.cloud.dataplex.v1.Entry, request, callback);
+                        }, "name", { value: "ModifyEntry" });
+    
+                        /**
+                         * Calls ModifyEntry.
+                         * @function modifyEntry
+                         * @memberof google.cloud.dataplex.v1.CatalogService
+                         * @instance
+                         * @param {google.cloud.dataplex.v1.IModifyEntryRequest} request ModifyEntryRequest message or plain object
+                         * @returns {Promise<google.cloud.dataplex.v1.Entry>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.dataplex.v1.CatalogService|searchEntries}.
                          * @memberof google.cloud.dataplex.v1.CatalogService
                          * @typedef SearchEntriesCallback
@@ -45783,6 +47363,7 @@
                          * @interface ILookupContextRequest
                          * @property {string|null} [name] LookupContextRequest name
                          * @property {Array.<string>|null} [resources] LookupContextRequest resources
+                         * @property {string|null} [context] LookupContextRequest context
                          * @property {Object.<string,string>|null} [options] LookupContextRequest options
                          */
     
@@ -45818,6 +47399,14 @@
                          * @instance
                          */
                         LookupContextRequest.prototype.resources = $util.emptyArray;
+    
+                        /**
+                         * LookupContextRequest context.
+                         * @member {string} context
+                         * @memberof google.cloud.dataplex.v1.LookupContextRequest
+                         * @instance
+                         */
+                        LookupContextRequest.prototype.context = "";
     
                         /**
                          * LookupContextRequest options.
@@ -45856,6 +47445,8 @@
                             if (message.resources != null && message.resources.length)
                                 for (var i = 0; i < message.resources.length; ++i)
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.resources[i]);
+                            if (message.context != null && Object.hasOwnProperty.call(message, "context"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.context);
                             if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                                 for (var keys = Object.keys(message.options), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.options[keys[i]]).ldelim();
@@ -45903,6 +47494,10 @@
                                         if (!(message.resources && message.resources.length))
                                             message.resources = [];
                                         message.resources.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.context = reader.string();
                                         break;
                                     }
                                 case 4: {
@@ -45973,6 +47568,9 @@
                                     if (!$util.isString(message.resources[i]))
                                         return "resources: string[] expected";
                             }
+                            if (message.context != null && message.hasOwnProperty("context"))
+                                if (!$util.isString(message.context))
+                                    return "context: string expected";
                             if (message.options != null && message.hasOwnProperty("options")) {
                                 if (!$util.isObject(message.options))
                                     return "options: object expected";
@@ -46005,6 +47603,8 @@
                                 for (var i = 0; i < object.resources.length; ++i)
                                     message.resources[i] = String(object.resources[i]);
                             }
+                            if (object.context != null)
+                                message.context = String(object.context);
                             if (object.options) {
                                 if (typeof object.options !== "object")
                                     throw TypeError(".google.cloud.dataplex.v1.LookupContextRequest.options: object expected");
@@ -46032,8 +47632,10 @@
                                 object.resources = [];
                             if (options.objects || options.defaults)
                                 object.options = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.context = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.resources && message.resources.length) {
@@ -46041,6 +47643,8 @@
                                 for (var j = 0; j < message.resources.length; ++j)
                                     object.resources[j] = message.resources[j];
                             }
+                            if (message.context != null && message.hasOwnProperty("context"))
+                                object.context = message.context;
                             var keys2;
                             if (message.options && (keys2 = Object.keys(message.options)).length) {
                                 object.options = {};
@@ -46077,6 +47681,331 @@
                         };
     
                         return LookupContextRequest;
+                    })();
+    
+                    v1.ModifyEntryRequest = (function() {
+    
+                        /**
+                         * Properties of a ModifyEntryRequest.
+                         * @memberof google.cloud.dataplex.v1
+                         * @interface IModifyEntryRequest
+                         * @property {string|null} [name] ModifyEntryRequest name
+                         * @property {google.cloud.dataplex.v1.IEntry|null} [entry] ModifyEntryRequest entry
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] ModifyEntryRequest updateMask
+                         * @property {boolean|null} [deleteMissingAspects] ModifyEntryRequest deleteMissingAspects
+                         * @property {Array.<string>|null} [aspectKeys] ModifyEntryRequest aspectKeys
+                         */
+    
+                        /**
+                         * Constructs a new ModifyEntryRequest.
+                         * @memberof google.cloud.dataplex.v1
+                         * @classdesc Represents a ModifyEntryRequest.
+                         * @implements IModifyEntryRequest
+                         * @constructor
+                         * @param {google.cloud.dataplex.v1.IModifyEntryRequest=} [properties] Properties to set
+                         */
+                        function ModifyEntryRequest(properties) {
+                            this.aspectKeys = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModifyEntryRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @instance
+                         */
+                        ModifyEntryRequest.prototype.name = "";
+    
+                        /**
+                         * ModifyEntryRequest entry.
+                         * @member {google.cloud.dataplex.v1.IEntry|null|undefined} entry
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @instance
+                         */
+                        ModifyEntryRequest.prototype.entry = null;
+    
+                        /**
+                         * ModifyEntryRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @instance
+                         */
+                        ModifyEntryRequest.prototype.updateMask = null;
+    
+                        /**
+                         * ModifyEntryRequest deleteMissingAspects.
+                         * @member {boolean} deleteMissingAspects
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @instance
+                         */
+                        ModifyEntryRequest.prototype.deleteMissingAspects = false;
+    
+                        /**
+                         * ModifyEntryRequest aspectKeys.
+                         * @member {Array.<string>} aspectKeys
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @instance
+                         */
+                        ModifyEntryRequest.prototype.aspectKeys = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ModifyEntryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IModifyEntryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataplex.v1.ModifyEntryRequest} ModifyEntryRequest instance
+                         */
+                        ModifyEntryRequest.create = function create(properties) {
+                            return new ModifyEntryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModifyEntryRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ModifyEntryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IModifyEntryRequest} message ModifyEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModifyEntryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.entry != null && Object.hasOwnProperty.call(message, "entry"))
+                                $root.google.cloud.dataplex.v1.Entry.encode(message.entry, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.deleteMissingAspects != null && Object.hasOwnProperty.call(message, "deleteMissingAspects"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.deleteMissingAspects);
+                            if (message.aspectKeys != null && message.aspectKeys.length)
+                                for (var i = 0; i < message.aspectKeys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.aspectKeys[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModifyEntryRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ModifyEntryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IModifyEntryRequest} message ModifyEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModifyEntryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModifyEntryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataplex.v1.ModifyEntryRequest} ModifyEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModifyEntryRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.ModifyEntryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.entry = $root.google.cloud.dataplex.v1.Entry.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.deleteMissingAspects = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.aspectKeys && message.aspectKeys.length))
+                                            message.aspectKeys = [];
+                                        message.aspectKeys.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModifyEntryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataplex.v1.ModifyEntryRequest} ModifyEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModifyEntryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModifyEntryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModifyEntryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.entry != null && message.hasOwnProperty("entry")) {
+                                var error = $root.google.cloud.dataplex.v1.Entry.verify(message.entry);
+                                if (error)
+                                    return "entry." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.deleteMissingAspects != null && message.hasOwnProperty("deleteMissingAspects"))
+                                if (typeof message.deleteMissingAspects !== "boolean")
+                                    return "deleteMissingAspects: boolean expected";
+                            if (message.aspectKeys != null && message.hasOwnProperty("aspectKeys")) {
+                                if (!Array.isArray(message.aspectKeys))
+                                    return "aspectKeys: array expected";
+                                for (var i = 0; i < message.aspectKeys.length; ++i)
+                                    if (!$util.isString(message.aspectKeys[i]))
+                                        return "aspectKeys: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModifyEntryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataplex.v1.ModifyEntryRequest} ModifyEntryRequest
+                         */
+                        ModifyEntryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataplex.v1.ModifyEntryRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataplex.v1.ModifyEntryRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.entry != null) {
+                                if (typeof object.entry !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ModifyEntryRequest.entry: object expected");
+                                message.entry = $root.google.cloud.dataplex.v1.Entry.fromObject(object.entry);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ModifyEntryRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.deleteMissingAspects != null)
+                                message.deleteMissingAspects = Boolean(object.deleteMissingAspects);
+                            if (object.aspectKeys) {
+                                if (!Array.isArray(object.aspectKeys))
+                                    throw TypeError(".google.cloud.dataplex.v1.ModifyEntryRequest.aspectKeys: array expected");
+                                message.aspectKeys = [];
+                                for (var i = 0; i < object.aspectKeys.length; ++i)
+                                    message.aspectKeys[i] = String(object.aspectKeys[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModifyEntryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.ModifyEntryRequest} message ModifyEntryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModifyEntryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.aspectKeys = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.entry = null;
+                                object.updateMask = null;
+                                object.deleteMissingAspects = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.entry != null && message.hasOwnProperty("entry"))
+                                object.entry = $root.google.cloud.dataplex.v1.Entry.toObject(message.entry, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.deleteMissingAspects != null && message.hasOwnProperty("deleteMissingAspects"))
+                                object.deleteMissingAspects = message.deleteMissingAspects;
+                            if (message.aspectKeys && message.aspectKeys.length) {
+                                object.aspectKeys = [];
+                                for (var j = 0; j < message.aspectKeys.length; ++j)
+                                    object.aspectKeys[j] = message.aspectKeys[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModifyEntryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModifyEntryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ModifyEntryRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataplex.v1.ModifyEntryRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ModifyEntryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataplex.v1.ModifyEntryRequest";
+                        };
+    
+                        return ModifyEntryRequest;
                     })();
     
                     v1.LookupContextResponse = (function() {
@@ -60108,6 +62037,7 @@
                              * @property {Array.<string>|null} [excludePatterns] StorageConfig excludePatterns
                              * @property {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.ICsvOptions|null} [csvOptions] StorageConfig csvOptions
                              * @property {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IJsonOptions|null} [jsonOptions] StorageConfig jsonOptions
+                             * @property {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions|null} [unstructuredDataOptions] StorageConfig unstructuredDataOptions
                              */
     
                             /**
@@ -60160,6 +62090,14 @@
                             StorageConfig.prototype.jsonOptions = null;
     
                             /**
+                             * StorageConfig unstructuredDataOptions.
+                             * @member {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions|null|undefined} unstructuredDataOptions
+                             * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig
+                             * @instance
+                             */
+                            StorageConfig.prototype.unstructuredDataOptions = null;
+    
+                            /**
                              * Creates a new StorageConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig
@@ -60193,6 +62131,8 @@
                                     $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.CsvOptions.encode(message.csvOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.jsonOptions != null && Object.hasOwnProperty.call(message, "jsonOptions"))
                                     $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.JsonOptions.encode(message.jsonOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.unstructuredDataOptions != null && Object.hasOwnProperty.call(message, "unstructuredDataOptions"))
+                                    $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions.encode(message.unstructuredDataOptions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -60247,6 +62187,10 @@
                                         }
                                     case 4: {
                                             message.jsonOptions = $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.JsonOptions.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.unstructuredDataOptions = $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -60308,6 +62252,11 @@
                                     if (error)
                                         return "jsonOptions." + error;
                                 }
+                                if (message.unstructuredDataOptions != null && message.hasOwnProperty("unstructuredDataOptions")) {
+                                    var error = $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions.verify(message.unstructuredDataOptions);
+                                    if (error)
+                                        return "unstructuredDataOptions." + error;
+                                }
                                 return null;
                             };
     
@@ -60347,6 +62296,11 @@
                                         throw TypeError(".google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.jsonOptions: object expected");
                                     message.jsonOptions = $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.JsonOptions.fromObject(object.jsonOptions);
                                 }
+                                if (object.unstructuredDataOptions != null) {
+                                    if (typeof object.unstructuredDataOptions !== "object")
+                                        throw TypeError(".google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.unstructuredDataOptions: object expected");
+                                    message.unstructuredDataOptions = $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions.fromObject(object.unstructuredDataOptions);
+                                }
                                 return message;
                             };
     
@@ -60370,6 +62324,7 @@
                                 if (options.defaults) {
                                     object.csvOptions = null;
                                     object.jsonOptions = null;
+                                    object.unstructuredDataOptions = null;
                                 }
                                 if (message.includePatterns && message.includePatterns.length) {
                                     object.includePatterns = [];
@@ -60385,6 +62340,8 @@
                                     object.csvOptions = $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.CsvOptions.toObject(message.csvOptions, options);
                                 if (message.jsonOptions != null && message.hasOwnProperty("jsonOptions"))
                                     object.jsonOptions = $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.JsonOptions.toObject(message.jsonOptions, options);
+                                if (message.unstructuredDataOptions != null && message.hasOwnProperty("unstructuredDataOptions"))
+                                    object.unstructuredDataOptions = $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions.toObject(message.unstructuredDataOptions, options);
                                 return object;
                             };
     
@@ -60939,6 +62896,211 @@
                                 };
     
                                 return JsonOptions;
+                            })();
+    
+                            StorageConfig.UnstructuredDataOptions = (function() {
+    
+                                /**
+                                 * Properties of an UnstructuredDataOptions.
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig
+                                 * @interface IUnstructuredDataOptions
+                                 * @property {boolean|null} [semanticInferenceEnabled] UnstructuredDataOptions semanticInferenceEnabled
+                                 */
+    
+                                /**
+                                 * Constructs a new UnstructuredDataOptions.
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig
+                                 * @classdesc Represents an UnstructuredDataOptions.
+                                 * @implements IUnstructuredDataOptions
+                                 * @constructor
+                                 * @param {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions=} [properties] Properties to set
+                                 */
+                                function UnstructuredDataOptions(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * UnstructuredDataOptions semanticInferenceEnabled.
+                                 * @member {boolean} semanticInferenceEnabled
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @instance
+                                 */
+                                UnstructuredDataOptions.prototype.semanticInferenceEnabled = false;
+    
+                                /**
+                                 * Creates a new UnstructuredDataOptions instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions=} [properties] Properties to set
+                                 * @returns {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions} UnstructuredDataOptions instance
+                                 */
+                                UnstructuredDataOptions.create = function create(properties) {
+                                    return new UnstructuredDataOptions(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified UnstructuredDataOptions message. Does not implicitly {@link google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions} message UnstructuredDataOptions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                UnstructuredDataOptions.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.semanticInferenceEnabled != null && Object.hasOwnProperty.call(message, "semanticInferenceEnabled"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.semanticInferenceEnabled);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified UnstructuredDataOptions message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions} message UnstructuredDataOptions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                UnstructuredDataOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an UnstructuredDataOptions message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions} UnstructuredDataOptions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                UnstructuredDataOptions.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 2: {
+                                                message.semanticInferenceEnabled = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an UnstructuredDataOptions message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions} UnstructuredDataOptions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                UnstructuredDataOptions.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an UnstructuredDataOptions message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                UnstructuredDataOptions.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.semanticInferenceEnabled != null && message.hasOwnProperty("semanticInferenceEnabled"))
+                                        if (typeof message.semanticInferenceEnabled !== "boolean")
+                                            return "semanticInferenceEnabled: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an UnstructuredDataOptions message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions} UnstructuredDataOptions
+                                 */
+                                UnstructuredDataOptions.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions)
+                                        return object;
+                                    var message = new $root.google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions();
+                                    if (object.semanticInferenceEnabled != null)
+                                        message.semanticInferenceEnabled = Boolean(object.semanticInferenceEnabled);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an UnstructuredDataOptions message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions} message UnstructuredDataOptions
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                UnstructuredDataOptions.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.semanticInferenceEnabled = false;
+                                    if (message.semanticInferenceEnabled != null && message.hasOwnProperty("semanticInferenceEnabled"))
+                                        object.semanticInferenceEnabled = message.semanticInferenceEnabled;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this UnstructuredDataOptions to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                UnstructuredDataOptions.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for UnstructuredDataOptions
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                UnstructuredDataOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions";
+                                };
+    
+                                return UnstructuredDataOptions;
                             })();
     
                             return StorageConfig;
@@ -64542,6 +66704,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.dataplex.v1.DataProductService|requestDataProductAccess}.
+                         * @memberof google.cloud.dataplex.v1.DataProductService
+                         * @typedef RequestDataProductAccessCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataplex.v1.RequestDataProductAccessResponse} [response] RequestDataProductAccessResponse
+                         */
+    
+                        /**
+                         * Calls RequestDataProductAccess.
+                         * @function requestDataProductAccess
+                         * @memberof google.cloud.dataplex.v1.DataProductService
+                         * @instance
+                         * @param {google.cloud.dataplex.v1.IRequestDataProductAccessRequest} request RequestDataProductAccessRequest message or plain object
+                         * @param {google.cloud.dataplex.v1.DataProductService.RequestDataProductAccessCallback} callback Node-style callback called with the error, if any, and RequestDataProductAccessResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataProductService.prototype.requestDataProductAccess = function requestDataProductAccess(request, callback) {
+                            return this.rpcCall(requestDataProductAccess, $root.google.cloud.dataplex.v1.RequestDataProductAccessRequest, $root.google.cloud.dataplex.v1.RequestDataProductAccessResponse, request, callback);
+                        }, "name", { value: "RequestDataProductAccess" });
+    
+                        /**
+                         * Calls RequestDataProductAccess.
+                         * @function requestDataProductAccess
+                         * @memberof google.cloud.dataplex.v1.DataProductService
+                         * @instance
+                         * @param {google.cloud.dataplex.v1.IRequestDataProductAccessRequest} request RequestDataProductAccessRequest message or plain object
+                         * @returns {Promise<google.cloud.dataplex.v1.RequestDataProductAccessResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.dataplex.v1.DataProductService|createDataAsset}.
                          * @memberof google.cloud.dataplex.v1.DataProductService
                          * @typedef CreateDataAssetCallback
@@ -64727,6 +66922,7 @@
                          * @property {Array.<string>|null} [ownerEmails] DataProduct ownerEmails
                          * @property {number|null} [assetCount] DataProduct assetCount
                          * @property {Object.<string,google.cloud.dataplex.v1.DataProduct.IAccessGroup>|null} [accessGroups] DataProduct accessGroups
+                         * @property {google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig|null} [accessApprovalConfig] DataProduct accessApprovalConfig
                          */
     
                         /**
@@ -64844,6 +67040,23 @@
                         DataProduct.prototype.accessGroups = $util.emptyObject;
     
                         /**
+                         * DataProduct accessApprovalConfig.
+                         * @member {google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig|null|undefined} accessApprovalConfig
+                         * @memberof google.cloud.dataplex.v1.DataProduct
+                         * @instance
+                         */
+                        DataProduct.prototype.accessApprovalConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DataProduct.prototype, "_accessApprovalConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["accessApprovalConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new DataProduct instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataplex.v1.DataProduct
@@ -64896,6 +67109,8 @@
                                     writer.uint32(/* id 14, wireType 2 =*/114).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.dataplex.v1.DataProduct.AccessGroup.encode(message.accessGroups[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.accessApprovalConfig != null && Object.hasOwnProperty.call(message, "accessApprovalConfig"))
+                                $root.google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig.encode(message.accessApprovalConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -65020,6 +67235,10 @@
                                         message.accessGroups[key] = value;
                                         break;
                                     }
+                                case 15: {
+                                        message.accessApprovalConfig = $root.google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -65055,6 +67274,7 @@
                         DataProduct.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -65109,6 +67329,14 @@
                                     var error = $root.google.cloud.dataplex.v1.DataProduct.AccessGroup.verify(message.accessGroups[key[i]]);
                                     if (error)
                                         return "accessGroups." + error;
+                                }
+                            }
+                            if (message.accessApprovalConfig != null && message.hasOwnProperty("accessApprovalConfig")) {
+                                properties._accessApprovalConfig = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig.verify(message.accessApprovalConfig);
+                                    if (error)
+                                        return "accessApprovalConfig." + error;
                                 }
                             }
                             return null;
@@ -65176,6 +67404,11 @@
                                         throw TypeError(".google.cloud.dataplex.v1.DataProduct.accessGroups: object expected");
                                     message.accessGroups[keys[i]] = $root.google.cloud.dataplex.v1.DataProduct.AccessGroup.fromObject(object.accessGroups[keys[i]]);
                                 }
+                            }
+                            if (object.accessApprovalConfig != null) {
+                                if (typeof object.accessApprovalConfig !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.DataProduct.accessApprovalConfig: object expected");
+                                message.accessApprovalConfig = $root.google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig.fromObject(object.accessApprovalConfig);
                             }
                             return message;
                         };
@@ -65250,6 +67483,11 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.accessGroups[keys2[j]] = $root.google.cloud.dataplex.v1.DataProduct.AccessGroup.toObject(message.accessGroups[keys2[j]], options);
                             }
+                            if (message.accessApprovalConfig != null && message.hasOwnProperty("accessApprovalConfig")) {
+                                object.accessApprovalConfig = $root.google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig.toObject(message.accessApprovalConfig, options);
+                                if (options.oneofs)
+                                    object._accessApprovalConfig = "accessApprovalConfig";
+                            }
                             return object;
                         };
     
@@ -65286,6 +67524,7 @@
                              * @memberof google.cloud.dataplex.v1.DataProduct
                              * @interface IPrincipal
                              * @property {string|null} [googleGroup] Principal googleGroup
+                             * @property {string|null} [serviceAccount] Principal serviceAccount
                              */
     
                             /**
@@ -65311,6 +67550,14 @@
                              */
                             Principal.prototype.googleGroup = null;
     
+                            /**
+                             * Principal serviceAccount.
+                             * @member {string|null|undefined} serviceAccount
+                             * @memberof google.cloud.dataplex.v1.DataProduct.Principal
+                             * @instance
+                             */
+                            Principal.prototype.serviceAccount = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -65322,6 +67569,12 @@
                              */
                             Object.defineProperty(Principal.prototype, "type", {
                                 get: $util.oneOfGetter($oneOfFields = ["googleGroup"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Principal.prototype, "_serviceAccount", {
+                                get: $util.oneOfGetter($oneOfFields = ["serviceAccount"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -65351,6 +67604,8 @@
                                     writer = $Writer.create();
                                 if (message.googleGroup != null && Object.hasOwnProperty.call(message, "googleGroup"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.googleGroup);
+                                if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceAccount);
                                 return writer;
                             };
     
@@ -65389,6 +67644,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.googleGroup = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.serviceAccount = reader.string();
                                             break;
                                         }
                                     default:
@@ -65432,6 +67691,11 @@
                                     if (!$util.isString(message.googleGroup))
                                         return "googleGroup: string expected";
                                 }
+                                if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount")) {
+                                    properties._serviceAccount = 1;
+                                    if (!$util.isString(message.serviceAccount))
+                                        return "serviceAccount: string expected";
+                                }
                                 return null;
                             };
     
@@ -65449,6 +67713,8 @@
                                 var message = new $root.google.cloud.dataplex.v1.DataProduct.Principal();
                                 if (object.googleGroup != null)
                                     message.googleGroup = String(object.googleGroup);
+                                if (object.serviceAccount != null)
+                                    message.serviceAccount = String(object.serviceAccount);
                                 return message;
                             };
     
@@ -65469,6 +67735,11 @@
                                     object.googleGroup = message.googleGroup;
                                     if (options.oneofs)
                                         object.type = "googleGroup";
+                                }
+                                if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount")) {
+                                    object.serviceAccount = message.serviceAccount;
+                                    if (options.oneofs)
+                                        object._serviceAccount = "serviceAccount";
                                 }
                                 return object;
                             };
@@ -65780,6 +68051,227 @@
                             };
     
                             return AccessGroup;
+                        })();
+    
+                        DataProduct.AccessApprovalConfig = (function() {
+    
+                            /**
+                             * Properties of an AccessApprovalConfig.
+                             * @memberof google.cloud.dataplex.v1.DataProduct
+                             * @interface IAccessApprovalConfig
+                             * @property {Array.<string>|null} [approverEmails] AccessApprovalConfig approverEmails
+                             */
+    
+                            /**
+                             * Constructs a new AccessApprovalConfig.
+                             * @memberof google.cloud.dataplex.v1.DataProduct
+                             * @classdesc Represents an AccessApprovalConfig.
+                             * @implements IAccessApprovalConfig
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig=} [properties] Properties to set
+                             */
+                            function AccessApprovalConfig(properties) {
+                                this.approverEmails = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AccessApprovalConfig approverEmails.
+                             * @member {Array.<string>} approverEmails
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @instance
+                             */
+                            AccessApprovalConfig.prototype.approverEmails = $util.emptyArray;
+    
+                            /**
+                             * Creates a new AccessApprovalConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig} AccessApprovalConfig instance
+                             */
+                            AccessApprovalConfig.create = function create(properties) {
+                                return new AccessApprovalConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AccessApprovalConfig message. Does not implicitly {@link google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig} message AccessApprovalConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccessApprovalConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.approverEmails != null && message.approverEmails.length)
+                                    for (var i = 0; i < message.approverEmails.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.approverEmails[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AccessApprovalConfig message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig} message AccessApprovalConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccessApprovalConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AccessApprovalConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig} AccessApprovalConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccessApprovalConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            if (!(message.approverEmails && message.approverEmails.length))
+                                                message.approverEmails = [];
+                                            message.approverEmails.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AccessApprovalConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig} AccessApprovalConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccessApprovalConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AccessApprovalConfig message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AccessApprovalConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.approverEmails != null && message.hasOwnProperty("approverEmails")) {
+                                    if (!Array.isArray(message.approverEmails))
+                                        return "approverEmails: array expected";
+                                    for (var i = 0; i < message.approverEmails.length; ++i)
+                                        if (!$util.isString(message.approverEmails[i]))
+                                            return "approverEmails: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AccessApprovalConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig} AccessApprovalConfig
+                             */
+                            AccessApprovalConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig)
+                                    return object;
+                                var message = new $root.google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig();
+                                if (object.approverEmails) {
+                                    if (!Array.isArray(object.approverEmails))
+                                        throw TypeError(".google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig.approverEmails: array expected");
+                                    message.approverEmails = [];
+                                    for (var i = 0; i < object.approverEmails.length; ++i)
+                                        message.approverEmails[i] = String(object.approverEmails[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AccessApprovalConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig} message AccessApprovalConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AccessApprovalConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.approverEmails = [];
+                                if (message.approverEmails && message.approverEmails.length) {
+                                    object.approverEmails = [];
+                                    for (var j = 0; j < message.approverEmails.length; ++j)
+                                        object.approverEmails[j] = message.approverEmails[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AccessApprovalConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AccessApprovalConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AccessApprovalConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AccessApprovalConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig";
+                            };
+    
+                            return AccessApprovalConfig;
                         })();
     
                         return DataProduct;
@@ -68048,6 +70540,468 @@
                         return UpdateDataProductRequest;
                     })();
     
+                    v1.RequestDataProductAccessRequest = (function() {
+    
+                        /**
+                         * Properties of a RequestDataProductAccessRequest.
+                         * @memberof google.cloud.dataplex.v1
+                         * @interface IRequestDataProductAccessRequest
+                         * @property {string|null} [parent] RequestDataProductAccessRequest parent
+                         * @property {google.cloud.dataplex.v1.IChangeRequest|null} [changeRequest] RequestDataProductAccessRequest changeRequest
+                         * @property {boolean|null} [validateOnly] RequestDataProductAccessRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new RequestDataProductAccessRequest.
+                         * @memberof google.cloud.dataplex.v1
+                         * @classdesc Represents a RequestDataProductAccessRequest.
+                         * @implements IRequestDataProductAccessRequest
+                         * @constructor
+                         * @param {google.cloud.dataplex.v1.IRequestDataProductAccessRequest=} [properties] Properties to set
+                         */
+                        function RequestDataProductAccessRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RequestDataProductAccessRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @instance
+                         */
+                        RequestDataProductAccessRequest.prototype.parent = "";
+    
+                        /**
+                         * RequestDataProductAccessRequest changeRequest.
+                         * @member {google.cloud.dataplex.v1.IChangeRequest|null|undefined} changeRequest
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @instance
+                         */
+                        RequestDataProductAccessRequest.prototype.changeRequest = null;
+    
+                        /**
+                         * RequestDataProductAccessRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @instance
+                         */
+                        RequestDataProductAccessRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new RequestDataProductAccessRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IRequestDataProductAccessRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataplex.v1.RequestDataProductAccessRequest} RequestDataProductAccessRequest instance
+                         */
+                        RequestDataProductAccessRequest.create = function create(properties) {
+                            return new RequestDataProductAccessRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RequestDataProductAccessRequest message. Does not implicitly {@link google.cloud.dataplex.v1.RequestDataProductAccessRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IRequestDataProductAccessRequest} message RequestDataProductAccessRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RequestDataProductAccessRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.changeRequest != null && Object.hasOwnProperty.call(message, "changeRequest"))
+                                $root.google.cloud.dataplex.v1.ChangeRequest.encode(message.changeRequest, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RequestDataProductAccessRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.RequestDataProductAccessRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IRequestDataProductAccessRequest} message RequestDataProductAccessRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RequestDataProductAccessRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RequestDataProductAccessRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataplex.v1.RequestDataProductAccessRequest} RequestDataProductAccessRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RequestDataProductAccessRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.RequestDataProductAccessRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.changeRequest = $root.google.cloud.dataplex.v1.ChangeRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RequestDataProductAccessRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataplex.v1.RequestDataProductAccessRequest} RequestDataProductAccessRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RequestDataProductAccessRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RequestDataProductAccessRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RequestDataProductAccessRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.changeRequest != null && message.hasOwnProperty("changeRequest")) {
+                                var error = $root.google.cloud.dataplex.v1.ChangeRequest.verify(message.changeRequest);
+                                if (error)
+                                    return "changeRequest." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RequestDataProductAccessRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataplex.v1.RequestDataProductAccessRequest} RequestDataProductAccessRequest
+                         */
+                        RequestDataProductAccessRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataplex.v1.RequestDataProductAccessRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataplex.v1.RequestDataProductAccessRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.changeRequest != null) {
+                                if (typeof object.changeRequest !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.RequestDataProductAccessRequest.changeRequest: object expected");
+                                message.changeRequest = $root.google.cloud.dataplex.v1.ChangeRequest.fromObject(object.changeRequest);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RequestDataProductAccessRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.RequestDataProductAccessRequest} message RequestDataProductAccessRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RequestDataProductAccessRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.changeRequest = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.changeRequest != null && message.hasOwnProperty("changeRequest"))
+                                object.changeRequest = $root.google.cloud.dataplex.v1.ChangeRequest.toObject(message.changeRequest, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RequestDataProductAccessRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RequestDataProductAccessRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RequestDataProductAccessRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RequestDataProductAccessRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataplex.v1.RequestDataProductAccessRequest";
+                        };
+    
+                        return RequestDataProductAccessRequest;
+                    })();
+    
+                    v1.RequestDataProductAccessResponse = (function() {
+    
+                        /**
+                         * Properties of a RequestDataProductAccessResponse.
+                         * @memberof google.cloud.dataplex.v1
+                         * @interface IRequestDataProductAccessResponse
+                         * @property {string|null} [changeRequestName] RequestDataProductAccessResponse changeRequestName
+                         */
+    
+                        /**
+                         * Constructs a new RequestDataProductAccessResponse.
+                         * @memberof google.cloud.dataplex.v1
+                         * @classdesc Represents a RequestDataProductAccessResponse.
+                         * @implements IRequestDataProductAccessResponse
+                         * @constructor
+                         * @param {google.cloud.dataplex.v1.IRequestDataProductAccessResponse=} [properties] Properties to set
+                         */
+                        function RequestDataProductAccessResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RequestDataProductAccessResponse changeRequestName.
+                         * @member {string} changeRequestName
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @instance
+                         */
+                        RequestDataProductAccessResponse.prototype.changeRequestName = "";
+    
+                        /**
+                         * Creates a new RequestDataProductAccessResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IRequestDataProductAccessResponse=} [properties] Properties to set
+                         * @returns {google.cloud.dataplex.v1.RequestDataProductAccessResponse} RequestDataProductAccessResponse instance
+                         */
+                        RequestDataProductAccessResponse.create = function create(properties) {
+                            return new RequestDataProductAccessResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RequestDataProductAccessResponse message. Does not implicitly {@link google.cloud.dataplex.v1.RequestDataProductAccessResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IRequestDataProductAccessResponse} message RequestDataProductAccessResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RequestDataProductAccessResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.changeRequestName != null && Object.hasOwnProperty.call(message, "changeRequestName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.changeRequestName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RequestDataProductAccessResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.RequestDataProductAccessResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IRequestDataProductAccessResponse} message RequestDataProductAccessResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RequestDataProductAccessResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RequestDataProductAccessResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataplex.v1.RequestDataProductAccessResponse} RequestDataProductAccessResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RequestDataProductAccessResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.RequestDataProductAccessResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.changeRequestName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RequestDataProductAccessResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataplex.v1.RequestDataProductAccessResponse} RequestDataProductAccessResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RequestDataProductAccessResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RequestDataProductAccessResponse message.
+                         * @function verify
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RequestDataProductAccessResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.changeRequestName != null && message.hasOwnProperty("changeRequestName"))
+                                if (!$util.isString(message.changeRequestName))
+                                    return "changeRequestName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RequestDataProductAccessResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataplex.v1.RequestDataProductAccessResponse} RequestDataProductAccessResponse
+                         */
+                        RequestDataProductAccessResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataplex.v1.RequestDataProductAccessResponse)
+                                return object;
+                            var message = new $root.google.cloud.dataplex.v1.RequestDataProductAccessResponse();
+                            if (object.changeRequestName != null)
+                                message.changeRequestName = String(object.changeRequestName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RequestDataProductAccessResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @static
+                         * @param {google.cloud.dataplex.v1.RequestDataProductAccessResponse} message RequestDataProductAccessResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RequestDataProductAccessResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.changeRequestName = "";
+                            if (message.changeRequestName != null && message.hasOwnProperty("changeRequestName"))
+                                object.changeRequestName = message.changeRequestName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RequestDataProductAccessResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RequestDataProductAccessResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RequestDataProductAccessResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataplex.v1.RequestDataProductAccessResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RequestDataProductAccessResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataplex.v1.RequestDataProductAccessResponse";
+                        };
+    
+                        return RequestDataProductAccessResponse;
+                    })();
+    
                     v1.CreateDataAssetRequest = (function() {
     
                         /**
@@ -69607,6 +72561,7 @@
                          * @property {google.cloud.dataplex.v1.DataProfileSpec.ISelectedFields|null} [includeFields] DataProfileSpec includeFields
                          * @property {google.cloud.dataplex.v1.DataProfileSpec.ISelectedFields|null} [excludeFields] DataProfileSpec excludeFields
                          * @property {boolean|null} [catalogPublishingEnabled] DataProfileSpec catalogPublishingEnabled
+                         * @property {google.cloud.dataplex.v1.DataProfileSpec.Mode|null} [mode] DataProfileSpec mode
                          */
     
                         /**
@@ -69673,6 +72628,14 @@
                         DataProfileSpec.prototype.catalogPublishingEnabled = false;
     
                         /**
+                         * DataProfileSpec mode.
+                         * @member {google.cloud.dataplex.v1.DataProfileSpec.Mode} mode
+                         * @memberof google.cloud.dataplex.v1.DataProfileSpec
+                         * @instance
+                         */
+                        DataProfileSpec.prototype.mode = 0;
+    
+                        /**
                          * Creates a new DataProfileSpec instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataplex.v1.DataProfileSpec
@@ -69708,6 +72671,8 @@
                                 $root.google.cloud.dataplex.v1.DataProfileSpec.SelectedFields.encode(message.excludeFields, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.catalogPublishingEnabled != null && Object.hasOwnProperty.call(message, "catalogPublishingEnabled"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.catalogPublishingEnabled);
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.mode);
                             return writer;
                         };
     
@@ -69766,6 +72731,10 @@
                                     }
                                 case 8: {
                                         message.catalogPublishingEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.mode = reader.int32();
                                         break;
                                     }
                                 default:
@@ -69827,6 +72796,15 @@
                             if (message.catalogPublishingEnabled != null && message.hasOwnProperty("catalogPublishingEnabled"))
                                 if (typeof message.catalogPublishingEnabled !== "boolean")
                                     return "catalogPublishingEnabled: boolean expected";
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                switch (message.mode) {
+                                default:
+                                    return "mode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -69863,6 +72841,26 @@
                             }
                             if (object.catalogPublishingEnabled != null)
                                 message.catalogPublishingEnabled = Boolean(object.catalogPublishingEnabled);
+                            switch (object.mode) {
+                            default:
+                                if (typeof object.mode === "number") {
+                                    message.mode = object.mode;
+                                    break;
+                                }
+                                break;
+                            case "MODE_UNSPECIFIED":
+                            case 0:
+                                message.mode = 0;
+                                break;
+                            case "STANDARD":
+                            case 1:
+                                message.mode = 1;
+                                break;
+                            case "LIGHTWEIGHT":
+                            case 2:
+                                message.mode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -69886,6 +72884,7 @@
                                 object.includeFields = null;
                                 object.excludeFields = null;
                                 object.catalogPublishingEnabled = false;
+                                object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
                             }
                             if (message.samplingPercent != null && message.hasOwnProperty("samplingPercent"))
                                 object.samplingPercent = options.json && !isFinite(message.samplingPercent) ? String(message.samplingPercent) : message.samplingPercent;
@@ -69899,6 +72898,8 @@
                                 object.excludeFields = $root.google.cloud.dataplex.v1.DataProfileSpec.SelectedFields.toObject(message.excludeFields, options);
                             if (message.catalogPublishingEnabled != null && message.hasOwnProperty("catalogPublishingEnabled"))
                                 object.catalogPublishingEnabled = message.catalogPublishingEnabled;
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                object.mode = options.enums === String ? $root.google.cloud.dataplex.v1.DataProfileSpec.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.dataplex.v1.DataProfileSpec.Mode[message.mode] : message.mode;
                             return object;
                         };
     
@@ -70562,6 +73563,22 @@
                             };
     
                             return SelectedFields;
+                        })();
+    
+                        /**
+                         * Mode enum.
+                         * @name google.cloud.dataplex.v1.DataProfileSpec.Mode
+                         * @enum {number}
+                         * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                         * @property {number} STANDARD=1 STANDARD value
+                         * @property {number} LIGHTWEIGHT=2 LIGHTWEIGHT value
+                         */
+                        DataProfileSpec.Mode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STANDARD"] = 1;
+                            values[valuesById[2] = "LIGHTWEIGHT"] = 2;
+                            return values;
                         })();
     
                         return DataProfileSpec;
@@ -75400,6 +78417,8 @@
                          * @property {string|null} [rowFilter] DataQualitySpec rowFilter
                          * @property {google.cloud.dataplex.v1.DataQualitySpec.IPostScanActions|null} [postScanActions] DataQualitySpec postScanActions
                          * @property {boolean|null} [catalogPublishingEnabled] DataQualitySpec catalogPublishingEnabled
+                         * @property {boolean|null} [enableCatalogBasedRules] DataQualitySpec enableCatalogBasedRules
+                         * @property {string|null} [filter] DataQualitySpec filter
                          */
     
                         /**
@@ -75459,6 +78478,22 @@
                         DataQualitySpec.prototype.catalogPublishingEnabled = false;
     
                         /**
+                         * DataQualitySpec enableCatalogBasedRules.
+                         * @member {boolean} enableCatalogBasedRules
+                         * @memberof google.cloud.dataplex.v1.DataQualitySpec
+                         * @instance
+                         */
+                        DataQualitySpec.prototype.enableCatalogBasedRules = false;
+    
+                        /**
+                         * DataQualitySpec filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.dataplex.v1.DataQualitySpec
+                         * @instance
+                         */
+                        DataQualitySpec.prototype.filter = "";
+    
+                        /**
                          * Creates a new DataQualitySpec instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataplex.v1.DataQualitySpec
@@ -75493,6 +78528,10 @@
                                 $root.google.cloud.dataplex.v1.DataQualitySpec.PostScanActions.encode(message.postScanActions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.catalogPublishingEnabled != null && Object.hasOwnProperty.call(message, "catalogPublishingEnabled"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.catalogPublishingEnabled);
+                            if (message.enableCatalogBasedRules != null && Object.hasOwnProperty.call(message, "enableCatalogBasedRules"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.enableCatalogBasedRules);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.filter);
                             return writer;
                         };
     
@@ -75549,6 +78588,14 @@
                                     }
                                 case 8: {
                                         message.catalogPublishingEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.enableCatalogBasedRules = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.filter = reader.string();
                                         break;
                                     }
                                 default:
@@ -75609,6 +78656,12 @@
                             if (message.catalogPublishingEnabled != null && message.hasOwnProperty("catalogPublishingEnabled"))
                                 if (typeof message.catalogPublishingEnabled !== "boolean")
                                     return "catalogPublishingEnabled: boolean expected";
+                            if (message.enableCatalogBasedRules != null && message.hasOwnProperty("enableCatalogBasedRules"))
+                                if (typeof message.enableCatalogBasedRules !== "boolean")
+                                    return "enableCatalogBasedRules: boolean expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -75645,6 +78698,10 @@
                             }
                             if (object.catalogPublishingEnabled != null)
                                 message.catalogPublishingEnabled = Boolean(object.catalogPublishingEnabled);
+                            if (object.enableCatalogBasedRules != null)
+                                message.enableCatalogBasedRules = Boolean(object.enableCatalogBasedRules);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -75668,6 +78725,8 @@
                                 object.rowFilter = "";
                                 object.postScanActions = null;
                                 object.catalogPublishingEnabled = false;
+                                object.enableCatalogBasedRules = false;
+                                object.filter = "";
                             }
                             if (message.rules && message.rules.length) {
                                 object.rules = [];
@@ -75682,6 +78741,10 @@
                                 object.postScanActions = $root.google.cloud.dataplex.v1.DataQualitySpec.PostScanActions.toObject(message.postScanActions, options);
                             if (message.catalogPublishingEnabled != null && message.hasOwnProperty("catalogPublishingEnabled"))
                                 object.catalogPublishingEnabled = message.catalogPublishingEnabled;
+                            if (message.enableCatalogBasedRules != null && message.hasOwnProperty("enableCatalogBasedRules"))
+                                object.enableCatalogBasedRules = message.enableCatalogBasedRules;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     
@@ -79962,6 +83025,7 @@
                          * @property {google.cloud.dataplex.v1.DataQualityRule.IRowConditionExpectation|null} [rowConditionExpectation] DataQualityRule rowConditionExpectation
                          * @property {google.cloud.dataplex.v1.DataQualityRule.ITableConditionExpectation|null} [tableConditionExpectation] DataQualityRule tableConditionExpectation
                          * @property {google.cloud.dataplex.v1.DataQualityRule.ISqlAssertion|null} [sqlAssertion] DataQualityRule sqlAssertion
+                         * @property {google.cloud.dataplex.v1.DataQualityRule.ITemplateReference|null} [templateReference] DataQualityRule templateReference
                          * @property {string|null} [column] DataQualityRule column
                          * @property {boolean|null} [ignoreNull] DataQualityRule ignoreNull
                          * @property {string|null} [dimension] DataQualityRule dimension
@@ -79969,6 +83033,8 @@
                          * @property {string|null} [name] DataQualityRule name
                          * @property {string|null} [description] DataQualityRule description
                          * @property {boolean|null} [suspended] DataQualityRule suspended
+                         * @property {Object.<string,string>|null} [attributes] DataQualityRule attributes
+                         * @property {google.cloud.dataplex.v1.DataQualityRule.IRuleSource|null} [ruleSource] DataQualityRule ruleSource
                          * @property {Array.<google.cloud.dataplex.v1.DataQualityRule.IDebugQuery>|null} [debugQueries] DataQualityRule debugQueries
                          */
     
@@ -79981,6 +83047,7 @@
                          * @param {google.cloud.dataplex.v1.IDataQualityRule=} [properties] Properties to set
                          */
                         function DataQualityRule(properties) {
+                            this.attributes = {};
                             this.debugQueries = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -80061,6 +83128,14 @@
                         DataQualityRule.prototype.sqlAssertion = null;
     
                         /**
+                         * DataQualityRule templateReference.
+                         * @member {google.cloud.dataplex.v1.DataQualityRule.ITemplateReference|null|undefined} templateReference
+                         * @memberof google.cloud.dataplex.v1.DataQualityRule
+                         * @instance
+                         */
+                        DataQualityRule.prototype.templateReference = null;
+    
+                        /**
                          * DataQualityRule column.
                          * @member {string} column
                          * @memberof google.cloud.dataplex.v1.DataQualityRule
@@ -80117,6 +83192,22 @@
                         DataQualityRule.prototype.suspended = false;
     
                         /**
+                         * DataQualityRule attributes.
+                         * @member {Object.<string,string>} attributes
+                         * @memberof google.cloud.dataplex.v1.DataQualityRule
+                         * @instance
+                         */
+                        DataQualityRule.prototype.attributes = $util.emptyObject;
+    
+                        /**
+                         * DataQualityRule ruleSource.
+                         * @member {google.cloud.dataplex.v1.DataQualityRule.IRuleSource|null|undefined} ruleSource
+                         * @memberof google.cloud.dataplex.v1.DataQualityRule
+                         * @instance
+                         */
+                        DataQualityRule.prototype.ruleSource = null;
+    
+                        /**
                          * DataQualityRule debugQueries.
                          * @member {Array.<google.cloud.dataplex.v1.DataQualityRule.IDebugQuery>} debugQueries
                          * @memberof google.cloud.dataplex.v1.DataQualityRule
@@ -80129,12 +83220,12 @@
     
                         /**
                          * DataQualityRule ruleType.
-                         * @member {"rangeExpectation"|"nonNullExpectation"|"setExpectation"|"regexExpectation"|"uniquenessExpectation"|"statisticRangeExpectation"|"rowConditionExpectation"|"tableConditionExpectation"|"sqlAssertion"|undefined} ruleType
+                         * @member {"rangeExpectation"|"nonNullExpectation"|"setExpectation"|"regexExpectation"|"uniquenessExpectation"|"statisticRangeExpectation"|"rowConditionExpectation"|"tableConditionExpectation"|"sqlAssertion"|"templateReference"|undefined} ruleType
                          * @memberof google.cloud.dataplex.v1.DataQualityRule
                          * @instance
                          */
                         Object.defineProperty(DataQualityRule.prototype, "ruleType", {
-                            get: $util.oneOfGetter($oneOfFields = ["rangeExpectation", "nonNullExpectation", "setExpectation", "regexExpectation", "uniquenessExpectation", "statisticRangeExpectation", "rowConditionExpectation", "tableConditionExpectation", "sqlAssertion"]),
+                            get: $util.oneOfGetter($oneOfFields = ["rangeExpectation", "nonNullExpectation", "setExpectation", "regexExpectation", "uniquenessExpectation", "statisticRangeExpectation", "rowConditionExpectation", "tableConditionExpectation", "sqlAssertion", "templateReference"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -80170,6 +83261,8 @@
                                 $root.google.cloud.dataplex.v1.DataQualityRule.SetExpectation.encode(message.setExpectation, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.regexExpectation != null && Object.hasOwnProperty.call(message, "regexExpectation"))
                                 $root.google.cloud.dataplex.v1.DataQualityRule.RegexExpectation.encode(message.regexExpectation, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.templateReference != null && Object.hasOwnProperty.call(message, "templateReference"))
+                                $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.encode(message.templateReference, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.uniquenessExpectation != null && Object.hasOwnProperty.call(message, "uniquenessExpectation"))
                                 $root.google.cloud.dataplex.v1.DataQualityRule.UniquenessExpectation.encode(message.uniquenessExpectation, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             if (message.statisticRangeExpectation != null && Object.hasOwnProperty.call(message, "statisticRangeExpectation"))
@@ -80194,6 +83287,11 @@
                                 writer.uint32(/* id 505, wireType 2 =*/4042).string(message.description);
                             if (message.suspended != null && Object.hasOwnProperty.call(message, "suspended"))
                                 writer.uint32(/* id 506, wireType 0 =*/4048).bool(message.suspended);
+                            if (message.attributes != null && Object.hasOwnProperty.call(message, "attributes"))
+                                for (var keys = Object.keys(message.attributes), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 507, wireType 2 =*/4058).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.attributes[keys[i]]).ldelim();
+                            if (message.ruleSource != null && Object.hasOwnProperty.call(message, "ruleSource"))
+                                $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.encode(message.ruleSource, writer.uint32(/* id 508, wireType 2 =*/4066).fork()).ldelim();
                             if (message.debugQueries != null && message.debugQueries.length)
                                 for (var i = 0; i < message.debugQueries.length; ++i)
                                     $root.google.cloud.dataplex.v1.DataQualityRule.DebugQuery.encode(message.debugQueries[i], writer.uint32(/* id 510, wireType 2 =*/4082).fork()).ldelim();
@@ -80227,7 +83325,7 @@
                         DataQualityRule.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRule();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRule(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -80269,6 +83367,10 @@
                                         message.sqlAssertion = $root.google.cloud.dataplex.v1.DataQualityRule.SqlAssertion.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 5: {
+                                        message.templateReference = $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 500: {
                                         message.column = reader.string();
                                         break;
@@ -80295,6 +83397,33 @@
                                     }
                                 case 506: {
                                         message.suspended = reader.bool();
+                                        break;
+                                    }
+                                case 507: {
+                                        if (message.attributes === $util.emptyObject)
+                                            message.attributes = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.attributes[key] = value;
+                                        break;
+                                    }
+                                case 508: {
+                                        message.ruleSource = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 510: {
@@ -80427,6 +83556,16 @@
                                         return "sqlAssertion." + error;
                                 }
                             }
+                            if (message.templateReference != null && message.hasOwnProperty("templateReference")) {
+                                if (properties.ruleType === 1)
+                                    return "ruleType: multiple values";
+                                properties.ruleType = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.verify(message.templateReference);
+                                    if (error)
+                                        return "templateReference." + error;
+                                }
+                            }
                             if (message.column != null && message.hasOwnProperty("column"))
                                 if (!$util.isString(message.column))
                                     return "column: string expected";
@@ -80448,6 +83587,19 @@
                             if (message.suspended != null && message.hasOwnProperty("suspended"))
                                 if (typeof message.suspended !== "boolean")
                                     return "suspended: boolean expected";
+                            if (message.attributes != null && message.hasOwnProperty("attributes")) {
+                                if (!$util.isObject(message.attributes))
+                                    return "attributes: object expected";
+                                var key = Object.keys(message.attributes);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.attributes[key[i]]))
+                                        return "attributes: string{k:string} expected";
+                            }
+                            if (message.ruleSource != null && message.hasOwnProperty("ruleSource")) {
+                                var error = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.verify(message.ruleSource);
+                                if (error)
+                                    return "ruleSource." + error;
+                            }
                             if (message.debugQueries != null && message.hasOwnProperty("debugQueries")) {
                                 if (!Array.isArray(message.debugQueries))
                                     return "debugQueries: array expected";
@@ -80517,6 +83669,11 @@
                                     throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.sqlAssertion: object expected");
                                 message.sqlAssertion = $root.google.cloud.dataplex.v1.DataQualityRule.SqlAssertion.fromObject(object.sqlAssertion);
                             }
+                            if (object.templateReference != null) {
+                                if (typeof object.templateReference !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.templateReference: object expected");
+                                message.templateReference = $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.fromObject(object.templateReference);
+                            }
                             if (object.column != null)
                                 message.column = String(object.column);
                             if (object.ignoreNull != null)
@@ -80531,6 +83688,18 @@
                                 message.description = String(object.description);
                             if (object.suspended != null)
                                 message.suspended = Boolean(object.suspended);
+                            if (object.attributes) {
+                                if (typeof object.attributes !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.attributes: object expected");
+                                message.attributes = {};
+                                for (var keys = Object.keys(object.attributes), i = 0; i < keys.length; ++i)
+                                    message.attributes[keys[i]] = String(object.attributes[keys[i]]);
+                            }
+                            if (object.ruleSource != null) {
+                                if (typeof object.ruleSource !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.ruleSource: object expected");
+                                message.ruleSource = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.fromObject(object.ruleSource);
+                            }
                             if (object.debugQueries) {
                                 if (!Array.isArray(object.debugQueries))
                                     throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.debugQueries: array expected");
@@ -80559,6 +83728,8 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.debugQueries = [];
+                            if (options.objects || options.defaults)
+                                object.attributes = {};
                             if (options.defaults) {
                                 object.column = "";
                                 object.ignoreNull = false;
@@ -80567,6 +83738,7 @@
                                 object.name = "";
                                 object.description = "";
                                 object.suspended = false;
+                                object.ruleSource = null;
                             }
                             if (message.rangeExpectation != null && message.hasOwnProperty("rangeExpectation")) {
                                 object.rangeExpectation = $root.google.cloud.dataplex.v1.DataQualityRule.RangeExpectation.toObject(message.rangeExpectation, options);
@@ -80587,6 +83759,11 @@
                                 object.regexExpectation = $root.google.cloud.dataplex.v1.DataQualityRule.RegexExpectation.toObject(message.regexExpectation, options);
                                 if (options.oneofs)
                                     object.ruleType = "regexExpectation";
+                            }
+                            if (message.templateReference != null && message.hasOwnProperty("templateReference")) {
+                                object.templateReference = $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.toObject(message.templateReference, options);
+                                if (options.oneofs)
+                                    object.ruleType = "templateReference";
                             }
                             if (message.uniquenessExpectation != null && message.hasOwnProperty("uniquenessExpectation")) {
                                 object.uniquenessExpectation = $root.google.cloud.dataplex.v1.DataQualityRule.UniquenessExpectation.toObject(message.uniquenessExpectation, options);
@@ -80627,6 +83804,14 @@
                                 object.description = message.description;
                             if (message.suspended != null && message.hasOwnProperty("suspended"))
                                 object.suspended = message.suspended;
+                            var keys2;
+                            if (message.attributes && (keys2 = Object.keys(message.attributes)).length) {
+                                object.attributes = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.attributes[keys2[j]] = message.attributes[keys2[j]];
+                            }
+                            if (message.ruleSource != null && message.hasOwnProperty("ruleSource"))
+                                object.ruleSource = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.toObject(message.ruleSource, options);
                             if (message.debugQueries && message.debugQueries.length) {
                                 object.debugQueries = [];
                                 for (var j = 0; j < message.debugQueries.length; ++j)
@@ -82676,6 +85861,1505 @@
                             return SqlAssertion;
                         })();
     
+                        DataQualityRule.TemplateReference = (function() {
+    
+                            /**
+                             * Properties of a TemplateReference.
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule
+                             * @interface ITemplateReference
+                             * @property {string|null} [name] TemplateReference name
+                             * @property {Object.<string,google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue>|null} [values] TemplateReference values
+                             * @property {string|null} [resolvedSql] TemplateReference resolvedSql
+                             * @property {google.cloud.dataplex.v1.IDataQualityRuleTemplate|null} [ruleTemplate] TemplateReference ruleTemplate
+                             */
+    
+                            /**
+                             * Constructs a new TemplateReference.
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule
+                             * @classdesc Represents a TemplateReference.
+                             * @implements ITemplateReference
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.DataQualityRule.ITemplateReference=} [properties] Properties to set
+                             */
+                            function TemplateReference(properties) {
+                                this.values = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TemplateReference name.
+                             * @member {string} name
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @instance
+                             */
+                            TemplateReference.prototype.name = "";
+    
+                            /**
+                             * TemplateReference values.
+                             * @member {Object.<string,google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue>} values
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @instance
+                             */
+                            TemplateReference.prototype.values = $util.emptyObject;
+    
+                            /**
+                             * TemplateReference resolvedSql.
+                             * @member {string} resolvedSql
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @instance
+                             */
+                            TemplateReference.prototype.resolvedSql = "";
+    
+                            /**
+                             * TemplateReference ruleTemplate.
+                             * @member {google.cloud.dataplex.v1.IDataQualityRuleTemplate|null|undefined} ruleTemplate
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @instance
+                             */
+                            TemplateReference.prototype.ruleTemplate = null;
+    
+                            /**
+                             * Creates a new TemplateReference instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRule.ITemplateReference=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.DataQualityRule.TemplateReference} TemplateReference instance
+                             */
+                            TemplateReference.create = function create(properties) {
+                                return new TemplateReference(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TemplateReference message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.TemplateReference.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRule.ITemplateReference} message TemplateReference message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TemplateReference.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.resolvedSql != null && Object.hasOwnProperty.call(message, "resolvedSql"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.resolvedSql);
+                                if (message.ruleTemplate != null && Object.hasOwnProperty.call(message, "ruleTemplate"))
+                                    $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.encode(message.ruleTemplate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.values != null && Object.hasOwnProperty.call(message, "values"))
+                                    for (var keys = Object.keys(message.values), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue.encode(message.values[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TemplateReference message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.TemplateReference.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRule.ITemplateReference} message TemplateReference message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TemplateReference.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TemplateReference message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.DataQualityRule.TemplateReference} TemplateReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TemplateReference.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (message.values === $util.emptyObject)
+                                                message.values = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = null;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue.decode(reader, reader.uint32());
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.values[key] = value;
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.resolvedSql = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.ruleTemplate = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TemplateReference message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.DataQualityRule.TemplateReference} TemplateReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TemplateReference.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TemplateReference message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TemplateReference.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.values != null && message.hasOwnProperty("values")) {
+                                    if (!$util.isObject(message.values))
+                                        return "values: object expected";
+                                    var key = Object.keys(message.values);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue.verify(message.values[key[i]]);
+                                        if (error)
+                                            return "values." + error;
+                                    }
+                                }
+                                if (message.resolvedSql != null && message.hasOwnProperty("resolvedSql"))
+                                    if (!$util.isString(message.resolvedSql))
+                                        return "resolvedSql: string expected";
+                                if (message.ruleTemplate != null && message.hasOwnProperty("ruleTemplate")) {
+                                    var error = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.verify(message.ruleTemplate);
+                                    if (error)
+                                        return "ruleTemplate." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TemplateReference message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.DataQualityRule.TemplateReference} TemplateReference
+                             */
+                            TemplateReference.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference)
+                                    return object;
+                                var message = new $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.values) {
+                                    if (typeof object.values !== "object")
+                                        throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.TemplateReference.values: object expected");
+                                    message.values = {};
+                                    for (var keys = Object.keys(object.values), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.values[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.TemplateReference.values: object expected");
+                                        message.values[keys[i]] = $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue.fromObject(object.values[keys[i]]);
+                                    }
+                                }
+                                if (object.resolvedSql != null)
+                                    message.resolvedSql = String(object.resolvedSql);
+                                if (object.ruleTemplate != null) {
+                                    if (typeof object.ruleTemplate !== "object")
+                                        throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ruleTemplate: object expected");
+                                    message.ruleTemplate = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.fromObject(object.ruleTemplate);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TemplateReference message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRule.TemplateReference} message TemplateReference
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TemplateReference.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.values = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.resolvedSql = "";
+                                    object.ruleTemplate = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.resolvedSql != null && message.hasOwnProperty("resolvedSql"))
+                                    object.resolvedSql = message.resolvedSql;
+                                if (message.ruleTemplate != null && message.hasOwnProperty("ruleTemplate"))
+                                    object.ruleTemplate = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.toObject(message.ruleTemplate, options);
+                                var keys2;
+                                if (message.values && (keys2 = Object.keys(message.values)).length) {
+                                    object.values = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.values[keys2[j]] = $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue.toObject(message.values[keys2[j]], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TemplateReference to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TemplateReference.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TemplateReference
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TemplateReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.DataQualityRule.TemplateReference";
+                            };
+    
+                            TemplateReference.ParameterValue = (function() {
+    
+                                /**
+                                 * Properties of a ParameterValue.
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                                 * @interface IParameterValue
+                                 * @property {string|null} [value] ParameterValue value
+                                 */
+    
+                                /**
+                                 * Constructs a new ParameterValue.
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference
+                                 * @classdesc Represents a ParameterValue.
+                                 * @implements IParameterValue
+                                 * @constructor
+                                 * @param {google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue=} [properties] Properties to set
+                                 */
+                                function ParameterValue(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ParameterValue value.
+                                 * @member {string} value
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @instance
+                                 */
+                                ParameterValue.prototype.value = "";
+    
+                                /**
+                                 * Creates a new ParameterValue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue=} [properties] Properties to set
+                                 * @returns {google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue} ParameterValue instance
+                                 */
+                                ParameterValue.create = function create(properties) {
+                                    return new ParameterValue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ParameterValue message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue} message ParameterValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ParameterValue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ParameterValue message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue} message ParameterValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ParameterValue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ParameterValue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue} ParameterValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ParameterValue.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.value = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ParameterValue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue} ParameterValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ParameterValue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ParameterValue message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ParameterValue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        if (!$util.isString(message.value))
+                                            return "value: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ParameterValue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue} ParameterValue
+                                 */
+                                ParameterValue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue)
+                                        return object;
+                                    var message = new $root.google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue();
+                                    if (object.value != null)
+                                        message.value = String(object.value);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ParameterValue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue} message ParameterValue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ParameterValue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.value = "";
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        object.value = message.value;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ParameterValue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ParameterValue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ParameterValue
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ParameterValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue";
+                                };
+    
+                                return ParameterValue;
+                            })();
+    
+                            return TemplateReference;
+                        })();
+    
+                        DataQualityRule.RuleSource = (function() {
+    
+                            /**
+                             * Properties of a RuleSource.
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule
+                             * @interface IRuleSource
+                             * @property {Array.<google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement>|null} [rulePathElements] RuleSource rulePathElements
+                             */
+    
+                            /**
+                             * Constructs a new RuleSource.
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule
+                             * @classdesc Represents a RuleSource.
+                             * @implements IRuleSource
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.DataQualityRule.IRuleSource=} [properties] Properties to set
+                             */
+                            function RuleSource(properties) {
+                                this.rulePathElements = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RuleSource rulePathElements.
+                             * @member {Array.<google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement>} rulePathElements
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @instance
+                             */
+                            RuleSource.prototype.rulePathElements = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RuleSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRule.IRuleSource=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource} RuleSource instance
+                             */
+                            RuleSource.create = function create(properties) {
+                                return new RuleSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RuleSource message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRule.IRuleSource} message RuleSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RuleSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.rulePathElements != null && message.rulePathElements.length)
+                                    for (var i = 0; i < message.rulePathElements.length; ++i)
+                                        $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.encode(message.rulePathElements[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RuleSource message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRule.IRuleSource} message RuleSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RuleSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RuleSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource} RuleSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RuleSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.rulePathElements && message.rulePathElements.length))
+                                                message.rulePathElements = [];
+                                            message.rulePathElements.push($root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RuleSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource} RuleSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RuleSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RuleSource message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RuleSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.rulePathElements != null && message.hasOwnProperty("rulePathElements")) {
+                                    if (!Array.isArray(message.rulePathElements))
+                                        return "rulePathElements: array expected";
+                                    for (var i = 0; i < message.rulePathElements.length; ++i) {
+                                        var error = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.verify(message.rulePathElements[i]);
+                                        if (error)
+                                            return "rulePathElements." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RuleSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource} RuleSource
+                             */
+                            RuleSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource)
+                                    return object;
+                                var message = new $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource();
+                                if (object.rulePathElements) {
+                                    if (!Array.isArray(object.rulePathElements))
+                                        throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.RuleSource.rulePathElements: array expected");
+                                    message.rulePathElements = [];
+                                    for (var i = 0; i < object.rulePathElements.length; ++i) {
+                                        if (typeof object.rulePathElements[i] !== "object")
+                                            throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.RuleSource.rulePathElements: object expected");
+                                        message.rulePathElements[i] = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.fromObject(object.rulePathElements[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RuleSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource} message RuleSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RuleSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.rulePathElements = [];
+                                if (message.rulePathElements && message.rulePathElements.length) {
+                                    object.rulePathElements = [];
+                                    for (var j = 0; j < message.rulePathElements.length; ++j)
+                                        object.rulePathElements[j] = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.toObject(message.rulePathElements[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RuleSource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RuleSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RuleSource
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RuleSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.DataQualityRule.RuleSource";
+                            };
+    
+                            RuleSource.RulePathElement = (function() {
+    
+                                /**
+                                 * Properties of a RulePathElement.
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                                 * @interface IRulePathElement
+                                 * @property {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource|null} [entrySource] RulePathElement entrySource
+                                 * @property {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource|null} [entryLinkSource] RulePathElement entryLinkSource
+                                 */
+    
+                                /**
+                                 * Constructs a new RulePathElement.
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource
+                                 * @classdesc Represents a RulePathElement.
+                                 * @implements IRulePathElement
+                                 * @constructor
+                                 * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement=} [properties] Properties to set
+                                 */
+                                function RulePathElement(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RulePathElement entrySource.
+                                 * @member {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource|null|undefined} entrySource
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @instance
+                                 */
+                                RulePathElement.prototype.entrySource = null;
+    
+                                /**
+                                 * RulePathElement entryLinkSource.
+                                 * @member {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource|null|undefined} entryLinkSource
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @instance
+                                 */
+                                RulePathElement.prototype.entryLinkSource = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * RulePathElement sourceType.
+                                 * @member {"entrySource"|"entryLinkSource"|undefined} sourceType
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @instance
+                                 */
+                                Object.defineProperty(RulePathElement.prototype, "sourceType", {
+                                    get: $util.oneOfGetter($oneOfFields = ["entrySource", "entryLinkSource"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new RulePathElement instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement=} [properties] Properties to set
+                                 * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement} RulePathElement instance
+                                 */
+                                RulePathElement.create = function create(properties) {
+                                    return new RulePathElement(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RulePathElement message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement} message RulePathElement message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RulePathElement.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.entrySource != null && Object.hasOwnProperty.call(message, "entrySource"))
+                                        $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource.encode(message.entrySource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.entryLinkSource != null && Object.hasOwnProperty.call(message, "entryLinkSource"))
+                                        $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource.encode(message.entryLinkSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RulePathElement message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement} message RulePathElement message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RulePathElement.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RulePathElement message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement} RulePathElement
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RulePathElement.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.entrySource = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.entryLinkSource = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RulePathElement message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement} RulePathElement
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RulePathElement.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RulePathElement message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RulePathElement.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.entrySource != null && message.hasOwnProperty("entrySource")) {
+                                        properties.sourceType = 1;
+                                        {
+                                            var error = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource.verify(message.entrySource);
+                                            if (error)
+                                                return "entrySource." + error;
+                                        }
+                                    }
+                                    if (message.entryLinkSource != null && message.hasOwnProperty("entryLinkSource")) {
+                                        if (properties.sourceType === 1)
+                                            return "sourceType: multiple values";
+                                        properties.sourceType = 1;
+                                        {
+                                            var error = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource.verify(message.entryLinkSource);
+                                            if (error)
+                                                return "entryLinkSource." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RulePathElement message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement} RulePathElement
+                                 */
+                                RulePathElement.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement)
+                                        return object;
+                                    var message = new $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement();
+                                    if (object.entrySource != null) {
+                                        if (typeof object.entrySource !== "object")
+                                            throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.entrySource: object expected");
+                                        message.entrySource = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource.fromObject(object.entrySource);
+                                    }
+                                    if (object.entryLinkSource != null) {
+                                        if (typeof object.entryLinkSource !== "object")
+                                            throw TypeError(".google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.entryLinkSource: object expected");
+                                        message.entryLinkSource = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource.fromObject(object.entryLinkSource);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RulePathElement message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement} message RulePathElement
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RulePathElement.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.entrySource != null && message.hasOwnProperty("entrySource")) {
+                                        object.entrySource = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource.toObject(message.entrySource, options);
+                                        if (options.oneofs)
+                                            object.sourceType = "entrySource";
+                                    }
+                                    if (message.entryLinkSource != null && message.hasOwnProperty("entryLinkSource")) {
+                                        object.entryLinkSource = $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource.toObject(message.entryLinkSource, options);
+                                        if (options.oneofs)
+                                            object.sourceType = "entryLinkSource";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RulePathElement to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RulePathElement.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RulePathElement
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RulePathElement.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement";
+                                };
+    
+                                RulePathElement.EntrySource = (function() {
+    
+                                    /**
+                                     * Properties of an EntrySource.
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                     * @interface IEntrySource
+                                     * @property {string|null} [entryType] EntrySource entryType
+                                     * @property {string|null} [entry] EntrySource entry
+                                     * @property {string|null} [displayName] EntrySource displayName
+                                     */
+    
+                                    /**
+                                     * Constructs a new EntrySource.
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                     * @classdesc Represents an EntrySource.
+                                     * @implements IEntrySource
+                                     * @constructor
+                                     * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource=} [properties] Properties to set
+                                     */
+                                    function EntrySource(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * EntrySource entryType.
+                                     * @member {string} entryType
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @instance
+                                     */
+                                    EntrySource.prototype.entryType = "";
+    
+                                    /**
+                                     * EntrySource entry.
+                                     * @member {string} entry
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @instance
+                                     */
+                                    EntrySource.prototype.entry = "";
+    
+                                    /**
+                                     * EntrySource displayName.
+                                     * @member {string} displayName
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @instance
+                                     */
+                                    EntrySource.prototype.displayName = "";
+    
+                                    /**
+                                     * Creates a new EntrySource instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @static
+                                     * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource=} [properties] Properties to set
+                                     * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource} EntrySource instance
+                                     */
+                                    EntrySource.create = function create(properties) {
+                                        return new EntrySource(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified EntrySource message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @static
+                                     * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource} message EntrySource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    EntrySource.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.entryType != null && Object.hasOwnProperty.call(message, "entryType"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.entryType);
+                                        if (message.entry != null && Object.hasOwnProperty.call(message, "entry"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.entry);
+                                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified EntrySource message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @static
+                                     * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource} message EntrySource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    EntrySource.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an EntrySource message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource} EntrySource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    EntrySource.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.entryType = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.entry = reader.string();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.displayName = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an EntrySource message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource} EntrySource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    EntrySource.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an EntrySource message.
+                                     * @function verify
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    EntrySource.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.entryType != null && message.hasOwnProperty("entryType"))
+                                            if (!$util.isString(message.entryType))
+                                                return "entryType: string expected";
+                                        if (message.entry != null && message.hasOwnProperty("entry"))
+                                            if (!$util.isString(message.entry))
+                                                return "entry: string expected";
+                                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                            if (!$util.isString(message.displayName))
+                                                return "displayName: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an EntrySource message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource} EntrySource
+                                     */
+                                    EntrySource.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource)
+                                            return object;
+                                        var message = new $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource();
+                                        if (object.entryType != null)
+                                            message.entryType = String(object.entryType);
+                                        if (object.entry != null)
+                                            message.entry = String(object.entry);
+                                        if (object.displayName != null)
+                                            message.displayName = String(object.displayName);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an EntrySource message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @static
+                                     * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource} message EntrySource
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    EntrySource.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.entryType = "";
+                                            object.entry = "";
+                                            object.displayName = "";
+                                        }
+                                        if (message.entryType != null && message.hasOwnProperty("entryType"))
+                                            object.entryType = message.entryType;
+                                        if (message.entry != null && message.hasOwnProperty("entry"))
+                                            object.entry = message.entry;
+                                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                            object.displayName = message.displayName;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this EntrySource to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    EntrySource.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for EntrySource
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    EntrySource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource";
+                                    };
+    
+                                    return EntrySource;
+                                })();
+    
+                                RulePathElement.EntryLinkSource = (function() {
+    
+                                    /**
+                                     * Properties of an EntryLinkSource.
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                     * @interface IEntryLinkSource
+                                     * @property {string|null} [entryLinkType] EntryLinkSource entryLinkType
+                                     * @property {string|null} [entryLink] EntryLinkSource entryLink
+                                     */
+    
+                                    /**
+                                     * Constructs a new EntryLinkSource.
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement
+                                     * @classdesc Represents an EntryLinkSource.
+                                     * @implements IEntryLinkSource
+                                     * @constructor
+                                     * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource=} [properties] Properties to set
+                                     */
+                                    function EntryLinkSource(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * EntryLinkSource entryLinkType.
+                                     * @member {string} entryLinkType
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @instance
+                                     */
+                                    EntryLinkSource.prototype.entryLinkType = "";
+    
+                                    /**
+                                     * EntryLinkSource entryLink.
+                                     * @member {string} entryLink
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @instance
+                                     */
+                                    EntryLinkSource.prototype.entryLink = "";
+    
+                                    /**
+                                     * Creates a new EntryLinkSource instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @static
+                                     * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource=} [properties] Properties to set
+                                     * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource} EntryLinkSource instance
+                                     */
+                                    EntryLinkSource.create = function create(properties) {
+                                        return new EntryLinkSource(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified EntryLinkSource message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @static
+                                     * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource} message EntryLinkSource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    EntryLinkSource.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.entryLinkType != null && Object.hasOwnProperty.call(message, "entryLinkType"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.entryLinkType);
+                                        if (message.entryLink != null && Object.hasOwnProperty.call(message, "entryLink"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.entryLink);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified EntryLinkSource message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @static
+                                     * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource} message EntryLinkSource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    EntryLinkSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an EntryLinkSource message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource} EntryLinkSource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    EntryLinkSource.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.entryLinkType = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.entryLink = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an EntryLinkSource message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource} EntryLinkSource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    EntryLinkSource.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an EntryLinkSource message.
+                                     * @function verify
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    EntryLinkSource.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.entryLinkType != null && message.hasOwnProperty("entryLinkType"))
+                                            if (!$util.isString(message.entryLinkType))
+                                                return "entryLinkType: string expected";
+                                        if (message.entryLink != null && message.hasOwnProperty("entryLink"))
+                                            if (!$util.isString(message.entryLink))
+                                                return "entryLink: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an EntryLinkSource message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource} EntryLinkSource
+                                     */
+                                    EntryLinkSource.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource)
+                                            return object;
+                                        var message = new $root.google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource();
+                                        if (object.entryLinkType != null)
+                                            message.entryLinkType = String(object.entryLinkType);
+                                        if (object.entryLink != null)
+                                            message.entryLink = String(object.entryLink);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an EntryLinkSource message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @static
+                                     * @param {google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource} message EntryLinkSource
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    EntryLinkSource.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.entryLinkType = "";
+                                            object.entryLink = "";
+                                        }
+                                        if (message.entryLinkType != null && message.hasOwnProperty("entryLinkType"))
+                                            object.entryLinkType = message.entryLinkType;
+                                        if (message.entryLink != null && message.hasOwnProperty("entryLink"))
+                                            object.entryLink = message.entryLink;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this EntryLinkSource to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    EntryLinkSource.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for EntryLinkSource
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    EntryLinkSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource";
+                                    };
+    
+                                    return EntryLinkSource;
+                                })();
+    
+                                return RulePathElement;
+                            })();
+    
+                            return RuleSource;
+                        })();
+    
                         DataQualityRule.DebugQuery = (function() {
     
                             /**
@@ -83217,6 +87901,820 @@
                         };
     
                         return DataQualityColumnResult;
+                    })();
+    
+                    v1.DataQualityRuleTemplate = (function() {
+    
+                        /**
+                         * Properties of a DataQualityRuleTemplate.
+                         * @memberof google.cloud.dataplex.v1
+                         * @interface IDataQualityRuleTemplate
+                         * @property {string|null} [name] DataQualityRuleTemplate name
+                         * @property {string|null} [dimension] DataQualityRuleTemplate dimension
+                         * @property {Array.<google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql>|null} [sqlCollection] DataQualityRuleTemplate sqlCollection
+                         * @property {Object.<string,google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription>|null} [inputParameters] DataQualityRuleTemplate inputParameters
+                         * @property {Array.<string>|null} [capabilities] DataQualityRuleTemplate capabilities
+                         */
+    
+                        /**
+                         * Constructs a new DataQualityRuleTemplate.
+                         * @memberof google.cloud.dataplex.v1
+                         * @classdesc Represents a DataQualityRuleTemplate.
+                         * @implements IDataQualityRuleTemplate
+                         * @constructor
+                         * @param {google.cloud.dataplex.v1.IDataQualityRuleTemplate=} [properties] Properties to set
+                         */
+                        function DataQualityRuleTemplate(properties) {
+                            this.sqlCollection = [];
+                            this.inputParameters = {};
+                            this.capabilities = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataQualityRuleTemplate name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @instance
+                         */
+                        DataQualityRuleTemplate.prototype.name = "";
+    
+                        /**
+                         * DataQualityRuleTemplate dimension.
+                         * @member {string} dimension
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @instance
+                         */
+                        DataQualityRuleTemplate.prototype.dimension = "";
+    
+                        /**
+                         * DataQualityRuleTemplate sqlCollection.
+                         * @member {Array.<google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql>} sqlCollection
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @instance
+                         */
+                        DataQualityRuleTemplate.prototype.sqlCollection = $util.emptyArray;
+    
+                        /**
+                         * DataQualityRuleTemplate inputParameters.
+                         * @member {Object.<string,google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription>} inputParameters
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @instance
+                         */
+                        DataQualityRuleTemplate.prototype.inputParameters = $util.emptyObject;
+    
+                        /**
+                         * DataQualityRuleTemplate capabilities.
+                         * @member {Array.<string>} capabilities
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @instance
+                         */
+                        DataQualityRuleTemplate.prototype.capabilities = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DataQualityRuleTemplate instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IDataQualityRuleTemplate=} [properties] Properties to set
+                         * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate} DataQualityRuleTemplate instance
+                         */
+                        DataQualityRuleTemplate.create = function create(properties) {
+                            return new DataQualityRuleTemplate(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataQualityRuleTemplate message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IDataQualityRuleTemplate} message DataQualityRuleTemplate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataQualityRuleTemplate.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.dimension != null && Object.hasOwnProperty.call(message, "dimension"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.dimension);
+                            if (message.sqlCollection != null && message.sqlCollection.length)
+                                for (var i = 0; i < message.sqlCollection.length; ++i)
+                                    $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql.encode(message.sqlCollection[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.inputParameters != null && Object.hasOwnProperty.call(message, "inputParameters"))
+                                for (var keys = Object.keys(message.inputParameters), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription.encode(message.inputParameters[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.capabilities != null && message.capabilities.length)
+                                for (var i = 0; i < message.capabilities.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.capabilities[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataQualityRuleTemplate message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IDataQualityRuleTemplate} message DataQualityRuleTemplate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataQualityRuleTemplate.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataQualityRuleTemplate message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate} DataQualityRuleTemplate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataQualityRuleTemplate.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRuleTemplate(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dimension = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.sqlCollection && message.sqlCollection.length))
+                                            message.sqlCollection = [];
+                                        message.sqlCollection.push($root.google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.inputParameters === $util.emptyObject)
+                                            message.inputParameters = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.inputParameters[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.capabilities && message.capabilities.length))
+                                            message.capabilities = [];
+                                        message.capabilities.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataQualityRuleTemplate message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate} DataQualityRuleTemplate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataQualityRuleTemplate.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataQualityRuleTemplate message.
+                         * @function verify
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataQualityRuleTemplate.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.dimension != null && message.hasOwnProperty("dimension"))
+                                if (!$util.isString(message.dimension))
+                                    return "dimension: string expected";
+                            if (message.sqlCollection != null && message.hasOwnProperty("sqlCollection")) {
+                                if (!Array.isArray(message.sqlCollection))
+                                    return "sqlCollection: array expected";
+                                for (var i = 0; i < message.sqlCollection.length; ++i) {
+                                    var error = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql.verify(message.sqlCollection[i]);
+                                    if (error)
+                                        return "sqlCollection." + error;
+                                }
+                            }
+                            if (message.inputParameters != null && message.hasOwnProperty("inputParameters")) {
+                                if (!$util.isObject(message.inputParameters))
+                                    return "inputParameters: object expected";
+                                var key = Object.keys(message.inputParameters);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription.verify(message.inputParameters[key[i]]);
+                                    if (error)
+                                        return "inputParameters." + error;
+                                }
+                            }
+                            if (message.capabilities != null && message.hasOwnProperty("capabilities")) {
+                                if (!Array.isArray(message.capabilities))
+                                    return "capabilities: array expected";
+                                for (var i = 0; i < message.capabilities.length; ++i)
+                                    if (!$util.isString(message.capabilities[i]))
+                                        return "capabilities: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataQualityRuleTemplate message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate} DataQualityRuleTemplate
+                         */
+                        DataQualityRuleTemplate.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataplex.v1.DataQualityRuleTemplate)
+                                return object;
+                            var message = new $root.google.cloud.dataplex.v1.DataQualityRuleTemplate();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.dimension != null)
+                                message.dimension = String(object.dimension);
+                            if (object.sqlCollection) {
+                                if (!Array.isArray(object.sqlCollection))
+                                    throw TypeError(".google.cloud.dataplex.v1.DataQualityRuleTemplate.sqlCollection: array expected");
+                                message.sqlCollection = [];
+                                for (var i = 0; i < object.sqlCollection.length; ++i) {
+                                    if (typeof object.sqlCollection[i] !== "object")
+                                        throw TypeError(".google.cloud.dataplex.v1.DataQualityRuleTemplate.sqlCollection: object expected");
+                                    message.sqlCollection[i] = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql.fromObject(object.sqlCollection[i]);
+                                }
+                            }
+                            if (object.inputParameters) {
+                                if (typeof object.inputParameters !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.DataQualityRuleTemplate.inputParameters: object expected");
+                                message.inputParameters = {};
+                                for (var keys = Object.keys(object.inputParameters), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.inputParameters[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.dataplex.v1.DataQualityRuleTemplate.inputParameters: object expected");
+                                    message.inputParameters[keys[i]] = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription.fromObject(object.inputParameters[keys[i]]);
+                                }
+                            }
+                            if (object.capabilities) {
+                                if (!Array.isArray(object.capabilities))
+                                    throw TypeError(".google.cloud.dataplex.v1.DataQualityRuleTemplate.capabilities: array expected");
+                                message.capabilities = [];
+                                for (var i = 0; i < object.capabilities.length; ++i)
+                                    message.capabilities[i] = String(object.capabilities[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataQualityRuleTemplate message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @static
+                         * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate} message DataQualityRuleTemplate
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataQualityRuleTemplate.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.sqlCollection = [];
+                                object.capabilities = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.inputParameters = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.dimension = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.dimension != null && message.hasOwnProperty("dimension"))
+                                object.dimension = message.dimension;
+                            if (message.sqlCollection && message.sqlCollection.length) {
+                                object.sqlCollection = [];
+                                for (var j = 0; j < message.sqlCollection.length; ++j)
+                                    object.sqlCollection[j] = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql.toObject(message.sqlCollection[j], options);
+                            }
+                            var keys2;
+                            if (message.inputParameters && (keys2 = Object.keys(message.inputParameters)).length) {
+                                object.inputParameters = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.inputParameters[keys2[j]] = $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription.toObject(message.inputParameters[keys2[j]], options);
+                            }
+                            if (message.capabilities && message.capabilities.length) {
+                                object.capabilities = [];
+                                for (var j = 0; j < message.capabilities.length; ++j)
+                                    object.capabilities[j] = message.capabilities[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataQualityRuleTemplate to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataQualityRuleTemplate.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataQualityRuleTemplate
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataQualityRuleTemplate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataplex.v1.DataQualityRuleTemplate";
+                        };
+    
+                        DataQualityRuleTemplate.Sql = (function() {
+    
+                            /**
+                             * Properties of a Sql.
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                             * @interface ISql
+                             * @property {string|null} [query] Sql query
+                             */
+    
+                            /**
+                             * Constructs a new Sql.
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                             * @classdesc Represents a Sql.
+                             * @implements ISql
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql=} [properties] Properties to set
+                             */
+                            function Sql(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Sql query.
+                             * @member {string} query
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @instance
+                             */
+                            Sql.prototype.query = "";
+    
+                            /**
+                             * Creates a new Sql instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql} Sql instance
+                             */
+                            Sql.create = function create(properties) {
+                                return new Sql(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Sql message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql} message Sql message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Sql.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Sql message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql} message Sql message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Sql.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Sql message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql} Sql
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Sql.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.query = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Sql message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql} Sql
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Sql.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Sql message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Sql.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    if (!$util.isString(message.query))
+                                        return "query: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Sql message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql} Sql
+                             */
+                            Sql.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql)
+                                    return object;
+                                var message = new $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql();
+                                if (object.query != null)
+                                    message.query = String(object.query);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Sql message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql} message Sql
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Sql.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.query = "";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    object.query = message.query;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Sql to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Sql.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Sql
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Sql.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql";
+                            };
+    
+                            return Sql;
+                        })();
+    
+                        DataQualityRuleTemplate.ParameterDescription = (function() {
+    
+                            /**
+                             * Properties of a ParameterDescription.
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                             * @interface IParameterDescription
+                             * @property {string|null} [description] ParameterDescription description
+                             * @property {string|null} [defaultValue] ParameterDescription defaultValue
+                             */
+    
+                            /**
+                             * Constructs a new ParameterDescription.
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate
+                             * @classdesc Represents a ParameterDescription.
+                             * @implements IParameterDescription
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription=} [properties] Properties to set
+                             */
+                            function ParameterDescription(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ParameterDescription description.
+                             * @member {string} description
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @instance
+                             */
+                            ParameterDescription.prototype.description = "";
+    
+                            /**
+                             * ParameterDescription defaultValue.
+                             * @member {string} defaultValue
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @instance
+                             */
+                            ParameterDescription.prototype.defaultValue = "";
+    
+                            /**
+                             * Creates a new ParameterDescription instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription} ParameterDescription instance
+                             */
+                            ParameterDescription.create = function create(properties) {
+                                return new ParameterDescription(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ParameterDescription message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription} message ParameterDescription message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ParameterDescription.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                                if (message.defaultValue != null && Object.hasOwnProperty.call(message, "defaultValue"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.defaultValue);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ParameterDescription message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription} message ParameterDescription message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ParameterDescription.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ParameterDescription message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription} ParameterDescription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ParameterDescription.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.defaultValue = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ParameterDescription message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription} ParameterDescription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ParameterDescription.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ParameterDescription message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ParameterDescription.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
+                                    if (!$util.isString(message.defaultValue))
+                                        return "defaultValue: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ParameterDescription message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription} ParameterDescription
+                             */
+                            ParameterDescription.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription)
+                                    return object;
+                                var message = new $root.google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription();
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                if (object.defaultValue != null)
+                                    message.defaultValue = String(object.defaultValue);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ParameterDescription message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription} message ParameterDescription
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ParameterDescription.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.description = "";
+                                    object.defaultValue = "";
+                                }
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
+                                    object.defaultValue = message.defaultValue;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ParameterDescription to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ParameterDescription.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ParameterDescription
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ParameterDescription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription";
+                            };
+    
+                            return ParameterDescription;
+                        })();
+    
+                        return DataQualityRuleTemplate;
                     })();
     
                     v1.DataTaxonomyService = (function() {
@@ -91018,6 +96516,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.dataplex.v1.DataScanService|cancelDataScanJob}.
+                         * @memberof google.cloud.dataplex.v1.DataScanService
+                         * @typedef CancelDataScanJobCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataplex.v1.CancelDataScanJobResponse} [response] CancelDataScanJobResponse
+                         */
+    
+                        /**
+                         * Calls CancelDataScanJob.
+                         * @function cancelDataScanJob
+                         * @memberof google.cloud.dataplex.v1.DataScanService
+                         * @instance
+                         * @param {google.cloud.dataplex.v1.ICancelDataScanJobRequest} request CancelDataScanJobRequest message or plain object
+                         * @param {google.cloud.dataplex.v1.DataScanService.CancelDataScanJobCallback} callback Node-style callback called with the error, if any, and CancelDataScanJobResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataScanService.prototype.cancelDataScanJob = function cancelDataScanJob(request, callback) {
+                            return this.rpcCall(cancelDataScanJob, $root.google.cloud.dataplex.v1.CancelDataScanJobRequest, $root.google.cloud.dataplex.v1.CancelDataScanJobResponse, request, callback);
+                        }, "name", { value: "CancelDataScanJob" });
+    
+                        /**
+                         * Calls CancelDataScanJob.
+                         * @function cancelDataScanJob
+                         * @memberof google.cloud.dataplex.v1.DataScanService
+                         * @instance
+                         * @param {google.cloud.dataplex.v1.ICancelDataScanJobRequest} request CancelDataScanJobRequest message or plain object
+                         * @returns {Promise<google.cloud.dataplex.v1.CancelDataScanJobResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.dataplex.v1.DataScanService|generateDataQualityRules}.
                          * @memberof google.cloud.dataplex.v1.DataScanService
                          * @typedef GenerateDataQualityRulesCallback
@@ -93890,6 +99421,388 @@
                         return ListDataScanJobsResponse;
                     })();
     
+                    v1.CancelDataScanJobRequest = (function() {
+    
+                        /**
+                         * Properties of a CancelDataScanJobRequest.
+                         * @memberof google.cloud.dataplex.v1
+                         * @interface ICancelDataScanJobRequest
+                         * @property {string|null} [name] CancelDataScanJobRequest name
+                         */
+    
+                        /**
+                         * Constructs a new CancelDataScanJobRequest.
+                         * @memberof google.cloud.dataplex.v1
+                         * @classdesc Represents a CancelDataScanJobRequest.
+                         * @implements ICancelDataScanJobRequest
+                         * @constructor
+                         * @param {google.cloud.dataplex.v1.ICancelDataScanJobRequest=} [properties] Properties to set
+                         */
+                        function CancelDataScanJobRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CancelDataScanJobRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @instance
+                         */
+                        CancelDataScanJobRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new CancelDataScanJobRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.ICancelDataScanJobRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataplex.v1.CancelDataScanJobRequest} CancelDataScanJobRequest instance
+                         */
+                        CancelDataScanJobRequest.create = function create(properties) {
+                            return new CancelDataScanJobRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CancelDataScanJobRequest message. Does not implicitly {@link google.cloud.dataplex.v1.CancelDataScanJobRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.ICancelDataScanJobRequest} message CancelDataScanJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelDataScanJobRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CancelDataScanJobRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.CancelDataScanJobRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.ICancelDataScanJobRequest} message CancelDataScanJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelDataScanJobRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CancelDataScanJobRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataplex.v1.CancelDataScanJobRequest} CancelDataScanJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelDataScanJobRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.CancelDataScanJobRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CancelDataScanJobRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataplex.v1.CancelDataScanJobRequest} CancelDataScanJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelDataScanJobRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CancelDataScanJobRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CancelDataScanJobRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CancelDataScanJobRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataplex.v1.CancelDataScanJobRequest} CancelDataScanJobRequest
+                         */
+                        CancelDataScanJobRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataplex.v1.CancelDataScanJobRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataplex.v1.CancelDataScanJobRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CancelDataScanJobRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @static
+                         * @param {google.cloud.dataplex.v1.CancelDataScanJobRequest} message CancelDataScanJobRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CancelDataScanJobRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CancelDataScanJobRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CancelDataScanJobRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CancelDataScanJobRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CancelDataScanJobRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataplex.v1.CancelDataScanJobRequest";
+                        };
+    
+                        return CancelDataScanJobRequest;
+                    })();
+    
+                    v1.CancelDataScanJobResponse = (function() {
+    
+                        /**
+                         * Properties of a CancelDataScanJobResponse.
+                         * @memberof google.cloud.dataplex.v1
+                         * @interface ICancelDataScanJobResponse
+                         */
+    
+                        /**
+                         * Constructs a new CancelDataScanJobResponse.
+                         * @memberof google.cloud.dataplex.v1
+                         * @classdesc Represents a CancelDataScanJobResponse.
+                         * @implements ICancelDataScanJobResponse
+                         * @constructor
+                         * @param {google.cloud.dataplex.v1.ICancelDataScanJobResponse=} [properties] Properties to set
+                         */
+                        function CancelDataScanJobResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new CancelDataScanJobResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobResponse
+                         * @static
+                         * @param {google.cloud.dataplex.v1.ICancelDataScanJobResponse=} [properties] Properties to set
+                         * @returns {google.cloud.dataplex.v1.CancelDataScanJobResponse} CancelDataScanJobResponse instance
+                         */
+                        CancelDataScanJobResponse.create = function create(properties) {
+                            return new CancelDataScanJobResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CancelDataScanJobResponse message. Does not implicitly {@link google.cloud.dataplex.v1.CancelDataScanJobResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobResponse
+                         * @static
+                         * @param {google.cloud.dataplex.v1.ICancelDataScanJobResponse} message CancelDataScanJobResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelDataScanJobResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CancelDataScanJobResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.CancelDataScanJobResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobResponse
+                         * @static
+                         * @param {google.cloud.dataplex.v1.ICancelDataScanJobResponse} message CancelDataScanJobResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelDataScanJobResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CancelDataScanJobResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataplex.v1.CancelDataScanJobResponse} CancelDataScanJobResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelDataScanJobResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.CancelDataScanJobResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CancelDataScanJobResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataplex.v1.CancelDataScanJobResponse} CancelDataScanJobResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelDataScanJobResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CancelDataScanJobResponse message.
+                         * @function verify
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CancelDataScanJobResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CancelDataScanJobResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataplex.v1.CancelDataScanJobResponse} CancelDataScanJobResponse
+                         */
+                        CancelDataScanJobResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataplex.v1.CancelDataScanJobResponse)
+                                return object;
+                            return new $root.google.cloud.dataplex.v1.CancelDataScanJobResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a CancelDataScanJobResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobResponse
+                         * @static
+                         * @param {google.cloud.dataplex.v1.CancelDataScanJobResponse} message CancelDataScanJobResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CancelDataScanJobResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this CancelDataScanJobResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CancelDataScanJobResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CancelDataScanJobResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataplex.v1.CancelDataScanJobResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CancelDataScanJobResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataplex.v1.CancelDataScanJobResponse";
+                        };
+    
+                        return CancelDataScanJobResponse;
+                    })();
+    
                     v1.GenerateDataQualityRulesRequest = (function() {
     
                         /**
@@ -94347,6 +100260,7 @@
                          * @property {google.cloud.dataplex.v1.IDataProfileResult|null} [dataProfileResult] DataScan dataProfileResult
                          * @property {google.cloud.dataplex.v1.IDataDiscoveryResult|null} [dataDiscoveryResult] DataScan dataDiscoveryResult
                          * @property {google.cloud.dataplex.v1.IDataDocumentationResult|null} [dataDocumentationResult] DataScan dataDocumentationResult
+                         * @property {google.cloud.dataplex.v1.IExecutionIdentity|null} [executionIdentity] DataScan executionIdentity
                          */
     
                         /**
@@ -94525,6 +100439,14 @@
                          */
                         DataScan.prototype.dataDocumentationResult = null;
     
+                        /**
+                         * DataScan executionIdentity.
+                         * @member {google.cloud.dataplex.v1.IExecutionIdentity|null|undefined} executionIdentity
+                         * @memberof google.cloud.dataplex.v1.DataScan
+                         * @instance
+                         */
+                        DataScan.prototype.executionIdentity = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -94615,6 +100537,8 @@
                                 $root.google.cloud.dataplex.v1.DataDiscoveryResult.encode(message.dataDiscoveryResult, writer.uint32(/* id 202, wireType 2 =*/1618).fork()).ldelim();
                             if (message.dataDocumentationResult != null && Object.hasOwnProperty.call(message, "dataDocumentationResult"))
                                 $root.google.cloud.dataplex.v1.DataDocumentationResult.encode(message.dataDocumentationResult, writer.uint32(/* id 203, wireType 2 =*/1626).fork()).ldelim();
+                            if (message.executionIdentity != null && Object.hasOwnProperty.call(message, "executionIdentity"))
+                                $root.google.cloud.dataplex.v1.ExecutionIdentity.encode(message.executionIdentity, writer.uint32(/* id 300, wireType 2 =*/2402).fork()).ldelim();
                             return writer;
                         };
     
@@ -94748,6 +100672,10 @@
                                     }
                                 case 203: {
                                         message.dataDocumentationResult = $root.google.cloud.dataplex.v1.DataDocumentationResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 300: {
+                                        message.executionIdentity = $root.google.cloud.dataplex.v1.ExecutionIdentity.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -94929,6 +100857,11 @@
                                         return "dataDocumentationResult." + error;
                                 }
                             }
+                            if (message.executionIdentity != null && message.hasOwnProperty("executionIdentity")) {
+                                var error = $root.google.cloud.dataplex.v1.ExecutionIdentity.verify(message.executionIdentity);
+                                if (error)
+                                    return "executionIdentity." + error;
+                            }
                             return null;
                         };
     
@@ -95080,6 +101013,11 @@
                                     throw TypeError(".google.cloud.dataplex.v1.DataScan.dataDocumentationResult: object expected");
                                 message.dataDocumentationResult = $root.google.cloud.dataplex.v1.DataDocumentationResult.fromObject(object.dataDocumentationResult);
                             }
+                            if (object.executionIdentity != null) {
+                                if (typeof object.executionIdentity !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.DataScan.executionIdentity: object expected");
+                                message.executionIdentity = $root.google.cloud.dataplex.v1.ExecutionIdentity.fromObject(object.executionIdentity);
+                            }
                             return message;
                         };
     
@@ -95110,6 +101048,7 @@
                                 object.executionSpec = null;
                                 object.executionStatus = null;
                                 object.type = options.enums === String ? "DATA_SCAN_TYPE_UNSPECIFIED" : 0;
+                                object.executionIdentity = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -95179,6 +101118,8 @@
                                 if (options.oneofs)
                                     object.result = "dataDocumentationResult";
                             }
+                            if (message.executionIdentity != null && message.hasOwnProperty("executionIdentity"))
+                                object.executionIdentity = $root.google.cloud.dataplex.v1.ExecutionIdentity.toObject(message.executionIdentity, options);
                             return object;
                         };
     
@@ -95730,6 +101671,864 @@
                         return DataScan;
                     })();
     
+                    v1.ExecutionIdentity = (function() {
+    
+                        /**
+                         * Properties of an ExecutionIdentity.
+                         * @memberof google.cloud.dataplex.v1
+                         * @interface IExecutionIdentity
+                         * @property {google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent|null} [dataplexServiceAgent] ExecutionIdentity dataplexServiceAgent
+                         * @property {google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential|null} [userCredential] ExecutionIdentity userCredential
+                         * @property {google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount|null} [serviceAccount] ExecutionIdentity serviceAccount
+                         */
+    
+                        /**
+                         * Constructs a new ExecutionIdentity.
+                         * @memberof google.cloud.dataplex.v1
+                         * @classdesc Represents an ExecutionIdentity.
+                         * @implements IExecutionIdentity
+                         * @constructor
+                         * @param {google.cloud.dataplex.v1.IExecutionIdentity=} [properties] Properties to set
+                         */
+                        function ExecutionIdentity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecutionIdentity dataplexServiceAgent.
+                         * @member {google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent|null|undefined} dataplexServiceAgent
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @instance
+                         */
+                        ExecutionIdentity.prototype.dataplexServiceAgent = null;
+    
+                        /**
+                         * ExecutionIdentity userCredential.
+                         * @member {google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential|null|undefined} userCredential
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @instance
+                         */
+                        ExecutionIdentity.prototype.userCredential = null;
+    
+                        /**
+                         * ExecutionIdentity serviceAccount.
+                         * @member {google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount|null|undefined} serviceAccount
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @instance
+                         */
+                        ExecutionIdentity.prototype.serviceAccount = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ExecutionIdentity identity.
+                         * @member {"dataplexServiceAgent"|"userCredential"|"serviceAccount"|undefined} identity
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @instance
+                         */
+                        Object.defineProperty(ExecutionIdentity.prototype, "identity", {
+                            get: $util.oneOfGetter($oneOfFields = ["dataplexServiceAgent", "userCredential", "serviceAccount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ExecutionIdentity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IExecutionIdentity=} [properties] Properties to set
+                         * @returns {google.cloud.dataplex.v1.ExecutionIdentity} ExecutionIdentity instance
+                         */
+                        ExecutionIdentity.create = function create(properties) {
+                            return new ExecutionIdentity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecutionIdentity message. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IExecutionIdentity} message ExecutionIdentity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecutionIdentity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataplexServiceAgent != null && Object.hasOwnProperty.call(message, "dataplexServiceAgent"))
+                                $root.google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent.encode(message.dataplexServiceAgent, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.userCredential != null && Object.hasOwnProperty.call(message, "userCredential"))
+                                $root.google.cloud.dataplex.v1.ExecutionIdentity.UserCredential.encode(message.userCredential, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                $root.google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount.encode(message.serviceAccount, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecutionIdentity message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IExecutionIdentity} message ExecutionIdentity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecutionIdentity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecutionIdentity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataplex.v1.ExecutionIdentity} ExecutionIdentity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecutionIdentity.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.ExecutionIdentity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dataplexServiceAgent = $root.google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.userCredential = $root.google.cloud.dataplex.v1.ExecutionIdentity.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.serviceAccount = $root.google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecutionIdentity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataplex.v1.ExecutionIdentity} ExecutionIdentity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecutionIdentity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecutionIdentity message.
+                         * @function verify
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecutionIdentity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.dataplexServiceAgent != null && message.hasOwnProperty("dataplexServiceAgent")) {
+                                properties.identity = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent.verify(message.dataplexServiceAgent);
+                                    if (error)
+                                        return "dataplexServiceAgent." + error;
+                                }
+                            }
+                            if (message.userCredential != null && message.hasOwnProperty("userCredential")) {
+                                if (properties.identity === 1)
+                                    return "identity: multiple values";
+                                properties.identity = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.ExecutionIdentity.UserCredential.verify(message.userCredential);
+                                    if (error)
+                                        return "userCredential." + error;
+                                }
+                            }
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount")) {
+                                if (properties.identity === 1)
+                                    return "identity: multiple values";
+                                properties.identity = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount.verify(message.serviceAccount);
+                                    if (error)
+                                        return "serviceAccount." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecutionIdentity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataplex.v1.ExecutionIdentity} ExecutionIdentity
+                         */
+                        ExecutionIdentity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataplex.v1.ExecutionIdentity)
+                                return object;
+                            var message = new $root.google.cloud.dataplex.v1.ExecutionIdentity();
+                            if (object.dataplexServiceAgent != null) {
+                                if (typeof object.dataplexServiceAgent !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ExecutionIdentity.dataplexServiceAgent: object expected");
+                                message.dataplexServiceAgent = $root.google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent.fromObject(object.dataplexServiceAgent);
+                            }
+                            if (object.userCredential != null) {
+                                if (typeof object.userCredential !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ExecutionIdentity.userCredential: object expected");
+                                message.userCredential = $root.google.cloud.dataplex.v1.ExecutionIdentity.UserCredential.fromObject(object.userCredential);
+                            }
+                            if (object.serviceAccount != null) {
+                                if (typeof object.serviceAccount !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.ExecutionIdentity.serviceAccount: object expected");
+                                message.serviceAccount = $root.google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount.fromObject(object.serviceAccount);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecutionIdentity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @static
+                         * @param {google.cloud.dataplex.v1.ExecutionIdentity} message ExecutionIdentity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecutionIdentity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.dataplexServiceAgent != null && message.hasOwnProperty("dataplexServiceAgent")) {
+                                object.dataplexServiceAgent = $root.google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent.toObject(message.dataplexServiceAgent, options);
+                                if (options.oneofs)
+                                    object.identity = "dataplexServiceAgent";
+                            }
+                            if (message.userCredential != null && message.hasOwnProperty("userCredential")) {
+                                object.userCredential = $root.google.cloud.dataplex.v1.ExecutionIdentity.UserCredential.toObject(message.userCredential, options);
+                                if (options.oneofs)
+                                    object.identity = "userCredential";
+                            }
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount")) {
+                                object.serviceAccount = $root.google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount.toObject(message.serviceAccount, options);
+                                if (options.oneofs)
+                                    object.identity = "serviceAccount";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecutionIdentity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecutionIdentity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecutionIdentity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecutionIdentity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataplex.v1.ExecutionIdentity";
+                        };
+    
+                        ExecutionIdentity.DataplexServiceAgent = (function() {
+    
+                            /**
+                             * Properties of a DataplexServiceAgent.
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                             * @interface IDataplexServiceAgent
+                             */
+    
+                            /**
+                             * Constructs a new DataplexServiceAgent.
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                             * @classdesc Represents a DataplexServiceAgent.
+                             * @implements IDataplexServiceAgent
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent=} [properties] Properties to set
+                             */
+                            function DataplexServiceAgent(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new DataplexServiceAgent instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent} DataplexServiceAgent instance
+                             */
+                            DataplexServiceAgent.create = function create(properties) {
+                                return new DataplexServiceAgent(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataplexServiceAgent message. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent} message DataplexServiceAgent message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataplexServiceAgent.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataplexServiceAgent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent} message DataplexServiceAgent message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataplexServiceAgent.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataplexServiceAgent message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent} DataplexServiceAgent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataplexServiceAgent.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataplexServiceAgent message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent} DataplexServiceAgent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataplexServiceAgent.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataplexServiceAgent message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataplexServiceAgent.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataplexServiceAgent message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent} DataplexServiceAgent
+                             */
+                            DataplexServiceAgent.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent)
+                                    return object;
+                                return new $root.google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent();
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataplexServiceAgent message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent} message DataplexServiceAgent
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataplexServiceAgent.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this DataplexServiceAgent to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataplexServiceAgent.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataplexServiceAgent
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataplexServiceAgent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent";
+                            };
+    
+                            return DataplexServiceAgent;
+                        })();
+    
+                        ExecutionIdentity.UserCredential = (function() {
+    
+                            /**
+                             * Properties of a UserCredential.
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                             * @interface IUserCredential
+                             */
+    
+                            /**
+                             * Constructs a new UserCredential.
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                             * @classdesc Represents a UserCredential.
+                             * @implements IUserCredential
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential=} [properties] Properties to set
+                             */
+                            function UserCredential(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new UserCredential instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.UserCredential
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.UserCredential} UserCredential instance
+                             */
+                            UserCredential.create = function create(properties) {
+                                return new UserCredential(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UserCredential message. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.UserCredential.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.UserCredential
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential} message UserCredential message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserCredential.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UserCredential message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.UserCredential.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.UserCredential
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential} message UserCredential message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserCredential.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UserCredential message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.UserCredential
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.UserCredential} UserCredential
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserCredential.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.ExecutionIdentity.UserCredential();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UserCredential message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.UserCredential
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.UserCredential} UserCredential
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserCredential.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UserCredential message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.UserCredential
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UserCredential.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UserCredential message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.UserCredential
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.UserCredential} UserCredential
+                             */
+                            UserCredential.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.ExecutionIdentity.UserCredential)
+                                    return object;
+                                return new $root.google.cloud.dataplex.v1.ExecutionIdentity.UserCredential();
+                            };
+    
+                            /**
+                             * Creates a plain object from a UserCredential message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.UserCredential
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.UserCredential} message UserCredential
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UserCredential.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this UserCredential to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.UserCredential
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UserCredential.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UserCredential
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.UserCredential
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UserCredential.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.ExecutionIdentity.UserCredential";
+                            };
+    
+                            return UserCredential;
+                        })();
+    
+                        ExecutionIdentity.ServiceAccount = (function() {
+    
+                            /**
+                             * Properties of a ServiceAccount.
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                             * @interface IServiceAccount
+                             * @property {string|null} [email] ServiceAccount email
+                             */
+    
+                            /**
+                             * Constructs a new ServiceAccount.
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity
+                             * @classdesc Represents a ServiceAccount.
+                             * @implements IServiceAccount
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount=} [properties] Properties to set
+                             */
+                            function ServiceAccount(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ServiceAccount email.
+                             * @member {string} email
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @instance
+                             */
+                            ServiceAccount.prototype.email = "";
+    
+                            /**
+                             * Creates a new ServiceAccount instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount} ServiceAccount instance
+                             */
+                            ServiceAccount.create = function create(properties) {
+                                return new ServiceAccount(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ServiceAccount message. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount} message ServiceAccount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ServiceAccount.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.email != null && Object.hasOwnProperty.call(message, "email"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.email);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ServiceAccount message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount} message ServiceAccount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ServiceAccount.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ServiceAccount message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount} ServiceAccount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ServiceAccount.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.email = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ServiceAccount message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount} ServiceAccount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ServiceAccount.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ServiceAccount message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ServiceAccount.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.email != null && message.hasOwnProperty("email"))
+                                    if (!$util.isString(message.email))
+                                        return "email: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ServiceAccount message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount} ServiceAccount
+                             */
+                            ServiceAccount.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount)
+                                    return object;
+                                var message = new $root.google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount();
+                                if (object.email != null)
+                                    message.email = String(object.email);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ServiceAccount message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @static
+                             * @param {google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount} message ServiceAccount
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ServiceAccount.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.email = "";
+                                if (message.email != null && message.hasOwnProperty("email"))
+                                    object.email = message.email;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ServiceAccount to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ServiceAccount.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ServiceAccount
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ServiceAccount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount";
+                            };
+    
+                            return ServiceAccount;
+                        })();
+    
+                        return ExecutionIdentity;
+                    })();
+    
                     v1.DataScanJob = (function() {
     
                         /**
@@ -95739,6 +102538,7 @@
                          * @property {string|null} [name] DataScanJob name
                          * @property {string|null} [uid] DataScanJob uid
                          * @property {google.protobuf.ITimestamp|null} [createTime] DataScanJob createTime
+                         * @property {string|null} [partialFailureMessage] DataScanJob partialFailureMessage
                          * @property {google.protobuf.ITimestamp|null} [startTime] DataScanJob startTime
                          * @property {google.protobuf.ITimestamp|null} [endTime] DataScanJob endTime
                          * @property {google.cloud.dataplex.v1.DataScanJob.State|null} [state] DataScanJob state
@@ -95792,6 +102592,14 @@
                          * @instance
                          */
                         DataScanJob.prototype.createTime = null;
+    
+                        /**
+                         * DataScanJob partialFailureMessage.
+                         * @member {string} partialFailureMessage
+                         * @memberof google.cloud.dataplex.v1.DataScanJob
+                         * @instance
+                         */
+                        DataScanJob.prototype.partialFailureMessage = "";
     
                         /**
                          * DataScanJob startTime.
@@ -95962,6 +102770,8 @@
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.type);
                             if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.partialFailureMessage != null && Object.hasOwnProperty.call(message, "partialFailureMessage"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.partialFailureMessage);
                             if (message.dataQualitySpec != null && Object.hasOwnProperty.call(message, "dataQualitySpec"))
                                 $root.google.cloud.dataplex.v1.DataQualitySpec.encode(message.dataQualitySpec, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             if (message.dataProfileSpec != null && Object.hasOwnProperty.call(message, "dataProfileSpec"))
@@ -96024,6 +102834,10 @@
                                     }
                                 case 8: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.partialFailureMessage = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -96125,6 +102939,9 @@
                                 if (error)
                                     return "createTime." + error;
                             }
+                            if (message.partialFailureMessage != null && message.hasOwnProperty("partialFailureMessage"))
+                                if (!$util.isString(message.partialFailureMessage))
+                                    return "partialFailureMessage: string expected";
                             if (message.startTime != null && message.hasOwnProperty("startTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.startTime);
                                 if (error)
@@ -96146,6 +102963,7 @@
                                 case 4:
                                 case 5:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.message != null && message.hasOwnProperty("message"))
@@ -96262,6 +103080,8 @@
                                     throw TypeError(".google.cloud.dataplex.v1.DataScanJob.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
+                            if (object.partialFailureMessage != null)
+                                message.partialFailureMessage = String(object.partialFailureMessage);
                             if (object.startTime != null) {
                                 if (typeof object.startTime !== "object")
                                     throw TypeError(".google.cloud.dataplex.v1.DataScanJob.startTime: object expected");
@@ -96306,6 +103126,10 @@
                             case "PENDING":
                             case 7:
                                 message.state = 7;
+                                break;
+                            case "SUCCEEDED_WITH_ERRORS":
+                            case 8:
+                                message.state = 8;
                                 break;
                             }
                             if (object.message != null)
@@ -96403,6 +103227,7 @@
                                 object.message = "";
                                 object.type = options.enums === String ? "DATA_SCAN_TYPE_UNSPECIFIED" : 0;
                                 object.createTime = null;
+                                object.partialFailureMessage = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -96420,6 +103245,8 @@
                                 object.type = options.enums === String ? $root.google.cloud.dataplex.v1.DataScanType[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.DataScanType[message.type] : message.type;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.partialFailureMessage != null && message.hasOwnProperty("partialFailureMessage"))
+                                object.partialFailureMessage = message.partialFailureMessage;
                             if (message.dataQualitySpec != null && message.hasOwnProperty("dataQualitySpec")) {
                                 object.dataQualitySpec = $root.google.cloud.dataplex.v1.DataQualitySpec.toObject(message.dataQualitySpec, options);
                                 if (options.oneofs)
@@ -96500,6 +103327,7 @@
                          * @property {number} SUCCEEDED=4 SUCCEEDED value
                          * @property {number} FAILED=5 FAILED value
                          * @property {number} PENDING=7 PENDING value
+                         * @property {number} SUCCEEDED_WITH_ERRORS=8 SUCCEEDED_WITH_ERRORS value
                          */
                         DataScanJob.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -96510,6 +103338,7 @@
                             values[valuesById[4] = "SUCCEEDED"] = 4;
                             values[valuesById[5] = "FAILED"] = 5;
                             values[valuesById[7] = "PENDING"] = 7;
+                            values[valuesById[8] = "SUCCEEDED_WITH_ERRORS"] = 8;
                             return values;
                         })();
     
@@ -103444,6 +110273,7 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.evalutionType != null && message.hasOwnProperty("evalutionType"))
@@ -103551,6 +110381,10 @@
                             case "SQL_ASSERTION":
                             case 9:
                                 message.ruleType = 9;
+                                break;
+                            case "TEMPLATE_REFERENCE":
+                            case 10:
+                                message.ruleType = 10;
                                 break;
                             }
                             switch (object.evalutionType) {
@@ -103761,6 +110595,7 @@
                          * @property {number} TABLE_CONDITION_EXPECTATION=7 TABLE_CONDITION_EXPECTATION value
                          * @property {number} UNIQUENESS_EXPECTATION=8 UNIQUENESS_EXPECTATION value
                          * @property {number} SQL_ASSERTION=9 SQL_ASSERTION value
+                         * @property {number} TEMPLATE_REFERENCE=10 TEMPLATE_REFERENCE value
                          */
                         DataQualityScanRuleResult.RuleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -103774,6 +110609,7 @@
                             values[valuesById[7] = "TABLE_CONDITION_EXPECTATION"] = 7;
                             values[valuesById[8] = "UNIQUENESS_EXPECTATION"] = 8;
                             values[valuesById[9] = "SQL_ASSERTION"] = 9;
+                            values[valuesById[10] = "TEMPLATE_REFERENCE"] = 10;
                             return values;
                         })();
     

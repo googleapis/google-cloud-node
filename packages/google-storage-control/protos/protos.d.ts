@@ -423,6 +423,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+
+                    /**
+                     * Calls GetIntelligenceFinding.
+                     * @param request GetIntelligenceFindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IntelligenceFinding
+                     */
+                    public getIntelligenceFinding(request: google.storage.control.v2.IGetIntelligenceFindingRequest, callback: google.storage.control.v2.StorageControl.GetIntelligenceFindingCallback): void;
+
+                    /**
+                     * Calls GetIntelligenceFinding.
+                     * @param request GetIntelligenceFindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIntelligenceFinding(request: google.storage.control.v2.IGetIntelligenceFindingRequest): Promise<google.storage.control.v2.IntelligenceFinding>;
+
+                    /**
+                     * Calls ListIntelligenceFindings.
+                     * @param request ListIntelligenceFindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListIntelligenceFindingsResponse
+                     */
+                    public listIntelligenceFindings(request: google.storage.control.v2.IListIntelligenceFindingsRequest, callback: google.storage.control.v2.StorageControl.ListIntelligenceFindingsCallback): void;
+
+                    /**
+                     * Calls ListIntelligenceFindings.
+                     * @param request ListIntelligenceFindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listIntelligenceFindings(request: google.storage.control.v2.IListIntelligenceFindingsRequest): Promise<google.storage.control.v2.ListIntelligenceFindingsResponse>;
+
+                    /**
+                     * Calls SummarizeIntelligenceFindings.
+                     * @param request SummarizeIntelligenceFindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SummarizeIntelligenceFindingsResponse
+                     */
+                    public summarizeIntelligenceFindings(request: google.storage.control.v2.ISummarizeIntelligenceFindingsRequest, callback: google.storage.control.v2.StorageControl.SummarizeIntelligenceFindingsCallback): void;
+
+                    /**
+                     * Calls SummarizeIntelligenceFindings.
+                     * @param request SummarizeIntelligenceFindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public summarizeIntelligenceFindings(request: google.storage.control.v2.ISummarizeIntelligenceFindingsRequest): Promise<google.storage.control.v2.SummarizeIntelligenceFindingsResponse>;
+
+                    /**
+                     * Calls GetIntelligenceFindingRevision.
+                     * @param request GetIntelligenceFindingRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IntelligenceFindingRevision
+                     */
+                    public getIntelligenceFindingRevision(request: google.storage.control.v2.IGetIntelligenceFindingRevisionRequest, callback: google.storage.control.v2.StorageControl.GetIntelligenceFindingRevisionCallback): void;
+
+                    /**
+                     * Calls GetIntelligenceFindingRevision.
+                     * @param request GetIntelligenceFindingRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIntelligenceFindingRevision(request: google.storage.control.v2.IGetIntelligenceFindingRevisionRequest): Promise<google.storage.control.v2.IntelligenceFindingRevision>;
+
+                    /**
+                     * Calls ListIntelligenceFindingRevisions.
+                     * @param request ListIntelligenceFindingRevisionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListIntelligenceFindingRevisionsResponse
+                     */
+                    public listIntelligenceFindingRevisions(request: google.storage.control.v2.IListIntelligenceFindingRevisionsRequest, callback: google.storage.control.v2.StorageControl.ListIntelligenceFindingRevisionsCallback): void;
+
+                    /**
+                     * Calls ListIntelligenceFindingRevisions.
+                     * @param request ListIntelligenceFindingRevisionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listIntelligenceFindingRevisions(request: google.storage.control.v2.IListIntelligenceFindingRevisionsRequest): Promise<google.storage.control.v2.ListIntelligenceFindingRevisionsResponse>;
                 }
 
                 namespace StorageControl {
@@ -615,6 +685,41 @@ export namespace google {
                      * @param [response] TestIamPermissionsResponse
                      */
                     type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|getIntelligenceFinding}.
+                     * @param error Error, if any
+                     * @param [response] IntelligenceFinding
+                     */
+                    type GetIntelligenceFindingCallback = (error: (Error|null), response?: google.storage.control.v2.IntelligenceFinding) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|listIntelligenceFindings}.
+                     * @param error Error, if any
+                     * @param [response] ListIntelligenceFindingsResponse
+                     */
+                    type ListIntelligenceFindingsCallback = (error: (Error|null), response?: google.storage.control.v2.ListIntelligenceFindingsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|summarizeIntelligenceFindings}.
+                     * @param error Error, if any
+                     * @param [response] SummarizeIntelligenceFindingsResponse
+                     */
+                    type SummarizeIntelligenceFindingsCallback = (error: (Error|null), response?: google.storage.control.v2.SummarizeIntelligenceFindingsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|getIntelligenceFindingRevision}.
+                     * @param error Error, if any
+                     * @param [response] IntelligenceFindingRevision
+                     */
+                    type GetIntelligenceFindingRevisionCallback = (error: (Error|null), response?: google.storage.control.v2.IntelligenceFindingRevision) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|listIntelligenceFindingRevisions}.
+                     * @param error Error, if any
+                     * @param [response] ListIntelligenceFindingRevisionsResponse
+                     */
+                    type ListIntelligenceFindingRevisionsCallback = (error: (Error|null), response?: google.storage.control.v2.ListIntelligenceFindingRevisionsResponse) => void;
                 }
 
                 /** Properties of a PendingRenameInfo. */
@@ -5632,6 +5737,3014 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IntelligenceFinding. */
+                interface IIntelligenceFinding {
+
+                    /** IntelligenceFinding name */
+                    name?: (string|null);
+
+                    /** IntelligenceFinding description */
+                    description?: (string|null);
+
+                    /** IntelligenceFinding type */
+                    type?: (google.storage.control.v2.FindingType|keyof typeof google.storage.control.v2.FindingType|null);
+
+                    /** IntelligenceFinding category */
+                    category?: (google.storage.control.v2.FindingCategory|keyof typeof google.storage.control.v2.FindingCategory|null);
+
+                    /** IntelligenceFinding severity */
+                    severity?: (google.storage.control.v2.FindingSeverity|keyof typeof google.storage.control.v2.FindingSeverity|null);
+
+                    /** IntelligenceFinding createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IntelligenceFinding updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IntelligenceFinding targetResource */
+                    targetResource?: (string|null);
+
+                    /** IntelligenceFinding associatedResources */
+                    associatedResources?: (string[]|null);
+
+                    /** IntelligenceFinding observationPeriod */
+                    observationPeriod?: (google.type.IInterval|null);
+
+                    /** IntelligenceFinding coldlineAndArchivalStorageOperationsSpike */
+                    coldlineAndArchivalStorageOperationsSpike?: (google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike|null);
+
+                    /** IntelligenceFinding throttledRequestsSpike */
+                    throttledRequestsSpike?: (google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike|null);
+
+                    /** IntelligenceFinding crossRegionEgressSpike */
+                    crossRegionEgressSpike?: (google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike|null);
+
+                    /** IntelligenceFinding storageGrowthAboveTrend */
+                    storageGrowthAboveTrend?: (google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend|null);
+                }
+
+                /** Represents an IntelligenceFinding. */
+                class IntelligenceFinding implements IIntelligenceFinding {
+
+                    /**
+                     * Constructs a new IntelligenceFinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IIntelligenceFinding);
+
+                    /** IntelligenceFinding name. */
+                    public name: string;
+
+                    /** IntelligenceFinding description. */
+                    public description: string;
+
+                    /** IntelligenceFinding type. */
+                    public type: (google.storage.control.v2.FindingType|keyof typeof google.storage.control.v2.FindingType);
+
+                    /** IntelligenceFinding category. */
+                    public category: (google.storage.control.v2.FindingCategory|keyof typeof google.storage.control.v2.FindingCategory);
+
+                    /** IntelligenceFinding severity. */
+                    public severity: (google.storage.control.v2.FindingSeverity|keyof typeof google.storage.control.v2.FindingSeverity);
+
+                    /** IntelligenceFinding createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IntelligenceFinding updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IntelligenceFinding targetResource. */
+                    public targetResource: string;
+
+                    /** IntelligenceFinding associatedResources. */
+                    public associatedResources: string[];
+
+                    /** IntelligenceFinding observationPeriod. */
+                    public observationPeriod?: (google.type.IInterval|null);
+
+                    /** IntelligenceFinding coldlineAndArchivalStorageOperationsSpike. */
+                    public coldlineAndArchivalStorageOperationsSpike?: (google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike|null);
+
+                    /** IntelligenceFinding throttledRequestsSpike. */
+                    public throttledRequestsSpike?: (google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike|null);
+
+                    /** IntelligenceFinding crossRegionEgressSpike. */
+                    public crossRegionEgressSpike?: (google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike|null);
+
+                    /** IntelligenceFinding storageGrowthAboveTrend. */
+                    public storageGrowthAboveTrend?: (google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend|null);
+
+                    /** IntelligenceFinding intelligenceFindingDetails. */
+                    public intelligenceFindingDetails?: ("coldlineAndArchivalStorageOperationsSpike"|"throttledRequestsSpike"|"crossRegionEgressSpike"|"storageGrowthAboveTrend");
+
+                    /**
+                     * Creates a new IntelligenceFinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IntelligenceFinding instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IIntelligenceFinding): google.storage.control.v2.IntelligenceFinding;
+
+                    /**
+                     * Encodes the specified IntelligenceFinding message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.verify|verify} messages.
+                     * @param message IntelligenceFinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IIntelligenceFinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IntelligenceFinding message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.verify|verify} messages.
+                     * @param message IntelligenceFinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IIntelligenceFinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IntelligenceFinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IntelligenceFinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding;
+
+                    /**
+                     * Decodes an IntelligenceFinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IntelligenceFinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding;
+
+                    /**
+                     * Verifies an IntelligenceFinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IntelligenceFinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IntelligenceFinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding;
+
+                    /**
+                     * Creates a plain object from an IntelligenceFinding message. Also converts values to other types if specified.
+                     * @param message IntelligenceFinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.IntelligenceFinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IntelligenceFinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IntelligenceFinding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IntelligenceFinding {
+
+                    /** Properties of a ColdlineAndArchivalStorageOperationsSpike. */
+                    interface IColdlineAndArchivalStorageOperationsSpike {
+
+                        /** ColdlineAndArchivalStorageOperationsSpike percentageIncrease */
+                        percentageIncrease?: (number|null);
+
+                        /** ColdlineAndArchivalStorageOperationsSpike totalOperationsCount */
+                        totalOperationsCount?: (number|Long|string|null);
+
+                        /** ColdlineAndArchivalStorageOperationsSpike topBuckets */
+                        topBuckets?: (google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution[]|null);
+                    }
+
+                    /** Represents a ColdlineAndArchivalStorageOperationsSpike. */
+                    class ColdlineAndArchivalStorageOperationsSpike implements IColdlineAndArchivalStorageOperationsSpike {
+
+                        /**
+                         * Constructs a new ColdlineAndArchivalStorageOperationsSpike.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike);
+
+                        /** ColdlineAndArchivalStorageOperationsSpike percentageIncrease. */
+                        public percentageIncrease: number;
+
+                        /** ColdlineAndArchivalStorageOperationsSpike totalOperationsCount. */
+                        public totalOperationsCount: (number|Long|string);
+
+                        /** ColdlineAndArchivalStorageOperationsSpike topBuckets. */
+                        public topBuckets: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution[];
+
+                        /**
+                         * Creates a new ColdlineAndArchivalStorageOperationsSpike instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ColdlineAndArchivalStorageOperationsSpike instance
+                         */
+                        public static create(properties?: google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike;
+
+                        /**
+                         * Encodes the specified ColdlineAndArchivalStorageOperationsSpike message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.verify|verify} messages.
+                         * @param message ColdlineAndArchivalStorageOperationsSpike message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ColdlineAndArchivalStorageOperationsSpike message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.verify|verify} messages.
+                         * @param message ColdlineAndArchivalStorageOperationsSpike message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ColdlineAndArchivalStorageOperationsSpike message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ColdlineAndArchivalStorageOperationsSpike
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike;
+
+                        /**
+                         * Decodes a ColdlineAndArchivalStorageOperationsSpike message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ColdlineAndArchivalStorageOperationsSpike
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike;
+
+                        /**
+                         * Verifies a ColdlineAndArchivalStorageOperationsSpike message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ColdlineAndArchivalStorageOperationsSpike message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ColdlineAndArchivalStorageOperationsSpike
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike;
+
+                        /**
+                         * Creates a plain object from a ColdlineAndArchivalStorageOperationsSpike message. Also converts values to other types if specified.
+                         * @param message ColdlineAndArchivalStorageOperationsSpike
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ColdlineAndArchivalStorageOperationsSpike to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ColdlineAndArchivalStorageOperationsSpike
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ColdlineAndArchivalStorageOperationsSpike {
+
+                        /** Properties of a BucketContribution. */
+                        interface IBucketContribution {
+
+                            /** BucketContribution bucket */
+                            bucket?: (string|null);
+
+                            /** BucketContribution percentageIncrease */
+                            percentageIncrease?: (number|null);
+
+                            /** BucketContribution totalOperationsCount */
+                            totalOperationsCount?: (number|Long|string|null);
+
+                            /** BucketContribution contribution */
+                            contribution?: (google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution|null);
+
+                            /** BucketContribution error */
+                            error?: (google.rpc.IStatus|null);
+                        }
+
+                        /** Represents a BucketContribution. */
+                        class BucketContribution implements IBucketContribution {
+
+                            /**
+                             * Constructs a new BucketContribution.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution);
+
+                            /** BucketContribution bucket. */
+                            public bucket: string;
+
+                            /** BucketContribution percentageIncrease. */
+                            public percentageIncrease: number;
+
+                            /** BucketContribution totalOperationsCount. */
+                            public totalOperationsCount: (number|Long|string);
+
+                            /** BucketContribution contribution. */
+                            public contribution?: (google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution|null);
+
+                            /** BucketContribution error. */
+                            public error?: (google.rpc.IStatus|null);
+
+                            /** BucketContribution details. */
+                            public details?: ("contribution"|"error");
+
+                            /**
+                             * Creates a new BucketContribution instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BucketContribution instance
+                             */
+                            public static create(properties?: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution;
+
+                            /**
+                             * Encodes the specified BucketContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.verify|verify} messages.
+                             * @param message BucketContribution message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BucketContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.verify|verify} messages.
+                             * @param message BucketContribution message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BucketContribution message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BucketContribution
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution;
+
+                            /**
+                             * Decodes a BucketContribution message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BucketContribution
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution;
+
+                            /**
+                             * Verifies a BucketContribution message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BucketContribution message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BucketContribution
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution;
+
+                            /**
+                             * Creates a plain object from a BucketContribution message. Also converts values to other types if specified.
+                             * @param message BucketContribution
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BucketContribution to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BucketContribution
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace BucketContribution {
+
+                            /** Properties of a Contribution. */
+                            interface IContribution {
+
+                                /** Contribution topPrefixes */
+                                topPrefixes?: (google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution[]|null);
+                            }
+
+                            /** Represents a Contribution. */
+                            class Contribution implements IContribution {
+
+                                /**
+                                 * Constructs a new Contribution.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution);
+
+                                /** Contribution topPrefixes. */
+                                public topPrefixes: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution[];
+
+                                /**
+                                 * Creates a new Contribution instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Contribution instance
+                                 */
+                                public static create(properties?: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Encodes the specified Contribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.verify|verify} messages.
+                                 * @param message Contribution message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Contribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.verify|verify} messages.
+                                 * @param message Contribution message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Contribution message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Contribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Decodes a Contribution message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Contribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Verifies a Contribution message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Contribution message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Contribution
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Creates a plain object from a Contribution message. Also converts values to other types if specified.
+                                 * @param message Contribution
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Contribution to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Contribution
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace Contribution {
+
+                                /** Properties of a PrefixContribution. */
+                                interface IPrefixContribution {
+
+                                    /** PrefixContribution prefix */
+                                    prefix?: (string|null);
+
+                                    /** PrefixContribution percentageIncrease */
+                                    percentageIncrease?: (number|null);
+
+                                    /** PrefixContribution totalOperationsCount */
+                                    totalOperationsCount?: (number|Long|string|null);
+                                }
+
+                                /** Represents a PrefixContribution. */
+                                class PrefixContribution implements IPrefixContribution {
+
+                                    /**
+                                     * Constructs a new PrefixContribution.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution);
+
+                                    /** PrefixContribution prefix. */
+                                    public prefix: string;
+
+                                    /** PrefixContribution percentageIncrease. */
+                                    public percentageIncrease: number;
+
+                                    /** PrefixContribution totalOperationsCount. */
+                                    public totalOperationsCount: (number|Long|string);
+
+                                    /**
+                                     * Creates a new PrefixContribution instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns PrefixContribution instance
+                                     */
+                                    public static create(properties?: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Encodes the specified PrefixContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                     * @param message PrefixContribution message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified PrefixContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                     * @param message PrefixContribution message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a PrefixContribution message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns PrefixContribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Decodes a PrefixContribution message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns PrefixContribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Verifies a PrefixContribution message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a PrefixContribution message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns PrefixContribution
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Creates a plain object from a PrefixContribution message. Also converts values to other types if specified.
+                                     * @param message PrefixContribution
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this PrefixContribution to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for PrefixContribution
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+                            }
+                        }
+                    }
+
+                    /** Properties of a CrossRegionEgressSpike. */
+                    interface ICrossRegionEgressSpike {
+
+                        /** CrossRegionEgressSpike totalEgressBytes */
+                        totalEgressBytes?: (number|Long|string|null);
+
+                        /** CrossRegionEgressSpike percentageIncrease */
+                        percentageIncrease?: (number|null);
+
+                        /** CrossRegionEgressSpike topBuckets */
+                        topBuckets?: (google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution[]|null);
+                    }
+
+                    /** Represents a CrossRegionEgressSpike. */
+                    class CrossRegionEgressSpike implements ICrossRegionEgressSpike {
+
+                        /**
+                         * Constructs a new CrossRegionEgressSpike.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike);
+
+                        /** CrossRegionEgressSpike totalEgressBytes. */
+                        public totalEgressBytes: (number|Long|string);
+
+                        /** CrossRegionEgressSpike percentageIncrease. */
+                        public percentageIncrease: number;
+
+                        /** CrossRegionEgressSpike topBuckets. */
+                        public topBuckets: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution[];
+
+                        /**
+                         * Creates a new CrossRegionEgressSpike instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CrossRegionEgressSpike instance
+                         */
+                        public static create(properties?: google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike;
+
+                        /**
+                         * Encodes the specified CrossRegionEgressSpike message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.verify|verify} messages.
+                         * @param message CrossRegionEgressSpike message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CrossRegionEgressSpike message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.verify|verify} messages.
+                         * @param message CrossRegionEgressSpike message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CrossRegionEgressSpike message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CrossRegionEgressSpike
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike;
+
+                        /**
+                         * Decodes a CrossRegionEgressSpike message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CrossRegionEgressSpike
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike;
+
+                        /**
+                         * Verifies a CrossRegionEgressSpike message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CrossRegionEgressSpike message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CrossRegionEgressSpike
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike;
+
+                        /**
+                         * Creates a plain object from a CrossRegionEgressSpike message. Also converts values to other types if specified.
+                         * @param message CrossRegionEgressSpike
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CrossRegionEgressSpike to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CrossRegionEgressSpike
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CrossRegionEgressSpike {
+
+                        /** Properties of a BucketContribution. */
+                        interface IBucketContribution {
+
+                            /** BucketContribution bucket */
+                            bucket?: (string|null);
+
+                            /** BucketContribution totalEgressBytes */
+                            totalEgressBytes?: (number|Long|string|null);
+
+                            /** BucketContribution percentageIncrease */
+                            percentageIncrease?: (number|null);
+
+                            /** BucketContribution contribution */
+                            contribution?: (google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution|null);
+
+                            /** BucketContribution error */
+                            error?: (google.rpc.IStatus|null);
+                        }
+
+                        /** Represents a BucketContribution. */
+                        class BucketContribution implements IBucketContribution {
+
+                            /**
+                             * Constructs a new BucketContribution.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution);
+
+                            /** BucketContribution bucket. */
+                            public bucket: string;
+
+                            /** BucketContribution totalEgressBytes. */
+                            public totalEgressBytes: (number|Long|string);
+
+                            /** BucketContribution percentageIncrease. */
+                            public percentageIncrease: number;
+
+                            /** BucketContribution contribution. */
+                            public contribution?: (google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution|null);
+
+                            /** BucketContribution error. */
+                            public error?: (google.rpc.IStatus|null);
+
+                            /** BucketContribution details. */
+                            public details?: ("contribution"|"error");
+
+                            /**
+                             * Creates a new BucketContribution instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BucketContribution instance
+                             */
+                            public static create(properties?: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution;
+
+                            /**
+                             * Encodes the specified BucketContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.verify|verify} messages.
+                             * @param message BucketContribution message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BucketContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.verify|verify} messages.
+                             * @param message BucketContribution message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BucketContribution message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BucketContribution
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution;
+
+                            /**
+                             * Decodes a BucketContribution message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BucketContribution
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution;
+
+                            /**
+                             * Verifies a BucketContribution message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BucketContribution message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BucketContribution
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution;
+
+                            /**
+                             * Creates a plain object from a BucketContribution message. Also converts values to other types if specified.
+                             * @param message BucketContribution
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BucketContribution to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BucketContribution
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace BucketContribution {
+
+                            /** Properties of a Contribution. */
+                            interface IContribution {
+
+                                /** Contribution topPrefixes */
+                                topPrefixes?: (google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution[]|null);
+                            }
+
+                            /** Represents a Contribution. */
+                            class Contribution implements IContribution {
+
+                                /**
+                                 * Constructs a new Contribution.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution);
+
+                                /** Contribution topPrefixes. */
+                                public topPrefixes: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution[];
+
+                                /**
+                                 * Creates a new Contribution instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Contribution instance
+                                 */
+                                public static create(properties?: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Encodes the specified Contribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.verify|verify} messages.
+                                 * @param message Contribution message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Contribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.verify|verify} messages.
+                                 * @param message Contribution message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Contribution message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Contribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Decodes a Contribution message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Contribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Verifies a Contribution message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Contribution message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Contribution
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Creates a plain object from a Contribution message. Also converts values to other types if specified.
+                                 * @param message Contribution
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Contribution to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Contribution
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace Contribution {
+
+                                /** Properties of a PrefixContribution. */
+                                interface IPrefixContribution {
+
+                                    /** PrefixContribution prefix */
+                                    prefix?: (string|null);
+
+                                    /** PrefixContribution totalEgressBytes */
+                                    totalEgressBytes?: (number|Long|string|null);
+
+                                    /** PrefixContribution percentageIncrease */
+                                    percentageIncrease?: (number|null);
+                                }
+
+                                /** Represents a PrefixContribution. */
+                                class PrefixContribution implements IPrefixContribution {
+
+                                    /**
+                                     * Constructs a new PrefixContribution.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution);
+
+                                    /** PrefixContribution prefix. */
+                                    public prefix: string;
+
+                                    /** PrefixContribution totalEgressBytes. */
+                                    public totalEgressBytes: (number|Long|string);
+
+                                    /** PrefixContribution percentageIncrease. */
+                                    public percentageIncrease: number;
+
+                                    /**
+                                     * Creates a new PrefixContribution instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns PrefixContribution instance
+                                     */
+                                    public static create(properties?: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Encodes the specified PrefixContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                     * @param message PrefixContribution message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified PrefixContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                     * @param message PrefixContribution message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a PrefixContribution message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns PrefixContribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Decodes a PrefixContribution message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns PrefixContribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Verifies a PrefixContribution message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a PrefixContribution message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns PrefixContribution
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Creates a plain object from a PrefixContribution message. Also converts values to other types if specified.
+                                     * @param message PrefixContribution
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this PrefixContribution to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for PrefixContribution
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+                            }
+                        }
+                    }
+
+                    /** Properties of a ThrottledRequestSpike. */
+                    interface IThrottledRequestSpike {
+
+                        /** ThrottledRequestSpike throttledRequests */
+                        throttledRequests?: (number|Long|string|null);
+
+                        /** ThrottledRequestSpike percentageIncrease */
+                        percentageIncrease?: (number|null);
+
+                        /** ThrottledRequestSpike topBuckets */
+                        topBuckets?: (google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution[]|null);
+                    }
+
+                    /** Represents a ThrottledRequestSpike. */
+                    class ThrottledRequestSpike implements IThrottledRequestSpike {
+
+                        /**
+                         * Constructs a new ThrottledRequestSpike.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike);
+
+                        /** ThrottledRequestSpike throttledRequests. */
+                        public throttledRequests: (number|Long|string);
+
+                        /** ThrottledRequestSpike percentageIncrease. */
+                        public percentageIncrease: number;
+
+                        /** ThrottledRequestSpike topBuckets. */
+                        public topBuckets: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution[];
+
+                        /**
+                         * Creates a new ThrottledRequestSpike instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ThrottledRequestSpike instance
+                         */
+                        public static create(properties?: google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike;
+
+                        /**
+                         * Encodes the specified ThrottledRequestSpike message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.verify|verify} messages.
+                         * @param message ThrottledRequestSpike message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ThrottledRequestSpike message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.verify|verify} messages.
+                         * @param message ThrottledRequestSpike message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ThrottledRequestSpike message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ThrottledRequestSpike
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike;
+
+                        /**
+                         * Decodes a ThrottledRequestSpike message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ThrottledRequestSpike
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike;
+
+                        /**
+                         * Verifies a ThrottledRequestSpike message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ThrottledRequestSpike message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ThrottledRequestSpike
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike;
+
+                        /**
+                         * Creates a plain object from a ThrottledRequestSpike message. Also converts values to other types if specified.
+                         * @param message ThrottledRequestSpike
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ThrottledRequestSpike to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ThrottledRequestSpike
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ThrottledRequestSpike {
+
+                        /** Properties of a BucketContribution. */
+                        interface IBucketContribution {
+
+                            /** BucketContribution bucket */
+                            bucket?: (string|null);
+
+                            /** BucketContribution throttledRequests */
+                            throttledRequests?: (number|Long|string|null);
+
+                            /** BucketContribution percentageIncrease */
+                            percentageIncrease?: (number|null);
+
+                            /** BucketContribution contribution */
+                            contribution?: (google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution|null);
+
+                            /** BucketContribution error */
+                            error?: (google.rpc.IStatus|null);
+                        }
+
+                        /** Represents a BucketContribution. */
+                        class BucketContribution implements IBucketContribution {
+
+                            /**
+                             * Constructs a new BucketContribution.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution);
+
+                            /** BucketContribution bucket. */
+                            public bucket: string;
+
+                            /** BucketContribution throttledRequests. */
+                            public throttledRequests: (number|Long|string);
+
+                            /** BucketContribution percentageIncrease. */
+                            public percentageIncrease: number;
+
+                            /** BucketContribution contribution. */
+                            public contribution?: (google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution|null);
+
+                            /** BucketContribution error. */
+                            public error?: (google.rpc.IStatus|null);
+
+                            /** BucketContribution details. */
+                            public details?: ("contribution"|"error");
+
+                            /**
+                             * Creates a new BucketContribution instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BucketContribution instance
+                             */
+                            public static create(properties?: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution;
+
+                            /**
+                             * Encodes the specified BucketContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.verify|verify} messages.
+                             * @param message BucketContribution message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BucketContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.verify|verify} messages.
+                             * @param message BucketContribution message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BucketContribution message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BucketContribution
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution;
+
+                            /**
+                             * Decodes a BucketContribution message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BucketContribution
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution;
+
+                            /**
+                             * Verifies a BucketContribution message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BucketContribution message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BucketContribution
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution;
+
+                            /**
+                             * Creates a plain object from a BucketContribution message. Also converts values to other types if specified.
+                             * @param message BucketContribution
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BucketContribution to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BucketContribution
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace BucketContribution {
+
+                            /** Properties of a Contribution. */
+                            interface IContribution {
+
+                                /** Contribution topPrefixes */
+                                topPrefixes?: (google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution[]|null);
+                            }
+
+                            /** Represents a Contribution. */
+                            class Contribution implements IContribution {
+
+                                /**
+                                 * Constructs a new Contribution.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution);
+
+                                /** Contribution topPrefixes. */
+                                public topPrefixes: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution[];
+
+                                /**
+                                 * Creates a new Contribution instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Contribution instance
+                                 */
+                                public static create(properties?: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Encodes the specified Contribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.verify|verify} messages.
+                                 * @param message Contribution message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Contribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.verify|verify} messages.
+                                 * @param message Contribution message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Contribution message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Contribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Decodes a Contribution message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Contribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Verifies a Contribution message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Contribution message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Contribution
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution;
+
+                                /**
+                                 * Creates a plain object from a Contribution message. Also converts values to other types if specified.
+                                 * @param message Contribution
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Contribution to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Contribution
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace Contribution {
+
+                                /** Properties of a PrefixContribution. */
+                                interface IPrefixContribution {
+
+                                    /** PrefixContribution prefix */
+                                    prefix?: (string|null);
+
+                                    /** PrefixContribution throttledRequests */
+                                    throttledRequests?: (number|Long|string|null);
+
+                                    /** PrefixContribution percentageIncrease */
+                                    percentageIncrease?: (number|null);
+                                }
+
+                                /** Represents a PrefixContribution. */
+                                class PrefixContribution implements IPrefixContribution {
+
+                                    /**
+                                     * Constructs a new PrefixContribution.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution);
+
+                                    /** PrefixContribution prefix. */
+                                    public prefix: string;
+
+                                    /** PrefixContribution throttledRequests. */
+                                    public throttledRequests: (number|Long|string);
+
+                                    /** PrefixContribution percentageIncrease. */
+                                    public percentageIncrease: number;
+
+                                    /**
+                                     * Creates a new PrefixContribution instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns PrefixContribution instance
+                                     */
+                                    public static create(properties?: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Encodes the specified PrefixContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                     * @param message PrefixContribution message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified PrefixContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                     * @param message PrefixContribution message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a PrefixContribution message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns PrefixContribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Decodes a PrefixContribution message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns PrefixContribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Verifies a PrefixContribution message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a PrefixContribution message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns PrefixContribution
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution;
+
+                                    /**
+                                     * Creates a plain object from a PrefixContribution message. Also converts values to other types if specified.
+                                     * @param message PrefixContribution
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this PrefixContribution to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for PrefixContribution
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+                            }
+                        }
+                    }
+
+                    /** Properties of a StorageGrowthAboveTrend. */
+                    interface IStorageGrowthAboveTrend {
+
+                        /** StorageGrowthAboveTrend totalStorageGrowthBytes */
+                        totalStorageGrowthBytes?: (number|Long|string|null);
+
+                        /** StorageGrowthAboveTrend percentageIncrease */
+                        percentageIncrease?: (number|null);
+
+                        /** StorageGrowthAboveTrend topBuckets */
+                        topBuckets?: (google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution[]|null);
+                    }
+
+                    /** Represents a StorageGrowthAboveTrend. */
+                    class StorageGrowthAboveTrend implements IStorageGrowthAboveTrend {
+
+                        /**
+                         * Constructs a new StorageGrowthAboveTrend.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend);
+
+                        /** StorageGrowthAboveTrend totalStorageGrowthBytes. */
+                        public totalStorageGrowthBytes: (number|Long|string);
+
+                        /** StorageGrowthAboveTrend percentageIncrease. */
+                        public percentageIncrease: number;
+
+                        /** StorageGrowthAboveTrend topBuckets. */
+                        public topBuckets: google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution[];
+
+                        /**
+                         * Creates a new StorageGrowthAboveTrend instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StorageGrowthAboveTrend instance
+                         */
+                        public static create(properties?: google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend): google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend;
+
+                        /**
+                         * Encodes the specified StorageGrowthAboveTrend message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.verify|verify} messages.
+                         * @param message StorageGrowthAboveTrend message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StorageGrowthAboveTrend message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.verify|verify} messages.
+                         * @param message StorageGrowthAboveTrend message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StorageGrowthAboveTrend message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StorageGrowthAboveTrend
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend;
+
+                        /**
+                         * Decodes a StorageGrowthAboveTrend message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StorageGrowthAboveTrend
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend;
+
+                        /**
+                         * Verifies a StorageGrowthAboveTrend message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StorageGrowthAboveTrend message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StorageGrowthAboveTrend
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend;
+
+                        /**
+                         * Creates a plain object from a StorageGrowthAboveTrend message. Also converts values to other types if specified.
+                         * @param message StorageGrowthAboveTrend
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StorageGrowthAboveTrend to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StorageGrowthAboveTrend
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace StorageGrowthAboveTrend {
+
+                        /** Properties of a BucketContribution. */
+                        interface IBucketContribution {
+
+                            /** BucketContribution bucket */
+                            bucket?: (string|null);
+
+                            /** BucketContribution totalStorageGrowthBytes */
+                            totalStorageGrowthBytes?: (number|Long|string|null);
+
+                            /** BucketContribution percentageIncrease */
+                            percentageIncrease?: (number|null);
+
+                            /** BucketContribution error */
+                            error?: (google.rpc.IStatus|null);
+                        }
+
+                        /** Represents a BucketContribution. */
+                        class BucketContribution implements IBucketContribution {
+
+                            /**
+                             * Constructs a new BucketContribution.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution);
+
+                            /** BucketContribution bucket. */
+                            public bucket: string;
+
+                            /** BucketContribution totalStorageGrowthBytes. */
+                            public totalStorageGrowthBytes: (number|Long|string);
+
+                            /** BucketContribution percentageIncrease. */
+                            public percentageIncrease: number;
+
+                            /** BucketContribution error. */
+                            public error?: (google.rpc.IStatus|null);
+
+                            /** BucketContribution details. */
+                            public details?: "error";
+
+                            /**
+                             * Creates a new BucketContribution instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BucketContribution instance
+                             */
+                            public static create(properties?: google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution): google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution;
+
+                            /**
+                             * Encodes the specified BucketContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.verify|verify} messages.
+                             * @param message BucketContribution message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BucketContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.verify|verify} messages.
+                             * @param message BucketContribution message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BucketContribution message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BucketContribution
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution;
+
+                            /**
+                             * Decodes a BucketContribution message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BucketContribution
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution;
+
+                            /**
+                             * Verifies a BucketContribution message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BucketContribution message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BucketContribution
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution;
+
+                            /**
+                             * Creates a plain object from a BucketContribution message. Also converts values to other types if specified.
+                             * @param message BucketContribution
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BucketContribution to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BucketContribution
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of an IntelligenceFindingRevision. */
+                interface IIntelligenceFindingRevision {
+
+                    /** IntelligenceFindingRevision name */
+                    name?: (string|null);
+
+                    /** IntelligenceFindingRevision snapshot */
+                    snapshot?: (google.storage.control.v2.IIntelligenceFinding|null);
+
+                    /** IntelligenceFindingRevision createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an IntelligenceFindingRevision. */
+                class IntelligenceFindingRevision implements IIntelligenceFindingRevision {
+
+                    /**
+                     * Constructs a new IntelligenceFindingRevision.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IIntelligenceFindingRevision);
+
+                    /** IntelligenceFindingRevision name. */
+                    public name: string;
+
+                    /** IntelligenceFindingRevision snapshot. */
+                    public snapshot?: (google.storage.control.v2.IIntelligenceFinding|null);
+
+                    /** IntelligenceFindingRevision createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new IntelligenceFindingRevision instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IntelligenceFindingRevision instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IIntelligenceFindingRevision): google.storage.control.v2.IntelligenceFindingRevision;
+
+                    /**
+                     * Encodes the specified IntelligenceFindingRevision message. Does not implicitly {@link google.storage.control.v2.IntelligenceFindingRevision.verify|verify} messages.
+                     * @param message IntelligenceFindingRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IIntelligenceFindingRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IntelligenceFindingRevision message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFindingRevision.verify|verify} messages.
+                     * @param message IntelligenceFindingRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IIntelligenceFindingRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IntelligenceFindingRevision message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IntelligenceFindingRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceFindingRevision;
+
+                    /**
+                     * Decodes an IntelligenceFindingRevision message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IntelligenceFindingRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceFindingRevision;
+
+                    /**
+                     * Verifies an IntelligenceFindingRevision message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IntelligenceFindingRevision message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IntelligenceFindingRevision
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceFindingRevision;
+
+                    /**
+                     * Creates a plain object from an IntelligenceFindingRevision message. Also converts values to other types if specified.
+                     * @param message IntelligenceFindingRevision
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.IntelligenceFindingRevision, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IntelligenceFindingRevision to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IntelligenceFindingRevision
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetIntelligenceFindingRequest. */
+                interface IGetIntelligenceFindingRequest {
+
+                    /** GetIntelligenceFindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetIntelligenceFindingRequest. */
+                class GetIntelligenceFindingRequest implements IGetIntelligenceFindingRequest {
+
+                    /**
+                     * Constructs a new GetIntelligenceFindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IGetIntelligenceFindingRequest);
+
+                    /** GetIntelligenceFindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetIntelligenceFindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetIntelligenceFindingRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IGetIntelligenceFindingRequest): google.storage.control.v2.GetIntelligenceFindingRequest;
+
+                    /**
+                     * Encodes the specified GetIntelligenceFindingRequest message. Does not implicitly {@link google.storage.control.v2.GetIntelligenceFindingRequest.verify|verify} messages.
+                     * @param message GetIntelligenceFindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IGetIntelligenceFindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetIntelligenceFindingRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetIntelligenceFindingRequest.verify|verify} messages.
+                     * @param message GetIntelligenceFindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IGetIntelligenceFindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetIntelligenceFindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetIntelligenceFindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.GetIntelligenceFindingRequest;
+
+                    /**
+                     * Decodes a GetIntelligenceFindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetIntelligenceFindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.GetIntelligenceFindingRequest;
+
+                    /**
+                     * Verifies a GetIntelligenceFindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetIntelligenceFindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetIntelligenceFindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.GetIntelligenceFindingRequest;
+
+                    /**
+                     * Creates a plain object from a GetIntelligenceFindingRequest message. Also converts values to other types if specified.
+                     * @param message GetIntelligenceFindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.GetIntelligenceFindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetIntelligenceFindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetIntelligenceFindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListIntelligenceFindingsRequest. */
+                interface IListIntelligenceFindingsRequest {
+
+                    /** ListIntelligenceFindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListIntelligenceFindingsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListIntelligenceFindingsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListIntelligenceFindingsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListIntelligenceFindingsRequest. */
+                class ListIntelligenceFindingsRequest implements IListIntelligenceFindingsRequest {
+
+                    /**
+                     * Constructs a new ListIntelligenceFindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IListIntelligenceFindingsRequest);
+
+                    /** ListIntelligenceFindingsRequest parent. */
+                    public parent: string;
+
+                    /** ListIntelligenceFindingsRequest filter. */
+                    public filter: string;
+
+                    /** ListIntelligenceFindingsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListIntelligenceFindingsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListIntelligenceFindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIntelligenceFindingsRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IListIntelligenceFindingsRequest): google.storage.control.v2.ListIntelligenceFindingsRequest;
+
+                    /**
+                     * Encodes the specified ListIntelligenceFindingsRequest message. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingsRequest.verify|verify} messages.
+                     * @param message ListIntelligenceFindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IListIntelligenceFindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIntelligenceFindingsRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingsRequest.verify|verify} messages.
+                     * @param message ListIntelligenceFindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IListIntelligenceFindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIntelligenceFindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIntelligenceFindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ListIntelligenceFindingsRequest;
+
+                    /**
+                     * Decodes a ListIntelligenceFindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIntelligenceFindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ListIntelligenceFindingsRequest;
+
+                    /**
+                     * Verifies a ListIntelligenceFindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIntelligenceFindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIntelligenceFindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ListIntelligenceFindingsRequest;
+
+                    /**
+                     * Creates a plain object from a ListIntelligenceFindingsRequest message. Also converts values to other types if specified.
+                     * @param message ListIntelligenceFindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ListIntelligenceFindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIntelligenceFindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListIntelligenceFindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListIntelligenceFindingsResponse. */
+                interface IListIntelligenceFindingsResponse {
+
+                    /** ListIntelligenceFindingsResponse intelligenceFindings */
+                    intelligenceFindings?: (google.storage.control.v2.IIntelligenceFinding[]|null);
+
+                    /** ListIntelligenceFindingsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListIntelligenceFindingsResponse. */
+                class ListIntelligenceFindingsResponse implements IListIntelligenceFindingsResponse {
+
+                    /**
+                     * Constructs a new ListIntelligenceFindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IListIntelligenceFindingsResponse);
+
+                    /** ListIntelligenceFindingsResponse intelligenceFindings. */
+                    public intelligenceFindings: google.storage.control.v2.IIntelligenceFinding[];
+
+                    /** ListIntelligenceFindingsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListIntelligenceFindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIntelligenceFindingsResponse instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IListIntelligenceFindingsResponse): google.storage.control.v2.ListIntelligenceFindingsResponse;
+
+                    /**
+                     * Encodes the specified ListIntelligenceFindingsResponse message. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingsResponse.verify|verify} messages.
+                     * @param message ListIntelligenceFindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IListIntelligenceFindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIntelligenceFindingsResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingsResponse.verify|verify} messages.
+                     * @param message ListIntelligenceFindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IListIntelligenceFindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIntelligenceFindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIntelligenceFindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ListIntelligenceFindingsResponse;
+
+                    /**
+                     * Decodes a ListIntelligenceFindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIntelligenceFindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ListIntelligenceFindingsResponse;
+
+                    /**
+                     * Verifies a ListIntelligenceFindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIntelligenceFindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIntelligenceFindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ListIntelligenceFindingsResponse;
+
+                    /**
+                     * Creates a plain object from a ListIntelligenceFindingsResponse message. Also converts values to other types if specified.
+                     * @param message ListIntelligenceFindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ListIntelligenceFindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIntelligenceFindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListIntelligenceFindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SummarizeIntelligenceFindingsRequest. */
+                interface ISummarizeIntelligenceFindingsRequest {
+
+                    /** SummarizeIntelligenceFindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** SummarizeIntelligenceFindingsRequest resourceScope */
+                    resourceScope?: (google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope|keyof typeof google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope|null);
+
+                    /** SummarizeIntelligenceFindingsRequest filter */
+                    filter?: (string|null);
+
+                    /** SummarizeIntelligenceFindingsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SummarizeIntelligenceFindingsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a SummarizeIntelligenceFindingsRequest. */
+                class SummarizeIntelligenceFindingsRequest implements ISummarizeIntelligenceFindingsRequest {
+
+                    /**
+                     * Constructs a new SummarizeIntelligenceFindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.ISummarizeIntelligenceFindingsRequest);
+
+                    /** SummarizeIntelligenceFindingsRequest parent. */
+                    public parent: string;
+
+                    /** SummarizeIntelligenceFindingsRequest resourceScope. */
+                    public resourceScope: (google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope|keyof typeof google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope);
+
+                    /** SummarizeIntelligenceFindingsRequest filter. */
+                    public filter: string;
+
+                    /** SummarizeIntelligenceFindingsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SummarizeIntelligenceFindingsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new SummarizeIntelligenceFindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SummarizeIntelligenceFindingsRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.ISummarizeIntelligenceFindingsRequest): google.storage.control.v2.SummarizeIntelligenceFindingsRequest;
+
+                    /**
+                     * Encodes the specified SummarizeIntelligenceFindingsRequest message. Does not implicitly {@link google.storage.control.v2.SummarizeIntelligenceFindingsRequest.verify|verify} messages.
+                     * @param message SummarizeIntelligenceFindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.ISummarizeIntelligenceFindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SummarizeIntelligenceFindingsRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.SummarizeIntelligenceFindingsRequest.verify|verify} messages.
+                     * @param message SummarizeIntelligenceFindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.ISummarizeIntelligenceFindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SummarizeIntelligenceFindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SummarizeIntelligenceFindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.SummarizeIntelligenceFindingsRequest;
+
+                    /**
+                     * Decodes a SummarizeIntelligenceFindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SummarizeIntelligenceFindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.SummarizeIntelligenceFindingsRequest;
+
+                    /**
+                     * Verifies a SummarizeIntelligenceFindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SummarizeIntelligenceFindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SummarizeIntelligenceFindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.SummarizeIntelligenceFindingsRequest;
+
+                    /**
+                     * Creates a plain object from a SummarizeIntelligenceFindingsRequest message. Also converts values to other types if specified.
+                     * @param message SummarizeIntelligenceFindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.SummarizeIntelligenceFindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SummarizeIntelligenceFindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SummarizeIntelligenceFindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SummarizeIntelligenceFindingsRequest {
+
+                    /** ResourceScope enum. */
+                    enum ResourceScope {
+                        RESOURCE_SCOPE_UNSPECIFIED = 0,
+                        PARENT = 1,
+                        PROJECT = 2
+                    }
+                }
+
+                /** Properties of a SummarizeIntelligenceFindingsResponse. */
+                interface ISummarizeIntelligenceFindingsResponse {
+
+                    /** SummarizeIntelligenceFindingsResponse findingSummaries */
+                    findingSummaries?: (google.storage.control.v2.IFindingSummary[]|null);
+
+                    /** SummarizeIntelligenceFindingsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a SummarizeIntelligenceFindingsResponse. */
+                class SummarizeIntelligenceFindingsResponse implements ISummarizeIntelligenceFindingsResponse {
+
+                    /**
+                     * Constructs a new SummarizeIntelligenceFindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.ISummarizeIntelligenceFindingsResponse);
+
+                    /** SummarizeIntelligenceFindingsResponse findingSummaries. */
+                    public findingSummaries: google.storage.control.v2.IFindingSummary[];
+
+                    /** SummarizeIntelligenceFindingsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new SummarizeIntelligenceFindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SummarizeIntelligenceFindingsResponse instance
+                     */
+                    public static create(properties?: google.storage.control.v2.ISummarizeIntelligenceFindingsResponse): google.storage.control.v2.SummarizeIntelligenceFindingsResponse;
+
+                    /**
+                     * Encodes the specified SummarizeIntelligenceFindingsResponse message. Does not implicitly {@link google.storage.control.v2.SummarizeIntelligenceFindingsResponse.verify|verify} messages.
+                     * @param message SummarizeIntelligenceFindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.ISummarizeIntelligenceFindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SummarizeIntelligenceFindingsResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.SummarizeIntelligenceFindingsResponse.verify|verify} messages.
+                     * @param message SummarizeIntelligenceFindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.ISummarizeIntelligenceFindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SummarizeIntelligenceFindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SummarizeIntelligenceFindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.SummarizeIntelligenceFindingsResponse;
+
+                    /**
+                     * Decodes a SummarizeIntelligenceFindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SummarizeIntelligenceFindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.SummarizeIntelligenceFindingsResponse;
+
+                    /**
+                     * Verifies a SummarizeIntelligenceFindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SummarizeIntelligenceFindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SummarizeIntelligenceFindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.SummarizeIntelligenceFindingsResponse;
+
+                    /**
+                     * Creates a plain object from a SummarizeIntelligenceFindingsResponse message. Also converts values to other types if specified.
+                     * @param message SummarizeIntelligenceFindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.SummarizeIntelligenceFindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SummarizeIntelligenceFindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SummarizeIntelligenceFindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetIntelligenceFindingRevisionRequest. */
+                interface IGetIntelligenceFindingRevisionRequest {
+
+                    /** GetIntelligenceFindingRevisionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetIntelligenceFindingRevisionRequest. */
+                class GetIntelligenceFindingRevisionRequest implements IGetIntelligenceFindingRevisionRequest {
+
+                    /**
+                     * Constructs a new GetIntelligenceFindingRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IGetIntelligenceFindingRevisionRequest);
+
+                    /** GetIntelligenceFindingRevisionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetIntelligenceFindingRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetIntelligenceFindingRevisionRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IGetIntelligenceFindingRevisionRequest): google.storage.control.v2.GetIntelligenceFindingRevisionRequest;
+
+                    /**
+                     * Encodes the specified GetIntelligenceFindingRevisionRequest message. Does not implicitly {@link google.storage.control.v2.GetIntelligenceFindingRevisionRequest.verify|verify} messages.
+                     * @param message GetIntelligenceFindingRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IGetIntelligenceFindingRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetIntelligenceFindingRevisionRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetIntelligenceFindingRevisionRequest.verify|verify} messages.
+                     * @param message GetIntelligenceFindingRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IGetIntelligenceFindingRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetIntelligenceFindingRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetIntelligenceFindingRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.GetIntelligenceFindingRevisionRequest;
+
+                    /**
+                     * Decodes a GetIntelligenceFindingRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetIntelligenceFindingRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.GetIntelligenceFindingRevisionRequest;
+
+                    /**
+                     * Verifies a GetIntelligenceFindingRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetIntelligenceFindingRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetIntelligenceFindingRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.GetIntelligenceFindingRevisionRequest;
+
+                    /**
+                     * Creates a plain object from a GetIntelligenceFindingRevisionRequest message. Also converts values to other types if specified.
+                     * @param message GetIntelligenceFindingRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.GetIntelligenceFindingRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetIntelligenceFindingRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetIntelligenceFindingRevisionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListIntelligenceFindingRevisionsRequest. */
+                interface IListIntelligenceFindingRevisionsRequest {
+
+                    /** ListIntelligenceFindingRevisionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListIntelligenceFindingRevisionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListIntelligenceFindingRevisionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListIntelligenceFindingRevisionsRequest. */
+                class ListIntelligenceFindingRevisionsRequest implements IListIntelligenceFindingRevisionsRequest {
+
+                    /**
+                     * Constructs a new ListIntelligenceFindingRevisionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IListIntelligenceFindingRevisionsRequest);
+
+                    /** ListIntelligenceFindingRevisionsRequest parent. */
+                    public parent: string;
+
+                    /** ListIntelligenceFindingRevisionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListIntelligenceFindingRevisionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListIntelligenceFindingRevisionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIntelligenceFindingRevisionsRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IListIntelligenceFindingRevisionsRequest): google.storage.control.v2.ListIntelligenceFindingRevisionsRequest;
+
+                    /**
+                     * Encodes the specified ListIntelligenceFindingRevisionsRequest message. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingRevisionsRequest.verify|verify} messages.
+                     * @param message ListIntelligenceFindingRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IListIntelligenceFindingRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIntelligenceFindingRevisionsRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingRevisionsRequest.verify|verify} messages.
+                     * @param message ListIntelligenceFindingRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IListIntelligenceFindingRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIntelligenceFindingRevisionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIntelligenceFindingRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ListIntelligenceFindingRevisionsRequest;
+
+                    /**
+                     * Decodes a ListIntelligenceFindingRevisionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIntelligenceFindingRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ListIntelligenceFindingRevisionsRequest;
+
+                    /**
+                     * Verifies a ListIntelligenceFindingRevisionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIntelligenceFindingRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIntelligenceFindingRevisionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ListIntelligenceFindingRevisionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListIntelligenceFindingRevisionsRequest message. Also converts values to other types if specified.
+                     * @param message ListIntelligenceFindingRevisionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ListIntelligenceFindingRevisionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIntelligenceFindingRevisionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListIntelligenceFindingRevisionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListIntelligenceFindingRevisionsResponse. */
+                interface IListIntelligenceFindingRevisionsResponse {
+
+                    /** ListIntelligenceFindingRevisionsResponse intelligenceFindingRevisions */
+                    intelligenceFindingRevisions?: (google.storage.control.v2.IIntelligenceFindingRevision[]|null);
+
+                    /** ListIntelligenceFindingRevisionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListIntelligenceFindingRevisionsResponse. */
+                class ListIntelligenceFindingRevisionsResponse implements IListIntelligenceFindingRevisionsResponse {
+
+                    /**
+                     * Constructs a new ListIntelligenceFindingRevisionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IListIntelligenceFindingRevisionsResponse);
+
+                    /** ListIntelligenceFindingRevisionsResponse intelligenceFindingRevisions. */
+                    public intelligenceFindingRevisions: google.storage.control.v2.IIntelligenceFindingRevision[];
+
+                    /** ListIntelligenceFindingRevisionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListIntelligenceFindingRevisionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIntelligenceFindingRevisionsResponse instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IListIntelligenceFindingRevisionsResponse): google.storage.control.v2.ListIntelligenceFindingRevisionsResponse;
+
+                    /**
+                     * Encodes the specified ListIntelligenceFindingRevisionsResponse message. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingRevisionsResponse.verify|verify} messages.
+                     * @param message ListIntelligenceFindingRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IListIntelligenceFindingRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIntelligenceFindingRevisionsResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingRevisionsResponse.verify|verify} messages.
+                     * @param message ListIntelligenceFindingRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IListIntelligenceFindingRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIntelligenceFindingRevisionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIntelligenceFindingRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ListIntelligenceFindingRevisionsResponse;
+
+                    /**
+                     * Decodes a ListIntelligenceFindingRevisionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIntelligenceFindingRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ListIntelligenceFindingRevisionsResponse;
+
+                    /**
+                     * Verifies a ListIntelligenceFindingRevisionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIntelligenceFindingRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIntelligenceFindingRevisionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ListIntelligenceFindingRevisionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListIntelligenceFindingRevisionsResponse message. Also converts values to other types if specified.
+                     * @param message ListIntelligenceFindingRevisionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ListIntelligenceFindingRevisionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIntelligenceFindingRevisionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListIntelligenceFindingRevisionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FindingSummary. */
+                interface IFindingSummary {
+
+                    /** FindingSummary type */
+                    type?: (google.storage.control.v2.FindingType|keyof typeof google.storage.control.v2.FindingType|null);
+
+                    /** FindingSummary category */
+                    category?: (google.storage.control.v2.FindingCategory|keyof typeof google.storage.control.v2.FindingCategory|null);
+
+                    /** FindingSummary targetResource */
+                    targetResource?: (string|null);
+
+                    /** FindingSummary createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingSummary updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingSummary severity */
+                    severity?: (google.storage.control.v2.FindingSeverity|keyof typeof google.storage.control.v2.FindingSeverity|null);
+
+                    /** FindingSummary summaryDetails */
+                    summaryDetails?: (google.storage.control.v2.FindingSummary.ISummaryDetails[]|null);
+                }
+
+                /** Represents a FindingSummary. */
+                class FindingSummary implements IFindingSummary {
+
+                    /**
+                     * Constructs a new FindingSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IFindingSummary);
+
+                    /** FindingSummary type. */
+                    public type: (google.storage.control.v2.FindingType|keyof typeof google.storage.control.v2.FindingType);
+
+                    /** FindingSummary category. */
+                    public category: (google.storage.control.v2.FindingCategory|keyof typeof google.storage.control.v2.FindingCategory);
+
+                    /** FindingSummary targetResource. */
+                    public targetResource: string;
+
+                    /** FindingSummary createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingSummary updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingSummary severity. */
+                    public severity: (google.storage.control.v2.FindingSeverity|keyof typeof google.storage.control.v2.FindingSeverity);
+
+                    /** FindingSummary summaryDetails. */
+                    public summaryDetails: google.storage.control.v2.FindingSummary.ISummaryDetails[];
+
+                    /**
+                     * Creates a new FindingSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FindingSummary instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IFindingSummary): google.storage.control.v2.FindingSummary;
+
+                    /**
+                     * Encodes the specified FindingSummary message. Does not implicitly {@link google.storage.control.v2.FindingSummary.verify|verify} messages.
+                     * @param message FindingSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IFindingSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FindingSummary message, length delimited. Does not implicitly {@link google.storage.control.v2.FindingSummary.verify|verify} messages.
+                     * @param message FindingSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IFindingSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FindingSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FindingSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.FindingSummary;
+
+                    /**
+                     * Decodes a FindingSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FindingSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.FindingSummary;
+
+                    /**
+                     * Verifies a FindingSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FindingSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FindingSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.FindingSummary;
+
+                    /**
+                     * Creates a plain object from a FindingSummary message. Also converts values to other types if specified.
+                     * @param message FindingSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.FindingSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FindingSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindingSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FindingSummary {
+
+                    /** Properties of a SummaryDetails. */
+                    interface ISummaryDetails {
+
+                        /** SummaryDetails count */
+                        count?: (number|Long|string|null);
+
+                        /** SummaryDetails percentage */
+                        percentage?: (number|null);
+
+                        /** SummaryDetails resourceType */
+                        resourceType?: (google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType|keyof typeof google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType|null);
+
+                        /** SummaryDetails description */
+                        description?: (string|null);
+                    }
+
+                    /** Represents a SummaryDetails. */
+                    class SummaryDetails implements ISummaryDetails {
+
+                        /**
+                         * Constructs a new SummaryDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.control.v2.FindingSummary.ISummaryDetails);
+
+                        /** SummaryDetails count. */
+                        public count?: (number|Long|string|null);
+
+                        /** SummaryDetails percentage. */
+                        public percentage?: (number|null);
+
+                        /** SummaryDetails resourceType. */
+                        public resourceType: (google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType|keyof typeof google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType);
+
+                        /** SummaryDetails description. */
+                        public description: string;
+
+                        /** SummaryDetails magnitude. */
+                        public magnitude?: ("count"|"percentage");
+
+                        /**
+                         * Creates a new SummaryDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SummaryDetails instance
+                         */
+                        public static create(properties?: google.storage.control.v2.FindingSummary.ISummaryDetails): google.storage.control.v2.FindingSummary.SummaryDetails;
+
+                        /**
+                         * Encodes the specified SummaryDetails message. Does not implicitly {@link google.storage.control.v2.FindingSummary.SummaryDetails.verify|verify} messages.
+                         * @param message SummaryDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.control.v2.FindingSummary.ISummaryDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SummaryDetails message, length delimited. Does not implicitly {@link google.storage.control.v2.FindingSummary.SummaryDetails.verify|verify} messages.
+                         * @param message SummaryDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.control.v2.FindingSummary.ISummaryDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SummaryDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SummaryDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.FindingSummary.SummaryDetails;
+
+                        /**
+                         * Decodes a SummaryDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SummaryDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.FindingSummary.SummaryDetails;
+
+                        /**
+                         * Verifies a SummaryDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SummaryDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SummaryDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.control.v2.FindingSummary.SummaryDetails;
+
+                        /**
+                         * Creates a plain object from a SummaryDetails message. Also converts values to other types if specified.
+                         * @param message SummaryDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.control.v2.FindingSummary.SummaryDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SummaryDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SummaryDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SummaryDetails {
+
+                        /** ResourceType enum. */
+                        enum ResourceType {
+                            RESOURCE_TYPE_UNSPECIFIED = 0,
+                            PROJECT = 1,
+                            BUCKET = 2
+                        }
+                    }
+                }
+
+                /** FindingType enum. */
+                enum FindingType {
+                    FINDING_TYPE_UNSPECIFIED = 0,
+                    FINDING_TYPE_COLDLINE_AND_ARCHIVAL_STORAGE_OPERATIONS_SPIKE = 1,
+                    FINDING_TYPE_THROTTLED_REQUEST_SPIKE = 2,
+                    FINDING_TYPE_CROSS_REGION_EGRESS_SPIKE = 3,
+                    FINDING_TYPE_STORAGE_GROWTH_ABOVE_TREND = 4
+                }
+
+                /** FindingCategory enum. */
+                enum FindingCategory {
+                    FINDING_CATEGORY_UNSPECIFIED = 0,
+                    FINDING_CATEGORY_DATA_MANAGEMENT = 1,
+                    FINDING_CATEGORY_PERFORMANCE = 2
+                }
+
+                /** FindingSeverity enum. */
+                enum FindingSeverity {
+                    FINDING_SEVERITY_UNSPECIFIED = 0,
+                    FINDING_SEVERITY_CRITICAL = 1
                 }
             }
         }
@@ -25366,6 +28479,109 @@ export namespace google {
 
             /**
              * Gets the default type url for Expr
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Interval. */
+        interface IInterval {
+
+            /** Interval startTime */
+            startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime */
+            endTime?: (google.protobuf.ITimestamp|null);
+        }
+
+        /** Represents an Interval. */
+        class Interval implements IInterval {
+
+            /**
+             * Constructs a new Interval.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IInterval);
+
+            /** Interval startTime. */
+            public startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime. */
+            public endTime?: (google.protobuf.ITimestamp|null);
+
+            /**
+             * Creates a new Interval instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Interval instance
+             */
+            public static create(properties?: google.type.IInterval): google.type.Interval;
+
+            /**
+             * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Interval;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Interval;
+
+            /**
+             * Verifies an Interval message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Interval
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Interval;
+
+            /**
+             * Creates a plain object from an Interval message. Also converts values to other types if specified.
+             * @param message Interval
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Interval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Interval to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Interval
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

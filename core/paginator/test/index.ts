@@ -17,7 +17,7 @@ import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {PassThrough, Transform} from 'stream';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import * as P from '../src';
 import {paginator, ParsedArguments} from '../src';
 
@@ -53,7 +53,7 @@ function createFakeStream<T = any>() {
 }
 
 describe('paginator', () => {
-  const UUID = uuid.v1();
+  const UUID = crypto.randomUUID();
   function FakeClass() {
     // do nothing
   }
@@ -124,7 +124,7 @@ describe('paginator', () => {
 
       /* eslint-disable  @typescript-eslint/no-explicit-any */
       const cls = new (FakeClass as any)();
-      cls.uuid = uuid.v1();
+      cls.uuid = crypto.randomUUID();
 
       sandbox.stub(paginator, 'run_').callsFake((_, originalMethod) => {
         assert.strictEqual(originalMethod(), cls.uuid);

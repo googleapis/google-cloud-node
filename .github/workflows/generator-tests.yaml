@@ -80,6 +80,7 @@ jobs:
       working-directory: core/generator/gapic-generator-typescript
       run: |
         set -ex
+        cp ../../../.mocharc.cjs .
         unzip ~/artifacts/outputs.zip -d library
         for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
           echo "--- Testing library $lib ---"
@@ -98,6 +99,7 @@ jobs:
       working-directory: core/generator/gapic-generator-typescript
       run: |
         set -ex
+        cp ../../../.mocharc.cjs .
         for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
           echo "--- Testing ESM library $lib ---"
           cd library/.test-out-$lib-esm

@@ -45,7 +45,7 @@
 #
 # Here is an example for running this script.
 #   TRAMPOLINE_IMAGE=gcr.io/cloud-devrel-kokoro-resources/node:18-user \
-#     TRAMPOLINE_BUILD_FILE=.kokoro/system-test.sh \
+#     TRAMPOLINE_BUILD_FILE=.kokoro/samples-test.sh \
 #     .kokoro/trampoline_v2.sh
 
 set -euo pipefail
@@ -259,9 +259,9 @@ cd "${PROJECT_ROOT}"
 if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
     # The package path is hardcoded during migration
     RELATIVE_PKG_PATH="handwritten/bigtable"
-    
+
     echo "Checking for changes in ${RELATIVE_PKG_PATH}..."
-    
+
     # Determine the diff range based on the CI system/event
     # Safe default: HEAD~1..HEAD
     DIFF_RANGE="HEAD~1..HEAD"
