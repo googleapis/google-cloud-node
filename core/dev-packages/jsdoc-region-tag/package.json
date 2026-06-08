@@ -8,7 +8,6 @@
     "lint": "gts check",
     "fix": "gts fix",
     "docs": "echo no docs needed",
-    "docs-test": "echo 🙈",
     "samples-test": "echo no samples test",
     "system-test": "echo no system test",
     "compile": "echo no compile script",

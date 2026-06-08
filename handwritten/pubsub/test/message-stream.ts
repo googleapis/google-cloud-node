@@ -20,7 +20,7 @@ import {grpc} from 'google-gax';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {Duplex, PassThrough} from 'stream';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import * as defer from 'p-defer';
 import {promisify} from 'util';
 
@@ -134,7 +134,7 @@ class FakeSubscriber {
   maxBytes: number;
   client: FakeGaxClient;
   constructor(client: FakeGaxClient) {
-    this.name = uuid.v4();
+    this.name = crypto.randomUUID();
     this.ackDeadline = Math.floor(Math.random() * 600);
     this.maxMessages = 20;
     this.maxBytes = 4000;

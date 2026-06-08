@@ -110,6 +110,16 @@
                 "testIamPermissions"
               ]
             },
+            "GetIntelligenceFinding": {
+              "methods": [
+                "getIntelligenceFinding"
+              ]
+            },
+            "GetIntelligenceFindingRevision": {
+              "methods": [
+                "getIntelligenceFindingRevision"
+              ]
+            },
             "RenameFolder": {
               "methods": [
                 "renameFolder"
@@ -149,6 +159,27 @@
                 "listAnywhereCaches",
                 "listAnywhereCachesStream",
                 "listAnywhereCachesAsync"
+              ]
+            },
+            "ListIntelligenceFindings": {
+              "methods": [
+                "listIntelligenceFindings",
+                "listIntelligenceFindingsStream",
+                "listIntelligenceFindingsAsync"
+              ]
+            },
+            "SummarizeIntelligenceFindings": {
+              "methods": [
+                "summarizeIntelligenceFindings",
+                "summarizeIntelligenceFindingsStream",
+                "summarizeIntelligenceFindingsAsync"
+              ]
+            },
+            "ListIntelligenceFindingRevisions": {
+              "methods": [
+                "listIntelligenceFindingRevisions",
+                "listIntelligenceFindingRevisionsStream",
+                "listIntelligenceFindingRevisionsAsync"
               ]
             }
           }
@@ -256,6 +287,16 @@
                 "testIamPermissions"
               ]
             },
+            "GetIntelligenceFinding": {
+              "methods": [
+                "getIntelligenceFinding"
+              ]
+            },
+            "GetIntelligenceFindingRevision": {
+              "methods": [
+                "getIntelligenceFindingRevision"
+              ]
+            },
             "RenameFolder": {
               "methods": [
                 "renameFolder"
@@ -295,6 +336,27 @@
                 "listAnywhereCaches",
                 "listAnywhereCachesStream",
                 "listAnywhereCachesAsync"
+              ]
+            },
+            "ListIntelligenceFindings": {
+              "methods": [
+                "listIntelligenceFindings",
+                "listIntelligenceFindingsStream",
+                "listIntelligenceFindingsAsync"
+              ]
+            },
+            "SummarizeIntelligenceFindings": {
+              "methods": [
+                "summarizeIntelligenceFindings",
+                "summarizeIntelligenceFindingsStream",
+                "summarizeIntelligenceFindingsAsync"
+              ]
+            },
+            "ListIntelligenceFindingRevisions": {
+              "methods": [
+                "listIntelligenceFindingRevisions",
+                "listIntelligenceFindingRevisionsStream",
+                "listIntelligenceFindingRevisionsAsync"
               ]
             }
           }

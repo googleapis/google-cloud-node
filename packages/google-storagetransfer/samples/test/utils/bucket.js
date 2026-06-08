@@ -22,7 +22,7 @@ const {
   StorageTransferServiceClient,
 } = require('@google-cloud/storage-transfer');
 const AWS = require('aws-sdk');
-const uuid = require('uuid');
+const crypto = require('crypto');
 
 class BucketManager {
   constructor() {
@@ -59,7 +59,7 @@ class BucketManager {
    * @returns {string} Name of bucket
    */
   static generateBucketName() {
-    return `nodejs-sts-samples-${uuid.v4()}`;
+    return `nodejs-sts-samples-${crypto.randomUUID()}`;
   }
 
   /**

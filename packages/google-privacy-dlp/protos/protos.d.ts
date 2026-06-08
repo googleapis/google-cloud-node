@@ -2789,6 +2789,9 @@ export namespace google {
                     /** ContentItem byteItem */
                     byteItem?: (google.privacy.dlp.v2.IByteContentItem|null);
 
+                    /** ContentItem conversation */
+                    conversation?: (google.privacy.dlp.v2.IConversation|null);
+
                     /** ContentItem contentMetadata */
                     contentMetadata?: (google.privacy.dlp.v2.IContentMetadata|null);
                 }
@@ -2811,11 +2814,14 @@ export namespace google {
                     /** ContentItem byteItem. */
                     public byteItem?: (google.privacy.dlp.v2.IByteContentItem|null);
 
+                    /** ContentItem conversation. */
+                    public conversation?: (google.privacy.dlp.v2.IConversation|null);
+
                     /** ContentItem contentMetadata. */
                     public contentMetadata?: (google.privacy.dlp.v2.IContentMetadata|null);
 
                     /** ContentItem dataItem. */
-                    public dataItem?: ("value"|"table"|"byteItem");
+                    public dataItem?: ("value"|"table"|"byteItem"|"conversation");
 
                     /**
                      * Creates a new ContentItem instance using the specified properties.
@@ -2990,6 +2996,222 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Conversation. */
+                interface IConversation {
+
+                    /** Conversation messages */
+                    messages?: (google.privacy.dlp.v2.IConversationMessage[]|null);
+                }
+
+                /** Represents a Conversation. */
+                class Conversation implements IConversation {
+
+                    /**
+                     * Constructs a new Conversation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IConversation);
+
+                    /** Conversation messages. */
+                    public messages: google.privacy.dlp.v2.IConversationMessage[];
+
+                    /**
+                     * Creates a new Conversation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Conversation instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IConversation): google.privacy.dlp.v2.Conversation;
+
+                    /**
+                     * Encodes the specified Conversation message. Does not implicitly {@link google.privacy.dlp.v2.Conversation.verify|verify} messages.
+                     * @param message Conversation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IConversation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Conversation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Conversation.verify|verify} messages.
+                     * @param message Conversation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IConversation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Conversation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Conversation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.Conversation;
+
+                    /**
+                     * Decodes a Conversation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Conversation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.Conversation;
+
+                    /**
+                     * Verifies a Conversation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Conversation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Conversation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.Conversation;
+
+                    /**
+                     * Creates a plain object from a Conversation message. Also converts values to other types if specified.
+                     * @param message Conversation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.Conversation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Conversation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Conversation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConversationMessage. */
+                interface IConversationMessage {
+
+                    /** ConversationMessage content */
+                    content?: (string|null);
+
+                    /** ConversationMessage messageType */
+                    messageType?: (google.privacy.dlp.v2.ConversationMessage.MessageType|keyof typeof google.privacy.dlp.v2.ConversationMessage.MessageType|null);
+
+                    /** ConversationMessage participantId */
+                    participantId?: (string|null);
+                }
+
+                /** Represents a ConversationMessage. */
+                class ConversationMessage implements IConversationMessage {
+
+                    /**
+                     * Constructs a new ConversationMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IConversationMessage);
+
+                    /** ConversationMessage content. */
+                    public content: string;
+
+                    /** ConversationMessage messageType. */
+                    public messageType: (google.privacy.dlp.v2.ConversationMessage.MessageType|keyof typeof google.privacy.dlp.v2.ConversationMessage.MessageType);
+
+                    /** ConversationMessage participantId. */
+                    public participantId: string;
+
+                    /**
+                     * Creates a new ConversationMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationMessage instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IConversationMessage): google.privacy.dlp.v2.ConversationMessage;
+
+                    /**
+                     * Encodes the specified ConversationMessage message. Does not implicitly {@link google.privacy.dlp.v2.ConversationMessage.verify|verify} messages.
+                     * @param message ConversationMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IConversationMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationMessage message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ConversationMessage.verify|verify} messages.
+                     * @param message ConversationMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IConversationMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ConversationMessage;
+
+                    /**
+                     * Decodes a ConversationMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ConversationMessage;
+
+                    /**
+                     * Verifies a ConversationMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ConversationMessage;
+
+                    /**
+                     * Creates a plain object from a ConversationMessage message. Also converts values to other types if specified.
+                     * @param message ConversationMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ConversationMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationMessage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationMessage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConversationMessage {
+
+                    /** MessageType enum. */
+                    enum MessageType {
+                        MESSAGE_TYPE_UNSPECIFIED = 0,
+                        CONTENT = 1,
+                        CONTEXT = 2
+                    }
                 }
 
                 /** Properties of a Table. */
@@ -3703,6 +3925,9 @@ export namespace google {
                     /** ContentLocation metadataLocation */
                     metadataLocation?: (google.privacy.dlp.v2.IMetadataLocation|null);
 
+                    /** ContentLocation conversationLocation */
+                    conversationLocation?: (google.privacy.dlp.v2.IConversationLocation|null);
+
                     /** ContentLocation containerTimestamp */
                     containerTimestamp?: (google.protobuf.ITimestamp|null);
 
@@ -3734,6 +3959,9 @@ export namespace google {
                     /** ContentLocation metadataLocation. */
                     public metadataLocation?: (google.privacy.dlp.v2.IMetadataLocation|null);
 
+                    /** ContentLocation conversationLocation. */
+                    public conversationLocation?: (google.privacy.dlp.v2.IConversationLocation|null);
+
                     /** ContentLocation containerTimestamp. */
                     public containerTimestamp?: (google.protobuf.ITimestamp|null);
 
@@ -3741,7 +3969,7 @@ export namespace google {
                     public containerVersion: string;
 
                     /** ContentLocation location. */
-                    public location?: ("recordLocation"|"imageLocation"|"documentLocation"|"metadataLocation");
+                    public location?: ("recordLocation"|"imageLocation"|"documentLocation"|"metadataLocation"|"conversationLocation");
 
                     /**
                      * Creates a new ContentLocation instance using the specified properties.
@@ -3819,6 +4047,206 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConversationLocation. */
+                interface IConversationLocation {
+
+                    /** ConversationLocation messageIndex */
+                    messageIndex?: (number|null);
+
+                    /** ConversationLocation allMessages */
+                    allMessages?: (google.privacy.dlp.v2.ConversationLocation.IAllMessages|null);
+                }
+
+                /** Represents a ConversationLocation. */
+                class ConversationLocation implements IConversationLocation {
+
+                    /**
+                     * Constructs a new ConversationLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IConversationLocation);
+
+                    /** ConversationLocation messageIndex. */
+                    public messageIndex?: (number|null);
+
+                    /** ConversationLocation allMessages. */
+                    public allMessages?: (google.privacy.dlp.v2.ConversationLocation.IAllMessages|null);
+
+                    /** ConversationLocation location. */
+                    public location?: ("messageIndex"|"allMessages");
+
+                    /**
+                     * Creates a new ConversationLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationLocation instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IConversationLocation): google.privacy.dlp.v2.ConversationLocation;
+
+                    /**
+                     * Encodes the specified ConversationLocation message. Does not implicitly {@link google.privacy.dlp.v2.ConversationLocation.verify|verify} messages.
+                     * @param message ConversationLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IConversationLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ConversationLocation.verify|verify} messages.
+                     * @param message ConversationLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IConversationLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ConversationLocation;
+
+                    /**
+                     * Decodes a ConversationLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ConversationLocation;
+
+                    /**
+                     * Verifies a ConversationLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ConversationLocation;
+
+                    /**
+                     * Creates a plain object from a ConversationLocation message. Also converts values to other types if specified.
+                     * @param message ConversationLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ConversationLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationLocation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConversationLocation {
+
+                    /** Properties of an AllMessages. */
+                    interface IAllMessages {
+                    }
+
+                    /** Represents an AllMessages. */
+                    class AllMessages implements IAllMessages {
+
+                        /**
+                         * Constructs a new AllMessages.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.ConversationLocation.IAllMessages);
+
+                        /**
+                         * Creates a new AllMessages instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AllMessages instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.ConversationLocation.IAllMessages): google.privacy.dlp.v2.ConversationLocation.AllMessages;
+
+                        /**
+                         * Encodes the specified AllMessages message. Does not implicitly {@link google.privacy.dlp.v2.ConversationLocation.AllMessages.verify|verify} messages.
+                         * @param message AllMessages message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.ConversationLocation.IAllMessages, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AllMessages message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ConversationLocation.AllMessages.verify|verify} messages.
+                         * @param message AllMessages message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.ConversationLocation.IAllMessages, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AllMessages message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AllMessages
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ConversationLocation.AllMessages;
+
+                        /**
+                         * Decodes an AllMessages message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AllMessages
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ConversationLocation.AllMessages;
+
+                        /**
+                         * Verifies an AllMessages message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AllMessages message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AllMessages
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ConversationLocation.AllMessages;
+
+                        /**
+                         * Creates a plain object from an AllMessages message. Also converts values to other types if specified.
+                         * @param message AllMessages
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.ConversationLocation.AllMessages, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AllMessages to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AllMessages
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a MetadataLocation. */

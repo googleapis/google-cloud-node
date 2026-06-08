@@ -18,11 +18,24 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +59,7 @@ export class VpcFlowLogsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('network-management');
@@ -59,12 +72,12 @@ export class VpcFlowLogsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  vpcFlowLogsServiceStub?: Promise<{[name: string]: Function}>;
+  vpcFlowLogsServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of VpcFlowLogsServiceClient.
@@ -105,21 +118,42 @@ export class VpcFlowLogsServiceClient {
    *     const client = new VpcFlowLogsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof VpcFlowLogsServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'networkmanagement.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -144,7 +178,7 @@ export class VpcFlowLogsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -157,18 +191,14 @@ export class VpcFlowLogsServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -190,32 +220,43 @@ export class VpcFlowLogsServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       connectivityTestPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/global/connectivityTests/{test}'
+        'projects/{project}/locations/global/connectivityTests/{test}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
-      organizationLocationVpcFlowLogsConfigsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}'
-      ),
+      organizationLocationVpcFlowLogsConfigsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}',
+        ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
-      projectLocationVpcFlowLogsConfigsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}'
-      ),
+      projectLocationVpcFlowLogsConfigsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}',
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listVpcFlowLogsConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'vpcFlowLogsConfigs'),
-      queryOrgVpcFlowLogsConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'vpcFlowLogsConfigs'),
-      showEffectiveFlowLogsConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'effectiveFlowLogsConfigs')
+      listVpcFlowLogsConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'vpcFlowLogsConfigs',
+      ),
+      queryOrgVpcFlowLogsConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'vpcFlowLogsConfigs',
+      ),
+      showEffectiveFlowLogsConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'effectiveFlowLogsConfigs',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -224,51 +265,135 @@ export class VpcFlowLogsServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',}],
-      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=organizations/*}/locations',}],
-      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/global/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/global/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/global/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/global/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/global/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/global/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/global}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/global}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*}' },
+          ],
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*}/locations' },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:getIamPolicy',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:setIamPolicy',
+          body: '*',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:testIamPermissions',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/global/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/global/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/global/operations/*}',
+          additional_bindings: [
+            {
+              delete:
+                '/v1/{name=organizations/*/locations/global/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/global/operations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/global/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/global}/operations',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/global}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createVpcFlowLogsConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkmanagement.v1.VpcFlowLogsConfig') as gax.protobuf.Type;
+      '.google.cloud.networkmanagement.v1.VpcFlowLogsConfig',
+    ) as gax.protobuf.Type;
     const createVpcFlowLogsConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkmanagement.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networkmanagement.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateVpcFlowLogsConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkmanagement.v1.VpcFlowLogsConfig') as gax.protobuf.Type;
+      '.google.cloud.networkmanagement.v1.VpcFlowLogsConfig',
+    ) as gax.protobuf.Type;
     const updateVpcFlowLogsConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkmanagement.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networkmanagement.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteVpcFlowLogsConfigResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteVpcFlowLogsConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkmanagement.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networkmanagement.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createVpcFlowLogsConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createVpcFlowLogsConfigResponse.decode.bind(createVpcFlowLogsConfigResponse),
-        createVpcFlowLogsConfigMetadata.decode.bind(createVpcFlowLogsConfigMetadata)),
+        createVpcFlowLogsConfigResponse.decode.bind(
+          createVpcFlowLogsConfigResponse,
+        ),
+        createVpcFlowLogsConfigMetadata.decode.bind(
+          createVpcFlowLogsConfigMetadata,
+        ),
+      ),
       updateVpcFlowLogsConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateVpcFlowLogsConfigResponse.decode.bind(updateVpcFlowLogsConfigResponse),
-        updateVpcFlowLogsConfigMetadata.decode.bind(updateVpcFlowLogsConfigMetadata)),
+        updateVpcFlowLogsConfigResponse.decode.bind(
+          updateVpcFlowLogsConfigResponse,
+        ),
+        updateVpcFlowLogsConfigMetadata.decode.bind(
+          updateVpcFlowLogsConfigMetadata,
+        ),
+      ),
       deleteVpcFlowLogsConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteVpcFlowLogsConfigResponse.decode.bind(deleteVpcFlowLogsConfigResponse),
-        deleteVpcFlowLogsConfigMetadata.decode.bind(deleteVpcFlowLogsConfigMetadata))
+        deleteVpcFlowLogsConfigResponse.decode.bind(
+          deleteVpcFlowLogsConfigResponse,
+        ),
+        deleteVpcFlowLogsConfigMetadata.decode.bind(
+          deleteVpcFlowLogsConfigMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.networkmanagement.v1.VpcFlowLogsService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.networkmanagement.v1.VpcFlowLogsService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -299,28 +424,42 @@ export class VpcFlowLogsServiceClient {
     // Put together the "service stub" for
     // google.cloud.networkmanagement.v1.VpcFlowLogsService.
     this.vpcFlowLogsServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.networkmanagement.v1.VpcFlowLogsService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.networkmanagement.v1.VpcFlowLogsService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.networkmanagement.v1.VpcFlowLogsService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.networkmanagement.v1
+            .VpcFlowLogsService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const vpcFlowLogsServiceStubMethods =
-        ['listVpcFlowLogsConfigs', 'getVpcFlowLogsConfig', 'createVpcFlowLogsConfig', 'updateVpcFlowLogsConfig', 'deleteVpcFlowLogsConfig', 'queryOrgVpcFlowLogsConfigs', 'showEffectiveFlowLogsConfigs'];
+    const vpcFlowLogsServiceStubMethods = [
+      'listVpcFlowLogsConfigs',
+      'getVpcFlowLogsConfig',
+      'createVpcFlowLogsConfig',
+      'updateVpcFlowLogsConfig',
+      'deleteVpcFlowLogsConfig',
+      'queryOrgVpcFlowLogsConfigs',
+      'showEffectiveFlowLogsConfigs',
+    ];
     for (const methodName of vpcFlowLogsServiceStubMethods) {
       const callPromise = this.vpcFlowLogsServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -330,7 +469,7 @@ export class VpcFlowLogsServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -345,8 +484,14 @@ export class VpcFlowLogsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networkmanagement.googleapis.com';
   }
@@ -357,8 +502,14 @@ export class VpcFlowLogsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networkmanagement.googleapis.com';
   }
@@ -389,9 +540,7 @@ export class VpcFlowLogsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -400,8 +549,9 @@ export class VpcFlowLogsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -412,577 +562,837 @@ export class VpcFlowLogsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets the details of a specific `VpcFlowLogsConfig`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the VpcFlowLogsConfig,
- *   in one of the following formats:
- *
- *   - For project-level resources:
- *   `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
- *
- *   - For organization-level resources:
- *   `organizations/{organization_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.get_vpc_flow_logs_config.js</caption>
- * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_GetVpcFlowLogsConfig_async
- */
+  /**
+   * Gets the details of a specific `VpcFlowLogsConfig`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the VpcFlowLogsConfig,
+   *   in one of the following formats:
+   *
+   *   - For project-level resources:
+   *   `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+   *
+   *   - For organization-level resources:
+   *   `organizations/{organization_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.get_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_GetVpcFlowLogsConfig_async
+   */
   getVpcFlowLogsConfig(
-      request?: protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
-        protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+      (
+        | protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getVpcFlowLogsConfig(
-      request: protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
-          protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+      | protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getVpcFlowLogsConfig(
-      request: protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest,
-      callback: Callback<
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
-          protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest,
+    callback: Callback<
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+      | protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getVpcFlowLogsConfig(
-      request?: protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
-          protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
-          protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
-        protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+      | protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+      (
+        | protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getVpcFlowLogsConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
-        protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+          | protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getVpcFlowLogsConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getVpcFlowLogsConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
-        protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getVpcFlowLogsConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getVpcFlowLogsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+          (
+            | protos.google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVpcFlowLogsConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new `VpcFlowLogsConfig`.
- * If a configuration with the exact same settings already exists (even if the
- * ID is different), the creation fails.
- * Notes:
- *
- *   1. Creating a configuration with `state=DISABLED` will fail
- *   2. The following fields are not considered as settings for the purpose
- *   of the check mentioned above, therefore - creating another configuration
- *   with the same fields but different values for the following fields will
- *   fail as well:
- *       * name
- *       * create_time
- *       * update_time
- *       * labels
- *       * description
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the VpcFlowLogsConfig to create,
- *   in one of the following formats:
- *
- *   - For project-level resources: `projects/{project_id}/locations/global`
- *
- *   - For organization-level resources:
- *   `organizations/{organization_id}/locations/global`
- * @param {string} request.vpcFlowLogsConfigId
- *   Required. ID of the `VpcFlowLogsConfig`.
- * @param {google.cloud.networkmanagement.v1.VpcFlowLogsConfig} request.vpcFlowLogsConfig
- *   Required. A `VpcFlowLogsConfig` resource
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.create_vpc_flow_logs_config.js</caption>
- * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_CreateVpcFlowLogsConfig_async
- */
+  /**
+   * Creates a new `VpcFlowLogsConfig`.
+   * If a configuration with the exact same settings already exists (even if the
+   * ID is different), the creation fails.
+   * Notes:
+   *
+   *   1. Creating a configuration with `state=DISABLED` will fail
+   *   2. The following fields are not considered as settings for the purpose
+   *   of the check mentioned above, therefore - creating another configuration
+   *   with the same fields but different values for the following fields will
+   *   fail as well:
+   *       * name
+   *       * create_time
+   *       * update_time
+   *       * labels
+   *       * description
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the VpcFlowLogsConfig to create,
+   *   in one of the following formats:
+   *
+   *   - For project-level resources: `projects/{project_id}/locations/global`
+   *
+   *   - For organization-level resources:
+   *   `organizations/{organization_id}/locations/global`
+   * @param {string} request.vpcFlowLogsConfigId
+   *   Required. ID of the `VpcFlowLogsConfig`.
+   * @param {google.cloud.networkmanagement.v1.VpcFlowLogsConfig} request.vpcFlowLogsConfig
+   *   Required. A `VpcFlowLogsConfig` resource
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.create_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_CreateVpcFlowLogsConfig_async
+   */
   createVpcFlowLogsConfig(
-      request?: protos.google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createVpcFlowLogsConfig(
-      request: protos.google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createVpcFlowLogsConfig(
-      request: protos.google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createVpcFlowLogsConfig(
-      request?: protos.google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+            protos.google.cloud.networkmanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+            protos.google.cloud.networkmanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createVpcFlowLogsConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createVpcFlowLogsConfig request %j', request);
-    return this.innerApiCalls.createVpcFlowLogsConfig(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createVpcFlowLogsConfig response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createVpcFlowLogsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+            protos.google.cloud.networkmanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createVpcFlowLogsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createVpcFlowLogsConfig()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.create_vpc_flow_logs_config.js</caption>
- * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_CreateVpcFlowLogsConfig_async
- */
-  async checkCreateVpcFlowLogsConfigProgress(name: string): Promise<LROperation<protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createVpcFlowLogsConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.create_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_CreateVpcFlowLogsConfig_async
+   */
+  async checkCreateVpcFlowLogsConfigProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig,
+      protos.google.cloud.networkmanagement.v1.OperationMetadata
+    >
+  > {
     this._log.info('createVpcFlowLogsConfig long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createVpcFlowLogsConfig, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createVpcFlowLogsConfig,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig,
+      protos.google.cloud.networkmanagement.v1.OperationMetadata
+    >;
   }
-/**
- * Updates an existing `VpcFlowLogsConfig`.
- * If a configuration with the exact same settings already exists (even if the
- * ID is different), the creation fails.
- * Notes:
- *
- *   1. Updating a configuration with `state=DISABLED` will fail.
- *   2. The following fields are not considered as settings for the purpose
- *   of the check mentioned above, therefore - updating another configuration
- *   with the same fields but different values for the following fields will
- *   fail as well:
- *       * name
- *       * create_time
- *       * update_time
- *       * labels
- *       * description
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Mask of fields to update. At least one path must be supplied in
- *   this field.
- *   For example, to change the state of the configuration to ENABLED, specify
- *     `update_mask` = `"state"`, and the `vpc_flow_logs_config` would be:
- *     `vpc_flow_logs_config = {
- *       name =
- *       "projects/my-project/locations/global/vpcFlowLogsConfigs/my-config"
- *       state = "ENABLED" }`
- * @param {google.cloud.networkmanagement.v1.VpcFlowLogsConfig} request.vpcFlowLogsConfig
- *   Required. Only fields specified in update_mask are updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.update_vpc_flow_logs_config.js</caption>
- * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_UpdateVpcFlowLogsConfig_async
- */
+  /**
+   * Updates an existing `VpcFlowLogsConfig`.
+   * If a configuration with the exact same settings already exists (even if the
+   * ID is different), the creation fails.
+   * Notes:
+   *
+   *   1. Updating a configuration with `state=DISABLED` will fail.
+   *   2. The following fields are not considered as settings for the purpose
+   *   of the check mentioned above, therefore - updating another configuration
+   *   with the same fields but different values for the following fields will
+   *   fail as well:
+   *       * name
+   *       * create_time
+   *       * update_time
+   *       * labels
+   *       * description
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field.
+   *   For example, to change the state of the configuration to ENABLED, specify
+   *     `update_mask` = `"state"`, and the `vpc_flow_logs_config` would be:
+   *     `vpc_flow_logs_config = {
+   *       name =
+   *       "projects/my-project/locations/global/vpcFlowLogsConfigs/my-config"
+   *       state = "ENABLED" }`
+   * @param {google.cloud.networkmanagement.v1.VpcFlowLogsConfig} request.vpcFlowLogsConfig
+   *   Required. Only fields specified in update_mask are updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.update_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_UpdateVpcFlowLogsConfig_async
+   */
   updateVpcFlowLogsConfig(
-      request?: protos.google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateVpcFlowLogsConfig(
-      request: protos.google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateVpcFlowLogsConfig(
-      request: protos.google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateVpcFlowLogsConfig(
-      request?: protos.google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+            protos.google.cloud.networkmanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'vpc_flow_logs_config.name': request.vpcFlowLogsConfig!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'vpc_flow_logs_config.name': request.vpcFlowLogsConfig!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+            protos.google.cloud.networkmanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateVpcFlowLogsConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateVpcFlowLogsConfig request %j', request);
-    return this.innerApiCalls.updateVpcFlowLogsConfig(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateVpcFlowLogsConfig response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateVpcFlowLogsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
+            protos.google.cloud.networkmanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVpcFlowLogsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateVpcFlowLogsConfig()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.update_vpc_flow_logs_config.js</caption>
- * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_UpdateVpcFlowLogsConfig_async
- */
-  async checkUpdateVpcFlowLogsConfigProgress(name: string): Promise<LROperation<protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateVpcFlowLogsConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.update_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_UpdateVpcFlowLogsConfig_async
+   */
+  async checkUpdateVpcFlowLogsConfigProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig,
+      protos.google.cloud.networkmanagement.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateVpcFlowLogsConfig long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateVpcFlowLogsConfig, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig, protos.google.cloud.networkmanagement.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateVpcFlowLogsConfig,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig,
+      protos.google.cloud.networkmanagement.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a specific `VpcFlowLogsConfig`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the VpcFlowLogsConfig,
- *   in one of the following formats:
- *
- *   - For a project-level resource:
- *   `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
- *
- *   - For an organization-level resource:
- *   `organizations/{organization_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.delete_vpc_flow_logs_config.js</caption>
- * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_DeleteVpcFlowLogsConfig_async
- */
+  /**
+   * Deletes a specific `VpcFlowLogsConfig`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the VpcFlowLogsConfig,
+   *   in one of the following formats:
+   *
+   *   - For a project-level resource:
+   *   `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+   *
+   *   - For an organization-level resource:
+   *   `organizations/{organization_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.delete_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_DeleteVpcFlowLogsConfig_async
+   */
   deleteVpcFlowLogsConfig(
-      request?: protos.google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteVpcFlowLogsConfig(
-      request: protos.google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteVpcFlowLogsConfig(
-      request: protos.google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteVpcFlowLogsConfig(
-      request?: protos.google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkmanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkmanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteVpcFlowLogsConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteVpcFlowLogsConfig request %j', request);
-    return this.innerApiCalls.deleteVpcFlowLogsConfig(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkmanagement.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteVpcFlowLogsConfig response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteVpcFlowLogsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkmanagement.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVpcFlowLogsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteVpcFlowLogsConfig()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.delete_vpc_flow_logs_config.js</caption>
- * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_DeleteVpcFlowLogsConfig_async
- */
-  async checkDeleteVpcFlowLogsConfigProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkmanagement.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteVpcFlowLogsConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.delete_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_DeleteVpcFlowLogsConfig_async
+   */
+  async checkDeleteVpcFlowLogsConfigProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networkmanagement.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteVpcFlowLogsConfig long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteVpcFlowLogsConfig, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkmanagement.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteVpcFlowLogsConfig,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networkmanagement.v1.OperationMetadata
+    >;
   }
- /**
- * Lists all `VpcFlowLogsConfigs` in a given project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the VpcFlowLogsConfig,
- *   in one of the following formats:
- *
- *   - For project-level resources: `projects/{project_id}/locations/global`
- *
- *   - For organization-level resources:
- *   `organizations/{organization_id}/locations/global`
- * @param {number} [request.pageSize]
- *   Optional. Number of `VpcFlowLogsConfigs` to return.
- * @param {string} [request.pageToken]
- *   Optional. Page token from an earlier query, as returned in
- *   `next_page_token`.
- * @param {string} [request.filter]
- *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
- *   A filter expression must use the supported [CEL logic operators]
- *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
- * @param {string} [request.orderBy]
- *   Optional. Field to use to sort the list.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listVpcFlowLogsConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all `VpcFlowLogsConfigs` in a given project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the VpcFlowLogsConfig,
+   *   in one of the following formats:
+   *
+   *   - For project-level resources: `projects/{project_id}/locations/global`
+   *
+   *   - For organization-level resources:
+   *   `organizations/{organization_id}/locations/global`
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `VpcFlowLogsConfigs` to return.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+   *   A filter expression must use the supported [CEL logic operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listVpcFlowLogsConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listVpcFlowLogsConfigs(
-      request?: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
-        protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest|null,
-        protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse
-      ]>;
+    request?: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
+      protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest | null,
+      protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse,
+    ]
+  >;
   listVpcFlowLogsConfigs(
-      request: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>): void;
+    request: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig
+    >,
+  ): void;
   listVpcFlowLogsConfigs(
-      request: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>): void;
+    request: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig
+    >,
+  ): void;
   listVpcFlowLogsConfigs(
-      request?: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>):
-      Promise<[
-        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
-        protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest|null,
-        protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse
-      ]>|void {
+          | protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
+      protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest | null,
+      protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-      protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse|null|undefined,
-      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
+          | protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listVpcFlowLogsConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -991,222 +1401,251 @@ export class VpcFlowLogsServiceClient {
     this._log.info('listVpcFlowLogsConfigs request %j', request);
     return this.innerApiCalls
       .listVpcFlowLogsConfigs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
-        protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest|null,
-        protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse
-      ]) => {
-        this._log.info('listVpcFlowLogsConfigs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
+          protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest | null,
+          protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsResponse,
+        ]) => {
+          this._log.info('listVpcFlowLogsConfigs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listVpcFlowLogsConfigs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the VpcFlowLogsConfig,
- *   in one of the following formats:
- *
- *   - For project-level resources: `projects/{project_id}/locations/global`
- *
- *   - For organization-level resources:
- *   `organizations/{organization_id}/locations/global`
- * @param {number} [request.pageSize]
- *   Optional. Number of `VpcFlowLogsConfigs` to return.
- * @param {string} [request.pageToken]
- *   Optional. Page token from an earlier query, as returned in
- *   `next_page_token`.
- * @param {string} [request.filter]
- *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
- *   A filter expression must use the supported [CEL logic operators]
- *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
- * @param {string} [request.orderBy]
- *   Optional. Field to use to sort the list.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listVpcFlowLogsConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listVpcFlowLogsConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the VpcFlowLogsConfig,
+   *   in one of the following formats:
+   *
+   *   - For project-level resources: `projects/{project_id}/locations/global`
+   *
+   *   - For organization-level resources:
+   *   `organizations/{organization_id}/locations/global`
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `VpcFlowLogsConfigs` to return.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+   *   A filter expression must use the supported [CEL logic operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listVpcFlowLogsConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listVpcFlowLogsConfigsStream(
-      request?: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listVpcFlowLogsConfigs stream %j', request);
     return this.descriptors.page.listVpcFlowLogsConfigs.createStream(
       this.innerApiCalls.listVpcFlowLogsConfigs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listVpcFlowLogsConfigs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the VpcFlowLogsConfig,
- *   in one of the following formats:
- *
- *   - For project-level resources: `projects/{project_id}/locations/global`
- *
- *   - For organization-level resources:
- *   `organizations/{organization_id}/locations/global`
- * @param {number} [request.pageSize]
- *   Optional. Number of `VpcFlowLogsConfigs` to return.
- * @param {string} [request.pageToken]
- *   Optional. Page token from an earlier query, as returned in
- *   `next_page_token`.
- * @param {string} [request.filter]
- *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
- *   A filter expression must use the supported [CEL logic operators]
- *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
- * @param {string} [request.orderBy]
- *   Optional. Field to use to sort the list.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.list_vpc_flow_logs_configs.js</caption>
- * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_ListVpcFlowLogsConfigs_async
- */
+  /**
+   * Equivalent to `listVpcFlowLogsConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the VpcFlowLogsConfig,
+   *   in one of the following formats:
+   *
+   *   - For project-level resources: `projects/{project_id}/locations/global`
+   *
+   *   - For organization-level resources:
+   *   `organizations/{organization_id}/locations/global`
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `VpcFlowLogsConfigs` to return.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+   *   A filter expression must use the supported [CEL logic operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.list_vpc_flow_logs_configs.js</caption>
+   * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_ListVpcFlowLogsConfigs_async
+   */
   listVpcFlowLogsConfigsAsync(
-      request?: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>{
+    request?: protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listVpcFlowLogsConfigs iterate %j', request);
     return this.descriptors.page.listVpcFlowLogsConfigs.asyncIterate(
       this.innerApiCalls['listVpcFlowLogsConfigs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>;
   }
- /**
- * QueryOrgVpcFlowLogsConfigs returns a list of all organization-level VPC
- * Flow Logs configurations applicable to the specified project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the VpcFlowLogsConfig, specified in
- *   the following format: `projects/{project_id}/locations/global`
- * @param {number} [request.pageSize]
- *   Optional. Number of `VpcFlowLogsConfigs` to return.
- * @param {string} [request.pageToken]
- *   Optional. Page token from an earlier query, as returned in
- *   `next_page_token`.
- * @param {string} [request.filter]
- *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
- *   A filter expression must use the supported [CEL logic operators]
- *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `queryOrgVpcFlowLogsConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * QueryOrgVpcFlowLogsConfigs returns a list of all organization-level VPC
+   * Flow Logs configurations applicable to the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the VpcFlowLogsConfig, specified in
+   *   the following format: `projects/{project_id}/locations/global`
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `VpcFlowLogsConfigs` to return.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+   *   A filter expression must use the supported [CEL logic operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `queryOrgVpcFlowLogsConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   queryOrgVpcFlowLogsConfigs(
-      request?: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
-        protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest|null,
-        protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse
-      ]>;
+    request?: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
+      protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest | null,
+      protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse,
+    ]
+  >;
   queryOrgVpcFlowLogsConfigs(
-      request: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>): void;
+    request: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig
+    >,
+  ): void;
   queryOrgVpcFlowLogsConfigs(
-      request: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>): void;
+    request: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig
+    >,
+  ): void;
   queryOrgVpcFlowLogsConfigs(
-      request?: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>):
-      Promise<[
-        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
-        protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest|null,
-        protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse
-      ]>|void {
+          | protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
+      protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest | null,
+      protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-      protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse|null|undefined,
-      protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
+          | protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('queryOrgVpcFlowLogsConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1215,214 +1654,243 @@ export class VpcFlowLogsServiceClient {
     this._log.info('queryOrgVpcFlowLogsConfigs request %j', request);
     return this.innerApiCalls
       .queryOrgVpcFlowLogsConfigs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
-        protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest|null,
-        protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse
-      ]) => {
-        this._log.info('queryOrgVpcFlowLogsConfigs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[],
+          protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest | null,
+          protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse,
+        ]) => {
+          this._log.info('queryOrgVpcFlowLogsConfigs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `queryOrgVpcFlowLogsConfigs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the VpcFlowLogsConfig, specified in
- *   the following format: `projects/{project_id}/locations/global`
- * @param {number} [request.pageSize]
- *   Optional. Number of `VpcFlowLogsConfigs` to return.
- * @param {string} [request.pageToken]
- *   Optional. Page token from an earlier query, as returned in
- *   `next_page_token`.
- * @param {string} [request.filter]
- *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
- *   A filter expression must use the supported [CEL logic operators]
- *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `queryOrgVpcFlowLogsConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `queryOrgVpcFlowLogsConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the VpcFlowLogsConfig, specified in
+   *   the following format: `projects/{project_id}/locations/global`
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `VpcFlowLogsConfigs` to return.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+   *   A filter expression must use the supported [CEL logic operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `queryOrgVpcFlowLogsConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   queryOrgVpcFlowLogsConfigsStream(
-      request?: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['queryOrgVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('queryOrgVpcFlowLogsConfigs stream %j', request);
     return this.descriptors.page.queryOrgVpcFlowLogsConfigs.createStream(
       this.innerApiCalls.queryOrgVpcFlowLogsConfigs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `queryOrgVpcFlowLogsConfigs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the VpcFlowLogsConfig, specified in
- *   the following format: `projects/{project_id}/locations/global`
- * @param {number} [request.pageSize]
- *   Optional. Number of `VpcFlowLogsConfigs` to return.
- * @param {string} [request.pageToken]
- *   Optional. Page token from an earlier query, as returned in
- *   `next_page_token`.
- * @param {string} [request.filter]
- *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
- *   A filter expression must use the supported [CEL logic operators]
- *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.query_org_vpc_flow_logs_configs.js</caption>
- * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_QueryOrgVpcFlowLogsConfigs_async
- */
+  /**
+   * Equivalent to `queryOrgVpcFlowLogsConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the VpcFlowLogsConfig, specified in
+   *   the following format: `projects/{project_id}/locations/global`
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `VpcFlowLogsConfigs` to return.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+   *   A filter expression must use the supported [CEL logic operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig|VpcFlowLogsConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.query_org_vpc_flow_logs_configs.js</caption>
+   * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_QueryOrgVpcFlowLogsConfigs_async
+   */
   queryOrgVpcFlowLogsConfigsAsync(
-      request?: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>{
+    request?: protos.google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['queryOrgVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('queryOrgVpcFlowLogsConfigs iterate %j', request);
     return this.descriptors.page.queryOrgVpcFlowLogsConfigs.asyncIterate(
       this.innerApiCalls['queryOrgVpcFlowLogsConfigs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>;
   }
- /**
- * ShowEffectiveFlowLogsConfigs returns a list of all VPC Flow Logs
- * configurations applicable to a specified resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the VpcFlowLogsConfig, specified in
- *   the following format: `projects/{project_id}/locations/global`
- * @param {string} request.resource
- *   Required. The resource to get the effective VPC Flow Logs configuration
- *   for. The resource must belong to the same project as the parent. The
- *   resource must be a network, subnetwork, interconnect attachment, VPN
- *   tunnel, or a project.
- * @param {number} [request.pageSize]
- *   Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
- * @param {string} [request.pageToken]
- *   Optional. Page token from an earlier query, as returned in
- *   `next_page_token`.
- * @param {string} [request.filter]
- *   Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
- *   expression. A filter expression must use the supported [CEL logic
- *   operators]
- *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig|EffectiveVpcFlowLogsConfig}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `showEffectiveFlowLogsConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * ShowEffectiveFlowLogsConfigs returns a list of all VPC Flow Logs
+   * configurations applicable to a specified resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the VpcFlowLogsConfig, specified in
+   *   the following format: `projects/{project_id}/locations/global`
+   * @param {string} request.resource
+   *   Required. The resource to get the effective VPC Flow Logs configuration
+   *   for. The resource must belong to the same project as the parent. The
+   *   resource must be a network, subnetwork, interconnect attachment, VPN
+   *   tunnel, or a project.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
+   *   expression. A filter expression must use the supported [CEL logic
+   *   operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig|EffectiveVpcFlowLogsConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `showEffectiveFlowLogsConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   showEffectiveFlowLogsConfigs(
-      request?: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[],
-        protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest|null,
-        protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse
-      ]>;
+    request?: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[],
+      protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest | null,
+      protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse,
+    ]
+  >;
   showEffectiveFlowLogsConfigs(
-      request: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig>): void;
+    request: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig
+    >,
+  ): void;
   showEffectiveFlowLogsConfigs(
-      request: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig>): void;
+    request: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig
+    >,
+  ): void;
   showEffectiveFlowLogsConfigs(
-      request?: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-          protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse|null|undefined,
-          protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig>):
-      Promise<[
-        protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[],
-        protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest|null,
-        protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse
-      ]>|void {
+          | protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[],
+      protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest | null,
+      protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-      protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse|null|undefined,
-      protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
+          | protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('showEffectiveFlowLogsConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1431,157 +1899,161 @@ export class VpcFlowLogsServiceClient {
     this._log.info('showEffectiveFlowLogsConfigs request %j', request);
     return this.innerApiCalls
       .showEffectiveFlowLogsConfigs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[],
-        protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest|null,
-        protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse
-      ]) => {
-        this._log.info('showEffectiveFlowLogsConfigs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[],
+          protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest | null,
+          protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse,
+        ]) => {
+          this._log.info('showEffectiveFlowLogsConfigs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `showEffectiveFlowLogsConfigs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the VpcFlowLogsConfig, specified in
- *   the following format: `projects/{project_id}/locations/global`
- * @param {string} request.resource
- *   Required. The resource to get the effective VPC Flow Logs configuration
- *   for. The resource must belong to the same project as the parent. The
- *   resource must be a network, subnetwork, interconnect attachment, VPN
- *   tunnel, or a project.
- * @param {number} [request.pageSize]
- *   Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
- * @param {string} [request.pageToken]
- *   Optional. Page token from an earlier query, as returned in
- *   `next_page_token`.
- * @param {string} [request.filter]
- *   Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
- *   expression. A filter expression must use the supported [CEL logic
- *   operators]
- *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig|EffectiveVpcFlowLogsConfig} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `showEffectiveFlowLogsConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `showEffectiveFlowLogsConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the VpcFlowLogsConfig, specified in
+   *   the following format: `projects/{project_id}/locations/global`
+   * @param {string} request.resource
+   *   Required. The resource to get the effective VPC Flow Logs configuration
+   *   for. The resource must belong to the same project as the parent. The
+   *   resource must be a network, subnetwork, interconnect attachment, VPN
+   *   tunnel, or a project.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
+   *   expression. A filter expression must use the supported [CEL logic
+   *   operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig|EffectiveVpcFlowLogsConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `showEffectiveFlowLogsConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   showEffectiveFlowLogsConfigsStream(
-      request?: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['showEffectiveFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('showEffectiveFlowLogsConfigs stream %j', request);
     return this.descriptors.page.showEffectiveFlowLogsConfigs.createStream(
       this.innerApiCalls.showEffectiveFlowLogsConfigs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `showEffectiveFlowLogsConfigs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the VpcFlowLogsConfig, specified in
- *   the following format: `projects/{project_id}/locations/global`
- * @param {string} request.resource
- *   Required. The resource to get the effective VPC Flow Logs configuration
- *   for. The resource must belong to the same project as the parent. The
- *   resource must be a network, subnetwork, interconnect attachment, VPN
- *   tunnel, or a project.
- * @param {number} [request.pageSize]
- *   Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
- * @param {string} [request.pageToken]
- *   Optional. Page token from an earlier query, as returned in
- *   `next_page_token`.
- * @param {string} [request.filter]
- *   Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
- *   expression. A filter expression must use the supported [CEL logic
- *   operators]
- *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig|EffectiveVpcFlowLogsConfig}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.show_effective_flow_logs_configs.js</caption>
- * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_ShowEffectiveFlowLogsConfigs_async
- */
+  /**
+   * Equivalent to `showEffectiveFlowLogsConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the VpcFlowLogsConfig, specified in
+   *   the following format: `projects/{project_id}/locations/global`
+   * @param {string} request.resource
+   *   Required. The resource to get the effective VPC Flow Logs configuration
+   *   for. The resource must belong to the same project as the parent. The
+   *   resource must be a network, subnetwork, interconnect attachment, VPN
+   *   tunnel, or a project.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
+   *   expression. A filter expression must use the supported [CEL logic
+   *   operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig|EffectiveVpcFlowLogsConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vpc_flow_logs_service.show_effective_flow_logs_configs.js</caption>
+   * region_tag:networkmanagement_v1_generated_VpcFlowLogsService_ShowEffectiveFlowLogsConfigs_async
+   */
   showEffectiveFlowLogsConfigsAsync(
-      request?: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig>{
+    request?: protos.google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['showEffectiveFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('showEffectiveFlowLogsConfigs iterate %j', request);
     return this.descriptors.page.showEffectiveFlowLogsConfigs.asyncIterate(
       this.innerApiCalls['showEffectiveFlowLogsConfigs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -1595,40 +2067,40 @@ export class VpcFlowLogsServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -1642,41 +2114,41 @@ export class VpcFlowLogsServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -1690,12 +2162,12 @@ export class VpcFlowLogsServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1730,12 +2202,11 @@ export class VpcFlowLogsServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1768,12 +2239,12 @@ export class VpcFlowLogsServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1816,22 +2287,22 @@ export class VpcFlowLogsServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1866,15 +2337,15 @@ export class VpcFlowLogsServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1908,7 +2379,7 @@ export class VpcFlowLogsServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1921,25 +2392,24 @@ export class VpcFlowLogsServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1978,22 +2448,22 @@ export class VpcFlowLogsServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2008,7 +2478,7 @@ export class VpcFlowLogsServiceClient {
    * @param {string} test
    * @returns {string} Resource name string.
    */
-  connectivityTestPath(project:string,test:string) {
+  connectivityTestPath(project: string, test: string) {
     return this.pathTemplates.connectivityTestPathTemplate.render({
       project: project,
       test: test,
@@ -2023,7 +2493,9 @@ export class VpcFlowLogsServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConnectivityTestName(connectivityTestName: string) {
-    return this.pathTemplates.connectivityTestPathTemplate.match(connectivityTestName).project;
+    return this.pathTemplates.connectivityTestPathTemplate.match(
+      connectivityTestName,
+    ).project;
   }
 
   /**
@@ -2034,7 +2506,9 @@ export class VpcFlowLogsServiceClient {
    * @returns {string} A string representing the test.
    */
   matchTestFromConnectivityTestName(connectivityTestName: string) {
-    return this.pathTemplates.connectivityTestPathTemplate.match(connectivityTestName).test;
+    return this.pathTemplates.connectivityTestPathTemplate.match(
+      connectivityTestName,
+    ).test;
   }
 
   /**
@@ -2044,7 +2518,7 @@ export class VpcFlowLogsServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2081,12 +2555,18 @@ export class VpcFlowLogsServiceClient {
    * @param {string} vpc_flow_logs_config
    * @returns {string} Resource name string.
    */
-  organizationLocationVpcFlowLogsConfigsPath(organization:string,location:string,vpcFlowLogsConfig:string) {
-    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.render({
-      organization: organization,
-      location: location,
-      vpc_flow_logs_config: vpcFlowLogsConfig,
-    });
+  organizationLocationVpcFlowLogsConfigsPath(
+    organization: string,
+    location: string,
+    vpcFlowLogsConfig: string,
+  ) {
+    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        vpc_flow_logs_config: vpcFlowLogsConfig,
+      },
+    );
   }
 
   /**
@@ -2096,8 +2576,12 @@ export class VpcFlowLogsServiceClient {
    *   A fully-qualified path representing organization_location_vpcFlowLogsConfigs resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationVpcFlowLogsConfigsName(organizationLocationVpcFlowLogsConfigsName: string) {
-    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match(organizationLocationVpcFlowLogsConfigsName).organization;
+  matchOrganizationFromOrganizationLocationVpcFlowLogsConfigsName(
+    organizationLocationVpcFlowLogsConfigsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match(
+      organizationLocationVpcFlowLogsConfigsName,
+    ).organization;
   }
 
   /**
@@ -2107,8 +2591,12 @@ export class VpcFlowLogsServiceClient {
    *   A fully-qualified path representing organization_location_vpcFlowLogsConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationVpcFlowLogsConfigsName(organizationLocationVpcFlowLogsConfigsName: string) {
-    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match(organizationLocationVpcFlowLogsConfigsName).location;
+  matchLocationFromOrganizationLocationVpcFlowLogsConfigsName(
+    organizationLocationVpcFlowLogsConfigsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match(
+      organizationLocationVpcFlowLogsConfigsName,
+    ).location;
   }
 
   /**
@@ -2118,8 +2606,12 @@ export class VpcFlowLogsServiceClient {
    *   A fully-qualified path representing organization_location_vpcFlowLogsConfigs resource.
    * @returns {string} A string representing the vpc_flow_logs_config.
    */
-  matchVpcFlowLogsConfigFromOrganizationLocationVpcFlowLogsConfigsName(organizationLocationVpcFlowLogsConfigsName: string) {
-    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match(organizationLocationVpcFlowLogsConfigsName).vpc_flow_logs_config;
+  matchVpcFlowLogsConfigFromOrganizationLocationVpcFlowLogsConfigsName(
+    organizationLocationVpcFlowLogsConfigsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match(
+      organizationLocationVpcFlowLogsConfigsName,
+    ).vpc_flow_logs_config;
   }
 
   /**
@@ -2128,7 +2620,7 @@ export class VpcFlowLogsServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2153,12 +2645,18 @@ export class VpcFlowLogsServiceClient {
    * @param {string} vpc_flow_logs_config
    * @returns {string} Resource name string.
    */
-  projectLocationVpcFlowLogsConfigsPath(project:string,location:string,vpcFlowLogsConfig:string) {
-    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.render({
-      project: project,
-      location: location,
-      vpc_flow_logs_config: vpcFlowLogsConfig,
-    });
+  projectLocationVpcFlowLogsConfigsPath(
+    project: string,
+    location: string,
+    vpcFlowLogsConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        vpc_flow_logs_config: vpcFlowLogsConfig,
+      },
+    );
   }
 
   /**
@@ -2168,8 +2666,12 @@ export class VpcFlowLogsServiceClient {
    *   A fully-qualified path representing project_location_vpcFlowLogsConfigs resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationVpcFlowLogsConfigsName(projectLocationVpcFlowLogsConfigsName: string) {
-    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match(projectLocationVpcFlowLogsConfigsName).project;
+  matchProjectFromProjectLocationVpcFlowLogsConfigsName(
+    projectLocationVpcFlowLogsConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match(
+      projectLocationVpcFlowLogsConfigsName,
+    ).project;
   }
 
   /**
@@ -2179,8 +2681,12 @@ export class VpcFlowLogsServiceClient {
    *   A fully-qualified path representing project_location_vpcFlowLogsConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationVpcFlowLogsConfigsName(projectLocationVpcFlowLogsConfigsName: string) {
-    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match(projectLocationVpcFlowLogsConfigsName).location;
+  matchLocationFromProjectLocationVpcFlowLogsConfigsName(
+    projectLocationVpcFlowLogsConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match(
+      projectLocationVpcFlowLogsConfigsName,
+    ).location;
   }
 
   /**
@@ -2190,8 +2696,12 @@ export class VpcFlowLogsServiceClient {
    *   A fully-qualified path representing project_location_vpcFlowLogsConfigs resource.
    * @returns {string} A string representing the vpc_flow_logs_config.
    */
-  matchVpcFlowLogsConfigFromProjectLocationVpcFlowLogsConfigsName(projectLocationVpcFlowLogsConfigsName: string) {
-    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match(projectLocationVpcFlowLogsConfigsName).vpc_flow_logs_config;
+  matchVpcFlowLogsConfigFromProjectLocationVpcFlowLogsConfigsName(
+    projectLocationVpcFlowLogsConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match(
+      projectLocationVpcFlowLogsConfigsName,
+    ).vpc_flow_logs_config;
   }
 
   /**
@@ -2202,12 +2712,16 @@ export class VpcFlowLogsServiceClient {
    */
   close(): Promise<void> {
     if (this.vpcFlowLogsServiceStub && !this._terminated) {
-      return this.vpcFlowLogsServiceStub.then(stub => {
+      return this.vpcFlowLogsServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

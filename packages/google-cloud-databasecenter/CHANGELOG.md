@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/databasecenter-v0.2.0...databasecenter-v0.3.0) (2026-06-01)
+
+
+### Features
+
+* [databasecenter] add a AggregateQueryStats  API ([#8315](https://github.com/googleapis/google-cloud-node/issues/8315)) ([d25b276](https://github.com/googleapis/google-cloud-node/commit/d25b276be2d154b68d0e6bce62244c15a5103f7a))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/databasecenter-v0.1.0...databasecenter-v0.2.0) (2026-05-27)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+
 ## 0.1.0 (2026-05-12)
 
 
