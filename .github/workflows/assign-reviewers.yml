@@ -68,6 +68,9 @@ jobs:
               pull_number: context.payload.pull_request.number,
             });
             const hasFirestoreChanges = files.some(file => file.filename.startsWith('handwritten/firestore/'));
+            const hasSpannerChanges = files.some(file => file.filename.startsWith('handwritten/spanner/'));
+            const hasStorageChanges = files.some(file => file.filename.startsWith('handwritten/storage/'));
+            const hasPubsubChanges = files.some(file => file.filename.startsWith('handwritten/pubsub/'));
 
             if (hasFirestoreChanges) {
               // Route to firestore team
@@ -77,6 +80,33 @@ jobs:
                 repo: context.repo.repo,
                 pull_number: context.payload.pull_request.number,
                 team_reviewers: ['firestore-team'],
+              });
+            } else if (hasSpannerChanges) {
+              // Route to spanner team
+              console.log("PR contains changes to handwritten/spanner/. Requesting review from spanner-team.");
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                team_reviewers: ['spanner-team'],
+              });
+            } else if (hasStorageChanges) {
+              // Route to storage team
+              console.log("PR contains changes to handwritten/storage/. Requesting review from gcs-team.");
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                team_reviewers: ['gcs-team'],
+              });
+            } else if (hasPubsubChanges) {
+              // Route to pubsub team
+              console.log("PR contains changes to handwritten/pubsub/. Requesting review from pubsub-team.");
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                team_reviewers: ['pubsub-team'],
               });
             } else {
               // Route to cloud-sdk-nodejs-team members with load balancing
