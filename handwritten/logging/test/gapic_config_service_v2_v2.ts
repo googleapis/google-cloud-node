@@ -1,4 +1,4 @@
-// Copyright 2026 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as configservicev2Module from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.configServiceV2Stub, undefined);
@@ -279,45 +279,33 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(client.configServiceV2Stub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
-        throw err;
-      });
+      client.initialize();
       assert(client.configServiceV2Stub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch((err) => {
-          throw err;
-        });
+      client.close().then(() => {
+        done();
+      });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.configServiceV2Stub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch((err) => {
-          throw err;
-        });
+      client.close().then(() => {
+        done();
+      });
     });
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +317,7 @@ describe('v2.ConfigServiceV2Client', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,10 +340,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getBucket', () => {
     it('invokes getBucket without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetBucketRequest(),
       );
@@ -364,7 +352,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogBucket(),
       );
@@ -383,10 +371,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getBucket without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetBucketRequest(),
       );
@@ -395,7 +383,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogBucket(),
       );
@@ -430,10 +418,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getBucket with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetBucketRequest(),
       );
@@ -442,7 +430,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBucket = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getBucket(request), expectedError);
@@ -458,10 +446,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getBucket with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetBucketRequest(),
       );
@@ -471,9 +459,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.getBucket(request), expectedError);
     });
   });
@@ -481,10 +467,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createBucket', () => {
     it('invokes createBucket without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateBucketRequest(),
       );
@@ -493,7 +479,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogBucket(),
       );
@@ -512,10 +498,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucket without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateBucketRequest(),
       );
@@ -524,7 +510,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogBucket(),
       );
@@ -559,10 +545,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucket with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateBucketRequest(),
       );
@@ -571,7 +557,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBucket = stubSimpleCall(
         undefined,
@@ -590,10 +576,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucket with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateBucketRequest(),
       );
@@ -603,9 +589,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.createBucket(request), expectedError);
     });
   });
@@ -613,10 +597,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateBucket', () => {
     it('invokes updateBucket without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateBucketRequest(),
       );
@@ -625,7 +609,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogBucket(),
       );
@@ -644,10 +628,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucket without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateBucketRequest(),
       );
@@ -656,7 +640,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogBucket(),
       );
@@ -691,10 +675,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucket with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateBucketRequest(),
       );
@@ -703,7 +687,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBucket = stubSimpleCall(
         undefined,
@@ -722,10 +706,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucket with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateBucketRequest(),
       );
@@ -735,9 +719,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.updateBucket(request), expectedError);
     });
   });
@@ -745,10 +727,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteBucket', () => {
     it('invokes deleteBucket without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteBucketRequest(),
       );
@@ -757,7 +739,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty(),
       );
@@ -776,10 +758,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteBucket without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteBucketRequest(),
       );
@@ -788,7 +770,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty(),
       );
@@ -823,10 +805,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteBucket with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteBucketRequest(),
       );
@@ -835,7 +817,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBucket = stubSimpleCall(
         undefined,
@@ -854,10 +836,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteBucket with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteBucketRequest(),
       );
@@ -867,9 +849,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.deleteBucket(request), expectedError);
     });
   });
@@ -877,10 +857,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('undeleteBucket', () => {
     it('invokes undeleteBucket without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UndeleteBucketRequest(),
       );
@@ -889,7 +869,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty(),
       );
@@ -908,10 +888,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes undeleteBucket without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UndeleteBucketRequest(),
       );
@@ -920,7 +900,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty(),
       );
@@ -955,10 +935,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes undeleteBucket with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UndeleteBucketRequest(),
       );
@@ -967,7 +947,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteBucket = stubSimpleCall(
         undefined,
@@ -986,10 +966,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes undeleteBucket with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UndeleteBucketRequest(),
       );
@@ -999,9 +979,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.undeleteBucket(request), expectedError);
     });
   });
@@ -1009,10 +987,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getView', () => {
     it('invokes getView without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetViewRequest(),
       );
@@ -1021,7 +999,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogView(),
       );
@@ -1040,10 +1018,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getView without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetViewRequest(),
       );
@@ -1052,7 +1030,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogView(),
       );
@@ -1087,10 +1065,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getView with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetViewRequest(),
       );
@@ -1099,7 +1077,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getView = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getView(request), expectedError);
@@ -1115,10 +1093,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getView with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetViewRequest(),
       );
@@ -1128,9 +1106,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.getView(request), expectedError);
     });
   });
@@ -1138,10 +1114,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createView', () => {
     it('invokes createView without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateViewRequest(),
       );
@@ -1150,7 +1126,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogView(),
       );
@@ -1169,10 +1145,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createView without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateViewRequest(),
       );
@@ -1181,7 +1157,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogView(),
       );
@@ -1216,10 +1192,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createView with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateViewRequest(),
       );
@@ -1228,7 +1204,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createView = stubSimpleCall(
         undefined,
@@ -1247,10 +1223,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createView with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateViewRequest(),
       );
@@ -1260,9 +1236,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.createView(request), expectedError);
     });
   });
@@ -1270,10 +1244,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateView', () => {
     it('invokes updateView without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateViewRequest(),
       );
@@ -1282,7 +1256,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogView(),
       );
@@ -1301,10 +1275,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateView without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateViewRequest(),
       );
@@ -1313,7 +1287,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogView(),
       );
@@ -1348,10 +1322,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateView with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateViewRequest(),
       );
@@ -1360,7 +1334,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateView = stubSimpleCall(
         undefined,
@@ -1379,10 +1353,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateView with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateViewRequest(),
       );
@@ -1392,9 +1366,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.updateView(request), expectedError);
     });
   });
@@ -1402,10 +1374,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteView', () => {
     it('invokes deleteView without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteViewRequest(),
       );
@@ -1414,7 +1386,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty(),
       );
@@ -1433,10 +1405,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteView without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteViewRequest(),
       );
@@ -1445,7 +1417,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty(),
       );
@@ -1480,10 +1452,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteView with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteViewRequest(),
       );
@@ -1492,7 +1464,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteView = stubSimpleCall(
         undefined,
@@ -1511,10 +1483,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteView with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteViewRequest(),
       );
@@ -1524,9 +1496,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.deleteView(request), expectedError);
     });
   });
@@ -1534,10 +1504,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getSink', () => {
     it('invokes getSink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetSinkRequest(),
       );
@@ -1546,7 +1516,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['sinkName'],
       );
       request.sinkName = defaultValue1;
-      const expectedHeaderRequestParams = `sink_name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogSink(),
       );
@@ -1565,10 +1535,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetSinkRequest(),
       );
@@ -1577,7 +1547,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['sinkName'],
       );
       request.sinkName = defaultValue1;
-      const expectedHeaderRequestParams = `sink_name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogSink(),
       );
@@ -1612,10 +1582,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSink with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetSinkRequest(),
       );
@@ -1624,7 +1594,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['sinkName'],
       );
       request.sinkName = defaultValue1;
-      const expectedHeaderRequestParams = `sink_name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSink = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSink(request), expectedError);
@@ -1640,10 +1610,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSink with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetSinkRequest(),
       );
@@ -1653,9 +1623,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.sinkName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.getSink(request), expectedError);
     });
   });
@@ -1663,10 +1631,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createSink', () => {
     it('invokes createSink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateSinkRequest(),
       );
@@ -1675,7 +1643,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogSink(),
       );
@@ -1694,10 +1662,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createSink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateSinkRequest(),
       );
@@ -1706,7 +1674,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogSink(),
       );
@@ -1741,10 +1709,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createSink with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateSinkRequest(),
       );
@@ -1753,7 +1721,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSink = stubSimpleCall(
         undefined,
@@ -1772,10 +1740,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createSink with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateSinkRequest(),
       );
@@ -1785,9 +1753,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.createSink(request), expectedError);
     });
   });
@@ -1795,10 +1761,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateSink', () => {
     it('invokes updateSink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateSinkRequest(),
       );
@@ -1807,7 +1773,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['sinkName'],
       );
       request.sinkName = defaultValue1;
-      const expectedHeaderRequestParams = `sink_name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogSink(),
       );
@@ -1826,10 +1792,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateSinkRequest(),
       );
@@ -1838,7 +1804,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['sinkName'],
       );
       request.sinkName = defaultValue1;
-      const expectedHeaderRequestParams = `sink_name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogSink(),
       );
@@ -1873,10 +1839,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSink with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateSinkRequest(),
       );
@@ -1885,7 +1851,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['sinkName'],
       );
       request.sinkName = defaultValue1;
-      const expectedHeaderRequestParams = `sink_name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSink = stubSimpleCall(
         undefined,
@@ -1904,10 +1870,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSink with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateSinkRequest(),
       );
@@ -1917,9 +1883,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.sinkName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.updateSink(request), expectedError);
     });
   });
@@ -1927,10 +1891,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteSink', () => {
     it('invokes deleteSink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteSinkRequest(),
       );
@@ -1939,7 +1903,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['sinkName'],
       );
       request.sinkName = defaultValue1;
-      const expectedHeaderRequestParams = `sink_name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty(),
       );
@@ -1958,10 +1922,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteSink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteSinkRequest(),
       );
@@ -1970,7 +1934,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['sinkName'],
       );
       request.sinkName = defaultValue1;
-      const expectedHeaderRequestParams = `sink_name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty(),
       );
@@ -2005,10 +1969,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteSink with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteSinkRequest(),
       );
@@ -2017,7 +1981,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['sinkName'],
       );
       request.sinkName = defaultValue1;
-      const expectedHeaderRequestParams = `sink_name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSink = stubSimpleCall(
         undefined,
@@ -2036,10 +2000,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteSink with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteSinkRequest(),
       );
@@ -2049,9 +2013,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.sinkName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.deleteSink(request), expectedError);
     });
   });
@@ -2059,10 +2021,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getLink', () => {
     it('invokes getLink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetLinkRequest(),
       );
@@ -2071,7 +2033,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.Link(),
       );
@@ -2090,10 +2052,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getLink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetLinkRequest(),
       );
@@ -2102,7 +2064,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.Link(),
       );
@@ -2137,10 +2099,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getLink with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetLinkRequest(),
       );
@@ -2149,7 +2111,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLink = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getLink(request), expectedError);
@@ -2165,10 +2127,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getLink with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetLinkRequest(),
       );
@@ -2178,9 +2140,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.getLink(request), expectedError);
     });
   });
@@ -2188,10 +2148,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getExclusion', () => {
     it('invokes getExclusion without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetExclusionRequest(),
       );
@@ -2200,7 +2160,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogExclusion(),
       );
@@ -2219,10 +2179,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getExclusion without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetExclusionRequest(),
       );
@@ -2231,7 +2191,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogExclusion(),
       );
@@ -2266,10 +2226,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getExclusion with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetExclusionRequest(),
       );
@@ -2278,7 +2238,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getExclusion = stubSimpleCall(
         undefined,
@@ -2297,10 +2257,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getExclusion with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetExclusionRequest(),
       );
@@ -2310,9 +2270,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.getExclusion(request), expectedError);
     });
   });
@@ -2320,10 +2278,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createExclusion', () => {
     it('invokes createExclusion without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateExclusionRequest(),
       );
@@ -2332,7 +2290,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogExclusion(),
       );
@@ -2351,10 +2309,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createExclusion without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateExclusionRequest(),
       );
@@ -2363,7 +2321,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogExclusion(),
       );
@@ -2398,10 +2356,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createExclusion with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateExclusionRequest(),
       );
@@ -2410,7 +2368,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExclusion = stubSimpleCall(
         undefined,
@@ -2429,10 +2387,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createExclusion with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateExclusionRequest(),
       );
@@ -2442,9 +2400,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.createExclusion(request), expectedError);
     });
   });
@@ -2452,10 +2408,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateExclusion', () => {
     it('invokes updateExclusion without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateExclusionRequest(),
       );
@@ -2464,7 +2420,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogExclusion(),
       );
@@ -2483,10 +2439,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateExclusion without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateExclusionRequest(),
       );
@@ -2495,7 +2451,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.LogExclusion(),
       );
@@ -2530,10 +2486,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateExclusion with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateExclusionRequest(),
       );
@@ -2542,7 +2498,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExclusion = stubSimpleCall(
         undefined,
@@ -2561,10 +2517,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateExclusion with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateExclusionRequest(),
       );
@@ -2574,9 +2530,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.updateExclusion(request), expectedError);
     });
   });
@@ -2584,10 +2538,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteExclusion', () => {
     it('invokes deleteExclusion without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteExclusionRequest(),
       );
@@ -2596,7 +2550,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty(),
       );
@@ -2615,10 +2569,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteExclusion without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteExclusionRequest(),
       );
@@ -2627,7 +2581,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty(),
       );
@@ -2662,10 +2616,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteExclusion with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteExclusionRequest(),
       );
@@ -2674,7 +2628,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExclusion = stubSimpleCall(
         undefined,
@@ -2693,10 +2647,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteExclusion with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteExclusionRequest(),
       );
@@ -2706,9 +2660,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.deleteExclusion(request), expectedError);
     });
   });
@@ -2716,10 +2668,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getCmekSettings', () => {
     it('invokes getCmekSettings without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetCmekSettingsRequest(),
       );
@@ -2728,7 +2680,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.CmekSettings(),
       );
@@ -2747,10 +2699,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getCmekSettings without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetCmekSettingsRequest(),
       );
@@ -2759,7 +2711,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.CmekSettings(),
       );
@@ -2794,10 +2746,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getCmekSettings with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetCmekSettingsRequest(),
       );
@@ -2806,7 +2758,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCmekSettings = stubSimpleCall(
         undefined,
@@ -2825,10 +2777,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getCmekSettings with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetCmekSettingsRequest(),
       );
@@ -2838,9 +2790,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.getCmekSettings(request), expectedError);
     });
   });
@@ -2848,10 +2798,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateCmekSettings', () => {
     it('invokes updateCmekSettings without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateCmekSettingsRequest(),
       );
@@ -2860,7 +2810,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.CmekSettings(),
       );
@@ -2880,10 +2830,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateCmekSettings without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateCmekSettingsRequest(),
       );
@@ -2892,7 +2842,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.CmekSettings(),
       );
@@ -2927,10 +2877,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateCmekSettings with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateCmekSettingsRequest(),
       );
@@ -2939,7 +2889,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCmekSettings = stubSimpleCall(
         undefined,
@@ -2958,10 +2908,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateCmekSettings with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateCmekSettingsRequest(),
       );
@@ -2971,9 +2921,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.updateCmekSettings(request), expectedError);
     });
   });
@@ -2981,10 +2929,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getSettings', () => {
     it('invokes getSettings without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetSettingsRequest(),
       );
@@ -2993,7 +2941,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.Settings(),
       );
@@ -3012,10 +2960,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSettings without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetSettingsRequest(),
       );
@@ -3024,7 +2972,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.Settings(),
       );
@@ -3059,10 +3007,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSettings with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetSettingsRequest(),
       );
@@ -3071,7 +3019,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSettings = stubSimpleCall(
         undefined,
@@ -3090,10 +3038,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSettings with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.GetSettingsRequest(),
       );
@@ -3103,9 +3051,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.getSettings(request), expectedError);
     });
   });
@@ -3113,10 +3059,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateSettings', () => {
     it('invokes updateSettings without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateSettingsRequest(),
       );
@@ -3125,7 +3071,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.Settings(),
       );
@@ -3144,10 +3090,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSettings without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateSettingsRequest(),
       );
@@ -3156,7 +3102,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.logging.v2.Settings(),
       );
@@ -3191,10 +3137,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSettings with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateSettingsRequest(),
       );
@@ -3203,7 +3149,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSettings = stubSimpleCall(
         undefined,
@@ -3222,10 +3168,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSettings with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateSettingsRequest(),
       );
@@ -3235,9 +3181,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
-      });
+      client.close();
       await assert.rejects(client.updateSettings(request), expectedError);
     });
   });
@@ -3245,10 +3189,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createBucketAsync', () => {
     it('invokes createBucketAsync without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateBucketRequest(),
       );
@@ -3257,7 +3201,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
@@ -3278,10 +3222,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucketAsync without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateBucketRequest(),
       );
@@ -3290,7 +3234,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
@@ -3332,10 +3276,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucketAsync with call error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateBucketRequest(),
       );
@@ -3344,7 +3288,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBucketAsync = stubLongRunningCall(
         undefined,
@@ -3363,10 +3307,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucketAsync with LRO error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateBucketRequest(),
       );
@@ -3375,7 +3319,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBucketAsync = stubLongRunningCall(
         undefined,
@@ -3396,16 +3340,16 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCreateBucketAsyncProgress without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBucketAsyncProgress(
@@ -3418,10 +3362,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCreateBucketAsyncProgress with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3439,10 +3383,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateBucketAsync', () => {
     it('invokes updateBucketAsync without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateBucketRequest(),
       );
@@ -3451,7 +3395,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
@@ -3472,10 +3416,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucketAsync without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateBucketRequest(),
       );
@@ -3484,7 +3428,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
@@ -3526,10 +3470,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucketAsync with call error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateBucketRequest(),
       );
@@ -3538,7 +3482,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBucketAsync = stubLongRunningCall(
         undefined,
@@ -3557,10 +3501,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucketAsync with LRO error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.UpdateBucketRequest(),
       );
@@ -3569,7 +3513,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBucketAsync = stubLongRunningCall(
         undefined,
@@ -3590,16 +3534,16 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkUpdateBucketAsyncProgress without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBucketAsyncProgress(
@@ -3612,10 +3556,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkUpdateBucketAsyncProgress with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3633,10 +3577,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createLink', () => {
     it('invokes createLink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateLinkRequest(),
       );
@@ -3645,7 +3589,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
@@ -3665,10 +3609,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createLink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateLinkRequest(),
       );
@@ -3677,7 +3621,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
@@ -3719,10 +3663,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createLink with call error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateLinkRequest(),
       );
@@ -3731,7 +3675,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLink = stubLongRunningCall(
         undefined,
@@ -3750,10 +3694,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createLink with LRO error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CreateLinkRequest(),
       );
@@ -3762,7 +3706,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLink = stubLongRunningCall(
         undefined,
@@ -3783,16 +3727,16 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCreateLinkProgress without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateLinkProgress(
@@ -3805,10 +3749,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCreateLinkProgress with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3823,10 +3767,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteLink', () => {
     it('invokes deleteLink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteLinkRequest(),
       );
@@ -3835,7 +3779,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
@@ -3855,10 +3799,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteLink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteLinkRequest(),
       );
@@ -3867,7 +3811,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
@@ -3909,10 +3853,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteLink with call error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteLinkRequest(),
       );
@@ -3921,7 +3865,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLink = stubLongRunningCall(
         undefined,
@@ -3940,10 +3884,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteLink with LRO error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.DeleteLinkRequest(),
       );
@@ -3952,7 +3896,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['name'],
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLink = stubLongRunningCall(
         undefined,
@@ -3973,16 +3917,16 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkDeleteLinkProgress without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteLinkProgress(
@@ -3995,10 +3939,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkDeleteLinkProgress with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4013,10 +3957,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('copyLogEntries', () => {
     it('invokes copyLogEntries without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CopyLogEntriesRequest(),
       );
@@ -4032,10 +3976,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes copyLogEntries without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CopyLogEntriesRequest(),
       );
@@ -4072,10 +4016,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes copyLogEntries with call error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CopyLogEntriesRequest(),
       );
@@ -4089,10 +4033,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes copyLogEntries with LRO error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.CopyLogEntriesRequest(),
       );
@@ -4108,16 +4052,16 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCopyLogEntriesProgress without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCopyLogEntriesProgress(
@@ -4130,10 +4074,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCopyLogEntriesProgress with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4151,10 +4095,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listBuckets', () => {
     it('invokes listBuckets without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListBucketsRequest(),
       );
@@ -4163,7 +4107,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogBucket()),
         generateSampleMessage(new protos.google.logging.v2.LogBucket()),
@@ -4184,10 +4128,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listBuckets without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListBucketsRequest(),
       );
@@ -4196,7 +4140,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogBucket()),
         generateSampleMessage(new protos.google.logging.v2.LogBucket()),
@@ -4233,10 +4177,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listBuckets with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListBucketsRequest(),
       );
@@ -4245,7 +4189,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBuckets = stubSimpleCall(
         undefined,
@@ -4264,10 +4208,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listBucketsStream without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListBucketsRequest(),
       );
@@ -4276,7 +4220,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogBucket()),
         generateSampleMessage(new protos.google.logging.v2.LogBucket()),
@@ -4315,10 +4259,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listBucketsStream with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListBucketsRequest(),
       );
@@ -4327,7 +4271,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBuckets.createStream = stubPageStreamingCall(
         undefined,
@@ -4363,10 +4307,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('uses async iteration with listBuckets without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListBucketsRequest(),
       );
@@ -4375,7 +4319,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogBucket()),
         generateSampleMessage(new protos.google.logging.v2.LogBucket()),
@@ -4406,10 +4350,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('uses async iteration with listBuckets with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListBucketsRequest(),
       );
@@ -4418,7 +4362,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBuckets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4450,10 +4394,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listViews', () => {
     it('invokes listViews without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListViewsRequest(),
       );
@@ -4462,7 +4406,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogView()),
         generateSampleMessage(new protos.google.logging.v2.LogView()),
@@ -4483,10 +4427,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listViews without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListViewsRequest(),
       );
@@ -4495,7 +4439,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogView()),
         generateSampleMessage(new protos.google.logging.v2.LogView()),
@@ -4532,10 +4476,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listViews with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListViewsRequest(),
       );
@@ -4544,7 +4488,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listViews = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listViews(request), expectedError);
@@ -4560,10 +4504,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listViewsStream without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListViewsRequest(),
       );
@@ -4572,7 +4516,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogView()),
         generateSampleMessage(new protos.google.logging.v2.LogView()),
@@ -4611,10 +4555,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listViewsStream with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListViewsRequest(),
       );
@@ -4623,7 +4567,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViews.createStream = stubPageStreamingCall(
         undefined,
@@ -4659,10 +4603,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('uses async iteration with listViews without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListViewsRequest(),
       );
@@ -4671,7 +4615,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogView()),
         generateSampleMessage(new protos.google.logging.v2.LogView()),
@@ -4701,10 +4645,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('uses async iteration with listViews with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListViewsRequest(),
       );
@@ -4713,7 +4657,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViews.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4744,10 +4688,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listSinks', () => {
     it('invokes listSinks without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListSinksRequest(),
       );
@@ -4756,7 +4700,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogSink()),
         generateSampleMessage(new protos.google.logging.v2.LogSink()),
@@ -4777,10 +4721,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listSinks without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListSinksRequest(),
       );
@@ -4789,7 +4733,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogSink()),
         generateSampleMessage(new protos.google.logging.v2.LogSink()),
@@ -4826,10 +4770,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listSinks with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListSinksRequest(),
       );
@@ -4838,7 +4782,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSinks = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listSinks(request), expectedError);
@@ -4854,10 +4798,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listSinksStream without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListSinksRequest(),
       );
@@ -4866,7 +4810,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogSink()),
         generateSampleMessage(new protos.google.logging.v2.LogSink()),
@@ -4905,10 +4849,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listSinksStream with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListSinksRequest(),
       );
@@ -4917,7 +4861,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSinks.createStream = stubPageStreamingCall(
         undefined,
@@ -4953,10 +4897,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('uses async iteration with listSinks without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListSinksRequest(),
       );
@@ -4965,7 +4909,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogSink()),
         generateSampleMessage(new protos.google.logging.v2.LogSink()),
@@ -4995,10 +4939,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('uses async iteration with listSinks with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListSinksRequest(),
       );
@@ -5007,7 +4951,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSinks.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5038,10 +4982,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listLinks', () => {
     it('invokes listLinks without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListLinksRequest(),
       );
@@ -5050,7 +4994,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.Link()),
         generateSampleMessage(new protos.google.logging.v2.Link()),
@@ -5071,10 +5015,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listLinks without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListLinksRequest(),
       );
@@ -5083,7 +5027,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.Link()),
         generateSampleMessage(new protos.google.logging.v2.Link()),
@@ -5120,10 +5064,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listLinks with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListLinksRequest(),
       );
@@ -5132,7 +5076,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLinks = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listLinks(request), expectedError);
@@ -5148,10 +5092,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listLinksStream without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListLinksRequest(),
       );
@@ -5160,7 +5104,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.Link()),
         generateSampleMessage(new protos.google.logging.v2.Link()),
@@ -5199,10 +5143,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listLinksStream with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListLinksRequest(),
       );
@@ -5211,7 +5155,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLinks.createStream = stubPageStreamingCall(
         undefined,
@@ -5247,10 +5191,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('uses async iteration with listLinks without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListLinksRequest(),
       );
@@ -5259,7 +5203,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.Link()),
         generateSampleMessage(new protos.google.logging.v2.Link()),
@@ -5289,10 +5233,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('uses async iteration with listLinks with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListLinksRequest(),
       );
@@ -5301,7 +5245,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLinks.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5332,10 +5276,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listExclusions', () => {
     it('invokes listExclusions without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListExclusionsRequest(),
       );
@@ -5344,7 +5288,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogExclusion()),
         generateSampleMessage(new protos.google.logging.v2.LogExclusion()),
@@ -5365,10 +5309,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listExclusions without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListExclusionsRequest(),
       );
@@ -5377,7 +5321,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogExclusion()),
         generateSampleMessage(new protos.google.logging.v2.LogExclusion()),
@@ -5414,10 +5358,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listExclusions with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListExclusionsRequest(),
       );
@@ -5426,7 +5370,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExclusions = stubSimpleCall(
         undefined,
@@ -5445,10 +5389,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listExclusionsStream without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListExclusionsRequest(),
       );
@@ -5457,7 +5401,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogExclusion()),
         generateSampleMessage(new protos.google.logging.v2.LogExclusion()),
@@ -5496,10 +5440,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listExclusionsStream with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListExclusionsRequest(),
       );
@@ -5508,7 +5452,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExclusions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5542,10 +5486,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('uses async iteration with listExclusions without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListExclusionsRequest(),
       );
@@ -5554,7 +5498,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogExclusion()),
         generateSampleMessage(new protos.google.logging.v2.LogExclusion()),
@@ -5585,10 +5529,10 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('uses async iteration with listExclusions with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new protos.google.logging.v2.ListExclusionsRequest(),
       );
@@ -5597,7 +5541,7 @@ describe('v2.ConfigServiceV2Client', () => {
         ['parent'],
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExclusions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5626,10 +5570,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest(),
       );
@@ -5647,7 +5591,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5660,24 +5604,20 @@ describe('v2.ConfigServiceV2Client', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null,
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            },
-          )
-          .catch((err) => {
-            throw err;
-          });
+        client.operationsClient.getOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: operationsProtos.google.longrunning.Operation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -5685,7 +5625,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5709,10 +5649,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest(),
       );
@@ -5731,7 +5671,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5744,24 +5684,20 @@ describe('v2.ConfigServiceV2Client', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null,
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            },
-          )
-          .catch((err) => {
-            throw err;
-          });
+        client.operationsClient.cancelOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -5769,7 +5705,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5793,10 +5729,10 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest(),
       );
@@ -5815,7 +5751,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5828,24 +5764,20 @@ describe('v2.ConfigServiceV2Client', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null,
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            },
-          )
-          .catch((err) => {
-            throw err;
-          });
+        client.operationsClient.deleteOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -5853,7 +5785,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5877,7 +5809,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5896,7 +5828,8 @@ describe('v2.ConfigServiceV2Client', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
+      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+        [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -5912,10 +5845,10 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest(),
       );
@@ -5924,7 +5857,8 @@ describe('v2.ConfigServiceV2Client', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
+        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -5940,16 +5874,16 @@ describe('v2.ConfigServiceV2Client', () => {
   });
 
   describe('Path templates', () => {
-    describe('billingAccountCmekSettings', async () => {
+    describe('billingAccountCmekSettings', () => {
       const fakePath = '/rendered/path/billingAccountCmekSettings';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.billingAccountCmekSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5989,17 +5923,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('billingAccountExclusion', async () => {
+    describe('billingAccountExclusion', () => {
       const fakePath = '/rendered/path/billingAccountExclusion';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
         exclusion: 'exclusionValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.billingAccountExclusionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6052,7 +5986,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('billingAccountLocationBucket', async () => {
+    describe('billingAccountLocationBucket', () => {
       const fakePath = '/rendered/path/billingAccountLocationBucket';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -6060,10 +5994,10 @@ describe('v2.ConfigServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.billingAccountLocationBucketPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.billingAccountLocationBucketPathTemplate.match =
@@ -6131,7 +6065,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('billingAccountLocationBucketLink', async () => {
+    describe('billingAccountLocationBucketLink', () => {
       const fakePath = '/rendered/path/billingAccountLocationBucketLink';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -6140,10 +6074,10 @@ describe('v2.ConfigServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.billingAccountLocationBucketLinkPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.billingAccountLocationBucketLinkPathTemplate.match =
@@ -6228,7 +6162,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('billingAccountLocationBucketView', async () => {
+    describe('billingAccountLocationBucketView', () => {
       const fakePath = '/rendered/path/billingAccountLocationBucketView';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -6237,10 +6171,10 @@ describe('v2.ConfigServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.billingAccountLocationBucketViewPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.billingAccountLocationBucketViewPathTemplate.match =
@@ -6325,17 +6259,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('billingAccountLog', async () => {
+    describe('billingAccountLog', () => {
       const fakePath = '/rendered/path/billingAccountLog';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
         log: 'logValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.billingAccountLogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6387,16 +6321,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('billingAccountSettings', async () => {
+    describe('billingAccountSettings', () => {
       const fakePath = '/rendered/path/billingAccountSettings';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.billingAccountSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6432,17 +6366,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('billingAccountSink', async () => {
+    describe('billingAccountSink', () => {
       const fakePath = '/rendered/path/billingAccountSink';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
         sink: 'sinkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.billingAccountSinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6494,16 +6428,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('folderCmekSettings', async () => {
+    describe('folderCmekSettings', () => {
       const fakePath = '/rendered/path/folderCmekSettings';
       const expectedParameters = {
         folder: 'folderValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.folderCmekSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6538,17 +6472,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('folderExclusion', async () => {
+    describe('folderExclusion', () => {
       const fakePath = '/rendered/path/folderExclusion';
       const expectedParameters = {
         folder: 'folderValue',
         exclusion: 'exclusionValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.folderExclusionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6590,7 +6524,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('folderLocationBucket', async () => {
+    describe('folderLocationBucket', () => {
       const fakePath = '/rendered/path/folderLocationBucket';
       const expectedParameters = {
         folder: 'folderValue',
@@ -6598,10 +6532,10 @@ describe('v2.ConfigServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.folderLocationBucketPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6667,7 +6601,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('folderLocationBucketLink', async () => {
+    describe('folderLocationBucketLink', () => {
       const fakePath = '/rendered/path/folderLocationBucketLink';
       const expectedParameters = {
         folder: 'folderValue',
@@ -6676,10 +6610,10 @@ describe('v2.ConfigServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.folderLocationBucketLinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6762,7 +6696,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('folderLocationBucketView', async () => {
+    describe('folderLocationBucketView', () => {
       const fakePath = '/rendered/path/folderLocationBucketView';
       const expectedParameters = {
         folder: 'folderValue',
@@ -6771,10 +6705,10 @@ describe('v2.ConfigServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.folderLocationBucketViewPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6857,17 +6791,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('folderLog', async () => {
+    describe('folderLog', () => {
       const fakePath = '/rendered/path/folderLog';
       const expectedParameters = {
         folder: 'folderValue',
         log: 'logValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.folderLogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6906,16 +6840,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('folderSettings', async () => {
+    describe('folderSettings', () => {
       const fakePath = '/rendered/path/folderSettings';
       const expectedParameters = {
         folder: 'folderValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.folderSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6944,17 +6878,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('folderSink', async () => {
+    describe('folderSink', () => {
       const fakePath = '/rendered/path/folderSink';
       const expectedParameters = {
         folder: 'folderValue',
         sink: 'sinkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.folderSinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6993,17 +6927,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('location', async () => {
+    describe('location', () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7042,17 +6976,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('logMetric', async () => {
+    describe('logMetric', () => {
       const fakePath = '/rendered/path/logMetric';
       const expectedParameters = {
         project: 'projectValue',
         metric: 'metricValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.logMetricPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7091,16 +7025,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('organizationCmekSettings', async () => {
+    describe('organizationCmekSettings', () => {
       const fakePath = '/rendered/path/organizationCmekSettings';
       const expectedParameters = {
         organization: 'organizationValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.organizationCmekSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7136,17 +7070,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('organizationExclusion', async () => {
+    describe('organizationExclusion', () => {
       const fakePath = '/rendered/path/organizationExclusion';
       const expectedParameters = {
         organization: 'organizationValue',
         exclusion: 'exclusionValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.organizationExclusionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7199,7 +7133,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('organizationLocationBucket', async () => {
+    describe('organizationLocationBucket', () => {
       const fakePath = '/rendered/path/organizationLocationBucket';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -7207,10 +7141,10 @@ describe('v2.ConfigServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.organizationLocationBucketPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7278,7 +7212,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('organizationLocationBucketLink', async () => {
+    describe('organizationLocationBucketLink', () => {
       const fakePath = '/rendered/path/organizationLocationBucketLink';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -7287,10 +7221,10 @@ describe('v2.ConfigServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.organizationLocationBucketLinkPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationBucketLinkPathTemplate.match =
@@ -7373,7 +7307,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('organizationLocationBucketView', async () => {
+    describe('organizationLocationBucketView', () => {
       const fakePath = '/rendered/path/organizationLocationBucketView';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -7382,10 +7316,10 @@ describe('v2.ConfigServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.organizationLocationBucketViewPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationBucketViewPathTemplate.match =
@@ -7468,17 +7402,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('organizationLog', async () => {
+    describe('organizationLog', () => {
       const fakePath = '/rendered/path/organizationLog';
       const expectedParameters = {
         organization: 'organizationValue',
         log: 'logValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.organizationLogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7521,16 +7455,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('organizationSettings', async () => {
+    describe('organizationSettings', () => {
       const fakePath = '/rendered/path/organizationSettings';
       const expectedParameters = {
         organization: 'organizationValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.organizationSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7566,17 +7500,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('organizationSink', async () => {
+    describe('organizationSink', () => {
       const fakePath = '/rendered/path/organizationSink';
       const expectedParameters = {
         organization: 'organizationValue',
         sink: 'sinkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.organizationSinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7622,16 +7556,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('project', async () => {
+    describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7660,16 +7594,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('projectCmekSettings', async () => {
+    describe('projectCmekSettings', () => {
       const fakePath = '/rendered/path/projectCmekSettings';
       const expectedParameters = {
         project: 'projectValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.projectCmekSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7704,17 +7638,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('projectExclusion', async () => {
+    describe('projectExclusion', () => {
       const fakePath = '/rendered/path/projectExclusion';
       const expectedParameters = {
         project: 'projectValue',
         exclusion: 'exclusionValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.projectExclusionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7759,7 +7693,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('projectLocationBucket', async () => {
+    describe('projectLocationBucket', () => {
       const fakePath = '/rendered/path/projectLocationBucket';
       const expectedParameters = {
         project: 'projectValue',
@@ -7767,10 +7701,10 @@ describe('v2.ConfigServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.projectLocationBucketPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7838,7 +7772,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('projectLocationBucketLink', async () => {
+    describe('projectLocationBucketLink', () => {
       const fakePath = '/rendered/path/projectLocationBucketLink';
       const expectedParameters = {
         project: 'projectValue',
@@ -7847,10 +7781,10 @@ describe('v2.ConfigServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.projectLocationBucketLinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7933,7 +7867,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('projectLocationBucketView', async () => {
+    describe('projectLocationBucketView', () => {
       const fakePath = '/rendered/path/projectLocationBucketView';
       const expectedParameters = {
         project: 'projectValue',
@@ -7942,10 +7876,10 @@ describe('v2.ConfigServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.projectLocationBucketViewPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8028,17 +7962,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('projectLog', async () => {
+    describe('projectLog', () => {
       const fakePath = '/rendered/path/projectLog';
       const expectedParameters = {
         project: 'projectValue',
         log: 'logValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.projectLogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8077,16 +8011,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('projectSettings', async () => {
+    describe('projectSettings', () => {
       const fakePath = '/rendered/path/projectSettings';
       const expectedParameters = {
         project: 'projectValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.projectSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8115,17 +8049,17 @@ describe('v2.ConfigServiceV2Client', () => {
       });
     });
 
-    describe('projectSink', async () => {
+    describe('projectSink', () => {
       const fakePath = '/rendered/path/projectSink';
       const expectedParameters = {
         project: 'projectValue',
         sink: 'sinkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      await client.initialize();
+      client.initialize();
       client.pathTemplates.projectSinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
