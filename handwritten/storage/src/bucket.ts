@@ -337,7 +337,7 @@ export interface EncryptionEnforcementConfig {
  * ```
  */
 export interface IpFilter {
-  mode?: string;
+  mode?: 'Enabled' | 'Disabled';
   publicNetworkSource?: {
     allowedIpCidrRanges?: string[];
   };
@@ -382,7 +382,7 @@ export interface BucketMetadata extends BaseMetadata {
       lockedTime?: string;
     };
   };
-  ipFilter?: IpFilter;
+  ipFilter?: IpFilter | null;
   labels?: {
     [key: string]: string | null;
   };

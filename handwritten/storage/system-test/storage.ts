@@ -44,6 +44,7 @@ interface ErrorCallbackFunction {
 }
 import {PubSub, Subscription, Topic} from '@google-cloud/pubsub';
 import {getDirName} from '../src/util.js';
+import {BucketMetadata} from '../src/bucket.js';
 
 class HTTPError extends Error {
   code: number;
@@ -1292,21 +1293,21 @@ describe('storage', function () {
     describe('ipFilter', () => {
       let ipFilterBucket: Bucket;
 
-      beforeEach(async () => {
+      before(async () => {
         ipFilterBucket = storage.bucket(generateName());
         await ipFilterBucket.create();
       });
 
-      afterEach(async () => {
+      after(async () => {
         await ipFilterBucket.delete().catch(() => { });
       });
 
       it('should enable and set ipFilter', async () => {
-        const metadata = {
+        const metadata: BucketMetadata = {
           ipFilter: {
-            mode: 'Enabled',
+            mode: 'Disabled',
             publicNetworkSource: {
-              allowedIpCidrRanges: ['192.0.2.0/24'],
+              allowedIpCidrRanges: ['0.0.0.0/0', '::/0'],
             },
             allowAllServiceAgentAccess: false,
           },
@@ -1316,17 +1317,8 @@ describe('storage', function () {
       });
 
       it('should get ipFilter', async () => {
-        const metadata = {
-          ipFilter: {
-            mode: 'Enabled',
-            publicNetworkSource: {
-              allowedIpCidrRanges: ['0.0.0.0/0', '::/0'],
-            },
-            allowAllServiceAgentAccess: false,
-          },
-        };
-        const [meta] = await ipFilterBucket.setMetadata(metadata);
-        assert.strictEqual(meta.ipFilter?.mode, 'Enabled');
+        const [meta] = await ipFilterBucket.getMetadata();
+        assert.strictEqual(meta.ipFilter?.mode, 'Disabled');
         assert.deepStrictEqual(
           meta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
           ['0.0.0.0/0', '::/0']
@@ -1334,9 +1326,9 @@ describe('storage', function () {
       });
 
       it('should update ipFilter', async () => {
-        const metadata = {
+        const metadata: BucketMetadata = {
           ipFilter: {
-            mode: 'Enabled',
+            mode: 'Disabled',
             publicNetworkSource: {
               allowedIpCidrRanges: ['203.0.113.0/24'],
             },
@@ -1347,17 +1339,26 @@ describe('storage', function () {
         assert.deepStrictEqual(meta.ipFilter, metadata.ipFilter);
       });
 
-      it('should clear/delete ipFilter', async () => {
-        const metadata = {
+      it('should clear ipFilter', async () => {
+        const [getMeta] = await ipFilterBucket.getMetadata();
+        assert.strictEqual(getMeta.ipFilter?.mode, 'Disabled');
+        assert.deepStrictEqual(
+          getMeta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+          ['203.0.113.0/24']
+        );
+
+        const metadata: BucketMetadata = {
           ipFilter: {
             mode: 'Disabled',
-            publicNetworkSource: {},
+            publicNetworkSource: {
+              allowedIpCidrRanges: [],
+            },
             allowAllServiceAgentAccess: false,
           },
         };
         const [meta] = await ipFilterBucket.setMetadata(metadata);
         assert.strictEqual(meta.ipFilter?.mode, 'Disabled');
-        assert.strictEqual(meta.ipFilter?.publicNetworkSource, undefined);
+        assert.strictEqual(meta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges, undefined);
         assert.strictEqual(meta.ipFilter?.allowAllServiceAgentAccess, false);
       });
     });
