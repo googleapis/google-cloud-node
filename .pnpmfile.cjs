@@ -17,9 +17,6 @@ function mutateYargs(deps, pkgName, depType, context) {
   const nodeVersion = process.version;
   const majorVersion = parseInt(nodeVersion.replace('v', '').split('.')[0], 10);
   
-  // Log that we are scanning the package
-  console.log(`[pnpmfile] Scanning ${pkgName} (${depType}), found yargs: ${deps.yargs}`);
-  
   if (majorVersion >= 24) {
     console.log(`[pnpmfile] Node.js version is ${nodeVersion} (>= 24). Overriding yargs to 18.0.0 in ${pkgName}`);
     deps.yargs = '18.0.0';
