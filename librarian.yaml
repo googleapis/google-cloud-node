@@ -340,7 +340,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/clientconnectorservices/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       package_name: '@google-cloud/clientconnectorservices'
   - name: google-cloud-beyondcorp-clientgateways
