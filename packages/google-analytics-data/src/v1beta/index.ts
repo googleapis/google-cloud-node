@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {BetaAnalyticsDataClient} from './beta_analytics_data_client';
+export { BetaAnalyticsDataClient } from './beta_analytics_data_client';
