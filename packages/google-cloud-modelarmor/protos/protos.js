@@ -395,6 +395,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1.ModelArmor|streamSanitizeUserPrompt}.
+                         * @memberof google.cloud.modelarmor.v1.ModelArmor
+                         * @typedef StreamSanitizeUserPromptCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1.SanitizeUserPromptResponse} [response] SanitizeUserPromptResponse
+                         */
+    
+                        /**
+                         * Calls StreamSanitizeUserPrompt.
+                         * @function streamSanitizeUserPrompt
+                         * @memberof google.cloud.modelarmor.v1.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1.ISanitizeUserPromptRequest} request SanitizeUserPromptRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1.ModelArmor.StreamSanitizeUserPromptCallback} callback Node-style callback called with the error, if any, and SanitizeUserPromptResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.streamSanitizeUserPrompt = function streamSanitizeUserPrompt(request, callback) {
+                            return this.rpcCall(streamSanitizeUserPrompt, $root.google.cloud.modelarmor.v1.SanitizeUserPromptRequest, $root.google.cloud.modelarmor.v1.SanitizeUserPromptResponse, request, callback);
+                        }, "name", { value: "StreamSanitizeUserPrompt" });
+    
+                        /**
+                         * Calls StreamSanitizeUserPrompt.
+                         * @function streamSanitizeUserPrompt
+                         * @memberof google.cloud.modelarmor.v1.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1.ISanitizeUserPromptRequest} request SanitizeUserPromptRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1.SanitizeUserPromptResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1.ModelArmor|streamSanitizeModelResponse}.
+                         * @memberof google.cloud.modelarmor.v1.ModelArmor
+                         * @typedef StreamSanitizeModelResponseCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1.SanitizeModelResponseResponse} [response] SanitizeModelResponseResponse
+                         */
+    
+                        /**
+                         * Calls StreamSanitizeModelResponse.
+                         * @function streamSanitizeModelResponse
+                         * @memberof google.cloud.modelarmor.v1.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1.ISanitizeModelResponseRequest} request SanitizeModelResponseRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1.ModelArmor.StreamSanitizeModelResponseCallback} callback Node-style callback called with the error, if any, and SanitizeModelResponseResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.streamSanitizeModelResponse = function streamSanitizeModelResponse(request, callback) {
+                            return this.rpcCall(streamSanitizeModelResponse, $root.google.cloud.modelarmor.v1.SanitizeModelResponseRequest, $root.google.cloud.modelarmor.v1.SanitizeModelResponseResponse, request, callback);
+                        }, "name", { value: "StreamSanitizeModelResponse" });
+    
+                        /**
+                         * Calls StreamSanitizeModelResponse.
+                         * @function streamSanitizeModelResponse
+                         * @memberof google.cloud.modelarmor.v1.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1.ISanitizeModelResponseRequest} request SanitizeModelResponseRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1.SanitizeModelResponseResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return ModelArmor;
                     })();
     
@@ -505,6 +571,22 @@
                         values[valuesById[1] = "SUCCESS"] = 1;
                         values[valuesById[2] = "PARTIAL"] = 2;
                         values[valuesById[3] = "FAILURE"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * StreamingMode enum.
+                     * @name google.cloud.modelarmor.v1.StreamingMode
+                     * @enum {number}
+                     * @property {number} STREAMING_MODE_UNSPECIFIED=0 STREAMING_MODE_UNSPECIFIED value
+                     * @property {number} STREAMING_MODE_BUFFERED=1 STREAMING_MODE_BUFFERED value
+                     * @property {number} STREAMING_MODE_REALTIME=2 STREAMING_MODE_REALTIME value
+                     */
+                    v1.StreamingMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STREAMING_MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "STREAMING_MODE_BUFFERED"] = 1;
+                        values[valuesById[2] = "STREAMING_MODE_REALTIME"] = 2;
                         return values;
                     })();
     
@@ -7086,6 +7168,7 @@
                          * @property {string|null} [name] SanitizeUserPromptRequest name
                          * @property {google.cloud.modelarmor.v1.IDataItem|null} [userPromptData] SanitizeUserPromptRequest userPromptData
                          * @property {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeUserPromptRequest multiLanguageDetectionMetadata
+                         * @property {google.cloud.modelarmor.v1.StreamingMode|null} [streamingMode] SanitizeUserPromptRequest streamingMode
                          */
     
                         /**
@@ -7128,6 +7211,23 @@
                         SanitizeUserPromptRequest.prototype.multiLanguageDetectionMetadata = null;
     
                         /**
+                         * SanitizeUserPromptRequest streamingMode.
+                         * @member {google.cloud.modelarmor.v1.StreamingMode|null|undefined} streamingMode
+                         * @memberof google.cloud.modelarmor.v1.SanitizeUserPromptRequest
+                         * @instance
+                         */
+                        SanitizeUserPromptRequest.prototype.streamingMode = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SanitizeUserPromptRequest.prototype, "_streamingMode", {
+                            get: $util.oneOfGetter($oneOfFields = ["streamingMode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new SanitizeUserPromptRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1.SanitizeUserPromptRequest
@@ -7157,6 +7257,8 @@
                                 $root.google.cloud.modelarmor.v1.DataItem.encode(message.userPromptData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
                                 $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.streamingMode != null && Object.hasOwnProperty.call(message, "streamingMode"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.streamingMode);
                             return writer;
                         };
     
@@ -7209,6 +7311,10 @@
                                         message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 7: {
+                                        message.streamingMode = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -7248,6 +7354,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -7260,6 +7367,17 @@
                                 var error = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata, long + 1);
                                 if (error)
                                     return "multiLanguageDetectionMetadata." + error;
+                            }
+                            if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                                properties._streamingMode = 1;
+                                switch (message.streamingMode) {
+                                default:
+                                    return "streamingMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             }
                             return null;
                         };
@@ -7292,6 +7410,26 @@
                                     throw TypeError(".google.cloud.modelarmor.v1.SanitizeUserPromptRequest.multiLanguageDetectionMetadata: object expected");
                                 message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata, long + 1);
                             }
+                            switch (object.streamingMode) {
+                            default:
+                                if (typeof object.streamingMode === "number") {
+                                    message.streamingMode = object.streamingMode;
+                                    break;
+                                }
+                                break;
+                            case "STREAMING_MODE_UNSPECIFIED":
+                            case 0:
+                                message.streamingMode = 0;
+                                break;
+                            case "STREAMING_MODE_BUFFERED":
+                            case 1:
+                                message.streamingMode = 1;
+                                break;
+                            case "STREAMING_MODE_REALTIME":
+                            case 2:
+                                message.streamingMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -7319,6 +7457,11 @@
                                 object.userPromptData = $root.google.cloud.modelarmor.v1.DataItem.toObject(message.userPromptData, options);
                             if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
                                 object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
+                            if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                                object.streamingMode = options.enums === String ? $root.google.cloud.modelarmor.v1.StreamingMode[message.streamingMode] === undefined ? message.streamingMode : $root.google.cloud.modelarmor.v1.StreamingMode[message.streamingMode] : message.streamingMode;
+                                if (options.oneofs)
+                                    object._streamingMode = "streamingMode";
+                            }
                             return object;
                         };
     
@@ -7361,6 +7504,7 @@
                          * @property {google.cloud.modelarmor.v1.IDataItem|null} [modelResponseData] SanitizeModelResponseRequest modelResponseData
                          * @property {string|null} [userPrompt] SanitizeModelResponseRequest userPrompt
                          * @property {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeModelResponseRequest multiLanguageDetectionMetadata
+                         * @property {google.cloud.modelarmor.v1.StreamingMode|null} [streamingMode] SanitizeModelResponseRequest streamingMode
                          */
     
                         /**
@@ -7411,6 +7555,23 @@
                         SanitizeModelResponseRequest.prototype.multiLanguageDetectionMetadata = null;
     
                         /**
+                         * SanitizeModelResponseRequest streamingMode.
+                         * @member {google.cloud.modelarmor.v1.StreamingMode|null|undefined} streamingMode
+                         * @memberof google.cloud.modelarmor.v1.SanitizeModelResponseRequest
+                         * @instance
+                         */
+                        SanitizeModelResponseRequest.prototype.streamingMode = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SanitizeModelResponseRequest.prototype, "_streamingMode", {
+                            get: $util.oneOfGetter($oneOfFields = ["streamingMode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new SanitizeModelResponseRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1.SanitizeModelResponseRequest
@@ -7442,6 +7603,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.userPrompt);
                             if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
                                 $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.streamingMode != null && Object.hasOwnProperty.call(message, "streamingMode"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.streamingMode);
                             return writer;
                         };
     
@@ -7498,6 +7661,10 @@
                                         message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 8: {
+                                        message.streamingMode = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -7537,6 +7704,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -7552,6 +7720,17 @@
                                 var error = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata, long + 1);
                                 if (error)
                                     return "multiLanguageDetectionMetadata." + error;
+                            }
+                            if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                                properties._streamingMode = 1;
+                                switch (message.streamingMode) {
+                                default:
+                                    return "streamingMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             }
                             return null;
                         };
@@ -7586,6 +7765,26 @@
                                     throw TypeError(".google.cloud.modelarmor.v1.SanitizeModelResponseRequest.multiLanguageDetectionMetadata: object expected");
                                 message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata, long + 1);
                             }
+                            switch (object.streamingMode) {
+                            default:
+                                if (typeof object.streamingMode === "number") {
+                                    message.streamingMode = object.streamingMode;
+                                    break;
+                                }
+                                break;
+                            case "STREAMING_MODE_UNSPECIFIED":
+                            case 0:
+                                message.streamingMode = 0;
+                                break;
+                            case "STREAMING_MODE_BUFFERED":
+                            case 1:
+                                message.streamingMode = 1;
+                                break;
+                            case "STREAMING_MODE_REALTIME":
+                            case 2:
+                                message.streamingMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -7616,6 +7815,11 @@
                                 object.userPrompt = message.userPrompt;
                             if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
                                 object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
+                            if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                                object.streamingMode = options.enums === String ? $root.google.cloud.modelarmor.v1.StreamingMode[message.streamingMode] === undefined ? message.streamingMode : $root.google.cloud.modelarmor.v1.StreamingMode[message.streamingMode] : message.streamingMode;
+                                if (options.oneofs)
+                                    object._streamingMode = "streamingMode";
+                            }
                             return object;
                         };
     
@@ -8493,6 +8697,7 @@
                              * @property {number|Long|null} [errorCode] SanitizationMetadata errorCode
                              * @property {string|null} [errorMessage] SanitizationMetadata errorMessage
                              * @property {boolean|null} [ignorePartialInvocationFailures] SanitizationMetadata ignorePartialInvocationFailures
+                             * @property {google.cloud.modelarmor.v1.IDataItem|null} [streamChunkProcessed] SanitizationMetadata streamChunkProcessed
                              */
     
                             /**
@@ -8535,6 +8740,14 @@
                             SanitizationMetadata.prototype.ignorePartialInvocationFailures = false;
     
                             /**
+                             * SanitizationMetadata streamChunkProcessed.
+                             * @member {google.cloud.modelarmor.v1.IDataItem|null|undefined} streamChunkProcessed
+                             * @memberof google.cloud.modelarmor.v1.SanitizationResult.SanitizationMetadata
+                             * @instance
+                             */
+                            SanitizationMetadata.prototype.streamChunkProcessed = null;
+    
+                            /**
                              * Creates a new SanitizationMetadata instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.modelarmor.v1.SanitizationResult.SanitizationMetadata
@@ -8564,6 +8777,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorMessage);
                                 if (message.ignorePartialInvocationFailures != null && Object.hasOwnProperty.call(message, "ignorePartialInvocationFailures"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.ignorePartialInvocationFailures);
+                                if (message.streamChunkProcessed != null && Object.hasOwnProperty.call(message, "streamChunkProcessed"))
+                                    $root.google.cloud.modelarmor.v1.DataItem.encode(message.streamChunkProcessed, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -8616,6 +8831,10 @@
                                             message.ignorePartialInvocationFailures = reader.bool();
                                             break;
                                         }
+                                    case 4: {
+                                            message.streamChunkProcessed = $root.google.cloud.modelarmor.v1.DataItem.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7, long);
                                         break;
@@ -8664,6 +8883,11 @@
                                 if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
                                     if (typeof message.ignorePartialInvocationFailures !== "boolean")
                                         return "ignorePartialInvocationFailures: boolean expected";
+                                if (message.streamChunkProcessed != null && message.hasOwnProperty("streamChunkProcessed")) {
+                                    var error = $root.google.cloud.modelarmor.v1.DataItem.verify(message.streamChunkProcessed, long + 1);
+                                    if (error)
+                                        return "streamChunkProcessed." + error;
+                                }
                                 return null;
                             };
     
@@ -8696,6 +8920,11 @@
                                     message.errorMessage = String(object.errorMessage);
                                 if (object.ignorePartialInvocationFailures != null)
                                     message.ignorePartialInvocationFailures = Boolean(object.ignorePartialInvocationFailures);
+                                if (object.streamChunkProcessed != null) {
+                                    if (typeof object.streamChunkProcessed !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1.SanitizationResult.SanitizationMetadata.streamChunkProcessed: object expected");
+                                    message.streamChunkProcessed = $root.google.cloud.modelarmor.v1.DataItem.fromObject(object.streamChunkProcessed, long + 1);
+                                }
                                 return message;
                             };
     
@@ -8720,6 +8949,7 @@
                                         object.errorCode = options.longs === String ? "0" : 0;
                                     object.errorMessage = "";
                                     object.ignorePartialInvocationFailures = false;
+                                    object.streamChunkProcessed = null;
                                 }
                                 if (message.errorCode != null && message.hasOwnProperty("errorCode"))
                                     if (typeof message.errorCode === "number")
@@ -8730,6 +8960,8 @@
                                     object.errorMessage = message.errorMessage;
                                 if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
                                     object.ignorePartialInvocationFailures = message.ignorePartialInvocationFailures;
+                                if (message.streamChunkProcessed != null && message.hasOwnProperty("streamChunkProcessed"))
+                                    object.streamChunkProcessed = $root.google.cloud.modelarmor.v1.DataItem.toObject(message.streamChunkProcessed, options);
                                 return object;
                             };
     
@@ -52608,6 +52840,282 @@
             })();
     
             return protobuf;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            type.Date = (function() {
+    
+                /**
+                 * Properties of a Date.
+                 * @memberof google.type
+                 * @interface IDate
+                 * @property {number|null} [year] Date year
+                 * @property {number|null} [month] Date month
+                 * @property {number|null} [day] Date day
+                 */
+    
+                /**
+                 * Constructs a new Date.
+                 * @memberof google.type
+                 * @classdesc Represents a Date.
+                 * @implements IDate
+                 * @constructor
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 */
+                function Date(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Date year.
+                 * @member {number} year
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.year = 0;
+    
+                /**
+                 * Date month.
+                 * @member {number} month
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.month = 0;
+    
+                /**
+                 * Date day.
+                 * @member {number} day
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.day = 0;
+    
+                /**
+                 * Creates a new Date instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 * @returns {google.type.Date} Date instance
+                 */
+                Date.create = function create(properties) {
+                    return new Date(properties);
+                };
+    
+                /**
+                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decode = function decode(reader, length, error, long) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.year = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.month = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.day = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7, long);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Date message.
+                 * @function verify
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Date.verify = function verify(message, long) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Date} Date
+                 */
+                Date.fromObject = function fromObject(object, long) {
+                    if (object instanceof $root.google.type.Date)
+                        return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var message = new $root.google.type.Date();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Date message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.Date} message Date
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Date.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Date to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Date
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Date.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Date
+                 * @function getTypeUrl
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Date.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Date";
+                };
+    
+                return Date;
+            })();
+    
+            return type;
         })();
     
         return google;
