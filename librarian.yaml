@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.18.0
+version: v0.19.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
@@ -23,6 +23,9 @@ default:
     - librarian.js
     - package.json
     - samples/package.json
+    - samples/quickstart.js
+    - samples/test/quickstart.js
+    - samples/README.md
     - README.md
     - CHANGELOG.md
     - .readme-partials.yaml
