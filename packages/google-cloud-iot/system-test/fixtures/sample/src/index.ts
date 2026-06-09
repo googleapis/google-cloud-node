@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DeviceManagerClient} from '@google-cloud/iot';
+import { DeviceManagerClient } from '@google-cloud/iot';
 
 // check that the client class type name can be used
 function doStuffWithDeviceManagerClient(client: DeviceManagerClient) {
