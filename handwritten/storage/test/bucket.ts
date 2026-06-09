@@ -947,6 +947,7 @@ describe('Bucket', () => {
       destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.strictEqual(reqOpts.qs.deleteSourceObjects, undefined);
         assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
+        assert.strictEqual(reqOpts.json.sourceObjects[0].generation, 12345);
         callback(null, {});
       };
 

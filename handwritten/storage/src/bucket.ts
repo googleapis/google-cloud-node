@@ -1763,10 +1763,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
               name: source.name,
             } as SourceObject;
 
-            if (source.metadata && source.metadata.generation) {
-              sourceObject.generation = parseInt(
-                source.metadata.generation.toString()
-              );
+            const generation = source.generation ?? source.metadata?.generation;
+            if (generation !== undefined) {
+              sourceObject.generation = parseInt(generation.toString());
             }
 
             return sourceObject;
@@ -1774,7 +1773,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         },
         qs: requestQueryObject,
       },
-      async (err, resp) => {
+      (err, resp) => {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
         if (err) {
           callback!(err, null, resp);
@@ -1782,7 +1781,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         }
 
         if (deleteSourceObjects) {
-          const deletePromises = (sources as File[]).map(async source => {
+          const deletePromises = (sources as File[]).map(source => {
             const deleteOptions: DeleteOptions = {
               ignoreNotFound: true,
               userProject: options.userProject,
@@ -1793,30 +1792,32 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
               deleteOptions.ifGenerationMatch = generation;
             }
 
-            try {
-              await source.delete(deleteOptions);
-            } catch (deleteErr) {
-              return deleteErr as Error;
-            }
-            return null;
+            return source
+              .delete(deleteOptions)
+              .catch(deleteErr => deleteErr as Error);
           });
 
-          const results = await Promise.all(deletePromises);
-          const errors = results.filter((res): res is Error => res !== null);
-
-          if (errors.length > 0) {
-            const cleanupErr = new ComposeCleanupError(
-              `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
-              errors,
-              destinationFile,
-              resp
+          Promise.all(deletePromises).then(results => {
+            const errors = results.filter(
+              (res): res is Error => res instanceof Error
             );
-            callback!(cleanupErr, destinationFile, resp);
-            return;
-          }
-        }
 
-        callback!(null, destinationFile, resp);
+            if (errors.length > 0) {
+              const cleanupErr = new ComposeCleanupError(
+                `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
+                errors,
+                destinationFile,
+                resp
+              );
+              callback!(cleanupErr, destinationFile, resp);
+              return;
+            }
+
+            callback!(null, destinationFile, resp);
+          });
+        } else {
+          callback!(null, destinationFile, resp);
+        }
       }
     );
   }
