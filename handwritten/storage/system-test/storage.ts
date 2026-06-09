@@ -1289,6 +1289,79 @@ describe('storage', function () {
   });
 
   describe('bucket metadata', () => {
+    describe('ipFilter', () => {
+      let ipFilterBucket: Bucket;
+
+      beforeEach(async () => {
+        ipFilterBucket = storage.bucket(generateName());
+        await ipFilterBucket.create();
+      });
+
+      afterEach(async () => {
+        await ipFilterBucket.delete().catch(() => { });
+      });
+
+      it('should enable and set ipFilter', async () => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Enabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['192.0.2.0/24'],
+            },
+            allowAllServiceAgentAccess: false,
+          },
+        };
+        const [meta] = await ipFilterBucket.setMetadata(metadata);
+        assert.deepStrictEqual(meta.ipFilter, metadata.ipFilter);
+      });
+
+      it('should get ipFilter', async () => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Enabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['0.0.0.0/0', '::/0'],
+            },
+            allowAllServiceAgentAccess: false,
+          },
+        };
+        const [meta] = await ipFilterBucket.setMetadata(metadata);
+        assert.strictEqual(meta.ipFilter?.mode, 'Enabled');
+        assert.deepStrictEqual(
+          meta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+          ['0.0.0.0/0', '::/0']
+        );
+      });
+
+      it('should update ipFilter', async () => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Enabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['203.0.113.0/24'],
+            },
+            allowAllServiceAgentAccess: false,
+          },
+        };
+        const [meta] = await ipFilterBucket.setMetadata(metadata);
+        assert.deepStrictEqual(meta.ipFilter, metadata.ipFilter);
+      });
+
+      it('should clear/delete ipFilter', async () => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Disabled',
+            publicNetworkSource: {},
+            allowAllServiceAgentAccess: false,
+          },
+        };
+        const [meta] = await ipFilterBucket.setMetadata(metadata);
+        assert.strictEqual(meta.ipFilter?.mode, 'Disabled');
+        assert.strictEqual(meta.ipFilter?.publicNetworkSource, undefined);
+        assert.strictEqual(meta.ipFilter?.allowAllServiceAgentAccess, false);
+      });
+    });
+
     it('should allow setting metadata on a bucket', async () => {
       const metadata = {
         website: {
@@ -4550,7 +4623,7 @@ describe('storage', function () {
       setTimeout(resolve, RETENTION_DURATION_SECONDS * 1000),
     );
     return Promise.all(
-      buckets.map(bucket => limit(() => deleteBucketAsync(bucket))),
+      buckets.map(bucket => limit(() => deleteBucketAsync(bucket).catch(() => {}))),
     );
   }
 
