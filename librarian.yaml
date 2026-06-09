@@ -203,7 +203,6 @@ libraries:
       - path: google/cloud/alloydb/v1beta
       - path: google/cloud/alloydb/v1alpha
     copyright_year: "2026"
-    skip_generate: true
   - name: google-cloud-apigateway
     version: 4.2.2
     apis:
