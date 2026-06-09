@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.iam.v2beta",
+  "libraryPackage": "@google-cloud/iam",
+  "services": {
+    "Policies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PoliciesClient",
+          "rpcs": {
+            "GetPolicy": {
+              "methods": [
+                "getPolicy"
+              ]
+            },
+            "CreatePolicy": {
+              "methods": [
+                "createPolicy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "updatePolicy"
+              ]
+            },
+            "DeletePolicy": {
+              "methods": [
+                "deletePolicy"
+              ]
+            },
+            "ListPolicies": {
+              "methods": [
+                "listPolicies",
+                "listPoliciesStream",
+                "listPoliciesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PoliciesClient",
+          "rpcs": {
+            "GetPolicy": {
+              "methods": [
+                "getPolicy"
+              ]
+            },
+            "CreatePolicy": {
+              "methods": [
+                "createPolicy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "updatePolicy"
+              ]
+            },
+            "DeletePolicy": {
+              "methods": [
+                "deletePolicy"
+              ]
+            },
+            "ListPolicies": {
+              "methods": [
+                "listPolicies",
+                "listPoliciesStream",
+                "listPoliciesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
