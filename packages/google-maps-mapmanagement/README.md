@@ -72,7 +72,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update map config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapmanagement/samples/generated/v2beta/map_management.update_map_config.js) |
 | update map context config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapmanagement/samples/generated/v2beta/map_management.update_map_context_config.js) |
 | update style config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapmanagement/samples/generated/v2beta/map_management.update_style_config.js) |
-| maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapmanagement/samples/generated/v2beta/snippet_metadata_google.maps.mapmanagement.v2beta.json) |
 
 
 ## Supported Node.js Versions
