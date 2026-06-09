@@ -348,7 +348,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/clientgateways/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       package_name: '@google-cloud/clientgateways'
   - name: google-cloud-bigquery-analyticshub
