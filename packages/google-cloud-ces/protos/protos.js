@@ -66427,6 +66427,7 @@
                          * @property {Array.<google.cloud.ces.v1beta.Agent.IAgentToolset>|null} [toolsets] Agent toolsets
                          * @property {string|null} [generatedSummary] Agent generatedSummary
                          * @property {Array.<google.cloud.ces.v1beta.ITransferRule>|null} [transferRules] Agent transferRules
+                         * @property {Array.<string>|null} [validationErrors] Agent validationErrors
                          */
     
                         /**
@@ -66449,6 +66450,7 @@
                             this.guardrails = [];
                             this.toolsets = [];
                             this.transferRules = [];
+                            this.validationErrors = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -66631,6 +66633,14 @@
                          */
                         Agent.prototype.transferRules = $util.emptyArray;
     
+                        /**
+                         * Agent validationErrors.
+                         * @member {Array.<string>} validationErrors
+                         * @memberof google.cloud.ces.v1beta.Agent
+                         * @instance
+                         */
+                        Agent.prototype.validationErrors = $util.emptyArray;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -66724,6 +66734,9 @@
                             if (message.transferRules != null && message.transferRules.length)
                                 for (var i = 0; i < message.transferRules.length; ++i)
                                     $root.google.cloud.ces.v1beta.TransferRule.encode(message.transferRules[i], writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
+                            if (message.validationErrors != null && message.validationErrors.length)
+                                for (var i = 0; i < message.validationErrors.length; ++i)
+                                    writer.uint32(/* id 32, wireType 2 =*/258).string(message.validationErrors[i]);
                             return writer;
                         };
     
@@ -66868,6 +66881,12 @@
                                         if (!(message.transferRules && message.transferRules.length))
                                             message.transferRules = [];
                                         message.transferRules.push($root.google.cloud.ces.v1beta.TransferRule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 32: {
+                                        if (!(message.validationErrors && message.validationErrors.length))
+                                            message.validationErrors = [];
+                                        message.validationErrors.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -67050,6 +67069,13 @@
                                         return "transferRules." + error;
                                 }
                             }
+                            if (message.validationErrors != null && message.hasOwnProperty("validationErrors")) {
+                                if (!Array.isArray(message.validationErrors))
+                                    return "validationErrors: array expected";
+                                for (var i = 0; i < message.validationErrors.length; ++i)
+                                    if (!$util.isString(message.validationErrors[i]))
+                                        return "validationErrors: string[] expected";
+                            }
                             return null;
                         };
     
@@ -67203,6 +67229,13 @@
                                     message.transferRules[i] = $root.google.cloud.ces.v1beta.TransferRule.fromObject(object.transferRules[i]);
                                 }
                             }
+                            if (object.validationErrors) {
+                                if (!Array.isArray(object.validationErrors))
+                                    throw TypeError(".google.cloud.ces.v1beta.Agent.validationErrors: array expected");
+                                message.validationErrors = [];
+                                for (var i = 0; i < object.validationErrors.length; ++i)
+                                    message.validationErrors[i] = String(object.validationErrors[i]);
+                            }
                             return message;
                         };
     
@@ -67231,6 +67264,7 @@
                                 object.afterToolCallbacks = [];
                                 object.toolsets = [];
                                 object.transferRules = [];
+                                object.validationErrors = [];
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -67325,6 +67359,11 @@
                                 object.transferRules = [];
                                 for (var j = 0; j < message.transferRules.length; ++j)
                                     object.transferRules[j] = $root.google.cloud.ces.v1beta.TransferRule.toObject(message.transferRules[j], options);
+                            }
+                            if (message.validationErrors && message.validationErrors.length) {
+                                object.validationErrors = [];
+                                for (var j = 0; j < message.validationErrors.length; ++j)
+                                    object.validationErrors[j] = message.validationErrors[j];
                             }
                             return object;
                         };
@@ -67544,6 +67583,7 @@
                              * @property {Object.<string,string>|null} [inputVariableMapping] RemoteDialogflowAgent inputVariableMapping
                              * @property {Object.<string,string>|null} [outputVariableMapping] RemoteDialogflowAgent outputVariableMapping
                              * @property {boolean|null} [respectResponseInterruptionSettings] RemoteDialogflowAgent respectResponseInterruptionSettings
+                             * @property {string|null} [languageCodeVariable] RemoteDialogflowAgent languageCodeVariable
                              */
     
                             /**
@@ -67612,6 +67652,14 @@
                             RemoteDialogflowAgent.prototype.respectResponseInterruptionSettings = false;
     
                             /**
+                             * RemoteDialogflowAgent languageCodeVariable.
+                             * @member {string} languageCodeVariable
+                             * @memberof google.cloud.ces.v1beta.Agent.RemoteDialogflowAgent
+                             * @instance
+                             */
+                            RemoteDialogflowAgent.prototype.languageCodeVariable = "";
+    
+                            /**
                              * Creates a new RemoteDialogflowAgent instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.ces.v1beta.Agent.RemoteDialogflowAgent
@@ -67649,6 +67697,8 @@
                                         writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.outputVariableMapping[keys[i]]).ldelim();
                                 if (message.respectResponseInterruptionSettings != null && Object.hasOwnProperty.call(message, "respectResponseInterruptionSettings"))
                                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.respectResponseInterruptionSettings);
+                                if (message.languageCodeVariable != null && Object.hasOwnProperty.call(message, "languageCodeVariable"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.languageCodeVariable);
                                 return writer;
                             };
     
@@ -67747,6 +67797,10 @@
                                             message.respectResponseInterruptionSettings = reader.bool();
                                             break;
                                         }
+                                    case 7: {
+                                            message.languageCodeVariable = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -67810,6 +67864,9 @@
                                 if (message.respectResponseInterruptionSettings != null && message.hasOwnProperty("respectResponseInterruptionSettings"))
                                     if (typeof message.respectResponseInterruptionSettings !== "boolean")
                                         return "respectResponseInterruptionSettings: boolean expected";
+                                if (message.languageCodeVariable != null && message.hasOwnProperty("languageCodeVariable"))
+                                    if (!$util.isString(message.languageCodeVariable))
+                                        return "languageCodeVariable: string expected";
                                 return null;
                             };
     
@@ -67847,6 +67904,8 @@
                                 }
                                 if (object.respectResponseInterruptionSettings != null)
                                     message.respectResponseInterruptionSettings = Boolean(object.respectResponseInterruptionSettings);
+                                if (object.languageCodeVariable != null)
+                                    message.languageCodeVariable = String(object.languageCodeVariable);
                                 return message;
                             };
     
@@ -67872,6 +67931,7 @@
                                     object.flowId = "";
                                     object.environmentId = "";
                                     object.respectResponseInterruptionSettings = false;
+                                    object.languageCodeVariable = "";
                                 }
                                 if (message.agent != null && message.hasOwnProperty("agent"))
                                     object.agent = message.agent;
@@ -67892,6 +67952,8 @@
                                 }
                                 if (message.respectResponseInterruptionSettings != null && message.hasOwnProperty("respectResponseInterruptionSettings"))
                                     object.respectResponseInterruptionSettings = message.respectResponseInterruptionSettings;
+                                if (message.languageCodeVariable != null && message.hasOwnProperty("languageCodeVariable"))
+                                    object.languageCodeVariable = message.languageCodeVariable;
                                 return object;
                             };
     
@@ -73494,6 +73556,1290 @@
                         };
     
                         return Span;
+                    })();
+    
+                    v1beta.AgentCard = (function() {
+    
+                        /**
+                         * Properties of an AgentCard.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IAgentCard
+                         * @property {string|null} [name] AgentCard name
+                         * @property {string|null} [description] AgentCard description
+                         * @property {Array.<google.cloud.ces.v1beta.IAgentInterface>|null} [supportedInterfaces] AgentCard supportedInterfaces
+                         * @property {string|null} [version] AgentCard version
+                         * @property {Array.<google.cloud.ces.v1beta.IAgentSkill>|null} [skills] AgentCard skills
+                         */
+    
+                        /**
+                         * Constructs a new AgentCard.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents an AgentCard.
+                         * @implements IAgentCard
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IAgentCard=} [properties] Properties to set
+                         */
+                        function AgentCard(properties) {
+                            this.supportedInterfaces = [];
+                            this.skills = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AgentCard name.
+                         * @member {string} name
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @instance
+                         */
+                        AgentCard.prototype.name = "";
+    
+                        /**
+                         * AgentCard description.
+                         * @member {string} description
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @instance
+                         */
+                        AgentCard.prototype.description = "";
+    
+                        /**
+                         * AgentCard supportedInterfaces.
+                         * @member {Array.<google.cloud.ces.v1beta.IAgentInterface>} supportedInterfaces
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @instance
+                         */
+                        AgentCard.prototype.supportedInterfaces = $util.emptyArray;
+    
+                        /**
+                         * AgentCard version.
+                         * @member {string} version
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @instance
+                         */
+                        AgentCard.prototype.version = "";
+    
+                        /**
+                         * AgentCard skills.
+                         * @member {Array.<google.cloud.ces.v1beta.IAgentSkill>} skills
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @instance
+                         */
+                        AgentCard.prototype.skills = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AgentCard instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IAgentCard=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.AgentCard} AgentCard instance
+                         */
+                        AgentCard.create = function create(properties) {
+                            return new AgentCard(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AgentCard message. Does not implicitly {@link google.cloud.ces.v1beta.AgentCard.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IAgentCard} message AgentCard message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AgentCard.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.supportedInterfaces != null && message.supportedInterfaces.length)
+                                for (var i = 0; i < message.supportedInterfaces.length; ++i)
+                                    $root.google.cloud.ces.v1beta.AgentInterface.encode(message.supportedInterfaces[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.version);
+                            if (message.skills != null && message.skills.length)
+                                for (var i = 0; i < message.skills.length; ++i)
+                                    $root.google.cloud.ces.v1beta.AgentSkill.encode(message.skills[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AgentCard message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.AgentCard.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IAgentCard} message AgentCard message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AgentCard.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AgentCard message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.AgentCard} AgentCard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AgentCard.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.AgentCard();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.supportedInterfaces && message.supportedInterfaces.length))
+                                            message.supportedInterfaces = [];
+                                        message.supportedInterfaces.push($root.google.cloud.ces.v1beta.AgentInterface.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.version = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.skills && message.skills.length))
+                                            message.skills = [];
+                                        message.skills.push($root.google.cloud.ces.v1beta.AgentSkill.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AgentCard message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.AgentCard} AgentCard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AgentCard.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AgentCard message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AgentCard.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.supportedInterfaces != null && message.hasOwnProperty("supportedInterfaces")) {
+                                if (!Array.isArray(message.supportedInterfaces))
+                                    return "supportedInterfaces: array expected";
+                                for (var i = 0; i < message.supportedInterfaces.length; ++i) {
+                                    var error = $root.google.cloud.ces.v1beta.AgentInterface.verify(message.supportedInterfaces[i]);
+                                    if (error)
+                                        return "supportedInterfaces." + error;
+                                }
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.skills != null && message.hasOwnProperty("skills")) {
+                                if (!Array.isArray(message.skills))
+                                    return "skills: array expected";
+                                for (var i = 0; i < message.skills.length; ++i) {
+                                    var error = $root.google.cloud.ces.v1beta.AgentSkill.verify(message.skills[i]);
+                                    if (error)
+                                        return "skills." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AgentCard message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.AgentCard} AgentCard
+                         */
+                        AgentCard.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.AgentCard)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.AgentCard();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.supportedInterfaces) {
+                                if (!Array.isArray(object.supportedInterfaces))
+                                    throw TypeError(".google.cloud.ces.v1beta.AgentCard.supportedInterfaces: array expected");
+                                message.supportedInterfaces = [];
+                                for (var i = 0; i < object.supportedInterfaces.length; ++i) {
+                                    if (typeof object.supportedInterfaces[i] !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.AgentCard.supportedInterfaces: object expected");
+                                    message.supportedInterfaces[i] = $root.google.cloud.ces.v1beta.AgentInterface.fromObject(object.supportedInterfaces[i]);
+                                }
+                            }
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            if (object.skills) {
+                                if (!Array.isArray(object.skills))
+                                    throw TypeError(".google.cloud.ces.v1beta.AgentCard.skills: array expected");
+                                message.skills = [];
+                                for (var i = 0; i < object.skills.length; ++i) {
+                                    if (typeof object.skills[i] !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.AgentCard.skills: object expected");
+                                    message.skills[i] = $root.google.cloud.ces.v1beta.AgentSkill.fromObject(object.skills[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AgentCard message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @static
+                         * @param {google.cloud.ces.v1beta.AgentCard} message AgentCard
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AgentCard.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.supportedInterfaces = [];
+                                object.skills = [];
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.version = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.supportedInterfaces && message.supportedInterfaces.length) {
+                                object.supportedInterfaces = [];
+                                for (var j = 0; j < message.supportedInterfaces.length; ++j)
+                                    object.supportedInterfaces[j] = $root.google.cloud.ces.v1beta.AgentInterface.toObject(message.supportedInterfaces[j], options);
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            if (message.skills && message.skills.length) {
+                                object.skills = [];
+                                for (var j = 0; j < message.skills.length; ++j)
+                                    object.skills[j] = $root.google.cloud.ces.v1beta.AgentSkill.toObject(message.skills[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AgentCard to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AgentCard.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AgentCard
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.AgentCard
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AgentCard.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.AgentCard";
+                        };
+    
+                        return AgentCard;
+                    })();
+    
+                    v1beta.AgentInterface = (function() {
+    
+                        /**
+                         * Properties of an AgentInterface.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IAgentInterface
+                         * @property {string|null} [url] AgentInterface url
+                         * @property {string|null} [protocolBinding] AgentInterface protocolBinding
+                         * @property {string|null} [tenant] AgentInterface tenant
+                         * @property {string|null} [protocolVersion] AgentInterface protocolVersion
+                         */
+    
+                        /**
+                         * Constructs a new AgentInterface.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents an AgentInterface.
+                         * @implements IAgentInterface
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IAgentInterface=} [properties] Properties to set
+                         */
+                        function AgentInterface(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AgentInterface url.
+                         * @member {string} url
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @instance
+                         */
+                        AgentInterface.prototype.url = "";
+    
+                        /**
+                         * AgentInterface protocolBinding.
+                         * @member {string} protocolBinding
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @instance
+                         */
+                        AgentInterface.prototype.protocolBinding = "";
+    
+                        /**
+                         * AgentInterface tenant.
+                         * @member {string} tenant
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @instance
+                         */
+                        AgentInterface.prototype.tenant = "";
+    
+                        /**
+                         * AgentInterface protocolVersion.
+                         * @member {string} protocolVersion
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @instance
+                         */
+                        AgentInterface.prototype.protocolVersion = "";
+    
+                        /**
+                         * Creates a new AgentInterface instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IAgentInterface=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.AgentInterface} AgentInterface instance
+                         */
+                        AgentInterface.create = function create(properties) {
+                            return new AgentInterface(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AgentInterface message. Does not implicitly {@link google.cloud.ces.v1beta.AgentInterface.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IAgentInterface} message AgentInterface message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AgentInterface.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                            if (message.protocolBinding != null && Object.hasOwnProperty.call(message, "protocolBinding"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.protocolBinding);
+                            if (message.tenant != null && Object.hasOwnProperty.call(message, "tenant"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.tenant);
+                            if (message.protocolVersion != null && Object.hasOwnProperty.call(message, "protocolVersion"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.protocolVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AgentInterface message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.AgentInterface.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IAgentInterface} message AgentInterface message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AgentInterface.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AgentInterface message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.AgentInterface} AgentInterface
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AgentInterface.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.AgentInterface();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.url = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.protocolBinding = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.tenant = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.protocolVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AgentInterface message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.AgentInterface} AgentInterface
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AgentInterface.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AgentInterface message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AgentInterface.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            if (message.protocolBinding != null && message.hasOwnProperty("protocolBinding"))
+                                if (!$util.isString(message.protocolBinding))
+                                    return "protocolBinding: string expected";
+                            if (message.tenant != null && message.hasOwnProperty("tenant"))
+                                if (!$util.isString(message.tenant))
+                                    return "tenant: string expected";
+                            if (message.protocolVersion != null && message.hasOwnProperty("protocolVersion"))
+                                if (!$util.isString(message.protocolVersion))
+                                    return "protocolVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AgentInterface message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.AgentInterface} AgentInterface
+                         */
+                        AgentInterface.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.AgentInterface)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.AgentInterface();
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            if (object.protocolBinding != null)
+                                message.protocolBinding = String(object.protocolBinding);
+                            if (object.tenant != null)
+                                message.tenant = String(object.tenant);
+                            if (object.protocolVersion != null)
+                                message.protocolVersion = String(object.protocolVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AgentInterface message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @static
+                         * @param {google.cloud.ces.v1beta.AgentInterface} message AgentInterface
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AgentInterface.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.url = "";
+                                object.protocolBinding = "";
+                                object.tenant = "";
+                                object.protocolVersion = "";
+                            }
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            if (message.protocolBinding != null && message.hasOwnProperty("protocolBinding"))
+                                object.protocolBinding = message.protocolBinding;
+                            if (message.tenant != null && message.hasOwnProperty("tenant"))
+                                object.tenant = message.tenant;
+                            if (message.protocolVersion != null && message.hasOwnProperty("protocolVersion"))
+                                object.protocolVersion = message.protocolVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AgentInterface to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AgentInterface.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AgentInterface
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.AgentInterface
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AgentInterface.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.AgentInterface";
+                        };
+    
+                        return AgentInterface;
+                    })();
+    
+                    v1beta.AgentSkill = (function() {
+    
+                        /**
+                         * Properties of an AgentSkill.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IAgentSkill
+                         * @property {string|null} [id] AgentSkill id
+                         * @property {string|null} [name] AgentSkill name
+                         * @property {string|null} [description] AgentSkill description
+                         * @property {Array.<string>|null} [tags] AgentSkill tags
+                         * @property {Array.<string>|null} [examples] AgentSkill examples
+                         * @property {Array.<string>|null} [inputModes] AgentSkill inputModes
+                         * @property {Array.<string>|null} [outputModes] AgentSkill outputModes
+                         */
+    
+                        /**
+                         * Constructs a new AgentSkill.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents an AgentSkill.
+                         * @implements IAgentSkill
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IAgentSkill=} [properties] Properties to set
+                         */
+                        function AgentSkill(properties) {
+                            this.tags = [];
+                            this.examples = [];
+                            this.inputModes = [];
+                            this.outputModes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AgentSkill id.
+                         * @member {string} id
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @instance
+                         */
+                        AgentSkill.prototype.id = "";
+    
+                        /**
+                         * AgentSkill name.
+                         * @member {string} name
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @instance
+                         */
+                        AgentSkill.prototype.name = "";
+    
+                        /**
+                         * AgentSkill description.
+                         * @member {string} description
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @instance
+                         */
+                        AgentSkill.prototype.description = "";
+    
+                        /**
+                         * AgentSkill tags.
+                         * @member {Array.<string>} tags
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @instance
+                         */
+                        AgentSkill.prototype.tags = $util.emptyArray;
+    
+                        /**
+                         * AgentSkill examples.
+                         * @member {Array.<string>} examples
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @instance
+                         */
+                        AgentSkill.prototype.examples = $util.emptyArray;
+    
+                        /**
+                         * AgentSkill inputModes.
+                         * @member {Array.<string>} inputModes
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @instance
+                         */
+                        AgentSkill.prototype.inputModes = $util.emptyArray;
+    
+                        /**
+                         * AgentSkill outputModes.
+                         * @member {Array.<string>} outputModes
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @instance
+                         */
+                        AgentSkill.prototype.outputModes = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AgentSkill instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IAgentSkill=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.AgentSkill} AgentSkill instance
+                         */
+                        AgentSkill.create = function create(properties) {
+                            return new AgentSkill(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AgentSkill message. Does not implicitly {@link google.cloud.ces.v1beta.AgentSkill.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IAgentSkill} message AgentSkill message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AgentSkill.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.tags != null && message.tags.length)
+                                for (var i = 0; i < message.tags.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.tags[i]);
+                            if (message.examples != null && message.examples.length)
+                                for (var i = 0; i < message.examples.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.examples[i]);
+                            if (message.inputModes != null && message.inputModes.length)
+                                for (var i = 0; i < message.inputModes.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.inputModes[i]);
+                            if (message.outputModes != null && message.outputModes.length)
+                                for (var i = 0; i < message.outputModes.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.outputModes[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AgentSkill message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.AgentSkill.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IAgentSkill} message AgentSkill message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AgentSkill.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AgentSkill message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.AgentSkill} AgentSkill
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AgentSkill.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.AgentSkill();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.tags && message.tags.length))
+                                            message.tags = [];
+                                        message.tags.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.examples && message.examples.length))
+                                            message.examples = [];
+                                        message.examples.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.inputModes && message.inputModes.length))
+                                            message.inputModes = [];
+                                        message.inputModes.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.outputModes && message.outputModes.length))
+                                            message.outputModes = [];
+                                        message.outputModes.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AgentSkill message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.AgentSkill} AgentSkill
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AgentSkill.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AgentSkill message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AgentSkill.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.tags != null && message.hasOwnProperty("tags")) {
+                                if (!Array.isArray(message.tags))
+                                    return "tags: array expected";
+                                for (var i = 0; i < message.tags.length; ++i)
+                                    if (!$util.isString(message.tags[i]))
+                                        return "tags: string[] expected";
+                            }
+                            if (message.examples != null && message.hasOwnProperty("examples")) {
+                                if (!Array.isArray(message.examples))
+                                    return "examples: array expected";
+                                for (var i = 0; i < message.examples.length; ++i)
+                                    if (!$util.isString(message.examples[i]))
+                                        return "examples: string[] expected";
+                            }
+                            if (message.inputModes != null && message.hasOwnProperty("inputModes")) {
+                                if (!Array.isArray(message.inputModes))
+                                    return "inputModes: array expected";
+                                for (var i = 0; i < message.inputModes.length; ++i)
+                                    if (!$util.isString(message.inputModes[i]))
+                                        return "inputModes: string[] expected";
+                            }
+                            if (message.outputModes != null && message.hasOwnProperty("outputModes")) {
+                                if (!Array.isArray(message.outputModes))
+                                    return "outputModes: array expected";
+                                for (var i = 0; i < message.outputModes.length; ++i)
+                                    if (!$util.isString(message.outputModes[i]))
+                                        return "outputModes: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AgentSkill message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.AgentSkill} AgentSkill
+                         */
+                        AgentSkill.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.AgentSkill)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.AgentSkill();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.tags) {
+                                if (!Array.isArray(object.tags))
+                                    throw TypeError(".google.cloud.ces.v1beta.AgentSkill.tags: array expected");
+                                message.tags = [];
+                                for (var i = 0; i < object.tags.length; ++i)
+                                    message.tags[i] = String(object.tags[i]);
+                            }
+                            if (object.examples) {
+                                if (!Array.isArray(object.examples))
+                                    throw TypeError(".google.cloud.ces.v1beta.AgentSkill.examples: array expected");
+                                message.examples = [];
+                                for (var i = 0; i < object.examples.length; ++i)
+                                    message.examples[i] = String(object.examples[i]);
+                            }
+                            if (object.inputModes) {
+                                if (!Array.isArray(object.inputModes))
+                                    throw TypeError(".google.cloud.ces.v1beta.AgentSkill.inputModes: array expected");
+                                message.inputModes = [];
+                                for (var i = 0; i < object.inputModes.length; ++i)
+                                    message.inputModes[i] = String(object.inputModes[i]);
+                            }
+                            if (object.outputModes) {
+                                if (!Array.isArray(object.outputModes))
+                                    throw TypeError(".google.cloud.ces.v1beta.AgentSkill.outputModes: array expected");
+                                message.outputModes = [];
+                                for (var i = 0; i < object.outputModes.length; ++i)
+                                    message.outputModes[i] = String(object.outputModes[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AgentSkill message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @static
+                         * @param {google.cloud.ces.v1beta.AgentSkill} message AgentSkill
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AgentSkill.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.tags = [];
+                                object.examples = [];
+                                object.inputModes = [];
+                                object.outputModes = [];
+                            }
+                            if (options.defaults) {
+                                object.id = "";
+                                object.name = "";
+                                object.description = "";
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.tags && message.tags.length) {
+                                object.tags = [];
+                                for (var j = 0; j < message.tags.length; ++j)
+                                    object.tags[j] = message.tags[j];
+                            }
+                            if (message.examples && message.examples.length) {
+                                object.examples = [];
+                                for (var j = 0; j < message.examples.length; ++j)
+                                    object.examples[j] = message.examples[j];
+                            }
+                            if (message.inputModes && message.inputModes.length) {
+                                object.inputModes = [];
+                                for (var j = 0; j < message.inputModes.length; ++j)
+                                    object.inputModes[j] = message.inputModes[j];
+                            }
+                            if (message.outputModes && message.outputModes.length) {
+                                object.outputModes = [];
+                                for (var j = 0; j < message.outputModes.length; ++j)
+                                    object.outputModes[j] = message.outputModes[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AgentSkill to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AgentSkill.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AgentSkill
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.AgentSkill
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AgentSkill.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.AgentSkill";
+                        };
+    
+                        return AgentSkill;
+                    })();
+    
+                    v1beta.RemoteAgentTool = (function() {
+    
+                        /**
+                         * Properties of a RemoteAgentTool.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IRemoteAgentTool
+                         * @property {string|null} [name] RemoteAgentTool name
+                         * @property {string|null} [description] RemoteAgentTool description
+                         * @property {google.cloud.ces.v1beta.IAgentCard|null} [agentCard] RemoteAgentTool agentCard
+                         */
+    
+                        /**
+                         * Constructs a new RemoteAgentTool.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents a RemoteAgentTool.
+                         * @implements IRemoteAgentTool
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IRemoteAgentTool=} [properties] Properties to set
+                         */
+                        function RemoteAgentTool(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RemoteAgentTool name.
+                         * @member {string} name
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @instance
+                         */
+                        RemoteAgentTool.prototype.name = "";
+    
+                        /**
+                         * RemoteAgentTool description.
+                         * @member {string} description
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @instance
+                         */
+                        RemoteAgentTool.prototype.description = "";
+    
+                        /**
+                         * RemoteAgentTool agentCard.
+                         * @member {google.cloud.ces.v1beta.IAgentCard|null|undefined} agentCard
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @instance
+                         */
+                        RemoteAgentTool.prototype.agentCard = null;
+    
+                        /**
+                         * Creates a new RemoteAgentTool instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRemoteAgentTool=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.RemoteAgentTool} RemoteAgentTool instance
+                         */
+                        RemoteAgentTool.create = function create(properties) {
+                            return new RemoteAgentTool(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RemoteAgentTool message. Does not implicitly {@link google.cloud.ces.v1beta.RemoteAgentTool.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRemoteAgentTool} message RemoteAgentTool message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RemoteAgentTool.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.agentCard != null && Object.hasOwnProperty.call(message, "agentCard"))
+                                $root.google.cloud.ces.v1beta.AgentCard.encode(message.agentCard, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RemoteAgentTool message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.RemoteAgentTool.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRemoteAgentTool} message RemoteAgentTool message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RemoteAgentTool.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RemoteAgentTool message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.RemoteAgentTool} RemoteAgentTool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RemoteAgentTool.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.RemoteAgentTool();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.agentCard = $root.google.cloud.ces.v1beta.AgentCard.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RemoteAgentTool message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.RemoteAgentTool} RemoteAgentTool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RemoteAgentTool.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RemoteAgentTool message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RemoteAgentTool.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.agentCard != null && message.hasOwnProperty("agentCard")) {
+                                var error = $root.google.cloud.ces.v1beta.AgentCard.verify(message.agentCard);
+                                if (error)
+                                    return "agentCard." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RemoteAgentTool message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.RemoteAgentTool} RemoteAgentTool
+                         */
+                        RemoteAgentTool.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.RemoteAgentTool)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.RemoteAgentTool();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.agentCard != null) {
+                                if (typeof object.agentCard !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.RemoteAgentTool.agentCard: object expected");
+                                message.agentCard = $root.google.cloud.ces.v1beta.AgentCard.fromObject(object.agentCard);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RemoteAgentTool message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @static
+                         * @param {google.cloud.ces.v1beta.RemoteAgentTool} message RemoteAgentTool
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RemoteAgentTool.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.agentCard = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.agentCard != null && message.hasOwnProperty("agentCard"))
+                                object.agentCard = $root.google.cloud.ces.v1beta.AgentCard.toObject(message.agentCard, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RemoteAgentTool to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RemoteAgentTool.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RemoteAgentTool
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.RemoteAgentTool
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RemoteAgentTool.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.RemoteAgentTool";
+                        };
+    
+                        return RemoteAgentTool;
                     })();
     
                     v1beta.AgentService = (function() {
@@ -90756,6 +92102,7 @@
                          * @property {google.cloud.ces.v1beta.IAgent|null} [agent] GenerateAppResourceRequest agent
                          * @property {google.cloud.ces.v1beta.ITool|null} [tool] GenerateAppResourceRequest tool
                          * @property {google.cloud.ces.v1beta.IToolset|null} [toolset] GenerateAppResourceRequest toolset
+                         * @property {google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppVersionContext|null} [appVersionContext] GenerateAppResourceRequest appVersionContext
                          * @property {string|null} [parent] GenerateAppResourceRequest parent
                          * @property {Array.<google.cloud.ces.v1beta.GenerateAppResourceRequest.IRefineInstructions>|null} [refineInstructions] GenerateAppResourceRequest refineInstructions
                          * @property {google.cloud.ces.v1beta.GenerateAppResourceRequest.IToolGenerationConfig|null} [toolGenerationConfig] GenerateAppResourceRequest toolGenerationConfig
@@ -90805,6 +92152,14 @@
                          * @instance
                          */
                         GenerateAppResourceRequest.prototype.toolset = null;
+    
+                        /**
+                         * GenerateAppResourceRequest appVersionContext.
+                         * @member {google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppVersionContext|null|undefined} appVersionContext
+                         * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest
+                         * @instance
+                         */
+                        GenerateAppResourceRequest.prototype.appVersionContext = null;
     
                         /**
                          * GenerateAppResourceRequest parent.
@@ -90875,12 +92230,12 @@
     
                         /**
                          * GenerateAppResourceRequest resource.
-                         * @member {"agent"|"tool"|"toolset"|undefined} resource
+                         * @member {"agent"|"tool"|"toolset"|"appVersionContext"|undefined} resource
                          * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest
                          * @instance
                          */
                         Object.defineProperty(GenerateAppResourceRequest.prototype, "resource", {
-                            get: $util.oneOfGetter($oneOfFields = ["agent", "tool", "toolset"]),
+                            get: $util.oneOfGetter($oneOfFields = ["agent", "tool", "toolset", "appVersionContext"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -90931,6 +92286,8 @@
                                 $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig.encode(message.qualityReportGenerationConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.hillClimbingFixConfig != null && Object.hasOwnProperty.call(message, "hillClimbingFixConfig"))
                                 $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig.encode(message.hillClimbingFixConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.appVersionContext != null && Object.hasOwnProperty.call(message, "appVersionContext"))
+                                $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext.encode(message.appVersionContext, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -90977,6 +92334,10 @@
                                     }
                                 case 6: {
                                         message.toolset = $root.google.cloud.ces.v1beta.Toolset.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.appVersionContext = $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -91077,6 +92438,16 @@
                                         return "toolset." + error;
                                 }
                             }
+                            if (message.appVersionContext != null && message.hasOwnProperty("appVersionContext")) {
+                                if (properties.resource === 1)
+                                    return "resource: multiple values";
+                                properties.resource = 1;
+                                {
+                                    var error = $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext.verify(message.appVersionContext);
+                                    if (error)
+                                        return "appVersionContext." + error;
+                                }
+                            }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -91148,6 +92519,11 @@
                                 if (typeof object.toolset !== "object")
                                     throw TypeError(".google.cloud.ces.v1beta.GenerateAppResourceRequest.toolset: object expected");
                                 message.toolset = $root.google.cloud.ces.v1beta.Toolset.fromObject(object.toolset);
+                            }
+                            if (object.appVersionContext != null) {
+                                if (typeof object.appVersionContext !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.GenerateAppResourceRequest.appVersionContext: object expected");
+                                message.appVersionContext = $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext.fromObject(object.appVersionContext);
                             }
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -91252,6 +92628,11 @@
                                 object.qualityReportGenerationConfig = $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig.toObject(message.qualityReportGenerationConfig, options);
                             if (message.hillClimbingFixConfig != null && message.hasOwnProperty("hillClimbingFixConfig"))
                                 object.hillClimbingFixConfig = $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig.toObject(message.hillClimbingFixConfig, options);
+                            if (message.appVersionContext != null && message.hasOwnProperty("appVersionContext")) {
+                                object.appVersionContext = $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext.toObject(message.appVersionContext, options);
+                                if (options.oneofs)
+                                    object.resource = "appVersionContext";
+                            }
                             return object;
                         };
     
@@ -91280,6 +92661,235 @@
                             }
                             return typeUrlPrefix + "/google.cloud.ces.v1beta.GenerateAppResourceRequest";
                         };
+    
+                        GenerateAppResourceRequest.AppVersionContext = (function() {
+    
+                            /**
+                             * Properties of an AppVersionContext.
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest
+                             * @interface IAppVersionContext
+                             * @property {string|null} [appVersion] AppVersionContext appVersion
+                             * @property {string|null} [agentResourceName] AppVersionContext agentResourceName
+                             */
+    
+                            /**
+                             * Constructs a new AppVersionContext.
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest
+                             * @classdesc Represents an AppVersionContext.
+                             * @implements IAppVersionContext
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppVersionContext=} [properties] Properties to set
+                             */
+                            function AppVersionContext(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AppVersionContext appVersion.
+                             * @member {string} appVersion
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @instance
+                             */
+                            AppVersionContext.prototype.appVersion = "";
+    
+                            /**
+                             * AppVersionContext agentResourceName.
+                             * @member {string} agentResourceName
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @instance
+                             */
+                            AppVersionContext.prototype.agentResourceName = "";
+    
+                            /**
+                             * Creates a new AppVersionContext instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @static
+                             * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppVersionContext=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext} AppVersionContext instance
+                             */
+                            AppVersionContext.create = function create(properties) {
+                                return new AppVersionContext(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AppVersionContext message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @static
+                             * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppVersionContext} message AppVersionContext message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AppVersionContext.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.appVersion != null && Object.hasOwnProperty.call(message, "appVersion"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.appVersion);
+                                if (message.agentResourceName != null && Object.hasOwnProperty.call(message, "agentResourceName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.agentResourceName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AppVersionContext message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @static
+                             * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppVersionContext} message AppVersionContext message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AppVersionContext.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AppVersionContext message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext} AppVersionContext
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AppVersionContext.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.appVersion = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.agentResourceName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AppVersionContext message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext} AppVersionContext
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AppVersionContext.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AppVersionContext message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AppVersionContext.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.appVersion != null && message.hasOwnProperty("appVersion"))
+                                    if (!$util.isString(message.appVersion))
+                                        return "appVersion: string expected";
+                                if (message.agentResourceName != null && message.hasOwnProperty("agentResourceName"))
+                                    if (!$util.isString(message.agentResourceName))
+                                        return "agentResourceName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AppVersionContext message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext} AppVersionContext
+                             */
+                            AppVersionContext.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext();
+                                if (object.appVersion != null)
+                                    message.appVersion = String(object.appVersion);
+                                if (object.agentResourceName != null)
+                                    message.agentResourceName = String(object.agentResourceName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AppVersionContext message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @static
+                             * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext} message AppVersionContext
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AppVersionContext.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.appVersion = "";
+                                    object.agentResourceName = "";
+                                }
+                                if (message.appVersion != null && message.hasOwnProperty("appVersion"))
+                                    object.appVersion = message.appVersion;
+                                if (message.agentResourceName != null && message.hasOwnProperty("agentResourceName"))
+                                    object.agentResourceName = message.agentResourceName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AppVersionContext to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AppVersionContext.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AppVersionContext
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AppVersionContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext";
+                            };
+    
+                            return AppVersionContext;
+                        })();
     
                         GenerateAppResourceRequest.RefineInstructions = (function() {
     
@@ -97375,9 +98985,11 @@
                          * @property {string|null} [etag] App etag
                          * @property {number|null} [deploymentCount] App deploymentCount
                          * @property {google.cloud.ces.v1beta.IClientCertificateSettings|null} [clientCertificateSettings] App clientCertificateSettings
+                         * @property {google.cloud.ces.v1beta.IVpcScSettings|null} [vpcScSettings] App vpcScSettings
                          * @property {boolean|null} [locked] App locked
                          * @property {Array.<google.cloud.ces.v1beta.IEvaluationPersona>|null} [evaluationPersonas] App evaluationPersonas
                          * @property {google.cloud.ces.v1beta.IEvaluationSettings|null} [evaluationSettings] App evaluationSettings
+                         * @property {Array.<string>|null} [validationErrors] App validationErrors
                          */
     
                         /**
@@ -97394,6 +99006,7 @@
                             this.guardrails = [];
                             this.metadata = {};
                             this.evaluationPersonas = [];
+                            this.validationErrors = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -97601,6 +99214,14 @@
                         App.prototype.clientCertificateSettings = null;
     
                         /**
+                         * App vpcScSettings.
+                         * @member {google.cloud.ces.v1beta.IVpcScSettings|null|undefined} vpcScSettings
+                         * @memberof google.cloud.ces.v1beta.App
+                         * @instance
+                         */
+                        App.prototype.vpcScSettings = null;
+    
+                        /**
                          * App locked.
                          * @member {boolean} locked
                          * @memberof google.cloud.ces.v1beta.App
@@ -97623,6 +99244,14 @@
                          * @instance
                          */
                         App.prototype.evaluationSettings = null;
+    
+                        /**
+                         * App validationErrors.
+                         * @member {Array.<string>} validationErrors
+                         * @memberof google.cloud.ces.v1beta.App
+                         * @instance
+                         */
+                        App.prototype.validationErrors = $util.emptyArray;
     
                         /**
                          * Creates a new App instance using the specified properties.
@@ -97691,6 +99320,8 @@
                                 $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.encode(message.evaluationMetricsThresholds, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             if (message.clientCertificateSettings != null && Object.hasOwnProperty.call(message, "clientCertificateSettings"))
                                 $root.google.cloud.ces.v1beta.ClientCertificateSettings.encode(message.clientCertificateSettings, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                            if (message.vpcScSettings != null && Object.hasOwnProperty.call(message, "vpcScSettings"))
+                                $root.google.cloud.ces.v1beta.VpcScSettings.encode(message.vpcScSettings, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.timeZoneSettings != null && Object.hasOwnProperty.call(message, "timeZoneSettings"))
                                 $root.google.cloud.ces.v1beta.TimeZoneSettings.encode(message.timeZoneSettings, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             if (message.predefinedVariableDeclarations != null && message.predefinedVariableDeclarations.length)
@@ -97709,6 +99340,9 @@
                                 $root.google.cloud.ces.v1beta.EvaluationSettings.encode(message.evaluationSettings, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
                             if (message.errorHandlingSettings != null && Object.hasOwnProperty.call(message, "errorHandlingSettings"))
                                 $root.google.cloud.ces.v1beta.ErrorHandlingSettings.encode(message.errorHandlingSettings, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                            if (message.validationErrors != null && message.validationErrors.length)
+                                for (var i = 0; i < message.validationErrors.length; ++i)
+                                    writer.uint32(/* id 39, wireType 2 =*/314).string(message.validationErrors[i]);
                             return writer;
                         };
     
@@ -97870,6 +99504,10 @@
                                         message.clientCertificateSettings = $root.google.cloud.ces.v1beta.ClientCertificateSettings.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 26: {
+                                        message.vpcScSettings = $root.google.cloud.ces.v1beta.VpcScSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 29: {
                                         message.locked = reader.bool();
                                         break;
@@ -97882,6 +99520,12 @@
                                     }
                                 case 33: {
                                         message.evaluationSettings = $root.google.cloud.ces.v1beta.EvaluationSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 39: {
+                                        if (!(message.validationErrors && message.validationErrors.length))
+                                            message.validationErrors = [];
+                                        message.validationErrors.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -98045,6 +99689,11 @@
                                 if (error)
                                     return "clientCertificateSettings." + error;
                             }
+                            if (message.vpcScSettings != null && message.hasOwnProperty("vpcScSettings")) {
+                                var error = $root.google.cloud.ces.v1beta.VpcScSettings.verify(message.vpcScSettings);
+                                if (error)
+                                    return "vpcScSettings." + error;
+                            }
                             if (message.locked != null && message.hasOwnProperty("locked"))
                                 if (typeof message.locked !== "boolean")
                                     return "locked: boolean expected";
@@ -98061,6 +99710,13 @@
                                 var error = $root.google.cloud.ces.v1beta.EvaluationSettings.verify(message.evaluationSettings);
                                 if (error)
                                     return "evaluationSettings." + error;
+                            }
+                            if (message.validationErrors != null && message.hasOwnProperty("validationErrors")) {
+                                if (!Array.isArray(message.validationErrors))
+                                    return "validationErrors: array expected";
+                                for (var i = 0; i < message.validationErrors.length; ++i)
+                                    if (!$util.isString(message.validationErrors[i]))
+                                        return "validationErrors: string[] expected";
                             }
                             return null;
                         };
@@ -98207,6 +99863,11 @@
                                     throw TypeError(".google.cloud.ces.v1beta.App.clientCertificateSettings: object expected");
                                 message.clientCertificateSettings = $root.google.cloud.ces.v1beta.ClientCertificateSettings.fromObject(object.clientCertificateSettings);
                             }
+                            if (object.vpcScSettings != null) {
+                                if (typeof object.vpcScSettings !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.App.vpcScSettings: object expected");
+                                message.vpcScSettings = $root.google.cloud.ces.v1beta.VpcScSettings.fromObject(object.vpcScSettings);
+                            }
                             if (object.locked != null)
                                 message.locked = Boolean(object.locked);
                             if (object.evaluationPersonas) {
@@ -98223,6 +99884,13 @@
                                 if (typeof object.evaluationSettings !== "object")
                                     throw TypeError(".google.cloud.ces.v1beta.App.evaluationSettings: object expected");
                                 message.evaluationSettings = $root.google.cloud.ces.v1beta.EvaluationSettings.fromObject(object.evaluationSettings);
+                            }
+                            if (object.validationErrors) {
+                                if (!Array.isArray(object.validationErrors))
+                                    throw TypeError(".google.cloud.ces.v1beta.App.validationErrors: array expected");
+                                message.validationErrors = [];
+                                for (var i = 0; i < object.validationErrors.length; ++i)
+                                    message.validationErrors[i] = String(object.validationErrors[i]);
                             }
                             return message;
                         };
@@ -98245,6 +99913,7 @@
                                 object.variableDeclarations = [];
                                 object.predefinedVariableDeclarations = [];
                                 object.evaluationPersonas = [];
+                                object.validationErrors = [];
                             }
                             if (options.objects || options.defaults)
                                 object.metadata = {};
@@ -98266,6 +99935,7 @@
                                 object.deploymentCount = 0;
                                 object.evaluationMetricsThresholds = null;
                                 object.clientCertificateSettings = null;
+                                object.vpcScSettings = null;
                                 object.timeZoneSettings = null;
                                 object.locked = false;
                                 object.pinned = false;
@@ -98323,6 +99993,8 @@
                                 object.evaluationMetricsThresholds = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.toObject(message.evaluationMetricsThresholds, options);
                             if (message.clientCertificateSettings != null && message.hasOwnProperty("clientCertificateSettings"))
                                 object.clientCertificateSettings = $root.google.cloud.ces.v1beta.ClientCertificateSettings.toObject(message.clientCertificateSettings, options);
+                            if (message.vpcScSettings != null && message.hasOwnProperty("vpcScSettings"))
+                                object.vpcScSettings = $root.google.cloud.ces.v1beta.VpcScSettings.toObject(message.vpcScSettings, options);
                             if (message.timeZoneSettings != null && message.hasOwnProperty("timeZoneSettings"))
                                 object.timeZoneSettings = $root.google.cloud.ces.v1beta.TimeZoneSettings.toObject(message.timeZoneSettings, options);
                             if (message.predefinedVariableDeclarations && message.predefinedVariableDeclarations.length) {
@@ -98345,6 +100017,11 @@
                                 object.evaluationSettings = $root.google.cloud.ces.v1beta.EvaluationSettings.toObject(message.evaluationSettings, options);
                             if (message.errorHandlingSettings != null && message.hasOwnProperty("errorHandlingSettings"))
                                 object.errorHandlingSettings = $root.google.cloud.ces.v1beta.ErrorHandlingSettings.toObject(message.errorHandlingSettings, options);
+                            if (message.validationErrors && message.validationErrors.length) {
+                                object.validationErrors = [];
+                                for (var j = 0; j < message.validationErrors.length; ++j)
+                                    object.validationErrors[j] = message.validationErrors[j];
+                            }
                             return object;
                         };
     
@@ -100503,6 +102180,7 @@
                          * @interface ILoggingSettings
                          * @property {google.cloud.ces.v1beta.IRedactionConfig|null} [redactionConfig] LoggingSettings redactionConfig
                          * @property {google.cloud.ces.v1beta.IAudioRecordingConfig|null} [audioRecordingConfig] LoggingSettings audioRecordingConfig
+                         * @property {google.cloud.ces.v1beta.IAudioRecordingConfig|null} [unredactedAudioRecordingConfig] LoggingSettings unredactedAudioRecordingConfig
                          * @property {google.cloud.ces.v1beta.IBigQueryExportSettings|null} [bigqueryExportSettings] LoggingSettings bigqueryExportSettings
                          * @property {google.cloud.ces.v1beta.ICloudLoggingSettings|null} [cloudLoggingSettings] LoggingSettings cloudLoggingSettings
                          * @property {google.cloud.ces.v1beta.IConversationLoggingSettings|null} [conversationLoggingSettings] LoggingSettings conversationLoggingSettings
@@ -100540,6 +102218,14 @@
                          * @instance
                          */
                         LoggingSettings.prototype.audioRecordingConfig = null;
+    
+                        /**
+                         * LoggingSettings unredactedAudioRecordingConfig.
+                         * @member {google.cloud.ces.v1beta.IAudioRecordingConfig|null|undefined} unredactedAudioRecordingConfig
+                         * @memberof google.cloud.ces.v1beta.LoggingSettings
+                         * @instance
+                         */
+                        LoggingSettings.prototype.unredactedAudioRecordingConfig = null;
     
                         /**
                          * LoggingSettings bigqueryExportSettings.
@@ -100619,6 +102305,8 @@
                                 $root.google.cloud.ces.v1beta.AudioRecordingConfig.encode(message.evaluationAudioRecordingConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.metricAnalysisSettings != null && Object.hasOwnProperty.call(message, "metricAnalysisSettings"))
                                 $root.google.cloud.ces.v1beta.MetricAnalysisSettings.encode(message.metricAnalysisSettings, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.unredactedAudioRecordingConfig != null && Object.hasOwnProperty.call(message, "unredactedAudioRecordingConfig"))
+                                $root.google.cloud.ces.v1beta.AudioRecordingConfig.encode(message.unredactedAudioRecordingConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -100661,6 +102349,10 @@
                                     }
                                 case 2: {
                                         message.audioRecordingConfig = $root.google.cloud.ces.v1beta.AudioRecordingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.unredactedAudioRecordingConfig = $root.google.cloud.ces.v1beta.AudioRecordingConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
@@ -100728,6 +102420,11 @@
                                 if (error)
                                     return "audioRecordingConfig." + error;
                             }
+                            if (message.unredactedAudioRecordingConfig != null && message.hasOwnProperty("unredactedAudioRecordingConfig")) {
+                                var error = $root.google.cloud.ces.v1beta.AudioRecordingConfig.verify(message.unredactedAudioRecordingConfig);
+                                if (error)
+                                    return "unredactedAudioRecordingConfig." + error;
+                            }
                             if (message.bigqueryExportSettings != null && message.hasOwnProperty("bigqueryExportSettings")) {
                                 var error = $root.google.cloud.ces.v1beta.BigQueryExportSettings.verify(message.bigqueryExportSettings);
                                 if (error)
@@ -100778,6 +102475,11 @@
                                     throw TypeError(".google.cloud.ces.v1beta.LoggingSettings.audioRecordingConfig: object expected");
                                 message.audioRecordingConfig = $root.google.cloud.ces.v1beta.AudioRecordingConfig.fromObject(object.audioRecordingConfig);
                             }
+                            if (object.unredactedAudioRecordingConfig != null) {
+                                if (typeof object.unredactedAudioRecordingConfig !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.LoggingSettings.unredactedAudioRecordingConfig: object expected");
+                                message.unredactedAudioRecordingConfig = $root.google.cloud.ces.v1beta.AudioRecordingConfig.fromObject(object.unredactedAudioRecordingConfig);
+                            }
                             if (object.bigqueryExportSettings != null) {
                                 if (typeof object.bigqueryExportSettings !== "object")
                                     throw TypeError(".google.cloud.ces.v1beta.LoggingSettings.bigqueryExportSettings: object expected");
@@ -100827,6 +102529,7 @@
                                 object.conversationLoggingSettings = null;
                                 object.evaluationAudioRecordingConfig = null;
                                 object.metricAnalysisSettings = null;
+                                object.unredactedAudioRecordingConfig = null;
                             }
                             if (message.redactionConfig != null && message.hasOwnProperty("redactionConfig"))
                                 object.redactionConfig = $root.google.cloud.ces.v1beta.RedactionConfig.toObject(message.redactionConfig, options);
@@ -100842,6 +102545,8 @@
                                 object.evaluationAudioRecordingConfig = $root.google.cloud.ces.v1beta.AudioRecordingConfig.toObject(message.evaluationAudioRecordingConfig, options);
                             if (message.metricAnalysisSettings != null && message.hasOwnProperty("metricAnalysisSettings"))
                                 object.metricAnalysisSettings = $root.google.cloud.ces.v1beta.MetricAnalysisSettings.toObject(message.metricAnalysisSettings, options);
+                            if (message.unredactedAudioRecordingConfig != null && message.hasOwnProperty("unredactedAudioRecordingConfig"))
+                                object.unredactedAudioRecordingConfig = $root.google.cloud.ces.v1beta.AudioRecordingConfig.toObject(message.unredactedAudioRecordingConfig, options);
                             return object;
                         };
     
@@ -103088,6 +104793,8 @@
                          * @property {google.cloud.ces.v1beta.GoldenRunMethod|null} [goldenRunMethod] EvaluationSettings goldenRunMethod
                          * @property {google.cloud.ces.v1beta.EvaluationToolCallBehaviour|null} [goldenEvaluationToolCallBehaviour] EvaluationSettings goldenEvaluationToolCallBehaviour
                          * @property {google.cloud.ces.v1beta.EvaluationToolCallBehaviour|null} [scenarioEvaluationToolCallBehaviour] EvaluationSettings scenarioEvaluationToolCallBehaviour
+                         * @property {google.cloud.ces.v1beta.IEvaluationMetricsConfig|null} [metricsConfig] EvaluationSettings metricsConfig
+                         * @property {google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode|null} [scenarioExecutionMode] EvaluationSettings scenarioExecutionMode
                          */
     
                         /**
@@ -103138,6 +104845,22 @@
                         EvaluationSettings.prototype.scenarioEvaluationToolCallBehaviour = 0;
     
                         /**
+                         * EvaluationSettings metricsConfig.
+                         * @member {google.cloud.ces.v1beta.IEvaluationMetricsConfig|null|undefined} metricsConfig
+                         * @memberof google.cloud.ces.v1beta.EvaluationSettings
+                         * @instance
+                         */
+                        EvaluationSettings.prototype.metricsConfig = null;
+    
+                        /**
+                         * EvaluationSettings scenarioExecutionMode.
+                         * @member {google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode} scenarioExecutionMode
+                         * @memberof google.cloud.ces.v1beta.EvaluationSettings
+                         * @instance
+                         */
+                        EvaluationSettings.prototype.scenarioExecutionMode = 0;
+    
+                        /**
                          * Creates a new EvaluationSettings instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.EvaluationSettings
@@ -103169,6 +104892,10 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.scenarioEvaluationToolCallBehaviour);
                             if (message.goldenRunMethod != null && Object.hasOwnProperty.call(message, "goldenRunMethod"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.goldenRunMethod);
+                            if (message.metricsConfig != null && Object.hasOwnProperty.call(message, "metricsConfig"))
+                                $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.encode(message.metricsConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.scenarioExecutionMode != null && Object.hasOwnProperty.call(message, "scenarioExecutionMode"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.scenarioExecutionMode);
                             return writer;
                         };
     
@@ -103219,6 +104946,14 @@
                                     }
                                 case 3: {
                                         message.scenarioEvaluationToolCallBehaviour = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.metricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.scenarioExecutionMode = reader.int32();
                                         break;
                                     }
                                 default:
@@ -103287,6 +105022,20 @@
                                 switch (message.scenarioEvaluationToolCallBehaviour) {
                                 default:
                                     return "scenarioEvaluationToolCallBehaviour: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.metricsConfig != null && message.hasOwnProperty("metricsConfig")) {
+                                var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.verify(message.metricsConfig);
+                                if (error)
+                                    return "metricsConfig." + error;
+                            }
+                            if (message.scenarioExecutionMode != null && message.hasOwnProperty("scenarioExecutionMode"))
+                                switch (message.scenarioExecutionMode) {
+                                default:
+                                    return "scenarioExecutionMode: enum value expected";
                                 case 0:
                                 case 1:
                                 case 2:
@@ -103387,6 +105136,31 @@
                                 message.scenarioEvaluationToolCallBehaviour = 2;
                                 break;
                             }
+                            if (object.metricsConfig != null) {
+                                if (typeof object.metricsConfig !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.EvaluationSettings.metricsConfig: object expected");
+                                message.metricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.fromObject(object.metricsConfig);
+                            }
+                            switch (object.scenarioExecutionMode) {
+                            default:
+                                if (typeof object.scenarioExecutionMode === "number") {
+                                    message.scenarioExecutionMode = object.scenarioExecutionMode;
+                                    break;
+                                }
+                                break;
+                            case "SCENARIO_EXECUTION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.scenarioExecutionMode = 0;
+                                break;
+                            case "QUALITY_OPTIMIZED":
+                            case 1:
+                                message.scenarioExecutionMode = 1;
+                                break;
+                            case "SPEED_OPTIMIZED":
+                            case 2:
+                                message.scenarioExecutionMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -103408,6 +105182,8 @@
                                 object.goldenEvaluationToolCallBehaviour = options.enums === String ? "EVALUATION_TOOL_CALL_BEHAVIOUR_UNSPECIFIED" : 0;
                                 object.scenarioEvaluationToolCallBehaviour = options.enums === String ? "EVALUATION_TOOL_CALL_BEHAVIOUR_UNSPECIFIED" : 0;
                                 object.goldenRunMethod = options.enums === String ? "GOLDEN_RUN_METHOD_UNSPECIFIED" : 0;
+                                object.metricsConfig = null;
+                                object.scenarioExecutionMode = options.enums === String ? "SCENARIO_EXECUTION_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.scenarioConversationInitiator != null && message.hasOwnProperty("scenarioConversationInitiator"))
                                 object.scenarioConversationInitiator = options.enums === String ? $root.google.cloud.ces.v1beta.EvaluationSettings.ScenarioConversationInitiator[message.scenarioConversationInitiator] === undefined ? message.scenarioConversationInitiator : $root.google.cloud.ces.v1beta.EvaluationSettings.ScenarioConversationInitiator[message.scenarioConversationInitiator] : message.scenarioConversationInitiator;
@@ -103417,6 +105193,10 @@
                                 object.scenarioEvaluationToolCallBehaviour = options.enums === String ? $root.google.cloud.ces.v1beta.EvaluationToolCallBehaviour[message.scenarioEvaluationToolCallBehaviour] === undefined ? message.scenarioEvaluationToolCallBehaviour : $root.google.cloud.ces.v1beta.EvaluationToolCallBehaviour[message.scenarioEvaluationToolCallBehaviour] : message.scenarioEvaluationToolCallBehaviour;
                             if (message.goldenRunMethod != null && message.hasOwnProperty("goldenRunMethod"))
                                 object.goldenRunMethod = options.enums === String ? $root.google.cloud.ces.v1beta.GoldenRunMethod[message.goldenRunMethod] === undefined ? message.goldenRunMethod : $root.google.cloud.ces.v1beta.GoldenRunMethod[message.goldenRunMethod] : message.goldenRunMethod;
+                            if (message.metricsConfig != null && message.hasOwnProperty("metricsConfig"))
+                                object.metricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.toObject(message.metricsConfig, options);
+                            if (message.scenarioExecutionMode != null && message.hasOwnProperty("scenarioExecutionMode"))
+                                object.scenarioExecutionMode = options.enums === String ? $root.google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode[message.scenarioExecutionMode] === undefined ? message.scenarioExecutionMode : $root.google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode[message.scenarioExecutionMode] : message.scenarioExecutionMode;
                             return object;
                         };
     
@@ -103459,6 +105239,22 @@
                             values[valuesById[0] = "SCENARIO_CONVERSATION_INITIATOR_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "USER"] = 1;
                             values[valuesById[2] = "AGENT"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ScenarioExecutionMode enum.
+                         * @name google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode
+                         * @enum {number}
+                         * @property {number} SCENARIO_EXECUTION_MODE_UNSPECIFIED=0 SCENARIO_EXECUTION_MODE_UNSPECIFIED value
+                         * @property {number} QUALITY_OPTIMIZED=1 QUALITY_OPTIMIZED value
+                         * @property {number} SPEED_OPTIMIZED=2 SPEED_OPTIMIZED value
+                         */
+                        EvaluationSettings.ScenarioExecutionMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCENARIO_EXECUTION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "QUALITY_OPTIMIZED"] = 1;
+                            values[valuesById[2] = "SPEED_OPTIMIZED"] = 2;
                             return values;
                         })();
     
@@ -103715,6 +105511,227 @@
                         };
     
                         return ClientCertificateSettings;
+                    })();
+    
+                    v1beta.VpcScSettings = (function() {
+    
+                        /**
+                         * Properties of a VpcScSettings.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IVpcScSettings
+                         * @property {Array.<string>|null} [allowedOrigins] VpcScSettings allowedOrigins
+                         */
+    
+                        /**
+                         * Constructs a new VpcScSettings.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents a VpcScSettings.
+                         * @implements IVpcScSettings
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IVpcScSettings=} [properties] Properties to set
+                         */
+                        function VpcScSettings(properties) {
+                            this.allowedOrigins = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VpcScSettings allowedOrigins.
+                         * @member {Array.<string>} allowedOrigins
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @instance
+                         */
+                        VpcScSettings.prototype.allowedOrigins = $util.emptyArray;
+    
+                        /**
+                         * Creates a new VpcScSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IVpcScSettings=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.VpcScSettings} VpcScSettings instance
+                         */
+                        VpcScSettings.create = function create(properties) {
+                            return new VpcScSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VpcScSettings message. Does not implicitly {@link google.cloud.ces.v1beta.VpcScSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IVpcScSettings} message VpcScSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VpcScSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.allowedOrigins != null && message.allowedOrigins.length)
+                                for (var i = 0; i < message.allowedOrigins.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.allowedOrigins[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VpcScSettings message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.VpcScSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IVpcScSettings} message VpcScSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VpcScSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VpcScSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.VpcScSettings} VpcScSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VpcScSettings.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.VpcScSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.allowedOrigins && message.allowedOrigins.length))
+                                            message.allowedOrigins = [];
+                                        message.allowedOrigins.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VpcScSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.VpcScSettings} VpcScSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VpcScSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VpcScSettings message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VpcScSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.allowedOrigins != null && message.hasOwnProperty("allowedOrigins")) {
+                                if (!Array.isArray(message.allowedOrigins))
+                                    return "allowedOrigins: array expected";
+                                for (var i = 0; i < message.allowedOrigins.length; ++i)
+                                    if (!$util.isString(message.allowedOrigins[i]))
+                                        return "allowedOrigins: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VpcScSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.VpcScSettings} VpcScSettings
+                         */
+                        VpcScSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.VpcScSettings)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.VpcScSettings();
+                            if (object.allowedOrigins) {
+                                if (!Array.isArray(object.allowedOrigins))
+                                    throw TypeError(".google.cloud.ces.v1beta.VpcScSettings.allowedOrigins: array expected");
+                                message.allowedOrigins = [];
+                                for (var i = 0; i < object.allowedOrigins.length; ++i)
+                                    message.allowedOrigins[i] = String(object.allowedOrigins[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VpcScSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @static
+                         * @param {google.cloud.ces.v1beta.VpcScSettings} message VpcScSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VpcScSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.allowedOrigins = [];
+                            if (message.allowedOrigins && message.allowedOrigins.length) {
+                                object.allowedOrigins = [];
+                                for (var j = 0; j < message.allowedOrigins.length; ++j)
+                                    object.allowedOrigins[j] = message.allowedOrigins[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VpcScSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VpcScSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VpcScSettings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.VpcScSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VpcScSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.VpcScSettings";
+                        };
+    
+                        return VpcScSettings;
                     })();
     
                     v1beta.ConversationLoggingSettings = (function() {
@@ -105991,6 +108008,1794 @@
                         };
     
                         return BigQueryExportSettings;
+                    })();
+    
+                    v1beta.EvaluationMetricsConfig = (function() {
+    
+                        /**
+                         * Properties of an EvaluationMetricsConfig.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IEvaluationMetricsConfig
+                         * @property {google.cloud.ces.v1beta.EvaluationMetricsConfig.IGoldenMetricsConfig|null} [goldenMetricsConfig] EvaluationMetricsConfig goldenMetricsConfig
+                         * @property {google.cloud.ces.v1beta.EvaluationMetricsConfig.IScenarioMetricsConfig|null} [scenarioMetricsConfig] EvaluationMetricsConfig scenarioMetricsConfig
+                         */
+    
+                        /**
+                         * Constructs a new EvaluationMetricsConfig.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents an EvaluationMetricsConfig.
+                         * @implements IEvaluationMetricsConfig
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IEvaluationMetricsConfig=} [properties] Properties to set
+                         */
+                        function EvaluationMetricsConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EvaluationMetricsConfig goldenMetricsConfig.
+                         * @member {google.cloud.ces.v1beta.EvaluationMetricsConfig.IGoldenMetricsConfig|null|undefined} goldenMetricsConfig
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @instance
+                         */
+                        EvaluationMetricsConfig.prototype.goldenMetricsConfig = null;
+    
+                        /**
+                         * EvaluationMetricsConfig scenarioMetricsConfig.
+                         * @member {google.cloud.ces.v1beta.EvaluationMetricsConfig.IScenarioMetricsConfig|null|undefined} scenarioMetricsConfig
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @instance
+                         */
+                        EvaluationMetricsConfig.prototype.scenarioMetricsConfig = null;
+    
+                        /**
+                         * Creates a new EvaluationMetricsConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IEvaluationMetricsConfig=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig} EvaluationMetricsConfig instance
+                         */
+                        EvaluationMetricsConfig.create = function create(properties) {
+                            return new EvaluationMetricsConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EvaluationMetricsConfig message. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IEvaluationMetricsConfig} message EvaluationMetricsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EvaluationMetricsConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.goldenMetricsConfig != null && Object.hasOwnProperty.call(message, "goldenMetricsConfig"))
+                                $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig.encode(message.goldenMetricsConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.scenarioMetricsConfig != null && Object.hasOwnProperty.call(message, "scenarioMetricsConfig"))
+                                $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig.encode(message.scenarioMetricsConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EvaluationMetricsConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IEvaluationMetricsConfig} message EvaluationMetricsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EvaluationMetricsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EvaluationMetricsConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig} EvaluationMetricsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EvaluationMetricsConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.goldenMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.scenarioMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EvaluationMetricsConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig} EvaluationMetricsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EvaluationMetricsConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EvaluationMetricsConfig message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EvaluationMetricsConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.goldenMetricsConfig != null && message.hasOwnProperty("goldenMetricsConfig")) {
+                                var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig.verify(message.goldenMetricsConfig);
+                                if (error)
+                                    return "goldenMetricsConfig." + error;
+                            }
+                            if (message.scenarioMetricsConfig != null && message.hasOwnProperty("scenarioMetricsConfig")) {
+                                var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig.verify(message.scenarioMetricsConfig);
+                                if (error)
+                                    return "scenarioMetricsConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EvaluationMetricsConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig} EvaluationMetricsConfig
+                         */
+                        EvaluationMetricsConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.EvaluationMetricsConfig)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig();
+                            if (object.goldenMetricsConfig != null) {
+                                if (typeof object.goldenMetricsConfig !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.EvaluationMetricsConfig.goldenMetricsConfig: object expected");
+                                message.goldenMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig.fromObject(object.goldenMetricsConfig);
+                            }
+                            if (object.scenarioMetricsConfig != null) {
+                                if (typeof object.scenarioMetricsConfig !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.EvaluationMetricsConfig.scenarioMetricsConfig: object expected");
+                                message.scenarioMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig.fromObject(object.scenarioMetricsConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EvaluationMetricsConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @static
+                         * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig} message EvaluationMetricsConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EvaluationMetricsConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.goldenMetricsConfig = null;
+                                object.scenarioMetricsConfig = null;
+                            }
+                            if (message.goldenMetricsConfig != null && message.hasOwnProperty("goldenMetricsConfig"))
+                                object.goldenMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig.toObject(message.goldenMetricsConfig, options);
+                            if (message.scenarioMetricsConfig != null && message.hasOwnProperty("scenarioMetricsConfig"))
+                                object.scenarioMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig.toObject(message.scenarioMetricsConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EvaluationMetricsConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EvaluationMetricsConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EvaluationMetricsConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EvaluationMetricsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.EvaluationMetricsConfig";
+                        };
+    
+                        EvaluationMetricsConfig.SemanticSimilarityMetricsConfig = (function() {
+    
+                            /**
+                             * Properties of a SemanticSimilarityMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @interface ISemanticSimilarityMetricsConfig
+                             * @property {boolean|null} [enableSemanticSimilarityMetrics] SemanticSimilarityMetricsConfig enableSemanticSimilarityMetrics
+                             */
+    
+                            /**
+                             * Constructs a new SemanticSimilarityMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @classdesc Represents a SemanticSimilarityMetricsConfig.
+                             * @implements ISemanticSimilarityMetricsConfig
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.ISemanticSimilarityMetricsConfig=} [properties] Properties to set
+                             */
+                            function SemanticSimilarityMetricsConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SemanticSimilarityMetricsConfig enableSemanticSimilarityMetrics.
+                             * @member {boolean} enableSemanticSimilarityMetrics
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @instance
+                             */
+                            SemanticSimilarityMetricsConfig.prototype.enableSemanticSimilarityMetrics = false;
+    
+                            /**
+                             * Creates a new SemanticSimilarityMetricsConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.ISemanticSimilarityMetricsConfig=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig} SemanticSimilarityMetricsConfig instance
+                             */
+                            SemanticSimilarityMetricsConfig.create = function create(properties) {
+                                return new SemanticSimilarityMetricsConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SemanticSimilarityMetricsConfig message. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.ISemanticSimilarityMetricsConfig} message SemanticSimilarityMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SemanticSimilarityMetricsConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enableSemanticSimilarityMetrics != null && Object.hasOwnProperty.call(message, "enableSemanticSimilarityMetrics"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableSemanticSimilarityMetrics);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SemanticSimilarityMetricsConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.ISemanticSimilarityMetricsConfig} message SemanticSimilarityMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SemanticSimilarityMetricsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SemanticSimilarityMetricsConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig} SemanticSimilarityMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SemanticSimilarityMetricsConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enableSemanticSimilarityMetrics = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SemanticSimilarityMetricsConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig} SemanticSimilarityMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SemanticSimilarityMetricsConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SemanticSimilarityMetricsConfig message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SemanticSimilarityMetricsConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enableSemanticSimilarityMetrics != null && message.hasOwnProperty("enableSemanticSimilarityMetrics"))
+                                    if (typeof message.enableSemanticSimilarityMetrics !== "boolean")
+                                        return "enableSemanticSimilarityMetrics: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SemanticSimilarityMetricsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig} SemanticSimilarityMetricsConfig
+                             */
+                            SemanticSimilarityMetricsConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig();
+                                if (object.enableSemanticSimilarityMetrics != null)
+                                    message.enableSemanticSimilarityMetrics = Boolean(object.enableSemanticSimilarityMetrics);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SemanticSimilarityMetricsConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig} message SemanticSimilarityMetricsConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SemanticSimilarityMetricsConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enableSemanticSimilarityMetrics = false;
+                                if (message.enableSemanticSimilarityMetrics != null && message.hasOwnProperty("enableSemanticSimilarityMetrics"))
+                                    object.enableSemanticSimilarityMetrics = message.enableSemanticSimilarityMetrics;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SemanticSimilarityMetricsConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SemanticSimilarityMetricsConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SemanticSimilarityMetricsConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SemanticSimilarityMetricsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig";
+                            };
+    
+                            return SemanticSimilarityMetricsConfig;
+                        })();
+    
+                        EvaluationMetricsConfig.ToolCorrectnessMetricsConfig = (function() {
+    
+                            /**
+                             * Properties of a ToolCorrectnessMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @interface IToolCorrectnessMetricsConfig
+                             * @property {boolean|null} [enableToolCorrectnessMetrics] ToolCorrectnessMetricsConfig enableToolCorrectnessMetrics
+                             */
+    
+                            /**
+                             * Constructs a new ToolCorrectnessMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @classdesc Represents a ToolCorrectnessMetricsConfig.
+                             * @implements IToolCorrectnessMetricsConfig
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IToolCorrectnessMetricsConfig=} [properties] Properties to set
+                             */
+                            function ToolCorrectnessMetricsConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ToolCorrectnessMetricsConfig enableToolCorrectnessMetrics.
+                             * @member {boolean} enableToolCorrectnessMetrics
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @instance
+                             */
+                            ToolCorrectnessMetricsConfig.prototype.enableToolCorrectnessMetrics = false;
+    
+                            /**
+                             * Creates a new ToolCorrectnessMetricsConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IToolCorrectnessMetricsConfig=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig} ToolCorrectnessMetricsConfig instance
+                             */
+                            ToolCorrectnessMetricsConfig.create = function create(properties) {
+                                return new ToolCorrectnessMetricsConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ToolCorrectnessMetricsConfig message. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IToolCorrectnessMetricsConfig} message ToolCorrectnessMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ToolCorrectnessMetricsConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enableToolCorrectnessMetrics != null && Object.hasOwnProperty.call(message, "enableToolCorrectnessMetrics"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableToolCorrectnessMetrics);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ToolCorrectnessMetricsConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IToolCorrectnessMetricsConfig} message ToolCorrectnessMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ToolCorrectnessMetricsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ToolCorrectnessMetricsConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig} ToolCorrectnessMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ToolCorrectnessMetricsConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enableToolCorrectnessMetrics = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ToolCorrectnessMetricsConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig} ToolCorrectnessMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ToolCorrectnessMetricsConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ToolCorrectnessMetricsConfig message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ToolCorrectnessMetricsConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enableToolCorrectnessMetrics != null && message.hasOwnProperty("enableToolCorrectnessMetrics"))
+                                    if (typeof message.enableToolCorrectnessMetrics !== "boolean")
+                                        return "enableToolCorrectnessMetrics: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ToolCorrectnessMetricsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig} ToolCorrectnessMetricsConfig
+                             */
+                            ToolCorrectnessMetricsConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig();
+                                if (object.enableToolCorrectnessMetrics != null)
+                                    message.enableToolCorrectnessMetrics = Boolean(object.enableToolCorrectnessMetrics);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ToolCorrectnessMetricsConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig} message ToolCorrectnessMetricsConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ToolCorrectnessMetricsConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enableToolCorrectnessMetrics = false;
+                                if (message.enableToolCorrectnessMetrics != null && message.hasOwnProperty("enableToolCorrectnessMetrics"))
+                                    object.enableToolCorrectnessMetrics = message.enableToolCorrectnessMetrics;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ToolCorrectnessMetricsConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ToolCorrectnessMetricsConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ToolCorrectnessMetricsConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ToolCorrectnessMetricsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig";
+                            };
+    
+                            return ToolCorrectnessMetricsConfig;
+                        })();
+    
+                        EvaluationMetricsConfig.HallucinationMetricsConfig = (function() {
+    
+                            /**
+                             * Properties of a HallucinationMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @interface IHallucinationMetricsConfig
+                             * @property {boolean|null} [enableHallucinationMetrics] HallucinationMetricsConfig enableHallucinationMetrics
+                             */
+    
+                            /**
+                             * Constructs a new HallucinationMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @classdesc Represents a HallucinationMetricsConfig.
+                             * @implements IHallucinationMetricsConfig
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IHallucinationMetricsConfig=} [properties] Properties to set
+                             */
+                            function HallucinationMetricsConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * HallucinationMetricsConfig enableHallucinationMetrics.
+                             * @member {boolean} enableHallucinationMetrics
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @instance
+                             */
+                            HallucinationMetricsConfig.prototype.enableHallucinationMetrics = false;
+    
+                            /**
+                             * Creates a new HallucinationMetricsConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IHallucinationMetricsConfig=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig} HallucinationMetricsConfig instance
+                             */
+                            HallucinationMetricsConfig.create = function create(properties) {
+                                return new HallucinationMetricsConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified HallucinationMetricsConfig message. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IHallucinationMetricsConfig} message HallucinationMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HallucinationMetricsConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enableHallucinationMetrics != null && Object.hasOwnProperty.call(message, "enableHallucinationMetrics"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableHallucinationMetrics);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified HallucinationMetricsConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IHallucinationMetricsConfig} message HallucinationMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HallucinationMetricsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a HallucinationMetricsConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig} HallucinationMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HallucinationMetricsConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enableHallucinationMetrics = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a HallucinationMetricsConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig} HallucinationMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HallucinationMetricsConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a HallucinationMetricsConfig message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            HallucinationMetricsConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enableHallucinationMetrics != null && message.hasOwnProperty("enableHallucinationMetrics"))
+                                    if (typeof message.enableHallucinationMetrics !== "boolean")
+                                        return "enableHallucinationMetrics: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a HallucinationMetricsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig} HallucinationMetricsConfig
+                             */
+                            HallucinationMetricsConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig();
+                                if (object.enableHallucinationMetrics != null)
+                                    message.enableHallucinationMetrics = Boolean(object.enableHallucinationMetrics);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a HallucinationMetricsConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig} message HallucinationMetricsConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            HallucinationMetricsConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enableHallucinationMetrics = false;
+                                if (message.enableHallucinationMetrics != null && message.hasOwnProperty("enableHallucinationMetrics"))
+                                    object.enableHallucinationMetrics = message.enableHallucinationMetrics;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this HallucinationMetricsConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            HallucinationMetricsConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HallucinationMetricsConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HallucinationMetricsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig";
+                            };
+    
+                            return HallucinationMetricsConfig;
+                        })();
+    
+                        EvaluationMetricsConfig.UserGoalMetMetricsConfig = (function() {
+    
+                            /**
+                             * Properties of a UserGoalMetMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @interface IUserGoalMetMetricsConfig
+                             * @property {boolean|null} [enableUserGoalMetMetrics] UserGoalMetMetricsConfig enableUserGoalMetMetrics
+                             */
+    
+                            /**
+                             * Constructs a new UserGoalMetMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @classdesc Represents a UserGoalMetMetricsConfig.
+                             * @implements IUserGoalMetMetricsConfig
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IUserGoalMetMetricsConfig=} [properties] Properties to set
+                             */
+                            function UserGoalMetMetricsConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UserGoalMetMetricsConfig enableUserGoalMetMetrics.
+                             * @member {boolean} enableUserGoalMetMetrics
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @instance
+                             */
+                            UserGoalMetMetricsConfig.prototype.enableUserGoalMetMetrics = false;
+    
+                            /**
+                             * Creates a new UserGoalMetMetricsConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IUserGoalMetMetricsConfig=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig} UserGoalMetMetricsConfig instance
+                             */
+                            UserGoalMetMetricsConfig.create = function create(properties) {
+                                return new UserGoalMetMetricsConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UserGoalMetMetricsConfig message. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IUserGoalMetMetricsConfig} message UserGoalMetMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserGoalMetMetricsConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enableUserGoalMetMetrics != null && Object.hasOwnProperty.call(message, "enableUserGoalMetMetrics"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableUserGoalMetMetrics);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UserGoalMetMetricsConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IUserGoalMetMetricsConfig} message UserGoalMetMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserGoalMetMetricsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UserGoalMetMetricsConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig} UserGoalMetMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserGoalMetMetricsConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enableUserGoalMetMetrics = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UserGoalMetMetricsConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig} UserGoalMetMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserGoalMetMetricsConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UserGoalMetMetricsConfig message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UserGoalMetMetricsConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enableUserGoalMetMetrics != null && message.hasOwnProperty("enableUserGoalMetMetrics"))
+                                    if (typeof message.enableUserGoalMetMetrics !== "boolean")
+                                        return "enableUserGoalMetMetrics: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UserGoalMetMetricsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig} UserGoalMetMetricsConfig
+                             */
+                            UserGoalMetMetricsConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig();
+                                if (object.enableUserGoalMetMetrics != null)
+                                    message.enableUserGoalMetMetrics = Boolean(object.enableUserGoalMetMetrics);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a UserGoalMetMetricsConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig} message UserGoalMetMetricsConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UserGoalMetMetricsConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enableUserGoalMetMetrics = false;
+                                if (message.enableUserGoalMetMetrics != null && message.hasOwnProperty("enableUserGoalMetMetrics"))
+                                    object.enableUserGoalMetMetrics = message.enableUserGoalMetMetrics;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UserGoalMetMetricsConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UserGoalMetMetricsConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UserGoalMetMetricsConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UserGoalMetMetricsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig";
+                            };
+    
+                            return UserGoalMetMetricsConfig;
+                        })();
+    
+                        EvaluationMetricsConfig.ExpectationsMetMetricsConfig = (function() {
+    
+                            /**
+                             * Properties of an ExpectationsMetMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @interface IExpectationsMetMetricsConfig
+                             * @property {boolean|null} [enableExpectationsMetMetrics] ExpectationsMetMetricsConfig enableExpectationsMetMetrics
+                             */
+    
+                            /**
+                             * Constructs a new ExpectationsMetMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @classdesc Represents an ExpectationsMetMetricsConfig.
+                             * @implements IExpectationsMetMetricsConfig
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IExpectationsMetMetricsConfig=} [properties] Properties to set
+                             */
+                            function ExpectationsMetMetricsConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ExpectationsMetMetricsConfig enableExpectationsMetMetrics.
+                             * @member {boolean} enableExpectationsMetMetrics
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @instance
+                             */
+                            ExpectationsMetMetricsConfig.prototype.enableExpectationsMetMetrics = false;
+    
+                            /**
+                             * Creates a new ExpectationsMetMetricsConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IExpectationsMetMetricsConfig=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig} ExpectationsMetMetricsConfig instance
+                             */
+                            ExpectationsMetMetricsConfig.create = function create(properties) {
+                                return new ExpectationsMetMetricsConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ExpectationsMetMetricsConfig message. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IExpectationsMetMetricsConfig} message ExpectationsMetMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExpectationsMetMetricsConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enableExpectationsMetMetrics != null && Object.hasOwnProperty.call(message, "enableExpectationsMetMetrics"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableExpectationsMetMetrics);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ExpectationsMetMetricsConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IExpectationsMetMetricsConfig} message ExpectationsMetMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExpectationsMetMetricsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ExpectationsMetMetricsConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig} ExpectationsMetMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExpectationsMetMetricsConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enableExpectationsMetMetrics = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ExpectationsMetMetricsConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig} ExpectationsMetMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExpectationsMetMetricsConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ExpectationsMetMetricsConfig message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ExpectationsMetMetricsConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enableExpectationsMetMetrics != null && message.hasOwnProperty("enableExpectationsMetMetrics"))
+                                    if (typeof message.enableExpectationsMetMetrics !== "boolean")
+                                        return "enableExpectationsMetMetrics: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ExpectationsMetMetricsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig} ExpectationsMetMetricsConfig
+                             */
+                            ExpectationsMetMetricsConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig();
+                                if (object.enableExpectationsMetMetrics != null)
+                                    message.enableExpectationsMetMetrics = Boolean(object.enableExpectationsMetMetrics);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ExpectationsMetMetricsConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig} message ExpectationsMetMetricsConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ExpectationsMetMetricsConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enableExpectationsMetMetrics = false;
+                                if (message.enableExpectationsMetMetrics != null && message.hasOwnProperty("enableExpectationsMetMetrics"))
+                                    object.enableExpectationsMetMetrics = message.enableExpectationsMetMetrics;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ExpectationsMetMetricsConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ExpectationsMetMetricsConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ExpectationsMetMetricsConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ExpectationsMetMetricsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig";
+                            };
+    
+                            return ExpectationsMetMetricsConfig;
+                        })();
+    
+                        EvaluationMetricsConfig.GoldenMetricsConfig = (function() {
+    
+                            /**
+                             * Properties of a GoldenMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @interface IGoldenMetricsConfig
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsConfig.ISemanticSimilarityMetricsConfig|null} [semanticSimilarityMetricsConfig] GoldenMetricsConfig semanticSimilarityMetricsConfig
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsConfig.IToolCorrectnessMetricsConfig|null} [toolCorrectnessMetricsConfig] GoldenMetricsConfig toolCorrectnessMetricsConfig
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsConfig.IToolCorrectnessMetricsConfig|null} [stepToolCorrectnessMetricsConfig] GoldenMetricsConfig stepToolCorrectnessMetricsConfig
+                             */
+    
+                            /**
+                             * Constructs a new GoldenMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @classdesc Represents a GoldenMetricsConfig.
+                             * @implements IGoldenMetricsConfig
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IGoldenMetricsConfig=} [properties] Properties to set
+                             */
+                            function GoldenMetricsConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GoldenMetricsConfig semanticSimilarityMetricsConfig.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsConfig.ISemanticSimilarityMetricsConfig|null|undefined} semanticSimilarityMetricsConfig
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @instance
+                             */
+                            GoldenMetricsConfig.prototype.semanticSimilarityMetricsConfig = null;
+    
+                            /**
+                             * GoldenMetricsConfig toolCorrectnessMetricsConfig.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsConfig.IToolCorrectnessMetricsConfig|null|undefined} toolCorrectnessMetricsConfig
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @instance
+                             */
+                            GoldenMetricsConfig.prototype.toolCorrectnessMetricsConfig = null;
+    
+                            /**
+                             * GoldenMetricsConfig stepToolCorrectnessMetricsConfig.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsConfig.IToolCorrectnessMetricsConfig|null|undefined} stepToolCorrectnessMetricsConfig
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @instance
+                             */
+                            GoldenMetricsConfig.prototype.stepToolCorrectnessMetricsConfig = null;
+    
+                            /**
+                             * Creates a new GoldenMetricsConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IGoldenMetricsConfig=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig} GoldenMetricsConfig instance
+                             */
+                            GoldenMetricsConfig.create = function create(properties) {
+                                return new GoldenMetricsConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GoldenMetricsConfig message. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IGoldenMetricsConfig} message GoldenMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoldenMetricsConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.semanticSimilarityMetricsConfig != null && Object.hasOwnProperty.call(message, "semanticSimilarityMetricsConfig"))
+                                    $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.encode(message.semanticSimilarityMetricsConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.toolCorrectnessMetricsConfig != null && Object.hasOwnProperty.call(message, "toolCorrectnessMetricsConfig"))
+                                    $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.encode(message.toolCorrectnessMetricsConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.stepToolCorrectnessMetricsConfig != null && Object.hasOwnProperty.call(message, "stepToolCorrectnessMetricsConfig"))
+                                    $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.encode(message.stepToolCorrectnessMetricsConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GoldenMetricsConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IGoldenMetricsConfig} message GoldenMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoldenMetricsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GoldenMetricsConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig} GoldenMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoldenMetricsConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.semanticSimilarityMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.toolCorrectnessMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.stepToolCorrectnessMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GoldenMetricsConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig} GoldenMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoldenMetricsConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GoldenMetricsConfig message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GoldenMetricsConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.semanticSimilarityMetricsConfig != null && message.hasOwnProperty("semanticSimilarityMetricsConfig")) {
+                                    var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.verify(message.semanticSimilarityMetricsConfig);
+                                    if (error)
+                                        return "semanticSimilarityMetricsConfig." + error;
+                                }
+                                if (message.toolCorrectnessMetricsConfig != null && message.hasOwnProperty("toolCorrectnessMetricsConfig")) {
+                                    var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.verify(message.toolCorrectnessMetricsConfig);
+                                    if (error)
+                                        return "toolCorrectnessMetricsConfig." + error;
+                                }
+                                if (message.stepToolCorrectnessMetricsConfig != null && message.hasOwnProperty("stepToolCorrectnessMetricsConfig")) {
+                                    var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.verify(message.stepToolCorrectnessMetricsConfig);
+                                    if (error)
+                                        return "stepToolCorrectnessMetricsConfig." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GoldenMetricsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig} GoldenMetricsConfig
+                             */
+                            GoldenMetricsConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig();
+                                if (object.semanticSimilarityMetricsConfig != null) {
+                                    if (typeof object.semanticSimilarityMetricsConfig !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig.semanticSimilarityMetricsConfig: object expected");
+                                    message.semanticSimilarityMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.fromObject(object.semanticSimilarityMetricsConfig);
+                                }
+                                if (object.toolCorrectnessMetricsConfig != null) {
+                                    if (typeof object.toolCorrectnessMetricsConfig !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig.toolCorrectnessMetricsConfig: object expected");
+                                    message.toolCorrectnessMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.fromObject(object.toolCorrectnessMetricsConfig);
+                                }
+                                if (object.stepToolCorrectnessMetricsConfig != null) {
+                                    if (typeof object.stepToolCorrectnessMetricsConfig !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig.stepToolCorrectnessMetricsConfig: object expected");
+                                    message.stepToolCorrectnessMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.fromObject(object.stepToolCorrectnessMetricsConfig);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GoldenMetricsConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig} message GoldenMetricsConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GoldenMetricsConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.semanticSimilarityMetricsConfig = null;
+                                    object.toolCorrectnessMetricsConfig = null;
+                                    object.stepToolCorrectnessMetricsConfig = null;
+                                }
+                                if (message.semanticSimilarityMetricsConfig != null && message.hasOwnProperty("semanticSimilarityMetricsConfig"))
+                                    object.semanticSimilarityMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.toObject(message.semanticSimilarityMetricsConfig, options);
+                                if (message.toolCorrectnessMetricsConfig != null && message.hasOwnProperty("toolCorrectnessMetricsConfig"))
+                                    object.toolCorrectnessMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.toObject(message.toolCorrectnessMetricsConfig, options);
+                                if (message.stepToolCorrectnessMetricsConfig != null && message.hasOwnProperty("stepToolCorrectnessMetricsConfig"))
+                                    object.stepToolCorrectnessMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ToolCorrectnessMetricsConfig.toObject(message.stepToolCorrectnessMetricsConfig, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GoldenMetricsConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GoldenMetricsConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GoldenMetricsConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GoldenMetricsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.EvaluationMetricsConfig.GoldenMetricsConfig";
+                            };
+    
+                            return GoldenMetricsConfig;
+                        })();
+    
+                        EvaluationMetricsConfig.ScenarioMetricsConfig = (function() {
+    
+                            /**
+                             * Properties of a ScenarioMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @interface IScenarioMetricsConfig
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsConfig.IUserGoalMetMetricsConfig|null} [userGoalMetMetricsConfig] ScenarioMetricsConfig userGoalMetMetricsConfig
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsConfig.IExpectationsMetMetricsConfig|null} [expectationsMetMetricsConfig] ScenarioMetricsConfig expectationsMetMetricsConfig
+                             */
+    
+                            /**
+                             * Constructs a new ScenarioMetricsConfig.
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig
+                             * @classdesc Represents a ScenarioMetricsConfig.
+                             * @implements IScenarioMetricsConfig
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IScenarioMetricsConfig=} [properties] Properties to set
+                             */
+                            function ScenarioMetricsConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ScenarioMetricsConfig userGoalMetMetricsConfig.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsConfig.IUserGoalMetMetricsConfig|null|undefined} userGoalMetMetricsConfig
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @instance
+                             */
+                            ScenarioMetricsConfig.prototype.userGoalMetMetricsConfig = null;
+    
+                            /**
+                             * ScenarioMetricsConfig expectationsMetMetricsConfig.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsConfig.IExpectationsMetMetricsConfig|null|undefined} expectationsMetMetricsConfig
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @instance
+                             */
+                            ScenarioMetricsConfig.prototype.expectationsMetMetricsConfig = null;
+    
+                            /**
+                             * Creates a new ScenarioMetricsConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IScenarioMetricsConfig=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig} ScenarioMetricsConfig instance
+                             */
+                            ScenarioMetricsConfig.create = function create(properties) {
+                                return new ScenarioMetricsConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ScenarioMetricsConfig message. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IScenarioMetricsConfig} message ScenarioMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ScenarioMetricsConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.userGoalMetMetricsConfig != null && Object.hasOwnProperty.call(message, "userGoalMetMetricsConfig"))
+                                    $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig.encode(message.userGoalMetMetricsConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.expectationsMetMetricsConfig != null && Object.hasOwnProperty.call(message, "expectationsMetMetricsConfig"))
+                                    $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig.encode(message.expectationsMetMetricsConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ScenarioMetricsConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.IScenarioMetricsConfig} message ScenarioMetricsConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ScenarioMetricsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ScenarioMetricsConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig} ScenarioMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ScenarioMetricsConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.userGoalMetMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.expectationsMetMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ScenarioMetricsConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig} ScenarioMetricsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ScenarioMetricsConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ScenarioMetricsConfig message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ScenarioMetricsConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.userGoalMetMetricsConfig != null && message.hasOwnProperty("userGoalMetMetricsConfig")) {
+                                    var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig.verify(message.userGoalMetMetricsConfig);
+                                    if (error)
+                                        return "userGoalMetMetricsConfig." + error;
+                                }
+                                if (message.expectationsMetMetricsConfig != null && message.hasOwnProperty("expectationsMetMetricsConfig")) {
+                                    var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig.verify(message.expectationsMetMetricsConfig);
+                                    if (error)
+                                        return "expectationsMetMetricsConfig." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ScenarioMetricsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig} ScenarioMetricsConfig
+                             */
+                            ScenarioMetricsConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig();
+                                if (object.userGoalMetMetricsConfig != null) {
+                                    if (typeof object.userGoalMetMetricsConfig !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig.userGoalMetMetricsConfig: object expected");
+                                    message.userGoalMetMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig.fromObject(object.userGoalMetMetricsConfig);
+                                }
+                                if (object.expectationsMetMetricsConfig != null) {
+                                    if (typeof object.expectationsMetMetricsConfig !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig.expectationsMetMetricsConfig: object expected");
+                                    message.expectationsMetMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig.fromObject(object.expectationsMetMetricsConfig);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ScenarioMetricsConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig} message ScenarioMetricsConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ScenarioMetricsConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.userGoalMetMetricsConfig = null;
+                                    object.expectationsMetMetricsConfig = null;
+                                }
+                                if (message.userGoalMetMetricsConfig != null && message.hasOwnProperty("userGoalMetMetricsConfig"))
+                                    object.userGoalMetMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.UserGoalMetMetricsConfig.toObject(message.userGoalMetMetricsConfig, options);
+                                if (message.expectationsMetMetricsConfig != null && message.hasOwnProperty("expectationsMetMetricsConfig"))
+                                    object.expectationsMetMetricsConfig = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ExpectationsMetMetricsConfig.toObject(message.expectationsMetMetricsConfig, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ScenarioMetricsConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ScenarioMetricsConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ScenarioMetricsConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ScenarioMetricsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.EvaluationMetricsConfig.ScenarioMetricsConfig";
+                            };
+    
+                            return ScenarioMetricsConfig;
+                        })();
+    
+                        /**
+                         * ComparisonType enum.
+                         * @name google.cloud.ces.v1beta.EvaluationMetricsConfig.ComparisonType
+                         * @enum {number}
+                         * @property {number} COMPARISON_TYPE_UNSPECIFIED=0 COMPARISON_TYPE_UNSPECIFIED value
+                         * @property {number} EQUALS=1 EQUALS value
+                         * @property {number} CONTAINS=2 CONTAINS value
+                         * @property {number} SEMANTIC_SIMILARITY=3 SEMANTIC_SIMILARITY value
+                         */
+                        EvaluationMetricsConfig.ComparisonType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "COMPARISON_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EQUALS"] = 1;
+                            values[valuesById[2] = "CONTAINS"] = 2;
+                            values[valuesById[3] = "SEMANTIC_SIMILARITY"] = 3;
+                            return values;
+                        })();
+    
+                        return EvaluationMetricsConfig;
                     })();
     
                     /**
@@ -113733,9 +117538,11 @@
                          * @property {google.cloud.ces.v1beta.ISystemTool|null} [systemTool] Tool systemTool
                          * @property {google.cloud.ces.v1beta.IAgentTool|null} [agentTool] Tool agentTool
                          * @property {google.cloud.ces.v1beta.IWidgetTool|null} [widgetTool] Tool widgetTool
+                         * @property {google.cloud.ces.v1beta.IRemoteAgentTool|null} [remoteAgentTool] Tool remoteAgentTool
                          * @property {string|null} [name] Tool name
                          * @property {string|null} [displayName] Tool displayName
                          * @property {google.cloud.ces.v1beta.ExecutionType|null} [executionType] Tool executionType
+                         * @property {google.protobuf.IDuration|null} [timeout] Tool timeout
                          * @property {google.protobuf.ITimestamp|null} [createTime] Tool createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Tool updateTime
                          * @property {string|null} [etag] Tool etag
@@ -113847,6 +117654,14 @@
                         Tool.prototype.widgetTool = null;
     
                         /**
+                         * Tool remoteAgentTool.
+                         * @member {google.cloud.ces.v1beta.IRemoteAgentTool|null|undefined} remoteAgentTool
+                         * @memberof google.cloud.ces.v1beta.Tool
+                         * @instance
+                         */
+                        Tool.prototype.remoteAgentTool = null;
+    
+                        /**
                          * Tool name.
                          * @member {string} name
                          * @memberof google.cloud.ces.v1beta.Tool
@@ -113869,6 +117684,14 @@
                          * @instance
                          */
                         Tool.prototype.executionType = 0;
+    
+                        /**
+                         * Tool timeout.
+                         * @member {google.protobuf.IDuration|null|undefined} timeout
+                         * @memberof google.cloud.ces.v1beta.Tool
+                         * @instance
+                         */
+                        Tool.prototype.timeout = null;
     
                         /**
                          * Tool createTime.
@@ -113915,12 +117738,12 @@
     
                         /**
                          * Tool toolType.
-                         * @member {"clientFunction"|"openApiTool"|"googleSearchTool"|"connectorTool"|"dataStoreTool"|"pythonFunction"|"mcpTool"|"fileSearchTool"|"systemTool"|"agentTool"|"widgetTool"|undefined} toolType
+                         * @member {"clientFunction"|"openApiTool"|"googleSearchTool"|"connectorTool"|"dataStoreTool"|"pythonFunction"|"mcpTool"|"fileSearchTool"|"systemTool"|"agentTool"|"widgetTool"|"remoteAgentTool"|undefined} toolType
                          * @memberof google.cloud.ces.v1beta.Tool
                          * @instance
                          */
                         Object.defineProperty(Tool.prototype, "toolType", {
-                            get: $util.oneOfGetter($oneOfFields = ["clientFunction", "openApiTool", "googleSearchTool", "connectorTool", "dataStoreTool", "pythonFunction", "mcpTool", "fileSearchTool", "systemTool", "agentTool", "widgetTool"]),
+                            get: $util.oneOfGetter($oneOfFields = ["clientFunction", "openApiTool", "googleSearchTool", "connectorTool", "dataStoreTool", "pythonFunction", "mcpTool", "fileSearchTool", "systemTool", "agentTool", "widgetTool", "remoteAgentTool"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -113982,10 +117805,14 @@
                                 $root.google.cloud.ces.v1beta.SystemTool.encode(message.systemTool, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.toolFakeConfig != null && Object.hasOwnProperty.call(message, "toolFakeConfig"))
                                 $root.google.cloud.ces.v1beta.ToolFakeConfig.encode(message.toolFakeConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                                $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.agentTool != null && Object.hasOwnProperty.call(message, "agentTool"))
                                 $root.google.cloud.ces.v1beta.AgentTool.encode(message.agentTool, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             if (message.widgetTool != null && Object.hasOwnProperty.call(message, "widgetTool"))
                                 $root.google.cloud.ces.v1beta.WidgetTool.encode(message.widgetTool, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.remoteAgentTool != null && Object.hasOwnProperty.call(message, "remoteAgentTool"))
+                                $root.google.cloud.ces.v1beta.RemoteAgentTool.encode(message.remoteAgentTool, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             return writer;
                         };
     
@@ -114066,6 +117893,10 @@
                                         message.widgetTool = $root.google.cloud.ces.v1beta.WidgetTool.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 25: {
+                                        message.remoteAgentTool = $root.google.cloud.ces.v1beta.RemoteAgentTool.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 1: {
                                         message.name = reader.string();
                                         break;
@@ -114076,6 +117907,10 @@
                                     }
                                 case 12: {
                                         message.executionType = reader.int32();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -114242,6 +118077,16 @@
                                         return "widgetTool." + error;
                                 }
                             }
+                            if (message.remoteAgentTool != null && message.hasOwnProperty("remoteAgentTool")) {
+                                if (properties.toolType === 1)
+                                    return "toolType: multiple values";
+                                properties.toolType = 1;
+                                {
+                                    var error = $root.google.cloud.ces.v1beta.RemoteAgentTool.verify(message.remoteAgentTool);
+                                    if (error)
+                                        return "remoteAgentTool." + error;
+                                }
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -114257,6 +118102,11 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.timeout != null && message.hasOwnProperty("timeout")) {
+                                var error = $root.google.protobuf.Duration.verify(message.timeout);
+                                if (error)
+                                    return "timeout." + error;
+                            }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime);
                                 if (error)
@@ -114348,6 +118198,11 @@
                                     throw TypeError(".google.cloud.ces.v1beta.Tool.widgetTool: object expected");
                                 message.widgetTool = $root.google.cloud.ces.v1beta.WidgetTool.fromObject(object.widgetTool);
                             }
+                            if (object.remoteAgentTool != null) {
+                                if (typeof object.remoteAgentTool !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.Tool.remoteAgentTool: object expected");
+                                message.remoteAgentTool = $root.google.cloud.ces.v1beta.RemoteAgentTool.fromObject(object.remoteAgentTool);
+                            }
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.displayName != null)
@@ -114371,6 +118226,11 @@
                             case 2:
                                 message.executionType = 2;
                                 break;
+                            }
+                            if (object.timeout != null) {
+                                if (typeof object.timeout !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.Tool.timeout: object expected");
+                                message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
                             }
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
@@ -114416,6 +118276,7 @@
                                 object.etag = "";
                                 object.generatedSummary = "";
                                 object.toolFakeConfig = null;
+                                object.timeout = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -114478,6 +118339,8 @@
                             }
                             if (message.toolFakeConfig != null && message.hasOwnProperty("toolFakeConfig"))
                                 object.toolFakeConfig = $root.google.cloud.ces.v1beta.ToolFakeConfig.toObject(message.toolFakeConfig, options);
+                            if (message.timeout != null && message.hasOwnProperty("timeout"))
+                                object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
                             if (message.agentTool != null && message.hasOwnProperty("agentTool")) {
                                 object.agentTool = $root.google.cloud.ces.v1beta.AgentTool.toObject(message.agentTool, options);
                                 if (options.oneofs)
@@ -114487,6 +118350,11 @@
                                 object.widgetTool = $root.google.cloud.ces.v1beta.WidgetTool.toObject(message.widgetTool, options);
                                 if (options.oneofs)
                                     object.toolType = "widgetTool";
+                            }
+                            if (message.remoteAgentTool != null && message.hasOwnProperty("remoteAgentTool")) {
+                                object.remoteAgentTool = $root.google.cloud.ces.v1beta.RemoteAgentTool.toObject(message.remoteAgentTool, options);
+                                if (options.oneofs)
+                                    object.toolType = "remoteAgentTool";
                             }
                             return object;
                         };
@@ -123371,6 +127239,7 @@
                          * @memberof google.cloud.ces.v1beta
                          * @interface IMcpTool
                          * @property {string|null} [name] McpTool name
+                         * @property {string|null} [nameOverride] McpTool nameOverride
                          * @property {string|null} [description] McpTool description
                          * @property {google.cloud.ces.v1beta.ISchema|null} [inputSchema] McpTool inputSchema
                          * @property {google.cloud.ces.v1beta.ISchema|null} [outputSchema] McpTool outputSchema
@@ -123379,6 +127248,7 @@
                          * @property {google.cloud.ces.v1beta.ITlsConfig|null} [tlsConfig] McpTool tlsConfig
                          * @property {google.cloud.ces.v1beta.IServiceDirectoryConfig|null} [serviceDirectoryConfig] McpTool serviceDirectoryConfig
                          * @property {Object.<string,string>|null} [customHeaders] McpTool customHeaders
+                         * @property {google.cloud.ces.v1beta.McpTool.State|null} [state] McpTool state
                          */
     
                         /**
@@ -123404,6 +127274,14 @@
                          * @instance
                          */
                         McpTool.prototype.name = "";
+    
+                        /**
+                         * McpTool nameOverride.
+                         * @member {string} nameOverride
+                         * @memberof google.cloud.ces.v1beta.McpTool
+                         * @instance
+                         */
+                        McpTool.prototype.nameOverride = "";
     
                         /**
                          * McpTool description.
@@ -123470,6 +127348,14 @@
                         McpTool.prototype.customHeaders = $util.emptyObject;
     
                         /**
+                         * McpTool state.
+                         * @member {google.cloud.ces.v1beta.McpTool.State} state
+                         * @memberof google.cloud.ces.v1beta.McpTool
+                         * @instance
+                         */
+                        McpTool.prototype.state = 0;
+    
+                        /**
                          * Creates a new McpTool instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.McpTool
@@ -123512,6 +127398,10 @@
                             if (message.customHeaders != null && Object.hasOwnProperty.call(message, "customHeaders"))
                                 for (var keys = Object.keys(message.customHeaders), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.customHeaders[keys[i]]).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.state);
+                            if (message.nameOverride != null && Object.hasOwnProperty.call(message, "nameOverride"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.nameOverride);
                             return writer;
                         };
     
@@ -123550,6 +127440,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.nameOverride = reader.string();
                                         break;
                                     }
                                 case 2: {
@@ -123603,6 +127497,10 @@
                                         message.customHeaders[key] = value;
                                         break;
                                     }
+                                case 12: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -123641,6 +127539,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.nameOverride != null && message.hasOwnProperty("nameOverride"))
+                                if (!$util.isString(message.nameOverride))
+                                    return "nameOverride: string expected";
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
@@ -123680,6 +127581,16 @@
                                     if (!$util.isString(message.customHeaders[key[i]]))
                                         return "customHeaders: string{k:string} expected";
                             }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -123697,6 +127608,8 @@
                             var message = new $root.google.cloud.ces.v1beta.McpTool();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.nameOverride != null)
+                                message.nameOverride = String(object.nameOverride);
                             if (object.description != null)
                                 message.description = String(object.description);
                             if (object.inputSchema != null) {
@@ -123733,6 +127646,30 @@
                                 for (var keys = Object.keys(object.customHeaders), i = 0; i < keys.length; ++i)
                                     message.customHeaders[keys[i]] = String(object.customHeaders[keys[i]]);
                             }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ACTIVE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "INACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "STALE":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -123760,6 +127697,8 @@
                                 object.apiAuthentication = null;
                                 object.tlsConfig = null;
                                 object.serviceDirectoryConfig = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.nameOverride = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -123783,6 +127722,10 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.customHeaders[keys2[j]] = message.customHeaders[keys2[j]];
                             }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.ces.v1beta.McpTool.State[message.state] === undefined ? message.state : $root.google.cloud.ces.v1beta.McpTool.State[message.state] : message.state;
+                            if (message.nameOverride != null && message.hasOwnProperty("nameOverride"))
+                                object.nameOverride = message.nameOverride;
                             return object;
                         };
     
@@ -123811,6 +127754,24 @@
                             }
                             return typeUrlPrefix + "/google.cloud.ces.v1beta.McpTool";
                         };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.ces.v1beta.McpTool.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} ACTIVE=1 ACTIVE value
+                         * @property {number} INACTIVE=2 INACTIVE value
+                         * @property {number} STALE=3 STALE value
+                         */
+                        McpTool.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACTIVE"] = 1;
+                            values[valuesById[2] = "INACTIVE"] = 2;
+                            values[valuesById[3] = "STALE"] = 3;
+                            return values;
+                        })();
     
                         return McpTool;
                     })();
@@ -124206,6 +128167,7 @@
                          * @property {string|null} [name] PythonFunction name
                          * @property {string|null} [pythonCode] PythonFunction pythonCode
                          * @property {string|null} [description] PythonFunction description
+                         * @property {google.cloud.ces.v1beta.IServiceDirectoryConfig|null} [serviceDirectoryConfig] PythonFunction serviceDirectoryConfig
                          */
     
                         /**
@@ -124248,6 +128210,14 @@
                         PythonFunction.prototype.description = "";
     
                         /**
+                         * PythonFunction serviceDirectoryConfig.
+                         * @member {google.cloud.ces.v1beta.IServiceDirectoryConfig|null|undefined} serviceDirectoryConfig
+                         * @memberof google.cloud.ces.v1beta.PythonFunction
+                         * @instance
+                         */
+                        PythonFunction.prototype.serviceDirectoryConfig = null;
+    
+                        /**
                          * Creates a new PythonFunction instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.PythonFunction
@@ -124277,6 +128247,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.pythonCode);
                             if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.serviceDirectoryConfig != null && Object.hasOwnProperty.call(message, "serviceDirectoryConfig"))
+                                $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.encode(message.serviceDirectoryConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -124325,6 +128297,10 @@
                                         message.description = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.serviceDirectoryConfig = $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -124369,6 +128345,11 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig")) {
+                                var error = $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.verify(message.serviceDirectoryConfig);
+                                if (error)
+                                    return "serviceDirectoryConfig." + error;
+                            }
                             return null;
                         };
     
@@ -124390,6 +128371,11 @@
                                 message.pythonCode = String(object.pythonCode);
                             if (object.description != null)
                                 message.description = String(object.description);
+                            if (object.serviceDirectoryConfig != null) {
+                                if (typeof object.serviceDirectoryConfig !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.PythonFunction.serviceDirectoryConfig: object expected");
+                                message.serviceDirectoryConfig = $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.fromObject(object.serviceDirectoryConfig);
+                            }
                             return message;
                         };
     
@@ -124410,6 +128396,7 @@
                                 object.name = "";
                                 object.pythonCode = "";
                                 object.description = "";
+                                object.serviceDirectoryConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -124417,6 +128404,8 @@
                                 object.pythonCode = message.pythonCode;
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig"))
+                                object.serviceDirectoryConfig = $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.toObject(message.serviceDirectoryConfig, options);
                             return object;
                         };
     
@@ -124690,6 +128679,7 @@
                          * @property {google.cloud.ces.v1beta.WidgetTool.WidgetType|null} [widgetType] WidgetTool widgetType
                          * @property {google.protobuf.IStruct|null} [uiConfig] WidgetTool uiConfig
                          * @property {google.cloud.ces.v1beta.WidgetTool.IDataMapping|null} [dataMapping] WidgetTool dataMapping
+                         * @property {google.cloud.ces.v1beta.WidgetTool.ITextResponseConfig|null} [textResponseConfig] WidgetTool textResponseConfig
                          */
     
                         /**
@@ -124755,6 +128745,14 @@
                          */
                         WidgetTool.prototype.dataMapping = null;
     
+                        /**
+                         * WidgetTool textResponseConfig.
+                         * @member {google.cloud.ces.v1beta.WidgetTool.ITextResponseConfig|null|undefined} textResponseConfig
+                         * @memberof google.cloud.ces.v1beta.WidgetTool
+                         * @instance
+                         */
+                        WidgetTool.prototype.textResponseConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -124805,6 +128803,8 @@
                                 $root.google.protobuf.Struct.encode(message.uiConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.dataMapping != null && Object.hasOwnProperty.call(message, "dataMapping"))
                                 $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.encode(message.dataMapping, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.textResponseConfig != null && Object.hasOwnProperty.call(message, "textResponseConfig"))
+                                $root.google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.encode(message.textResponseConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -124863,6 +128863,10 @@
                                     }
                                 case 6: {
                                         message.dataMapping = $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.textResponseConfig = $root.google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -124943,6 +128947,11 @@
                                 var error = $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.verify(message.dataMapping);
                                 if (error)
                                     return "dataMapping." + error;
+                            }
+                            if (message.textResponseConfig != null && message.hasOwnProperty("textResponseConfig")) {
+                                var error = $root.google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.verify(message.textResponseConfig);
+                                if (error)
+                                    return "textResponseConfig." + error;
                             }
                             return null;
                         };
@@ -125038,6 +129047,11 @@
                                     throw TypeError(".google.cloud.ces.v1beta.WidgetTool.dataMapping: object expected");
                                 message.dataMapping = $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.fromObject(object.dataMapping);
                             }
+                            if (object.textResponseConfig != null) {
+                                if (typeof object.textResponseConfig !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.WidgetTool.textResponseConfig: object expected");
+                                message.textResponseConfig = $root.google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.fromObject(object.textResponseConfig);
+                            }
                             return message;
                         };
     
@@ -125060,6 +129074,7 @@
                                 object.widgetType = options.enums === String ? "WIDGET_TYPE_UNSPECIFIED" : 0;
                                 object.uiConfig = null;
                                 object.dataMapping = null;
+                                object.textResponseConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -125076,6 +129091,8 @@
                                 object.uiConfig = $root.google.protobuf.Struct.toObject(message.uiConfig, options);
                             if (message.dataMapping != null && message.hasOwnProperty("dataMapping"))
                                 object.dataMapping = $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.toObject(message.dataMapping, options);
+                            if (message.textResponseConfig != null && message.hasOwnProperty("textResponseConfig"))
+                                object.textResponseConfig = $root.google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.toObject(message.textResponseConfig, options);
                             return object;
                         };
     
@@ -125104,6 +129121,305 @@
                             }
                             return typeUrlPrefix + "/google.cloud.ces.v1beta.WidgetTool";
                         };
+    
+                        WidgetTool.TextResponseConfig = (function() {
+    
+                            /**
+                             * Properties of a TextResponseConfig.
+                             * @memberof google.cloud.ces.v1beta.WidgetTool
+                             * @interface ITextResponseConfig
+                             * @property {google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.Type|null} [type] TextResponseConfig type
+                             * @property {string|null} [staticText] TextResponseConfig staticText
+                             * @property {string|null} [textResponseInstruction] TextResponseConfig textResponseInstruction
+                             */
+    
+                            /**
+                             * Constructs a new TextResponseConfig.
+                             * @memberof google.cloud.ces.v1beta.WidgetTool
+                             * @classdesc Represents a TextResponseConfig.
+                             * @implements ITextResponseConfig
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.WidgetTool.ITextResponseConfig=} [properties] Properties to set
+                             */
+                            function TextResponseConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TextResponseConfig type.
+                             * @member {google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.Type} type
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @instance
+                             */
+                            TextResponseConfig.prototype.type = 0;
+    
+                            /**
+                             * TextResponseConfig staticText.
+                             * @member {string} staticText
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @instance
+                             */
+                            TextResponseConfig.prototype.staticText = "";
+    
+                            /**
+                             * TextResponseConfig textResponseInstruction.
+                             * @member {string} textResponseInstruction
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @instance
+                             */
+                            TextResponseConfig.prototype.textResponseInstruction = "";
+    
+                            /**
+                             * Creates a new TextResponseConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.WidgetTool.ITextResponseConfig=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.WidgetTool.TextResponseConfig} TextResponseConfig instance
+                             */
+                            TextResponseConfig.create = function create(properties) {
+                                return new TextResponseConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TextResponseConfig message. Does not implicitly {@link google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.WidgetTool.ITextResponseConfig} message TextResponseConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TextResponseConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                if (message.staticText != null && Object.hasOwnProperty.call(message, "staticText"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.staticText);
+                                if (message.textResponseInstruction != null && Object.hasOwnProperty.call(message, "textResponseInstruction"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.textResponseInstruction);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TextResponseConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.WidgetTool.ITextResponseConfig} message TextResponseConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TextResponseConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TextResponseConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.WidgetTool.TextResponseConfig} TextResponseConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TextResponseConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.WidgetTool.TextResponseConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.staticText = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.textResponseInstruction = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TextResponseConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.WidgetTool.TextResponseConfig} TextResponseConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TextResponseConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TextResponseConfig message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TextResponseConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.staticText != null && message.hasOwnProperty("staticText"))
+                                    if (!$util.isString(message.staticText))
+                                        return "staticText: string expected";
+                                if (message.textResponseInstruction != null && message.hasOwnProperty("textResponseInstruction"))
+                                    if (!$util.isString(message.textResponseInstruction))
+                                        return "textResponseInstruction: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TextResponseConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.WidgetTool.TextResponseConfig} TextResponseConfig
+                             */
+                            TextResponseConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.WidgetTool.TextResponseConfig)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.WidgetTool.TextResponseConfig();
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "NONE":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "LLM_GENERATED":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                case "STATIC":
+                                case 3:
+                                    message.type = 3;
+                                    break;
+                                }
+                                if (object.staticText != null)
+                                    message.staticText = String(object.staticText);
+                                if (object.textResponseInstruction != null)
+                                    message.textResponseInstruction = String(object.textResponseInstruction);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TextResponseConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @static
+                             * @param {google.cloud.ces.v1beta.WidgetTool.TextResponseConfig} message TextResponseConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TextResponseConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                    object.staticText = "";
+                                    object.textResponseInstruction = "";
+                                }
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.Type[message.type] === undefined ? message.type : $root.google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.Type[message.type] : message.type;
+                                if (message.staticText != null && message.hasOwnProperty("staticText"))
+                                    object.staticText = message.staticText;
+                                if (message.textResponseInstruction != null && message.hasOwnProperty("textResponseInstruction"))
+                                    object.textResponseInstruction = message.textResponseInstruction;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TextResponseConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TextResponseConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TextResponseConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.TextResponseConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TextResponseConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.WidgetTool.TextResponseConfig";
+                            };
+    
+                            /**
+                             * Type enum.
+                             * @name google.cloud.ces.v1beta.WidgetTool.TextResponseConfig.Type
+                             * @enum {number}
+                             * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                             * @property {number} NONE=1 NONE value
+                             * @property {number} LLM_GENERATED=2 LLM_GENERATED value
+                             * @property {number} STATIC=3 STATIC value
+                             */
+                            TextResponseConfig.Type = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "NONE"] = 1;
+                                values[valuesById[2] = "LLM_GENERATED"] = 2;
+                                values[valuesById[3] = "STATIC"] = 3;
+                                return values;
+                            })();
+    
+                            return TextResponseConfig;
+                        })();
     
                         WidgetTool.DataMapping = (function() {
     
@@ -126337,6 +130653,7 @@
                          * @property {google.cloud.ces.v1beta.IServiceDirectoryConfig|null} [serviceDirectoryConfig] McpToolset serviceDirectoryConfig
                          * @property {google.cloud.ces.v1beta.ITlsConfig|null} [tlsConfig] McpToolset tlsConfig
                          * @property {Object.<string,string>|null} [customHeaders] McpToolset customHeaders
+                         * @property {Array.<google.cloud.ces.v1beta.IMcpToolOverride>|null} [toolOverrides] McpToolset toolOverrides
                          */
     
                         /**
@@ -126349,6 +130666,7 @@
                          */
                         function McpToolset(properties) {
                             this.customHeaders = {};
+                            this.toolOverrides = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -126396,6 +130714,14 @@
                         McpToolset.prototype.customHeaders = $util.emptyObject;
     
                         /**
+                         * McpToolset toolOverrides.
+                         * @member {Array.<google.cloud.ces.v1beta.IMcpToolOverride>} toolOverrides
+                         * @memberof google.cloud.ces.v1beta.McpToolset
+                         * @instance
+                         */
+                        McpToolset.prototype.toolOverrides = $util.emptyArray;
+    
+                        /**
                          * Creates a new McpToolset instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.McpToolset
@@ -126430,6 +130756,9 @@
                             if (message.customHeaders != null && Object.hasOwnProperty.call(message, "customHeaders"))
                                 for (var keys = Object.keys(message.customHeaders), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.customHeaders[keys[i]]).ldelim();
+                            if (message.toolOverrides != null && message.toolOverrides.length)
+                                for (var i = 0; i < message.toolOverrides.length; ++i)
+                                    $root.google.cloud.ces.v1beta.McpToolOverride.encode(message.toolOverrides[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -126505,6 +130834,12 @@
                                         message.customHeaders[key] = value;
                                         break;
                                     }
+                                case 6: {
+                                        if (!(message.toolOverrides && message.toolOverrides.length))
+                                            message.toolOverrides = [];
+                                        message.toolOverrides.push($root.google.cloud.ces.v1beta.McpToolOverride.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -126566,6 +130901,15 @@
                                     if (!$util.isString(message.customHeaders[key[i]]))
                                         return "customHeaders: string{k:string} expected";
                             }
+                            if (message.toolOverrides != null && message.hasOwnProperty("toolOverrides")) {
+                                if (!Array.isArray(message.toolOverrides))
+                                    return "toolOverrides: array expected";
+                                for (var i = 0; i < message.toolOverrides.length; ++i) {
+                                    var error = $root.google.cloud.ces.v1beta.McpToolOverride.verify(message.toolOverrides[i]);
+                                    if (error)
+                                        return "toolOverrides." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -126605,6 +130949,16 @@
                                 for (var keys = Object.keys(object.customHeaders), i = 0; i < keys.length; ++i)
                                     message.customHeaders[keys[i]] = String(object.customHeaders[keys[i]]);
                             }
+                            if (object.toolOverrides) {
+                                if (!Array.isArray(object.toolOverrides))
+                                    throw TypeError(".google.cloud.ces.v1beta.McpToolset.toolOverrides: array expected");
+                                message.toolOverrides = [];
+                                for (var i = 0; i < object.toolOverrides.length; ++i) {
+                                    if (typeof object.toolOverrides[i] !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.McpToolset.toolOverrides: object expected");
+                                    message.toolOverrides[i] = $root.google.cloud.ces.v1beta.McpToolOverride.fromObject(object.toolOverrides[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -126621,6 +130975,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.toolOverrides = [];
                             if (options.objects || options.defaults)
                                 object.customHeaders = {};
                             if (options.defaults) {
@@ -126642,6 +130998,11 @@
                                 object.customHeaders = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.customHeaders[keys2[j]] = message.customHeaders[keys2[j]];
+                            }
+                            if (message.toolOverrides && message.toolOverrides.length) {
+                                object.toolOverrides = [];
+                                for (var j = 0; j < message.toolOverrides.length; ++j)
+                                    object.toolOverrides[j] = $root.google.cloud.ces.v1beta.McpToolOverride.toObject(message.toolOverrides[j], options);
                             }
                             return object;
                         };
@@ -126673,6 +131034,548 @@
                         };
     
                         return McpToolset;
+                    })();
+    
+                    v1beta.McpToolOverride = (function() {
+    
+                        /**
+                         * Properties of a McpToolOverride.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IMcpToolOverride
+                         * @property {string|null} [tool] McpToolOverride tool
+                         * @property {string|null} [nameOverride] McpToolOverride nameOverride
+                         * @property {string|null} [descriptionOverride] McpToolOverride descriptionOverride
+                         * @property {google.cloud.ces.v1beta.IMcpToolDefinition|null} [snapshot] McpToolOverride snapshot
+                         */
+    
+                        /**
+                         * Constructs a new McpToolOverride.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents a McpToolOverride.
+                         * @implements IMcpToolOverride
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IMcpToolOverride=} [properties] Properties to set
+                         */
+                        function McpToolOverride(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * McpToolOverride tool.
+                         * @member {string} tool
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @instance
+                         */
+                        McpToolOverride.prototype.tool = "";
+    
+                        /**
+                         * McpToolOverride nameOverride.
+                         * @member {string} nameOverride
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @instance
+                         */
+                        McpToolOverride.prototype.nameOverride = "";
+    
+                        /**
+                         * McpToolOverride descriptionOverride.
+                         * @member {string} descriptionOverride
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @instance
+                         */
+                        McpToolOverride.prototype.descriptionOverride = "";
+    
+                        /**
+                         * McpToolOverride snapshot.
+                         * @member {google.cloud.ces.v1beta.IMcpToolDefinition|null|undefined} snapshot
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @instance
+                         */
+                        McpToolOverride.prototype.snapshot = null;
+    
+                        /**
+                         * Creates a new McpToolOverride instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IMcpToolOverride=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.McpToolOverride} McpToolOverride instance
+                         */
+                        McpToolOverride.create = function create(properties) {
+                            return new McpToolOverride(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified McpToolOverride message. Does not implicitly {@link google.cloud.ces.v1beta.McpToolOverride.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IMcpToolOverride} message McpToolOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        McpToolOverride.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tool != null && Object.hasOwnProperty.call(message, "tool"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.tool);
+                            if (message.nameOverride != null && Object.hasOwnProperty.call(message, "nameOverride"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nameOverride);
+                            if (message.descriptionOverride != null && Object.hasOwnProperty.call(message, "descriptionOverride"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.descriptionOverride);
+                            if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
+                                $root.google.cloud.ces.v1beta.McpToolDefinition.encode(message.snapshot, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified McpToolOverride message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.McpToolOverride.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IMcpToolOverride} message McpToolOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        McpToolOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a McpToolOverride message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.McpToolOverride} McpToolOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        McpToolOverride.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.McpToolOverride();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.tool = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nameOverride = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.descriptionOverride = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.snapshot = $root.google.cloud.ces.v1beta.McpToolDefinition.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a McpToolOverride message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.McpToolOverride} McpToolOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        McpToolOverride.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a McpToolOverride message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        McpToolOverride.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tool != null && message.hasOwnProperty("tool"))
+                                if (!$util.isString(message.tool))
+                                    return "tool: string expected";
+                            if (message.nameOverride != null && message.hasOwnProperty("nameOverride"))
+                                if (!$util.isString(message.nameOverride))
+                                    return "nameOverride: string expected";
+                            if (message.descriptionOverride != null && message.hasOwnProperty("descriptionOverride"))
+                                if (!$util.isString(message.descriptionOverride))
+                                    return "descriptionOverride: string expected";
+                            if (message.snapshot != null && message.hasOwnProperty("snapshot")) {
+                                var error = $root.google.cloud.ces.v1beta.McpToolDefinition.verify(message.snapshot);
+                                if (error)
+                                    return "snapshot." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a McpToolOverride message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.McpToolOverride} McpToolOverride
+                         */
+                        McpToolOverride.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.McpToolOverride)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.McpToolOverride();
+                            if (object.tool != null)
+                                message.tool = String(object.tool);
+                            if (object.nameOverride != null)
+                                message.nameOverride = String(object.nameOverride);
+                            if (object.descriptionOverride != null)
+                                message.descriptionOverride = String(object.descriptionOverride);
+                            if (object.snapshot != null) {
+                                if (typeof object.snapshot !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.McpToolOverride.snapshot: object expected");
+                                message.snapshot = $root.google.cloud.ces.v1beta.McpToolDefinition.fromObject(object.snapshot);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a McpToolOverride message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @static
+                         * @param {google.cloud.ces.v1beta.McpToolOverride} message McpToolOverride
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        McpToolOverride.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.tool = "";
+                                object.nameOverride = "";
+                                object.descriptionOverride = "";
+                                object.snapshot = null;
+                            }
+                            if (message.tool != null && message.hasOwnProperty("tool"))
+                                object.tool = message.tool;
+                            if (message.nameOverride != null && message.hasOwnProperty("nameOverride"))
+                                object.nameOverride = message.nameOverride;
+                            if (message.descriptionOverride != null && message.hasOwnProperty("descriptionOverride"))
+                                object.descriptionOverride = message.descriptionOverride;
+                            if (message.snapshot != null && message.hasOwnProperty("snapshot"))
+                                object.snapshot = $root.google.cloud.ces.v1beta.McpToolDefinition.toObject(message.snapshot, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this McpToolOverride to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        McpToolOverride.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for McpToolOverride
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.McpToolOverride
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        McpToolOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.McpToolOverride";
+                        };
+    
+                        return McpToolOverride;
+                    })();
+    
+                    v1beta.McpToolDefinition = (function() {
+    
+                        /**
+                         * Properties of a McpToolDefinition.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IMcpToolDefinition
+                         * @property {string|null} [description] McpToolDefinition description
+                         * @property {google.cloud.ces.v1beta.ISchema|null} [inputSchema] McpToolDefinition inputSchema
+                         * @property {google.cloud.ces.v1beta.ISchema|null} [outputSchema] McpToolDefinition outputSchema
+                         */
+    
+                        /**
+                         * Constructs a new McpToolDefinition.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents a McpToolDefinition.
+                         * @implements IMcpToolDefinition
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IMcpToolDefinition=} [properties] Properties to set
+                         */
+                        function McpToolDefinition(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * McpToolDefinition description.
+                         * @member {string} description
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @instance
+                         */
+                        McpToolDefinition.prototype.description = "";
+    
+                        /**
+                         * McpToolDefinition inputSchema.
+                         * @member {google.cloud.ces.v1beta.ISchema|null|undefined} inputSchema
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @instance
+                         */
+                        McpToolDefinition.prototype.inputSchema = null;
+    
+                        /**
+                         * McpToolDefinition outputSchema.
+                         * @member {google.cloud.ces.v1beta.ISchema|null|undefined} outputSchema
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @instance
+                         */
+                        McpToolDefinition.prototype.outputSchema = null;
+    
+                        /**
+                         * Creates a new McpToolDefinition instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IMcpToolDefinition=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.McpToolDefinition} McpToolDefinition instance
+                         */
+                        McpToolDefinition.create = function create(properties) {
+                            return new McpToolDefinition(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified McpToolDefinition message. Does not implicitly {@link google.cloud.ces.v1beta.McpToolDefinition.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IMcpToolDefinition} message McpToolDefinition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        McpToolDefinition.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                            if (message.inputSchema != null && Object.hasOwnProperty.call(message, "inputSchema"))
+                                $root.google.cloud.ces.v1beta.Schema.encode(message.inputSchema, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.outputSchema != null && Object.hasOwnProperty.call(message, "outputSchema"))
+                                $root.google.cloud.ces.v1beta.Schema.encode(message.outputSchema, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified McpToolDefinition message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.McpToolDefinition.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IMcpToolDefinition} message McpToolDefinition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        McpToolDefinition.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a McpToolDefinition message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.McpToolDefinition} McpToolDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        McpToolDefinition.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.McpToolDefinition();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.inputSchema = $root.google.cloud.ces.v1beta.Schema.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.outputSchema = $root.google.cloud.ces.v1beta.Schema.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a McpToolDefinition message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.McpToolDefinition} McpToolDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        McpToolDefinition.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a McpToolDefinition message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        McpToolDefinition.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.inputSchema != null && message.hasOwnProperty("inputSchema")) {
+                                var error = $root.google.cloud.ces.v1beta.Schema.verify(message.inputSchema);
+                                if (error)
+                                    return "inputSchema." + error;
+                            }
+                            if (message.outputSchema != null && message.hasOwnProperty("outputSchema")) {
+                                var error = $root.google.cloud.ces.v1beta.Schema.verify(message.outputSchema);
+                                if (error)
+                                    return "outputSchema." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a McpToolDefinition message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.McpToolDefinition} McpToolDefinition
+                         */
+                        McpToolDefinition.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.McpToolDefinition)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.McpToolDefinition();
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.inputSchema != null) {
+                                if (typeof object.inputSchema !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.McpToolDefinition.inputSchema: object expected");
+                                message.inputSchema = $root.google.cloud.ces.v1beta.Schema.fromObject(object.inputSchema);
+                            }
+                            if (object.outputSchema != null) {
+                                if (typeof object.outputSchema !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.McpToolDefinition.outputSchema: object expected");
+                                message.outputSchema = $root.google.cloud.ces.v1beta.Schema.fromObject(object.outputSchema);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a McpToolDefinition message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @static
+                         * @param {google.cloud.ces.v1beta.McpToolDefinition} message McpToolDefinition
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        McpToolDefinition.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.description = "";
+                                object.inputSchema = null;
+                                object.outputSchema = null;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.inputSchema != null && message.hasOwnProperty("inputSchema"))
+                                object.inputSchema = $root.google.cloud.ces.v1beta.Schema.toObject(message.inputSchema, options);
+                            if (message.outputSchema != null && message.hasOwnProperty("outputSchema"))
+                                object.outputSchema = $root.google.cloud.ces.v1beta.Schema.toObject(message.outputSchema, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this McpToolDefinition to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        McpToolDefinition.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for McpToolDefinition
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.McpToolDefinition
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        McpToolDefinition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.McpToolDefinition";
+                        };
+    
+                        return McpToolDefinition;
                     })();
     
                     v1beta.OpenApiToolset = (function() {
@@ -127909,6 +132812,7 @@
                                         return "inputTypes: enum value[] expected";
                                     case 0:
                                     case 1:
+                                    case 7:
                                     case 2:
                                     case 3:
                                     case 4:
@@ -128047,6 +132951,10 @@
                                     case "INPUT_TYPE_TEXT":
                                     case 1:
                                         message.inputTypes[i] = 1;
+                                        break;
+                                    case "INPUT_TYPE_EVENT":
+                                    case 7:
+                                        message.inputTypes[i] = 7;
                                         break;
                                     case "INPUT_TYPE_AUDIO":
                                     case 2:
@@ -128484,6 +133392,7 @@
                          * @enum {number}
                          * @property {number} INPUT_TYPE_UNSPECIFIED=0 INPUT_TYPE_UNSPECIFIED value
                          * @property {number} INPUT_TYPE_TEXT=1 INPUT_TYPE_TEXT value
+                         * @property {number} INPUT_TYPE_EVENT=7 INPUT_TYPE_EVENT value
                          * @property {number} INPUT_TYPE_AUDIO=2 INPUT_TYPE_AUDIO value
                          * @property {number} INPUT_TYPE_IMAGE=3 INPUT_TYPE_IMAGE value
                          * @property {number} INPUT_TYPE_BLOB=4 INPUT_TYPE_BLOB value
@@ -128494,6 +133403,7 @@
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "INPUT_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "INPUT_TYPE_TEXT"] = 1;
+                            values[valuesById[7] = "INPUT_TYPE_EVENT"] = 7;
                             values[valuesById[2] = "INPUT_TYPE_AUDIO"] = 2;
                             values[valuesById[3] = "INPUT_TYPE_IMAGE"] = 3;
                             values[valuesById[4] = "INPUT_TYPE_BLOB"] = 4;
@@ -128503,6 +133413,772 @@
                         })();
     
                         return Conversation;
+                    })();
+    
+                    v1beta.ExperimentConfig = (function() {
+    
+                        /**
+                         * Properties of an ExperimentConfig.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IExperimentConfig
+                         * @property {google.cloud.ces.v1beta.ExperimentConfig.IVersionRelease|null} [versionRelease] ExperimentConfig versionRelease
+                         */
+    
+                        /**
+                         * Constructs a new ExperimentConfig.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents an ExperimentConfig.
+                         * @implements IExperimentConfig
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IExperimentConfig=} [properties] Properties to set
+                         */
+                        function ExperimentConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExperimentConfig versionRelease.
+                         * @member {google.cloud.ces.v1beta.ExperimentConfig.IVersionRelease|null|undefined} versionRelease
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @instance
+                         */
+                        ExperimentConfig.prototype.versionRelease = null;
+    
+                        /**
+                         * Creates a new ExperimentConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExperimentConfig=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.ExperimentConfig} ExperimentConfig instance
+                         */
+                        ExperimentConfig.create = function create(properties) {
+                            return new ExperimentConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExperimentConfig message. Does not implicitly {@link google.cloud.ces.v1beta.ExperimentConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExperimentConfig} message ExperimentConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExperimentConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.versionRelease != null && Object.hasOwnProperty.call(message, "versionRelease"))
+                                $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.encode(message.versionRelease, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExperimentConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExperimentConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExperimentConfig} message ExperimentConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExperimentConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExperimentConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.ExperimentConfig} ExperimentConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExperimentConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.ExperimentConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.versionRelease = $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExperimentConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.ExperimentConfig} ExperimentConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExperimentConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExperimentConfig message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExperimentConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.versionRelease != null && message.hasOwnProperty("versionRelease")) {
+                                var error = $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.verify(message.versionRelease);
+                                if (error)
+                                    return "versionRelease." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExperimentConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.ExperimentConfig} ExperimentConfig
+                         */
+                        ExperimentConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.ExperimentConfig)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.ExperimentConfig();
+                            if (object.versionRelease != null) {
+                                if (typeof object.versionRelease !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.ExperimentConfig.versionRelease: object expected");
+                                message.versionRelease = $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.fromObject(object.versionRelease);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExperimentConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @static
+                         * @param {google.cloud.ces.v1beta.ExperimentConfig} message ExperimentConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExperimentConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.versionRelease = null;
+                            if (message.versionRelease != null && message.hasOwnProperty("versionRelease"))
+                                object.versionRelease = $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.toObject(message.versionRelease, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExperimentConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExperimentConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExperimentConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExperimentConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.ExperimentConfig";
+                        };
+    
+                        ExperimentConfig.VersionRelease = (function() {
+    
+                            /**
+                             * Properties of a VersionRelease.
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                             * @interface IVersionRelease
+                             * @property {google.cloud.ces.v1beta.ExperimentConfig.State|null} [state] VersionRelease state
+                             * @property {Array.<google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.ITrafficAllocation>|null} [trafficAllocations] VersionRelease trafficAllocations
+                             */
+    
+                            /**
+                             * Constructs a new VersionRelease.
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig
+                             * @classdesc Represents a VersionRelease.
+                             * @implements IVersionRelease
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.ExperimentConfig.IVersionRelease=} [properties] Properties to set
+                             */
+                            function VersionRelease(properties) {
+                                this.trafficAllocations = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VersionRelease state.
+                             * @member {google.cloud.ces.v1beta.ExperimentConfig.State} state
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @instance
+                             */
+                            VersionRelease.prototype.state = 0;
+    
+                            /**
+                             * VersionRelease trafficAllocations.
+                             * @member {Array.<google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.ITrafficAllocation>} trafficAllocations
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @instance
+                             */
+                            VersionRelease.prototype.trafficAllocations = $util.emptyArray;
+    
+                            /**
+                             * Creates a new VersionRelease instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @static
+                             * @param {google.cloud.ces.v1beta.ExperimentConfig.IVersionRelease=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease} VersionRelease instance
+                             */
+                            VersionRelease.create = function create(properties) {
+                                return new VersionRelease(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VersionRelease message. Does not implicitly {@link google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @static
+                             * @param {google.cloud.ces.v1beta.ExperimentConfig.IVersionRelease} message VersionRelease message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VersionRelease.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                                if (message.trafficAllocations != null && message.trafficAllocations.length)
+                                    for (var i = 0; i < message.trafficAllocations.length; ++i)
+                                        $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation.encode(message.trafficAllocations[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VersionRelease message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @static
+                             * @param {google.cloud.ces.v1beta.ExperimentConfig.IVersionRelease} message VersionRelease message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VersionRelease.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VersionRelease message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease} VersionRelease
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VersionRelease.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.trafficAllocations && message.trafficAllocations.length))
+                                                message.trafficAllocations = [];
+                                            message.trafficAllocations.push($root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VersionRelease message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease} VersionRelease
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VersionRelease.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VersionRelease message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VersionRelease.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.trafficAllocations != null && message.hasOwnProperty("trafficAllocations")) {
+                                    if (!Array.isArray(message.trafficAllocations))
+                                        return "trafficAllocations: array expected";
+                                    for (var i = 0; i < message.trafficAllocations.length; ++i) {
+                                        var error = $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation.verify(message.trafficAllocations[i]);
+                                        if (error)
+                                            return "trafficAllocations." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VersionRelease message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease} VersionRelease
+                             */
+                            VersionRelease.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease();
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "PENDING":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "RUNNING":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "DONE":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "EXPIRED":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                if (object.trafficAllocations) {
+                                    if (!Array.isArray(object.trafficAllocations))
+                                        throw TypeError(".google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.trafficAllocations: array expected");
+                                    message.trafficAllocations = [];
+                                    for (var i = 0; i < object.trafficAllocations.length; ++i) {
+                                        if (typeof object.trafficAllocations[i] !== "object")
+                                            throw TypeError(".google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.trafficAllocations: object expected");
+                                        message.trafficAllocations[i] = $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation.fromObject(object.trafficAllocations[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VersionRelease message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @static
+                             * @param {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease} message VersionRelease
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VersionRelease.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.trafficAllocations = [];
+                                if (options.defaults)
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.ces.v1beta.ExperimentConfig.State[message.state] === undefined ? message.state : $root.google.cloud.ces.v1beta.ExperimentConfig.State[message.state] : message.state;
+                                if (message.trafficAllocations && message.trafficAllocations.length) {
+                                    object.trafficAllocations = [];
+                                    for (var j = 0; j < message.trafficAllocations.length; ++j)
+                                        object.trafficAllocations[j] = $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation.toObject(message.trafficAllocations[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VersionRelease to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VersionRelease.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for VersionRelease
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            VersionRelease.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.ExperimentConfig.VersionRelease";
+                            };
+    
+                            VersionRelease.TrafficAllocation = (function() {
+    
+                                /**
+                                 * Properties of a TrafficAllocation.
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                                 * @interface ITrafficAllocation
+                                 * @property {string|null} [id] TrafficAllocation id
+                                 * @property {number|null} [trafficPercentage] TrafficAllocation trafficPercentage
+                                 * @property {string|null} [appVersion] TrafficAllocation appVersion
+                                 */
+    
+                                /**
+                                 * Constructs a new TrafficAllocation.
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease
+                                 * @classdesc Represents a TrafficAllocation.
+                                 * @implements ITrafficAllocation
+                                 * @constructor
+                                 * @param {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.ITrafficAllocation=} [properties] Properties to set
+                                 */
+                                function TrafficAllocation(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * TrafficAllocation id.
+                                 * @member {string} id
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @instance
+                                 */
+                                TrafficAllocation.prototype.id = "";
+    
+                                /**
+                                 * TrafficAllocation trafficPercentage.
+                                 * @member {number} trafficPercentage
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @instance
+                                 */
+                                TrafficAllocation.prototype.trafficPercentage = 0;
+    
+                                /**
+                                 * TrafficAllocation appVersion.
+                                 * @member {string} appVersion
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @instance
+                                 */
+                                TrafficAllocation.prototype.appVersion = "";
+    
+                                /**
+                                 * Creates a new TrafficAllocation instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @static
+                                 * @param {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.ITrafficAllocation=} [properties] Properties to set
+                                 * @returns {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation} TrafficAllocation instance
+                                 */
+                                TrafficAllocation.create = function create(properties) {
+                                    return new TrafficAllocation(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified TrafficAllocation message. Does not implicitly {@link google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @static
+                                 * @param {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.ITrafficAllocation} message TrafficAllocation message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TrafficAllocation.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                    if (message.trafficPercentage != null && Object.hasOwnProperty.call(message, "trafficPercentage"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.trafficPercentage);
+                                    if (message.appVersion != null && Object.hasOwnProperty.call(message, "appVersion"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.appVersion);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified TrafficAllocation message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @static
+                                 * @param {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.ITrafficAllocation} message TrafficAllocation message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TrafficAllocation.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a TrafficAllocation message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation} TrafficAllocation
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TrafficAllocation.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.id = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.trafficPercentage = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.appVersion = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a TrafficAllocation message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation} TrafficAllocation
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TrafficAllocation.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a TrafficAllocation message.
+                                 * @function verify
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                TrafficAllocation.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.id != null && message.hasOwnProperty("id"))
+                                        if (!$util.isString(message.id))
+                                            return "id: string expected";
+                                    if (message.trafficPercentage != null && message.hasOwnProperty("trafficPercentage"))
+                                        if (!$util.isInteger(message.trafficPercentage))
+                                            return "trafficPercentage: integer expected";
+                                    if (message.appVersion != null && message.hasOwnProperty("appVersion"))
+                                        if (!$util.isString(message.appVersion))
+                                            return "appVersion: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a TrafficAllocation message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation} TrafficAllocation
+                                 */
+                                TrafficAllocation.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation)
+                                        return object;
+                                    var message = new $root.google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation();
+                                    if (object.id != null)
+                                        message.id = String(object.id);
+                                    if (object.trafficPercentage != null)
+                                        message.trafficPercentage = object.trafficPercentage | 0;
+                                    if (object.appVersion != null)
+                                        message.appVersion = String(object.appVersion);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a TrafficAllocation message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @static
+                                 * @param {google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation} message TrafficAllocation
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                TrafficAllocation.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.id = "";
+                                        object.trafficPercentage = 0;
+                                        object.appVersion = "";
+                                    }
+                                    if (message.id != null && message.hasOwnProperty("id"))
+                                        object.id = message.id;
+                                    if (message.trafficPercentage != null && message.hasOwnProperty("trafficPercentage"))
+                                        object.trafficPercentage = message.trafficPercentage;
+                                    if (message.appVersion != null && message.hasOwnProperty("appVersion"))
+                                        object.appVersion = message.appVersion;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this TrafficAllocation to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                TrafficAllocation.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for TrafficAllocation
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                TrafficAllocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.ces.v1beta.ExperimentConfig.VersionRelease.TrafficAllocation";
+                                };
+    
+                                return TrafficAllocation;
+                            })();
+    
+                            return VersionRelease;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.ces.v1beta.ExperimentConfig.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} PENDING=1 PENDING value
+                         * @property {number} RUNNING=2 RUNNING value
+                         * @property {number} DONE=3 DONE value
+                         * @property {number} EXPIRED=4 EXPIRED value
+                         */
+                        ExperimentConfig.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PENDING"] = 1;
+                            values[valuesById[2] = "RUNNING"] = 2;
+                            values[valuesById[3] = "DONE"] = 3;
+                            values[valuesById[4] = "EXPIRED"] = 4;
+                            return values;
+                        })();
+    
+                        return ExperimentConfig;
                     })();
     
                     v1beta.Deployment = (function() {
@@ -128518,6 +134194,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Deployment createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Deployment updateTime
                          * @property {string|null} [etag] Deployment etag
+                         * @property {google.cloud.ces.v1beta.IExperimentConfig|null} [experimentConfig] Deployment experimentConfig
                          */
     
                         /**
@@ -128592,6 +134269,14 @@
                         Deployment.prototype.etag = "";
     
                         /**
+                         * Deployment experimentConfig.
+                         * @member {google.cloud.ces.v1beta.IExperimentConfig|null|undefined} experimentConfig
+                         * @memberof google.cloud.ces.v1beta.Deployment
+                         * @instance
+                         */
+                        Deployment.prototype.experimentConfig = null;
+    
+                        /**
                          * Creates a new Deployment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.Deployment
@@ -128629,6 +134314,8 @@
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.etag);
                             if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.displayName);
+                            if (message.experimentConfig != null && Object.hasOwnProperty.call(message, "experimentConfig"))
+                                $root.google.cloud.ces.v1beta.ExperimentConfig.encode(message.experimentConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -128693,6 +134380,10 @@
                                         message.etag = reader.string();
                                         break;
                                     }
+                                case 9: {
+                                        message.experimentConfig = $root.google.cloud.ces.v1beta.ExperimentConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -128755,6 +134446,11 @@
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
+                            if (message.experimentConfig != null && message.hasOwnProperty("experimentConfig")) {
+                                var error = $root.google.cloud.ces.v1beta.ExperimentConfig.verify(message.experimentConfig);
+                                if (error)
+                                    return "experimentConfig." + error;
+                            }
                             return null;
                         };
     
@@ -128793,6 +134489,11 @@
                             }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
+                            if (object.experimentConfig != null) {
+                                if (typeof object.experimentConfig !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.Deployment.experimentConfig: object expected");
+                                message.experimentConfig = $root.google.cloud.ces.v1beta.ExperimentConfig.fromObject(object.experimentConfig);
+                            }
                             return message;
                         };
     
@@ -128817,6 +134518,7 @@
                                 object.updateTime = null;
                                 object.etag = "";
                                 object.displayName = "";
+                                object.experimentConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -128832,6 +134534,8 @@
                                 object.etag = message.etag;
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
+                            if (message.experimentConfig != null && message.hasOwnProperty("experimentConfig"))
+                                object.experimentConfig = $root.google.cloud.ces.v1beta.ExperimentConfig.toObject(message.experimentConfig, options);
                             return object;
                         };
     
@@ -131164,6 +136868,8 @@
                          * @property {google.cloud.ces.v1beta.IEvaluationResult|null} [lastCompletedResult] Evaluation lastCompletedResult
                          * @property {boolean|null} [invalid] Evaluation invalid
                          * @property {Array.<google.cloud.ces.v1beta.IEvaluationResult>|null} [lastTenResults] Evaluation lastTenResults
+                         * @property {google.cloud.ces.v1beta.IEvaluationMetricsThresholds|null} [evaluationMetricsThresholdOverride] Evaluation evaluationMetricsThresholdOverride
+                         * @property {google.cloud.ces.v1beta.IEvaluationMetricsConfig|null} [evaluationMetricsConfigOverride] Evaluation evaluationMetricsConfigOverride
                          */
     
                         /**
@@ -131321,6 +137027,22 @@
                          */
                         Evaluation.prototype.lastTenResults = $util.emptyArray;
     
+                        /**
+                         * Evaluation evaluationMetricsThresholdOverride.
+                         * @member {google.cloud.ces.v1beta.IEvaluationMetricsThresholds|null|undefined} evaluationMetricsThresholdOverride
+                         * @memberof google.cloud.ces.v1beta.Evaluation
+                         * @instance
+                         */
+                        Evaluation.prototype.evaluationMetricsThresholdOverride = null;
+    
+                        /**
+                         * Evaluation evaluationMetricsConfigOverride.
+                         * @member {google.cloud.ces.v1beta.IEvaluationMetricsConfig|null|undefined} evaluationMetricsConfigOverride
+                         * @memberof google.cloud.ces.v1beta.Evaluation
+                         * @instance
+                         */
+                        Evaluation.prototype.evaluationMetricsConfigOverride = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -131397,6 +137119,10 @@
                             if (message.lastTenResults != null && message.lastTenResults.length)
                                 for (var i = 0; i < message.lastTenResults.length; ++i)
                                     $root.google.cloud.ces.v1beta.EvaluationResult.encode(message.lastTenResults[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.evaluationMetricsThresholdOverride != null && Object.hasOwnProperty.call(message, "evaluationMetricsThresholdOverride"))
+                                $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.encode(message.evaluationMetricsThresholdOverride, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.evaluationMetricsConfigOverride != null && Object.hasOwnProperty.call(message, "evaluationMetricsConfigOverride"))
+                                $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.encode(message.evaluationMetricsConfigOverride, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -131507,6 +137233,14 @@
                                         if (!(message.lastTenResults && message.lastTenResults.length))
                                             message.lastTenResults = [];
                                         message.lastTenResults.push($root.google.cloud.ces.v1beta.EvaluationResult.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 20: {
+                                        message.evaluationMetricsThresholdOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 21: {
+                                        message.evaluationMetricsConfigOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -131634,6 +137368,16 @@
                                         return "lastTenResults." + error;
                                 }
                             }
+                            if (message.evaluationMetricsThresholdOverride != null && message.hasOwnProperty("evaluationMetricsThresholdOverride")) {
+                                var error = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.verify(message.evaluationMetricsThresholdOverride);
+                                if (error)
+                                    return "evaluationMetricsThresholdOverride." + error;
+                            }
+                            if (message.evaluationMetricsConfigOverride != null && message.hasOwnProperty("evaluationMetricsConfigOverride")) {
+                                var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.verify(message.evaluationMetricsConfigOverride);
+                                if (error)
+                                    return "evaluationMetricsConfigOverride." + error;
+                            }
                             return null;
                         };
     
@@ -131724,6 +137468,16 @@
                                     message.lastTenResults[i] = $root.google.cloud.ces.v1beta.EvaluationResult.fromObject(object.lastTenResults[i]);
                                 }
                             }
+                            if (object.evaluationMetricsThresholdOverride != null) {
+                                if (typeof object.evaluationMetricsThresholdOverride !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.Evaluation.evaluationMetricsThresholdOverride: object expected");
+                                message.evaluationMetricsThresholdOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.fromObject(object.evaluationMetricsThresholdOverride);
+                            }
+                            if (object.evaluationMetricsConfigOverride != null) {
+                                if (typeof object.evaluationMetricsConfigOverride !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.Evaluation.evaluationMetricsConfigOverride: object expected");
+                                message.evaluationMetricsConfigOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.fromObject(object.evaluationMetricsConfigOverride);
+                            }
                             return message;
                         };
     
@@ -131758,6 +137512,8 @@
                                 object.aggregatedMetrics = null;
                                 object.lastCompletedResult = null;
                                 object.invalid = false;
+                                object.evaluationMetricsThresholdOverride = null;
+                                object.evaluationMetricsConfigOverride = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -131811,6 +137567,10 @@
                                 for (var j = 0; j < message.lastTenResults.length; ++j)
                                     object.lastTenResults[j] = $root.google.cloud.ces.v1beta.EvaluationResult.toObject(message.lastTenResults[j], options);
                             }
+                            if (message.evaluationMetricsThresholdOverride != null && message.hasOwnProperty("evaluationMetricsThresholdOverride"))
+                                object.evaluationMetricsThresholdOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.toObject(message.evaluationMetricsThresholdOverride, options);
+                            if (message.evaluationMetricsConfigOverride != null && message.hasOwnProperty("evaluationMetricsConfigOverride"))
+                                object.evaluationMetricsConfigOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.toObject(message.evaluationMetricsConfigOverride, options);
                             return object;
                         };
     
@@ -131852,7 +137612,13 @@
                              * @property {google.cloud.ces.v1beta.IAgentTransfer|null} [agentTransfer] GoldenExpectation agentTransfer
                              * @property {google.protobuf.IStruct|null} [updatedVariables] GoldenExpectation updatedVariables
                              * @property {google.cloud.ces.v1beta.IToolResponse|null} [mockToolResponse] GoldenExpectation mockToolResponse
+                             * @property {boolean|null} [noToolCalls] GoldenExpectation noToolCalls
                              * @property {string|null} [note] GoldenExpectation note
+                             * @property {boolean|null} [skipEvaluation] GoldenExpectation skipEvaluation
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.IExpectationLevelMetricsThresholds|null} [expectationLevelMetricsThresholdsOverride] GoldenExpectation expectationLevelMetricsThresholdsOverride
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsConfig.ISemanticSimilarityMetricsConfig|null} [agentResponseSemanticSimilarityMetricsConfigOverride] GoldenExpectation agentResponseSemanticSimilarityMetricsConfigOverride
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsConfig.IHallucinationMetricsConfig|null} [agentResponseHallucinationMetricsConfigOverride] GoldenExpectation agentResponseHallucinationMetricsConfigOverride
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsConfig.ComparisonType|null} [comparisonType] GoldenExpectation comparisonType
                              */
     
                             /**
@@ -131919,6 +137685,14 @@
                             GoldenExpectation.prototype.mockToolResponse = null;
     
                             /**
+                             * GoldenExpectation noToolCalls.
+                             * @member {boolean|null|undefined} noToolCalls
+                             * @memberof google.cloud.ces.v1beta.Evaluation.GoldenExpectation
+                             * @instance
+                             */
+                            GoldenExpectation.prototype.noToolCalls = null;
+    
+                            /**
                              * GoldenExpectation note.
                              * @member {string} note
                              * @memberof google.cloud.ces.v1beta.Evaluation.GoldenExpectation
@@ -131926,17 +137700,57 @@
                              */
                             GoldenExpectation.prototype.note = "";
     
+                            /**
+                             * GoldenExpectation skipEvaluation.
+                             * @member {boolean} skipEvaluation
+                             * @memberof google.cloud.ces.v1beta.Evaluation.GoldenExpectation
+                             * @instance
+                             */
+                            GoldenExpectation.prototype.skipEvaluation = false;
+    
+                            /**
+                             * GoldenExpectation expectationLevelMetricsThresholdsOverride.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.IExpectationLevelMetricsThresholds|null|undefined} expectationLevelMetricsThresholdsOverride
+                             * @memberof google.cloud.ces.v1beta.Evaluation.GoldenExpectation
+                             * @instance
+                             */
+                            GoldenExpectation.prototype.expectationLevelMetricsThresholdsOverride = null;
+    
+                            /**
+                             * GoldenExpectation agentResponseSemanticSimilarityMetricsConfigOverride.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsConfig.ISemanticSimilarityMetricsConfig|null|undefined} agentResponseSemanticSimilarityMetricsConfigOverride
+                             * @memberof google.cloud.ces.v1beta.Evaluation.GoldenExpectation
+                             * @instance
+                             */
+                            GoldenExpectation.prototype.agentResponseSemanticSimilarityMetricsConfigOverride = null;
+    
+                            /**
+                             * GoldenExpectation agentResponseHallucinationMetricsConfigOverride.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsConfig.IHallucinationMetricsConfig|null|undefined} agentResponseHallucinationMetricsConfigOverride
+                             * @memberof google.cloud.ces.v1beta.Evaluation.GoldenExpectation
+                             * @instance
+                             */
+                            GoldenExpectation.prototype.agentResponseHallucinationMetricsConfigOverride = null;
+    
+                            /**
+                             * GoldenExpectation comparisonType.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsConfig.ComparisonType} comparisonType
+                             * @memberof google.cloud.ces.v1beta.Evaluation.GoldenExpectation
+                             * @instance
+                             */
+                            GoldenExpectation.prototype.comparisonType = 0;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * GoldenExpectation condition.
-                             * @member {"toolCall"|"toolResponse"|"agentResponse"|"agentTransfer"|"updatedVariables"|"mockToolResponse"|undefined} condition
+                             * @member {"toolCall"|"toolResponse"|"agentResponse"|"agentTransfer"|"updatedVariables"|"mockToolResponse"|"noToolCalls"|undefined} condition
                              * @memberof google.cloud.ces.v1beta.Evaluation.GoldenExpectation
                              * @instance
                              */
                             Object.defineProperty(GoldenExpectation.prototype, "condition", {
-                                get: $util.oneOfGetter($oneOfFields = ["toolCall", "toolResponse", "agentResponse", "agentTransfer", "updatedVariables", "mockToolResponse"]),
+                                get: $util.oneOfGetter($oneOfFields = ["toolCall", "toolResponse", "agentResponse", "agentTransfer", "updatedVariables", "mockToolResponse", "noToolCalls"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -131978,6 +137792,18 @@
                                     $root.google.protobuf.Struct.encode(message.updatedVariables, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 if (message.mockToolResponse != null && Object.hasOwnProperty.call(message, "mockToolResponse"))
                                     $root.google.cloud.ces.v1beta.ToolResponse.encode(message.mockToolResponse, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.skipEvaluation != null && Object.hasOwnProperty.call(message, "skipEvaluation"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).bool(message.skipEvaluation);
+                                if (message.expectationLevelMetricsThresholdsOverride != null && Object.hasOwnProperty.call(message, "expectationLevelMetricsThresholdsOverride"))
+                                    $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.ExpectationLevelMetricsThresholds.encode(message.expectationLevelMetricsThresholdsOverride, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.agentResponseSemanticSimilarityMetricsConfigOverride != null && Object.hasOwnProperty.call(message, "agentResponseSemanticSimilarityMetricsConfigOverride"))
+                                    $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.encode(message.agentResponseSemanticSimilarityMetricsConfigOverride, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.agentResponseHallucinationMetricsConfigOverride != null && Object.hasOwnProperty.call(message, "agentResponseHallucinationMetricsConfigOverride"))
+                                    $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig.encode(message.agentResponseHallucinationMetricsConfigOverride, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.comparisonType != null && Object.hasOwnProperty.call(message, "comparisonType"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).int32(message.comparisonType);
+                                if (message.noToolCalls != null && Object.hasOwnProperty.call(message, "noToolCalls"))
+                                    writer.uint32(/* id 13, wireType 0 =*/104).bool(message.noToolCalls);
                                 return writer;
                             };
     
@@ -132038,8 +137864,32 @@
                                             message.mockToolResponse = $root.google.cloud.ces.v1beta.ToolResponse.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 13: {
+                                            message.noToolCalls = reader.bool();
+                                            break;
+                                        }
                                     case 1: {
                                             message.note = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.skipEvaluation = reader.bool();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.expectationLevelMetricsThresholdsOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.ExpectationLevelMetricsThresholds.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.agentResponseSemanticSimilarityMetricsConfigOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.agentResponseHallucinationMetricsConfigOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.comparisonType = reader.int32();
                                             break;
                                         }
                                     default:
@@ -132136,9 +137986,44 @@
                                             return "mockToolResponse." + error;
                                     }
                                 }
+                                if (message.noToolCalls != null && message.hasOwnProperty("noToolCalls")) {
+                                    if (properties.condition === 1)
+                                        return "condition: multiple values";
+                                    properties.condition = 1;
+                                    if (typeof message.noToolCalls !== "boolean")
+                                        return "noToolCalls: boolean expected";
+                                }
                                 if (message.note != null && message.hasOwnProperty("note"))
                                     if (!$util.isString(message.note))
                                         return "note: string expected";
+                                if (message.skipEvaluation != null && message.hasOwnProperty("skipEvaluation"))
+                                    if (typeof message.skipEvaluation !== "boolean")
+                                        return "skipEvaluation: boolean expected";
+                                if (message.expectationLevelMetricsThresholdsOverride != null && message.hasOwnProperty("expectationLevelMetricsThresholdsOverride")) {
+                                    var error = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.ExpectationLevelMetricsThresholds.verify(message.expectationLevelMetricsThresholdsOverride);
+                                    if (error)
+                                        return "expectationLevelMetricsThresholdsOverride." + error;
+                                }
+                                if (message.agentResponseSemanticSimilarityMetricsConfigOverride != null && message.hasOwnProperty("agentResponseSemanticSimilarityMetricsConfigOverride")) {
+                                    var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.verify(message.agentResponseSemanticSimilarityMetricsConfigOverride);
+                                    if (error)
+                                        return "agentResponseSemanticSimilarityMetricsConfigOverride." + error;
+                                }
+                                if (message.agentResponseHallucinationMetricsConfigOverride != null && message.hasOwnProperty("agentResponseHallucinationMetricsConfigOverride")) {
+                                    var error = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig.verify(message.agentResponseHallucinationMetricsConfigOverride);
+                                    if (error)
+                                        return "agentResponseHallucinationMetricsConfigOverride." + error;
+                                }
+                                if (message.comparisonType != null && message.hasOwnProperty("comparisonType"))
+                                    switch (message.comparisonType) {
+                                    default:
+                                        return "comparisonType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -132184,8 +138069,51 @@
                                         throw TypeError(".google.cloud.ces.v1beta.Evaluation.GoldenExpectation.mockToolResponse: object expected");
                                     message.mockToolResponse = $root.google.cloud.ces.v1beta.ToolResponse.fromObject(object.mockToolResponse);
                                 }
+                                if (object.noToolCalls != null)
+                                    message.noToolCalls = Boolean(object.noToolCalls);
                                 if (object.note != null)
                                     message.note = String(object.note);
+                                if (object.skipEvaluation != null)
+                                    message.skipEvaluation = Boolean(object.skipEvaluation);
+                                if (object.expectationLevelMetricsThresholdsOverride != null) {
+                                    if (typeof object.expectationLevelMetricsThresholdsOverride !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.Evaluation.GoldenExpectation.expectationLevelMetricsThresholdsOverride: object expected");
+                                    message.expectationLevelMetricsThresholdsOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.ExpectationLevelMetricsThresholds.fromObject(object.expectationLevelMetricsThresholdsOverride);
+                                }
+                                if (object.agentResponseSemanticSimilarityMetricsConfigOverride != null) {
+                                    if (typeof object.agentResponseSemanticSimilarityMetricsConfigOverride !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.Evaluation.GoldenExpectation.agentResponseSemanticSimilarityMetricsConfigOverride: object expected");
+                                    message.agentResponseSemanticSimilarityMetricsConfigOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.fromObject(object.agentResponseSemanticSimilarityMetricsConfigOverride);
+                                }
+                                if (object.agentResponseHallucinationMetricsConfigOverride != null) {
+                                    if (typeof object.agentResponseHallucinationMetricsConfigOverride !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.Evaluation.GoldenExpectation.agentResponseHallucinationMetricsConfigOverride: object expected");
+                                    message.agentResponseHallucinationMetricsConfigOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig.fromObject(object.agentResponseHallucinationMetricsConfigOverride);
+                                }
+                                switch (object.comparisonType) {
+                                default:
+                                    if (typeof object.comparisonType === "number") {
+                                        message.comparisonType = object.comparisonType;
+                                        break;
+                                    }
+                                    break;
+                                case "COMPARISON_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.comparisonType = 0;
+                                    break;
+                                case "EQUALS":
+                                case 1:
+                                    message.comparisonType = 1;
+                                    break;
+                                case "CONTAINS":
+                                case 2:
+                                    message.comparisonType = 2;
+                                    break;
+                                case "SEMANTIC_SIMILARITY":
+                                case 3:
+                                    message.comparisonType = 3;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -132202,8 +138130,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.note = "";
+                                    object.skipEvaluation = false;
+                                    object.expectationLevelMetricsThresholdsOverride = null;
+                                    object.agentResponseSemanticSimilarityMetricsConfigOverride = null;
+                                    object.agentResponseHallucinationMetricsConfigOverride = null;
+                                    object.comparisonType = options.enums === String ? "COMPARISON_TYPE_UNSPECIFIED" : 0;
+                                }
                                 if (message.note != null && message.hasOwnProperty("note"))
                                     object.note = message.note;
                                 if (message.toolCall != null && message.hasOwnProperty("toolCall")) {
@@ -132235,6 +138169,21 @@
                                     object.mockToolResponse = $root.google.cloud.ces.v1beta.ToolResponse.toObject(message.mockToolResponse, options);
                                     if (options.oneofs)
                                         object.condition = "mockToolResponse";
+                                }
+                                if (message.skipEvaluation != null && message.hasOwnProperty("skipEvaluation"))
+                                    object.skipEvaluation = message.skipEvaluation;
+                                if (message.expectationLevelMetricsThresholdsOverride != null && message.hasOwnProperty("expectationLevelMetricsThresholdsOverride"))
+                                    object.expectationLevelMetricsThresholdsOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.ExpectationLevelMetricsThresholds.toObject(message.expectationLevelMetricsThresholdsOverride, options);
+                                if (message.agentResponseSemanticSimilarityMetricsConfigOverride != null && message.hasOwnProperty("agentResponseSemanticSimilarityMetricsConfigOverride"))
+                                    object.agentResponseSemanticSimilarityMetricsConfigOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.SemanticSimilarityMetricsConfig.toObject(message.agentResponseSemanticSimilarityMetricsConfigOverride, options);
+                                if (message.agentResponseHallucinationMetricsConfigOverride != null && message.hasOwnProperty("agentResponseHallucinationMetricsConfigOverride"))
+                                    object.agentResponseHallucinationMetricsConfigOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.HallucinationMetricsConfig.toObject(message.agentResponseHallucinationMetricsConfigOverride, options);
+                                if (message.comparisonType != null && message.hasOwnProperty("comparisonType"))
+                                    object.comparisonType = options.enums === String ? $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ComparisonType[message.comparisonType] === undefined ? message.comparisonType : $root.google.cloud.ces.v1beta.EvaluationMetricsConfig.ComparisonType[message.comparisonType] : message.comparisonType;
+                                if (message.noToolCalls != null && message.hasOwnProperty("noToolCalls")) {
+                                    object.noToolCalls = message.noToolCalls;
+                                    if (options.oneofs)
+                                        object.condition = "noToolCalls";
                                 }
                                 return object;
                             };
@@ -132575,6 +138524,8 @@
                              * @interface IGoldenTurn
                              * @property {Array.<google.cloud.ces.v1beta.Evaluation.IStep>|null} [steps] GoldenTurn steps
                              * @property {google.cloud.ces.v1beta.ISpan|null} [rootSpan] GoldenTurn rootSpan
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.ITurnLevelMetricsThresholds|null} [turnLevelMetricsThresholdsOverride] GoldenTurn turnLevelMetricsThresholdsOverride
+                             * @property {google.cloud.ces.v1beta.EvaluationMetricsThresholds.HallucinationMetricBehavior|null} [hallucinationMetricBehaviorOverride] GoldenTurn hallucinationMetricBehaviorOverride
                              */
     
                             /**
@@ -132610,6 +138561,22 @@
                             GoldenTurn.prototype.rootSpan = null;
     
                             /**
+                             * GoldenTurn turnLevelMetricsThresholdsOverride.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.ITurnLevelMetricsThresholds|null|undefined} turnLevelMetricsThresholdsOverride
+                             * @memberof google.cloud.ces.v1beta.Evaluation.GoldenTurn
+                             * @instance
+                             */
+                            GoldenTurn.prototype.turnLevelMetricsThresholdsOverride = null;
+    
+                            /**
+                             * GoldenTurn hallucinationMetricBehaviorOverride.
+                             * @member {google.cloud.ces.v1beta.EvaluationMetricsThresholds.HallucinationMetricBehavior} hallucinationMetricBehaviorOverride
+                             * @memberof google.cloud.ces.v1beta.Evaluation.GoldenTurn
+                             * @instance
+                             */
+                            GoldenTurn.prototype.hallucinationMetricBehaviorOverride = 0;
+    
+                            /**
                              * Creates a new GoldenTurn instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.ces.v1beta.Evaluation.GoldenTurn
@@ -132638,6 +138605,10 @@
                                         $root.google.cloud.ces.v1beta.Evaluation.Step.encode(message.steps[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                 if (message.rootSpan != null && Object.hasOwnProperty.call(message, "rootSpan"))
                                     $root.google.cloud.ces.v1beta.Span.encode(message.rootSpan, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.turnLevelMetricsThresholdsOverride != null && Object.hasOwnProperty.call(message, "turnLevelMetricsThresholdsOverride"))
+                                    $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.TurnLevelMetricsThresholds.encode(message.turnLevelMetricsThresholdsOverride, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.hallucinationMetricBehaviorOverride != null && Object.hasOwnProperty.call(message, "hallucinationMetricBehaviorOverride"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.hallucinationMetricBehaviorOverride);
                                 return writer;
                             };
     
@@ -132682,6 +138653,14 @@
                                         }
                                     case 2: {
                                             message.rootSpan = $root.google.cloud.ces.v1beta.Span.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.turnLevelMetricsThresholdsOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.TurnLevelMetricsThresholds.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.hallucinationMetricBehaviorOverride = reader.int32();
                                             break;
                                         }
                                     default:
@@ -132733,6 +138712,20 @@
                                     if (error)
                                         return "rootSpan." + error;
                                 }
+                                if (message.turnLevelMetricsThresholdsOverride != null && message.hasOwnProperty("turnLevelMetricsThresholdsOverride")) {
+                                    var error = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.TurnLevelMetricsThresholds.verify(message.turnLevelMetricsThresholdsOverride);
+                                    if (error)
+                                        return "turnLevelMetricsThresholdsOverride." + error;
+                                }
+                                if (message.hallucinationMetricBehaviorOverride != null && message.hasOwnProperty("hallucinationMetricBehaviorOverride"))
+                                    switch (message.hallucinationMetricBehaviorOverride) {
+                                    default:
+                                        return "hallucinationMetricBehaviorOverride: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -132763,6 +138756,31 @@
                                         throw TypeError(".google.cloud.ces.v1beta.Evaluation.GoldenTurn.rootSpan: object expected");
                                     message.rootSpan = $root.google.cloud.ces.v1beta.Span.fromObject(object.rootSpan);
                                 }
+                                if (object.turnLevelMetricsThresholdsOverride != null) {
+                                    if (typeof object.turnLevelMetricsThresholdsOverride !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.Evaluation.GoldenTurn.turnLevelMetricsThresholdsOverride: object expected");
+                                    message.turnLevelMetricsThresholdsOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.TurnLevelMetricsThresholds.fromObject(object.turnLevelMetricsThresholdsOverride);
+                                }
+                                switch (object.hallucinationMetricBehaviorOverride) {
+                                default:
+                                    if (typeof object.hallucinationMetricBehaviorOverride === "number") {
+                                        message.hallucinationMetricBehaviorOverride = object.hallucinationMetricBehaviorOverride;
+                                        break;
+                                    }
+                                    break;
+                                case "HALLUCINATION_METRIC_BEHAVIOR_UNSPECIFIED":
+                                case 0:
+                                    message.hallucinationMetricBehaviorOverride = 0;
+                                    break;
+                                case "DISABLED":
+                                case 1:
+                                    message.hallucinationMetricBehaviorOverride = 1;
+                                    break;
+                                case "ENABLED":
+                                case 2:
+                                    message.hallucinationMetricBehaviorOverride = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -132781,8 +138799,11 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.steps = [];
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.rootSpan = null;
+                                    object.turnLevelMetricsThresholdsOverride = null;
+                                    object.hallucinationMetricBehaviorOverride = options.enums === String ? "HALLUCINATION_METRIC_BEHAVIOR_UNSPECIFIED" : 0;
+                                }
                                 if (message.steps && message.steps.length) {
                                     object.steps = [];
                                     for (var j = 0; j < message.steps.length; ++j)
@@ -132790,6 +138811,10 @@
                                 }
                                 if (message.rootSpan != null && message.hasOwnProperty("rootSpan"))
                                     object.rootSpan = $root.google.cloud.ces.v1beta.Span.toObject(message.rootSpan, options);
+                                if (message.turnLevelMetricsThresholdsOverride != null && message.hasOwnProperty("turnLevelMetricsThresholdsOverride"))
+                                    object.turnLevelMetricsThresholdsOverride = $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.TurnLevelMetricsThresholds.toObject(message.turnLevelMetricsThresholdsOverride, options);
+                                if (message.hallucinationMetricBehaviorOverride != null && message.hasOwnProperty("hallucinationMetricBehaviorOverride"))
+                                    object.hallucinationMetricBehaviorOverride = options.enums === String ? $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.HallucinationMetricBehavior[message.hallucinationMetricBehaviorOverride] === undefined ? message.hallucinationMetricBehaviorOverride : $root.google.cloud.ces.v1beta.EvaluationMetricsThresholds.HallucinationMetricBehavior[message.hallucinationMetricBehaviorOverride] : message.hallucinationMetricBehaviorOverride;
                                 return object;
                             };
     
@@ -133606,6 +139631,7 @@
                              * @property {google.cloud.ces.v1beta.Evaluation.Scenario.TaskCompletionBehavior|null} [taskCompletionBehavior] Scenario taskCompletionBehavior
                              * @property {google.cloud.ces.v1beta.Evaluation.Scenario.UserGoalBehavior|null} [userGoalBehavior] Scenario userGoalBehavior
                              * @property {Array.<string>|null} [evaluationExpectations] Scenario evaluationExpectations
+                             * @property {google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode|null} [scenarioExecutionMode] Scenario scenarioExecutionMode
                              */
     
                             /**
@@ -133700,6 +139726,14 @@
                             Scenario.prototype.evaluationExpectations = $util.emptyArray;
     
                             /**
+                             * Scenario scenarioExecutionMode.
+                             * @member {google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode} scenarioExecutionMode
+                             * @memberof google.cloud.ces.v1beta.Evaluation.Scenario
+                             * @instance
+                             */
+                            Scenario.prototype.scenarioExecutionMode = 0;
+    
+                            /**
                              * Creates a new Scenario instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.ces.v1beta.Evaluation.Scenario
@@ -133745,6 +139779,8 @@
                                 if (message.evaluationExpectations != null && message.evaluationExpectations.length)
                                     for (var i = 0; i < message.evaluationExpectations.length; ++i)
                                         writer.uint32(/* id 10, wireType 2 =*/82).string(message.evaluationExpectations[i]);
+                                if (message.scenarioExecutionMode != null && Object.hasOwnProperty.call(message, "scenarioExecutionMode"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).int32(message.scenarioExecutionMode);
                                 return writer;
                             };
     
@@ -133823,6 +139859,10 @@
                                             if (!(message.evaluationExpectations && message.evaluationExpectations.length))
                                                 message.evaluationExpectations = [];
                                             message.evaluationExpectations.push(reader.string());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.scenarioExecutionMode = reader.int32();
                                             break;
                                         }
                                     default:
@@ -133922,6 +139962,15 @@
                                         if (!$util.isString(message.evaluationExpectations[i]))
                                             return "evaluationExpectations: string[] expected";
                                 }
+                                if (message.scenarioExecutionMode != null && message.hasOwnProperty("scenarioExecutionMode"))
+                                    switch (message.scenarioExecutionMode) {
+                                    default:
+                                        return "scenarioExecutionMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -134024,6 +140073,26 @@
                                     for (var i = 0; i < object.evaluationExpectations.length; ++i)
                                         message.evaluationExpectations[i] = String(object.evaluationExpectations[i]);
                                 }
+                                switch (object.scenarioExecutionMode) {
+                                default:
+                                    if (typeof object.scenarioExecutionMode === "number") {
+                                        message.scenarioExecutionMode = object.scenarioExecutionMode;
+                                        break;
+                                    }
+                                    break;
+                                case "SCENARIO_EXECUTION_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.scenarioExecutionMode = 0;
+                                    break;
+                                case "QUALITY_OPTIMIZED":
+                                case 1:
+                                    message.scenarioExecutionMode = 1;
+                                    break;
+                                case "SPEED_OPTIMIZED":
+                                case 2:
+                                    message.scenarioExecutionMode = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -134052,6 +140121,7 @@
                                     object.variableOverrides = null;
                                     object.taskCompletionBehavior = options.enums === String ? "TASK_COMPLETION_BEHAVIOR_UNSPECIFIED" : 0;
                                     object.userGoalBehavior = options.enums === String ? "USER_GOAL_BEHAVIOR_UNSPECIFIED" : 0;
+                                    object.scenarioExecutionMode = options.enums === String ? "SCENARIO_EXECUTION_MODE_UNSPECIFIED" : 0;
                                 }
                                 if (message.task != null && message.hasOwnProperty("task"))
                                     object.task = message.task;
@@ -134083,6 +140153,8 @@
                                     for (var j = 0; j < message.evaluationExpectations.length; ++j)
                                         object.evaluationExpectations[j] = message.evaluationExpectations[j];
                                 }
+                                if (message.scenarioExecutionMode != null && message.hasOwnProperty("scenarioExecutionMode"))
+                                    object.scenarioExecutionMode = options.enums === String ? $root.google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode[message.scenarioExecutionMode] === undefined ? message.scenarioExecutionMode : $root.google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode[message.scenarioExecutionMode] : message.scenarioExecutionMode;
                                 return object;
                             };
     
@@ -135300,9 +141372,11 @@
                                 default:
                                     return "executionState: enum value expected";
                                 case 0:
+                                case 5:
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.evaluationMetricsThresholds != null && message.hasOwnProperty("evaluationMetricsThresholds")) {
@@ -135423,6 +141497,10 @@
                             case 0:
                                 message.executionState = 0;
                                 break;
+                            case "QUEUED":
+                            case 5:
+                                message.executionState = 5;
+                                break;
                             case "RUNNING":
                             case 1:
                                 message.executionState = 1;
@@ -135434,6 +141512,10 @@
                             case "ERROR":
                             case 3:
                                 message.executionState = 3;
+                                break;
+                            case "CANCELLED":
+                            case 4:
+                                message.executionState = 4;
                                 break;
                             }
                             if (object.evaluationMetricsThresholds != null) {
@@ -135584,6 +141666,7 @@
                              * @property {google.cloud.ces.v1beta.IToolResponse|null} [observedToolResponse] GoldenExpectationOutcome observedToolResponse
                              * @property {google.cloud.ces.v1beta.IMessage|null} [observedAgentResponse] GoldenExpectationOutcome observedAgentResponse
                              * @property {google.cloud.ces.v1beta.IAgentTransfer|null} [observedAgentTransfer] GoldenExpectationOutcome observedAgentTransfer
+                             * @property {google.protobuf.IStruct|null} [observedPayload] GoldenExpectationOutcome observedPayload
                              * @property {google.cloud.ces.v1beta.Evaluation.IGoldenExpectation|null} [expectation] GoldenExpectationOutcome expectation
                              * @property {google.cloud.ces.v1beta.EvaluationResult.Outcome|null} [outcome] GoldenExpectationOutcome outcome
                              * @property {google.cloud.ces.v1beta.EvaluationResult.ISemanticSimilarityResult|null} [semanticSimilarityResult] GoldenExpectationOutcome semanticSimilarityResult
@@ -135638,6 +141721,14 @@
                             GoldenExpectationOutcome.prototype.observedAgentTransfer = null;
     
                             /**
+                             * GoldenExpectationOutcome observedPayload.
+                             * @member {google.protobuf.IStruct|null|undefined} observedPayload
+                             * @memberof google.cloud.ces.v1beta.EvaluationResult.GoldenExpectationOutcome
+                             * @instance
+                             */
+                            GoldenExpectationOutcome.prototype.observedPayload = null;
+    
+                            /**
                              * GoldenExpectationOutcome expectation.
                              * @member {google.cloud.ces.v1beta.Evaluation.IGoldenExpectation|null|undefined} expectation
                              * @memberof google.cloud.ces.v1beta.EvaluationResult.GoldenExpectationOutcome
@@ -135674,12 +141765,12 @@
     
                             /**
                              * GoldenExpectationOutcome result.
-                             * @member {"observedToolCall"|"observedToolResponse"|"observedAgentResponse"|"observedAgentTransfer"|undefined} result
+                             * @member {"observedToolCall"|"observedToolResponse"|"observedAgentResponse"|"observedAgentTransfer"|"observedPayload"|undefined} result
                              * @memberof google.cloud.ces.v1beta.EvaluationResult.GoldenExpectationOutcome
                              * @instance
                              */
                             Object.defineProperty(GoldenExpectationOutcome.prototype, "result", {
-                                get: $util.oneOfGetter($oneOfFields = ["observedToolCall", "observedToolResponse", "observedAgentResponse", "observedAgentTransfer"]),
+                                get: $util.oneOfGetter($oneOfFields = ["observedToolCall", "observedToolResponse", "observedAgentResponse", "observedAgentTransfer", "observedPayload"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -135723,6 +141814,8 @@
                                     $root.google.cloud.ces.v1beta.EvaluationResult.SemanticSimilarityResult.encode(message.semanticSimilarityResult, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.toolInvocationResult != null && Object.hasOwnProperty.call(message, "toolInvocationResult"))
                                     $root.google.cloud.ces.v1beta.EvaluationResult.GoldenExpectationOutcome.ToolInvocationResult.encode(message.toolInvocationResult, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.observedPayload != null && Object.hasOwnProperty.call(message, "observedPayload"))
+                                    $root.google.protobuf.Struct.encode(message.observedPayload, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -135773,6 +141866,10 @@
                                         }
                                     case 5: {
                                             message.observedAgentTransfer = $root.google.cloud.ces.v1beta.AgentTransfer.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.observedPayload = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 1: {
@@ -135865,6 +141962,16 @@
                                             return "observedAgentTransfer." + error;
                                     }
                                 }
+                                if (message.observedPayload != null && message.hasOwnProperty("observedPayload")) {
+                                    if (properties.result === 1)
+                                        return "result: multiple values";
+                                    properties.result = 1;
+                                    {
+                                        var error = $root.google.protobuf.Struct.verify(message.observedPayload);
+                                        if (error)
+                                            return "observedPayload." + error;
+                                    }
+                                }
                                 if (message.expectation != null && message.hasOwnProperty("expectation")) {
                                     var error = $root.google.cloud.ces.v1beta.Evaluation.GoldenExpectation.verify(message.expectation);
                                     if (error)
@@ -135924,6 +142031,11 @@
                                     if (typeof object.observedAgentTransfer !== "object")
                                         throw TypeError(".google.cloud.ces.v1beta.EvaluationResult.GoldenExpectationOutcome.observedAgentTransfer: object expected");
                                     message.observedAgentTransfer = $root.google.cloud.ces.v1beta.AgentTransfer.fromObject(object.observedAgentTransfer);
+                                }
+                                if (object.observedPayload != null) {
+                                    if (typeof object.observedPayload !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.EvaluationResult.GoldenExpectationOutcome.observedPayload: object expected");
+                                    message.observedPayload = $root.google.protobuf.Struct.fromObject(object.observedPayload);
                                 }
                                 if (object.expectation != null) {
                                     if (typeof object.expectation !== "object")
@@ -136014,6 +142126,11 @@
                                     object.semanticSimilarityResult = $root.google.cloud.ces.v1beta.EvaluationResult.SemanticSimilarityResult.toObject(message.semanticSimilarityResult, options);
                                 if (message.toolInvocationResult != null && message.hasOwnProperty("toolInvocationResult"))
                                     object.toolInvocationResult = $root.google.cloud.ces.v1beta.EvaluationResult.GoldenExpectationOutcome.ToolInvocationResult.toObject(message.toolInvocationResult, options);
+                                if (message.observedPayload != null && message.hasOwnProperty("observedPayload")) {
+                                    object.observedPayload = $root.google.protobuf.Struct.toObject(message.observedPayload, options);
+                                    if (options.oneofs)
+                                        object.result = "observedPayload";
+                                }
                                 return object;
                             };
     
@@ -141197,16 +147314,20 @@
                          * @name google.cloud.ces.v1beta.EvaluationResult.ExecutionState
                          * @enum {number}
                          * @property {number} EXECUTION_STATE_UNSPECIFIED=0 EXECUTION_STATE_UNSPECIFIED value
+                         * @property {number} QUEUED=5 QUEUED value
                          * @property {number} RUNNING=1 RUNNING value
                          * @property {number} COMPLETED=2 COMPLETED value
                          * @property {number} ERROR=3 ERROR value
+                         * @property {number} CANCELLED=4 CANCELLED value
                          */
                         EvaluationResult.ExecutionState = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "EXECUTION_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[5] = "QUEUED"] = 5;
                             values[valuesById[1] = "RUNNING"] = 1;
                             values[valuesById[2] = "COMPLETED"] = 2;
                             values[valuesById[3] = "ERROR"] = 3;
+                            values[valuesById[4] = "CANCELLED"] = 4;
                             return values;
                         })();
     
@@ -141243,6 +147364,7 @@
                          * @property {google.cloud.ces.v1beta.IOptimizationConfig|null} [optimizationConfig] EvaluationRun optimizationConfig
                          * @property {string|null} [scheduledEvaluationRun] EvaluationRun scheduledEvaluationRun
                          * @property {google.cloud.ces.v1beta.GoldenRunMethod|null} [goldenRunMethod] EvaluationRun goldenRunMethod
+                         * @property {string|null} [operation] EvaluationRun operation
                          */
     
                         /**
@@ -141457,6 +147579,14 @@
                         EvaluationRun.prototype.goldenRunMethod = 0;
     
                         /**
+                         * EvaluationRun operation.
+                         * @member {string} operation
+                         * @memberof google.cloud.ces.v1beta.EvaluationRun
+                         * @instance
+                         */
+                        EvaluationRun.prototype.operation = "";
+    
+                        /**
                          * Creates a new EvaluationRun instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.EvaluationRun
@@ -141534,6 +147664,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.changelogCreateTime, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             if (message.latencyReport != null && Object.hasOwnProperty.call(message, "latencyReport"))
                                 $root.google.cloud.ces.v1beta.LatencyReport.encode(message.latencyReport, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                            if (message.operation != null && Object.hasOwnProperty.call(message, "operation"))
+                                writer.uint32(/* id 26, wireType 2 =*/210).string(message.operation);
                             return writer;
                         };
     
@@ -141691,6 +147823,10 @@
                                         message.goldenRunMethod = reader.int32();
                                         break;
                                     }
+                                case 26: {
+                                        message.operation = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -141786,9 +147922,11 @@
                                 default:
                                     return "state: enum value expected";
                                 case 0:
+                                case 5:
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.progress != null && message.hasOwnProperty("progress")) {
@@ -141855,6 +147993,9 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.operation != null && message.hasOwnProperty("operation"))
+                                if (!$util.isString(message.operation))
+                                    return "operation: string expected";
                             return null;
                         };
     
@@ -141943,6 +148084,10 @@
                             case 0:
                                 message.state = 0;
                                 break;
+                            case "QUEUED":
+                            case 5:
+                                message.state = 5;
+                                break;
                             case "RUNNING":
                             case 1:
                                 message.state = 1;
@@ -141954,6 +148099,10 @@
                             case "ERROR":
                             case 3:
                                 message.state = 3;
+                                break;
+                            case "CANCELLED":
+                            case 4:
+                                message.state = 4;
                                 break;
                             }
                             if (object.progress != null) {
@@ -142030,6 +148179,8 @@
                                 message.goldenRunMethod = 2;
                                 break;
                             }
+                            if (object.operation != null)
+                                message.operation = String(object.operation);
                             return message;
                         };
     
@@ -142074,6 +148225,7 @@
                                 object.changelog = "";
                                 object.changelogCreateTime = null;
                                 object.latencyReport = null;
+                                object.operation = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -142136,6 +148288,8 @@
                                 object.changelogCreateTime = $root.google.protobuf.Timestamp.toObject(message.changelogCreateTime, options);
                             if (message.latencyReport != null && message.hasOwnProperty("latencyReport"))
                                 object.latencyReport = $root.google.cloud.ces.v1beta.LatencyReport.toObject(message.latencyReport, options);
+                            if (message.operation != null && message.hasOwnProperty("operation"))
+                                object.operation = message.operation;
                             return object;
                         };
     
@@ -142176,6 +148330,7 @@
                              * @property {number|null} [errorCount] Progress errorCount
                              * @property {number|null} [completedCount] Progress completedCount
                              * @property {number|null} [passedCount] Progress passedCount
+                             * @property {number|null} [cancelledCount] Progress cancelledCount
                              */
     
                             /**
@@ -142234,6 +148389,14 @@
                             Progress.prototype.passedCount = 0;
     
                             /**
+                             * Progress cancelledCount.
+                             * @member {number} cancelledCount
+                             * @memberof google.cloud.ces.v1beta.EvaluationRun.Progress
+                             * @instance
+                             */
+                            Progress.prototype.cancelledCount = 0;
+    
+                            /**
                              * Creates a new Progress instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.ces.v1beta.EvaluationRun.Progress
@@ -142267,6 +148430,8 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.completedCount);
                                 if (message.passedCount != null && Object.hasOwnProperty.call(message, "passedCount"))
                                     writer.uint32(/* id 5, wireType 0 =*/40).int32(message.passedCount);
+                                if (message.cancelledCount != null && Object.hasOwnProperty.call(message, "cancelledCount"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.cancelledCount);
                                 return writer;
                             };
     
@@ -142323,6 +148488,10 @@
                                             message.passedCount = reader.int32();
                                             break;
                                         }
+                                    case 6: {
+                                            message.cancelledCount = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -142373,6 +148542,9 @@
                                 if (message.passedCount != null && message.hasOwnProperty("passedCount"))
                                     if (!$util.isInteger(message.passedCount))
                                         return "passedCount: integer expected";
+                                if (message.cancelledCount != null && message.hasOwnProperty("cancelledCount"))
+                                    if (!$util.isInteger(message.cancelledCount))
+                                        return "cancelledCount: integer expected";
                                 return null;
                             };
     
@@ -142398,6 +148570,8 @@
                                     message.completedCount = object.completedCount | 0;
                                 if (object.passedCount != null)
                                     message.passedCount = object.passedCount | 0;
+                                if (object.cancelledCount != null)
+                                    message.cancelledCount = object.cancelledCount | 0;
                                 return message;
                             };
     
@@ -142420,6 +148594,7 @@
                                     object.errorCount = 0;
                                     object.completedCount = 0;
                                     object.passedCount = 0;
+                                    object.cancelledCount = 0;
                                 }
                                 if (message.totalCount != null && message.hasOwnProperty("totalCount"))
                                     object.totalCount = message.totalCount;
@@ -142431,6 +148606,8 @@
                                     object.completedCount = message.completedCount;
                                 if (message.passedCount != null && message.hasOwnProperty("passedCount"))
                                     object.passedCount = message.passedCount;
+                                if (message.cancelledCount != null && message.hasOwnProperty("cancelledCount"))
+                                    object.cancelledCount = message.cancelledCount;
                                 return object;
                             };
     
@@ -142738,16 +148915,20 @@
                          * @name google.cloud.ces.v1beta.EvaluationRun.EvaluationRunState
                          * @enum {number}
                          * @property {number} EVALUATION_RUN_STATE_UNSPECIFIED=0 EVALUATION_RUN_STATE_UNSPECIFIED value
+                         * @property {number} QUEUED=5 QUEUED value
                          * @property {number} RUNNING=1 RUNNING value
                          * @property {number} COMPLETED=2 COMPLETED value
                          * @property {number} ERROR=3 ERROR value
+                         * @property {number} CANCELLED=4 CANCELLED value
                          */
                         EvaluationRun.EvaluationRunState = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "EVALUATION_RUN_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[5] = "QUEUED"] = 5;
                             values[valuesById[1] = "RUNNING"] = 1;
                             values[valuesById[2] = "COMPLETED"] = 2;
                             values[valuesById[3] = "ERROR"] = 3;
+                            values[valuesById[4] = "CANCELLED"] = 4;
                             return values;
                         })();
     
@@ -145422,6 +151603,7 @@
                          * @property {google.cloud.ces.v1beta.EvaluationErrorInfo.ErrorType|null} [errorType] EvaluationErrorInfo errorType
                          * @property {string|null} [errorMessage] EvaluationErrorInfo errorMessage
                          * @property {string|null} [sessionId] EvaluationErrorInfo sessionId
+                         * @property {string|null} [userFacingErrorMessage] EvaluationErrorInfo userFacingErrorMessage
                          */
     
                         /**
@@ -145464,6 +151646,14 @@
                         EvaluationErrorInfo.prototype.sessionId = "";
     
                         /**
+                         * EvaluationErrorInfo userFacingErrorMessage.
+                         * @member {string} userFacingErrorMessage
+                         * @memberof google.cloud.ces.v1beta.EvaluationErrorInfo
+                         * @instance
+                         */
+                        EvaluationErrorInfo.prototype.userFacingErrorMessage = "";
+    
+                        /**
                          * Creates a new EvaluationErrorInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.EvaluationErrorInfo
@@ -145493,6 +151683,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorMessage);
                             if (message.sessionId != null && Object.hasOwnProperty.call(message, "sessionId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.sessionId);
+                            if (message.userFacingErrorMessage != null && Object.hasOwnProperty.call(message, "userFacingErrorMessage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.userFacingErrorMessage);
                             return writer;
                         };
     
@@ -145539,6 +151731,10 @@
                                     }
                                 case 3: {
                                         message.sessionId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.userFacingErrorMessage = reader.string();
                                         break;
                                     }
                                 default:
@@ -145595,6 +151791,9 @@
                             if (message.sessionId != null && message.hasOwnProperty("sessionId"))
                                 if (!$util.isString(message.sessionId))
                                     return "sessionId: string expected";
+                            if (message.userFacingErrorMessage != null && message.hasOwnProperty("userFacingErrorMessage"))
+                                if (!$util.isString(message.userFacingErrorMessage))
+                                    return "userFacingErrorMessage: string expected";
                             return null;
                         };
     
@@ -145650,6 +151849,8 @@
                                 message.errorMessage = String(object.errorMessage);
                             if (object.sessionId != null)
                                 message.sessionId = String(object.sessionId);
+                            if (object.userFacingErrorMessage != null)
+                                message.userFacingErrorMessage = String(object.userFacingErrorMessage);
                             return message;
                         };
     
@@ -145670,6 +151871,7 @@
                                 object.errorType = options.enums === String ? "ERROR_TYPE_UNSPECIFIED" : 0;
                                 object.errorMessage = "";
                                 object.sessionId = "";
+                                object.userFacingErrorMessage = "";
                             }
                             if (message.errorType != null && message.hasOwnProperty("errorType"))
                                 object.errorType = options.enums === String ? $root.google.cloud.ces.v1beta.EvaluationErrorInfo.ErrorType[message.errorType] === undefined ? message.errorType : $root.google.cloud.ces.v1beta.EvaluationErrorInfo.ErrorType[message.errorType] : message.errorType;
@@ -145677,6 +151879,8 @@
                                 object.errorMessage = message.errorMessage;
                             if (message.sessionId != null && message.hasOwnProperty("sessionId"))
                                 object.sessionId = message.sessionId;
+                            if (message.userFacingErrorMessage != null && message.hasOwnProperty("userFacingErrorMessage"))
+                                object.userFacingErrorMessage = message.userFacingErrorMessage;
                             return object;
                         };
     
@@ -150183,6 +156387,7 @@
                              * @property {string|null} [uri] CitedChunk uri
                              * @property {string|null} [title] CitedChunk title
                              * @property {string|null} [text] CitedChunk text
+                             * @property {boolean|null} [requiresAttribution] CitedChunk requiresAttribution
                              */
     
                             /**
@@ -150225,6 +156430,14 @@
                             CitedChunk.prototype.text = "";
     
                             /**
+                             * CitedChunk requiresAttribution.
+                             * @member {boolean} requiresAttribution
+                             * @memberof google.cloud.ces.v1beta.Citations.CitedChunk
+                             * @instance
+                             */
+                            CitedChunk.prototype.requiresAttribution = false;
+    
+                            /**
                              * Creates a new CitedChunk instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.ces.v1beta.Citations.CitedChunk
@@ -150254,6 +156467,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
                                 if (message.text != null && Object.hasOwnProperty.call(message, "text"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.text);
+                                if (message.requiresAttribution != null && Object.hasOwnProperty.call(message, "requiresAttribution"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.requiresAttribution);
                                 return writer;
                             };
     
@@ -150302,6 +156517,10 @@
                                             message.text = reader.string();
                                             break;
                                         }
+                                    case 4: {
+                                            message.requiresAttribution = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -150346,6 +156565,9 @@
                                 if (message.text != null && message.hasOwnProperty("text"))
                                     if (!$util.isString(message.text))
                                         return "text: string expected";
+                                if (message.requiresAttribution != null && message.hasOwnProperty("requiresAttribution"))
+                                    if (typeof message.requiresAttribution !== "boolean")
+                                        return "requiresAttribution: boolean expected";
                                 return null;
                             };
     
@@ -150367,6 +156589,8 @@
                                     message.title = String(object.title);
                                 if (object.text != null)
                                     message.text = String(object.text);
+                                if (object.requiresAttribution != null)
+                                    message.requiresAttribution = Boolean(object.requiresAttribution);
                                 return message;
                             };
     
@@ -150387,6 +156611,7 @@
                                     object.uri = "";
                                     object.title = "";
                                     object.text = "";
+                                    object.requiresAttribution = false;
                                 }
                                 if (message.uri != null && message.hasOwnProperty("uri"))
                                     object.uri = message.uri;
@@ -150394,6 +156619,8 @@
                                     object.title = message.title;
                                 if (message.text != null && message.hasOwnProperty("text"))
                                     object.text = message.text;
+                                if (message.requiresAttribution != null && message.hasOwnProperty("requiresAttribution"))
+                                    object.requiresAttribution = message.requiresAttribution;
                                 return object;
                             };
     
@@ -156799,7 +163026,545 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.ces.v1beta.EvaluationService|exportEvaluationRuns}.
+                         * @memberof google.cloud.ces.v1beta.EvaluationService
+                         * @typedef ExportEvaluationRunsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExportEvaluationRuns.
+                         * @function exportEvaluationRuns
+                         * @memberof google.cloud.ces.v1beta.EvaluationService
+                         * @instance
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationRunsRequest} request ExportEvaluationRunsRequest message or plain object
+                         * @param {google.cloud.ces.v1beta.EvaluationService.ExportEvaluationRunsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EvaluationService.prototype.exportEvaluationRuns = function exportEvaluationRuns(request, callback) {
+                            return this.rpcCall(exportEvaluationRuns, $root.google.cloud.ces.v1beta.ExportEvaluationRunsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExportEvaluationRuns" });
+    
+                        /**
+                         * Calls ExportEvaluationRuns.
+                         * @function exportEvaluationRuns
+                         * @memberof google.cloud.ces.v1beta.EvaluationService
+                         * @instance
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationRunsRequest} request ExportEvaluationRunsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.ces.v1beta.EvaluationService|exportEvaluationResults}.
+                         * @memberof google.cloud.ces.v1beta.EvaluationService
+                         * @typedef ExportEvaluationResultsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExportEvaluationResults.
+                         * @function exportEvaluationResults
+                         * @memberof google.cloud.ces.v1beta.EvaluationService
+                         * @instance
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationResultsRequest} request ExportEvaluationResultsRequest message or plain object
+                         * @param {google.cloud.ces.v1beta.EvaluationService.ExportEvaluationResultsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EvaluationService.prototype.exportEvaluationResults = function exportEvaluationResults(request, callback) {
+                            return this.rpcCall(exportEvaluationResults, $root.google.cloud.ces.v1beta.ExportEvaluationResultsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExportEvaluationResults" });
+    
+                        /**
+                         * Calls ExportEvaluationResults.
+                         * @function exportEvaluationResults
+                         * @memberof google.cloud.ces.v1beta.EvaluationService
+                         * @instance
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationResultsRequest} request ExportEvaluationResultsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.ces.v1beta.EvaluationService|runEvaluationResultMetrics}.
+                         * @memberof google.cloud.ces.v1beta.EvaluationService
+                         * @typedef RunEvaluationResultMetricsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RunEvaluationResultMetrics.
+                         * @function runEvaluationResultMetrics
+                         * @memberof google.cloud.ces.v1beta.EvaluationService
+                         * @instance
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsRequest} request RunEvaluationResultMetricsRequest message or plain object
+                         * @param {google.cloud.ces.v1beta.EvaluationService.RunEvaluationResultMetricsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EvaluationService.prototype.runEvaluationResultMetrics = function runEvaluationResultMetrics(request, callback) {
+                            return this.rpcCall(runEvaluationResultMetrics, $root.google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RunEvaluationResultMetrics" });
+    
+                        /**
+                         * Calls RunEvaluationResultMetrics.
+                         * @function runEvaluationResultMetrics
+                         * @memberof google.cloud.ces.v1beta.EvaluationService
+                         * @instance
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsRequest} request RunEvaluationResultMetricsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return EvaluationService;
+                    })();
+    
+                    v1beta.RunEvaluationResultMetricsRequest = (function() {
+    
+                        /**
+                         * Properties of a RunEvaluationResultMetricsRequest.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IRunEvaluationResultMetricsRequest
+                         * @property {string|null} [evaluationResultId] RunEvaluationResultMetricsRequest evaluationResultId
+                         */
+    
+                        /**
+                         * Constructs a new RunEvaluationResultMetricsRequest.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents a RunEvaluationResultMetricsRequest.
+                         * @implements IRunEvaluationResultMetricsRequest
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsRequest=} [properties] Properties to set
+                         */
+                        function RunEvaluationResultMetricsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunEvaluationResultMetricsRequest evaluationResultId.
+                         * @member {string} evaluationResultId
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @instance
+                         */
+                        RunEvaluationResultMetricsRequest.prototype.evaluationResultId = "";
+    
+                        /**
+                         * Creates a new RunEvaluationResultMetricsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest} RunEvaluationResultMetricsRequest instance
+                         */
+                        RunEvaluationResultMetricsRequest.create = function create(properties) {
+                            return new RunEvaluationResultMetricsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunEvaluationResultMetricsRequest message. Does not implicitly {@link google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsRequest} message RunEvaluationResultMetricsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunEvaluationResultMetricsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.evaluationResultId != null && Object.hasOwnProperty.call(message, "evaluationResultId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.evaluationResultId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunEvaluationResultMetricsRequest message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsRequest} message RunEvaluationResultMetricsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunEvaluationResultMetricsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunEvaluationResultMetricsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest} RunEvaluationResultMetricsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunEvaluationResultMetricsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.evaluationResultId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunEvaluationResultMetricsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest} RunEvaluationResultMetricsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunEvaluationResultMetricsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunEvaluationResultMetricsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunEvaluationResultMetricsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.evaluationResultId != null && message.hasOwnProperty("evaluationResultId"))
+                                if (!$util.isString(message.evaluationResultId))
+                                    return "evaluationResultId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunEvaluationResultMetricsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest} RunEvaluationResultMetricsRequest
+                         */
+                        RunEvaluationResultMetricsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest();
+                            if (object.evaluationResultId != null)
+                                message.evaluationResultId = String(object.evaluationResultId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunEvaluationResultMetricsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest} message RunEvaluationResultMetricsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunEvaluationResultMetricsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.evaluationResultId = "";
+                            if (message.evaluationResultId != null && message.hasOwnProperty("evaluationResultId"))
+                                object.evaluationResultId = message.evaluationResultId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunEvaluationResultMetricsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunEvaluationResultMetricsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RunEvaluationResultMetricsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunEvaluationResultMetricsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.RunEvaluationResultMetricsRequest";
+                        };
+    
+                        return RunEvaluationResultMetricsRequest;
+                    })();
+    
+                    v1beta.RunEvaluationResultMetricsResponse = (function() {
+    
+                        /**
+                         * Properties of a RunEvaluationResultMetricsResponse.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IRunEvaluationResultMetricsResponse
+                         * @property {google.cloud.ces.v1beta.EvaluationResult.Outcome|null} [status] RunEvaluationResultMetricsResponse status
+                         */
+    
+                        /**
+                         * Constructs a new RunEvaluationResultMetricsResponse.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents a RunEvaluationResultMetricsResponse.
+                         * @implements IRunEvaluationResultMetricsResponse
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse=} [properties] Properties to set
+                         */
+                        function RunEvaluationResultMetricsResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunEvaluationResultMetricsResponse status.
+                         * @member {google.cloud.ces.v1beta.EvaluationResult.Outcome} status
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @instance
+                         */
+                        RunEvaluationResultMetricsResponse.prototype.status = 0;
+    
+                        /**
+                         * Creates a new RunEvaluationResultMetricsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse} RunEvaluationResultMetricsResponse instance
+                         */
+                        RunEvaluationResultMetricsResponse.create = function create(properties) {
+                            return new RunEvaluationResultMetricsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunEvaluationResultMetricsResponse message. Does not implicitly {@link google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse} message RunEvaluationResultMetricsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunEvaluationResultMetricsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunEvaluationResultMetricsResponse message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse} message RunEvaluationResultMetricsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunEvaluationResultMetricsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunEvaluationResultMetricsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse} RunEvaluationResultMetricsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunEvaluationResultMetricsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.status = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunEvaluationResultMetricsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse} RunEvaluationResultMetricsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunEvaluationResultMetricsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunEvaluationResultMetricsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunEvaluationResultMetricsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                switch (message.status) {
+                                default:
+                                    return "status: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunEvaluationResultMetricsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse} RunEvaluationResultMetricsResponse
+                         */
+                        RunEvaluationResultMetricsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse();
+                            switch (object.status) {
+                            default:
+                                if (typeof object.status === "number") {
+                                    message.status = object.status;
+                                    break;
+                                }
+                                break;
+                            case "OUTCOME_UNSPECIFIED":
+                            case 0:
+                                message.status = 0;
+                                break;
+                            case "PASS":
+                            case 1:
+                                message.status = 1;
+                                break;
+                            case "FAIL":
+                            case 2:
+                                message.status = 2;
+                                break;
+                            case "SKIPPED":
+                            case 3:
+                                message.status = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunEvaluationResultMetricsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @static
+                         * @param {google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse} message RunEvaluationResultMetricsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunEvaluationResultMetricsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.status = options.enums === String ? "OUTCOME_UNSPECIFIED" : 0;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = options.enums === String ? $root.google.cloud.ces.v1beta.EvaluationResult.Outcome[message.status] === undefined ? message.status : $root.google.cloud.ces.v1beta.EvaluationResult.Outcome[message.status] : message.status;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunEvaluationResultMetricsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunEvaluationResultMetricsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RunEvaluationResultMetricsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunEvaluationResultMetricsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse";
+                        };
+    
+                        return RunEvaluationResultMetricsResponse;
                     })();
     
                     v1beta.RunEvaluationResponse = (function() {
@@ -169282,6 +176047,280 @@
                         return ExportEvaluationsResponse;
                     })();
     
+                    v1beta.ExportEvaluationResultsRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportEvaluationResultsRequest.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IExportEvaluationResultsRequest
+                         * @property {string|null} [parent] ExportEvaluationResultsRequest parent
+                         * @property {Array.<string>|null} [names] ExportEvaluationResultsRequest names
+                         * @property {google.cloud.ces.v1beta.IExportOptions|null} [exportOptions] ExportEvaluationResultsRequest exportOptions
+                         */
+    
+                        /**
+                         * Constructs a new ExportEvaluationResultsRequest.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents an ExportEvaluationResultsRequest.
+                         * @implements IExportEvaluationResultsRequest
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationResultsRequest=} [properties] Properties to set
+                         */
+                        function ExportEvaluationResultsRequest(properties) {
+                            this.names = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportEvaluationResultsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @instance
+                         */
+                        ExportEvaluationResultsRequest.prototype.parent = "";
+    
+                        /**
+                         * ExportEvaluationResultsRequest names.
+                         * @member {Array.<string>} names
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @instance
+                         */
+                        ExportEvaluationResultsRequest.prototype.names = $util.emptyArray;
+    
+                        /**
+                         * ExportEvaluationResultsRequest exportOptions.
+                         * @member {google.cloud.ces.v1beta.IExportOptions|null|undefined} exportOptions
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @instance
+                         */
+                        ExportEvaluationResultsRequest.prototype.exportOptions = null;
+    
+                        /**
+                         * Creates a new ExportEvaluationResultsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationResultsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationResultsRequest} ExportEvaluationResultsRequest instance
+                         */
+                        ExportEvaluationResultsRequest.create = function create(properties) {
+                            return new ExportEvaluationResultsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEvaluationResultsRequest message. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationResultsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationResultsRequest} message ExportEvaluationResultsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEvaluationResultsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.names != null && message.names.length)
+                                for (var i = 0; i < message.names.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.names[i]);
+                            if (message.exportOptions != null && Object.hasOwnProperty.call(message, "exportOptions"))
+                                $root.google.cloud.ces.v1beta.ExportOptions.encode(message.exportOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEvaluationResultsRequest message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationResultsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationResultsRequest} message ExportEvaluationResultsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEvaluationResultsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportEvaluationResultsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationResultsRequest} ExportEvaluationResultsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEvaluationResultsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.ExportEvaluationResultsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.names && message.names.length))
+                                            message.names = [];
+                                        message.names.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.exportOptions = $root.google.cloud.ces.v1beta.ExportOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportEvaluationResultsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationResultsRequest} ExportEvaluationResultsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEvaluationResultsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportEvaluationResultsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportEvaluationResultsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.names != null && message.hasOwnProperty("names")) {
+                                if (!Array.isArray(message.names))
+                                    return "names: array expected";
+                                for (var i = 0; i < message.names.length; ++i)
+                                    if (!$util.isString(message.names[i]))
+                                        return "names: string[] expected";
+                            }
+                            if (message.exportOptions != null && message.hasOwnProperty("exportOptions")) {
+                                var error = $root.google.cloud.ces.v1beta.ExportOptions.verify(message.exportOptions);
+                                if (error)
+                                    return "exportOptions." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportEvaluationResultsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationResultsRequest} ExportEvaluationResultsRequest
+                         */
+                        ExportEvaluationResultsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.ExportEvaluationResultsRequest)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.ExportEvaluationResultsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.names) {
+                                if (!Array.isArray(object.names))
+                                    throw TypeError(".google.cloud.ces.v1beta.ExportEvaluationResultsRequest.names: array expected");
+                                message.names = [];
+                                for (var i = 0; i < object.names.length; ++i)
+                                    message.names[i] = String(object.names[i]);
+                            }
+                            if (object.exportOptions != null) {
+                                if (typeof object.exportOptions !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.ExportEvaluationResultsRequest.exportOptions: object expected");
+                                message.exportOptions = $root.google.cloud.ces.v1beta.ExportOptions.fromObject(object.exportOptions);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportEvaluationResultsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.ExportEvaluationResultsRequest} message ExportEvaluationResultsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportEvaluationResultsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.names = [];
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.exportOptions = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.names && message.names.length) {
+                                object.names = [];
+                                for (var j = 0; j < message.names.length; ++j)
+                                    object.names[j] = message.names[j];
+                            }
+                            if (message.exportOptions != null && message.hasOwnProperty("exportOptions"))
+                                object.exportOptions = $root.google.cloud.ces.v1beta.ExportOptions.toObject(message.exportOptions, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportEvaluationResultsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportEvaluationResultsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportEvaluationResultsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportEvaluationResultsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.ExportEvaluationResultsRequest";
+                        };
+    
+                        return ExportEvaluationResultsRequest;
+                    })();
+    
                     v1beta.ExportEvaluationResultsResponse = (function() {
     
                         /**
@@ -169537,6 +176576,280 @@
                         return ExportEvaluationResultsResponse;
                     })();
     
+                    v1beta.ExportEvaluationRunsRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportEvaluationRunsRequest.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IExportEvaluationRunsRequest
+                         * @property {string|null} [parent] ExportEvaluationRunsRequest parent
+                         * @property {Array.<string>|null} [names] ExportEvaluationRunsRequest names
+                         * @property {google.cloud.ces.v1beta.IExportOptions|null} [exportOptions] ExportEvaluationRunsRequest exportOptions
+                         */
+    
+                        /**
+                         * Constructs a new ExportEvaluationRunsRequest.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents an ExportEvaluationRunsRequest.
+                         * @implements IExportEvaluationRunsRequest
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationRunsRequest=} [properties] Properties to set
+                         */
+                        function ExportEvaluationRunsRequest(properties) {
+                            this.names = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportEvaluationRunsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @instance
+                         */
+                        ExportEvaluationRunsRequest.prototype.parent = "";
+    
+                        /**
+                         * ExportEvaluationRunsRequest names.
+                         * @member {Array.<string>} names
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @instance
+                         */
+                        ExportEvaluationRunsRequest.prototype.names = $util.emptyArray;
+    
+                        /**
+                         * ExportEvaluationRunsRequest exportOptions.
+                         * @member {google.cloud.ces.v1beta.IExportOptions|null|undefined} exportOptions
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @instance
+                         */
+                        ExportEvaluationRunsRequest.prototype.exportOptions = null;
+    
+                        /**
+                         * Creates a new ExportEvaluationRunsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationRunsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationRunsRequest} ExportEvaluationRunsRequest instance
+                         */
+                        ExportEvaluationRunsRequest.create = function create(properties) {
+                            return new ExportEvaluationRunsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEvaluationRunsRequest message. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationRunsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationRunsRequest} message ExportEvaluationRunsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEvaluationRunsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.names != null && message.names.length)
+                                for (var i = 0; i < message.names.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.names[i]);
+                            if (message.exportOptions != null && Object.hasOwnProperty.call(message, "exportOptions"))
+                                $root.google.cloud.ces.v1beta.ExportOptions.encode(message.exportOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEvaluationRunsRequest message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationRunsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationRunsRequest} message ExportEvaluationRunsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEvaluationRunsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportEvaluationRunsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationRunsRequest} ExportEvaluationRunsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEvaluationRunsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.ExportEvaluationRunsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.names && message.names.length))
+                                            message.names = [];
+                                        message.names.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.exportOptions = $root.google.cloud.ces.v1beta.ExportOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportEvaluationRunsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationRunsRequest} ExportEvaluationRunsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEvaluationRunsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportEvaluationRunsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportEvaluationRunsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.names != null && message.hasOwnProperty("names")) {
+                                if (!Array.isArray(message.names))
+                                    return "names: array expected";
+                                for (var i = 0; i < message.names.length; ++i)
+                                    if (!$util.isString(message.names[i]))
+                                        return "names: string[] expected";
+                            }
+                            if (message.exportOptions != null && message.hasOwnProperty("exportOptions")) {
+                                var error = $root.google.cloud.ces.v1beta.ExportOptions.verify(message.exportOptions);
+                                if (error)
+                                    return "exportOptions." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportEvaluationRunsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationRunsRequest} ExportEvaluationRunsRequest
+                         */
+                        ExportEvaluationRunsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.ExportEvaluationRunsRequest)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.ExportEvaluationRunsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.names) {
+                                if (!Array.isArray(object.names))
+                                    throw TypeError(".google.cloud.ces.v1beta.ExportEvaluationRunsRequest.names: array expected");
+                                message.names = [];
+                                for (var i = 0; i < object.names.length; ++i)
+                                    message.names[i] = String(object.names[i]);
+                            }
+                            if (object.exportOptions != null) {
+                                if (typeof object.exportOptions !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.ExportEvaluationRunsRequest.exportOptions: object expected");
+                                message.exportOptions = $root.google.cloud.ces.v1beta.ExportOptions.fromObject(object.exportOptions);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportEvaluationRunsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @static
+                         * @param {google.cloud.ces.v1beta.ExportEvaluationRunsRequest} message ExportEvaluationRunsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportEvaluationRunsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.names = [];
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.exportOptions = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.names && message.names.length) {
+                                object.names = [];
+                                for (var j = 0; j < message.names.length; ++j)
+                                    object.names[j] = message.names[j];
+                            }
+                            if (message.exportOptions != null && message.hasOwnProperty("exportOptions"))
+                                object.exportOptions = $root.google.cloud.ces.v1beta.ExportOptions.toObject(message.exportOptions, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportEvaluationRunsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportEvaluationRunsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportEvaluationRunsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportEvaluationRunsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.ExportEvaluationRunsRequest";
+                        };
+    
+                        return ExportEvaluationRunsRequest;
+                    })();
+    
                     v1beta.ExportEvaluationRunsResponse = (function() {
     
                         /**
@@ -169790,6 +177103,537 @@
                         };
     
                         return ExportEvaluationRunsResponse;
+                    })();
+    
+                    v1beta.ExportEvaluationRunsOperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an ExportEvaluationRunsOperationMetadata.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IExportEvaluationRunsOperationMetadata
+                         */
+    
+                        /**
+                         * Constructs a new ExportEvaluationRunsOperationMetadata.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents an ExportEvaluationRunsOperationMetadata.
+                         * @implements IExportEvaluationRunsOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata=} [properties] Properties to set
+                         */
+                        function ExportEvaluationRunsOperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ExportEvaluationRunsOperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata} ExportEvaluationRunsOperationMetadata instance
+                         */
+                        ExportEvaluationRunsOperationMetadata.create = function create(properties) {
+                            return new ExportEvaluationRunsOperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEvaluationRunsOperationMetadata message. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata} message ExportEvaluationRunsOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEvaluationRunsOperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEvaluationRunsOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata} message ExportEvaluationRunsOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEvaluationRunsOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportEvaluationRunsOperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata} ExportEvaluationRunsOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEvaluationRunsOperationMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportEvaluationRunsOperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata} ExportEvaluationRunsOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEvaluationRunsOperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportEvaluationRunsOperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportEvaluationRunsOperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportEvaluationRunsOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata} ExportEvaluationRunsOperationMetadata
+                         */
+                        ExportEvaluationRunsOperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata)
+                                return object;
+                            return new $root.google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportEvaluationRunsOperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata} message ExportEvaluationRunsOperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportEvaluationRunsOperationMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ExportEvaluationRunsOperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportEvaluationRunsOperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportEvaluationRunsOperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportEvaluationRunsOperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata";
+                        };
+    
+                        return ExportEvaluationRunsOperationMetadata;
+                    })();
+    
+                    v1beta.ExportEvaluationResultsOperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an ExportEvaluationResultsOperationMetadata.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IExportEvaluationResultsOperationMetadata
+                         */
+    
+                        /**
+                         * Constructs a new ExportEvaluationResultsOperationMetadata.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents an ExportEvaluationResultsOperationMetadata.
+                         * @implements IExportEvaluationResultsOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata=} [properties] Properties to set
+                         */
+                        function ExportEvaluationResultsOperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ExportEvaluationResultsOperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata} ExportEvaluationResultsOperationMetadata instance
+                         */
+                        ExportEvaluationResultsOperationMetadata.create = function create(properties) {
+                            return new ExportEvaluationResultsOperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEvaluationResultsOperationMetadata message. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata} message ExportEvaluationResultsOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEvaluationResultsOperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEvaluationResultsOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata} message ExportEvaluationResultsOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEvaluationResultsOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportEvaluationResultsOperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata} ExportEvaluationResultsOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEvaluationResultsOperationMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportEvaluationResultsOperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata} ExportEvaluationResultsOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEvaluationResultsOperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportEvaluationResultsOperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportEvaluationResultsOperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportEvaluationResultsOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata} ExportEvaluationResultsOperationMetadata
+                         */
+                        ExportEvaluationResultsOperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata)
+                                return object;
+                            return new $root.google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportEvaluationResultsOperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata} message ExportEvaluationResultsOperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportEvaluationResultsOperationMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ExportEvaluationResultsOperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportEvaluationResultsOperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportEvaluationResultsOperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportEvaluationResultsOperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata";
+                        };
+    
+                        return ExportEvaluationResultsOperationMetadata;
+                    })();
+    
+                    v1beta.RunEvaluationResultMetricsOperationMetadata = (function() {
+    
+                        /**
+                         * Properties of a RunEvaluationResultMetricsOperationMetadata.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IRunEvaluationResultMetricsOperationMetadata
+                         */
+    
+                        /**
+                         * Constructs a new RunEvaluationResultMetricsOperationMetadata.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents a RunEvaluationResultMetricsOperationMetadata.
+                         * @implements IRunEvaluationResultMetricsOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata=} [properties] Properties to set
+                         */
+                        function RunEvaluationResultMetricsOperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new RunEvaluationResultMetricsOperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata} RunEvaluationResultMetricsOperationMetadata instance
+                         */
+                        RunEvaluationResultMetricsOperationMetadata.create = function create(properties) {
+                            return new RunEvaluationResultMetricsOperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunEvaluationResultMetricsOperationMetadata message. Does not implicitly {@link google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata} message RunEvaluationResultMetricsOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunEvaluationResultMetricsOperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunEvaluationResultMetricsOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata} message RunEvaluationResultMetricsOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunEvaluationResultMetricsOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunEvaluationResultMetricsOperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata} RunEvaluationResultMetricsOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunEvaluationResultMetricsOperationMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunEvaluationResultMetricsOperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata} RunEvaluationResultMetricsOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunEvaluationResultMetricsOperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunEvaluationResultMetricsOperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunEvaluationResultMetricsOperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunEvaluationResultMetricsOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata} RunEvaluationResultMetricsOperationMetadata
+                         */
+                        RunEvaluationResultMetricsOperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata)
+                                return object;
+                            return new $root.google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunEvaluationResultMetricsOperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+                         * @static
+                         * @param {google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata} message RunEvaluationResultMetricsOperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunEvaluationResultMetricsOperationMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this RunEvaluationResultMetricsOperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunEvaluationResultMetricsOperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RunEvaluationResultMetricsOperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunEvaluationResultMetricsOperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata";
+                        };
+    
+                        return RunEvaluationResultMetricsOperationMetadata;
                     })();
     
                     v1beta.Omnichannel = (function() {
@@ -172563,6 +180407,8 @@
                          * @property {google.cloud.ces.v1beta.IToolsetTool|null} [toolsetTool] ExecuteToolResponse toolsetTool
                          * @property {google.protobuf.IStruct|null} [response] ExecuteToolResponse response
                          * @property {google.protobuf.IStruct|null} [variables] ExecuteToolResponse variables
+                         * @property {google.cloud.ces.v1beta.ICitations|null} [citations] ExecuteToolResponse citations
+                         * @property {google.cloud.ces.v1beta.IGoogleSearchSuggestions|null} [googleSearchSuggestions] ExecuteToolResponse googleSearchSuggestions
                          */
     
                         /**
@@ -172612,6 +180458,22 @@
                          */
                         ExecuteToolResponse.prototype.variables = null;
     
+                        /**
+                         * ExecuteToolResponse citations.
+                         * @member {google.cloud.ces.v1beta.ICitations|null|undefined} citations
+                         * @memberof google.cloud.ces.v1beta.ExecuteToolResponse
+                         * @instance
+                         */
+                        ExecuteToolResponse.prototype.citations = null;
+    
+                        /**
+                         * ExecuteToolResponse googleSearchSuggestions.
+                         * @member {google.cloud.ces.v1beta.IGoogleSearchSuggestions|null|undefined} googleSearchSuggestions
+                         * @memberof google.cloud.ces.v1beta.ExecuteToolResponse
+                         * @instance
+                         */
+                        ExecuteToolResponse.prototype.googleSearchSuggestions = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -172658,6 +180520,10 @@
                                 $root.google.cloud.ces.v1beta.ToolsetTool.encode(message.toolsetTool, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.variables != null && Object.hasOwnProperty.call(message, "variables"))
                                 $root.google.protobuf.Struct.encode(message.variables, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.citations != null && Object.hasOwnProperty.call(message, "citations"))
+                                $root.google.cloud.ces.v1beta.Citations.encode(message.citations, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.googleSearchSuggestions != null && Object.hasOwnProperty.call(message, "googleSearchSuggestions"))
+                                $root.google.cloud.ces.v1beta.GoogleSearchSuggestions.encode(message.googleSearchSuggestions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -172708,6 +180574,14 @@
                                     }
                                 case 4: {
                                         message.variables = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.citations = $root.google.cloud.ces.v1beta.Citations.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.googleSearchSuggestions = $root.google.cloud.ces.v1beta.GoogleSearchSuggestions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -172771,6 +180645,16 @@
                                 if (error)
                                     return "variables." + error;
                             }
+                            if (message.citations != null && message.hasOwnProperty("citations")) {
+                                var error = $root.google.cloud.ces.v1beta.Citations.verify(message.citations);
+                                if (error)
+                                    return "citations." + error;
+                            }
+                            if (message.googleSearchSuggestions != null && message.hasOwnProperty("googleSearchSuggestions")) {
+                                var error = $root.google.cloud.ces.v1beta.GoogleSearchSuggestions.verify(message.googleSearchSuggestions);
+                                if (error)
+                                    return "googleSearchSuggestions." + error;
+                            }
                             return null;
                         };
     
@@ -172803,6 +180687,16 @@
                                     throw TypeError(".google.cloud.ces.v1beta.ExecuteToolResponse.variables: object expected");
                                 message.variables = $root.google.protobuf.Struct.fromObject(object.variables);
                             }
+                            if (object.citations != null) {
+                                if (typeof object.citations !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.ExecuteToolResponse.citations: object expected");
+                                message.citations = $root.google.cloud.ces.v1beta.Citations.fromObject(object.citations);
+                            }
+                            if (object.googleSearchSuggestions != null) {
+                                if (typeof object.googleSearchSuggestions !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.ExecuteToolResponse.googleSearchSuggestions: object expected");
+                                message.googleSearchSuggestions = $root.google.cloud.ces.v1beta.GoogleSearchSuggestions.fromObject(object.googleSearchSuggestions);
+                            }
                             return message;
                         };
     
@@ -172822,6 +180716,8 @@
                             if (options.defaults) {
                                 object.response = null;
                                 object.variables = null;
+                                object.citations = null;
+                                object.googleSearchSuggestions = null;
                             }
                             if (message.tool != null && message.hasOwnProperty("tool")) {
                                 object.tool = message.tool;
@@ -172837,6 +180733,10 @@
                             }
                             if (message.variables != null && message.hasOwnProperty("variables"))
                                 object.variables = $root.google.protobuf.Struct.toObject(message.variables, options);
+                            if (message.citations != null && message.hasOwnProperty("citations"))
+                                object.citations = $root.google.cloud.ces.v1beta.Citations.toObject(message.citations, options);
+                            if (message.googleSearchSuggestions != null && message.hasOwnProperty("googleSearchSuggestions"))
+                                object.googleSearchSuggestions = $root.google.cloud.ces.v1beta.GoogleSearchSuggestions.toObject(message.googleSearchSuggestions, options);
                             return object;
                         };
     
@@ -173475,6 +181375,7 @@
                          * @interface IRetrieveToolsRequest
                          * @property {string|null} [toolset] RetrieveToolsRequest toolset
                          * @property {Array.<string>|null} [toolIds] RetrieveToolsRequest toolIds
+                         * @property {boolean|null} [bypassPersistenceConfig] RetrieveToolsRequest bypassPersistenceConfig
                          */
     
                         /**
@@ -173510,6 +181411,14 @@
                         RetrieveToolsRequest.prototype.toolIds = $util.emptyArray;
     
                         /**
+                         * RetrieveToolsRequest bypassPersistenceConfig.
+                         * @member {boolean} bypassPersistenceConfig
+                         * @memberof google.cloud.ces.v1beta.RetrieveToolsRequest
+                         * @instance
+                         */
+                        RetrieveToolsRequest.prototype.bypassPersistenceConfig = false;
+    
+                        /**
                          * Creates a new RetrieveToolsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.RetrieveToolsRequest
@@ -173538,6 +181447,8 @@
                             if (message.toolIds != null && message.toolIds.length)
                                 for (var i = 0; i < message.toolIds.length; ++i)
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.toolIds[i]);
+                            if (message.bypassPersistenceConfig != null && Object.hasOwnProperty.call(message, "bypassPersistenceConfig"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.bypassPersistenceConfig);
                             return writer;
                         };
     
@@ -173582,6 +181493,10 @@
                                         if (!(message.toolIds && message.toolIds.length))
                                             message.toolIds = [];
                                         message.toolIds.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.bypassPersistenceConfig = reader.bool();
                                         break;
                                     }
                                 default:
@@ -173629,6 +181544,9 @@
                                     if (!$util.isString(message.toolIds[i]))
                                         return "toolIds: string[] expected";
                             }
+                            if (message.bypassPersistenceConfig != null && message.hasOwnProperty("bypassPersistenceConfig"))
+                                if (typeof message.bypassPersistenceConfig !== "boolean")
+                                    return "bypassPersistenceConfig: boolean expected";
                             return null;
                         };
     
@@ -173653,6 +181571,8 @@
                                 for (var i = 0; i < object.toolIds.length; ++i)
                                     message.toolIds[i] = String(object.toolIds[i]);
                             }
+                            if (object.bypassPersistenceConfig != null)
+                                message.bypassPersistenceConfig = Boolean(object.bypassPersistenceConfig);
                             return message;
                         };
     
@@ -173671,8 +181591,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.toolIds = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.toolset = "";
+                                object.bypassPersistenceConfig = false;
+                            }
                             if (message.toolset != null && message.hasOwnProperty("toolset"))
                                 object.toolset = message.toolset;
                             if (message.toolIds && message.toolIds.length) {
@@ -173680,6 +181602,8 @@
                                 for (var j = 0; j < message.toolIds.length; ++j)
                                     object.toolIds[j] = message.toolIds[j];
                             }
+                            if (message.bypassPersistenceConfig != null && message.hasOwnProperty("bypassPersistenceConfig"))
+                                object.bypassPersistenceConfig = message.bypassPersistenceConfig;
                             return object;
                         };
     
