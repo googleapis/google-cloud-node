@@ -55,6 +55,12 @@ function main(database) {
    *  minute timestamp within the past 7 days.
    */
   // const readTime = {}
+  /**
+   *  Optional. Automatically commits the transaction after the pipeline has been
+   *  executed. Only permitted in combination with `transaction` or
+   *  `new_transaction`.
+   */
+  // const autoCommitTransaction = true
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore').v1;

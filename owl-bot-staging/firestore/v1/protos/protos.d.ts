@@ -1448,11 +1448,21 @@ export namespace google {
 
             namespace TransactionOptions {
 
+                /** ConcurrencyMode enum. */
+                enum ConcurrencyMode {
+                    CONCURRENCY_MODE_UNSPECIFIED = 0,
+                    OPTIMISTIC = 1,
+                    PESSIMISTIC = 2
+                }
+
                 /** Properties of a ReadWrite. */
                 interface IReadWrite {
 
                     /** ReadWrite retryTransaction */
                     retryTransaction?: (Uint8Array|Buffer|string|null);
+
+                    /** ReadWrite concurrencyMode */
+                    concurrencyMode?: (google.firestore.v1.TransactionOptions.ConcurrencyMode|keyof typeof google.firestore.v1.TransactionOptions.ConcurrencyMode|null);
                 }
 
                 /** Represents a ReadWrite. */
@@ -1466,6 +1476,9 @@ export namespace google {
 
                     /** ReadWrite retryTransaction. */
                     public retryTransaction: (Uint8Array|Buffer|string);
+
+                    /** ReadWrite concurrencyMode. */
+                    public concurrencyMode: (google.firestore.v1.TransactionOptions.ConcurrencyMode|keyof typeof google.firestore.v1.TransactionOptions.ConcurrencyMode);
 
                     /**
                      * Creates a new ReadWrite instance using the specified properties.
@@ -3875,6 +3888,9 @@ export namespace google {
 
                 /** ExecutePipelineRequest readTime */
                 readTime?: (google.protobuf.ITimestamp|null);
+
+                /** ExecutePipelineRequest autoCommitTransaction */
+                autoCommitTransaction?: (boolean|null);
             }
 
             /** Represents an ExecutePipelineRequest. */
@@ -3900,6 +3916,9 @@ export namespace google {
 
                 /** ExecutePipelineRequest readTime. */
                 public readTime?: (google.protobuf.ITimestamp|null);
+
+                /** ExecutePipelineRequest autoCommitTransaction. */
+                public autoCommitTransaction: boolean;
 
                 /** ExecutePipelineRequest pipelineType. */
                 public pipelineType?: "structuredPipeline";

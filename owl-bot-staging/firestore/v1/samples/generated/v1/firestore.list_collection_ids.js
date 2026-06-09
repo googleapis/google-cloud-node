@@ -33,6 +33,8 @@ function main(parent) {
    *  `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
    *  For example:
    *  `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+   *  Use `projects/{project_id}/databases/{database_id}/documents` to list
+   *  top-level collections.
    */
   // const parent = 'abc123'
   /**

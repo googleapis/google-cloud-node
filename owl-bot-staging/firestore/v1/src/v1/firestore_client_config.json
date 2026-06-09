@@ -22,6 +22,10 @@
           "INTERNAL",
           "UNAVAILABLE"
         ],
+        "internal_unavailable": [
+          "INTERNAL",
+          "UNAVAILABLE"
+        ],
         "resource_exhausted_aborted_unavailable": [
           "RESOURCE_EXHAUSTED",
           "ABORTED",
@@ -87,7 +91,7 @@
         },
         "ExecutePipeline": {
           "timeout_millis": 300000,
-          "retry_codes_name": "deadline_exceeded_internal_unavailable",
+          "retry_codes_name": "internal_unavailable",
           "retry_params_name": "default"
         },
         "RunAggregationQuery": {

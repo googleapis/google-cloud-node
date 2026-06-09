@@ -1694,6 +1694,10 @@ export class FirestoreClient {
    *   This must be a microsecond precision timestamp within the past one hour,
    *   or if Point-in-Time Recovery is enabled, can additionally be a whole
    *   minute timestamp within the past 7 days.
+   * @param {boolean} [request.autoCommitTransaction]
+   *   Optional. Automatically commits the transaction after the pipeline has been
+   *   executed. Only permitted in combination with `transaction` or
+   *   `new_transaction`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2573,6 +2577,9 @@ export class FirestoreClient {
    *   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
    *   For example:
    *   `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+   *
+   *   Use `projects/{project_id}/databases/{database_id}/documents` to list
+   *   top-level collections.
    * @param {number} request.pageSize
    *   The maximum number of results to return.
    * @param {string} request.pageToken
@@ -2702,6 +2709,9 @@ export class FirestoreClient {
    *   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
    *   For example:
    *   `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+   *
+   *   Use `projects/{project_id}/databases/{database_id}/documents` to list
+   *   top-level collections.
    * @param {number} request.pageSize
    *   The maximum number of results to return.
    * @param {string} request.pageToken
@@ -2760,6 +2770,9 @@ export class FirestoreClient {
    *   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
    *   For example:
    *   `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+   *
+   *   Use `projects/{project_id}/databases/{database_id}/documents` to list
+   *   top-level collections.
    * @param {number} request.pageSize
    *   The maximum number of results to return.
    * @param {string} request.pageToken

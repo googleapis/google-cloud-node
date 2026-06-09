@@ -4058,6 +4058,22 @@
                         return typeUrlPrefix + "/google.firestore.v1.TransactionOptions";
                     };
     
+                    /**
+                     * ConcurrencyMode enum.
+                     * @name google.firestore.v1.TransactionOptions.ConcurrencyMode
+                     * @enum {number}
+                     * @property {number} CONCURRENCY_MODE_UNSPECIFIED=0 CONCURRENCY_MODE_UNSPECIFIED value
+                     * @property {number} OPTIMISTIC=1 OPTIMISTIC value
+                     * @property {number} PESSIMISTIC=2 PESSIMISTIC value
+                     */
+                    TransactionOptions.ConcurrencyMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CONCURRENCY_MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "OPTIMISTIC"] = 1;
+                        values[valuesById[2] = "PESSIMISTIC"] = 2;
+                        return values;
+                    })();
+    
                     TransactionOptions.ReadWrite = (function() {
     
                         /**
@@ -4065,6 +4081,7 @@
                          * @memberof google.firestore.v1.TransactionOptions
                          * @interface IReadWrite
                          * @property {Uint8Array|null} [retryTransaction] ReadWrite retryTransaction
+                         * @property {google.firestore.v1.TransactionOptions.ConcurrencyMode|null} [concurrencyMode] ReadWrite concurrencyMode
                          */
     
                         /**
@@ -4089,6 +4106,14 @@
                          * @instance
                          */
                         ReadWrite.prototype.retryTransaction = $util.newBuffer([]);
+    
+                        /**
+                         * ReadWrite concurrencyMode.
+                         * @member {google.firestore.v1.TransactionOptions.ConcurrencyMode} concurrencyMode
+                         * @memberof google.firestore.v1.TransactionOptions.ReadWrite
+                         * @instance
+                         */
+                        ReadWrite.prototype.concurrencyMode = 0;
     
                         /**
                          * Creates a new ReadWrite instance using the specified properties.
@@ -4116,6 +4141,8 @@
                                 writer = $Writer.create();
                             if (message.retryTransaction != null && Object.hasOwnProperty.call(message, "retryTransaction"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.retryTransaction);
+                            if (message.concurrencyMode != null && Object.hasOwnProperty.call(message, "concurrencyMode"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.concurrencyMode);
                             return writer;
                         };
     
@@ -4160,6 +4187,10 @@
                                         message.retryTransaction = reader.bytes();
                                         break;
                                     }
+                                case 2: {
+                                        message.concurrencyMode = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -4202,6 +4233,15 @@
                             if (message.retryTransaction != null && message.hasOwnProperty("retryTransaction"))
                                 if (!(message.retryTransaction && typeof message.retryTransaction.length === "number" || $util.isString(message.retryTransaction)))
                                     return "retryTransaction: buffer expected";
+                            if (message.concurrencyMode != null && message.hasOwnProperty("concurrencyMode"))
+                                switch (message.concurrencyMode) {
+                                default:
+                                    return "concurrencyMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -4226,6 +4266,26 @@
                                     $util.base64.decode(object.retryTransaction, message.retryTransaction = $util.newBuffer($util.base64.length(object.retryTransaction)), 0);
                                 else if (object.retryTransaction.length >= 0)
                                     message.retryTransaction = object.retryTransaction;
+                            switch (object.concurrencyMode) {
+                            default:
+                                if (typeof object.concurrencyMode === "number") {
+                                    message.concurrencyMode = object.concurrencyMode;
+                                    break;
+                                }
+                                break;
+                            case "CONCURRENCY_MODE_UNSPECIFIED":
+                            case 0:
+                                message.concurrencyMode = 0;
+                                break;
+                            case "OPTIMISTIC":
+                            case 1:
+                                message.concurrencyMode = 1;
+                                break;
+                            case "PESSIMISTIC":
+                            case 2:
+                                message.concurrencyMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -4242,7 +4302,7 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 if (options.bytes === String)
                                     object.retryTransaction = "";
                                 else {
@@ -4250,8 +4310,12 @@
                                     if (options.bytes !== Array)
                                         object.retryTransaction = $util.newBuffer(object.retryTransaction);
                                 }
+                                object.concurrencyMode = options.enums === String ? "CONCURRENCY_MODE_UNSPECIFIED" : 0;
+                            }
                             if (message.retryTransaction != null && message.hasOwnProperty("retryTransaction"))
                                 object.retryTransaction = options.bytes === String ? $util.base64.encode(message.retryTransaction, 0, message.retryTransaction.length) : options.bytes === Array ? Array.prototype.slice.call(message.retryTransaction) : message.retryTransaction;
+                            if (message.concurrencyMode != null && message.hasOwnProperty("concurrencyMode"))
+                                object.concurrencyMode = options.enums === String ? $root.google.firestore.v1.TransactionOptions.ConcurrencyMode[message.concurrencyMode] === undefined ? message.concurrencyMode : $root.google.firestore.v1.TransactionOptions.ConcurrencyMode[message.concurrencyMode] : message.concurrencyMode;
                             return object;
                         };
     
@@ -10057,6 +10121,7 @@
                      * @property {Uint8Array|null} [transaction] ExecutePipelineRequest transaction
                      * @property {google.firestore.v1.ITransactionOptions|null} [newTransaction] ExecutePipelineRequest newTransaction
                      * @property {google.protobuf.ITimestamp|null} [readTime] ExecutePipelineRequest readTime
+                     * @property {boolean|null} [autoCommitTransaction] ExecutePipelineRequest autoCommitTransaction
                      */
     
                     /**
@@ -10113,6 +10178,14 @@
                      * @instance
                      */
                     ExecutePipelineRequest.prototype.readTime = null;
+    
+                    /**
+                     * ExecutePipelineRequest autoCommitTransaction.
+                     * @member {boolean} autoCommitTransaction
+                     * @memberof google.firestore.v1.ExecutePipelineRequest
+                     * @instance
+                     */
+                    ExecutePipelineRequest.prototype.autoCommitTransaction = false;
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
@@ -10173,6 +10246,8 @@
                             $root.google.firestore.v1.TransactionOptions.encode(message.newTransaction, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
                             $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.autoCommitTransaction != null && Object.hasOwnProperty.call(message, "autoCommitTransaction"))
+                            writer.uint32(/* id 9, wireType 0 =*/72).bool(message.autoCommitTransaction);
                         return writer;
                     };
     
@@ -10231,6 +10306,10 @@
                                 }
                             case 7: {
                                     message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 9: {
+                                    message.autoCommitTransaction = reader.bool();
                                     break;
                                 }
                             default:
@@ -10309,6 +10388,9 @@
                                     return "readTime." + error;
                             }
                         }
+                        if (message.autoCommitTransaction != null && message.hasOwnProperty("autoCommitTransaction"))
+                            if (typeof message.autoCommitTransaction !== "boolean")
+                                return "autoCommitTransaction: boolean expected";
                         return null;
                     };
     
@@ -10350,6 +10432,8 @@
                                 throw TypeError(".google.firestore.v1.ExecutePipelineRequest.readTime: object expected");
                             message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime, long + 1);
                         }
+                        if (object.autoCommitTransaction != null)
+                            message.autoCommitTransaction = Boolean(object.autoCommitTransaction);
                         return message;
                     };
     
@@ -10366,8 +10450,10 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.database = "";
+                            object.autoCommitTransaction = false;
+                        }
                         if (message.database != null && message.hasOwnProperty("database"))
                             object.database = message.database;
                         if (message.structuredPipeline != null && message.hasOwnProperty("structuredPipeline")) {
@@ -10390,6 +10476,8 @@
                             if (options.oneofs)
                                 object.consistencySelector = "readTime";
                         }
+                        if (message.autoCommitTransaction != null && message.hasOwnProperty("autoCommitTransaction"))
+                            object.autoCommitTransaction = message.autoCommitTransaction;
                         return object;
                     };
     
