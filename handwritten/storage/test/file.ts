@@ -118,7 +118,17 @@ const fakePromisify = {
 };
 
 const fsCached = fs;
-const fakeFs = {...fsCached};
+const safeFs: any = {};
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const fsOriginal = require('fs');
+for (const key of Object.keys(fsOriginal)) {
+  try {
+    safeFs[key] = fsOriginal[key];
+  } catch (e) {
+    // Ignore deprecated getters
+  }
+}
+const fakeFs = {...safeFs} as typeof fs;
 
 const zlibCached = zlib;
 let createGunzipOverride: Function | null;
@@ -223,7 +233,7 @@ describe('File', () => {
   });
 
   beforeEach(() => {
-    Object.assign(fakeFs, fsCached);
+    Object.assign(fakeFs, safeFs);
     Object.assign(fakeOs, osCached);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     FakeServiceObject.prototype.request = util.noop as any;

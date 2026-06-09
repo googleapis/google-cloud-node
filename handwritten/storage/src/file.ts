@@ -2187,6 +2187,17 @@ class File extends ServiceObject<File, FileMetadata> {
       // remove temporary noop listener as we now create a pipeline that handles the errors
       emitStream.removeListener('error', noop);
 
+      if (fileWriteStream.destroyed) {
+        fileWriteStream.once('error', (err: Error) => {
+          pipelineCallback(err);
+        });
+        // Call pipelineCallback immediately if there's no error to wait for,
+        // though duplexify might emit error on next tick.
+        // Also cleanup emitStream since pipeline won't do it.
+        emitStream.destroy();
+        return;
+      }
+
       pipeline(
         emitStream,
         ...(transformStreams as [Transform]),
