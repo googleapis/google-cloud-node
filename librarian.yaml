@@ -34,12 +34,16 @@ libraries:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/admanager/latest
   - name: google-ads-datamanager
     version: 0.3.0
     apis:
       - path: google/ads/datamanager/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/datamanager/latest
   - name: google-ai-generativelanguage
     version: 3.7.1
     apis:
@@ -50,6 +54,8 @@ libraries:
       - path: google/ai/generativelanguage/v1alpha
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://developers.generativeai.google/guide/palm_api_overview
   - name: google-analytics-admin
     version: 9.1.0
     apis:
@@ -58,6 +64,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://googleapis.dev/nodejs/analytics-admin/latest/
       dependencies:
         google-auth-library: ^10.0.0-rc.1
         server-destroy: ^1.0.1
@@ -68,6 +75,8 @@ libraries:
       - path: google/analytics/data/v1alpha
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://googleapis.dev/nodejs/analytics-data/latest/
   - name: google-api-apikeys
     version: 2.2.2
     apis:
@@ -115,6 +124,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/service-usage/docs/overview
       package_name: '@google-cloud/service-usage'
   - name: google-appengine
     version: 4.2.2
@@ -132,6 +142,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/workspaceevents/latest
       package_name: '@google-cloud/subscriptions'
   - name: google-apps-meet
     version: 0.7.2
@@ -140,6 +151,8 @@ libraries:
       - path: google/apps/meet/v2beta
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/meet/latest
   - name: google-area120-tables
     version: 4.2.2
     apis:
@@ -147,6 +160,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
       package_name: '@google/area120-tables'
   - name: google-chat
     version: 0.24.0
@@ -155,6 +169,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/chat/latest
       package_name: '@google-apps/chat'
   - name: google-cloud-accessapproval
     version: 4.2.2
@@ -608,6 +623,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/dataplex
       mixins: google.cloud.location.Locations;google.longrunning.Operations
   - name: google-cloud-dataproc
     version: 6.5.1
@@ -723,6 +739,8 @@ libraries:
       - path: google/cloud/eventarc/publishing/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://googleapis.dev/nodejs/publishing/latest/
   - name: google-cloud-filestore
     version: 4.2.2
     apis:
@@ -828,6 +846,8 @@ libraries:
       - path: google/cloud/ids/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://cloud.google.com/intrusion-detection-system
   - name: google-cloud-iot
     version: 5.2.3
     apis:
@@ -910,6 +930,8 @@ libraries:
       - path: google/cloud/managedkafka/schemaregistry/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/managedkafka/latest
   - name: google-cloud-mediatranslation
     version: 5.2.2
     apis:
@@ -1099,6 +1121,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/iam/latest
       package_name: '@google-cloud/policy-troubleshooter-iam'
   - name: google-cloud-privatecatalog
     version: 4.2.2
@@ -1150,6 +1173,8 @@ libraries:
       - path: google/cloud/redis/cluster/v1beta1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/redis/latest
   - name: google-cloud-resourcemanager
     version: 6.2.2
     apis:
@@ -1387,6 +1412,8 @@ libraries:
       - path: google/cloud/video/stitcher/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://googleapis.dev/nodejs/videostitcher/latest/
   - name: google-cloud-video-transcoder
     version: 4.4.3
     apis:
@@ -1584,6 +1611,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/addressvalidation/latest
       package_name: '@googlemaps/addressvalidation'
   - name: google-maps-areainsights
     version: 0.5.2
@@ -1592,6 +1620,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area-insights/latest
       package_name: '@googlemaps/areainsights'
   - name: google-maps-fleetengine
     version: 0.8.2
@@ -1600,6 +1629,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/fleetengine/latest
       package_name: '@googlemaps/fleetengine'
   - name: google-maps-fleetengine-delivery
     version: 0.6.2
@@ -1608,6 +1638,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/fleetengine-delivery/latest
       package_name: '@googlemaps/fleetengine-delivery'
   - name: google-maps-geocode
     version: 0.1.1
@@ -1632,6 +1663,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/mapsplatformdatasets/latest
       package_name: '@googlemaps/maps-platform-datasets'
   - name: google-maps-navconnect
     version: 0.1.1
@@ -1648,6 +1680,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/places/latest
       package_name: '@googlemaps/places'
   - name: google-maps-routeoptimization
     version: 0.6.1
@@ -1656,6 +1689,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/routeoptimization/latest
       package_name: '@googlemaps/routeoptimization'
   - name: google-maps-routing
     version: 2.2.1
@@ -1664,6 +1698,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/routing/latest
       package_name: '@googlemaps/routing'
   - name: google-maps-solar
     version: 0.5.2
@@ -1672,6 +1707,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/solar/latest
       package_name: '@googlemaps/solar'
   - name: google-marketingplatform-admin
     version: 0.4.1
@@ -1680,6 +1716,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/marketingplatformadminapi/latest
       nodejs_apis:
         - omit_common_resources: true
           path: google/marketingplatform/admin/v1alpha
@@ -1706,6 +1743,8 @@ libraries:
       - path: google/shopping/css/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/css/latest
   - name: google-shopping-merchant-accounts
     version: 3.2.1
     apis:
@@ -1714,6 +1753,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/accounts'
   - name: google-shopping-merchant-conversions
     version: 0.7.2
@@ -1723,6 +1763,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/conversions'
   - name: google-shopping-merchant-datasources
     version: 0.11.1
@@ -1732,6 +1773,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/datasources'
   - name: google-shopping-merchant-inventories
     version: 0.12.1
@@ -1741,6 +1783,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/inventories'
   - name: google-shopping-merchant-issueresolution
     version: 0.4.1
@@ -1750,6 +1793,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/issueresolution'
   - name: google-shopping-merchant-lfp
     version: 0.10.1
@@ -1759,6 +1803,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/lfp'
   - name: google-shopping-merchant-notifications
     version: 0.9.1
@@ -1768,6 +1813,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/notifications'
   - name: google-shopping-merchant-ordertracking
     version: 0.4.1
@@ -1777,6 +1823,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/ordertracking'
   - name: google-shopping-merchant-products
     version: 0.9.0
@@ -1786,6 +1833,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/products'
   - name: google-shopping-merchant-promotions
     version: 0.6.1
@@ -1795,6 +1843,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/promotions'
   - name: google-shopping-merchant-quota
     version: 0.9.1
@@ -1804,6 +1853,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/quota'
   - name: google-shopping-merchant-reports
     version: 0.15.0
@@ -1814,6 +1864,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/reports'
   - name: google-shopping-merchant-reviews
     version: 0.6.1
@@ -1822,6 +1873,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       package_name: '@google-shopping/reviews'
   - name: google-storage-control
     version: 0.10.0
@@ -1838,6 +1890,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://googleapis.dev/nodejs/storagetransfer/latest/
       package_name: '@google-cloud/storage-transfer'
   - name: google-streetview-publish
     version: 0.4.2
@@ -1846,6 +1899,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/publish/latest
       package_name: '@googlemaps/streetview-publish'
   - name: grafeas
     version: 6.1.2
