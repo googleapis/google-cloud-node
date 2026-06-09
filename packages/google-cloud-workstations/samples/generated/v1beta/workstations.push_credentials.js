@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START workstations_v1beta_generated_Workstations_StopWorkstation_async]
+function main(workstation) {
+  // [START workstations_v1beta_generated_Workstations_PushCredentials_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,19 +29,16 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the workstation to stop.
+   *  Required. Name of the workstation for which the credentials should be
+   *  pushed.
    */
-  // const name = 'abc123'
+  // const workstation = 'abc123'
   /**
-   *  Optional. If set, validate the request and preview the result, but do not
-   *  actually apply it.
+   *  Optional. Credentials used by Cloud Client Libraries, Google API Client
+   *  Libraries, and other tooling within the user conainer:
+   *  https://cloud.google.com/docs/authentication/application-default-credentials
    */
-  // const validateOnly = true
-  /**
-   *  Optional. If set, the request will be rejected if the latest version of the
-   *  workstation on the server does not have this ETag.
-   */
-  // const etag = 'abc123'
+  // const applicationDefaultCredentials = {}
 
   // Imports the Workstations library
   const {WorkstationsClient} = require('@google-cloud/workstations').v1beta;
@@ -49,20 +46,20 @@ function main(name) {
   // Instantiates a client
   const workstationsClient = new WorkstationsClient();
 
-  async function callStopWorkstation() {
+  async function callPushCredentials() {
     // Construct request
     const request = {
-      name,
+      workstation,
     };
 
     // Run request
-    const [operation] = await workstationsClient.stopWorkstation(request);
+    const [operation] = await workstationsClient.pushCredentials(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callStopWorkstation();
-  // [END workstations_v1beta_generated_Workstations_StopWorkstation_async]
+  callPushCredentials();
+  // [END workstations_v1beta_generated_Workstations_PushCredentials_async]
 }
 
 process.on('unhandledRejection', err => {
