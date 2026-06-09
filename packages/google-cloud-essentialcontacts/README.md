@@ -65,7 +65,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list contacts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.list_contacts.js) |
 | send test message | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.send_test_message.js) |
 | update contact | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.update_contact.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/snippet_metadata_google.cloud.essentialcontacts.v1.json) |
 
 
 ## Supported Node.js Versions
