@@ -5,6 +5,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.21.0](https://github.com/googleapis/google-cloud-node/compare/storage-v7.20.0...storage-v7.21.0) (2026-06-03)
+
+
+### Features
+
+* **storage:** Enable CRC32C validation by default in transfer manager ([#8350](https://github.com/googleapis/google-cloud-node/issues/8350)) ([86086a6](https://github.com/googleapis/google-cloud-node/commit/86086a62cb6b583af71ef1ba6d42abe894b66323))
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [7.20.0](https://github.com/googleapis/google-cloud-node/compare/storage-v7.19.0...storage-v7.20.0) (2026-05-11)
 
 
