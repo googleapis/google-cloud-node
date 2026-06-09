@@ -2792,6 +2792,9 @@ export namespace google {
                     /** ContentItem conversation */
                     conversation?: (google.privacy.dlp.v2.IConversation|null);
 
+                    /** ContentItem batchContentItem */
+                    batchContentItem?: (google.privacy.dlp.v2.IBatchContentItem|null);
+
                     /** ContentItem contentMetadata */
                     contentMetadata?: (google.privacy.dlp.v2.IContentMetadata|null);
                 }
@@ -2817,11 +2820,14 @@ export namespace google {
                     /** ContentItem conversation. */
                     public conversation?: (google.privacy.dlp.v2.IConversation|null);
 
+                    /** ContentItem batchContentItem. */
+                    public batchContentItem?: (google.privacy.dlp.v2.IBatchContentItem|null);
+
                     /** ContentItem contentMetadata. */
                     public contentMetadata?: (google.privacy.dlp.v2.IContentMetadata|null);
 
                     /** ContentItem dataItem. */
-                    public dataItem?: ("value"|"table"|"byteItem"|"conversation");
+                    public dataItem?: ("value"|"table"|"byteItem"|"conversation"|"batchContentItem");
 
                     /**
                      * Creates a new ContentItem instance using the specified properties.
@@ -3212,6 +3218,203 @@ export namespace google {
                         CONTENT = 1,
                         CONTEXT = 2
                     }
+                }
+
+                /** Properties of a BatchContentItem. */
+                interface IBatchContentItem {
+
+                    /** BatchContentItem stringValueBatch */
+                    stringValueBatch?: (google.privacy.dlp.v2.IStringValueBatch|null);
+                }
+
+                /** Represents a BatchContentItem. */
+                class BatchContentItem implements IBatchContentItem {
+
+                    /**
+                     * Constructs a new BatchContentItem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IBatchContentItem);
+
+                    /** BatchContentItem stringValueBatch. */
+                    public stringValueBatch?: (google.privacy.dlp.v2.IStringValueBatch|null);
+
+                    /** BatchContentItem batch. */
+                    public batch?: "stringValueBatch";
+
+                    /**
+                     * Creates a new BatchContentItem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchContentItem instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IBatchContentItem): google.privacy.dlp.v2.BatchContentItem;
+
+                    /**
+                     * Encodes the specified BatchContentItem message. Does not implicitly {@link google.privacy.dlp.v2.BatchContentItem.verify|verify} messages.
+                     * @param message BatchContentItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IBatchContentItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchContentItem message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.BatchContentItem.verify|verify} messages.
+                     * @param message BatchContentItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IBatchContentItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchContentItem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchContentItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.BatchContentItem;
+
+                    /**
+                     * Decodes a BatchContentItem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchContentItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.BatchContentItem;
+
+                    /**
+                     * Verifies a BatchContentItem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchContentItem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchContentItem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.BatchContentItem;
+
+                    /**
+                     * Creates a plain object from a BatchContentItem message. Also converts values to other types if specified.
+                     * @param message BatchContentItem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.BatchContentItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchContentItem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchContentItem
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StringValueBatch. */
+                interface IStringValueBatch {
+
+                    /** StringValueBatch values */
+                    values?: (string[]|null);
+                }
+
+                /** Represents a StringValueBatch. */
+                class StringValueBatch implements IStringValueBatch {
+
+                    /**
+                     * Constructs a new StringValueBatch.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IStringValueBatch);
+
+                    /** StringValueBatch values. */
+                    public values: string[];
+
+                    /**
+                     * Creates a new StringValueBatch instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StringValueBatch instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IStringValueBatch): google.privacy.dlp.v2.StringValueBatch;
+
+                    /**
+                     * Encodes the specified StringValueBatch message. Does not implicitly {@link google.privacy.dlp.v2.StringValueBatch.verify|verify} messages.
+                     * @param message StringValueBatch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IStringValueBatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StringValueBatch message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.StringValueBatch.verify|verify} messages.
+                     * @param message StringValueBatch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IStringValueBatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StringValueBatch message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StringValueBatch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.StringValueBatch;
+
+                    /**
+                     * Decodes a StringValueBatch message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StringValueBatch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.StringValueBatch;
+
+                    /**
+                     * Verifies a StringValueBatch message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StringValueBatch message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StringValueBatch
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.StringValueBatch;
+
+                    /**
+                     * Creates a plain object from a StringValueBatch message. Also converts values to other types if specified.
+                     * @param message StringValueBatch
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.StringValueBatch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StringValueBatch to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StringValueBatch
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Table. */
@@ -3928,6 +4131,9 @@ export namespace google {
                     /** ContentLocation conversationLocation */
                     conversationLocation?: (google.privacy.dlp.v2.IConversationLocation|null);
 
+                    /** ContentLocation batchContentLocation */
+                    batchContentLocation?: (google.privacy.dlp.v2.IBatchContentLocation|null);
+
                     /** ContentLocation containerTimestamp */
                     containerTimestamp?: (google.protobuf.ITimestamp|null);
 
@@ -3962,6 +4168,9 @@ export namespace google {
                     /** ContentLocation conversationLocation. */
                     public conversationLocation?: (google.privacy.dlp.v2.IConversationLocation|null);
 
+                    /** ContentLocation batchContentLocation. */
+                    public batchContentLocation?: (google.privacy.dlp.v2.IBatchContentLocation|null);
+
                     /** ContentLocation containerTimestamp. */
                     public containerTimestamp?: (google.protobuf.ITimestamp|null);
 
@@ -3969,7 +4178,7 @@ export namespace google {
                     public containerVersion: string;
 
                     /** ContentLocation location. */
-                    public location?: ("recordLocation"|"imageLocation"|"documentLocation"|"metadataLocation"|"conversationLocation");
+                    public location?: ("recordLocation"|"imageLocation"|"documentLocation"|"metadataLocation"|"conversationLocation"|"batchContentLocation");
 
                     /**
                      * Creates a new ContentLocation instance using the specified properties.
@@ -4247,6 +4456,103 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a BatchContentLocation. */
+                interface IBatchContentLocation {
+
+                    /** BatchContentLocation itemIndex */
+                    itemIndex?: (number|null);
+                }
+
+                /** Represents a BatchContentLocation. */
+                class BatchContentLocation implements IBatchContentLocation {
+
+                    /**
+                     * Constructs a new BatchContentLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IBatchContentLocation);
+
+                    /** BatchContentLocation itemIndex. */
+                    public itemIndex: number;
+
+                    /**
+                     * Creates a new BatchContentLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchContentLocation instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IBatchContentLocation): google.privacy.dlp.v2.BatchContentLocation;
+
+                    /**
+                     * Encodes the specified BatchContentLocation message. Does not implicitly {@link google.privacy.dlp.v2.BatchContentLocation.verify|verify} messages.
+                     * @param message BatchContentLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IBatchContentLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchContentLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.BatchContentLocation.verify|verify} messages.
+                     * @param message BatchContentLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IBatchContentLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchContentLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchContentLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.BatchContentLocation;
+
+                    /**
+                     * Decodes a BatchContentLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchContentLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.BatchContentLocation;
+
+                    /**
+                     * Verifies a BatchContentLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchContentLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchContentLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.BatchContentLocation;
+
+                    /**
+                     * Creates a plain object from a BatchContentLocation message. Also converts values to other types if specified.
+                     * @param message BatchContentLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.BatchContentLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchContentLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchContentLocation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a MetadataLocation. */
