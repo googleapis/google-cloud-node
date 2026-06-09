@@ -2,38 +2,48 @@
 {{license.license(commonParameters.copyrightYear)}}
 'use strict';
 
-module.exports = {
-  opts: {
-    readme: './README.md',
-    package: './package.json',
-    template: './node_modules/jsdoc-fresh',
-    recurse: true,
-    verbose: true,
-    destination: './docs/'
-  },
-  plugins: [
-    'plugins/markdown',
-    'jsdoc-region-tag'
-  ],
-  source: {
-    excludePattern: '(^|\\/|\\\\)[._]',
-    include: [
-      'build/src',
-      'protos'
+const fs = require('fs');
+const path = require('path');
+
+const sharedConfigPath = path.join(__dirname, '../../.jsdoc.cjs');
+
+if (fs.existsSync(sharedConfigPath)) {
+  module.exports = require(sharedConfigPath);
+} else {
+  const pkg = require('./package.json');
+  module.exports = {
+    opts: {
+      readme: './README.md',
+      package: './package.json',
+      template: './node_modules/jsdoc-fresh',
+      recurse: true,
+      verbose: true,
+      destination: './docs/'
+    },
+    plugins: [
+      'plugins/markdown',
+      'jsdoc-region-tag'
     ],
-    includePattern: '\\.js$'
-  },
-  templates: {
-    copyright: 'Copyright {{ commonParameters.copyrightYear }} Google LLC',
-    includeDate: false,
-    sourceFiles: false,
-    systemName: '{{ api.publishName }}',
-    theme: 'lumen',
-    default: {
-      outputSourceFiles: false
+    source: {
+      excludePattern: '(^|\\/|\\\\)[._]',
+      include: [
+        'build/src',
+        'protos'
+      ],
+      includePattern: '\\.js$'
+    },
+    templates: {
+      copyright: 'Copyright {{ commonParameters.copyrightYear }} Google LLC',
+      includeDate: false,
+      sourceFiles: false,
+      systemName: pkg.name,
+      theme: 'lumen',
+      default: {
+        outputSourceFiles: false
+      }
+    },
+    markdown: {
+      idInHeadings: true
     }
-  },
-  markdown: {
-    idInHeadings: true
-  }
-};
+  };
+}
