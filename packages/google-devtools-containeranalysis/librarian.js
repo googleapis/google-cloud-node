@@ -71,24 +71,24 @@ v1beta1Files.forEach(file => {
 const containerAnalysisClientFile = path.resolve('packages/google-devtools-containeranalysis/src/v1/container_analysis_client.ts');
 const grafeasClientMethod = `
     /**
-    * Returns an instance of a @google-cloud/grafeas client, configured to
-    * connect to Google Cloud's Container Analysis API. For documentation
-    * on this client, see:
-    * <a href="https://googleapis.dev/nodejs/grafeas/latest/index.html">https://googleapis.dev/nodejs/grafeas/latest/index.html</a>
-    *
-    * @returns {GrafeasClient} - An instance of a Grafeas client.
-    *
-    */
+     * Returns an instance of a @google-cloud/grafeas client, configured to
+     * connect to Google Cloud's Container Analysis API. For documentation
+     * on this client, see:
+     * <a href="https://googleapis.dev/nodejs/grafeas/latest/index.html">https://googleapis.dev/nodejs/grafeas/latest/index.html</a>
+     *
+     * @returns {GrafeasClient} - An instance of a Grafeas client.
+     * 
+     */
     getGrafeasClient() {
         return new GrafeasClient(this._opts as {});
     }
-    }`;
+}`;
 
 try {
   const clientContent = fs.readFileSync(containerAnalysisClientFile, 'utf8');
   if (!clientContent.includes('getGrafeasClient()')) {
     replaceInFile(containerAnalysisClientFile, /import type \* as gax from 'google-gax';/g, "import type * as gax from 'google-gax';\nimport {GrafeasClient} from '@google-cloud/grafeas';");
-    replaceInFile(containerAnalysisClientFile, /^}/m, grafeasClientMethod);
+    replaceInFile(containerAnalysisClientFile, /}\s*$/, grafeasClientMethod);
     console.log('Successfully added getGrafeasClient method.');
   } else {
     console.log('getGrafeasClient method already exists, skipping.');
