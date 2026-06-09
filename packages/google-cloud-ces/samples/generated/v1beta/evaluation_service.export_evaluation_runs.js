@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(toolset) {
-  // [START ces_v1beta_generated_ToolService_RetrieveTools_async]
+function main(parent, names) {
+  // [START ces_v1beta_generated_EvaluationService_ExportEvaluationRuns_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,42 +29,40 @@ function main(toolset) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the toolset to retrieve the tools for.
-   *  Format:
-   *  `projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}`
+   *  Required. The resource name of the app to export evaluation runs from.
+   *  Format: `projects/{project}/locations/{location}/apps/{app}`
    */
-  // const toolset = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. The identifiers of the tools to retrieve from the toolset.
-   *  If empty, all tools in the toolset will be returned.
+   *  Required. The resource names of the evaluation runs to export.
    */
-  // const toolIds = ['abc','def']
+  // const names = ['abc','def']
   /**
-   *  Optional. If true, the returned tools will contain raw descriptions and
-   *  schemas directly from the server, bypassing any stored persistence
-   *  configurations (overrides/snapshots).
+   *  Optional. The export options for the evaluation runs.
    */
-  // const bypassPersistenceConfig = true
+  // const exportOptions = {}
 
   // Imports the Ces library
-  const {ToolServiceClient} = require('@google-cloud/ces').v1beta;
+  const {EvaluationServiceClient} = require('@google-cloud/ces').v1beta;
 
   // Instantiates a client
-  const cesClient = new ToolServiceClient();
+  const cesClient = new EvaluationServiceClient();
 
-  async function callRetrieveTools() {
+  async function callExportEvaluationRuns() {
     // Construct request
     const request = {
-      toolset,
+      parent,
+      names,
     };
 
     // Run request
-    const response = await cesClient.retrieveTools(request);
+    const [operation] = await cesClient.exportEvaluationRuns(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callRetrieveTools();
-  // [END ces_v1beta_generated_ToolService_RetrieveTools_async]
+  callExportEvaluationRuns();
+  // [END ces_v1beta_generated_EvaluationService_ExportEvaluationRuns_async]
 }
 
 process.on('unhandledRejection', err => {

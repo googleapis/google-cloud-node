@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(toolset) {
-  // [START ces_v1beta_generated_ToolService_RetrieveTools_async]
+function main(evaluationResultId) {
+  // [START ces_v1beta_generated_EvaluationService_RunEvaluationResultMetrics_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,42 +29,32 @@ function main(toolset) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the toolset to retrieve the tools for.
+   *  Required. The evaluation result to run metrics for.
    *  Format:
-   *  `projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}`
+   *  `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}/results/{evaluation_result_id}`
    */
-  // const toolset = 'abc123'
-  /**
-   *  Optional. The identifiers of the tools to retrieve from the toolset.
-   *  If empty, all tools in the toolset will be returned.
-   */
-  // const toolIds = ['abc','def']
-  /**
-   *  Optional. If true, the returned tools will contain raw descriptions and
-   *  schemas directly from the server, bypassing any stored persistence
-   *  configurations (overrides/snapshots).
-   */
-  // const bypassPersistenceConfig = true
+  // const evaluationResultId = 'abc123'
 
   // Imports the Ces library
-  const {ToolServiceClient} = require('@google-cloud/ces').v1beta;
+  const {EvaluationServiceClient} = require('@google-cloud/ces').v1beta;
 
   // Instantiates a client
-  const cesClient = new ToolServiceClient();
+  const cesClient = new EvaluationServiceClient();
 
-  async function callRetrieveTools() {
+  async function callRunEvaluationResultMetrics() {
     // Construct request
     const request = {
-      toolset,
+      evaluationResultId,
     };
 
     // Run request
-    const response = await cesClient.retrieveTools(request);
+    const [operation] = await cesClient.runEvaluationResultMetrics(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callRetrieveTools();
-  // [END ces_v1beta_generated_ToolService_RetrieveTools_async]
+  callRunEvaluationResultMetrics();
+  // [END ces_v1beta_generated_EvaluationService_RunEvaluationResultMetrics_async]
 }
 
 process.on('unhandledRejection', err => {
