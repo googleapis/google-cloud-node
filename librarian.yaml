@@ -255,7 +255,6 @@ libraries:
     apis:
       - path: google/cloud/appoptimize/v1beta
     copyright_year: "2026"
-    skip_generate: true
   - name: google-cloud-asset
     version: 6.3.3
     apis:
