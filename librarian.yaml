@@ -220,7 +220,6 @@ libraries:
     apis:
       - path: google/cloud/apigeeconnect/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       package_name: '@google-cloud/apigee-connect'
   - name: google-cloud-apigeeregistry
