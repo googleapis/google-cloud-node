@@ -105,7 +105,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.update_cluster.js) |
 | update master | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.update_master.js) |
 | update node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.update_node_pool.js) |
-| container | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/snippet_metadata_google.container.v1.json) |
 | cancel operation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.cancel_operation.js) |
 | check autopilot compatibility | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.check_autopilot_compatibility.js) |
 | complete control plane upgrade | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.complete_control_plane_upgrade.js) |
@@ -144,7 +143,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.update_cluster.js) |
 | update master | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.update_master.js) |
 | update node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.update_node_pool.js) |
-| container | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/snippet_metadata_google.container.v1beta1.json) |
 
 
 ## Supported Node.js Versions

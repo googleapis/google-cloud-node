@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AccessApprovalClient} from './access_approval_client';
+export { AccessApprovalClient } from './access_approval_client';

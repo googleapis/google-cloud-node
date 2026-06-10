@@ -238,5 +238,5 @@
       "type": "sentence-case"
     }
   ],
-  "release-type": "node"
+  "release-type": "node-librarian"
 }

@@ -88,7 +88,7 @@ try {
   const clientContent = fs.readFileSync(containerAnalysisClientFile, 'utf8');
   if (!clientContent.includes('getGrafeasClient()')) {
     replaceInFile(containerAnalysisClientFile, /import type \* as gax from 'google-gax';/g, "import type * as gax from 'google-gax';\nimport {GrafeasClient} from '@google-cloud/grafeas';");
-    replaceInFile(containerAnalysisClientFile, /^}/m, grafeasClientMethod);
+    replaceInFile(containerAnalysisClientFile, /}\s*$/, grafeasClientMethod);
     console.log('Successfully added getGrafeasClient method.');
   } else {
     console.log('getGrafeasClient method already exists, skipping.');

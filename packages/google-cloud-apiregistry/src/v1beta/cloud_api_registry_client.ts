@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +54,7 @@ export class CloudApiRegistryClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('apiregistry');
@@ -58,10 +67,10 @@ export class CloudApiRegistryClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  cloudApiRegistryStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  cloudApiRegistryStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of CloudApiRegistryClient.
@@ -102,21 +111,42 @@ export class CloudApiRegistryClient {
    *     const client = new CloudApiRegistryClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CloudApiRegistryClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'cloudapiregistry.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +171,7 @@ export class CloudApiRegistryClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +185,11 @@ export class CloudApiRegistryClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,25 +211,28 @@ export class CloudApiRegistryClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       apiNamespacePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apiNamespaces/{api_namespace}'
+        'projects/{project}/locations/{location}/apiNamespaces/{api_namespace}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
-      projectLocationApiNamespaceMcpServerMcpToolsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apiNamespaces/{api_namespace}/mcpServers/{mcp_server}/mcpTools/{mcp_tool}'
-      ),
-      projectLocationApiNamespaceMcpServersPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apiNamespaces/{api_namespace}/mcpServers/{mcp_server}'
-      ),
-      projectLocationMcpServerMcpToolsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mcpServers/{mcp_server}/mcpTools/{mcp_tool}'
-      ),
+      projectLocationApiNamespaceMcpServerMcpToolsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/apiNamespaces/{api_namespace}/mcpServers/{mcp_server}/mcpTools/{mcp_tool}',
+        ),
+      projectLocationApiNamespaceMcpServersPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/apiNamespaces/{api_namespace}/mcpServers/{mcp_server}',
+        ),
+      projectLocationMcpServerMcpToolsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/mcpServers/{mcp_server}/mcpTools/{mcp_tool}',
+        ),
       projectLocationMcpServersPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mcpServers/{mcp_server}'
+        'projects/{project}/locations/{location}/mcpServers/{mcp_server}',
       ),
     };
 
@@ -211,16 +240,25 @@ export class CloudApiRegistryClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listMcpServers:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'mcpServers'),
-      listMcpTools:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'mcpTools')
+      listMcpServers: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'mcpServers',
+      ),
+      listMcpTools: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'mcpTools',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.apiregistry.v1beta.CloudApiRegistry', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.apiregistry.v1beta.CloudApiRegistry',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -251,37 +289,46 @@ export class CloudApiRegistryClient {
     // Put together the "service stub" for
     // google.cloud.apiregistry.v1beta.CloudApiRegistry.
     this.cloudApiRegistryStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.apiregistry.v1beta.CloudApiRegistry') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.apiregistry.v1beta.CloudApiRegistry,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.apiregistry.v1beta.CloudApiRegistry',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.apiregistry.v1beta
+            .CloudApiRegistry,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const cloudApiRegistryStubMethods =
-        ['getMcpServer', 'listMcpServers', 'getMcpTool', 'listMcpTools'];
+    const cloudApiRegistryStubMethods = [
+      'getMcpServer',
+      'listMcpServers',
+      'getMcpTool',
+      'listMcpTools',
+    ];
     for (const methodName of cloudApiRegistryStubMethods) {
       const callPromise = this.cloudApiRegistryStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -296,8 +343,14 @@ export class CloudApiRegistryClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudapiregistry.googleapis.com';
   }
@@ -308,8 +361,14 @@ export class CloudApiRegistryClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudapiregistry.googleapis.com';
   }
@@ -340,9 +399,7 @@ export class CloudApiRegistryClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -351,8 +408,9 @@ export class CloudApiRegistryClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -363,281 +421,389 @@ export class CloudApiRegistryClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets a single McpServer.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.apiregistry.v1beta.McpServer|McpServer}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/cloud_api_registry.get_mcp_server.js</caption>
- * region_tag:cloudapiregistry_v1beta_generated_CloudApiRegistry_GetMcpServer_async
- */
+  /**
+   * Gets a single McpServer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apiregistry.v1beta.McpServer|McpServer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/cloud_api_registry.get_mcp_server.js</caption>
+   * region_tag:cloudapiregistry_v1beta_generated_CloudApiRegistry_GetMcpServer_async
+   */
   getMcpServer(
-      request?: protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apiregistry.v1beta.IMcpServer,
-        protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apiregistry.v1beta.IMcpServer,
+      protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getMcpServer(
-      request: protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.apiregistry.v1beta.IMcpServer,
-          protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apiregistry.v1beta.IMcpServer,
+      | protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMcpServer(
-      request: protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest,
-      callback: Callback<
-          protos.google.cloud.apiregistry.v1beta.IMcpServer,
-          protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest,
+    callback: Callback<
+      protos.google.cloud.apiregistry.v1beta.IMcpServer,
+      | protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMcpServer(
-      request?: protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.apiregistry.v1beta.IMcpServer,
-          protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.apiregistry.v1beta.IMcpServer,
-          protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.apiregistry.v1beta.IMcpServer,
-        protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apiregistry.v1beta.IMcpServer,
+      | protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apiregistry.v1beta.IMcpServer,
+      protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMcpServer request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.apiregistry.v1beta.IMcpServer,
-        protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apiregistry.v1beta.IMcpServer,
+          | protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMcpServer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMcpServer(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.apiregistry.v1beta.IMcpServer,
-        protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMcpServer response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMcpServer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apiregistry.v1beta.IMcpServer,
+          (
+            | protos.google.cloud.apiregistry.v1beta.IGetMcpServerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMcpServer response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a single McpTool.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.apiregistry.v1beta.McpTool|McpTool}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/cloud_api_registry.get_mcp_tool.js</caption>
- * region_tag:cloudapiregistry_v1beta_generated_CloudApiRegistry_GetMcpTool_async
- */
+  /**
+   * Gets a single McpTool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apiregistry.v1beta.McpTool|McpTool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/cloud_api_registry.get_mcp_tool.js</caption>
+   * region_tag:cloudapiregistry_v1beta_generated_CloudApiRegistry_GetMcpTool_async
+   */
   getMcpTool(
-      request?: protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apiregistry.v1beta.IMcpTool,
-        protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apiregistry.v1beta.IMcpTool,
+      protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getMcpTool(
-      request: protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.apiregistry.v1beta.IMcpTool,
-          protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apiregistry.v1beta.IMcpTool,
+      | protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMcpTool(
-      request: protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest,
-      callback: Callback<
-          protos.google.cloud.apiregistry.v1beta.IMcpTool,
-          protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest,
+    callback: Callback<
+      protos.google.cloud.apiregistry.v1beta.IMcpTool,
+      | protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMcpTool(
-      request?: protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.apiregistry.v1beta.IMcpTool,
-          protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.apiregistry.v1beta.IMcpTool,
-          protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.apiregistry.v1beta.IMcpTool,
-        protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apiregistry.v1beta.IMcpTool,
+      | protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apiregistry.v1beta.IMcpTool,
+      protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMcpTool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.apiregistry.v1beta.IMcpTool,
-        protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apiregistry.v1beta.IMcpTool,
+          | protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMcpTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMcpTool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.apiregistry.v1beta.IMcpTool,
-        protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMcpTool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMcpTool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apiregistry.v1beta.IMcpTool,
+          protos.google.cloud.apiregistry.v1beta.IGetMcpToolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMcpTool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists McpServers in a given Project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListMcpServersRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.apiregistry.v1beta.McpServer|McpServer}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMcpServersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists McpServers in a given Project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListMcpServersRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.apiregistry.v1beta.McpServer|McpServer}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMcpServersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMcpServers(
-      request?: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apiregistry.v1beta.IMcpServer[],
-        protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest|null,
-        protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse
-      ]>;
+    request?: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apiregistry.v1beta.IMcpServer[],
+      protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest | null,
+      protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse,
+    ]
+  >;
   listMcpServers(
-      request: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-          protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse|null|undefined,
-          protos.google.cloud.apiregistry.v1beta.IMcpServer>): void;
+    request: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
+      | protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse
+      | null
+      | undefined,
+      protos.google.cloud.apiregistry.v1beta.IMcpServer
+    >,
+  ): void;
   listMcpServers(
-      request: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-          protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse|null|undefined,
-          protos.google.cloud.apiregistry.v1beta.IMcpServer>): void;
+    request: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
+      | protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse
+      | null
+      | undefined,
+      protos.google.cloud.apiregistry.v1beta.IMcpServer
+    >,
+  ): void;
   listMcpServers(
-      request?: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-          protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse|null|undefined,
-          protos.google.cloud.apiregistry.v1beta.IMcpServer>,
-      callback?: PaginationCallback<
-          protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-          protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse|null|undefined,
-          protos.google.cloud.apiregistry.v1beta.IMcpServer>):
-      Promise<[
-        protos.google.cloud.apiregistry.v1beta.IMcpServer[],
-        protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest|null,
-        protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse
-      ]>|void {
+          | protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse
+          | null
+          | undefined,
+          protos.google.cloud.apiregistry.v1beta.IMcpServer
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
+      | protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse
+      | null
+      | undefined,
+      protos.google.cloud.apiregistry.v1beta.IMcpServer
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apiregistry.v1beta.IMcpServer[],
+      protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest | null,
+      protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-      protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse|null|undefined,
-      protos.google.cloud.apiregistry.v1beta.IMcpServer>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
+          | protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse
+          | null
+          | undefined,
+          protos.google.cloud.apiregistry.v1beta.IMcpServer
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMcpServers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -646,204 +812,233 @@ export class CloudApiRegistryClient {
     this._log.info('listMcpServers request %j', request);
     return this.innerApiCalls
       .listMcpServers(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.apiregistry.v1beta.IMcpServer[],
-        protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest|null,
-        protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse
-      ]) => {
-        this._log.info('listMcpServers values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apiregistry.v1beta.IMcpServer[],
+          protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest | null,
+          protos.google.cloud.apiregistry.v1beta.IListMcpServersResponse,
+        ]) => {
+          this._log.info('listMcpServers values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMcpServers`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListMcpServersRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.apiregistry.v1beta.McpServer|McpServer} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMcpServersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMcpServers`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListMcpServersRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.apiregistry.v1beta.McpServer|McpServer} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMcpServersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMcpServersStream(
-      request?: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMcpServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMcpServers stream %j', request);
     return this.descriptors.page.listMcpServers.createStream(
       this.innerApiCalls.listMcpServers as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMcpServers`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListMcpServersRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.apiregistry.v1beta.McpServer|McpServer}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/cloud_api_registry.list_mcp_servers.js</caption>
- * region_tag:cloudapiregistry_v1beta_generated_CloudApiRegistry_ListMcpServers_async
- */
+  /**
+   * Equivalent to `listMcpServers`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListMcpServersRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.apiregistry.v1beta.McpServer|McpServer}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/cloud_api_registry.list_mcp_servers.js</caption>
+   * region_tag:cloudapiregistry_v1beta_generated_CloudApiRegistry_ListMcpServers_async
+   */
   listMcpServersAsync(
-      request?: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.apiregistry.v1beta.IMcpServer>{
+    request?: protos.google.cloud.apiregistry.v1beta.IListMcpServersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.apiregistry.v1beta.IMcpServer> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMcpServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMcpServers iterate %j', request);
     return this.descriptors.page.listMcpServers.asyncIterate(
       this.innerApiCalls['listMcpServers'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.apiregistry.v1beta.IMcpServer>;
   }
- /**
- * Lists McpTools in a given McpServer.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListMcpToolsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.apiregistry.v1beta.McpTool|McpTool}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMcpToolsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists McpTools in a given McpServer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListMcpToolsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.apiregistry.v1beta.McpTool|McpTool}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMcpToolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMcpTools(
-      request?: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apiregistry.v1beta.IMcpTool[],
-        protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest|null,
-        protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse
-      ]>;
+    request?: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apiregistry.v1beta.IMcpTool[],
+      protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest | null,
+      protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse,
+    ]
+  >;
   listMcpTools(
-      request: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-          protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse|null|undefined,
-          protos.google.cloud.apiregistry.v1beta.IMcpTool>): void;
+    request: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
+      | protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse
+      | null
+      | undefined,
+      protos.google.cloud.apiregistry.v1beta.IMcpTool
+    >,
+  ): void;
   listMcpTools(
-      request: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-          protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse|null|undefined,
-          protos.google.cloud.apiregistry.v1beta.IMcpTool>): void;
+    request: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
+      | protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse
+      | null
+      | undefined,
+      protos.google.cloud.apiregistry.v1beta.IMcpTool
+    >,
+  ): void;
   listMcpTools(
-      request?: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-          protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse|null|undefined,
-          protos.google.cloud.apiregistry.v1beta.IMcpTool>,
-      callback?: PaginationCallback<
-          protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-          protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse|null|undefined,
-          protos.google.cloud.apiregistry.v1beta.IMcpTool>):
-      Promise<[
-        protos.google.cloud.apiregistry.v1beta.IMcpTool[],
-        protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest|null,
-        protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse
-      ]>|void {
+          | protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apiregistry.v1beta.IMcpTool
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
+      | protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse
+      | null
+      | undefined,
+      protos.google.cloud.apiregistry.v1beta.IMcpTool
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apiregistry.v1beta.IMcpTool[],
+      protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest | null,
+      protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-      protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse|null|undefined,
-      protos.google.cloud.apiregistry.v1beta.IMcpTool>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
+          | protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apiregistry.v1beta.IMcpTool
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMcpTools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -852,119 +1047,124 @@ export class CloudApiRegistryClient {
     this._log.info('listMcpTools request %j', request);
     return this.innerApiCalls
       .listMcpTools(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.apiregistry.v1beta.IMcpTool[],
-        protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest|null,
-        protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse
-      ]) => {
-        this._log.info('listMcpTools values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apiregistry.v1beta.IMcpTool[],
+          protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest | null,
+          protos.google.cloud.apiregistry.v1beta.IListMcpToolsResponse,
+        ]) => {
+          this._log.info('listMcpTools values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMcpTools`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListMcpToolsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.apiregistry.v1beta.McpTool|McpTool} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMcpToolsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMcpTools`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListMcpToolsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.apiregistry.v1beta.McpTool|McpTool} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMcpToolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMcpToolsStream(
-      request?: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMcpTools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMcpTools stream %j', request);
     return this.descriptors.page.listMcpTools.createStream(
       this.innerApiCalls.listMcpTools as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMcpTools`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListMcpToolsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.apiregistry.v1beta.McpTool|McpTool}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/cloud_api_registry.list_mcp_tools.js</caption>
- * region_tag:cloudapiregistry_v1beta_generated_CloudApiRegistry_ListMcpTools_async
- */
+  /**
+   * Equivalent to `listMcpTools`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListMcpToolsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.apiregistry.v1beta.McpTool|McpTool}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/cloud_api_registry.list_mcp_tools.js</caption>
+   * region_tag:cloudapiregistry_v1beta_generated_CloudApiRegistry_ListMcpTools_async
+   */
   listMcpToolsAsync(
-      request?: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.apiregistry.v1beta.IMcpTool>{
+    request?: protos.google.cloud.apiregistry.v1beta.IListMcpToolsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.apiregistry.v1beta.IMcpTool> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMcpTools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMcpTools iterate %j', request);
     return this.descriptors.page.listMcpTools.asyncIterate(
       this.innerApiCalls['listMcpTools'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.apiregistry.v1beta.IMcpTool>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -999,12 +1199,11 @@ export class CloudApiRegistryClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1037,7 +1236,7 @@ export class CloudApiRegistryClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1054,7 +1253,7 @@ export class CloudApiRegistryClient {
    * @param {string} api_namespace
    * @returns {string} Resource name string.
    */
-  apiNamespacePath(project:string,location:string,apiNamespace:string) {
+  apiNamespacePath(project: string, location: string, apiNamespace: string) {
     return this.pathTemplates.apiNamespacePathTemplate.render({
       project: project,
       location: location,
@@ -1070,7 +1269,8 @@ export class CloudApiRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiNamespaceName(apiNamespaceName: string) {
-    return this.pathTemplates.apiNamespacePathTemplate.match(apiNamespaceName).project;
+    return this.pathTemplates.apiNamespacePathTemplate.match(apiNamespaceName)
+      .project;
   }
 
   /**
@@ -1081,7 +1281,8 @@ export class CloudApiRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiNamespaceName(apiNamespaceName: string) {
-    return this.pathTemplates.apiNamespacePathTemplate.match(apiNamespaceName).location;
+    return this.pathTemplates.apiNamespacePathTemplate.match(apiNamespaceName)
+      .location;
   }
 
   /**
@@ -1092,7 +1293,8 @@ export class CloudApiRegistryClient {
    * @returns {string} A string representing the api_namespace.
    */
   matchApiNamespaceFromApiNamespaceName(apiNamespaceName: string) {
-    return this.pathTemplates.apiNamespacePathTemplate.match(apiNamespaceName).api_namespace;
+    return this.pathTemplates.apiNamespacePathTemplate.match(apiNamespaceName)
+      .api_namespace;
   }
 
   /**
@@ -1102,7 +1304,7 @@ export class CloudApiRegistryClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1137,7 +1339,7 @@ export class CloudApiRegistryClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1164,14 +1366,22 @@ export class CloudApiRegistryClient {
    * @param {string} mcp_tool
    * @returns {string} Resource name string.
    */
-  projectLocationApiNamespaceMcpServerMcpToolsPath(project:string,location:string,apiNamespace:string,mcpServer:string,mcpTool:string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.render({
-      project: project,
-      location: location,
-      api_namespace: apiNamespace,
-      mcp_server: mcpServer,
-      mcp_tool: mcpTool,
-    });
+  projectLocationApiNamespaceMcpServerMcpToolsPath(
+    project: string,
+    location: string,
+    apiNamespace: string,
+    mcpServer: string,
+    mcpTool: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        api_namespace: apiNamespace,
+        mcp_server: mcpServer,
+        mcp_tool: mcpTool,
+      },
+    );
   }
 
   /**
@@ -1181,8 +1391,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_api_namespace_mcp_server_mcpTools resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationApiNamespaceMcpServerMcpToolsName(projectLocationApiNamespaceMcpServerMcpToolsName: string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.match(projectLocationApiNamespaceMcpServerMcpToolsName).project;
+  matchProjectFromProjectLocationApiNamespaceMcpServerMcpToolsName(
+    projectLocationApiNamespaceMcpServerMcpToolsName: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.match(
+      projectLocationApiNamespaceMcpServerMcpToolsName,
+    ).project;
   }
 
   /**
@@ -1192,8 +1406,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_api_namespace_mcp_server_mcpTools resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationApiNamespaceMcpServerMcpToolsName(projectLocationApiNamespaceMcpServerMcpToolsName: string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.match(projectLocationApiNamespaceMcpServerMcpToolsName).location;
+  matchLocationFromProjectLocationApiNamespaceMcpServerMcpToolsName(
+    projectLocationApiNamespaceMcpServerMcpToolsName: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.match(
+      projectLocationApiNamespaceMcpServerMcpToolsName,
+    ).location;
   }
 
   /**
@@ -1203,8 +1421,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_api_namespace_mcp_server_mcpTools resource.
    * @returns {string} A string representing the api_namespace.
    */
-  matchApiNamespaceFromProjectLocationApiNamespaceMcpServerMcpToolsName(projectLocationApiNamespaceMcpServerMcpToolsName: string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.match(projectLocationApiNamespaceMcpServerMcpToolsName).api_namespace;
+  matchApiNamespaceFromProjectLocationApiNamespaceMcpServerMcpToolsName(
+    projectLocationApiNamespaceMcpServerMcpToolsName: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.match(
+      projectLocationApiNamespaceMcpServerMcpToolsName,
+    ).api_namespace;
   }
 
   /**
@@ -1214,8 +1436,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_api_namespace_mcp_server_mcpTools resource.
    * @returns {string} A string representing the mcp_server.
    */
-  matchMcpServerFromProjectLocationApiNamespaceMcpServerMcpToolsName(projectLocationApiNamespaceMcpServerMcpToolsName: string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.match(projectLocationApiNamespaceMcpServerMcpToolsName).mcp_server;
+  matchMcpServerFromProjectLocationApiNamespaceMcpServerMcpToolsName(
+    projectLocationApiNamespaceMcpServerMcpToolsName: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.match(
+      projectLocationApiNamespaceMcpServerMcpToolsName,
+    ).mcp_server;
   }
 
   /**
@@ -1225,8 +1451,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_api_namespace_mcp_server_mcpTools resource.
    * @returns {string} A string representing the mcp_tool.
    */
-  matchMcpToolFromProjectLocationApiNamespaceMcpServerMcpToolsName(projectLocationApiNamespaceMcpServerMcpToolsName: string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.match(projectLocationApiNamespaceMcpServerMcpToolsName).mcp_tool;
+  matchMcpToolFromProjectLocationApiNamespaceMcpServerMcpToolsName(
+    projectLocationApiNamespaceMcpServerMcpToolsName: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServerMcpToolsPathTemplate.match(
+      projectLocationApiNamespaceMcpServerMcpToolsName,
+    ).mcp_tool;
   }
 
   /**
@@ -1238,13 +1468,20 @@ export class CloudApiRegistryClient {
    * @param {string} mcp_server
    * @returns {string} Resource name string.
    */
-  projectLocationApiNamespaceMcpServersPath(project:string,location:string,apiNamespace:string,mcpServer:string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServersPathTemplate.render({
-      project: project,
-      location: location,
-      api_namespace: apiNamespace,
-      mcp_server: mcpServer,
-    });
+  projectLocationApiNamespaceMcpServersPath(
+    project: string,
+    location: string,
+    apiNamespace: string,
+    mcpServer: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServersPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        api_namespace: apiNamespace,
+        mcp_server: mcpServer,
+      },
+    );
   }
 
   /**
@@ -1254,8 +1491,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_api_namespace_mcpServers resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationApiNamespaceMcpServersName(projectLocationApiNamespaceMcpServersName: string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServersPathTemplate.match(projectLocationApiNamespaceMcpServersName).project;
+  matchProjectFromProjectLocationApiNamespaceMcpServersName(
+    projectLocationApiNamespaceMcpServersName: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServersPathTemplate.match(
+      projectLocationApiNamespaceMcpServersName,
+    ).project;
   }
 
   /**
@@ -1265,8 +1506,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_api_namespace_mcpServers resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationApiNamespaceMcpServersName(projectLocationApiNamespaceMcpServersName: string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServersPathTemplate.match(projectLocationApiNamespaceMcpServersName).location;
+  matchLocationFromProjectLocationApiNamespaceMcpServersName(
+    projectLocationApiNamespaceMcpServersName: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServersPathTemplate.match(
+      projectLocationApiNamespaceMcpServersName,
+    ).location;
   }
 
   /**
@@ -1276,8 +1521,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_api_namespace_mcpServers resource.
    * @returns {string} A string representing the api_namespace.
    */
-  matchApiNamespaceFromProjectLocationApiNamespaceMcpServersName(projectLocationApiNamespaceMcpServersName: string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServersPathTemplate.match(projectLocationApiNamespaceMcpServersName).api_namespace;
+  matchApiNamespaceFromProjectLocationApiNamespaceMcpServersName(
+    projectLocationApiNamespaceMcpServersName: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServersPathTemplate.match(
+      projectLocationApiNamespaceMcpServersName,
+    ).api_namespace;
   }
 
   /**
@@ -1287,8 +1536,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_api_namespace_mcpServers resource.
    * @returns {string} A string representing the mcp_server.
    */
-  matchMcpServerFromProjectLocationApiNamespaceMcpServersName(projectLocationApiNamespaceMcpServersName: string) {
-    return this.pathTemplates.projectLocationApiNamespaceMcpServersPathTemplate.match(projectLocationApiNamespaceMcpServersName).mcp_server;
+  matchMcpServerFromProjectLocationApiNamespaceMcpServersName(
+    projectLocationApiNamespaceMcpServersName: string,
+  ) {
+    return this.pathTemplates.projectLocationApiNamespaceMcpServersPathTemplate.match(
+      projectLocationApiNamespaceMcpServersName,
+    ).mcp_server;
   }
 
   /**
@@ -1300,13 +1553,20 @@ export class CloudApiRegistryClient {
    * @param {string} mcp_tool
    * @returns {string} Resource name string.
    */
-  projectLocationMcpServerMcpToolsPath(project:string,location:string,mcpServer:string,mcpTool:string) {
-    return this.pathTemplates.projectLocationMcpServerMcpToolsPathTemplate.render({
-      project: project,
-      location: location,
-      mcp_server: mcpServer,
-      mcp_tool: mcpTool,
-    });
+  projectLocationMcpServerMcpToolsPath(
+    project: string,
+    location: string,
+    mcpServer: string,
+    mcpTool: string,
+  ) {
+    return this.pathTemplates.projectLocationMcpServerMcpToolsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        mcp_server: mcpServer,
+        mcp_tool: mcpTool,
+      },
+    );
   }
 
   /**
@@ -1316,8 +1576,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_mcp_server_mcpTools resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationMcpServerMcpToolsName(projectLocationMcpServerMcpToolsName: string) {
-    return this.pathTemplates.projectLocationMcpServerMcpToolsPathTemplate.match(projectLocationMcpServerMcpToolsName).project;
+  matchProjectFromProjectLocationMcpServerMcpToolsName(
+    projectLocationMcpServerMcpToolsName: string,
+  ) {
+    return this.pathTemplates.projectLocationMcpServerMcpToolsPathTemplate.match(
+      projectLocationMcpServerMcpToolsName,
+    ).project;
   }
 
   /**
@@ -1327,8 +1591,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_mcp_server_mcpTools resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationMcpServerMcpToolsName(projectLocationMcpServerMcpToolsName: string) {
-    return this.pathTemplates.projectLocationMcpServerMcpToolsPathTemplate.match(projectLocationMcpServerMcpToolsName).location;
+  matchLocationFromProjectLocationMcpServerMcpToolsName(
+    projectLocationMcpServerMcpToolsName: string,
+  ) {
+    return this.pathTemplates.projectLocationMcpServerMcpToolsPathTemplate.match(
+      projectLocationMcpServerMcpToolsName,
+    ).location;
   }
 
   /**
@@ -1338,8 +1606,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_mcp_server_mcpTools resource.
    * @returns {string} A string representing the mcp_server.
    */
-  matchMcpServerFromProjectLocationMcpServerMcpToolsName(projectLocationMcpServerMcpToolsName: string) {
-    return this.pathTemplates.projectLocationMcpServerMcpToolsPathTemplate.match(projectLocationMcpServerMcpToolsName).mcp_server;
+  matchMcpServerFromProjectLocationMcpServerMcpToolsName(
+    projectLocationMcpServerMcpToolsName: string,
+  ) {
+    return this.pathTemplates.projectLocationMcpServerMcpToolsPathTemplate.match(
+      projectLocationMcpServerMcpToolsName,
+    ).mcp_server;
   }
 
   /**
@@ -1349,8 +1621,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_mcp_server_mcpTools resource.
    * @returns {string} A string representing the mcp_tool.
    */
-  matchMcpToolFromProjectLocationMcpServerMcpToolsName(projectLocationMcpServerMcpToolsName: string) {
-    return this.pathTemplates.projectLocationMcpServerMcpToolsPathTemplate.match(projectLocationMcpServerMcpToolsName).mcp_tool;
+  matchMcpToolFromProjectLocationMcpServerMcpToolsName(
+    projectLocationMcpServerMcpToolsName: string,
+  ) {
+    return this.pathTemplates.projectLocationMcpServerMcpToolsPathTemplate.match(
+      projectLocationMcpServerMcpToolsName,
+    ).mcp_tool;
   }
 
   /**
@@ -1361,7 +1637,11 @@ export class CloudApiRegistryClient {
    * @param {string} mcp_server
    * @returns {string} Resource name string.
    */
-  projectLocationMcpServersPath(project:string,location:string,mcpServer:string) {
+  projectLocationMcpServersPath(
+    project: string,
+    location: string,
+    mcpServer: string,
+  ) {
     return this.pathTemplates.projectLocationMcpServersPathTemplate.render({
       project: project,
       location: location,
@@ -1376,8 +1656,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_mcpServers resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationMcpServersName(projectLocationMcpServersName: string) {
-    return this.pathTemplates.projectLocationMcpServersPathTemplate.match(projectLocationMcpServersName).project;
+  matchProjectFromProjectLocationMcpServersName(
+    projectLocationMcpServersName: string,
+  ) {
+    return this.pathTemplates.projectLocationMcpServersPathTemplate.match(
+      projectLocationMcpServersName,
+    ).project;
   }
 
   /**
@@ -1387,8 +1671,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_mcpServers resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationMcpServersName(projectLocationMcpServersName: string) {
-    return this.pathTemplates.projectLocationMcpServersPathTemplate.match(projectLocationMcpServersName).location;
+  matchLocationFromProjectLocationMcpServersName(
+    projectLocationMcpServersName: string,
+  ) {
+    return this.pathTemplates.projectLocationMcpServersPathTemplate.match(
+      projectLocationMcpServersName,
+    ).location;
   }
 
   /**
@@ -1398,8 +1686,12 @@ export class CloudApiRegistryClient {
    *   A fully-qualified path representing project_location_mcpServers resource.
    * @returns {string} A string representing the mcp_server.
    */
-  matchMcpServerFromProjectLocationMcpServersName(projectLocationMcpServersName: string) {
-    return this.pathTemplates.projectLocationMcpServersPathTemplate.match(projectLocationMcpServersName).mcp_server;
+  matchMcpServerFromProjectLocationMcpServersName(
+    projectLocationMcpServersName: string,
+  ) {
+    return this.pathTemplates.projectLocationMcpServersPathTemplate.match(
+      projectLocationMcpServersName,
+    ).mcp_server;
   }
 
   /**
@@ -1410,11 +1702,13 @@ export class CloudApiRegistryClient {
    */
   close(): Promise<void> {
     if (this.cloudApiRegistryStub && !this._terminated) {
-      return this.cloudApiRegistryStub.then(stub => {
+      return this.cloudApiRegistryStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

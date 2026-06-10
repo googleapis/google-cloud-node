@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {PoliciesClient} from '@google-cloud/iam';
+import { PoliciesClient } from '@google-cloud/iam';
 
 // check that the client class type name can be used
 function doStuffWithPoliciesClient(client: PoliciesClient) {

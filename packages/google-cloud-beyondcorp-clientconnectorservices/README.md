@@ -62,7 +62,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get client connector service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.get_client_connector_service.js) |
 | list client connector services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.list_client_connector_services.js) |
 | update client connector service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.update_client_connector_service.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/snippet_metadata_google.cloud.beyondcorp.clientconnectorservices.v1.json) |
 
 
 ## Supported Node.js Versions

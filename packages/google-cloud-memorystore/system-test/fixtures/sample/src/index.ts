@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {MemorystoreClient} from '@google-cloud/memorystore';
+import { MemorystoreClient } from '@google-cloud/memorystore';
 
 // check that the client class type name can be used
 function doStuffWithMemorystoreClient(client: MemorystoreClient) {
