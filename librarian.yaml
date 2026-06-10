@@ -1815,7 +1815,6 @@ libraries:
       - path: google/devtools/artifactregistry/v1
       - path: google/devtools/artifactregistry/v1beta2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/artifact-registry'
