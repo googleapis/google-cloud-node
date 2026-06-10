@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {TranscoderServiceClient} from './transcoder_service_client';
+export { TranscoderServiceClient } from './transcoder_service_client';

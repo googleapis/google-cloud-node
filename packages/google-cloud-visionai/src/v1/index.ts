@@ -16,9 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AppPlatformClient} from './app_platform_client';
-export {HealthCheckServiceClient} from './health_check_service_client';
-export {LiveVideoAnalyticsClient} from './live_video_analytics_client';
-export {StreamingServiceClient} from './streaming_service_client';
-export {StreamsServiceClient} from './streams_service_client';
-export {WarehouseClient} from './warehouse_client';
+export { AppPlatformClient } from './app_platform_client';
+export { HealthCheckServiceClient } from './health_check_service_client';
+export { LiveVideoAnalyticsClient } from './live_video_analytics_client';
+export { StreamingServiceClient } from './streaming_service_client';
+export { StreamsServiceClient } from './streams_service_client';
+export { WarehouseClient } from './warehouse_client';
