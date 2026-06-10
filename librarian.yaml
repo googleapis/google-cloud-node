@@ -977,7 +977,6 @@ libraries:
       - path: google/cloud/hypercomputecluster/v1beta
       - path: google/cloud/hypercomputecluster/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-iap
