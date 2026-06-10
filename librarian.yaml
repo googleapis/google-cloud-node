@@ -211,7 +211,6 @@ libraries:
     apis:
       - path: google/cloud/apigateway/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       package_name: '@google-cloud/api-gateway'
   - name: google-cloud-apigeeconnect
