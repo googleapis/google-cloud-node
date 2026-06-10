@@ -1,16 +1,18 @@
 const Module = require('module');
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
 
 const originalResolveFilename = Module._resolveFilename;
 
 Module._resolveFilename = function(request, parent, isMain, options) {
   if (request === 'yargs/yargs') {
     const resolved = originalResolveFilename.apply(this, arguments);
-    // Create a unique shim file in tmpdir based on the exact path to avoid collisions
+    if (resolved.endsWith('.mjs')) {
+      return resolved;
+    }
+    // Create a unique shim file in the local scripts directory to avoid shared temp directory vulnerabilities
     const safeHash = Buffer.from(resolved).toString('base64').replace(/[^a-zA-Z0-9]/g, '');
-    const shimPath = path.join(os.tmpdir(), `yargs-shim-${safeHash}.cjs`);
+    const shimPath = path.join(__dirname, `yargs-shim-${safeHash}.cjs`);
     
     if (!fs.existsSync(shimPath)) {
       const content = fs.readFileSync(resolved, 'utf8');

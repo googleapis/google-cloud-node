@@ -2188,13 +2188,25 @@ class File extends ServiceObject<File, FileMetadata> {
       emitStream.removeListener('error', noop);
 
       if (fileWriteStream.destroyed) {
-        fileWriteStream.once('error', (err: Error) => {
-          pipelineCallback(err);
-        });
-        // Call pipelineCallback immediately if there's no error to wait for,
-        // though duplexify might emit error on next tick.
-        // Also cleanup emitStream since pipeline won't do it.
+        let callbackCalled = false;
+        const onError = (err: Error) => {
+          if (!callbackCalled) {
+            callbackCalled = true;
+            pipelineCallback(err);
+          }
+        };
+        fileWriteStream.once('error', onError);
         emitStream.destroy();
+
+        process.nextTick(() => {
+          fileWriteStream.removeListener('error', onError);
+          if (!callbackCalled) {
+            callbackCalled = true;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const err = (fileWriteStream as any).errored || new Error('Write stream destroyed');
+            pipelineCallback(err);
+          }
+        });
         return;
       }
 
