@@ -299,7 +299,6 @@ libraries:
     apis:
       - path: google/cloud/baremetalsolution/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       package_name: '@google-cloud/bare-metal-solution'
   - name: google-cloud-batch
