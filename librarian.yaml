@@ -1024,9 +1024,8 @@ libraries:
       - path: google/cloud/maintenance/api/v1
       - path: google/cloud/maintenance/api/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
-      default_version: v1beta
+      default_version: v1
   - name: google-cloud-managedidentities
     version: 4.2.2
     apis:
