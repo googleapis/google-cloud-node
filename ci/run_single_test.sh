@@ -40,8 +40,8 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
-pnpm install --ignore-scripts --engine-strict --prod; pnpm install
+echo "pnpm install --ignore-scripts --engine-strict --prod --pnpmfile \"${PROJECT_ROOT}/.pnpmfile.cjs\"; pnpm install --pnpmfile \"${PROJECT_ROOT}/.pnpmfile.cjs\""
+pnpm install --ignore-scripts --engine-strict --prod --pnpmfile "${PROJECT_ROOT}/.pnpmfile.cjs"; pnpm install --pnpmfile "${PROJECT_ROOT}/.pnpmfile.cjs"
 
 
 retval=0

@@ -1,17 +1,16 @@
 {
-  "name": "chat",
-  "name_pretty": "Google Chat API",
-  "product_documentation": "https://developers.google.com/chat/concepts",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/chat/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-apps/chat",
-  "api_id": "chat.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "chat"
+    "api_id": "chat.googleapis.com",
+    "api_shortname": "chat",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/chat/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-apps/chat",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "chat",
+    "name_pretty": "Google Chat API",
+    "product_documentation": "https://developers.google.com/chat/concepts",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node",
+    "requires_billing": true
 }
-

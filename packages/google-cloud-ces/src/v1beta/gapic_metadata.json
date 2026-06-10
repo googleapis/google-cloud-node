@@ -704,6 +704,21 @@
                 "exportEvaluations"
               ]
             },
+            "ExportEvaluationRuns": {
+              "methods": [
+                "exportEvaluationRuns"
+              ]
+            },
+            "ExportEvaluationResults": {
+              "methods": [
+                "exportEvaluationResults"
+              ]
+            },
+            "RunEvaluationResultMetrics": {
+              "methods": [
+                "runEvaluationResultMetrics"
+              ]
+            },
             "ListEvaluations": {
               "methods": [
                 "listEvaluations",
@@ -879,6 +894,21 @@
             "ExportEvaluations": {
               "methods": [
                 "exportEvaluations"
+              ]
+            },
+            "ExportEvaluationRuns": {
+              "methods": [
+                "exportEvaluationRuns"
+              ]
+            },
+            "ExportEvaluationResults": {
+              "methods": [
+                "exportEvaluationResults"
+              ]
+            },
+            "RunEvaluationResultMetrics": {
+              "methods": [
+                "runEvaluationResultMetrics"
               ]
             },
             "ListEvaluations": {
