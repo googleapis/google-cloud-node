@@ -370,5 +370,92 @@ describe('compute', () => {
         /RegionalAccessBoundary: Failed to retrieve default service account email from metadata server./,
       );
     });
+
+    it('should return null from getRegionalAccessBoundaryUrl if email returned from metadata server is not a valid email format', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'not-a-valid-email';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      const url = await compute.getRegionalAccessBoundaryUrl();
+      assert.strictEqual(url, null);
+    });
+
+    it('should return valid URL from getRegionalAccessBoundaryUrl if custom serviceAccountEmail is set', async () => {
+      const email = 'custom-sa@example.com';
+      const compute = new Compute({serviceAccountEmail: email});
+      const url = await compute.getRegionalAccessBoundaryUrl();
+      const expectedUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(email),
+      );
+      assert.strictEqual(url, expectedUrl);
+    });
+
+    it('should return valid URL from getRegionalAccessBoundaryUrl when MDS returns a valid default service account email', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'fake-default-sa@developer.gserviceaccount.com';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      const url = await compute.getRegionalAccessBoundaryUrl();
+      const expectedUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(fakeEmail),
+      );
+      assert.strictEqual(url, expectedUrl);
+    });
+
+    it('should NOT trigger asynchronous RAB refresh and NOT attach RAB header if email from metadata server is not a valid email format', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'not-a-valid-email';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      const tokenScope = setupTokenNock('default');
+
+      const url = 'https://pubsub.googleapis.com';
+      const headers = await compute.getRequestHeaders(url);
+
+      // Headers should NOT have RAB
+      assert.strictEqual(headers.get('x-allowed-locations'), null);
+
+      // Wait a little bit for any background task to run
+      await new Promise(r => setTimeout(r, 500));
+
+      // Regional access boundary data should remain null
+      assert.strictEqual(compute.getRegionalAccessBoundary(), null);
+
+      tokenScope.done();
+    });
+
+    it('should cache the service account email and avoid repeated metadata server calls when email is invalid', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'not-a-valid-email';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      // Call it the first time
+      let url = await compute.getRegionalAccessBoundaryUrl();
+      assert.strictEqual(url, null);
+      assert.strictEqual(metadataStub.callCount, 1);
+
+      // Call it a second time - should use cache and not call MDS again
+      url = await compute.getRegionalAccessBoundaryUrl();
+      assert.strictEqual(url, null);
+      assert.strictEqual(metadataStub.callCount, 1);
+    });
   });
 });
