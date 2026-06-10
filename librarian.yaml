@@ -2084,7 +2084,11 @@ libraries:
     apis:
       - path: google/storagetransfer/v1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - samples/test/utils/bucket.js
+      - samples/test/utils/index.js
+      - samples/test/utils/sample.js
+      - samples/test/utils/transfer.js
     nodejs:
       default_version: v1
       package_name: '@google-cloud/storage-transfer'
