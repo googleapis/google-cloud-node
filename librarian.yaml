@@ -2107,7 +2107,6 @@ libraries:
       - path: google/shopping/merchant/lfp/v1
       - path: google/shopping/merchant/lfp/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/lfp'
