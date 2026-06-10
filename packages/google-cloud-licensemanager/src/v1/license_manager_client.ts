@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +55,7 @@ export class LicenseManagerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('licensemanager');
@@ -57,11 +68,11 @@ export class LicenseManagerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  licenseManagerStub?: Promise<{[name: string]: Function}>;
+  licenseManagerStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of LicenseManagerClient.
@@ -102,21 +113,42 @@ export class LicenseManagerClient {
    *     const client = new LicenseManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof LicenseManagerClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'licensemanager.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +173,7 @@ export class LicenseManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +187,11 @@ export class LicenseManagerClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,19 +213,19 @@ export class LicenseManagerClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       configurationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/configurations/{configuration}'
+        'projects/{project}/locations/{location}/configurations/{configuration}',
       ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}'
+        'projects/{project}/locations/{location}/instances/{instance}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       productPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/products/{product}'
+        'projects/{project}/locations/{location}/products/{product}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
     };
 
@@ -205,14 +233,26 @@ export class LicenseManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConfigurations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'configurations'),
-      listInstances:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'instances'),
-      aggregateUsage:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'usages'),
-      listProducts:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'products')
+      listConfigurations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'configurations',
+      ),
+      listInstances: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'instances',
+      ),
+      aggregateUsage: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'usages',
+      ),
+      listProducts: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'products',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -221,61 +261,115 @@ export class LicenseManagerClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createConfigurationResponse = protoFilesRoot.lookup(
-      '.google.cloud.licensemanager.v1.Configuration') as gax.protobuf.Type;
+      '.google.cloud.licensemanager.v1.Configuration',
+    ) as gax.protobuf.Type;
     const createConfigurationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.licensemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.licensemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateConfigurationResponse = protoFilesRoot.lookup(
-      '.google.cloud.licensemanager.v1.Configuration') as gax.protobuf.Type;
+      '.google.cloud.licensemanager.v1.Configuration',
+    ) as gax.protobuf.Type;
     const updateConfigurationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.licensemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.licensemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteConfigurationResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteConfigurationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.licensemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.licensemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deactivateConfigurationResponse = protoFilesRoot.lookup(
-      '.google.cloud.licensemanager.v1.Configuration') as gax.protobuf.Type;
+      '.google.cloud.licensemanager.v1.Configuration',
+    ) as gax.protobuf.Type;
     const deactivateConfigurationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.licensemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.licensemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const reactivateConfigurationResponse = protoFilesRoot.lookup(
-      '.google.cloud.licensemanager.v1.Configuration') as gax.protobuf.Type;
+      '.google.cloud.licensemanager.v1.Configuration',
+    ) as gax.protobuf.Type;
     const reactivateConfigurationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.licensemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.licensemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createConfiguration: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createConfigurationResponse.decode.bind(createConfigurationResponse),
-        createConfigurationMetadata.decode.bind(createConfigurationMetadata)),
+        createConfigurationMetadata.decode.bind(createConfigurationMetadata),
+      ),
       updateConfiguration: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateConfigurationResponse.decode.bind(updateConfigurationResponse),
-        updateConfigurationMetadata.decode.bind(updateConfigurationMetadata)),
+        updateConfigurationMetadata.decode.bind(updateConfigurationMetadata),
+      ),
       deleteConfiguration: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteConfigurationResponse.decode.bind(deleteConfigurationResponse),
-        deleteConfigurationMetadata.decode.bind(deleteConfigurationMetadata)),
+        deleteConfigurationMetadata.decode.bind(deleteConfigurationMetadata),
+      ),
       deactivateConfiguration: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deactivateConfigurationResponse.decode.bind(deactivateConfigurationResponse),
-        deactivateConfigurationMetadata.decode.bind(deactivateConfigurationMetadata)),
+        deactivateConfigurationResponse.decode.bind(
+          deactivateConfigurationResponse,
+        ),
+        deactivateConfigurationMetadata.decode.bind(
+          deactivateConfigurationMetadata,
+        ),
+      ),
       reactivateConfiguration: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        reactivateConfigurationResponse.decode.bind(reactivateConfigurationResponse),
-        reactivateConfigurationMetadata.decode.bind(reactivateConfigurationMetadata))
+        reactivateConfigurationResponse.decode.bind(
+          reactivateConfigurationResponse,
+        ),
+        reactivateConfigurationMetadata.decode.bind(
+          reactivateConfigurationMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.licensemanager.v1.LicenseManager', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.licensemanager.v1.LicenseManager',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -306,28 +400,47 @@ export class LicenseManagerClient {
     // Put together the "service stub" for
     // google.cloud.licensemanager.v1.LicenseManager.
     this.licenseManagerStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.licensemanager.v1.LicenseManager') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.licensemanager.v1.LicenseManager',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.licensemanager.v1.LicenseManager,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const licenseManagerStubMethods =
-        ['listConfigurations', 'getConfiguration', 'createConfiguration', 'updateConfiguration', 'deleteConfiguration', 'listInstances', 'getInstance', 'deactivateConfiguration', 'reactivateConfiguration', 'queryConfigurationLicenseUsage', 'aggregateUsage', 'listProducts', 'getProduct'];
+    const licenseManagerStubMethods = [
+      'listConfigurations',
+      'getConfiguration',
+      'createConfiguration',
+      'updateConfiguration',
+      'deleteConfiguration',
+      'listInstances',
+      'getInstance',
+      'deactivateConfiguration',
+      'reactivateConfiguration',
+      'queryConfigurationLicenseUsage',
+      'aggregateUsage',
+      'listProducts',
+      'getProduct',
+    ];
     for (const methodName of licenseManagerStubMethods) {
       const callPromise = this.licenseManagerStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -337,7 +450,7 @@ export class LicenseManagerClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -352,8 +465,14 @@ export class LicenseManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'licensemanager.googleapis.com';
   }
@@ -364,8 +483,14 @@ export class LicenseManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'licensemanager.googleapis.com';
   }
@@ -396,9 +521,7 @@ export class LicenseManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -407,8 +530,9 @@ export class LicenseManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -419,1090 +543,1609 @@ export class LicenseManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single Configuration.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.licensemanager.v1.Configuration|Configuration}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.get_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_GetConfiguration_async
- */
+  /**
+   * Gets details of a single Configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.licensemanager.v1.Configuration|Configuration}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.get_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_GetConfiguration_async
+   */
   getConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.IGetConfigurationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IConfiguration,
-        protos.google.cloud.licensemanager.v1.IGetConfigurationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IGetConfigurationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IConfiguration,
+      (
+        | protos.google.cloud.licensemanager.v1.IGetConfigurationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getConfiguration(
-      request: protos.google.cloud.licensemanager.v1.IGetConfigurationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.licensemanager.v1.IConfiguration,
-          protos.google.cloud.licensemanager.v1.IGetConfigurationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IGetConfigurationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.licensemanager.v1.IConfiguration,
+      | protos.google.cloud.licensemanager.v1.IGetConfigurationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getConfiguration(
-      request: protos.google.cloud.licensemanager.v1.IGetConfigurationRequest,
-      callback: Callback<
-          protos.google.cloud.licensemanager.v1.IConfiguration,
-          protos.google.cloud.licensemanager.v1.IGetConfigurationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IGetConfigurationRequest,
+    callback: Callback<
+      protos.google.cloud.licensemanager.v1.IConfiguration,
+      | protos.google.cloud.licensemanager.v1.IGetConfigurationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.IGetConfigurationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.licensemanager.v1.IGetConfigurationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.licensemanager.v1.IConfiguration,
-          protos.google.cloud.licensemanager.v1.IGetConfigurationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.licensemanager.v1.IConfiguration,
-          protos.google.cloud.licensemanager.v1.IGetConfigurationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IConfiguration,
-        protos.google.cloud.licensemanager.v1.IGetConfigurationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.licensemanager.v1.IGetConfigurationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.licensemanager.v1.IConfiguration,
+      | protos.google.cloud.licensemanager.v1.IGetConfigurationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IConfiguration,
+      (
+        | protos.google.cloud.licensemanager.v1.IGetConfigurationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getConfiguration request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.licensemanager.v1.IConfiguration,
-        protos.google.cloud.licensemanager.v1.IGetConfigurationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.licensemanager.v1.IConfiguration,
+          | protos.google.cloud.licensemanager.v1.IGetConfigurationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConfiguration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getConfiguration(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.licensemanager.v1.IConfiguration,
-        protos.google.cloud.licensemanager.v1.IGetConfigurationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getConfiguration response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getConfiguration(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.licensemanager.v1.IConfiguration,
+          (
+            | protos.google.cloud.licensemanager.v1.IGetConfigurationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConfiguration response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single Instance.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.licensemanager.v1.Instance|Instance}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.get_instance.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_GetInstance_async
- */
+  /**
+   * Gets details of a single Instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.licensemanager.v1.Instance|Instance}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.get_instance.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_GetInstance_async
+   */
   getInstance(
-      request?: protos.google.cloud.licensemanager.v1.IGetInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IInstance,
-        protos.google.cloud.licensemanager.v1.IGetInstanceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IGetInstanceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IInstance,
+      protos.google.cloud.licensemanager.v1.IGetInstanceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getInstance(
-      request: protos.google.cloud.licensemanager.v1.IGetInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.licensemanager.v1.IInstance,
-          protos.google.cloud.licensemanager.v1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IGetInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.licensemanager.v1.IInstance,
+      | protos.google.cloud.licensemanager.v1.IGetInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInstance(
-      request: protos.google.cloud.licensemanager.v1.IGetInstanceRequest,
-      callback: Callback<
-          protos.google.cloud.licensemanager.v1.IInstance,
-          protos.google.cloud.licensemanager.v1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IGetInstanceRequest,
+    callback: Callback<
+      protos.google.cloud.licensemanager.v1.IInstance,
+      | protos.google.cloud.licensemanager.v1.IGetInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInstance(
-      request?: protos.google.cloud.licensemanager.v1.IGetInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.licensemanager.v1.IGetInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.licensemanager.v1.IInstance,
-          protos.google.cloud.licensemanager.v1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.licensemanager.v1.IInstance,
-          protos.google.cloud.licensemanager.v1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IInstance,
-        protos.google.cloud.licensemanager.v1.IGetInstanceRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.licensemanager.v1.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.licensemanager.v1.IInstance,
+      | protos.google.cloud.licensemanager.v1.IGetInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IInstance,
+      protos.google.cloud.licensemanager.v1.IGetInstanceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getInstance request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.licensemanager.v1.IInstance,
-        protos.google.cloud.licensemanager.v1.IGetInstanceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.licensemanager.v1.IInstance,
+          | protos.google.cloud.licensemanager.v1.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getInstance(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.licensemanager.v1.IInstance,
-        protos.google.cloud.licensemanager.v1.IGetInstanceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getInstance response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.licensemanager.v1.IInstance,
+          protos.google.cloud.licensemanager.v1.IGetInstanceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getInstance response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * License Usage information for a Configuration.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource path of the Configuration.
- * @param {google.protobuf.Timestamp} request.startTime
- *   Required. The start time for retrieving the usage. If not specified, we
- *   will use the first day of the current billing period.
- * @param {google.protobuf.Timestamp} request.endTime
- *   Required. The end time for retrieving the usage. If not specified, we will
- *   use the last day of the current billing period.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.licensemanager.v1.QueryConfigurationLicenseUsageResponse|QueryConfigurationLicenseUsageResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.query_configuration_license_usage.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_QueryConfigurationLicenseUsage_async
- */
+  /**
+   * License Usage information for a Configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource path of the Configuration.
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   Required. The start time for retrieving the usage. If not specified, we
+   *   will use the first day of the current billing period.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   Required. The end time for retrieving the usage. If not specified, we will
+   *   use the last day of the current billing period.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.licensemanager.v1.QueryConfigurationLicenseUsageResponse|QueryConfigurationLicenseUsageResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.query_configuration_license_usage.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_QueryConfigurationLicenseUsage_async
+   */
   queryConfigurationLicenseUsage(
-      request?: protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
-        protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
+      (
+        | protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   queryConfigurationLicenseUsage(
-      request: protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
-          protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
+      | protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryConfigurationLicenseUsage(
-      request: protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest,
-      callback: Callback<
-          protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
-          protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest,
+    callback: Callback<
+      protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
+      | protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryConfigurationLicenseUsage(
-      request?: protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
-          protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
-          protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
-        protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
+      | protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
+      (
+        | protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('queryConfigurationLicenseUsage request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
-        protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
+          | protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('queryConfigurationLicenseUsage response %j', response);
+          this._log.info(
+            'queryConfigurationLicenseUsage response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.queryConfigurationLicenseUsage(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
-        protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('queryConfigurationLicenseUsage response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .queryConfigurationLicenseUsage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageResponse,
+          (
+            | protos.google.cloud.licensemanager.v1.IQueryConfigurationLicenseUsageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'queryConfigurationLicenseUsage response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single Product.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.licensemanager.v1.Product|Product}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.get_product.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_GetProduct_async
- */
+  /**
+   * Gets details of a single Product.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.licensemanager.v1.Product|Product}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.get_product.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_GetProduct_async
+   */
   getProduct(
-      request?: protos.google.cloud.licensemanager.v1.IGetProductRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IProduct,
-        protos.google.cloud.licensemanager.v1.IGetProductRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IGetProductRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IProduct,
+      protos.google.cloud.licensemanager.v1.IGetProductRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getProduct(
-      request: protos.google.cloud.licensemanager.v1.IGetProductRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.licensemanager.v1.IProduct,
-          protos.google.cloud.licensemanager.v1.IGetProductRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IGetProductRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.licensemanager.v1.IProduct,
+      | protos.google.cloud.licensemanager.v1.IGetProductRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProduct(
-      request: protos.google.cloud.licensemanager.v1.IGetProductRequest,
-      callback: Callback<
-          protos.google.cloud.licensemanager.v1.IProduct,
-          protos.google.cloud.licensemanager.v1.IGetProductRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IGetProductRequest,
+    callback: Callback<
+      protos.google.cloud.licensemanager.v1.IProduct,
+      | protos.google.cloud.licensemanager.v1.IGetProductRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProduct(
-      request?: protos.google.cloud.licensemanager.v1.IGetProductRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.licensemanager.v1.IGetProductRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.licensemanager.v1.IProduct,
-          protos.google.cloud.licensemanager.v1.IGetProductRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.licensemanager.v1.IProduct,
-          protos.google.cloud.licensemanager.v1.IGetProductRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IProduct,
-        protos.google.cloud.licensemanager.v1.IGetProductRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.licensemanager.v1.IGetProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.licensemanager.v1.IProduct,
+      | protos.google.cloud.licensemanager.v1.IGetProductRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IProduct,
+      protos.google.cloud.licensemanager.v1.IGetProductRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getProduct request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.licensemanager.v1.IProduct,
-        protos.google.cloud.licensemanager.v1.IGetProductRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.licensemanager.v1.IProduct,
+          | protos.google.cloud.licensemanager.v1.IGetProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getProduct response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getProduct(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.licensemanager.v1.IProduct,
-        protos.google.cloud.licensemanager.v1.IGetProductRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getProduct response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getProduct(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.licensemanager.v1.IProduct,
+          protos.google.cloud.licensemanager.v1.IGetProductRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getProduct response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new Configuration in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Value for parent.
- * @param {string} request.configurationId
- *   Required. Id of the requesting object
- * @param {google.cloud.licensemanager.v1.Configuration} request.configuration
- *   Required. The resource being created
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.create_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_CreateConfiguration_async
- */
+  /**
+   * Creates a new Configuration in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent.
+   * @param {string} request.configurationId
+   *   Required. Id of the requesting object
+   * @param {google.cloud.licensemanager.v1.Configuration} request.configuration
+   *   Required. The resource being created
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.create_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_CreateConfiguration_async
+   */
   createConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.ICreateConfigurationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.ICreateConfigurationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createConfiguration(
-      request: protos.google.cloud.licensemanager.v1.ICreateConfigurationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.ICreateConfigurationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createConfiguration(
-      request: protos.google.cloud.licensemanager.v1.ICreateConfigurationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.ICreateConfigurationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.ICreateConfigurationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.licensemanager.v1.ICreateConfigurationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createConfiguration response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createConfiguration request %j', request);
-    return this.innerApiCalls.createConfiguration(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createConfiguration response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createConfiguration(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createConfiguration response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createConfiguration()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.create_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_CreateConfiguration_async
- */
-  async checkCreateConfigurationProgress(name: string): Promise<LROperation<protos.google.cloud.licensemanager.v1.Configuration, protos.google.cloud.licensemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createConfiguration()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.create_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_CreateConfiguration_async
+   */
+  async checkCreateConfigurationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.licensemanager.v1.Configuration,
+      protos.google.cloud.licensemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('createConfiguration long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createConfiguration, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.licensemanager.v1.Configuration, protos.google.cloud.licensemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createConfiguration,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.licensemanager.v1.Configuration,
+      protos.google.cloud.licensemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single Configuration.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   Configuration resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields will be overwritten.
- * @param {google.cloud.licensemanager.v1.Configuration} request.configuration
- *   Required. The resource being updated
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.update_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_UpdateConfiguration_async
- */
+  /**
+   * Updates the parameters of a single Configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   Configuration resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.licensemanager.v1.Configuration} request.configuration
+   *   Required. The resource being updated
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.update_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_UpdateConfiguration_async
+   */
   updateConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.IUpdateConfigurationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IUpdateConfigurationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateConfiguration(
-      request: protos.google.cloud.licensemanager.v1.IUpdateConfigurationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IUpdateConfigurationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateConfiguration(
-      request: protos.google.cloud.licensemanager.v1.IUpdateConfigurationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IUpdateConfigurationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.IUpdateConfigurationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.licensemanager.v1.IUpdateConfigurationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'configuration.name': request.configuration!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'configuration.name': request.configuration!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateConfiguration response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateConfiguration request %j', request);
-    return this.innerApiCalls.updateConfiguration(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateConfiguration response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateConfiguration(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConfiguration response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateConfiguration()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.update_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_UpdateConfiguration_async
- */
-  async checkUpdateConfigurationProgress(name: string): Promise<LROperation<protos.google.cloud.licensemanager.v1.Configuration, protos.google.cloud.licensemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateConfiguration()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.update_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_UpdateConfiguration_async
+   */
+  async checkUpdateConfigurationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.licensemanager.v1.Configuration,
+      protos.google.cloud.licensemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateConfiguration long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateConfiguration, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.licensemanager.v1.Configuration, protos.google.cloud.licensemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateConfiguration,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.licensemanager.v1.Configuration,
+      protos.google.cloud.licensemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Configuration.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.delete_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_DeleteConfiguration_async
- */
+  /**
+   * Deletes a single Configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.delete_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_DeleteConfiguration_async
+   */
   deleteConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.IDeleteConfigurationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IDeleteConfigurationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteConfiguration(
-      request: protos.google.cloud.licensemanager.v1.IDeleteConfigurationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IDeleteConfigurationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteConfiguration(
-      request: protos.google.cloud.licensemanager.v1.IDeleteConfigurationRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IDeleteConfigurationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.IDeleteConfigurationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.licensemanager.v1.IDeleteConfigurationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteConfiguration response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteConfiguration request %j', request);
-    return this.innerApiCalls.deleteConfiguration(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteConfiguration response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteConfiguration(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConfiguration response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteConfiguration()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.delete_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_DeleteConfiguration_async
- */
-  async checkDeleteConfigurationProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.licensemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteConfiguration()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.delete_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_DeleteConfiguration_async
+   */
+  async checkDeleteConfigurationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.licensemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteConfiguration long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteConfiguration, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.licensemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteConfiguration,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.licensemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Deactivates the given configuration.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.deactivate_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_DeactivateConfiguration_async
- */
+  /**
+   * Deactivates the given configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.deactivate_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_DeactivateConfiguration_async
+   */
   deactivateConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.IDeactivateConfigurationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IDeactivateConfigurationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deactivateConfiguration(
-      request: protos.google.cloud.licensemanager.v1.IDeactivateConfigurationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IDeactivateConfigurationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deactivateConfiguration(
-      request: protos.google.cloud.licensemanager.v1.IDeactivateConfigurationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IDeactivateConfigurationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deactivateConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.IDeactivateConfigurationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.licensemanager.v1.IDeactivateConfigurationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deactivateConfiguration response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deactivateConfiguration request %j', request);
-    return this.innerApiCalls.deactivateConfiguration(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deactivateConfiguration response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deactivateConfiguration(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deactivateConfiguration response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deactivateConfiguration()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.deactivate_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_DeactivateConfiguration_async
- */
-  async checkDeactivateConfigurationProgress(name: string): Promise<LROperation<protos.google.cloud.licensemanager.v1.Configuration, protos.google.cloud.licensemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deactivateConfiguration()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.deactivate_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_DeactivateConfiguration_async
+   */
+  async checkDeactivateConfigurationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.licensemanager.v1.Configuration,
+      protos.google.cloud.licensemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deactivateConfiguration long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deactivateConfiguration, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.licensemanager.v1.Configuration, protos.google.cloud.licensemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deactivateConfiguration,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.licensemanager.v1.Configuration,
+      protos.google.cloud.licensemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Reactivates the given configuration.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.reactivate_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_ReactivateConfiguration_async
- */
+  /**
+   * Reactivates the given configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.reactivate_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_ReactivateConfiguration_async
+   */
   reactivateConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.IReactivateConfigurationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IReactivateConfigurationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   reactivateConfiguration(
-      request: protos.google.cloud.licensemanager.v1.IReactivateConfigurationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IReactivateConfigurationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   reactivateConfiguration(
-      request: protos.google.cloud.licensemanager.v1.IReactivateConfigurationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.licensemanager.v1.IReactivateConfigurationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   reactivateConfiguration(
-      request?: protos.google.cloud.licensemanager.v1.IReactivateConfigurationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.licensemanager.v1.IReactivateConfigurationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.licensemanager.v1.IConfiguration,
+        protos.google.cloud.licensemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('reactivateConfiguration response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('reactivateConfiguration request %j', request);
-    return this.innerApiCalls.reactivateConfiguration(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.licensemanager.v1.IConfiguration, protos.google.cloud.licensemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('reactivateConfiguration response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .reactivateConfiguration(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.licensemanager.v1.IConfiguration,
+            protos.google.cloud.licensemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('reactivateConfiguration response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `reactivateConfiguration()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.reactivate_configuration.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_ReactivateConfiguration_async
- */
-  async checkReactivateConfigurationProgress(name: string): Promise<LROperation<protos.google.cloud.licensemanager.v1.Configuration, protos.google.cloud.licensemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `reactivateConfiguration()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.reactivate_configuration.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_ReactivateConfiguration_async
+   */
+  async checkReactivateConfigurationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.licensemanager.v1.Configuration,
+      protos.google.cloud.licensemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('reactivateConfiguration long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.reactivateConfiguration, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.licensemanager.v1.Configuration, protos.google.cloud.licensemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.reactivateConfiguration,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.licensemanager.v1.Configuration,
+      protos.google.cloud.licensemanager.v1.OperationMetadata
+    >;
   }
- /**
- * Lists Configurations in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListConfigurationsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.licensemanager.v1.Configuration|Configuration}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listConfigurationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Configurations in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListConfigurationsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.licensemanager.v1.Configuration|Configuration}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listConfigurationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listConfigurations(
-      request?: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IConfiguration[],
-        protos.google.cloud.licensemanager.v1.IListConfigurationsRequest|null,
-        protos.google.cloud.licensemanager.v1.IListConfigurationsResponse
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IConfiguration[],
+      protos.google.cloud.licensemanager.v1.IListConfigurationsRequest | null,
+      protos.google.cloud.licensemanager.v1.IListConfigurationsResponse,
+    ]
+  >;
   listConfigurations(
-      request: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-          protos.google.cloud.licensemanager.v1.IListConfigurationsResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IConfiguration>): void;
+    request: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
+      | protos.google.cloud.licensemanager.v1.IListConfigurationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IConfiguration
+    >,
+  ): void;
   listConfigurations(
-      request: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-          protos.google.cloud.licensemanager.v1.IListConfigurationsResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IConfiguration>): void;
+    request: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
+      | protos.google.cloud.licensemanager.v1.IListConfigurationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IConfiguration
+    >,
+  ): void;
   listConfigurations(
-      request?: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-          protos.google.cloud.licensemanager.v1.IListConfigurationsResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IConfiguration>,
-      callback?: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-          protos.google.cloud.licensemanager.v1.IListConfigurationsResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IConfiguration>):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IConfiguration[],
-        protos.google.cloud.licensemanager.v1.IListConfigurationsRequest|null,
-        protos.google.cloud.licensemanager.v1.IListConfigurationsResponse
-      ]>|void {
+          | protos.google.cloud.licensemanager.v1.IListConfigurationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.licensemanager.v1.IConfiguration
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
+      | protos.google.cloud.licensemanager.v1.IListConfigurationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IConfiguration
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IConfiguration[],
+      protos.google.cloud.licensemanager.v1.IListConfigurationsRequest | null,
+      protos.google.cloud.licensemanager.v1.IListConfigurationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-      protos.google.cloud.licensemanager.v1.IListConfigurationsResponse|null|undefined,
-      protos.google.cloud.licensemanager.v1.IConfiguration>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
+          | protos.google.cloud.licensemanager.v1.IListConfigurationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.licensemanager.v1.IConfiguration
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConfigurations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1511,204 +2154,233 @@ export class LicenseManagerClient {
     this._log.info('listConfigurations request %j', request);
     return this.innerApiCalls
       .listConfigurations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.licensemanager.v1.IConfiguration[],
-        protos.google.cloud.licensemanager.v1.IListConfigurationsRequest|null,
-        protos.google.cloud.licensemanager.v1.IListConfigurationsResponse
-      ]) => {
-        this._log.info('listConfigurations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.licensemanager.v1.IConfiguration[],
+          protos.google.cloud.licensemanager.v1.IListConfigurationsRequest | null,
+          protos.google.cloud.licensemanager.v1.IListConfigurationsResponse,
+        ]) => {
+          this._log.info('listConfigurations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listConfigurations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListConfigurationsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.licensemanager.v1.Configuration|Configuration} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listConfigurationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listConfigurations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListConfigurationsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.licensemanager.v1.Configuration|Configuration} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listConfigurationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listConfigurationsStream(
-      request?: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listConfigurations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listConfigurations stream %j', request);
     return this.descriptors.page.listConfigurations.createStream(
       this.innerApiCalls.listConfigurations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listConfigurations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListConfigurationsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.licensemanager.v1.Configuration|Configuration}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.list_configurations.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_ListConfigurations_async
- */
+  /**
+   * Equivalent to `listConfigurations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListConfigurationsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.licensemanager.v1.Configuration|Configuration}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.list_configurations.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_ListConfigurations_async
+   */
   listConfigurationsAsync(
-      request?: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.licensemanager.v1.IConfiguration>{
+    request?: protos.google.cloud.licensemanager.v1.IListConfigurationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.licensemanager.v1.IConfiguration> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listConfigurations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listConfigurations iterate %j', request);
     return this.descriptors.page.listConfigurations.asyncIterate(
       this.innerApiCalls['listConfigurations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.licensemanager.v1.IConfiguration>;
   }
- /**
- * Lists Instances in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListInstancesRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.licensemanager.v1.Instance|Instance}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listInstancesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Instances in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListInstancesRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.licensemanager.v1.Instance|Instance}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listInstancesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInstances(
-      request?: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IInstance[],
-        protos.google.cloud.licensemanager.v1.IListInstancesRequest|null,
-        protos.google.cloud.licensemanager.v1.IListInstancesResponse
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IInstance[],
+      protos.google.cloud.licensemanager.v1.IListInstancesRequest | null,
+      protos.google.cloud.licensemanager.v1.IListInstancesResponse,
+    ]
+  >;
   listInstances(
-      request: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-          protos.google.cloud.licensemanager.v1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IInstance>): void;
+    request: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IListInstancesRequest,
+      | protos.google.cloud.licensemanager.v1.IListInstancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IInstance
+    >,
+  ): void;
   listInstances(
-      request: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-          protos.google.cloud.licensemanager.v1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IInstance>): void;
+    request: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IListInstancesRequest,
+      | protos.google.cloud.licensemanager.v1.IListInstancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IInstance
+    >,
+  ): void;
   listInstances(
-      request?: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-          protos.google.cloud.licensemanager.v1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IInstance>,
-      callback?: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-          protos.google.cloud.licensemanager.v1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IInstance>):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IInstance[],
-        protos.google.cloud.licensemanager.v1.IListInstancesRequest|null,
-        protos.google.cloud.licensemanager.v1.IListInstancesResponse
-      ]>|void {
+          | protos.google.cloud.licensemanager.v1.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.licensemanager.v1.IInstance
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IListInstancesRequest,
+      | protos.google.cloud.licensemanager.v1.IListInstancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IInstance
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IInstance[],
+      protos.google.cloud.licensemanager.v1.IListInstancesRequest | null,
+      protos.google.cloud.licensemanager.v1.IListInstancesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-      protos.google.cloud.licensemanager.v1.IListInstancesResponse|null|undefined,
-      protos.google.cloud.licensemanager.v1.IInstance>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.licensemanager.v1.IListInstancesRequest,
+          | protos.google.cloud.licensemanager.v1.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.licensemanager.v1.IInstance
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInstances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1717,210 +2389,239 @@ export class LicenseManagerClient {
     this._log.info('listInstances request %j', request);
     return this.innerApiCalls
       .listInstances(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.licensemanager.v1.IInstance[],
-        protos.google.cloud.licensemanager.v1.IListInstancesRequest|null,
-        protos.google.cloud.licensemanager.v1.IListInstancesResponse
-      ]) => {
-        this._log.info('listInstances values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.licensemanager.v1.IInstance[],
+          protos.google.cloud.licensemanager.v1.IListInstancesRequest | null,
+          protos.google.cloud.licensemanager.v1.IListInstancesResponse,
+        ]) => {
+          this._log.info('listInstances values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listInstances`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListInstancesRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.licensemanager.v1.Instance|Instance} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listInstancesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listInstances`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListInstancesRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.licensemanager.v1.Instance|Instance} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listInstancesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInstancesStream(
-      request?: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listInstances`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListInstancesRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.licensemanager.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.list_instances.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_ListInstances_async
- */
+  /**
+   * Equivalent to `listInstances`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListInstancesRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.licensemanager.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.list_instances.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_ListInstances_async
+   */
   listInstancesAsync(
-      request?: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.licensemanager.v1.IInstance>{
+    request?: protos.google.cloud.licensemanager.v1.IListInstancesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.licensemanager.v1.IInstance> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.licensemanager.v1.IInstance>;
   }
- /**
- * Aggregates Usage per Instance for a Configuration.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Parent value for AggregateUsageRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {google.protobuf.Timestamp} request.startTime
- *   Required. Licenses are purchased per month - so usage track needs start
- *   time of a month.
- * @param {google.protobuf.Timestamp} request.endTime
- *   Required. Usage track is always for a month. This parameter is for the end
- *   time of the month.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.licensemanager.v1.Usage|Usage}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `aggregateUsageAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Aggregates Usage per Instance for a Configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Parent value for AggregateUsageRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   Required. Licenses are purchased per month - so usage track needs start
+   *   time of a month.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   Required. Usage track is always for a month. This parameter is for the end
+   *   time of the month.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.licensemanager.v1.Usage|Usage}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `aggregateUsageAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   aggregateUsage(
-      request?: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IUsage[],
-        protos.google.cloud.licensemanager.v1.IAggregateUsageRequest|null,
-        protos.google.cloud.licensemanager.v1.IAggregateUsageResponse
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IUsage[],
+      protos.google.cloud.licensemanager.v1.IAggregateUsageRequest | null,
+      protos.google.cloud.licensemanager.v1.IAggregateUsageResponse,
+    ]
+  >;
   aggregateUsage(
-      request: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-          protos.google.cloud.licensemanager.v1.IAggregateUsageResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IUsage>): void;
+    request: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
+      | protos.google.cloud.licensemanager.v1.IAggregateUsageResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IUsage
+    >,
+  ): void;
   aggregateUsage(
-      request: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-          protos.google.cloud.licensemanager.v1.IAggregateUsageResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IUsage>): void;
+    request: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
+      | protos.google.cloud.licensemanager.v1.IAggregateUsageResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IUsage
+    >,
+  ): void;
   aggregateUsage(
-      request?: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-          protos.google.cloud.licensemanager.v1.IAggregateUsageResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IUsage>,
-      callback?: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-          protos.google.cloud.licensemanager.v1.IAggregateUsageResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IUsage>):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IUsage[],
-        protos.google.cloud.licensemanager.v1.IAggregateUsageRequest|null,
-        protos.google.cloud.licensemanager.v1.IAggregateUsageResponse
-      ]>|void {
+          | protos.google.cloud.licensemanager.v1.IAggregateUsageResponse
+          | null
+          | undefined,
+          protos.google.cloud.licensemanager.v1.IUsage
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
+      | protos.google.cloud.licensemanager.v1.IAggregateUsageResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IUsage
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IUsage[],
+      protos.google.cloud.licensemanager.v1.IAggregateUsageRequest | null,
+      protos.google.cloud.licensemanager.v1.IAggregateUsageResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-      protos.google.cloud.licensemanager.v1.IAggregateUsageResponse|null|undefined,
-      protos.google.cloud.licensemanager.v1.IUsage>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
+          | protos.google.cloud.licensemanager.v1.IAggregateUsageResponse
+          | null
+          | undefined,
+          protos.google.cloud.licensemanager.v1.IUsage
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('aggregateUsage values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1929,216 +2630,245 @@ export class LicenseManagerClient {
     this._log.info('aggregateUsage request %j', request);
     return this.innerApiCalls
       .aggregateUsage(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.licensemanager.v1.IUsage[],
-        protos.google.cloud.licensemanager.v1.IAggregateUsageRequest|null,
-        protos.google.cloud.licensemanager.v1.IAggregateUsageResponse
-      ]) => {
-        this._log.info('aggregateUsage values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.licensemanager.v1.IUsage[],
+          protos.google.cloud.licensemanager.v1.IAggregateUsageRequest | null,
+          protos.google.cloud.licensemanager.v1.IAggregateUsageResponse,
+        ]) => {
+          this._log.info('aggregateUsage values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `aggregateUsage`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Parent value for AggregateUsageRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {google.protobuf.Timestamp} request.startTime
- *   Required. Licenses are purchased per month - so usage track needs start
- *   time of a month.
- * @param {google.protobuf.Timestamp} request.endTime
- *   Required. Usage track is always for a month. This parameter is for the end
- *   time of the month.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.licensemanager.v1.Usage|Usage} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `aggregateUsageAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `aggregateUsage`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Parent value for AggregateUsageRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   Required. Licenses are purchased per month - so usage track needs start
+   *   time of a month.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   Required. Usage track is always for a month. This parameter is for the end
+   *   time of the month.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.licensemanager.v1.Usage|Usage} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `aggregateUsageAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   aggregateUsageStream(
-      request?: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     const defaultCallSettings = this._defaults['aggregateUsage'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('aggregateUsage stream %j', request);
     return this.descriptors.page.aggregateUsage.createStream(
       this.innerApiCalls.aggregateUsage as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `aggregateUsage`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Parent value for AggregateUsageRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {google.protobuf.Timestamp} request.startTime
- *   Required. Licenses are purchased per month - so usage track needs start
- *   time of a month.
- * @param {google.protobuf.Timestamp} request.endTime
- *   Required. Usage track is always for a month. This parameter is for the end
- *   time of the month.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.licensemanager.v1.Usage|Usage}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.aggregate_usage.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_AggregateUsage_async
- */
+  /**
+   * Equivalent to `aggregateUsage`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Parent value for AggregateUsageRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   Required. Licenses are purchased per month - so usage track needs start
+   *   time of a month.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   Required. Usage track is always for a month. This parameter is for the end
+   *   time of the month.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.licensemanager.v1.Usage|Usage}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.aggregate_usage.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_AggregateUsage_async
+   */
   aggregateUsageAsync(
-      request?: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.licensemanager.v1.IUsage>{
+    request?: protos.google.cloud.licensemanager.v1.IAggregateUsageRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.licensemanager.v1.IUsage> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     const defaultCallSettings = this._defaults['aggregateUsage'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('aggregateUsage iterate %j', request);
     return this.descriptors.page.aggregateUsage.asyncIterate(
       this.innerApiCalls['aggregateUsage'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.licensemanager.v1.IUsage>;
   }
- /**
- * Lists Products in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListProductsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.licensemanager.v1.Product|Product}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listProductsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Products in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProductsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.licensemanager.v1.Product|Product}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listProductsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listProducts(
-      request?: protos.google.cloud.licensemanager.v1.IListProductsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IProduct[],
-        protos.google.cloud.licensemanager.v1.IListProductsRequest|null,
-        protos.google.cloud.licensemanager.v1.IListProductsResponse
-      ]>;
+    request?: protos.google.cloud.licensemanager.v1.IListProductsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IProduct[],
+      protos.google.cloud.licensemanager.v1.IListProductsRequest | null,
+      protos.google.cloud.licensemanager.v1.IListProductsResponse,
+    ]
+  >;
   listProducts(
-      request: protos.google.cloud.licensemanager.v1.IListProductsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IListProductsRequest,
-          protos.google.cloud.licensemanager.v1.IListProductsResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IProduct>): void;
+    request: protos.google.cloud.licensemanager.v1.IListProductsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IListProductsRequest,
+      | protos.google.cloud.licensemanager.v1.IListProductsResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IProduct
+    >,
+  ): void;
   listProducts(
-      request: protos.google.cloud.licensemanager.v1.IListProductsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IListProductsRequest,
-          protos.google.cloud.licensemanager.v1.IListProductsResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IProduct>): void;
+    request: protos.google.cloud.licensemanager.v1.IListProductsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IListProductsRequest,
+      | protos.google.cloud.licensemanager.v1.IListProductsResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IProduct
+    >,
+  ): void;
   listProducts(
-      request?: protos.google.cloud.licensemanager.v1.IListProductsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.licensemanager.v1.IListProductsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.licensemanager.v1.IListProductsRequest,
-          protos.google.cloud.licensemanager.v1.IListProductsResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IProduct>,
-      callback?: PaginationCallback<
-          protos.google.cloud.licensemanager.v1.IListProductsRequest,
-          protos.google.cloud.licensemanager.v1.IListProductsResponse|null|undefined,
-          protos.google.cloud.licensemanager.v1.IProduct>):
-      Promise<[
-        protos.google.cloud.licensemanager.v1.IProduct[],
-        protos.google.cloud.licensemanager.v1.IListProductsRequest|null,
-        protos.google.cloud.licensemanager.v1.IListProductsResponse
-      ]>|void {
+          | protos.google.cloud.licensemanager.v1.IListProductsResponse
+          | null
+          | undefined,
+          protos.google.cloud.licensemanager.v1.IProduct
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.licensemanager.v1.IListProductsRequest,
+      | protos.google.cloud.licensemanager.v1.IListProductsResponse
+      | null
+      | undefined,
+      protos.google.cloud.licensemanager.v1.IProduct
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.licensemanager.v1.IProduct[],
+      protos.google.cloud.licensemanager.v1.IListProductsRequest | null,
+      protos.google.cloud.licensemanager.v1.IListProductsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.licensemanager.v1.IListProductsRequest,
-      protos.google.cloud.licensemanager.v1.IListProductsResponse|null|undefined,
-      protos.google.cloud.licensemanager.v1.IProduct>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.licensemanager.v1.IListProductsRequest,
+          | protos.google.cloud.licensemanager.v1.IListProductsResponse
+          | null
+          | undefined,
+          protos.google.cloud.licensemanager.v1.IProduct
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listProducts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2147,119 +2877,124 @@ export class LicenseManagerClient {
     this._log.info('listProducts request %j', request);
     return this.innerApiCalls
       .listProducts(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.licensemanager.v1.IProduct[],
-        protos.google.cloud.licensemanager.v1.IListProductsRequest|null,
-        protos.google.cloud.licensemanager.v1.IListProductsResponse
-      ]) => {
-        this._log.info('listProducts values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.licensemanager.v1.IProduct[],
+          protos.google.cloud.licensemanager.v1.IListProductsRequest | null,
+          protos.google.cloud.licensemanager.v1.IListProductsResponse,
+        ]) => {
+          this._log.info('listProducts values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listProducts`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListProductsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.licensemanager.v1.Product|Product} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listProductsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listProducts`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProductsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.licensemanager.v1.Product|Product} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listProductsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listProductsStream(
-      request?: protos.google.cloud.licensemanager.v1.IListProductsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.licensemanager.v1.IListProductsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listProducts stream %j', request);
     return this.descriptors.page.listProducts.createStream(
       this.innerApiCalls.listProducts as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listProducts`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListProductsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.licensemanager.v1.Product|Product}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/license_manager.list_products.js</caption>
- * region_tag:licensemanager_v1_generated_LicenseManager_ListProducts_async
- */
+  /**
+   * Equivalent to `listProducts`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProductsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.licensemanager.v1.Product|Product}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_manager.list_products.js</caption>
+   * region_tag:licensemanager_v1_generated_LicenseManager_ListProducts_async
+   */
   listProductsAsync(
-      request?: protos.google.cloud.licensemanager.v1.IListProductsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.licensemanager.v1.IProduct>{
+    request?: protos.google.cloud.licensemanager.v1.IListProductsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.licensemanager.v1.IProduct> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listProducts iterate %j', request);
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.licensemanager.v1.IProduct>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2294,12 +3029,11 @@ export class LicenseManagerClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2332,12 +3066,12 @@ export class LicenseManagerClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2380,22 +3114,22 @@ export class LicenseManagerClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2430,15 +3164,15 @@ export class LicenseManagerClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2472,7 +3206,7 @@ export class LicenseManagerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2485,25 +3219,24 @@ export class LicenseManagerClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -2542,22 +3275,22 @@ export class LicenseManagerClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2573,7 +3306,7 @@ export class LicenseManagerClient {
    * @param {string} configuration
    * @returns {string} Resource name string.
    */
-  configurationPath(project:string,location:string,configuration:string) {
+  configurationPath(project: string, location: string, configuration: string) {
     return this.pathTemplates.configurationPathTemplate.render({
       project: project,
       location: location,
@@ -2589,7 +3322,8 @@ export class LicenseManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConfigurationName(configurationName: string) {
-    return this.pathTemplates.configurationPathTemplate.match(configurationName).project;
+    return this.pathTemplates.configurationPathTemplate.match(configurationName)
+      .project;
   }
 
   /**
@@ -2600,7 +3334,8 @@ export class LicenseManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConfigurationName(configurationName: string) {
-    return this.pathTemplates.configurationPathTemplate.match(configurationName).location;
+    return this.pathTemplates.configurationPathTemplate.match(configurationName)
+      .location;
   }
 
   /**
@@ -2611,7 +3346,8 @@ export class LicenseManagerClient {
    * @returns {string} A string representing the configuration.
    */
   matchConfigurationFromConfigurationName(configurationName: string) {
-    return this.pathTemplates.configurationPathTemplate.match(configurationName).configuration;
+    return this.pathTemplates.configurationPathTemplate.match(configurationName)
+      .configuration;
   }
 
   /**
@@ -2622,7 +3358,7 @@ export class LicenseManagerClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project:string,location:string,instance:string) {
+  instancePath(project: string, location: string, instance: string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -2670,7 +3406,7 @@ export class LicenseManagerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2707,7 +3443,7 @@ export class LicenseManagerClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(project:string,location:string,product:string) {
+  productPath(project: string, location: string, product: string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -2754,7 +3490,7 @@ export class LicenseManagerClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2779,11 +3515,13 @@ export class LicenseManagerClient {
    */
   close(): Promise<void> {
     if (this.licenseManagerStub && !this._terminated) {
-      return this.licenseManagerStub.then(stub => {
+      return this.licenseManagerStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }
