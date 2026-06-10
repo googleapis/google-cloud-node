@@ -67,6 +67,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      billing_not_required: true
       dependencies:
         google-auth-library: ^10.0.0-rc.1
         server-destroy: ^1.0.1
@@ -79,6 +80,8 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/ga-devrel'
+      billing_not_required: true
       client_documentation_override: https://googleapis.dev/nodejs/analytics-data/latest/
   - name: google-api-apikeys
     version: 2.2.2
@@ -136,6 +139,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
       package_name: '@google-cloud/appengine-admin'
   - name: google-apps-events-subscriptions
     version: 0.1.2
@@ -163,6 +167,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/area120-tables'
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
@@ -199,6 +204,8 @@ libraries:
       - path: google/cloud/aiplatform/v1beta1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/ml-apis'
   - name: google-cloud-alloydb
     version: 2.5.1
     apis:
@@ -265,6 +272,8 @@ libraries:
       - path: google/cloud/asset/v1p1beta1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/cloud-asset-team'
   - name: google-cloud-assuredworkloads
     version: 5.1.2
     apis:
@@ -288,6 +297,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/ml-apis'
       main_service: automl
   - name: google-cloud-backupdr
     version: 0.8.1
@@ -363,6 +373,8 @@ libraries:
       - path: google/cloud/bigquery/connection/v1beta1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/api-bigquery'
   - name: google-cloud-bigquery-dataexchange
     version: 2.1.2
     apis:
@@ -387,6 +399,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/api-bigquery'
       package_name: '@google-cloud/bigquery-data-transfer'
   - name: google-cloud-bigquery-migration
     version: 2.2.0
@@ -401,6 +414,8 @@ libraries:
       - path: google/cloud/bigquery/reservation/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/api-bigquery'
   - name: google-cloud-billing
     version: 5.1.2
     apis:
@@ -426,6 +441,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
       package_name: '@google-cloud/binary-authorization'
   - name: google-cloud-capacityplanner
     version: 0.1.3
@@ -516,6 +532,7 @@ libraries:
       - test/gapic_region_operations_v1small.ts
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/api-compute'
       nodejs_apis:
         - diregapic: true
           path: google/cloud/compute/v1
@@ -555,6 +572,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/api-contact-center-insights'
       package_name: '@google-cloud/contact-center-insights'
   - name: google-cloud-contentwarehouse
     version: 2.4.1
@@ -617,6 +635,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/ml-apis'
       main_service: datalabeling
   - name: google-cloud-dataplex
     version: 5.6.0
@@ -634,6 +653,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/api-dataproc'
       main_service: dataproc
   - name: google-cloud-dataqna
     version: 4.1.2
@@ -656,6 +676,8 @@ libraries:
       - path: google/cloud/deploy/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
   - name: google-cloud-developerconnect
     version: 0.7.1
     apis:
@@ -676,6 +698,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/ml-apis'
       main_service: dialogflow
   - name: google-cloud-dialogflow-cx
     version: 5.8.2
@@ -685,6 +708,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/ml-apis'
       mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-discoveryengine
     version: 2.7.0
@@ -701,6 +725,8 @@ libraries:
       - path: google/cloud/documentai/v1beta3
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/ml-apis'
   - name: google-cloud-domains
     version: 4.2.2
     apis:
@@ -735,6 +761,8 @@ libraries:
       - path: google/cloud/eventarc/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
   - name: google-cloud-eventarc-publishing
     version: 4.2.2
     apis:
@@ -766,6 +794,8 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
+      billing_not_required: true
       mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-gdchardwaremanagement
     version: 0.10.1
@@ -857,6 +887,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/api-iot'
       main_service: iot
   - name: google-cloud-kms
     version: 5.5.1
@@ -864,6 +895,8 @@ libraries:
       - path: google/cloud/kms/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/api-kms'
   - name: google-cloud-kms-inventory
     version: 2.6.1
     apis:
@@ -878,6 +911,8 @@ libraries:
       - path: google/cloud/language/v1beta2
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/ml-apis'
   - name: google-cloud-licensemanager
     version: 0.1.2
     apis:
@@ -1037,6 +1072,8 @@ libraries:
       - path: google/cloud/notebooks/v1beta1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/ml-apis'
   - name: google-cloud-oracledatabase
     version: 0.7.1
     apis:
@@ -1161,6 +1198,8 @@ libraries:
       - path: google/cloud/recommender/v1beta1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/ml-apis'
   - name: google-cloud-redis
     version: 5.2.2
     apis:
@@ -1197,6 +1236,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/cloud-retail-team'
       mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-run
     version: 3.2.1
@@ -1220,6 +1260,8 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
+      billing_not_required: true
       main_service: scheduler
   - name: google-cloud-secretmanager
     version: 6.1.3
@@ -1229,6 +1271,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/api-secrets'
       package_name: '@google-cloud/secret-manager'
   - name: google-cloud-securesourcemanager
     version: 0.9.1
@@ -1296,6 +1339,8 @@ libraries:
       - path: google/cloud/shell/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
   - name: google-cloud-speech
     version: 7.3.2
     apis:
@@ -1305,6 +1350,8 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/ml-apis'
+      billing_not_required: true
       dependencies:
         '@google-cloud/common': ^6.0.0
         '@types/pumpify': ^1.4.4
@@ -1353,6 +1400,7 @@ libraries:
       - path: google/cloud/tasks/v2beta2
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
       esm: true
       main_service: tasks
   - name: google-cloud-telcoautomation
@@ -1370,6 +1418,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/ml-apis'
       package_name: '@google-cloud/text-to-speech'
   - name: google-cloud-tpu
     version: 4.1.2
@@ -1387,6 +1436,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/ml-apis'
       dependencies:
         '@google-cloud/common': ^6.0.0
         '@google-cloud/promisify': ^5.0.0
@@ -1407,6 +1457,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/cloud-media-team'
       package_name: '@google-cloud/livestream'
   - name: google-cloud-video-stitcher
     version: 3.2.2
@@ -1415,6 +1466,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/cloud-media-team'
       client_documentation_override: https://googleapis.dev/nodejs/videostitcher/latest/
   - name: google-cloud-video-transcoder
     version: 4.4.3
@@ -1422,6 +1474,8 @@ libraries:
       - path: google/cloud/video/transcoder/v1
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/cloud-media-team'
   - name: google-cloud-videointelligence
     version: 6.2.2
     apis:
@@ -1433,6 +1487,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/ml-apis'
       main_service: videointelligence
       package_name: '@google-cloud/video-intelligence'
   - name: google-cloud-vision
@@ -1446,6 +1501,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/ml-apis'
       dependencies:
         '@google-cloud/promisify': ^5.0.0
       main_service: vision
@@ -1502,6 +1558,8 @@ libraries:
       - path: google/cloud/workflows/v1beta
     copyright_year: "2026"
     skip_generate: true
+    nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
   - name: google-cloud-workloadmanager
     version: 0.1.1
     apis:
@@ -1548,6 +1606,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
       package_name: '@google-cloud/artifact-registry'
   - name: google-devtools-cloudbuild
     version: 5.5.1
@@ -1557,6 +1616,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
       package_name: '@google-cloud/cloudbuild'
   - name: google-devtools-cloudprofiler
     version: 0.9.2
@@ -1574,6 +1634,7 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
       dependencies:
         '@google-cloud/grafeas': ^6.0.0
       main_service: containeranalysis
@@ -1910,4 +1971,6 @@ libraries:
     copyright_year: "2026"
     skip_generate: true
     nodejs:
+      codeowner_team: '@googleapis/aap-dpes'
+      billing_not_required: true
       package_name: '@google-cloud/grafeas'
