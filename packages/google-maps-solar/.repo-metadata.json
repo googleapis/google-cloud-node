@@ -1,16 +1,16 @@
 {
+    "api_description": "Solar API.",
     "api_id": "solar.googleapis.com",
     "api_shortname": "solar",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/solar/latest",
     "default_version": "v1",
     "distribution_name": "@googlemaps/solar",
-    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1356349",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "solar",
-    "name_pretty": "Solar API",
+    "name_pretty": "Solar",
     "product_documentation": "https://developers.google.com/maps/documentation/solar/overview",
     "release_level": "preview",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }
