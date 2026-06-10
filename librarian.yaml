@@ -176,7 +176,6 @@ libraries:
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-apps/chat'
@@ -269,7 +268,6 @@ libraries:
     apis:
       - path: google/cloud/appoptimize/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-asset
@@ -298,7 +296,6 @@ libraries:
     apis:
       - path: google/cloud/auditmanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-automl
@@ -316,7 +313,6 @@ libraries:
     apis:
       - path: google/cloud/backupdr/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-baremetalsolution
@@ -324,7 +320,6 @@ libraries:
     apis:
       - path: google/cloud/baremetalsolution/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@google-cloud/bare-metal-solution'
@@ -334,7 +329,6 @@ libraries:
       - path: google/cloud/batch/v1
       - path: google/cloud/batch/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-beyondcorp-appconnections
@@ -342,7 +336,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appconnections'
@@ -351,7 +344,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/appconnectors/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appconnectors'
@@ -360,7 +352,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/appgateways/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appgateways'
@@ -369,7 +360,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/clientconnectorservices/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/clientconnectorservices'
