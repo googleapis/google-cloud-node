@@ -1045,7 +1045,6 @@ libraries:
     apis:
       - path: google/cloud/lifesciences/v2beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2beta
       package_name: '@google-cloud/life-sciences'
