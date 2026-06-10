@@ -234,7 +234,6 @@ libraries:
     apis:
       - path: google/cloud/apihub/v1
     copyright_year: "2026"
-    skip_generate: true
   - name: google-cloud-apiregistry
     version: 0.2.1
     apis:
