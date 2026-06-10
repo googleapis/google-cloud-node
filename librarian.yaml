@@ -314,7 +314,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       package_name: '@google-cloud/appconnections'
   - name: google-cloud-beyondcorp-appconnectors
