@@ -1919,7 +1919,6 @@ libraries:
     apis:
       - path: google/maps/fleetengine/delivery/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@googlemaps/fleetengine-delivery'
