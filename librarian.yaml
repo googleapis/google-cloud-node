@@ -322,7 +322,6 @@ libraries:
     apis:
       - path: google/cloud/baremetalsolution/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@google-cloud/bare-metal-solution'
