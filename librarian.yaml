@@ -1921,7 +1921,6 @@ libraries:
     apis:
       - path: google/maps/places/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@googlemaps/places'
@@ -1931,7 +1930,6 @@ libraries:
     apis:
       - path: google/maps/routeoptimization/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@googlemaps/routeoptimization'
@@ -1941,7 +1939,6 @@ libraries:
     apis:
       - path: google/maps/routing/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@googlemaps/routing'
@@ -1951,7 +1948,6 @@ libraries:
     apis:
       - path: google/maps/solar/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@googlemaps/solar'
@@ -1961,7 +1957,6 @@ libraries:
     apis:
       - path: google/marketingplatform/admin/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha
       nodejs_apis:
@@ -1992,7 +1987,6 @@ libraries:
     apis:
       - path: google/shopping/css/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/css/latest
@@ -2002,7 +1996,6 @@ libraries:
       - path: google/shopping/merchant/accounts/v1
       - path: google/shopping/merchant/accounts/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/accounts'
@@ -2013,7 +2006,6 @@ libraries:
       - path: google/shopping/merchant/conversions/v1
       - path: google/shopping/merchant/conversions/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/conversions'
@@ -2024,7 +2016,6 @@ libraries:
       - path: google/shopping/merchant/datasources/v1
       - path: google/shopping/merchant/datasources/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/datasources'
@@ -2035,7 +2026,6 @@ libraries:
       - path: google/shopping/merchant/inventories/v1
       - path: google/shopping/merchant/inventories/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/inventories'
