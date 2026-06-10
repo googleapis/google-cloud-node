@@ -45,7 +45,6 @@ libraries:
     apis:
       - path: google/ads/datamanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/datamanager/latest
