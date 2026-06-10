@@ -238,7 +238,6 @@ libraries:
     apis:
       - path: google/cloud/apigeeregistry/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/apigee-registry'
@@ -247,7 +246,6 @@ libraries:
     apis:
       - path: google/cloud/apihub/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-apiregistry
@@ -264,7 +262,6 @@ libraries:
     apis:
       - path: google/cloud/apphub/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-appoptimize
@@ -1567,7 +1564,6 @@ libraries:
       - path: google/cloud/telcoautomation/v1
       - path: google/cloud/telcoautomation/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-texttospeech
@@ -1587,7 +1583,6 @@ libraries:
       - path: google/cloud/tpu/v1
       - path: google/cloud/tpu/v2alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-translate
@@ -1619,7 +1614,6 @@ libraries:
     apis:
       - path: google/cloud/video/livestream/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/livestream'
@@ -1637,7 +1631,6 @@ libraries:
     apis:
       - path: google/cloud/video/transcoder/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-videointelligence
