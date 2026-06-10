@@ -1355,7 +1355,6 @@ libraries:
       - path: google/cloud/recaptchaenterprise/v1
       - path: google/cloud/recaptchaenterprise/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/recaptcha-enterprise'
