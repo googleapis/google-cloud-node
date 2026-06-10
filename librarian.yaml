@@ -293,7 +293,6 @@ libraries:
     apis:
       - path: google/cloud/backupdr/v1
     copyright_year: "2026"
-    skip_generate: true
   - name: google-cloud-baremetalsolution
     version: 2.1.2
     apis:
