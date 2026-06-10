@@ -2096,7 +2096,6 @@ libraries:
       - path: google/shopping/merchant/issueresolution/v1
       - path: google/shopping/merchant/issueresolution/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/issueresolution'
@@ -2107,7 +2106,6 @@ libraries:
       - path: google/shopping/merchant/lfp/v1
       - path: google/shopping/merchant/lfp/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/lfp'
@@ -2118,7 +2116,6 @@ libraries:
       - path: google/shopping/merchant/notifications/v1
       - path: google/shopping/merchant/notifications/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/notifications'
@@ -2129,7 +2126,6 @@ libraries:
       - path: google/shopping/merchant/ordertracking/v1
       - path: google/shopping/merchant/ordertracking/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/ordertracking'
@@ -2140,7 +2136,6 @@ libraries:
       - path: google/shopping/merchant/products/v1
       - path: google/shopping/merchant/products/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/products'
@@ -2151,7 +2146,6 @@ libraries:
       - path: google/shopping/merchant/promotions/v1
       - path: google/shopping/merchant/promotions/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/promotions'
@@ -2162,7 +2156,6 @@ libraries:
       - path: google/shopping/merchant/quota/v1
       - path: google/shopping/merchant/quota/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/quota'
@@ -2184,7 +2177,6 @@ libraries:
     apis:
       - path: google/shopping/merchant/reviews/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
       package_name: '@google-shopping/reviews'
@@ -2213,7 +2205,6 @@ libraries:
     apis:
       - path: google/streetview/publish/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@googlemaps/streetview-publish'
