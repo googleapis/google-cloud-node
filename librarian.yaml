@@ -130,7 +130,6 @@ libraries:
       - path: google/api/serviceusage/v1
       - path: google/api/serviceusage/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/service-usage'
