@@ -1867,7 +1867,6 @@ libraries:
       - path: google/iam/v2beta
       - path: google/iam/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@google-cloud/iam'
@@ -1876,7 +1875,6 @@ libraries:
     apis:
       - path: google/iam/credentials/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/iam-credentials'
@@ -1885,7 +1883,6 @@ libraries:
     apis:
       - path: google/identity/accesscontextmanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/access-context-manager'
@@ -1894,7 +1891,6 @@ libraries:
     apis:
       - path: google/maps/addressvalidation/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@googlemaps/addressvalidation'
@@ -1904,7 +1900,6 @@ libraries:
     apis:
       - path: google/maps/areainsights/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@googlemaps/areainsights'
@@ -1914,7 +1909,6 @@ libraries:
     apis:
       - path: google/maps/fleetengine/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@googlemaps/fleetengine'
@@ -1924,7 +1918,6 @@ libraries:
     apis:
       - path: google/maps/fleetengine/delivery/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@googlemaps/fleetengine-delivery'
@@ -1934,7 +1927,6 @@ libraries:
     apis:
       - path: google/maps/geocode/v4
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v4
       package_name: '@google-cloud/geocode'
@@ -1952,7 +1944,6 @@ libraries:
     apis:
       - path: google/maps/mapsplatformdatasets/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@googlemaps/maps-platform-datasets'
@@ -1962,7 +1953,6 @@ libraries:
     apis:
       - path: google/maps/navconnect/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/navconnect'
