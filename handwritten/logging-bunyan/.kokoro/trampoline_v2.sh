@@ -257,8 +257,9 @@ cd "${PROJECT_ROOT}"
 # Auto-injected conditional check
 # Check if the package directory has changes. If not, skip tests.
 if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
-    # The package path is hardcoded during migration
-    RELATIVE_PKG_PATH="handwritten/logging-bunyan"
+    # We're already in the relevant directory, so we only need to check for
+    # changes relative to that.
+    RELATIVE_PKG_PATH="."
     
     echo "Checking for changes in ${RELATIVE_PKG_PATH}..."
     
