@@ -1151,7 +1151,6 @@ libraries:
     apis:
       - path: google/cloud/netapp/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-networkconnectivity
@@ -1171,7 +1170,6 @@ libraries:
       - path: google/cloud/networkmanagement/v1
       - path: google/cloud/networkmanagement/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/network-management'
@@ -1182,7 +1180,6 @@ libraries:
       - path: google/cloud/networksecurity/v1beta1
       - path: google/cloud/networksecurity/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/network-security'
@@ -1192,7 +1189,6 @@ libraries:
       - path: google/cloud/networkservices/v1
       - path: google/cloud/networkservices/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-notebooks
@@ -1202,7 +1198,6 @@ libraries:
       - path: google/cloud/notebooks/v1
       - path: google/cloud/notebooks/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-oracledatabase
@@ -1219,7 +1214,6 @@ libraries:
       - path: google/cloud/orchestration/airflow/service/v1
       - path: google/cloud/orchestration/airflow/service/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/orchestration-airflow'
@@ -1228,7 +1222,6 @@ libraries:
     apis:
       - path: google/cloud/orgpolicy/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@google-cloud/org-policy'
@@ -1260,7 +1253,6 @@ libraries:
       - path: google/cloud/parallelstore/v1
       - path: google/cloud/parallelstore/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-parametermanager
@@ -1268,7 +1260,6 @@ libraries:
     apis:
       - path: google/cloud/parametermanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-phishingprotection
@@ -1276,7 +1267,6 @@ libraries:
     apis:
       - path: google/cloud/phishingprotection/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/phishing-protection'
