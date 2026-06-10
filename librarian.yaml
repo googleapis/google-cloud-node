@@ -1305,7 +1305,6 @@ libraries:
     apis:
       - path: google/cloud/policysimulator/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-policytroubleshooter
@@ -1313,7 +1312,6 @@ libraries:
     apis:
       - path: google/cloud/policytroubleshooter/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/policy-troubleshooter'
@@ -1333,7 +1331,6 @@ libraries:
     apis:
       - path: google/cloud/privatecatalog/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/private-catalog'
@@ -1342,7 +1339,6 @@ libraries:
     apis:
       - path: google/cloud/privilegedaccessmanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-rapidmigrationassessment
@@ -1350,7 +1346,6 @@ libraries:
     apis:
       - path: google/cloud/rapidmigrationassessment/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-recaptchaenterprise
@@ -1359,7 +1354,6 @@ libraries:
       - path: google/cloud/recaptchaenterprise/v1
       - path: google/cloud/recaptchaenterprise/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/recaptcha-enterprise'
@@ -1369,7 +1363,6 @@ libraries:
       - path: google/cloud/recommender/v1
       - path: google/cloud/recommender/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-redis
@@ -1427,7 +1420,6 @@ libraries:
     apis:
       - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/saasservicemgmt'
@@ -1822,7 +1814,6 @@ libraries:
       - path: google/devtools/artifactregistry/v1
       - path: google/devtools/artifactregistry/v1beta2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/artifact-registry'
@@ -1841,7 +1832,6 @@ libraries:
     apis:
       - path: google/devtools/cloudprofiler/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@google-cloud/cloudprofiler'
