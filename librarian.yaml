@@ -1868,7 +1868,6 @@ libraries:
       - path: google/iam/v2beta
       - path: google/iam/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@google-cloud/iam'
