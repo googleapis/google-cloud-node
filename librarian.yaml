@@ -241,7 +241,6 @@ libraries:
       - path: google/cloud/apiregistry/v1
       - path: google/cloud/apiregistry/v1beta
     copyright_year: "2026"
-    skip_generate: true
   - name: google-cloud-apphub
     version: 0.6.2
     apis:
