@@ -1,16 +1,16 @@
 {
+    "api_description": "The Places API allows developers to access a variety of search and\nretrieval endpoints for a Place.",
     "api_id": "places.googleapis.com",
     "api_shortname": "places",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/places/latest",
     "default_version": "v1",
     "distribution_name": "@googlemaps/places",
-    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=188872&template=1815671",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "places",
     "name_pretty": "Places API (New)",
     "product_documentation": "https://developers.google.com/maps/documentation/places/web-service/",
-    "release_level": "preview",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
