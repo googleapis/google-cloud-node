@@ -1,16 +1,16 @@
 {
+    "api_description": "Navigation Connect API.",
     "api_id": "navigationconnect.googleapis.com",
     "api_shortname": "navigationconnect",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/navigationconnect/latest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/navconnect/latest",
     "default_version": "v1",
     "distribution_name": "@google-cloud/navconnect",
-    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1180397&template=1812135",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "navigationconnect",
-    "name_pretty": "Navigation Connect API",
+    "name_pretty": "Navigation Connect",
     "product_documentation": "https://developers.google.com/maps/documentation/mobility/navigationconnect",
     "release_level": "preview",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }
