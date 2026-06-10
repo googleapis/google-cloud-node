@@ -247,7 +247,6 @@ libraries:
     apis:
       - path: google/cloud/apphub/v1
     copyright_year: "2026"
-    skip_generate: true
   - name: google-cloud-appoptimize
     version: 0.2.0
     apis:
