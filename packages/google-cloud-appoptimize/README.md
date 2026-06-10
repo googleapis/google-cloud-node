@@ -62,7 +62,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-appoptimize/samples/generated/v1beta/app_optimize.get_report.js) |
 | list reports | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-appoptimize/samples/generated/v1beta/app_optimize.list_reports.js) |
 | read report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-appoptimize/samples/generated/v1beta/app_optimize.read_report.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-appoptimize/samples/generated/v1beta/snippet_metadata_google.cloud.appoptimize.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -96,7 +95,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-appoptimize/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -106,7 +105,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-appoptimize/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

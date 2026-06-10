@@ -33,19 +33,18 @@ function main(workstation, updateMask) {
    */
   // const workstation = {}
   /**
-   *  Required. Mask specifying which fields in the workstation configuration
-   *  should be updated.
+   *  Required. Mask specifying which fields in the workstation should be
+   *  updated.
    */
   // const updateMask = {}
   /**
-   *  Optional. If set, validate the request and preview the review, but do not
+   *  Optional. If set, validate the request and preview the result, but do not
    *  actually apply it.
    */
   // const validateOnly = true
   /**
-   *  Optional. If set and the workstation configuration is not found, a new
-   *  workstation configuration is created. In this situation, update_mask
-   *  is ignored.
+   *  Optional. If set and the workstation is not found, a new workstation is
+   *  created. In this situation, update_mask is ignored.
    */
   // const allowMissing = true
 

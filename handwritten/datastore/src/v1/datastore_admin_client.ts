@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import {Transform} from 'stream';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -99,7 +99,7 @@ export class DatastoreAdminClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('datastore-admin');
@@ -112,9 +112,9 @@ export class DatastoreAdminClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   operationsClient: gax.OperationsClient;
-  datastoreAdminStub?: Promise<{[name: string]: Function}>;
+  datastoreAdminStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DatastoreAdminClient.
@@ -190,7 +190,7 @@ export class DatastoreAdminClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -257,7 +257,7 @@ export class DatastoreAdminClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -342,7 +342,7 @@ export class DatastoreAdminClient {
       'google.datastore.admin.v1.DatastoreAdmin',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      { 'x-goog-api-client': clientHeader.join(' ') },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -382,7 +382,7 @@ export class DatastoreAdminClient {
           (this._protos as any).google.datastore.admin.v1.DatastoreAdmin,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{[method: string]: Function}>;
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -396,7 +396,7 @@ export class DatastoreAdminClient {
     ];
     for (const methodName of datastoreAdminStubMethods) {
       const callPromise = this.datastoreAdminStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -592,10 +592,10 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        index_id: request.indexId ?? '',
+        project_id: request.projectId?.toString() ?? '',
+        index_id: request.indexId?.toString() ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getIndex request %j', request);
@@ -622,7 +622,23 @@ export class DatastoreAdminClient {
           this._log.info('getIndex response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -752,9 +768,9 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
+        project_id: request.projectId?.toString() ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -811,7 +827,7 @@ export class DatastoreAdminClient {
     this._log.info('exportEntities long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        { name },
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -947,9 +963,9 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
+        project_id: request.projectId?.toString() ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1006,7 +1022,7 @@ export class DatastoreAdminClient {
     this._log.info('importEntities long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        { name },
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1132,9 +1148,9 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
+        project_id: request.projectId?.toString() ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1191,7 +1207,7 @@ export class DatastoreAdminClient {
     this._log.info('createIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        { name },
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1313,10 +1329,10 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        index_id: request.indexId ?? '',
+        project_id: request.projectId?.toString() ?? '',
+        index_id: request.indexId?.toString() ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1373,7 +1389,7 @@ export class DatastoreAdminClient {
     this._log.info('deleteIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        { name },
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1476,9 +1492,9 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
+        project_id: request.projectId?.toString() ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1543,11 +1559,11 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
+        project_id: request.projectId?.toString() ?? '',
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listIndexes stream %j', request);
@@ -1594,11 +1610,11 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
+        project_id: request.projectId?.toString() ?? '',
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listIndexes iterate %j', request);
@@ -1774,7 +1790,6 @@ export class DatastoreAdminClient {
       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1840,11 +1855,11 @@ export class DatastoreAdminClient {
    */
   close(): Promise<void> {
     if (this.datastoreAdminStub && !this._terminated) {
-      return this.datastoreAdminStub.then(stub => {
+      return this.datastoreAdminStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();
