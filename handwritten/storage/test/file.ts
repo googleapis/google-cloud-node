@@ -119,11 +119,9 @@ const fakePromisify = {
 
 const fsCached = fs;
 const safeFs: any = {};
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const fsOriginal = require('fs');
-for (const key of Object.keys(fsOriginal)) {
+for (const key of Object.keys(fsCached)) {
   try {
-    safeFs[key] = fsOriginal[key];
+    safeFs[key] = (fsCached as any)[key];
   } catch (e) {
     // Ignore deprecated getters
   }

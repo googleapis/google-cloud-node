@@ -22,6 +22,16 @@ Module._resolveFilename = function(request, parent, isMain, options) {
       const newContent = content.replace(/require\(['"]\.\/build\/index\.cjs['"]\)/g, `require(${JSON.stringify(buildIndexPath)})`);
       fs.writeFileSync(shimPath, newContent);
     }
+
+    global.__yargsShimCleanups = global.__yargsShimCleanups || new Set();
+    if (!global.__yargsShimCleanups.has(shimPath)) {
+      global.__yargsShimCleanups.add(shimPath);
+      process.on('exit', () => {
+        try {
+          fs.unlinkSync(shimPath);
+        } catch (e) {}
+      });
+    }
     
     return shimPath;
   }
