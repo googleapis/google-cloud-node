@@ -1129,7 +1129,6 @@ libraries:
       - path: google/cloud/metastore/v1beta
       - path: google/cloud/metastore/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/dataproc-metastore'
