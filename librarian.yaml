@@ -293,7 +293,6 @@ libraries:
       - path: google/cloud/assuredworkloads/v1
       - path: google/cloud/assuredworkloads/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/assured-workloads'
@@ -1028,7 +1027,6 @@ libraries:
     apis:
       - path: google/cloud/licensemanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-lifesciences
@@ -1036,7 +1034,6 @@ libraries:
     apis:
       - path: google/cloud/lifesciences/v2beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2beta
       package_name: '@google-cloud/life-sciences'
@@ -1053,7 +1050,6 @@ libraries:
     apis:
       - path: google/cloud/lustre/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-maintenance-api
@@ -1071,7 +1067,6 @@ libraries:
       - path: google/cloud/managedidentities/v1
       - path: google/cloud/managedidentities/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/managed-identities'
@@ -1080,7 +1075,6 @@ libraries:
     apis:
       - path: google/cloud/managedkafka/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-managedkafka-schemaregistry
@@ -1088,7 +1082,6 @@ libraries:
     apis:
       - path: google/cloud/managedkafka/schemaregistry/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/managedkafka/latest
@@ -1107,7 +1100,6 @@ libraries:
       - path: google/cloud/memcache/v1
       - path: google/cloud/memcache/v1beta2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
@@ -1126,7 +1118,6 @@ libraries:
       - path: google/cloud/metastore/v1beta
       - path: google/cloud/metastore/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/dataproc-metastore'
@@ -1135,7 +1126,6 @@ libraries:
     apis:
       - path: google/cloud/migrationcenter/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-modelarmor
