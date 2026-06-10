@@ -1,17 +1,16 @@
 {
-  "name": "publish",
-  "name_pretty": "",
-  "product_documentation": "",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/publish/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@googlemaps/streetview-publish",
-  "api_id": "",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "publish"
+    "api_id": "",
+    "api_shortname": "publish",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/publish/latest",
+    "default_version": "v1",
+    "distribution_name": "@googlemaps/streetview-publish",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "publish",
+    "name_pretty": "",
+    "product_documentation": "",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node",
+    "requires_billing": true
 }
-
