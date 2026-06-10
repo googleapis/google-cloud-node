@@ -15,6 +15,7 @@
 import {GaxiosError} from 'gaxios';
 import * as gcpMetadata from 'gcp-metadata';
 
+import {AuthClient} from './authclient';
 import {CredentialRequest, Credentials} from './credentials';
 import {
   GetTokenResponse,
@@ -38,8 +39,10 @@ export interface ComputeOptions extends OAuth2ClientOptions {
 }
 
 export class Compute extends OAuth2Client {
+  private static readonly EMAIL_REGEX = /^[^@]+@[^@]+\.[^@]+$/;
   readonly serviceAccountEmail: string;
   scopes: string[];
+  private isNonEmailAccount = false;
 
   /**
    * Google Compute Engine service account credentials.
@@ -141,14 +144,20 @@ export class Compute extends OAuth2Client {
 
   /**
    * Returns the regional access boundary lookup URL for the GCE instance.
-   * This implementation resolves the default service account email of the GCE
-   * instance to construct the lookup endpoint.
+   * This implementation resolves the service account email of the GCE
+   * instance to construct the lookup endpoint. If the resolved email is invalid
+   * or not found, it returns `null` to skip the regional access boundary check.
    *
-   * @return The regional access boundary URL string.
+   * @return The regional access boundary URL string, or null if regional access
+   * boundary checks should be skipped.
    * @internal
    */
-  public async getRegionalAccessBoundaryUrl(): Promise<string> {
+  public async getRegionalAccessBoundaryUrl(): Promise<string | null> {
     const email = await this.resolveServiceAccountEmail();
+    if (email === null) {
+      // This credential corresponds to a non-email account; skip RAB lookup.
+      return null;
+    }
     const regionalAccessBoundaryUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
       '{service_account_email}',
       encodeURIComponent(email),
@@ -159,9 +168,14 @@ export class Compute extends OAuth2Client {
   /**
    * Resolves the service account email. If the email is set to 'default',
    * it fetches the email from the GCE metadata server.
-   * @returns A promise that resolves with the service account email.
+   * @returns A promise that resolves with the service account email,
+   *  or null if MDS returns an invalid email format
    */
-  private async resolveServiceAccountEmail(): Promise<string> {
+  private async resolveServiceAccountEmail(): Promise<string | null> {
+    if (this.isNonEmailAccount) {
+      return null;
+    }
+
     if (this.serviceAccountEmail !== 'default') {
       // If a specific email is provided, return it directly.
       return this.serviceAccountEmail;
@@ -169,7 +183,20 @@ export class Compute extends OAuth2Client {
 
     // Otherwise, fetch the default email from the metadata server.
     try {
-      return await gcpMetadata.instance('service-accounts/default/email');
+      const email = await gcpMetadata.instance<string>(
+        'service-accounts/default/email',
+      );
+
+      // If the metadata server returned an non-email format, log a warning only once.
+      if (!email || !Compute.EMAIL_REGEX.test(email)) {
+        AuthClient.log.info(
+          `RegionalAccessBoundary: Service account email "${email}" is not in a valid email format. Skipping regional access boundary lookup.`,
+        );
+        this.isNonEmailAccount = true;
+        return null;
+      }
+
+      return email;
     } catch (e) {
       throw new Error(
         'RegionalAccessBoundary: Failed to retrieve default service account email from metadata server.',
