@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +54,7 @@ export class ApiHubDiscoveryClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('apihub');
@@ -58,10 +67,10 @@ export class ApiHubDiscoveryClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  apiHubDiscoveryStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  apiHubDiscoveryStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ApiHubDiscoveryClient.
@@ -102,27 +111,48 @@ export class ApiHubDiscoveryClient {
    *     const client = new ApiHubDiscoveryClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ApiHubDiscoveryClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'apihub.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = {fallback: true};
+      opts = { fallback: true };
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -147,7 +177,7 @@ export class ApiHubDiscoveryClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -161,15 +191,11 @@ export class ApiHubDiscoveryClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -191,64 +217,64 @@ export class ApiHubDiscoveryClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       apiPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}'
+        'projects/{project}/locations/{location}/apis/{api}',
       ),
       apiHubInstancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apiHubInstances/{api_hub_instance}'
+        'projects/{project}/locations/{location}/apiHubInstances/{api_hub_instance}',
       ),
       apiOperationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}',
       ),
       attributePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/attributes/{attribute}'
+        'projects/{project}/locations/{location}/attributes/{attribute}',
       ),
       curationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/curations/{curation}'
+        'projects/{project}/locations/{location}/curations/{curation}',
       ),
       definitionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}',
       ),
       dependencyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dependencies/{dependency}'
+        'projects/{project}/locations/{location}/dependencies/{dependency}',
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/deployments/{deployment}'
+        'projects/{project}/locations/{location}/deployments/{deployment}',
       ),
       discoveredApiObservationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}'
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}',
       ),
       discoveredApiOperationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}'
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}',
       ),
       externalApiPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/externalApis/{external_api}'
+        'projects/{project}/locations/{location}/externalApis/{external_api}',
       ),
       hostProjectRegistrationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/hostProjectRegistrations/{host_project_registration}'
+        'projects/{project}/locations/{location}/hostProjectRegistrations/{host_project_registration}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       pluginPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/plugins/{plugin}'
+        'projects/{project}/locations/{location}/plugins/{plugin}',
       ),
       pluginInstancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}'
+        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       runtimeProjectAttachmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/runtimeProjectAttachments/{runtime_project_attachment}'
+        'projects/{project}/locations/{location}/runtimeProjectAttachments/{runtime_project_attachment}',
       ),
       specPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}',
       ),
       styleGuidePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/plugins/{plugin}/styleGuide'
+        'projects/{project}/locations/{location}/plugins/{plugin}/styleGuide',
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}',
       ),
     };
 
@@ -256,16 +282,25 @@ export class ApiHubDiscoveryClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDiscoveredApiObservations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'discoveredApiObservations'),
-      listDiscoveredApiOperations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'discoveredApiOperations')
+      listDiscoveredApiObservations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'discoveredApiObservations',
+      ),
+      listDiscoveredApiOperations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'discoveredApiOperations',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.apihub.v1.ApiHubDiscovery', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.apihub.v1.ApiHubDiscovery',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -296,37 +331,45 @@ export class ApiHubDiscoveryClient {
     // Put together the "service stub" for
     // google.cloud.apihub.v1.ApiHubDiscovery.
     this.apiHubDiscoveryStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.apihub.v1.ApiHubDiscovery') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.apihub.v1.ApiHubDiscovery',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apihub.v1.ApiHubDiscovery,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const apiHubDiscoveryStubMethods =
-        ['listDiscoveredApiObservations', 'getDiscoveredApiObservation', 'listDiscoveredApiOperations', 'getDiscoveredApiOperation'];
+    const apiHubDiscoveryStubMethods = [
+      'listDiscoveredApiObservations',
+      'getDiscoveredApiObservation',
+      'listDiscoveredApiOperations',
+      'getDiscoveredApiOperation',
+    ];
     for (const methodName of apiHubDiscoveryStubMethods) {
       const callPromise = this.apiHubDiscoveryStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -341,8 +384,14 @@ export class ApiHubDiscoveryClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'apihub.googleapis.com';
   }
@@ -353,8 +402,14 @@ export class ApiHubDiscoveryClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'apihub.googleapis.com';
   }
@@ -385,9 +440,7 @@ export class ApiHubDiscoveryClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -396,8 +449,9 @@ export class ApiHubDiscoveryClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -408,292 +462,415 @@ export class ApiHubDiscoveryClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets a DiscoveredAPIObservation in a given project, location and
- * ApiObservation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the DiscoveredApiObservation to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.DiscoveredApiObservation|DiscoveredApiObservation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_discovery.get_discovered_api_observation.js</caption>
- * region_tag:apihub_v1_generated_ApiHubDiscovery_GetDiscoveredApiObservation_async
- */
+  /**
+   * Gets a DiscoveredAPIObservation in a given project, location and
+   * ApiObservation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DiscoveredApiObservation to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.DiscoveredApiObservation|DiscoveredApiObservation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_discovery.get_discovered_api_observation.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubDiscovery_GetDiscoveredApiObservation_async
+   */
   getDiscoveredApiObservation(
-      request?: protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
-        protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
+      (
+        | protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getDiscoveredApiObservation(
-      request: protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
-          protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
+      | protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDiscoveredApiObservation(
-      request: protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
-          protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
+      | protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDiscoveredApiObservation(
-      request?: protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
-          protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
-          protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
-        protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
+      | protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
+      (
+        | protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDiscoveredApiObservation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
-        protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
+          | protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDiscoveredApiObservation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDiscoveredApiObservation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
-        protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDiscoveredApiObservation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDiscoveredApiObservation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
+          (
+            | protos.google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDiscoveredApiObservation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a DiscoveredAPIOperation in a given project, location,
- * ApiObservation and ApiOperation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the DiscoveredApiOperation to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.DiscoveredApiOperation|DiscoveredApiOperation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_discovery.get_discovered_api_operation.js</caption>
- * region_tag:apihub_v1_generated_ApiHubDiscovery_GetDiscoveredApiOperation_async
- */
+  /**
+   * Gets a DiscoveredAPIOperation in a given project, location,
+   * ApiObservation and ApiOperation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DiscoveredApiOperation to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.DiscoveredApiOperation|DiscoveredApiOperation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_discovery.get_discovered_api_operation.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubDiscovery_GetDiscoveredApiOperation_async
+   */
   getDiscoveredApiOperation(
-      request?: protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
-        protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
+      (
+        | protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getDiscoveredApiOperation(
-      request: protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
-          protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
+      | protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDiscoveredApiOperation(
-      request: protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
-          protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
+      | protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDiscoveredApiOperation(
-      request?: protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
-          protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
-          protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
-        protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
+      | protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
+      (
+        | protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDiscoveredApiOperation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
-        protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
+          | protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDiscoveredApiOperation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDiscoveredApiOperation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
-        protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDiscoveredApiOperation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDiscoveredApiOperation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
+          (
+            | protos.google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDiscoveredApiOperation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists all the DiscoveredAPIObservations in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of ApiObservations.
- *   Format:
- *   projects/{project}/locations/{location}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of ApiObservations to return. The service may
- *   return fewer than this value. If unspecified, at most 10
- *   ApiObservations will be returned. The maximum value is 1000; values
- *   above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListApiObservations`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `ListApiObservations` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.apihub.v1.DiscoveredApiObservation|DiscoveredApiObservation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDiscoveredApiObservationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all the DiscoveredAPIObservations in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of ApiObservations.
+   *   Format:
+   *   projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of ApiObservations to return. The service may
+   *   return fewer than this value. If unspecified, at most 10
+   *   ApiObservations will be returned. The maximum value is 1000; values
+   *   above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListApiObservations`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListApiObservations` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.apihub.v1.DiscoveredApiObservation|DiscoveredApiObservation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDiscoveredApiObservationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDiscoveredApiObservations(
-      request?: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDiscoveredApiObservation[],
-        protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest|null,
-        protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDiscoveredApiObservation[],
+      protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest | null,
+      protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse,
+    ]
+  >;
   listDiscoveredApiObservations(
-      request: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-          protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDiscoveredApiObservation>): void;
+    request: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
+      | protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.apihub.v1.IDiscoveredApiObservation
+    >,
+  ): void;
   listDiscoveredApiObservations(
-      request: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-          protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDiscoveredApiObservation>): void;
+    request: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
+      | protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.apihub.v1.IDiscoveredApiObservation
+    >,
+  ): void;
   listDiscoveredApiObservations(
-      request?: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-          protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDiscoveredApiObservation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-          protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDiscoveredApiObservation>):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDiscoveredApiObservation[],
-        protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest|null,
-        protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IDiscoveredApiObservation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
+      | protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.apihub.v1.IDiscoveredApiObservation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDiscoveredApiObservation[],
+      protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest | null,
+      protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-      protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse|null|undefined,
-      protos.google.cloud.apihub.v1.IDiscoveredApiObservation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
+          | protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IDiscoveredApiObservation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDiscoveredApiObservations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -702,219 +879,248 @@ export class ApiHubDiscoveryClient {
     this._log.info('listDiscoveredApiObservations request %j', request);
     return this.innerApiCalls
       .listDiscoveredApiObservations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.apihub.v1.IDiscoveredApiObservation[],
-        protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest|null,
-        protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse
-      ]) => {
-        this._log.info('listDiscoveredApiObservations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IDiscoveredApiObservation[],
+          protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest | null,
+          protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse,
+        ]) => {
+          this._log.info('listDiscoveredApiObservations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDiscoveredApiObservations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of ApiObservations.
- *   Format:
- *   projects/{project}/locations/{location}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of ApiObservations to return. The service may
- *   return fewer than this value. If unspecified, at most 10
- *   ApiObservations will be returned. The maximum value is 1000; values
- *   above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListApiObservations`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `ListApiObservations` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.apihub.v1.DiscoveredApiObservation|DiscoveredApiObservation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDiscoveredApiObservationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDiscoveredApiObservations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of ApiObservations.
+   *   Format:
+   *   projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of ApiObservations to return. The service may
+   *   return fewer than this value. If unspecified, at most 10
+   *   ApiObservations will be returned. The maximum value is 1000; values
+   *   above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListApiObservations`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListApiObservations` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.apihub.v1.DiscoveredApiObservation|DiscoveredApiObservation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDiscoveredApiObservationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDiscoveredApiObservationsStream(
-      request?: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDiscoveredApiObservations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDiscoveredApiObservations stream %j', request);
     return this.descriptors.page.listDiscoveredApiObservations.createStream(
       this.innerApiCalls.listDiscoveredApiObservations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDiscoveredApiObservations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of ApiObservations.
- *   Format:
- *   projects/{project}/locations/{location}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of ApiObservations to return. The service may
- *   return fewer than this value. If unspecified, at most 10
- *   ApiObservations will be returned. The maximum value is 1000; values
- *   above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListApiObservations`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `ListApiObservations` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.apihub.v1.DiscoveredApiObservation|DiscoveredApiObservation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_discovery.list_discovered_api_observations.js</caption>
- * region_tag:apihub_v1_generated_ApiHubDiscovery_ListDiscoveredApiObservations_async
- */
+  /**
+   * Equivalent to `listDiscoveredApiObservations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of ApiObservations.
+   *   Format:
+   *   projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of ApiObservations to return. The service may
+   *   return fewer than this value. If unspecified, at most 10
+   *   ApiObservations will be returned. The maximum value is 1000; values
+   *   above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListApiObservations`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListApiObservations` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.apihub.v1.DiscoveredApiObservation|DiscoveredApiObservation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_discovery.list_discovered_api_observations.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubDiscovery_ListDiscoveredApiObservations_async
+   */
   listDiscoveredApiObservationsAsync(
-      request?: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.apihub.v1.IDiscoveredApiObservation>{
+    request?: protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.apihub.v1.IDiscoveredApiObservation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDiscoveredApiObservations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDiscoveredApiObservations iterate %j', request);
     return this.descriptors.page.listDiscoveredApiObservations.asyncIterate(
       this.innerApiCalls['listDiscoveredApiObservations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.apihub.v1.IDiscoveredApiObservation>;
   }
- /**
- * Lists all the DiscoveredAPIOperations in a given project, location and
- * ApiObservation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of
- *   DiscoveredApiOperations. Format:
- *   projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}
- * @param {number} [request.pageSize]
- *   Optional. DiscoveredApiOperations will be returned. The maximum value is
- *   1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListDiscoveredApiApiOperations` call. Provide this to retrieve the
- *   subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `ListDiscoveredApiApiOperations` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.apihub.v1.DiscoveredApiOperation|DiscoveredApiOperation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDiscoveredApiOperationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all the DiscoveredAPIOperations in a given project, location and
+   * ApiObservation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of
+   *   DiscoveredApiOperations. Format:
+   *   projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}
+   * @param {number} [request.pageSize]
+   *   Optional. DiscoveredApiOperations will be returned. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListDiscoveredApiApiOperations` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListDiscoveredApiApiOperations` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.apihub.v1.DiscoveredApiOperation|DiscoveredApiOperation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDiscoveredApiOperationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDiscoveredApiOperations(
-      request?: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDiscoveredApiOperation[],
-        protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest|null,
-        protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDiscoveredApiOperation[],
+      protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest | null,
+      protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse,
+    ]
+  >;
   listDiscoveredApiOperations(
-      request: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-          protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDiscoveredApiOperation>): void;
+    request: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
+      | protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.apihub.v1.IDiscoveredApiOperation
+    >,
+  ): void;
   listDiscoveredApiOperations(
-      request: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-          protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDiscoveredApiOperation>): void;
+    request: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
+      | protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.apihub.v1.IDiscoveredApiOperation
+    >,
+  ): void;
   listDiscoveredApiOperations(
-      request?: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-          protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDiscoveredApiOperation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-          protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDiscoveredApiOperation>):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDiscoveredApiOperation[],
-        protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest|null,
-        protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IDiscoveredApiOperation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
+      | protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.apihub.v1.IDiscoveredApiOperation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDiscoveredApiOperation[],
+      protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest | null,
+      protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-      protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse|null|undefined,
-      protos.google.cloud.apihub.v1.IDiscoveredApiOperation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
+          | protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IDiscoveredApiOperation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDiscoveredApiOperations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -923,127 +1129,132 @@ export class ApiHubDiscoveryClient {
     this._log.info('listDiscoveredApiOperations request %j', request);
     return this.innerApiCalls
       .listDiscoveredApiOperations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.apihub.v1.IDiscoveredApiOperation[],
-        protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest|null,
-        protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse
-      ]) => {
-        this._log.info('listDiscoveredApiOperations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IDiscoveredApiOperation[],
+          protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest | null,
+          protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse,
+        ]) => {
+          this._log.info('listDiscoveredApiOperations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDiscoveredApiOperations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of
- *   DiscoveredApiOperations. Format:
- *   projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}
- * @param {number} [request.pageSize]
- *   Optional. DiscoveredApiOperations will be returned. The maximum value is
- *   1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListDiscoveredApiApiOperations` call. Provide this to retrieve the
- *   subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `ListDiscoveredApiApiOperations` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.apihub.v1.DiscoveredApiOperation|DiscoveredApiOperation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDiscoveredApiOperationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDiscoveredApiOperations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of
+   *   DiscoveredApiOperations. Format:
+   *   projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}
+   * @param {number} [request.pageSize]
+   *   Optional. DiscoveredApiOperations will be returned. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListDiscoveredApiApiOperations` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListDiscoveredApiApiOperations` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.apihub.v1.DiscoveredApiOperation|DiscoveredApiOperation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDiscoveredApiOperationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDiscoveredApiOperationsStream(
-      request?: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDiscoveredApiOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDiscoveredApiOperations stream %j', request);
     return this.descriptors.page.listDiscoveredApiOperations.createStream(
       this.innerApiCalls.listDiscoveredApiOperations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDiscoveredApiOperations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of
- *   DiscoveredApiOperations. Format:
- *   projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}
- * @param {number} [request.pageSize]
- *   Optional. DiscoveredApiOperations will be returned. The maximum value is
- *   1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListDiscoveredApiApiOperations` call. Provide this to retrieve the
- *   subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `ListDiscoveredApiApiOperations` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.apihub.v1.DiscoveredApiOperation|DiscoveredApiOperation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_discovery.list_discovered_api_operations.js</caption>
- * region_tag:apihub_v1_generated_ApiHubDiscovery_ListDiscoveredApiOperations_async
- */
+  /**
+   * Equivalent to `listDiscoveredApiOperations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of
+   *   DiscoveredApiOperations. Format:
+   *   projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}
+   * @param {number} [request.pageSize]
+   *   Optional. DiscoveredApiOperations will be returned. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListDiscoveredApiApiOperations` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListDiscoveredApiApiOperations` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.apihub.v1.DiscoveredApiOperation|DiscoveredApiOperation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_discovery.list_discovered_api_operations.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubDiscovery_ListDiscoveredApiOperations_async
+   */
   listDiscoveredApiOperationsAsync(
-      request?: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.apihub.v1.IDiscoveredApiOperation>{
+    request?: protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.apihub.v1.IDiscoveredApiOperation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDiscoveredApiOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDiscoveredApiOperations iterate %j', request);
     return this.descriptors.page.listDiscoveredApiOperations.asyncIterate(
       this.innerApiCalls['listDiscoveredApiOperations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.apihub.v1.IDiscoveredApiOperation>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1078,12 +1289,11 @@ export class ApiHubDiscoveryClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1116,7 +1326,7 @@ export class ApiHubDiscoveryClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1133,7 +1343,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} api
    * @returns {string} Resource name string.
    */
-  apiPath(project:string,location:string,api:string) {
+  apiPath(project: string, location: string, api: string) {
     return this.pathTemplates.apiPathTemplate.render({
       project: project,
       location: location,
@@ -1182,7 +1392,11 @@ export class ApiHubDiscoveryClient {
    * @param {string} api_hub_instance
    * @returns {string} Resource name string.
    */
-  apiHubInstancePath(project:string,location:string,apiHubInstance:string) {
+  apiHubInstancePath(
+    project: string,
+    location: string,
+    apiHubInstance: string,
+  ) {
     return this.pathTemplates.apiHubInstancePathTemplate.render({
       project: project,
       location: location,
@@ -1198,7 +1412,9 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).project;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(
+      apiHubInstanceName,
+    ).project;
   }
 
   /**
@@ -1209,7 +1425,9 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).location;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(
+      apiHubInstanceName,
+    ).location;
   }
 
   /**
@@ -1220,7 +1438,9 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the api_hub_instance.
    */
   matchApiHubInstanceFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).api_hub_instance;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(
+      apiHubInstanceName,
+    ).api_hub_instance;
   }
 
   /**
@@ -1233,7 +1453,13 @@ export class ApiHubDiscoveryClient {
    * @param {string} operation
    * @returns {string} Resource name string.
    */
-  apiOperationPath(project:string,location:string,api:string,version:string,operation:string) {
+  apiOperationPath(
+    project: string,
+    location: string,
+    api: string,
+    version: string,
+    operation: string,
+  ) {
     return this.pathTemplates.apiOperationPathTemplate.render({
       project: project,
       location: location,
@@ -1251,7 +1477,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).project;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .project;
   }
 
   /**
@@ -1262,7 +1489,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).location;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .location;
   }
 
   /**
@@ -1273,7 +1501,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the api.
    */
   matchApiFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).api;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .api;
   }
 
   /**
@@ -1284,7 +1513,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).version;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .version;
   }
 
   /**
@@ -1295,7 +1525,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the operation.
    */
   matchOperationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).operation;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .operation;
   }
 
   /**
@@ -1306,7 +1537,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} attribute
    * @returns {string} Resource name string.
    */
-  attributePath(project:string,location:string,attribute:string) {
+  attributePath(project: string, location: string, attribute: string) {
     return this.pathTemplates.attributePathTemplate.render({
       project: project,
       location: location,
@@ -1322,7 +1553,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName).project;
+    return this.pathTemplates.attributePathTemplate.match(attributeName)
+      .project;
   }
 
   /**
@@ -1333,7 +1565,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName).location;
+    return this.pathTemplates.attributePathTemplate.match(attributeName)
+      .location;
   }
 
   /**
@@ -1344,7 +1577,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the attribute.
    */
   matchAttributeFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName).attribute;
+    return this.pathTemplates.attributePathTemplate.match(attributeName)
+      .attribute;
   }
 
   /**
@@ -1355,7 +1589,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} curation
    * @returns {string} Resource name string.
    */
-  curationPath(project:string,location:string,curation:string) {
+  curationPath(project: string, location: string, curation: string) {
     return this.pathTemplates.curationPathTemplate.render({
       project: project,
       location: location,
@@ -1406,7 +1640,13 @@ export class ApiHubDiscoveryClient {
    * @param {string} definition
    * @returns {string} Resource name string.
    */
-  definitionPath(project:string,location:string,api:string,version:string,definition:string) {
+  definitionPath(
+    project: string,
+    location: string,
+    api: string,
+    version: string,
+    definition: string,
+  ) {
     return this.pathTemplates.definitionPathTemplate.render({
       project: project,
       location: location,
@@ -1424,7 +1664,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).project;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .project;
   }
 
   /**
@@ -1435,7 +1676,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).location;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .location;
   }
 
   /**
@@ -1457,7 +1699,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).version;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .version;
   }
 
   /**
@@ -1468,7 +1711,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the definition.
    */
   matchDefinitionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).definition;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .definition;
   }
 
   /**
@@ -1479,7 +1723,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} dependency
    * @returns {string} Resource name string.
    */
-  dependencyPath(project:string,location:string,dependency:string) {
+  dependencyPath(project: string, location: string, dependency: string) {
     return this.pathTemplates.dependencyPathTemplate.render({
       project: project,
       location: location,
@@ -1495,7 +1739,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).project;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
+      .project;
   }
 
   /**
@@ -1506,7 +1751,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).location;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
+      .location;
   }
 
   /**
@@ -1517,7 +1763,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the dependency.
    */
   matchDependencyFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).dependency;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
+      .dependency;
   }
 
   /**
@@ -1528,7 +1775,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project:string,location:string,deployment:string) {
+  deploymentPath(project: string, location: string, deployment: string) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1544,7 +1791,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .project;
   }
 
   /**
@@ -1555,7 +1803,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .location;
   }
 
   /**
@@ -1566,7 +1815,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .deployment;
   }
 
   /**
@@ -1577,7 +1827,11 @@ export class ApiHubDiscoveryClient {
    * @param {string} discovered_api_observation
    * @returns {string} Resource name string.
    */
-  discoveredApiObservationPath(project:string,location:string,discoveredApiObservation:string) {
+  discoveredApiObservationPath(
+    project: string,
+    location: string,
+    discoveredApiObservation: string,
+  ) {
     return this.pathTemplates.discoveredApiObservationPathTemplate.render({
       project: project,
       location: location,
@@ -1592,8 +1846,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing DiscoveredApiObservation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
-    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).project;
+  matchProjectFromDiscoveredApiObservationName(
+    discoveredApiObservationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(
+      discoveredApiObservationName,
+    ).project;
   }
 
   /**
@@ -1603,8 +1861,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing DiscoveredApiObservation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
-    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).location;
+  matchLocationFromDiscoveredApiObservationName(
+    discoveredApiObservationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(
+      discoveredApiObservationName,
+    ).location;
   }
 
   /**
@@ -1614,8 +1876,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing DiscoveredApiObservation resource.
    * @returns {string} A string representing the discovered_api_observation.
    */
-  matchDiscoveredApiObservationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
-    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).discovered_api_observation;
+  matchDiscoveredApiObservationFromDiscoveredApiObservationName(
+    discoveredApiObservationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(
+      discoveredApiObservationName,
+    ).discovered_api_observation;
   }
 
   /**
@@ -1627,7 +1893,12 @@ export class ApiHubDiscoveryClient {
    * @param {string} discovered_api_operation
    * @returns {string} Resource name string.
    */
-  discoveredApiOperationPath(project:string,location:string,discoveredApiObservation:string,discoveredApiOperation:string) {
+  discoveredApiOperationPath(
+    project: string,
+    location: string,
+    discoveredApiObservation: string,
+    discoveredApiOperation: string,
+  ) {
     return this.pathTemplates.discoveredApiOperationPathTemplate.render({
       project: project,
       location: location,
@@ -1643,8 +1914,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).project;
+  matchProjectFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).project;
   }
 
   /**
@@ -1654,8 +1929,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).location;
+  matchLocationFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).location;
   }
 
   /**
@@ -1665,8 +1944,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the discovered_api_observation.
    */
-  matchDiscoveredApiObservationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_observation;
+  matchDiscoveredApiObservationFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).discovered_api_observation;
   }
 
   /**
@@ -1676,8 +1959,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the discovered_api_operation.
    */
-  matchDiscoveredApiOperationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_operation;
+  matchDiscoveredApiOperationFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).discovered_api_operation;
   }
 
   /**
@@ -1688,7 +1975,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} external_api
    * @returns {string} Resource name string.
    */
-  externalApiPath(project:string,location:string,externalApi:string) {
+  externalApiPath(project: string, location: string, externalApi: string) {
     return this.pathTemplates.externalApiPathTemplate.render({
       project: project,
       location: location,
@@ -1704,7 +1991,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).project;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
+      .project;
   }
 
   /**
@@ -1715,7 +2003,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).location;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
+      .location;
   }
 
   /**
@@ -1726,7 +2015,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the external_api.
    */
   matchExternalApiFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).external_api;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
+      .external_api;
   }
 
   /**
@@ -1737,7 +2027,11 @@ export class ApiHubDiscoveryClient {
    * @param {string} host_project_registration
    * @returns {string} Resource name string.
    */
-  hostProjectRegistrationPath(project:string,location:string,hostProjectRegistration:string) {
+  hostProjectRegistrationPath(
+    project: string,
+    location: string,
+    hostProjectRegistration: string,
+  ) {
     return this.pathTemplates.hostProjectRegistrationPathTemplate.render({
       project: project,
       location: location,
@@ -1752,8 +2046,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).project;
+  matchProjectFromHostProjectRegistrationName(
+    hostProjectRegistrationName: string,
+  ) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
+      hostProjectRegistrationName,
+    ).project;
   }
 
   /**
@@ -1763,8 +2061,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).location;
+  matchLocationFromHostProjectRegistrationName(
+    hostProjectRegistrationName: string,
+  ) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
+      hostProjectRegistrationName,
+    ).location;
   }
 
   /**
@@ -1774,8 +2076,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the host_project_registration.
    */
-  matchHostProjectRegistrationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).host_project_registration;
+  matchHostProjectRegistrationFromHostProjectRegistrationName(
+    hostProjectRegistrationName: string,
+  ) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
+      hostProjectRegistrationName,
+    ).host_project_registration;
   }
 
   /**
@@ -1785,7 +2091,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1822,7 +2128,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  pluginPath(project:string,location:string,plugin:string) {
+  pluginPath(project: string, location: string, plugin: string) {
     return this.pathTemplates.pluginPathTemplate.render({
       project: project,
       location: location,
@@ -1872,7 +2178,12 @@ export class ApiHubDiscoveryClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  pluginInstancePath(project:string,location:string,plugin:string,instance:string) {
+  pluginInstancePath(
+    project: string,
+    location: string,
+    plugin: string,
+    instance: string,
+  ) {
     return this.pathTemplates.pluginInstancePathTemplate.render({
       project: project,
       location: location,
@@ -1889,7 +2200,9 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).project;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).project;
   }
 
   /**
@@ -1900,7 +2213,9 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).location;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).location;
   }
 
   /**
@@ -1911,7 +2226,9 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the plugin.
    */
   matchPluginFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).plugin;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).plugin;
   }
 
   /**
@@ -1922,7 +2239,9 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).instance;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).instance;
   }
 
   /**
@@ -1931,7 +2250,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1956,7 +2275,11 @@ export class ApiHubDiscoveryClient {
    * @param {string} runtime_project_attachment
    * @returns {string} Resource name string.
    */
-  runtimeProjectAttachmentPath(project:string,location:string,runtimeProjectAttachment:string) {
+  runtimeProjectAttachmentPath(
+    project: string,
+    location: string,
+    runtimeProjectAttachment: string,
+  ) {
     return this.pathTemplates.runtimeProjectAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -1971,8 +2294,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).project;
+  matchProjectFromRuntimeProjectAttachmentName(
+    runtimeProjectAttachmentName: string,
+  ) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
+      runtimeProjectAttachmentName,
+    ).project;
   }
 
   /**
@@ -1982,8 +2309,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).location;
+  matchLocationFromRuntimeProjectAttachmentName(
+    runtimeProjectAttachmentName: string,
+  ) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
+      runtimeProjectAttachmentName,
+    ).location;
   }
 
   /**
@@ -1993,8 +2324,12 @@ export class ApiHubDiscoveryClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the runtime_project_attachment.
    */
-  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).runtime_project_attachment;
+  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(
+    runtimeProjectAttachmentName: string,
+  ) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
+      runtimeProjectAttachmentName,
+    ).runtime_project_attachment;
   }
 
   /**
@@ -2007,7 +2342,13 @@ export class ApiHubDiscoveryClient {
    * @param {string} spec
    * @returns {string} Resource name string.
    */
-  specPath(project:string,location:string,api:string,version:string,spec:string) {
+  specPath(
+    project: string,
+    location: string,
+    api: string,
+    version: string,
+    spec: string,
+  ) {
     return this.pathTemplates.specPathTemplate.render({
       project: project,
       location: location,
@@ -2080,7 +2421,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  styleGuidePath(project:string,location:string,plugin:string) {
+  styleGuidePath(project: string, location: string, plugin: string) {
     return this.pathTemplates.styleGuidePathTemplate.render({
       project: project,
       location: location,
@@ -2096,7 +2437,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).project;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
+      .project;
   }
 
   /**
@@ -2107,7 +2449,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).location;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
+      .location;
   }
 
   /**
@@ -2118,7 +2461,8 @@ export class ApiHubDiscoveryClient {
    * @returns {string} A string representing the plugin.
    */
   matchPluginFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).plugin;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
+      .plugin;
   }
 
   /**
@@ -2130,7 +2474,7 @@ export class ApiHubDiscoveryClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(project:string,location:string,api:string,version:string) {
+  versionPath(project: string, location: string, api: string, version: string) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -2191,11 +2535,13 @@ export class ApiHubDiscoveryClient {
    */
   close(): Promise<void> {
     if (this.apiHubDiscoveryStub && !this._terminated) {
-      return this.apiHubDiscoveryStub.then(stub => {
+      return this.apiHubDiscoveryStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

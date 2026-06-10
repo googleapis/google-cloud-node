@@ -67,7 +67,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.list_workloads.js) |
 | restrict allowed resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.restrict_allowed_resources.js) |
 | update workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.update_workload.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/snippet_metadata_google.cloud.assuredworkloads.v1.json) |
 | analyze workload move | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.analyze_workload_move.js) |
 | create workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.create_workload.js) |
 | delete workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.delete_workload.js) |
@@ -75,7 +74,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.list_workloads.js) |
 | restrict allowed resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.restrict_allowed_resources.js) |
 | update workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.update_workload.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/snippet_metadata_google.cloud.assuredworkloads.v1beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -109,7 +107,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -119,7 +117,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

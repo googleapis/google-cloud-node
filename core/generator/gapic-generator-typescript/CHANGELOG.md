@@ -1,6 +1,16 @@
 # Changelog
 
 
+## [4.12.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.14...gapic-generator-v4.12.0) (2026-06-08)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+* Consolidate package manager to pnpm on gapic-generator-typescript ([#8365](https://github.com/googleapis/google-cloud-node/issues/8365)) ([5c16c62](https://github.com/googleapis/google-cloud-node/commit/5c16c6218730d4835fae3c2c6abe78f21d856bcb))
+* **doc:** Add space to readme ([#8448](https://github.com/googleapis/google-cloud-node/issues/8448)) ([d56eb08](https://github.com/googleapis/google-cloud-node/commit/d56eb080b89bf58bd8235f4843f3801ecd1ae8be))
+* **gapic-generator-typescript:** Disable snippet metadata generation ([#8403](https://github.com/googleapis/google-cloud-node/issues/8403)) ([1c44d96](https://github.com/googleapis/google-cloud-node/commit/1c44d96461b5e8729352001ec9027c20e074470b))
+
 ## [4.11.14](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.13...gapic-generator-v4.11.14) (2026-05-11)
 
 

@@ -4,6 +4,47 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "d56eb080b89bf58bd8235f4843f3801ecd1ae8be",
+          "message": "Add space to readme",
+          "issues": [
+            "8448"
+          ],
+          "scope": "doc"
+        },
+        {
+          "type": "feat",
+          "sha": "5c16c6218730d4835fae3c2c6abe78f21d856bcb",
+          "message": "Consolidate package manager to pnpm on gapic-generator-typescript",
+          "issues": [
+            "8365"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1c44d96461b5e8729352001ec9027c20e074470b",
+          "message": "Disable snippet metadata generation",
+          "issues": [
+            "8403"
+          ],
+          "scope": "gapic-generator-typescript"
+        },
+        {
+          "type": "feat",
+          "sha": "b053d0edfa1ade74ce069279af86f058c77a589b",
+          "message": "Clean up per-package eslintrc configurations",
+          "issues": []
+        }
+      ],
+      "version": "4.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "8402656a-1584-47c9-9c2b-f058dcb9a316",
+      "createTime": "2026-06-08T17:51:13.237Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
           "message": "Remove vulnerable dependency `uuid`",
@@ -80052,5 +80093,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-03T21:14:03.792Z"
+  "updateTime": "2026-06-08T17:51:13.237Z"
 }

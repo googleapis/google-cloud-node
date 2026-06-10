@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {SubscriptionsServiceClient} from './subscriptions_service_client';
+export { SubscriptionsServiceClient } from './subscriptions_service_client';

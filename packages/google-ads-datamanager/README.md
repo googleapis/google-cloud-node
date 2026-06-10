@@ -65,7 +65,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | create partner link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/partner_link_service.create_partner_link.js) |
 | delete partner link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/partner_link_service.delete_partner_link.js) |
 | search partner links | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/partner_link_service.search_partner_links.js) |
-| ads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/snippet_metadata_google.ads.datamanager.v1.json) |
 | create user list direct license | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_direct_license_service.create_user_list_direct_license.js) |
 | get user list direct license | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_direct_license_service.get_user_list_direct_license.js) |
 | list user list direct licenses | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_direct_license_service.list_user_list_direct_licenses.js) |
