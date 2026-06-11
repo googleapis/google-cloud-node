@@ -1857,6 +1857,10 @@ libraries:
       dependencies:
         '@google-cloud/grafeas': ^6.0.0
       main_service: containeranalysis
+      nodejs_apis:
+        - additional_protos:
+            - google/devtools/containeranalysis/v1beta1/grafeas/grafeas.proto
+          path: google/devtools/containeranalysis/v1beta1
       package_name: '@google-cloud/containeranalysis'
   - name: google-iam
     version: 2.4.0
