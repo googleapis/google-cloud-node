@@ -64,9 +64,10 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list templates | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/model_armor.list_templates.js) |
 | sanitize model response | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/model_armor.sanitize_model_response.js) |
 | sanitize user prompt | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/model_armor.sanitize_user_prompt.js) |
+| stream sanitize model response | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/model_armor.stream_sanitize_model_response.js) |
+| stream sanitize user prompt | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/model_armor.stream_sanitize_user_prompt.js) |
 | update floor setting | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/model_armor.update_floor_setting.js) |
 | update template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/model_armor.update_template.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/snippet_metadata_google.cloud.modelarmor.v1.json) |
 | create template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.create_template.js) |
 | delete template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.delete_template.js) |
 | get floor setting | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.get_floor_setting.js) |
@@ -78,7 +79,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stream sanitize user prompt | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.stream_sanitize_user_prompt.js) |
 | update floor setting | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.update_floor_setting.js) |
 | update template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.update_template.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/snippet_metadata_google.cloud.modelarmor.v1beta.json) |
 
 
 ## Supported Node.js Versions

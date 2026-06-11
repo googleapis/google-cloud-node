@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | report phishing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-phishingprotection/samples/generated/v1beta1/phishing_protection_service_v1_beta1.report_phishing.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-phishingprotection/samples/generated/v1beta1/snippet_metadata_google.cloud.phishingprotection.v1beta1.json) |
 
 
 ## Supported Node.js Versions

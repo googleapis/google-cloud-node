@@ -70,7 +70,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orgpolicy/samples/generated/v2/org_policy.list_policies.js) |
 | update custom constraint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orgpolicy/samples/generated/v2/org_policy.update_custom_constraint.js) |
 | update policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orgpolicy/samples/generated/v2/org_policy.update_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orgpolicy/samples/generated/v2/snippet_metadata_google.cloud.orgpolicy.v2.json) |
 
 
 ## Supported Node.js Versions

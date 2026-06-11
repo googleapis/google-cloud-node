@@ -63,6 +63,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | create db system | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_db_system.js) |
 | create exadb vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_exadb_vm_cluster.js) |
 | create exascale db storage vault | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_exascale_db_storage_vault.js) |
+| create goldengate connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_goldengate_connection.js) |
+| create goldengate connection assignment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_goldengate_connection_assignment.js) |
+| create goldengate deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_goldengate_deployment.js) |
 | create odb network | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_odb_network.js) |
 | create odb subnet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_odb_subnet.js) |
 | delete autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_autonomous_database.js) |
@@ -71,6 +74,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete db system | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_db_system.js) |
 | delete exadb vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_exadb_vm_cluster.js) |
 | delete exascale db storage vault | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_exascale_db_storage_vault.js) |
+| delete goldengate connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_goldengate_connection.js) |
+| delete goldengate connection assignment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_goldengate_connection_assignment.js) |
+| delete goldengate deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_goldengate_deployment.js) |
 | delete odb network | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_odb_network.js) |
 | delete odb subnet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_odb_subnet.js) |
 | failover autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.failover_autonomous_database.js) |
@@ -82,6 +88,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get db system | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_db_system.js) |
 | get exadb vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_exadb_vm_cluster.js) |
 | get exascale db storage vault | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_exascale_db_storage_vault.js) |
+| get goldengate connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_goldengate_connection.js) |
+| get goldengate connection assignment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_goldengate_connection_assignment.js) |
+| get goldengate connection type | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_goldengate_connection_type.js) |
+| get goldengate deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_goldengate_deployment.js) |
+| get goldengate deployment environment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_goldengate_deployment_environment.js) |
+| get goldengate deployment type | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_goldengate_deployment_type.js) |
+| get goldengate deployment version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_goldengate_deployment_version.js) |
 | get odb network | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_odb_network.js) |
 | get odb subnet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_odb_subnet.js) |
 | get pluggable database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_pluggable_database.js) |
@@ -103,6 +116,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list exadb vm clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_exadb_vm_clusters.js) |
 | list exascale db storage vaults | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_exascale_db_storage_vaults.js) |
 | list gi versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_gi_versions.js) |
+| list goldengate connection assignments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_goldengate_connection_assignments.js) |
+| list goldengate connection types | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_goldengate_connection_types.js) |
+| list goldengate connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_goldengate_connections.js) |
+| list goldengate deployment environments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_goldengate_deployment_environments.js) |
+| list goldengate deployment types | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_goldengate_deployment_types.js) |
+| list goldengate deployment versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_goldengate_deployment_versions.js) |
+| list goldengate deployments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_goldengate_deployments.js) |
 | list minor versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_minor_versions.js) |
 | list odb networks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_odb_networks.js) |
 | list odb subnets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_odb_subnets.js) |
@@ -111,11 +131,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | restart autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restart_autonomous_database.js) |
 | restore autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restore_autonomous_database.js) |
 | start autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.start_autonomous_database.js) |
+| start goldengate deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.start_goldengate_deployment.js) |
 | stop autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.stop_autonomous_database.js) |
+| stop goldengate deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.stop_goldengate_deployment.js) |
 | switchover autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.switchover_autonomous_database.js) |
+| test goldengate connection assignment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.test_goldengate_connection_assignment.js) |
 | update autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.update_autonomous_database.js) |
 | update exadb vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.update_exadb_vm_cluster.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/snippet_metadata_google.cloud.oracledatabase.v1.json) |
 
 
 ## Supported Node.js Versions

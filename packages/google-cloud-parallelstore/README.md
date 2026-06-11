@@ -64,7 +64,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | import data | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.import_data.js) |
 | list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.list_instances.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.update_instance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/snippet_metadata_google.cloud.parallelstore.v1.json) |
 | create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.create_instance.js) |
 | delete instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.delete_instance.js) |
 | export data | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.export_data.js) |
@@ -72,7 +71,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | import data | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.import_data.js) |
 | list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.list_instances.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.update_instance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/snippet_metadata_google.cloud.parallelstore.v1beta.json) |
 
 
 ## Supported Node.js Versions

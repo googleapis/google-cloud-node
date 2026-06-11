@@ -65,6 +65,46 @@
                 "getDbSystem"
               ]
             },
+            "GetGoldengateDeployment": {
+              "methods": [
+                "getGoldengateDeployment"
+              ]
+            },
+            "GetGoldengateConnection": {
+              "methods": [
+                "getGoldengateConnection"
+              ]
+            },
+            "GetGoldengateDeploymentVersion": {
+              "methods": [
+                "getGoldengateDeploymentVersion"
+              ]
+            },
+            "GetGoldengateDeploymentType": {
+              "methods": [
+                "getGoldengateDeploymentType"
+              ]
+            },
+            "GetGoldengateDeploymentEnvironment": {
+              "methods": [
+                "getGoldengateDeploymentEnvironment"
+              ]
+            },
+            "GetGoldengateConnectionType": {
+              "methods": [
+                "getGoldengateConnectionType"
+              ]
+            },
+            "GetGoldengateConnectionAssignment": {
+              "methods": [
+                "getGoldengateConnectionAssignment"
+              ]
+            },
+            "TestGoldengateConnectionAssignment": {
+              "methods": [
+                "testGoldengateConnectionAssignment"
+              ]
+            },
             "CreateCloudExadataInfrastructure": {
               "methods": [
                 "createCloudExadataInfrastructure"
@@ -188,6 +228,46 @@
             "DeleteDbSystem": {
               "methods": [
                 "deleteDbSystem"
+              ]
+            },
+            "CreateGoldengateDeployment": {
+              "methods": [
+                "createGoldengateDeployment"
+              ]
+            },
+            "DeleteGoldengateDeployment": {
+              "methods": [
+                "deleteGoldengateDeployment"
+              ]
+            },
+            "StopGoldengateDeployment": {
+              "methods": [
+                "stopGoldengateDeployment"
+              ]
+            },
+            "StartGoldengateDeployment": {
+              "methods": [
+                "startGoldengateDeployment"
+              ]
+            },
+            "CreateGoldengateConnection": {
+              "methods": [
+                "createGoldengateConnection"
+              ]
+            },
+            "DeleteGoldengateConnection": {
+              "methods": [
+                "deleteGoldengateConnection"
+              ]
+            },
+            "CreateGoldengateConnectionAssignment": {
+              "methods": [
+                "createGoldengateConnectionAssignment"
+              ]
+            },
+            "DeleteGoldengateConnectionAssignment": {
+              "methods": [
+                "deleteGoldengateConnectionAssignment"
               ]
             },
             "ListCloudExadataInfrastructures": {
@@ -330,6 +410,48 @@
                 "listDbSystemsAsync"
               ]
             },
+            "ListGoldengateDeployments": {
+              "methods": [
+                "listGoldengateDeployments",
+                "listGoldengateDeploymentsStream",
+                "listGoldengateDeploymentsAsync"
+              ]
+            },
+            "ListGoldengateConnections": {
+              "methods": [
+                "listGoldengateConnections",
+                "listGoldengateConnectionsStream",
+                "listGoldengateConnectionsAsync"
+              ]
+            },
+            "ListGoldengateDeploymentVersions": {
+              "methods": [
+                "listGoldengateDeploymentVersions",
+                "listGoldengateDeploymentVersionsStream",
+                "listGoldengateDeploymentVersionsAsync"
+              ]
+            },
+            "ListGoldengateDeploymentTypes": {
+              "methods": [
+                "listGoldengateDeploymentTypes",
+                "listGoldengateDeploymentTypesStream",
+                "listGoldengateDeploymentTypesAsync"
+              ]
+            },
+            "ListGoldengateDeploymentEnvironments": {
+              "methods": [
+                "listGoldengateDeploymentEnvironments",
+                "listGoldengateDeploymentEnvironmentsStream",
+                "listGoldengateDeploymentEnvironmentsAsync"
+              ]
+            },
+            "ListGoldengateConnectionTypes": {
+              "methods": [
+                "listGoldengateConnectionTypes",
+                "listGoldengateConnectionTypesStream",
+                "listGoldengateConnectionTypesAsync"
+              ]
+            },
             "ListDbVersions": {
               "methods": [
                 "listDbVersions",
@@ -342,6 +464,13 @@
                 "listDatabaseCharacterSets",
                 "listDatabaseCharacterSetsStream",
                 "listDatabaseCharacterSetsAsync"
+              ]
+            },
+            "ListGoldengateConnectionAssignments": {
+              "methods": [
+                "listGoldengateConnectionAssignments",
+                "listGoldengateConnectionAssignmentsStream",
+                "listGoldengateConnectionAssignmentsAsync"
               ]
             }
           }
@@ -404,6 +533,46 @@
                 "getDbSystem"
               ]
             },
+            "GetGoldengateDeployment": {
+              "methods": [
+                "getGoldengateDeployment"
+              ]
+            },
+            "GetGoldengateConnection": {
+              "methods": [
+                "getGoldengateConnection"
+              ]
+            },
+            "GetGoldengateDeploymentVersion": {
+              "methods": [
+                "getGoldengateDeploymentVersion"
+              ]
+            },
+            "GetGoldengateDeploymentType": {
+              "methods": [
+                "getGoldengateDeploymentType"
+              ]
+            },
+            "GetGoldengateDeploymentEnvironment": {
+              "methods": [
+                "getGoldengateDeploymentEnvironment"
+              ]
+            },
+            "GetGoldengateConnectionType": {
+              "methods": [
+                "getGoldengateConnectionType"
+              ]
+            },
+            "GetGoldengateConnectionAssignment": {
+              "methods": [
+                "getGoldengateConnectionAssignment"
+              ]
+            },
+            "TestGoldengateConnectionAssignment": {
+              "methods": [
+                "testGoldengateConnectionAssignment"
+              ]
+            },
             "CreateCloudExadataInfrastructure": {
               "methods": [
                 "createCloudExadataInfrastructure"
@@ -527,6 +696,46 @@
             "DeleteDbSystem": {
               "methods": [
                 "deleteDbSystem"
+              ]
+            },
+            "CreateGoldengateDeployment": {
+              "methods": [
+                "createGoldengateDeployment"
+              ]
+            },
+            "DeleteGoldengateDeployment": {
+              "methods": [
+                "deleteGoldengateDeployment"
+              ]
+            },
+            "StopGoldengateDeployment": {
+              "methods": [
+                "stopGoldengateDeployment"
+              ]
+            },
+            "StartGoldengateDeployment": {
+              "methods": [
+                "startGoldengateDeployment"
+              ]
+            },
+            "CreateGoldengateConnection": {
+              "methods": [
+                "createGoldengateConnection"
+              ]
+            },
+            "DeleteGoldengateConnection": {
+              "methods": [
+                "deleteGoldengateConnection"
+              ]
+            },
+            "CreateGoldengateConnectionAssignment": {
+              "methods": [
+                "createGoldengateConnectionAssignment"
+              ]
+            },
+            "DeleteGoldengateConnectionAssignment": {
+              "methods": [
+                "deleteGoldengateConnectionAssignment"
               ]
             },
             "ListCloudExadataInfrastructures": {
@@ -669,6 +878,48 @@
                 "listDbSystemsAsync"
               ]
             },
+            "ListGoldengateDeployments": {
+              "methods": [
+                "listGoldengateDeployments",
+                "listGoldengateDeploymentsStream",
+                "listGoldengateDeploymentsAsync"
+              ]
+            },
+            "ListGoldengateConnections": {
+              "methods": [
+                "listGoldengateConnections",
+                "listGoldengateConnectionsStream",
+                "listGoldengateConnectionsAsync"
+              ]
+            },
+            "ListGoldengateDeploymentVersions": {
+              "methods": [
+                "listGoldengateDeploymentVersions",
+                "listGoldengateDeploymentVersionsStream",
+                "listGoldengateDeploymentVersionsAsync"
+              ]
+            },
+            "ListGoldengateDeploymentTypes": {
+              "methods": [
+                "listGoldengateDeploymentTypes",
+                "listGoldengateDeploymentTypesStream",
+                "listGoldengateDeploymentTypesAsync"
+              ]
+            },
+            "ListGoldengateDeploymentEnvironments": {
+              "methods": [
+                "listGoldengateDeploymentEnvironments",
+                "listGoldengateDeploymentEnvironmentsStream",
+                "listGoldengateDeploymentEnvironmentsAsync"
+              ]
+            },
+            "ListGoldengateConnectionTypes": {
+              "methods": [
+                "listGoldengateConnectionTypes",
+                "listGoldengateConnectionTypesStream",
+                "listGoldengateConnectionTypesAsync"
+              ]
+            },
             "ListDbVersions": {
               "methods": [
                 "listDbVersions",
@@ -681,6 +932,13 @@
                 "listDatabaseCharacterSets",
                 "listDatabaseCharacterSetsStream",
                 "listDatabaseCharacterSetsAsync"
+              ]
+            },
+            "ListGoldengateConnectionAssignments": {
+              "methods": [
+                "listGoldengateConnectionAssignments",
+                "listGoldengateConnectionAssignmentsStream",
+                "listGoldengateConnectionAssignmentsAsync"
               ]
             }
           }

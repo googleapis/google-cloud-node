@@ -68,7 +68,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | render parameter version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.render_parameter_version.js) |
 | update parameter | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.update_parameter.js) |
 | update parameter version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.update_parameter_version.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/snippet_metadata_google.cloud.parametermanager.v1.json) |
 
 
 ## Supported Node.js Versions

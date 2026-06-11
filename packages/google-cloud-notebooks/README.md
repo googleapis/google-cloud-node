@@ -105,7 +105,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update shielded instance config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1/notebook_service.update_shielded_instance_config.js) |
 | upgrade instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1/notebook_service.upgrade_instance.js) |
 | upgrade instance internal | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1/notebook_service.upgrade_instance_internal.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1/snippet_metadata_google.cloud.notebooks.v1.json) |
 | create environment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1beta1/notebook_service.create_environment.js) |
 | create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1beta1/notebook_service.create_instance.js) |
 | delete environment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1beta1/notebook_service.delete_environment.js) |
@@ -125,7 +124,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stop instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1beta1/notebook_service.stop_instance.js) |
 | upgrade instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1beta1/notebook_service.upgrade_instance.js) |
 | upgrade instance internal | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1beta1/notebook_service.upgrade_instance_internal.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1beta1/snippet_metadata_google.cloud.notebooks.v1beta1.json) |
 | check instance upgradability | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.check_instance_upgradability.js) |
 | create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.create_instance.js) |
 | delete instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.delete_instance.js) |
@@ -138,7 +136,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stop instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.stop_instance.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.update_instance.js) |
 | upgrade instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.upgrade_instance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/snippet_metadata_google.cloud.notebooks.v2.json) |
 
 
 ## Supported Node.js Versions

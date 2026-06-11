@@ -120,7 +120,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete policy based route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/policy_based_routing_service.delete_policy_based_route.js) |
 | get policy based route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/policy_based_routing_service.get_policy_based_route.js) |
 | list policy based routes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/policy_based_routing_service.list_policy_based_routes.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/snippet_metadata_google.cloud.networkconnectivity.v1.json) |
 | create hub | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1alpha1/hub_service.create_hub.js) |
 | create spoke | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1alpha1/hub_service.create_spoke.js) |
 | delete hub | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1alpha1/hub_service.delete_hub.js) |
@@ -131,7 +130,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list spokes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1alpha1/hub_service.list_spokes.js) |
 | update hub | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1alpha1/hub_service.update_hub.js) |
 | update spoke | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1alpha1/hub_service.update_spoke.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1alpha1/snippet_metadata_google.cloud.networkconnectivity.v1alpha1.json) |
 | create destination | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1beta/data_transfer_service.create_destination.js) |
 | create multicloud data transfer config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1beta/data_transfer_service.create_multicloud_data_transfer_config.js) |
 | delete destination | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1beta/data_transfer_service.delete_destination.js) |
@@ -176,7 +174,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete policy based route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1beta/policy_based_routing_service.delete_policy_based_route.js) |
 | get policy based route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1beta/policy_based_routing_service.get_policy_based_route.js) |
 | list policy based routes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1beta/policy_based_routing_service.list_policy_based_routes.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1beta/snippet_metadata_google.cloud.networkconnectivity.v1beta.json) |
 | create transport | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1beta/transport_manager.create_transport.js) |
 | delete transport | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1beta/transport_manager.delete_transport.js) |
 | get remote transport profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1beta/transport_manager.get_remote_transport_profile.js) |

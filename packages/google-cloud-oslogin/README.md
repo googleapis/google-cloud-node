@@ -65,7 +65,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get ssh public key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1/os_login_service.get_ssh_public_key.js) |
 | import ssh public key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1/os_login_service.import_ssh_public_key.js) |
 | update ssh public key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1/os_login_service.update_ssh_public_key.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1/snippet_metadata_google.cloud.oslogin.v1.json) |
 | create ssh public key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.create_ssh_public_key.js) |
 | delete posix account | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.delete_posix_account.js) |
 | delete ssh public key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.delete_ssh_public_key.js) |
@@ -74,7 +73,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | import ssh public key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.import_ssh_public_key.js) |
 | sign ssh public key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.sign_ssh_public_key.js) |
 | update ssh public key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.update_ssh_public_key.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/snippet_metadata_google.cloud.oslogin.v1beta.json) |
 
 
 ## Supported Node.js Versions

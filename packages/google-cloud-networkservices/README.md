@@ -78,6 +78,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update lb edge extension | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_edge_extension.js) |
 | update lb route extension | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_route_extension.js) |
 | update lb traffic extension | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_traffic_extension.js) |
+| create agent gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_agent_gateway.js) |
 | create endpoint policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_endpoint_policy.js) |
 | create gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_gateway.js) |
 | create grpc route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_grpc_route.js) |
@@ -89,6 +90,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | create tls route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_tls_route.js) |
 | create wasm plugin | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_wasm_plugin.js) |
 | create wasm plugin version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_wasm_plugin_version.js) |
+| delete agent gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_agent_gateway.js) |
 | delete endpoint policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_endpoint_policy.js) |
 | delete gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_gateway.js) |
 | delete grpc route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_grpc_route.js) |
@@ -100,6 +102,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete tls route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_tls_route.js) |
 | delete wasm plugin | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_wasm_plugin.js) |
 | delete wasm plugin version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_wasm_plugin_version.js) |
+| get agent gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_agent_gateway.js) |
 | get endpoint policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_endpoint_policy.js) |
 | get gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_gateway.js) |
 | get gateway route view | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_gateway_route_view.js) |
@@ -113,6 +116,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get tls route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_tls_route.js) |
 | get wasm plugin | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_wasm_plugin.js) |
 | get wasm plugin version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_wasm_plugin_version.js) |
+| list agent gateways | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_agent_gateways.js) |
 | list endpoint policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_endpoint_policies.js) |
 | list gateway route views | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_gateway_route_views.js) |
 | list gateways | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_gateways.js) |
@@ -126,6 +130,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list tls routes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_tls_routes.js) |
 | list wasm plugin versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_wasm_plugin_versions.js) |
 | list wasm plugins | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_wasm_plugins.js) |
+| update agent gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_agent_gateway.js) |
 | update endpoint policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_endpoint_policy.js) |
 | update gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_gateway.js) |
 | update grpc route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_grpc_route.js) |
@@ -136,7 +141,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update tcp route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_tcp_route.js) |
 | update tls route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_tls_route.js) |
 | update wasm plugin | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_wasm_plugin.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/snippet_metadata_google.cloud.networkservices.v1.json) |
 | create lb route extension | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.create_lb_route_extension.js) |
 | create lb traffic extension | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.create_lb_traffic_extension.js) |
 | delete lb route extension | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/dep_service.delete_lb_route_extension.js) |
@@ -152,7 +156,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get endpoint policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.get_endpoint_policy.js) |
 | list endpoint policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.list_endpoint_policies.js) |
 | update endpoint policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/network_services.update_endpoint_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1beta1/snippet_metadata_google.cloud.networkservices.v1beta1.json) |
 
 
 ## Supported Node.js Versions
