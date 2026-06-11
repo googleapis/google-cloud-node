@@ -16,8 +16,8 @@ version: v0.20.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: ff15be54722218705740b9fc6223d264c4cdb6dd
-    sha256: 13dc3b1a01767be8d486980d3ddcb7fe6f6b89c3da8d41c358d5c2536c86de3c
+    commit: 05c4b6d37258ab81054529451cdf804f2918441f
+    sha256: 4ddc45ca7bfc92cc723162ca9f6721c34c5c56003f2b0f6254350bf769593839
 default:
   keep:
     - librarian.js
@@ -478,7 +478,6 @@ libraries:
       - path: google/cloud/ces/v1
       - path: google/cloud/ces/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-channel
@@ -1103,7 +1102,6 @@ libraries:
       - path: google/cloud/modelarmor/v1
       - path: google/cloud/modelarmor/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-monitoring
@@ -1174,7 +1172,6 @@ libraries:
     apis:
       - path: google/cloud/oracledatabase/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-orchestration-airflow-service
