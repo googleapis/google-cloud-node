@@ -1,16 +1,16 @@
 {
+    "api_description": "Model, deploy, and operate your SaaS at scale.",
     "api_id": "saasservicemgmt.googleapis.com",
     "api_shortname": "saasservicemgmt",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/saasservicemgmt/latest",
     "default_version": "v1beta1",
     "distribution_name": "@google-cloud/saasservicemgmt",
-    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1863319",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "saasservicemgmt",
-    "name_pretty": "SaaS Runtime API",
-    "product_documentation": "https://cloud.google.com/saas-runtime/docs/overview",
+    "name_pretty": "App Lifecycle Manager",
+    "product_documentation": "https://cloud.google.com/saas-runtime/docs",
     "release_level": "preview",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }

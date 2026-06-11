@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,23 +14,24 @@
 
 'use strict';
 
-const path = require('path');
 const assert = require('assert');
-const {execSync} = require('child_process');
 const {describe, it, before} = require('mocha');
-const cwd = path.join(__dirname, '..');
-const {ApiGatewayServiceClient} = require('@google-cloud/api-gateway');
-const client = new ApiGatewayServiceClient();
+const {execSync} = require('child_process');
+// eslint-disable-next-line node/no-missing-require
+const {ContainerAnalysisClient} = require('@google-cloud/containeranalysis').v1;
+const containeranalysisClient = new ContainerAnalysisClient();
 
-describe('Quickstart', () => {
+const exec = cmd => execSync(cmd, {encoding: 'utf8'});
+
+describe('quickstart', () => {
   let projectId;
+
   before(async () => {
-    projectId = await client.getProjectId();
+    projectId = await containeranalysisClient.getProjectId();
   });
-  it('should run quickstart', async () => {
-    const stdout = execSync(`node ./quickstart.js ${projectId}`, {
-      cwd,
-    }).toString('utf8');
-    assert(stdout.match(/name: projects.*/));
+
+  it('should run the quickstart', () => {
+    const stdout = exec(`node quickstart.js projects/${projectId}`);
+    assert(stdout !== null);
   });
 });

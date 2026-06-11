@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -48,7 +59,7 @@ export class VectorSearchServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('vectorsearch');
@@ -61,11 +72,11 @@ export class VectorSearchServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  vectorSearchServiceStub?: Promise<{[name: string]: Function}>;
+  vectorSearchServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of VectorSearchServiceClient.
@@ -106,21 +117,42 @@ export class VectorSearchServiceClient {
    *     const client = new VectorSearchServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof VectorSearchServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'vectorsearch.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -145,7 +177,7 @@ export class VectorSearchServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -159,15 +191,11 @@ export class VectorSearchServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -189,19 +217,19 @@ export class VectorSearchServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       collectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}'
+        'projects/{project}/locations/{location}/collections/{collection}',
       ),
       dataObjectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}'
+        'projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}',
       ),
       indexPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/indexes/{index}'
+        'projects/{project}/locations/{location}/collections/{collection}/indexes/{index}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
     };
 
@@ -209,10 +237,16 @@ export class VectorSearchServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCollections:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'collections'),
-      listIndexes:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'indexes')
+      listCollections: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'collections',
+      ),
+      listIndexes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'indexes',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -221,85 +255,140 @@ export class VectorSearchServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1beta/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1beta/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1beta/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1beta/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1beta/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1beta/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1beta/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createCollectionResponse = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.Collection') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.Collection',
+    ) as gax.protobuf.Type;
     const createCollectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateCollectionResponse = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.Collection') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.Collection',
+    ) as gax.protobuf.Type;
     const updateCollectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteCollectionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteCollectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createIndexResponse = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.Index') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.Index',
+    ) as gax.protobuf.Type;
     const createIndexMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateIndexResponse = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.Index') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.Index',
+    ) as gax.protobuf.Type;
     const updateIndexMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteIndexResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteIndexMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
     const importDataObjectsResponse = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.ImportDataObjectsResponse') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.ImportDataObjectsResponse',
+    ) as gax.protobuf.Type;
     const importDataObjectsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.ImportDataObjectsMetadata') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.ImportDataObjectsMetadata',
+    ) as gax.protobuf.Type;
     const exportDataObjectsResponse = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse',
+    ) as gax.protobuf.Type;
     const exportDataObjectsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata') as gax.protobuf.Type;
+      '.google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createCollection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createCollectionResponse.decode.bind(createCollectionResponse),
-        createCollectionMetadata.decode.bind(createCollectionMetadata)),
+        createCollectionMetadata.decode.bind(createCollectionMetadata),
+      ),
       updateCollection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateCollectionResponse.decode.bind(updateCollectionResponse),
-        updateCollectionMetadata.decode.bind(updateCollectionMetadata)),
+        updateCollectionMetadata.decode.bind(updateCollectionMetadata),
+      ),
       deleteCollection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteCollectionResponse.decode.bind(deleteCollectionResponse),
-        deleteCollectionMetadata.decode.bind(deleteCollectionMetadata)),
+        deleteCollectionMetadata.decode.bind(deleteCollectionMetadata),
+      ),
       createIndex: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createIndexResponse.decode.bind(createIndexResponse),
-        createIndexMetadata.decode.bind(createIndexMetadata)),
+        createIndexMetadata.decode.bind(createIndexMetadata),
+      ),
       updateIndex: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateIndexResponse.decode.bind(updateIndexResponse),
-        updateIndexMetadata.decode.bind(updateIndexMetadata)),
+        updateIndexMetadata.decode.bind(updateIndexMetadata),
+      ),
       deleteIndex: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteIndexResponse.decode.bind(deleteIndexResponse),
-        deleteIndexMetadata.decode.bind(deleteIndexMetadata)),
+        deleteIndexMetadata.decode.bind(deleteIndexMetadata),
+      ),
       importDataObjects: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDataObjectsResponse.decode.bind(importDataObjectsResponse),
-        importDataObjectsMetadata.decode.bind(importDataObjectsMetadata)),
+        importDataObjectsMetadata.decode.bind(importDataObjectsMetadata),
+      ),
       exportDataObjects: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportDataObjectsResponse.decode.bind(exportDataObjectsResponse),
-        exportDataObjectsMetadata.decode.bind(exportDataObjectsMetadata))
+        exportDataObjectsMetadata.decode.bind(exportDataObjectsMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.vectorsearch.v1beta.VectorSearchService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.vectorsearch.v1beta.VectorSearchService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -330,28 +419,47 @@ export class VectorSearchServiceClient {
     // Put together the "service stub" for
     // google.cloud.vectorsearch.v1beta.VectorSearchService.
     this.vectorSearchServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.vectorsearch.v1beta.VectorSearchService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.vectorsearch.v1beta.VectorSearchService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.vectorsearch.v1beta.VectorSearchService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.vectorsearch.v1beta
+            .VectorSearchService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const vectorSearchServiceStubMethods =
-        ['listCollections', 'getCollection', 'createCollection', 'updateCollection', 'deleteCollection', 'listIndexes', 'getIndex', 'createIndex', 'updateIndex', 'deleteIndex', 'importDataObjects', 'exportDataObjects'];
+    const vectorSearchServiceStubMethods = [
+      'listCollections',
+      'getCollection',
+      'createCollection',
+      'updateCollection',
+      'deleteCollection',
+      'listIndexes',
+      'getIndex',
+      'createIndex',
+      'updateIndex',
+      'deleteIndex',
+      'importDataObjects',
+      'exportDataObjects',
+    ];
     for (const methodName of vectorSearchServiceStubMethods) {
       const callPromise = this.vectorSearchServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -361,7 +469,7 @@ export class VectorSearchServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -376,8 +484,14 @@ export class VectorSearchServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'vectorsearch.googleapis.com';
   }
@@ -388,8 +502,14 @@ export class VectorSearchServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'vectorsearch.googleapis.com';
   }
@@ -420,9 +540,7 @@ export class VectorSearchServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -431,8 +549,9 @@ export class VectorSearchServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -443,1282 +562,1886 @@ export class VectorSearchServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single Collection.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.Collection|Collection}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.get_collection.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_GetCollection_async
- */
+  /**
+   * Gets details of a single Collection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.Collection|Collection}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.get_collection.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_GetCollection_async
+   */
   getCollection(
-      request?: protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.ICollection,
-        protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.ICollection,
+      protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getCollection(
-      request: protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.ICollection,
-          protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.ICollection,
+      | protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCollection(
-      request: protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.ICollection,
-          protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.ICollection,
+      | protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCollection(
-      request?: protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.vectorsearch.v1beta.ICollection,
-          protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.vectorsearch.v1beta.ICollection,
-          protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.ICollection,
-        protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vectorsearch.v1beta.ICollection,
+      | protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.ICollection,
+      protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getCollection request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.vectorsearch.v1beta.ICollection,
-        protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vectorsearch.v1beta.ICollection,
+          | protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCollection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getCollection(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.vectorsearch.v1beta.ICollection,
-        protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getCollection response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getCollection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vectorsearch.v1beta.ICollection,
+          (
+            | protos.google.cloud.vectorsearch.v1beta.IGetCollectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCollection response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single Index.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.Index|Index}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.get_index.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_GetIndex_async
- */
+  /**
+   * Gets details of a single Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.Index|Index}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.get_index.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_GetIndex_async
+   */
   getIndex(
-      request?: protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IIndex,
-        protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IIndex,
+      protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getIndex(
-      request: protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IIndex,
-          protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IIndex,
+      | protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIndex(
-      request: protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IIndex,
-          protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IIndex,
+      | protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIndex(
-      request?: protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.vectorsearch.v1beta.IIndex,
-          protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IIndex,
-          protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IIndex,
-        protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IIndex,
+      | protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IIndex,
+      protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getIndex request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.vectorsearch.v1beta.IIndex,
-        protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vectorsearch.v1beta.IIndex,
+          | protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIndex response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getIndex(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.vectorsearch.v1beta.IIndex,
-        protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getIndex response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getIndex(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vectorsearch.v1beta.IIndex,
+          protos.google.cloud.vectorsearch.v1beta.IGetIndexRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIndex response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new Collection in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Value for parent.
- * @param {string} request.collectionId
- *   Required. ID of the Collection to create.
- *   The id must be 1-63 characters long, and comply with
- *   [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
- *   Specifically, it must be 1-63 characters long and match the regular
- *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?`.
- * @param {google.cloud.vectorsearch.v1beta.Collection} request.collection
- *   Required. The resource being created
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.create_collection.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_CreateCollection_async
- */
+  /**
+   * Creates a new Collection in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent.
+   * @param {string} request.collectionId
+   *   Required. ID of the Collection to create.
+   *   The id must be 1-63 characters long, and comply with
+   *   [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
+   *   Specifically, it must be 1-63 characters long and match the regular
+   *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?`.
+   * @param {google.cloud.vectorsearch.v1beta.Collection} request.collection
+   *   Required. The resource being created
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.create_collection.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_CreateCollection_async
+   */
   createCollection(
-      request?: protos.google.cloud.vectorsearch.v1beta.ICreateCollectionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.ICreateCollectionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.ICollection,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createCollection(
-      request: protos.google.cloud.vectorsearch.v1beta.ICreateCollectionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.ICreateCollectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.ICollection,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCollection(
-      request: protos.google.cloud.vectorsearch.v1beta.ICreateCollectionRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.ICreateCollectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.ICollection,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCollection(
-      request?: protos.google.cloud.vectorsearch.v1beta.ICreateCollectionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.vectorsearch.v1beta.ICreateCollectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.ICollection,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.ICollection,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.ICollection,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.ICollection,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCollection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCollection request %j', request);
-    return this.innerApiCalls.createCollection(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createCollection response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createCollection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.ICollection,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCollection response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createCollection()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.create_collection.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_CreateCollection_async
- */
-  async checkCreateCollectionProgress(name: string): Promise<LROperation<protos.google.cloud.vectorsearch.v1beta.Collection, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createCollection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.create_collection.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_CreateCollection_async
+   */
+  async checkCreateCollectionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vectorsearch.v1beta.Collection,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('createCollection long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCollection, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.vectorsearch.v1beta.Collection, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createCollection,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vectorsearch.v1beta.Collection,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single Collection.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   Collection resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields present in the request will be
- *   overwritten.
- *
- *   The following fields support update: `display_name`, `description`,
- *   `labels`, `data_schema`, `vector_schema`.
- *   For `data_schema` and `vector_schema`, fields can only be added, not
- *   deleted, but `vertex_embedding_config` in `vector_schema` can be added or
- *   removed.
- *   Partial updates for `data_schema` and `vector_schema` are also supported
- *   by using sub-field paths in `update_mask`, e.g.
- *   `data_schema.properties.foo` or `vector_schema.my_vector_field`.
- *
- *   If `*` is provided in the update_mask, full replacement will be performed.
- * @param {google.cloud.vectorsearch.v1beta.Collection} request.collection
- *   Required. The resource being updated
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.update_collection.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_UpdateCollection_async
- */
+  /**
+   * Updates the parameters of a single Collection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   Collection resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields present in the request will be
+   *   overwritten.
+   *
+   *   The following fields support update: `display_name`, `description`,
+   *   `labels`, `data_schema`, `vector_schema`.
+   *   For `data_schema` and `vector_schema`, fields can only be added, not
+   *   deleted, but `vertex_embedding_config` in `vector_schema` can be added or
+   *   removed.
+   *   Partial updates for `data_schema` and `vector_schema` are also supported
+   *   by using sub-field paths in `update_mask`, e.g.
+   *   `data_schema.properties.foo` or `vector_schema.my_vector_field`.
+   *
+   *   If `*` is provided in the update_mask, full replacement will be performed.
+   * @param {google.cloud.vectorsearch.v1beta.Collection} request.collection
+   *   Required. The resource being updated
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.update_collection.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_UpdateCollection_async
+   */
   updateCollection(
-      request?: protos.google.cloud.vectorsearch.v1beta.IUpdateCollectionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IUpdateCollectionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.ICollection,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateCollection(
-      request: protos.google.cloud.vectorsearch.v1beta.IUpdateCollectionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IUpdateCollectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.ICollection,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCollection(
-      request: protos.google.cloud.vectorsearch.v1beta.IUpdateCollectionRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IUpdateCollectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.ICollection,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCollection(
-      request?: protos.google.cloud.vectorsearch.v1beta.IUpdateCollectionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.vectorsearch.v1beta.IUpdateCollectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.ICollection,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.ICollection,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.ICollection,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'collection.name': request.collection!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'collection.name': request.collection!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.ICollection,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCollection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCollection request %j', request);
-    return this.innerApiCalls.updateCollection(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.vectorsearch.v1beta.ICollection, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateCollection response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateCollection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.ICollection,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCollection response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateCollection()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.update_collection.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_UpdateCollection_async
- */
-  async checkUpdateCollectionProgress(name: string): Promise<LROperation<protos.google.cloud.vectorsearch.v1beta.Collection, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateCollection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.update_collection.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_UpdateCollection_async
+   */
+  async checkUpdateCollectionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vectorsearch.v1beta.Collection,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('updateCollection long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCollection, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.vectorsearch.v1beta.Collection, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateCollection,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vectorsearch.v1beta.Collection,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Collection.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.delete_collection.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_DeleteCollection_async
- */
+  /**
+   * Deletes a single Collection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.delete_collection.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_DeleteCollection_async
+   */
   deleteCollection(
-      request?: protos.google.cloud.vectorsearch.v1beta.IDeleteCollectionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IDeleteCollectionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteCollection(
-      request: protos.google.cloud.vectorsearch.v1beta.IDeleteCollectionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IDeleteCollectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCollection(
-      request: protos.google.cloud.vectorsearch.v1beta.IDeleteCollectionRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IDeleteCollectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCollection(
-      request?: protos.google.cloud.vectorsearch.v1beta.IDeleteCollectionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.vectorsearch.v1beta.IDeleteCollectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCollection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCollection request %j', request);
-    return this.innerApiCalls.deleteCollection(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteCollection response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteCollection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCollection response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteCollection()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.delete_collection.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_DeleteCollection_async
- */
-  async checkDeleteCollectionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteCollection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.delete_collection.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_DeleteCollection_async
+   */
+  async checkDeleteCollectionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('deleteCollection long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCollection, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteCollection,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >;
   }
-/**
- * Creates a new Index in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Collection for which to create the
- *   Index. Format:
- *   `projects/{project}/locations/{location}/collections/{collection}`
- * @param {string} request.indexId
- *   Required. ID of the Index to create.
- *   The id must be 1-63 characters long, and comply with
- *   [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
- *   Specifically, it must be 1-63 characters long and match the regular
- *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?`.
- * @param {google.cloud.vectorsearch.v1beta.Index} request.index
- *   Required. The resource being created
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.create_index.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_CreateIndex_async
- */
+  /**
+   * Creates a new Index in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection for which to create the
+   *   Index. Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}`
+   * @param {string} request.indexId
+   *   Required. ID of the Index to create.
+   *   The id must be 1-63 characters long, and comply with
+   *   [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
+   *   Specifically, it must be 1-63 characters long and match the regular
+   *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?`.
+   * @param {google.cloud.vectorsearch.v1beta.Index} request.index
+   *   Required. The resource being created
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.create_index.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_CreateIndex_async
+   */
   createIndex(
-      request?: protos.google.cloud.vectorsearch.v1beta.ICreateIndexRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.ICreateIndexRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IIndex,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createIndex(
-      request: protos.google.cloud.vectorsearch.v1beta.ICreateIndexRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.ICreateIndexRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IIndex,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createIndex(
-      request: protos.google.cloud.vectorsearch.v1beta.ICreateIndexRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.ICreateIndexRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IIndex,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createIndex(
-      request?: protos.google.cloud.vectorsearch.v1beta.ICreateIndexRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.vectorsearch.v1beta.ICreateIndexRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IIndex,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IIndex,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IIndex,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IIndex,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createIndex request %j', request);
-    return this.innerApiCalls.createIndex(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createIndex response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createIndex(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IIndex,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createIndex response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createIndex()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.create_index.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_CreateIndex_async
- */
-  async checkCreateIndexProgress(name: string): Promise<LROperation<protos.google.cloud.vectorsearch.v1beta.Index, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createIndex()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.create_index.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_CreateIndex_async
+   */
+  async checkCreateIndexProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vectorsearch.v1beta.Index,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('createIndex long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createIndex, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.vectorsearch.v1beta.Index, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createIndex,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vectorsearch.v1beta.Index,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single Index.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.vectorsearch.v1beta.Index} request.index
- *   Required. The resource being updated.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Specifies the fields to be overwritten in the Index resource by
- *   the update. The fields specified in the update_mask are relative to the
- *   resource, not the full request. A field will be overwritten if it is in the
- *   mask. If the user does not provide a mask then all fields present in the
- *   request with non-empty values will be overwritten.
- *
- *   The following fields support update:
- *     * `display_name`
- *     * `description`
- *     * `labels`
- *     * `dedicated_infrastructure.autoscaling_spec.min_replica_count`
- *     * `dedicated_infrastructure.autoscaling_spec.max_replica_count`
- *
- *   If `*` is provided in the `update_mask`, full replacement of mutable fields
- *   will be performed.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.update_index.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_UpdateIndex_async
- */
+  /**
+   * Updates the parameters of a single Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.vectorsearch.v1beta.Index} request.index
+   *   Required. The resource being updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Specifies the fields to be overwritten in the Index resource by
+   *   the update. The fields specified in the update_mask are relative to the
+   *   resource, not the full request. A field will be overwritten if it is in the
+   *   mask. If the user does not provide a mask then all fields present in the
+   *   request with non-empty values will be overwritten.
+   *
+   *   The following fields support update:
+   *     * `display_name`
+   *     * `description`
+   *     * `labels`
+   *     * `dedicated_infrastructure.autoscaling_spec.min_replica_count`
+   *     * `dedicated_infrastructure.autoscaling_spec.max_replica_count`
+   *
+   *   If `*` is provided in the `update_mask`, full replacement of mutable fields
+   *   will be performed.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.update_index.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_UpdateIndex_async
+   */
   updateIndex(
-      request?: protos.google.cloud.vectorsearch.v1beta.IUpdateIndexRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IUpdateIndexRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IIndex,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateIndex(
-      request: protos.google.cloud.vectorsearch.v1beta.IUpdateIndexRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IUpdateIndexRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IIndex,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateIndex(
-      request: protos.google.cloud.vectorsearch.v1beta.IUpdateIndexRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IUpdateIndexRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IIndex,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateIndex(
-      request?: protos.google.cloud.vectorsearch.v1beta.IUpdateIndexRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.vectorsearch.v1beta.IUpdateIndexRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IIndex,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IIndex,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IIndex,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'index.name': request.index!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'index.name': request.index!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IIndex,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateIndex request %j', request);
-    return this.innerApiCalls.updateIndex(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.vectorsearch.v1beta.IIndex, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateIndex response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateIndex(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IIndex,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateIndex response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateIndex()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.update_index.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_UpdateIndex_async
- */
-  async checkUpdateIndexProgress(name: string): Promise<LROperation<protos.google.cloud.vectorsearch.v1beta.Index, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateIndex()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.update_index.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_UpdateIndex_async
+   */
+  async checkUpdateIndexProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vectorsearch.v1beta.Index,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('updateIndex long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateIndex, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.vectorsearch.v1beta.Index, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateIndex,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vectorsearch.v1beta.Index,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Index.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the Index to delete.
- *   Format:
- *   `projects/{project}/locations/{location}/collections/{collection}/indexes/{index}`
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.delete_index.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_DeleteIndex_async
- */
+  /**
+   * Deletes a single Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Index to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}/indexes/{index}`
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.delete_index.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_DeleteIndex_async
+   */
   deleteIndex(
-      request?: protos.google.cloud.vectorsearch.v1beta.IDeleteIndexRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IDeleteIndexRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteIndex(
-      request: protos.google.cloud.vectorsearch.v1beta.IDeleteIndexRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IDeleteIndexRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteIndex(
-      request: protos.google.cloud.vectorsearch.v1beta.IDeleteIndexRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IDeleteIndexRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteIndex(
-      request?: protos.google.cloud.vectorsearch.v1beta.IDeleteIndexRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.vectorsearch.v1beta.IDeleteIndexRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteIndex request %j', request);
-    return this.innerApiCalls.deleteIndex(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vectorsearch.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteIndex response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteIndex(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vectorsearch.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteIndex response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteIndex()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.delete_index.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_DeleteIndex_async
- */
-  async checkDeleteIndexProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteIndex()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.delete_index.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_DeleteIndex_async
+   */
+  async checkDeleteIndexProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('deleteIndex long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteIndex, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.vectorsearch.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteIndex,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vectorsearch.v1beta.OperationMetadata
+    >;
   }
-/**
- * Initiates a Long-Running Operation to import DataObjects into a Collection.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.vectorsearch.v1beta.ImportDataObjectsRequest.GcsImportConfig} request.gcsImport
- *   The Cloud Storage location of the input content.
- * @param {string} request.name
- *   Required. The resource name of the Collection to import DataObjects into.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.import_data_objects.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ImportDataObjects_async
- */
+  /**
+   * Initiates a Long-Running Operation to import DataObjects into a Collection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.vectorsearch.v1beta.ImportDataObjectsRequest.GcsImportConfig} request.gcsImport
+   *   The Cloud Storage location of the input content.
+   * @param {string} request.name
+   *   Required. The resource name of the Collection to import DataObjects into.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.import_data_objects.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ImportDataObjects_async
+   */
   importDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse,
+        protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   importDataObjects(
-      request: protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse,
+        protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importDataObjects(
-      request: protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse,
+        protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse,
+            protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse,
+        protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse,
+        protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse,
+            protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importDataObjects response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importDataObjects request %j', request);
-    return this.innerApiCalls.importDataObjects(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('importDataObjects response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .importDataObjects(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsResponse,
+            protos.google.cloud.vectorsearch.v1beta.IImportDataObjectsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importDataObjects response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `importDataObjects()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.import_data_objects.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ImportDataObjects_async
- */
-  async checkImportDataObjectsProgress(name: string): Promise<LROperation<protos.google.cloud.vectorsearch.v1beta.ImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.ImportDataObjectsMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `importDataObjects()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.import_data_objects.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ImportDataObjects_async
+   */
+  async checkImportDataObjectsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vectorsearch.v1beta.ImportDataObjectsResponse,
+      protos.google.cloud.vectorsearch.v1beta.ImportDataObjectsMetadata
+    >
+  > {
     this._log.info('importDataObjects long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importDataObjects, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.vectorsearch.v1beta.ImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.ImportDataObjectsMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importDataObjects,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vectorsearch.v1beta.ImportDataObjectsResponse,
+      protos.google.cloud.vectorsearch.v1beta.ImportDataObjectsMetadata
+    >;
   }
-/**
- * Initiates a Long-Running Operation to export DataObjects from a Collection.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination} request.gcsDestination
- *   The Cloud Storage location where user wants to export Data Objects.
- * @param {string} request.name
- *   Required. The resource name of the Collection from which we want to export
- *   Data Objects. Format:
- *   `projects/{project}/locations/{location}/collections/{collection}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.export_data_objects.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ExportDataObjects_async
- */
+  /**
+   * Initiates a Long-Running Operation to export DataObjects from a Collection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination} request.gcsDestination
+   *   The Cloud Storage location where user wants to export Data Objects.
+   * @param {string} request.name
+   *   Required. The resource name of the Collection from which we want to export
+   *   Data Objects. Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.export_data_objects.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ExportDataObjects_async
+   */
   exportDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse,
+        protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   exportDataObjects(
-      request: protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse,
+        protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportDataObjects(
-      request: protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse,
+        protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse,
+            protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse,
+        protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse,
+        protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse,
+            protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportDataObjects response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportDataObjects request %j', request);
-    return this.innerApiCalls.exportDataObjects(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('exportDataObjects response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .exportDataObjects(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse,
+            protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportDataObjects response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `exportDataObjects()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.export_data_objects.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ExportDataObjects_async
- */
-  async checkExportDataObjectsProgress(name: string): Promise<LROperation<protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `exportDataObjects()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.export_data_objects.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ExportDataObjects_async
+   */
+  async checkExportDataObjectsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse,
+      protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata
+    >
+  > {
     this._log.info('exportDataObjects long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportDataObjects, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportDataObjects,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse,
+      protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata
+    >;
   }
- /**
- * Lists Collections in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListCollectionsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.vectorsearch.v1beta.Collection|Collection}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listCollectionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Collections in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListCollectionsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vectorsearch.v1beta.Collection|Collection}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCollectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCollections(
-      request?: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.ICollection[],
-        protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest|null,
-        protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.ICollection[],
+      protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest | null,
+      protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse,
+    ]
+  >;
   listCollections(
-      request: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-          protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1beta.ICollection>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
+      | protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1beta.ICollection
+    >,
+  ): void;
   listCollections(
-      request: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-          protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1beta.ICollection>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
+      | protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1beta.ICollection
+    >,
+  ): void;
   listCollections(
-      request?: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-          protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1beta.ICollection>,
-      callback?: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-          protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1beta.ICollection>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.ICollection[],
-        protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest|null,
-        protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vectorsearch.v1beta.ICollection
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
+      | protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1beta.ICollection
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.ICollection[],
+      protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest | null,
+      protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-      protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse|null|undefined,
-      protos.google.cloud.vectorsearch.v1beta.ICollection>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
+          | protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vectorsearch.v1beta.ICollection
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCollections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1727,204 +2450,233 @@ export class VectorSearchServiceClient {
     this._log.info('listCollections request %j', request);
     return this.innerApiCalls
       .listCollections(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.vectorsearch.v1beta.ICollection[],
-        protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest|null,
-        protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse
-      ]) => {
-        this._log.info('listCollections values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vectorsearch.v1beta.ICollection[],
+          protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest | null,
+          protos.google.cloud.vectorsearch.v1beta.IListCollectionsResponse,
+        ]) => {
+          this._log.info('listCollections values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listCollections`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListCollectionsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.vectorsearch.v1beta.Collection|Collection} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listCollectionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listCollections`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListCollectionsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vectorsearch.v1beta.Collection|Collection} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCollectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCollectionsStream(
-      request?: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listCollections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listCollections stream %j', request);
     return this.descriptors.page.listCollections.createStream(
       this.innerApiCalls.listCollections as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listCollections`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListCollectionsRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.vectorsearch.v1beta.Collection|Collection}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.list_collections.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ListCollections_async
- */
+  /**
+   * Equivalent to `listCollections`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListCollectionsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vectorsearch.v1beta.Collection|Collection}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.list_collections.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ListCollections_async
+   */
   listCollectionsAsync(
-      request?: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.vectorsearch.v1beta.ICollection>{
+    request?: protos.google.cloud.vectorsearch.v1beta.IListCollectionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.vectorsearch.v1beta.ICollection> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listCollections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listCollections iterate %j', request);
     return this.descriptors.page.listCollections.asyncIterate(
       this.innerApiCalls['listCollections'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.vectorsearch.v1beta.ICollection>;
   }
- /**
- * Lists Indexes in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListIndexesRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.vectorsearch.v1beta.Index|Index}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listIndexesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Indexes in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListIndexesRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vectorsearch.v1beta.Index|Index}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIndexesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listIndexes(
-      request?: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IIndex[],
-        protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest|null,
-        protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IIndex[],
+      protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest | null,
+      protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse,
+    ]
+  >;
   listIndexes(
-      request: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-          protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1beta.IIndex>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
+      | protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1beta.IIndex
+    >,
+  ): void;
   listIndexes(
-      request: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-          protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1beta.IIndex>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
+      | protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1beta.IIndex
+    >,
+  ): void;
   listIndexes(
-      request?: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-          protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1beta.IIndex>,
-      callback?: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-          protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1beta.IIndex>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IIndex[],
-        protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest|null,
-        protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vectorsearch.v1beta.IIndex
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
+      | protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1beta.IIndex
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IIndex[],
+      protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest | null,
+      protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-      protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse|null|undefined,
-      protos.google.cloud.vectorsearch.v1beta.IIndex>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
+          | protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vectorsearch.v1beta.IIndex
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listIndexes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1933,119 +2685,124 @@ export class VectorSearchServiceClient {
     this._log.info('listIndexes request %j', request);
     return this.innerApiCalls
       .listIndexes(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.vectorsearch.v1beta.IIndex[],
-        protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest|null,
-        protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse
-      ]) => {
-        this._log.info('listIndexes values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vectorsearch.v1beta.IIndex[],
+          protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest | null,
+          protos.google.cloud.vectorsearch.v1beta.IListIndexesResponse,
+        ]) => {
+          this._log.info('listIndexes values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listIndexes`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListIndexesRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.vectorsearch.v1beta.Index|Index} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listIndexesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listIndexes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListIndexesRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vectorsearch.v1beta.Index|Index} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listIndexesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listIndexesStream(
-      request?: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listIndexes stream %j', request);
     return this.descriptors.page.listIndexes.createStream(
       this.innerApiCalls.listIndexes as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listIndexes`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListIndexesRequest
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.vectorsearch.v1beta.Index|Index}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/vector_search_service.list_indexes.js</caption>
- * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ListIndexes_async
- */
+  /**
+   * Equivalent to `listIndexes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListIndexesRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vectorsearch.v1beta.Index|Index}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/vector_search_service.list_indexes.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_VectorSearchService_ListIndexes_async
+   */
   listIndexesAsync(
-      request?: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.vectorsearch.v1beta.IIndex>{
+    request?: protos.google.cloud.vectorsearch.v1beta.IListIndexesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.vectorsearch.v1beta.IIndex> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listIndexes iterate %j', request);
     return this.descriptors.page.listIndexes.asyncIterate(
       this.innerApiCalls['listIndexes'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.vectorsearch.v1beta.IIndex>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2080,12 +2837,11 @@ export class VectorSearchServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2118,12 +2874,12 @@ export class VectorSearchServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2166,22 +2922,22 @@ export class VectorSearchServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2216,15 +2972,15 @@ export class VectorSearchServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2258,7 +3014,7 @@ export class VectorSearchServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2271,25 +3027,24 @@ export class VectorSearchServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -2328,22 +3083,22 @@ export class VectorSearchServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2359,7 +3114,7 @@ export class VectorSearchServiceClient {
    * @param {string} collection
    * @returns {string} Resource name string.
    */
-  collectionPath(project:string,location:string,collection:string) {
+  collectionPath(project: string, location: string, collection: string) {
     return this.pathTemplates.collectionPathTemplate.render({
       project: project,
       location: location,
@@ -2375,7 +3130,8 @@ export class VectorSearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).project;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .project;
   }
 
   /**
@@ -2386,7 +3142,8 @@ export class VectorSearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).location;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .location;
   }
 
   /**
@@ -2397,7 +3154,8 @@ export class VectorSearchServiceClient {
    * @returns {string} A string representing the collection.
    */
   matchCollectionFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).collection;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .collection;
   }
 
   /**
@@ -2409,7 +3167,12 @@ export class VectorSearchServiceClient {
    * @param {string} dataObject
    * @returns {string} Resource name string.
    */
-  dataObjectPath(project:string,location:string,collection:string,dataObject:string) {
+  dataObjectPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataObject: string,
+  ) {
     return this.pathTemplates.dataObjectPathTemplate.render({
       project: project,
       location: location,
@@ -2426,7 +3189,8 @@ export class VectorSearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).project;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .project;
   }
 
   /**
@@ -2437,7 +3201,8 @@ export class VectorSearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).location;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .location;
   }
 
   /**
@@ -2448,7 +3213,8 @@ export class VectorSearchServiceClient {
    * @returns {string} A string representing the collection.
    */
   matchCollectionFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).collection;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .collection;
   }
 
   /**
@@ -2459,7 +3225,8 @@ export class VectorSearchServiceClient {
    * @returns {string} A string representing the dataObject.
    */
   matchDataObjectFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).dataObject;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .dataObject;
   }
 
   /**
@@ -2471,7 +3238,12 @@ export class VectorSearchServiceClient {
    * @param {string} index
    * @returns {string} Resource name string.
    */
-  indexPath(project:string,location:string,collection:string,index:string) {
+  indexPath(
+    project: string,
+    location: string,
+    collection: string,
+    index: string,
+  ) {
     return this.pathTemplates.indexPathTemplate.render({
       project: project,
       location: location,
@@ -2531,7 +3303,7 @@ export class VectorSearchServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2566,7 +3338,7 @@ export class VectorSearchServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2591,11 +3363,13 @@ export class VectorSearchServiceClient {
    */
   close(): Promise<void> {
     if (this.vectorSearchServiceStub && !this._terminated) {
-      return this.vectorSearchServiceStub.then(stub => {
+      return this.vectorSearchServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

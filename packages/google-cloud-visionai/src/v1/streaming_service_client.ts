@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {PassThrough} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { PassThrough } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +53,7 @@ export class StreamingServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('visionai');
@@ -57,11 +66,11 @@ export class StreamingServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  streamingServiceStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  streamingServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of StreamingServiceClient.
@@ -102,21 +111,42 @@ export class StreamingServiceClient {
    *     const client = new StreamingServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof StreamingServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'warehouse-visionai.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +171,7 @@ export class StreamingServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,18 +184,14 @@ export class StreamingServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -187,82 +213,97 @@ export class StreamingServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       analysisPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/analyses/{analysis}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/analyses/{analysis}',
       ),
       annotationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/assets/{asset}/annotations/{annotation}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/assets/{asset}/annotations/{annotation}',
       ),
       applicationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/applications/{application}'
+        'projects/{project}/locations/{location}/applications/{application}',
       ),
       assetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/assets/{asset}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/assets/{asset}',
       ),
       channelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/channels/{channel}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/channels/{channel}',
       ),
       clusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}'
+        'projects/{project}/locations/{location}/clusters/{cluster}',
       ),
       collectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/collections/{collection}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/collections/{collection}',
       ),
       corpusPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}',
       ),
       dataSchemaPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/dataSchemas/{data_schema}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/dataSchemas/{data_schema}',
       ),
       draftPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/applications/{application}/drafts/{draft}'
+        'projects/{project}/locations/{location}/applications/{application}/drafts/{draft}',
       ),
       eventPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/events/{event}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/events/{event}',
       ),
       indexPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/indexes/{index}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/indexes/{index}',
       ),
       indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
+        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}',
       ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/applications/{application}/instances/{instance}'
+        'projects/{project}/locations/{location}/applications/{application}/instances/{instance}',
       ),
       operatorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/operators/{operator}'
+        'projects/{project}/locations/{location}/operators/{operator}',
       ),
       processPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/processes/{process}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/processes/{process}',
       ),
       processorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/processors/{processor}'
+        'projects/{project}/locations/{location}/processors/{processor}',
       ),
       searchConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/searchConfigs/{search_config}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/searchConfigs/{search_config}',
       ),
       searchHypernymPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/searchHypernyms/{search_hypernym}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/searchHypernyms/{search_hypernym}',
       ),
       seriesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/series/{series}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/series/{series}',
       ),
       streamPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/streams/{stream}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/streams/{stream}',
       ),
     };
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      sendPackets: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries),
-      receivePackets: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries),
-      receiveEvents: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
+      sendPackets: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.BIDI_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries,
+      ),
+      receivePackets: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.BIDI_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries,
+      ),
+      receiveEvents: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.BIDI_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries,
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.visionai.v1.StreamingService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.visionai.v1.StreamingService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -293,44 +334,59 @@ export class StreamingServiceClient {
     // Put together the "service stub" for
     // google.cloud.visionai.v1.StreamingService.
     this.streamingServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.visionai.v1.StreamingService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.visionai.v1.StreamingService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.visionai.v1.StreamingService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const streamingServiceStubMethods =
-        ['sendPackets', 'receivePackets', 'receiveEvents', 'acquireLease', 'renewLease', 'releaseLease'];
+    const streamingServiceStubMethods = [
+      'sendPackets',
+      'receivePackets',
+      'receiveEvents',
+      'acquireLease',
+      'renewLease',
+      'releaseLease',
+    ];
     for (const methodName of streamingServiceStubMethods) {
       const callPromise = this.streamingServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            if (methodName in this.descriptors.stream) {
-              const stream = new PassThrough({objectMode: true});
-              setImmediate(() => {
-                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
-              });
-              return stream;
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough({ objectMode: true });
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new this._gaxModule.GoogleError(
+                      'The client has already been closed.',
+                    ),
+                  );
+                });
+                return stream;
+              }
+              return Promise.reject('The client has already been closed.');
             }
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.stream[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.stream[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -345,8 +401,14 @@ export class StreamingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'warehouse-visionai.googleapis.com';
   }
@@ -357,8 +419,14 @@ export class StreamingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'warehouse-visionai.googleapis.com';
   }
@@ -389,9 +457,7 @@ export class StreamingServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -400,8 +466,9 @@ export class StreamingServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -412,396 +479,494 @@ export class StreamingServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * AcquireLease acquires a lease.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.series
- *   The series name.
- * @param {string} request.owner
- *   The owner name.
- * @param {google.protobuf.Duration} request.term
- *   The lease term.
- * @param {google.cloud.visionai.v1.LeaseType} request.leaseType
- *   The lease type.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.Lease|Lease}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/streaming_service.acquire_lease.js</caption>
- * region_tag:warehouse-visionai_v1_generated_StreamingService_AcquireLease_async
- */
+  /**
+   * AcquireLease acquires a lease.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.series
+   *   The series name.
+   * @param {string} request.owner
+   *   The owner name.
+   * @param {google.protobuf.Duration} request.term
+   *   The lease term.
+   * @param {google.cloud.visionai.v1.LeaseType} request.leaseType
+   *   The lease type.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.Lease|Lease}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/streaming_service.acquire_lease.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_StreamingService_AcquireLease_async
+   */
   acquireLease(
-      request?: protos.google.cloud.visionai.v1.IAcquireLeaseRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.ILease,
-        protos.google.cloud.visionai.v1.IAcquireLeaseRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IAcquireLeaseRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.ILease,
+      protos.google.cloud.visionai.v1.IAcquireLeaseRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   acquireLease(
-      request: protos.google.cloud.visionai.v1.IAcquireLeaseRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.ILease,
-          protos.google.cloud.visionai.v1.IAcquireLeaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IAcquireLeaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.ILease,
+      protos.google.cloud.visionai.v1.IAcquireLeaseRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   acquireLease(
-      request: protos.google.cloud.visionai.v1.IAcquireLeaseRequest,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.ILease,
-          protos.google.cloud.visionai.v1.IAcquireLeaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IAcquireLeaseRequest,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.ILease,
+      protos.google.cloud.visionai.v1.IAcquireLeaseRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   acquireLease(
-      request?: protos.google.cloud.visionai.v1.IAcquireLeaseRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.visionai.v1.IAcquireLeaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.visionai.v1.ILease,
-          protos.google.cloud.visionai.v1.IAcquireLeaseRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.visionai.v1.ILease,
-          protos.google.cloud.visionai.v1.IAcquireLeaseRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.visionai.v1.ILease,
-        protos.google.cloud.visionai.v1.IAcquireLeaseRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.visionai.v1.IAcquireLeaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.visionai.v1.ILease,
+      protos.google.cloud.visionai.v1.IAcquireLeaseRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.ILease,
+      protos.google.cloud.visionai.v1.IAcquireLeaseRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'series': request.series ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        series: request.series ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('acquireLease request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.visionai.v1.ILease,
-        protos.google.cloud.visionai.v1.IAcquireLeaseRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.visionai.v1.ILease,
+          | protos.google.cloud.visionai.v1.IAcquireLeaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('acquireLease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.acquireLease(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.visionai.v1.ILease,
-        protos.google.cloud.visionai.v1.IAcquireLeaseRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('acquireLease response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .acquireLease(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.visionai.v1.ILease,
+          protos.google.cloud.visionai.v1.IAcquireLeaseRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('acquireLease response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * RenewLease renews a lease.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.id
- *   Lease id.
- * @param {string} request.series
- *   Series name.
- * @param {string} request.owner
- *   Lease owner.
- * @param {google.protobuf.Duration} request.term
- *   Lease term.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.Lease|Lease}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/streaming_service.renew_lease.js</caption>
- * region_tag:warehouse-visionai_v1_generated_StreamingService_RenewLease_async
- */
+  /**
+   * RenewLease renews a lease.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.id
+   *   Lease id.
+   * @param {string} request.series
+   *   Series name.
+   * @param {string} request.owner
+   *   Lease owner.
+   * @param {google.protobuf.Duration} request.term
+   *   Lease term.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.Lease|Lease}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/streaming_service.renew_lease.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_StreamingService_RenewLease_async
+   */
   renewLease(
-      request?: protos.google.cloud.visionai.v1.IRenewLeaseRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.ILease,
-        protos.google.cloud.visionai.v1.IRenewLeaseRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IRenewLeaseRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.ILease,
+      protos.google.cloud.visionai.v1.IRenewLeaseRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   renewLease(
-      request: protos.google.cloud.visionai.v1.IRenewLeaseRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.ILease,
-          protos.google.cloud.visionai.v1.IRenewLeaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IRenewLeaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.ILease,
+      protos.google.cloud.visionai.v1.IRenewLeaseRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   renewLease(
-      request: protos.google.cloud.visionai.v1.IRenewLeaseRequest,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.ILease,
-          protos.google.cloud.visionai.v1.IRenewLeaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IRenewLeaseRequest,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.ILease,
+      protos.google.cloud.visionai.v1.IRenewLeaseRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   renewLease(
-      request?: protos.google.cloud.visionai.v1.IRenewLeaseRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.visionai.v1.IRenewLeaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.visionai.v1.ILease,
-          protos.google.cloud.visionai.v1.IRenewLeaseRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.visionai.v1.ILease,
-          protos.google.cloud.visionai.v1.IRenewLeaseRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.visionai.v1.ILease,
-        protos.google.cloud.visionai.v1.IRenewLeaseRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.visionai.v1.IRenewLeaseRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.visionai.v1.ILease,
+      protos.google.cloud.visionai.v1.IRenewLeaseRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.ILease,
+      protos.google.cloud.visionai.v1.IRenewLeaseRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'series': request.series ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        series: request.series ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('renewLease request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.visionai.v1.ILease,
-        protos.google.cloud.visionai.v1.IRenewLeaseRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.visionai.v1.ILease,
+          protos.google.cloud.visionai.v1.IRenewLeaseRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('renewLease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.renewLease(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.visionai.v1.ILease,
-        protos.google.cloud.visionai.v1.IRenewLeaseRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('renewLease response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .renewLease(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.visionai.v1.ILease,
+          protos.google.cloud.visionai.v1.IRenewLeaseRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('renewLease response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * RleaseLease releases a lease.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.id
- *   Lease id.
- * @param {string} request.series
- *   Series name.
- * @param {string} request.owner
- *   Lease owner.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.ReleaseLeaseResponse|ReleaseLeaseResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/streaming_service.release_lease.js</caption>
- * region_tag:warehouse-visionai_v1_generated_StreamingService_ReleaseLease_async
- */
+  /**
+   * RleaseLease releases a lease.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.id
+   *   Lease id.
+   * @param {string} request.series
+   *   Series name.
+   * @param {string} request.owner
+   *   Lease owner.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.ReleaseLeaseResponse|ReleaseLeaseResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/streaming_service.release_lease.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_StreamingService_ReleaseLease_async
+   */
   releaseLease(
-      request?: protos.google.cloud.visionai.v1.IReleaseLeaseRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
-        protos.google.cloud.visionai.v1.IReleaseLeaseRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IReleaseLeaseRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
+      protos.google.cloud.visionai.v1.IReleaseLeaseRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   releaseLease(
-      request: protos.google.cloud.visionai.v1.IReleaseLeaseRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
-          protos.google.cloud.visionai.v1.IReleaseLeaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IReleaseLeaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
+      protos.google.cloud.visionai.v1.IReleaseLeaseRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   releaseLease(
-      request: protos.google.cloud.visionai.v1.IReleaseLeaseRequest,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
-          protos.google.cloud.visionai.v1.IReleaseLeaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IReleaseLeaseRequest,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
+      protos.google.cloud.visionai.v1.IReleaseLeaseRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   releaseLease(
-      request?: protos.google.cloud.visionai.v1.IReleaseLeaseRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.visionai.v1.IReleaseLeaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
-          protos.google.cloud.visionai.v1.IReleaseLeaseRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
-          protos.google.cloud.visionai.v1.IReleaseLeaseRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
-        protos.google.cloud.visionai.v1.IReleaseLeaseRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.visionai.v1.IReleaseLeaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
+      protos.google.cloud.visionai.v1.IReleaseLeaseRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
+      protos.google.cloud.visionai.v1.IReleaseLeaseRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'series': request.series ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        series: request.series ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('releaseLease request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
-        protos.google.cloud.visionai.v1.IReleaseLeaseRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
+          | protos.google.cloud.visionai.v1.IReleaseLeaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('releaseLease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.releaseLease(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
-        protos.google.cloud.visionai.v1.IReleaseLeaseRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('releaseLease response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .releaseLease(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
+          protos.google.cloud.visionai.v1.IReleaseLeaseRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('releaseLease response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Send packets to the series.
- *
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which is both readable and writable. It accepts objects
- *   representing {@link protos.google.cloud.visionai.v1.SendPacketsRequest|SendPacketsRequest} for write() method, and
- *   will emit objects representing {@link protos.google.cloud.visionai.v1.SendPacketsResponse|SendPacketsResponse} on 'data' event asynchronously.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/streaming_service.send_packets.js</caption>
- * region_tag:warehouse-visionai_v1_generated_StreamingService_SendPackets_async
- */
-  sendPackets(
-      options?: CallOptions):
-    gax.CancellableStream {
-    this.initialize().catch(err => {throw err});
+  /**
+   * Send packets to the series.
+   *
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing {@link protos.google.cloud.visionai.v1.SendPacketsRequest|SendPacketsRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.visionai.v1.SendPacketsResponse|SendPacketsResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/streaming_service.send_packets.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_StreamingService_SendPackets_async
+   */
+  sendPackets(options?: CallOptions): gax.CancellableStream {
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('sendPackets stream %j', options);
     return this.innerApiCalls.sendPackets(null, options);
   }
 
-/**
- * Receive packets from the series.
- *
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which is both readable and writable. It accepts objects
- *   representing {@link protos.google.cloud.visionai.v1.ReceivePacketsRequest|ReceivePacketsRequest} for write() method, and
- *   will emit objects representing {@link protos.google.cloud.visionai.v1.ReceivePacketsResponse|ReceivePacketsResponse} on 'data' event asynchronously.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/streaming_service.receive_packets.js</caption>
- * region_tag:warehouse-visionai_v1_generated_StreamingService_ReceivePackets_async
- */
-  receivePackets(
-      options?: CallOptions):
-    gax.CancellableStream {
-    this.initialize().catch(err => {throw err});
+  /**
+   * Receive packets from the series.
+   *
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing {@link protos.google.cloud.visionai.v1.ReceivePacketsRequest|ReceivePacketsRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.visionai.v1.ReceivePacketsResponse|ReceivePacketsResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/streaming_service.receive_packets.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_StreamingService_ReceivePackets_async
+   */
+  receivePackets(options?: CallOptions): gax.CancellableStream {
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('receivePackets stream %j', options);
     return this.innerApiCalls.receivePackets(null, options);
   }
 
-/**
- * Receive events given the stream name.
- *
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which is both readable and writable. It accepts objects
- *   representing {@link protos.google.cloud.visionai.v1.ReceiveEventsRequest|ReceiveEventsRequest} for write() method, and
- *   will emit objects representing {@link protos.google.cloud.visionai.v1.ReceiveEventsResponse|ReceiveEventsResponse} on 'data' event asynchronously.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/streaming_service.receive_events.js</caption>
- * region_tag:warehouse-visionai_v1_generated_StreamingService_ReceiveEvents_async
- */
-  receiveEvents(
-      options?: CallOptions):
-    gax.CancellableStream {
-    this.initialize().catch(err => {throw err});
+  /**
+   * Receive events given the stream name.
+   *
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing {@link protos.google.cloud.visionai.v1.ReceiveEventsRequest|ReceiveEventsRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.visionai.v1.ReceiveEventsResponse|ReceiveEventsResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/streaming_service.receive_events.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_StreamingService_ReceiveEvents_async
+   */
+  receiveEvents(options?: CallOptions): gax.CancellableStream {
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('receiveEvents stream %j', options);
     return this.innerApiCalls.receiveEvents(null, options);
   }
 
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -815,40 +980,40 @@ export class StreamingServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -862,41 +1027,41 @@ export class StreamingServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -910,12 +1075,12 @@ export class StreamingServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -950,12 +1115,11 @@ export class StreamingServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -988,7 +1152,7 @@ export class StreamingServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1006,7 +1170,12 @@ export class StreamingServiceClient {
    * @param {string} analysis
    * @returns {string} Resource name string.
    */
-  analysisPath(project:string,location:string,cluster:string,analysis:string) {
+  analysisPath(
+    project: string,
+    location: string,
+    cluster: string,
+    analysis: string,
+  ) {
     return this.pathTemplates.analysisPathTemplate.render({
       project: project,
       location: location,
@@ -1069,7 +1238,13 @@ export class StreamingServiceClient {
    * @param {string} annotation
    * @returns {string} Resource name string.
    */
-  annotationPath(projectNumber:string,location:string,corpus:string,asset:string,annotation:string) {
+  annotationPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    asset: string,
+    annotation: string,
+  ) {
     return this.pathTemplates.annotationPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -1087,7 +1262,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).project_number;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .project_number;
   }
 
   /**
@@ -1098,7 +1274,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).location;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .location;
   }
 
   /**
@@ -1109,7 +1286,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).corpus;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .corpus;
   }
 
   /**
@@ -1120,7 +1298,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the asset.
    */
   matchAssetFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).asset;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .asset;
   }
 
   /**
@@ -1131,7 +1310,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the annotation.
    */
   matchAnnotationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).annotation;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .annotation;
   }
 
   /**
@@ -1142,7 +1322,7 @@ export class StreamingServiceClient {
    * @param {string} application
    * @returns {string} Resource name string.
    */
-  applicationPath(project:string,location:string,application:string) {
+  applicationPath(project: string, location: string, application: string) {
     return this.pathTemplates.applicationPathTemplate.render({
       project: project,
       location: location,
@@ -1158,7 +1338,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).project;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .project;
   }
 
   /**
@@ -1169,7 +1350,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).location;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .location;
   }
 
   /**
@@ -1180,7 +1362,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).application;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .application;
   }
 
   /**
@@ -1192,7 +1375,12 @@ export class StreamingServiceClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(projectNumber:string,location:string,corpus:string,asset:string) {
+  assetPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    asset: string,
+  ) {
     return this.pathTemplates.assetPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -1254,7 +1442,12 @@ export class StreamingServiceClient {
    * @param {string} channel
    * @returns {string} Resource name string.
    */
-  channelPath(project:string,location:string,cluster:string,channel:string) {
+  channelPath(
+    project: string,
+    location: string,
+    cluster: string,
+    channel: string,
+  ) {
     return this.pathTemplates.channelPathTemplate.render({
       project: project,
       location: location,
@@ -1315,7 +1508,7 @@ export class StreamingServiceClient {
    * @param {string} cluster
    * @returns {string} Resource name string.
    */
-  clusterPath(project:string,location:string,cluster:string) {
+  clusterPath(project: string, location: string, cluster: string) {
     return this.pathTemplates.clusterPathTemplate.render({
       project: project,
       location: location,
@@ -1365,7 +1558,12 @@ export class StreamingServiceClient {
    * @param {string} collection
    * @returns {string} Resource name string.
    */
-  collectionPath(projectNumber:string,location:string,corpus:string,collection:string) {
+  collectionPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    collection: string,
+  ) {
     return this.pathTemplates.collectionPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -1382,7 +1580,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).project_number;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .project_number;
   }
 
   /**
@@ -1393,7 +1592,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).location;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .location;
   }
 
   /**
@@ -1404,7 +1604,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).corpus;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .corpus;
   }
 
   /**
@@ -1415,7 +1616,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the collection.
    */
   matchCollectionFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).collection;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .collection;
   }
 
   /**
@@ -1426,7 +1628,7 @@ export class StreamingServiceClient {
    * @param {string} corpus
    * @returns {string} Resource name string.
    */
-  corpusPath(projectNumber:string,location:string,corpus:string) {
+  corpusPath(projectNumber: string, location: string, corpus: string) {
     return this.pathTemplates.corpusPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -1442,7 +1644,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromCorpusName(corpusName: string) {
-    return this.pathTemplates.corpusPathTemplate.match(corpusName).project_number;
+    return this.pathTemplates.corpusPathTemplate.match(corpusName)
+      .project_number;
   }
 
   /**
@@ -1476,7 +1679,12 @@ export class StreamingServiceClient {
    * @param {string} data_schema
    * @returns {string} Resource name string.
    */
-  dataSchemaPath(projectNumber:string,location:string,corpus:string,dataSchema:string) {
+  dataSchemaPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    dataSchema: string,
+  ) {
     return this.pathTemplates.dataSchemaPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -1493,7 +1701,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromDataSchemaName(dataSchemaName: string) {
-    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName).project_number;
+    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName)
+      .project_number;
   }
 
   /**
@@ -1504,7 +1713,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataSchemaName(dataSchemaName: string) {
-    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName).location;
+    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName)
+      .location;
   }
 
   /**
@@ -1515,7 +1725,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromDataSchemaName(dataSchemaName: string) {
-    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName).corpus;
+    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName)
+      .corpus;
   }
 
   /**
@@ -1526,7 +1737,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the data_schema.
    */
   matchDataSchemaFromDataSchemaName(dataSchemaName: string) {
-    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName).data_schema;
+    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName)
+      .data_schema;
   }
 
   /**
@@ -1538,7 +1750,12 @@ export class StreamingServiceClient {
    * @param {string} draft
    * @returns {string} Resource name string.
    */
-  draftPath(project:string,location:string,application:string,draft:string) {
+  draftPath(
+    project: string,
+    location: string,
+    application: string,
+    draft: string,
+  ) {
     return this.pathTemplates.draftPathTemplate.render({
       project: project,
       location: location,
@@ -1600,7 +1817,7 @@ export class StreamingServiceClient {
    * @param {string} event
    * @returns {string} Resource name string.
    */
-  eventPath(project:string,location:string,cluster:string,event:string) {
+  eventPath(project: string, location: string, cluster: string, event: string) {
     return this.pathTemplates.eventPathTemplate.render({
       project: project,
       location: location,
@@ -1662,7 +1879,12 @@ export class StreamingServiceClient {
    * @param {string} index
    * @returns {string} Resource name string.
    */
-  indexPath(projectNumber:string,location:string,corpus:string,index:string) {
+  indexPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    index: string,
+  ) {
     return this.pathTemplates.indexPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -1723,7 +1945,7 @@ export class StreamingServiceClient {
    * @param {string} index_endpoint
    * @returns {string} Resource name string.
    */
-  indexEndpointPath(project:string,location:string,indexEndpoint:string) {
+  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
     return this.pathTemplates.indexEndpointPathTemplate.render({
       project: project,
       location: location,
@@ -1739,7 +1961,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).project;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .project;
   }
 
   /**
@@ -1750,7 +1973,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).location;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .location;
   }
 
   /**
@@ -1761,7 +1985,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the index_endpoint.
    */
   matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).index_endpoint;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .index_endpoint;
   }
 
   /**
@@ -1773,7 +1998,12 @@ export class StreamingServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project:string,location:string,application:string,instance:string) {
+  instancePath(
+    project: string,
+    location: string,
+    application: string,
+    instance: string,
+  ) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -1812,7 +2042,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromInstanceName(instanceName: string) {
-    return this.pathTemplates.instancePathTemplate.match(instanceName).application;
+    return this.pathTemplates.instancePathTemplate.match(instanceName)
+      .application;
   }
 
   /**
@@ -1834,7 +2065,7 @@ export class StreamingServiceClient {
    * @param {string} operator
    * @returns {string} Resource name string.
    */
-  operatorPath(project:string,location:string,operator:string) {
+  operatorPath(project: string, location: string, operator: string) {
     return this.pathTemplates.operatorPathTemplate.render({
       project: project,
       location: location,
@@ -1884,7 +2115,12 @@ export class StreamingServiceClient {
    * @param {string} process
    * @returns {string} Resource name string.
    */
-  processPath(project:string,location:string,cluster:string,process:string) {
+  processPath(
+    project: string,
+    location: string,
+    cluster: string,
+    process: string,
+  ) {
     return this.pathTemplates.processPathTemplate.render({
       project: project,
       location: location,
@@ -1945,7 +2181,7 @@ export class StreamingServiceClient {
    * @param {string} processor
    * @returns {string} Resource name string.
    */
-  processorPath(project:string,location:string,processor:string) {
+  processorPath(project: string, location: string, processor: string) {
     return this.pathTemplates.processorPathTemplate.render({
       project: project,
       location: location,
@@ -1961,7 +2197,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProcessorName(processorName: string) {
-    return this.pathTemplates.processorPathTemplate.match(processorName).project;
+    return this.pathTemplates.processorPathTemplate.match(processorName)
+      .project;
   }
 
   /**
@@ -1972,7 +2209,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProcessorName(processorName: string) {
-    return this.pathTemplates.processorPathTemplate.match(processorName).location;
+    return this.pathTemplates.processorPathTemplate.match(processorName)
+      .location;
   }
 
   /**
@@ -1983,7 +2221,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the processor.
    */
   matchProcessorFromProcessorName(processorName: string) {
-    return this.pathTemplates.processorPathTemplate.match(processorName).processor;
+    return this.pathTemplates.processorPathTemplate.match(processorName)
+      .processor;
   }
 
   /**
@@ -1995,7 +2234,12 @@ export class StreamingServiceClient {
    * @param {string} search_config
    * @returns {string} Resource name string.
    */
-  searchConfigPath(projectNumber:string,location:string,corpus:string,searchConfig:string) {
+  searchConfigPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    searchConfig: string,
+  ) {
     return this.pathTemplates.searchConfigPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -2012,7 +2256,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromSearchConfigName(searchConfigName: string) {
-    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName).project_number;
+    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName)
+      .project_number;
   }
 
   /**
@@ -2023,7 +2268,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSearchConfigName(searchConfigName: string) {
-    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName).location;
+    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName)
+      .location;
   }
 
   /**
@@ -2034,7 +2280,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromSearchConfigName(searchConfigName: string) {
-    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName).corpus;
+    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName)
+      .corpus;
   }
 
   /**
@@ -2045,7 +2292,8 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the search_config.
    */
   matchSearchConfigFromSearchConfigName(searchConfigName: string) {
-    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName).search_config;
+    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName)
+      .search_config;
   }
 
   /**
@@ -2057,7 +2305,12 @@ export class StreamingServiceClient {
    * @param {string} search_hypernym
    * @returns {string} Resource name string.
    */
-  searchHypernymPath(projectNumber:string,location:string,corpus:string,searchHypernym:string) {
+  searchHypernymPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    searchHypernym: string,
+  ) {
     return this.pathTemplates.searchHypernymPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -2074,7 +2327,9 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromSearchHypernymName(searchHypernymName: string) {
-    return this.pathTemplates.searchHypernymPathTemplate.match(searchHypernymName).project_number;
+    return this.pathTemplates.searchHypernymPathTemplate.match(
+      searchHypernymName,
+    ).project_number;
   }
 
   /**
@@ -2085,7 +2340,9 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSearchHypernymName(searchHypernymName: string) {
-    return this.pathTemplates.searchHypernymPathTemplate.match(searchHypernymName).location;
+    return this.pathTemplates.searchHypernymPathTemplate.match(
+      searchHypernymName,
+    ).location;
   }
 
   /**
@@ -2096,7 +2353,9 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromSearchHypernymName(searchHypernymName: string) {
-    return this.pathTemplates.searchHypernymPathTemplate.match(searchHypernymName).corpus;
+    return this.pathTemplates.searchHypernymPathTemplate.match(
+      searchHypernymName,
+    ).corpus;
   }
 
   /**
@@ -2107,7 +2366,9 @@ export class StreamingServiceClient {
    * @returns {string} A string representing the search_hypernym.
    */
   matchSearchHypernymFromSearchHypernymName(searchHypernymName: string) {
-    return this.pathTemplates.searchHypernymPathTemplate.match(searchHypernymName).search_hypernym;
+    return this.pathTemplates.searchHypernymPathTemplate.match(
+      searchHypernymName,
+    ).search_hypernym;
   }
 
   /**
@@ -2119,7 +2380,12 @@ export class StreamingServiceClient {
    * @param {string} series
    * @returns {string} Resource name string.
    */
-  seriesPath(project:string,location:string,cluster:string,series:string) {
+  seriesPath(
+    project: string,
+    location: string,
+    cluster: string,
+    series: string,
+  ) {
     return this.pathTemplates.seriesPathTemplate.render({
       project: project,
       location: location,
@@ -2181,7 +2447,12 @@ export class StreamingServiceClient {
    * @param {string} stream
    * @returns {string} Resource name string.
    */
-  streamPath(project:string,location:string,cluster:string,stream:string) {
+  streamPath(
+    project: string,
+    location: string,
+    cluster: string,
+    stream: string,
+  ) {
     return this.pathTemplates.streamPathTemplate.render({
       project: project,
       location: location,
@@ -2242,12 +2513,16 @@ export class StreamingServiceClient {
    */
   close(): Promise<void> {
     if (this.streamingServiceStub && !this._terminated) {
-      return this.streamingServiceStub.then(stub => {
+      return this.streamingServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

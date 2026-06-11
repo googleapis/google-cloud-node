@@ -1,16 +1,16 @@
 {
+    "api_description": "Programmatically manage your Comparison Shopping Service (CSS) account data\nat scale.",
     "api_id": "css.googleapis.com",
     "api_shortname": "css",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/css/latest",
     "default_version": "v1",
     "distribution_name": "@google-shopping/css",
-    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=826068&template=1564577",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "css",
-    "name_pretty": "CSS API",
+    "name_pretty": "CSS",
     "product_documentation": "https://developers.google.com/comparison-shopping-services/api",
     "release_level": "preview",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }
