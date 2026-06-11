@@ -1859,6 +1859,9 @@ libraries:
       main_service: containeranalysis
       nodejs_apis:
         - additional_protos:
+            - grafeas/v1/grafeas.proto
+          path: google/devtools/containeranalysis/v1
+        - additional_protos:
             - google/devtools/containeranalysis/v1beta1/grafeas/grafeas.proto
           path: google/devtools/containeranalysis/v1beta1
       package_name: '@google-cloud/containeranalysis'

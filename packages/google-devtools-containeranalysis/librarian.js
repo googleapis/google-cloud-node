@@ -123,6 +123,19 @@ filesToDelete.forEach(file => {
   }
 });
 
+const v1SamplesDir = path.resolve('packages/google-devtools-containeranalysis/samples/generated/v1');
+if (fs.existsSync(v1SamplesDir)) {
+  const v1SamplesToDelete = findFilesByExtension(v1SamplesDir, '.js', /^grafeas\./);
+  v1SamplesToDelete.forEach(file => {
+    try {
+      fs.unlinkSync(file);
+      console.log(`Successfully deleted sample: ${file}`);
+    } catch (err) {
+      console.error(`Error deleting sample ${file}:`, err);
+    }
+  });
+}
+
 // Add beta version GrafeasClient to export
 const indexFile = path.resolve('packages/google-devtools-containeranalysis/src/index.ts');
 const searchPattern1 = /const GrafeasClient = v1\.GrafeasClient;\ntype GrafeasClient = v1\.GrafeasClient;/g;
@@ -131,6 +144,6 @@ const replacement1 = '\nconst GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n' +
 replaceInFile(indexFile, searchPattern1, replacement1);
 
 const v1IndexFile = path.resolve('packages/google-devtools-containeranalysis/src/v1/index.ts');
-const searchPattern2 = /export {GrafeasClient} from '\.\/grafeas_client';/g;
+const searchPattern2 = /export\s+{\s*GrafeasClient\s*}\s*from\s*'\.\/grafeas_client';/g;
 const replacement2 = '\n';
 replaceInFile(v1IndexFile, searchPattern2, replacement2);
