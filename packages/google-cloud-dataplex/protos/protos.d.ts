@@ -3482,7 +3482,7 @@ export namespace google {
                     description?: (string|null);
 
                     /** Asset state */
-                    state?: (google.cloud.dataplex.v1.Asset.DiscoveryStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.DiscoveryStatus.State|null);
+                    state?: (google.cloud.dataplex.v1.Asset.SecurityStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.SecurityStatus.State|null);
 
                     /** Asset resourceSpec */
                     resourceSpec?: (google.cloud.dataplex.v1.Asset.IResourceSpec|null);
@@ -3531,7 +3531,7 @@ export namespace google {
                     public description: string;
 
                     /** Asset state. */
-                    public state: (google.cloud.dataplex.v1.Asset.DiscoveryStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.DiscoveryStatus.State);
+                    public state: (google.cloud.dataplex.v1.Asset.SecurityStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.SecurityStatus.State);
 
                     /** Asset resourceSpec. */
                     public resourceSpec?: (google.cloud.dataplex.v1.Asset.IResourceSpec|null);
