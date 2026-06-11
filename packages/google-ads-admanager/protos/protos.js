@@ -14804,6 +14804,361 @@
                         return BatchArchiveAdUnitsResponse;
                     })();
     
+                    v1.AdManagerError = (function() {
+    
+                        /**
+                         * Properties of an AdManagerError.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IAdManagerError
+                         * @property {string|null} [errorCode] AdManagerError errorCode
+                         * @property {string|null} [message] AdManagerError message
+                         * @property {string|null} [fieldPath] AdManagerError fieldPath
+                         * @property {string|null} [trigger] AdManagerError trigger
+                         * @property {string|null} [stackTrace] AdManagerError stackTrace
+                         * @property {Array.<google.protobuf.IAny>|null} [details] AdManagerError details
+                         */
+    
+                        /**
+                         * Constructs a new AdManagerError.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents an AdManagerError.
+                         * @implements IAdManagerError
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IAdManagerError=} [properties] Properties to set
+                         */
+                        function AdManagerError(properties) {
+                            this.details = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdManagerError errorCode.
+                         * @member {string} errorCode
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @instance
+                         */
+                        AdManagerError.prototype.errorCode = "";
+    
+                        /**
+                         * AdManagerError message.
+                         * @member {string} message
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @instance
+                         */
+                        AdManagerError.prototype.message = "";
+    
+                        /**
+                         * AdManagerError fieldPath.
+                         * @member {string} fieldPath
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @instance
+                         */
+                        AdManagerError.prototype.fieldPath = "";
+    
+                        /**
+                         * AdManagerError trigger.
+                         * @member {string} trigger
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @instance
+                         */
+                        AdManagerError.prototype.trigger = "";
+    
+                        /**
+                         * AdManagerError stackTrace.
+                         * @member {string} stackTrace
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @instance
+                         */
+                        AdManagerError.prototype.stackTrace = "";
+    
+                        /**
+                         * AdManagerError details.
+                         * @member {Array.<google.protobuf.IAny>} details
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @instance
+                         */
+                        AdManagerError.prototype.details = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AdManagerError instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @static
+                         * @param {google.ads.admanager.v1.IAdManagerError=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.AdManagerError} AdManagerError instance
+                         */
+                        AdManagerError.create = function create(properties) {
+                            return new AdManagerError(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdManagerError message. Does not implicitly {@link google.ads.admanager.v1.AdManagerError.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @static
+                         * @param {google.ads.admanager.v1.IAdManagerError} message AdManagerError message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdManagerError.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.errorCode != null && Object.hasOwnProperty.call(message, "errorCode"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.errorCode);
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                            if (message.fieldPath != null && Object.hasOwnProperty.call(message, "fieldPath"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.fieldPath);
+                            if (message.trigger != null && Object.hasOwnProperty.call(message, "trigger"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.trigger);
+                            if (message.stackTrace != null && Object.hasOwnProperty.call(message, "stackTrace"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.stackTrace);
+                            if (message.details != null && message.details.length)
+                                for (var i = 0; i < message.details.length; ++i)
+                                    $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdManagerError message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AdManagerError.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @static
+                         * @param {google.ads.admanager.v1.IAdManagerError} message AdManagerError message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdManagerError.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdManagerError message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.AdManagerError} AdManagerError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdManagerError.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.AdManagerError();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.errorCode = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.message = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.fieldPath = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.trigger = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.stackTrace = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.details && message.details.length))
+                                            message.details = [];
+                                        message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdManagerError message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.AdManagerError} AdManagerError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdManagerError.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdManagerError message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdManagerError.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.errorCode != null && message.hasOwnProperty("errorCode"))
+                                if (!$util.isString(message.errorCode))
+                                    return "errorCode: string expected";
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            if (message.fieldPath != null && message.hasOwnProperty("fieldPath"))
+                                if (!$util.isString(message.fieldPath))
+                                    return "fieldPath: string expected";
+                            if (message.trigger != null && message.hasOwnProperty("trigger"))
+                                if (!$util.isString(message.trigger))
+                                    return "trigger: string expected";
+                            if (message.stackTrace != null && message.hasOwnProperty("stackTrace"))
+                                if (!$util.isString(message.stackTrace))
+                                    return "stackTrace: string expected";
+                            if (message.details != null && message.hasOwnProperty("details")) {
+                                if (!Array.isArray(message.details))
+                                    return "details: array expected";
+                                for (var i = 0; i < message.details.length; ++i) {
+                                    var error = $root.google.protobuf.Any.verify(message.details[i], long + 1);
+                                    if (error)
+                                        return "details." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdManagerError message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.AdManagerError} AdManagerError
+                         */
+                        AdManagerError.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.ads.admanager.v1.AdManagerError)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.ads.admanager.v1.AdManagerError();
+                            if (object.errorCode != null)
+                                message.errorCode = String(object.errorCode);
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            if (object.fieldPath != null)
+                                message.fieldPath = String(object.fieldPath);
+                            if (object.trigger != null)
+                                message.trigger = String(object.trigger);
+                            if (object.stackTrace != null)
+                                message.stackTrace = String(object.stackTrace);
+                            if (object.details) {
+                                if (!Array.isArray(object.details))
+                                    throw TypeError(".google.ads.admanager.v1.AdManagerError.details: array expected");
+                                message.details = [];
+                                for (var i = 0; i < object.details.length; ++i) {
+                                    if (typeof object.details[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.AdManagerError.details: object expected");
+                                    message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i], long + 1);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdManagerError message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @static
+                         * @param {google.ads.admanager.v1.AdManagerError} message AdManagerError
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdManagerError.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.details = [];
+                            if (options.defaults) {
+                                object.errorCode = "";
+                                object.message = "";
+                                object.fieldPath = "";
+                                object.trigger = "";
+                                object.stackTrace = "";
+                            }
+                            if (message.errorCode != null && message.hasOwnProperty("errorCode"))
+                                object.errorCode = message.errorCode;
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            if (message.fieldPath != null && message.hasOwnProperty("fieldPath"))
+                                object.fieldPath = message.fieldPath;
+                            if (message.trigger != null && message.hasOwnProperty("trigger"))
+                                object.trigger = message.trigger;
+                            if (message.stackTrace != null && message.hasOwnProperty("stackTrace"))
+                                object.stackTrace = message.stackTrace;
+                            if (message.details && message.details.length) {
+                                object.details = [];
+                                for (var j = 0; j < message.details.length; ++j)
+                                    object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdManagerError to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdManagerError.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdManagerError
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.AdManagerError
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdManagerError.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.AdManagerError";
+                        };
+    
+                        return AdManagerError;
+                    })();
+    
                     v1.ApplicationStoreEnum = (function() {
     
                         /**
