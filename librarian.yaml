@@ -57,7 +57,6 @@ libraries:
       - path: google/ai/generativelanguage/v1beta
       - path: google/ai/generativelanguage/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
       client_documentation_override: https://developers.generativeai.google/guide/palm_api_overview
