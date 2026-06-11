@@ -166,7 +166,6 @@ libraries:
     apis:
       - path: google/area120/tables/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha1
       package_name: '@google/area120-tables'
