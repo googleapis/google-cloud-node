@@ -761,7 +761,6 @@ libraries:
       - path: google/cloud/discoveryengine/v1beta
       - path: google/cloud/discoveryengine/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-documentai
@@ -788,7 +787,6 @@ libraries:
     apis:
       - path: google/cloud/edgecontainer/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-edgenetwork
@@ -796,7 +794,6 @@ libraries:
     apis:
       - path: google/cloud/edgenetwork/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-essentialcontacts
@@ -804,7 +801,6 @@ libraries:
     apis:
       - path: google/cloud/essentialcontacts/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/essential-contacts'
@@ -813,7 +809,6 @@ libraries:
     apis:
       - path: google/cloud/eventarc/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-eventarc-publishing
@@ -831,7 +826,6 @@ libraries:
       - path: google/cloud/filestore/v1
       - path: google/cloud/filestore/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-financialservices
@@ -839,7 +833,6 @@ libraries:
     apis:
       - path: google/cloud/financialservices/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-functions
@@ -859,7 +852,6 @@ libraries:
     apis:
       - path: google/cloud/gdchardwaremanagement/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha
   - name: google-cloud-geminidataanalytics
@@ -877,7 +869,6 @@ libraries:
     apis:
       - path: google/cloud/gkebackup/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/gke-backup'
@@ -887,7 +878,6 @@ libraries:
       - path: google/cloud/gkeconnect/gateway/v1
       - path: google/cloud/gkeconnect/gateway/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/gke-connect-gateway'
