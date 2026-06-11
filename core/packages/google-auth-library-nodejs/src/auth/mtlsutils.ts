@@ -89,11 +89,20 @@ export function getMtlsEndpointUsagePolicy(): MtlsEndpointUsagePolicy {
 export async function canMtlsBeEnabled(
   certConfigPathOverride?: string,
 ): Promise<boolean> {
+  const policy = getMtlsEndpointUsagePolicy();
   if (process.env.GOOGLE_API_USE_CLIENT_CERTIFICATE === 'false') {
+    if (policy === MtlsEndpointUsagePolicy.ALWAYS) {
+      throw new CertificateSourceUnavailableError(
+        'mTLS is configured to ALWAYS, but client certificate usage was explicitly disabled via GOOGLE_API_USE_CLIENT_CERTIFICATE=false.',
+      );
+    }
     return false;
   }
-  if (getMtlsEndpointUsagePolicy() === MtlsEndpointUsagePolicy.NEVER) {
+  if (policy === MtlsEndpointUsagePolicy.NEVER) {
     return false;
+  }
+  if (policy === MtlsEndpointUsagePolicy.ALWAYS) {
+    return true;
   }
 
   // Check for certificate configuration file

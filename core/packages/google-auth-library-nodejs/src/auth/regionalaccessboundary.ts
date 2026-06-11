@@ -15,7 +15,12 @@
 import { Gaxios, GaxiosOptions } from 'gaxios';
 import { log as makeLog } from 'google-logging-utils';
 import * as https from 'https';
-import { canMtlsBeEnabled, getClientCertAndKey } from './mtlsutils';
+import {
+  canMtlsBeEnabled,
+  getClientCertAndKey,
+  getMtlsEndpointUsagePolicy,
+  MtlsEndpointUsagePolicy,
+} from './mtlsutils';
 
 const log = makeLog('auth');
 
@@ -268,6 +273,10 @@ export class RegionalAccessBoundaryManager {
       }
     } catch (e) {
       log.error('RegionalAccessBoundary: Failed to initialize mTLS: ', e);
+      // If mTLS is configured to ALWAYS, propagate the error instead of falling back to the standard endpoint.
+      if (getMtlsEndpointUsagePolicy() === MtlsEndpointUsagePolicy.ALWAYS) {
+        throw e;
+      }
     }
 
     const { data: regionalAccessBoundaryData } =

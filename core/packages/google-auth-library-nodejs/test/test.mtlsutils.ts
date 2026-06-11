@@ -76,6 +76,25 @@ describe('mtlsutils', () => {
       const result = await canMtlsBeEnabled();
       assert.strictEqual(result, false);
     });
+
+    it('returns true if GOOGLE_API_USE_MTLS_ENDPOINT is always, even if no config file is present', async () => {
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'always';
+      delete process.env.GOOGLE_API_CERTIFICATE_CONFIG;
+      sandbox
+        .stub(util, 'getWellKnownCertificateConfigFileLocation')
+        .returns(path.join(tempDir, 'non_existent.json'));
+      const result = await canMtlsBeEnabled();
+      assert.strictEqual(result, true);
+    });
+
+    it('throws error if GOOGLE_API_USE_MTLS_ENDPOINT is always and GOOGLE_API_USE_CLIENT_CERTIFICATE is false', async () => {
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'always';
+      process.env.GOOGLE_API_USE_CLIENT_CERTIFICATE = 'false';
+      await assert.rejects(
+        canMtlsBeEnabled(),
+        /mTLS is configured to ALWAYS, but client certificate usage was explicitly disabled via GOOGLE_API_USE_CLIENT_CERTIFICATE=false\./,
+      );
+    });
   });
 
   describe('getClientCertAndKey', () => {
