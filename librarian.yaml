@@ -794,7 +794,6 @@ libraries:
     apis:
       - path: google/cloud/edgenetwork/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-essentialcontacts
