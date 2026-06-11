@@ -1,0 +1,75 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.kms.inventory.v1",
+  "libraryPackage": "@google-cloud/kms-inventory",
+  "services": {
+    "KeyDashboardService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "KeyDashboardServiceClient",
+          "rpcs": {
+            "ListCryptoKeys": {
+              "methods": [
+                "listCryptoKeys",
+                "listCryptoKeysStream",
+                "listCryptoKeysAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "KeyDashboardServiceClient",
+          "rpcs": {
+            "ListCryptoKeys": {
+              "methods": [
+                "listCryptoKeys",
+                "listCryptoKeysStream",
+                "listCryptoKeysAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "KeyTrackingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "KeyTrackingServiceClient",
+          "rpcs": {
+            "GetProtectedResourcesSummary": {
+              "methods": [
+                "getProtectedResourcesSummary"
+              ]
+            },
+            "SearchProtectedResources": {
+              "methods": [
+                "searchProtectedResources",
+                "searchProtectedResourcesStream",
+                "searchProtectedResourcesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "KeyTrackingServiceClient",
+          "rpcs": {
+            "GetProtectedResourcesSummary": {
+              "methods": [
+                "getProtectedResourcesSummary"
+              ]
+            },
+            "SearchProtectedResources": {
+              "methods": [
+                "searchProtectedResources",
+                "searchProtectedResourcesStream",
+                "searchProtectedResourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

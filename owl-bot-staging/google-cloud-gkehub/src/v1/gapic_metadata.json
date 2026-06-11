@@ -1,0 +1,503 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.gkehub.v1",
+  "libraryPackage": "@google-cloud/gke-hub",
+  "services": {
+    "GkeHub": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GkeHubClient",
+          "rpcs": {
+            "GetMembership": {
+              "methods": [
+                "getMembership"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "getFeature"
+              ]
+            },
+            "GenerateConnectManifest": {
+              "methods": [
+                "generateConnectManifest"
+              ]
+            },
+            "GetFleet": {
+              "methods": [
+                "getFleet"
+              ]
+            },
+            "GetScopeNamespace": {
+              "methods": [
+                "getScopeNamespace"
+              ]
+            },
+            "GetScopeRBACRoleBinding": {
+              "methods": [
+                "getScopeRBACRoleBinding"
+              ]
+            },
+            "GetScope": {
+              "methods": [
+                "getScope"
+              ]
+            },
+            "GetMembershipBinding": {
+              "methods": [
+                "getMembershipBinding"
+              ]
+            },
+            "GetMembershipRBACRoleBinding": {
+              "methods": [
+                "getMembershipRBACRoleBinding"
+              ]
+            },
+            "GenerateMembershipRBACRoleBindingYAML": {
+              "methods": [
+                "generateMembershipRBACRoleBindingYAML"
+              ]
+            },
+            "CreateMembership": {
+              "methods": [
+                "createMembership"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "createFeature"
+              ]
+            },
+            "DeleteMembership": {
+              "methods": [
+                "deleteMembership"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "deleteFeature"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "updateFeature"
+              ]
+            },
+            "CreateFleet": {
+              "methods": [
+                "createFleet"
+              ]
+            },
+            "UpdateFleet": {
+              "methods": [
+                "updateFleet"
+              ]
+            },
+            "DeleteFleet": {
+              "methods": [
+                "deleteFleet"
+              ]
+            },
+            "CreateScopeNamespace": {
+              "methods": [
+                "createScopeNamespace"
+              ]
+            },
+            "UpdateScopeNamespace": {
+              "methods": [
+                "updateScopeNamespace"
+              ]
+            },
+            "DeleteScopeNamespace": {
+              "methods": [
+                "deleteScopeNamespace"
+              ]
+            },
+            "CreateScopeRBACRoleBinding": {
+              "methods": [
+                "createScopeRBACRoleBinding"
+              ]
+            },
+            "UpdateScopeRBACRoleBinding": {
+              "methods": [
+                "updateScopeRBACRoleBinding"
+              ]
+            },
+            "DeleteScopeRBACRoleBinding": {
+              "methods": [
+                "deleteScopeRBACRoleBinding"
+              ]
+            },
+            "CreateScope": {
+              "methods": [
+                "createScope"
+              ]
+            },
+            "UpdateScope": {
+              "methods": [
+                "updateScope"
+              ]
+            },
+            "DeleteScope": {
+              "methods": [
+                "deleteScope"
+              ]
+            },
+            "CreateMembershipBinding": {
+              "methods": [
+                "createMembershipBinding"
+              ]
+            },
+            "UpdateMembershipBinding": {
+              "methods": [
+                "updateMembershipBinding"
+              ]
+            },
+            "DeleteMembershipBinding": {
+              "methods": [
+                "deleteMembershipBinding"
+              ]
+            },
+            "CreateMembershipRBACRoleBinding": {
+              "methods": [
+                "createMembershipRBACRoleBinding"
+              ]
+            },
+            "UpdateMembershipRBACRoleBinding": {
+              "methods": [
+                "updateMembershipRBACRoleBinding"
+              ]
+            },
+            "DeleteMembershipRBACRoleBinding": {
+              "methods": [
+                "deleteMembershipRBACRoleBinding"
+              ]
+            },
+            "ListMemberships": {
+              "methods": [
+                "listMemberships",
+                "listMembershipsStream",
+                "listMembershipsAsync"
+              ]
+            },
+            "ListBoundMemberships": {
+              "methods": [
+                "listBoundMemberships",
+                "listBoundMembershipsStream",
+                "listBoundMembershipsAsync"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "listFeatures",
+                "listFeaturesStream",
+                "listFeaturesAsync"
+              ]
+            },
+            "ListFleets": {
+              "methods": [
+                "listFleets",
+                "listFleetsStream",
+                "listFleetsAsync"
+              ]
+            },
+            "ListScopeNamespaces": {
+              "methods": [
+                "listScopeNamespaces",
+                "listScopeNamespacesStream",
+                "listScopeNamespacesAsync"
+              ]
+            },
+            "ListScopeRBACRoleBindings": {
+              "methods": [
+                "listScopeRBACRoleBindings",
+                "listScopeRBACRoleBindingsStream",
+                "listScopeRBACRoleBindingsAsync"
+              ]
+            },
+            "ListScopes": {
+              "methods": [
+                "listScopes",
+                "listScopesStream",
+                "listScopesAsync"
+              ]
+            },
+            "ListPermittedScopes": {
+              "methods": [
+                "listPermittedScopes",
+                "listPermittedScopesStream",
+                "listPermittedScopesAsync"
+              ]
+            },
+            "ListMembershipBindings": {
+              "methods": [
+                "listMembershipBindings",
+                "listMembershipBindingsStream",
+                "listMembershipBindingsAsync"
+              ]
+            },
+            "ListMembershipRBACRoleBindings": {
+              "methods": [
+                "listMembershipRBACRoleBindings",
+                "listMembershipRBACRoleBindingsStream",
+                "listMembershipRBACRoleBindingsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GkeHubClient",
+          "rpcs": {
+            "GetMembership": {
+              "methods": [
+                "getMembership"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "getFeature"
+              ]
+            },
+            "GenerateConnectManifest": {
+              "methods": [
+                "generateConnectManifest"
+              ]
+            },
+            "GetFleet": {
+              "methods": [
+                "getFleet"
+              ]
+            },
+            "GetScopeNamespace": {
+              "methods": [
+                "getScopeNamespace"
+              ]
+            },
+            "GetScopeRBACRoleBinding": {
+              "methods": [
+                "getScopeRBACRoleBinding"
+              ]
+            },
+            "GetScope": {
+              "methods": [
+                "getScope"
+              ]
+            },
+            "GetMembershipBinding": {
+              "methods": [
+                "getMembershipBinding"
+              ]
+            },
+            "GetMembershipRBACRoleBinding": {
+              "methods": [
+                "getMembershipRBACRoleBinding"
+              ]
+            },
+            "GenerateMembershipRBACRoleBindingYAML": {
+              "methods": [
+                "generateMembershipRBACRoleBindingYAML"
+              ]
+            },
+            "CreateMembership": {
+              "methods": [
+                "createMembership"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "createFeature"
+              ]
+            },
+            "DeleteMembership": {
+              "methods": [
+                "deleteMembership"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "deleteFeature"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "updateFeature"
+              ]
+            },
+            "CreateFleet": {
+              "methods": [
+                "createFleet"
+              ]
+            },
+            "UpdateFleet": {
+              "methods": [
+                "updateFleet"
+              ]
+            },
+            "DeleteFleet": {
+              "methods": [
+                "deleteFleet"
+              ]
+            },
+            "CreateScopeNamespace": {
+              "methods": [
+                "createScopeNamespace"
+              ]
+            },
+            "UpdateScopeNamespace": {
+              "methods": [
+                "updateScopeNamespace"
+              ]
+            },
+            "DeleteScopeNamespace": {
+              "methods": [
+                "deleteScopeNamespace"
+              ]
+            },
+            "CreateScopeRBACRoleBinding": {
+              "methods": [
+                "createScopeRBACRoleBinding"
+              ]
+            },
+            "UpdateScopeRBACRoleBinding": {
+              "methods": [
+                "updateScopeRBACRoleBinding"
+              ]
+            },
+            "DeleteScopeRBACRoleBinding": {
+              "methods": [
+                "deleteScopeRBACRoleBinding"
+              ]
+            },
+            "CreateScope": {
+              "methods": [
+                "createScope"
+              ]
+            },
+            "UpdateScope": {
+              "methods": [
+                "updateScope"
+              ]
+            },
+            "DeleteScope": {
+              "methods": [
+                "deleteScope"
+              ]
+            },
+            "CreateMembershipBinding": {
+              "methods": [
+                "createMembershipBinding"
+              ]
+            },
+            "UpdateMembershipBinding": {
+              "methods": [
+                "updateMembershipBinding"
+              ]
+            },
+            "DeleteMembershipBinding": {
+              "methods": [
+                "deleteMembershipBinding"
+              ]
+            },
+            "CreateMembershipRBACRoleBinding": {
+              "methods": [
+                "createMembershipRBACRoleBinding"
+              ]
+            },
+            "UpdateMembershipRBACRoleBinding": {
+              "methods": [
+                "updateMembershipRBACRoleBinding"
+              ]
+            },
+            "DeleteMembershipRBACRoleBinding": {
+              "methods": [
+                "deleteMembershipRBACRoleBinding"
+              ]
+            },
+            "ListMemberships": {
+              "methods": [
+                "listMemberships",
+                "listMembershipsStream",
+                "listMembershipsAsync"
+              ]
+            },
+            "ListBoundMemberships": {
+              "methods": [
+                "listBoundMemberships",
+                "listBoundMembershipsStream",
+                "listBoundMembershipsAsync"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "listFeatures",
+                "listFeaturesStream",
+                "listFeaturesAsync"
+              ]
+            },
+            "ListFleets": {
+              "methods": [
+                "listFleets",
+                "listFleetsStream",
+                "listFleetsAsync"
+              ]
+            },
+            "ListScopeNamespaces": {
+              "methods": [
+                "listScopeNamespaces",
+                "listScopeNamespacesStream",
+                "listScopeNamespacesAsync"
+              ]
+            },
+            "ListScopeRBACRoleBindings": {
+              "methods": [
+                "listScopeRBACRoleBindings",
+                "listScopeRBACRoleBindingsStream",
+                "listScopeRBACRoleBindingsAsync"
+              ]
+            },
+            "ListScopes": {
+              "methods": [
+                "listScopes",
+                "listScopesStream",
+                "listScopesAsync"
+              ]
+            },
+            "ListPermittedScopes": {
+              "methods": [
+                "listPermittedScopes",
+                "listPermittedScopesStream",
+                "listPermittedScopesAsync"
+              ]
+            },
+            "ListMembershipBindings": {
+              "methods": [
+                "listMembershipBindings",
+                "listMembershipBindingsStream",
+                "listMembershipBindingsAsync"
+              ]
+            },
+            "ListMembershipRBACRoleBindings": {
+              "methods": [
+                "listMembershipRBACRoleBindings",
+                "listMembershipRBACRoleBindingsStream",
+                "listMembershipRBACRoleBindingsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
