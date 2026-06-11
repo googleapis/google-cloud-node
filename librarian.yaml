@@ -1748,12 +1748,18 @@ libraries:
       - path: google/devtools/containeranalysis/v1
       - path: google/devtools/containeranalysis/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       dependencies:
         '@google-cloud/grafeas': ^6.0.0
       main_service: containeranalysis
+      nodejs_apis:
+        - additional_protos:
+            - grafeas/v1/grafeas.proto
+          path: google/devtools/containeranalysis/v1
+        - additional_protos:
+            - google/devtools/containeranalysis/v1beta1/grafeas/grafeas.proto
+          path: google/devtools/containeranalysis/v1beta1
       package_name: '@google-cloud/containeranalysis'
   - name: google-iam
     version: 2.4.0
