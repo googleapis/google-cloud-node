@@ -1,0 +1,159 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.workloadmanager.v1",
+  "libraryPackage": "@google-cloud/workloadmanager",
+  "services": {
+    "WorkloadManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "WorkloadManagerClient",
+          "rpcs": {
+            "GetEvaluation": {
+              "methods": [
+                "getEvaluation"
+              ]
+            },
+            "GetExecution": {
+              "methods": [
+                "getExecution"
+              ]
+            },
+            "ListRules": {
+              "methods": [
+                "listRules"
+              ]
+            },
+            "CreateEvaluation": {
+              "methods": [
+                "createEvaluation"
+              ]
+            },
+            "UpdateEvaluation": {
+              "methods": [
+                "updateEvaluation"
+              ]
+            },
+            "DeleteEvaluation": {
+              "methods": [
+                "deleteEvaluation"
+              ]
+            },
+            "RunEvaluation": {
+              "methods": [
+                "runEvaluation"
+              ]
+            },
+            "DeleteExecution": {
+              "methods": [
+                "deleteExecution"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "listEvaluations",
+                "listEvaluationsStream",
+                "listEvaluationsAsync"
+              ]
+            },
+            "ListExecutions": {
+              "methods": [
+                "listExecutions",
+                "listExecutionsStream",
+                "listExecutionsAsync"
+              ]
+            },
+            "ListExecutionResults": {
+              "methods": [
+                "listExecutionResults",
+                "listExecutionResultsStream",
+                "listExecutionResultsAsync"
+              ]
+            },
+            "ListScannedResources": {
+              "methods": [
+                "listScannedResources",
+                "listScannedResourcesStream",
+                "listScannedResourcesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "WorkloadManagerClient",
+          "rpcs": {
+            "GetEvaluation": {
+              "methods": [
+                "getEvaluation"
+              ]
+            },
+            "GetExecution": {
+              "methods": [
+                "getExecution"
+              ]
+            },
+            "ListRules": {
+              "methods": [
+                "listRules"
+              ]
+            },
+            "CreateEvaluation": {
+              "methods": [
+                "createEvaluation"
+              ]
+            },
+            "UpdateEvaluation": {
+              "methods": [
+                "updateEvaluation"
+              ]
+            },
+            "DeleteEvaluation": {
+              "methods": [
+                "deleteEvaluation"
+              ]
+            },
+            "RunEvaluation": {
+              "methods": [
+                "runEvaluation"
+              ]
+            },
+            "DeleteExecution": {
+              "methods": [
+                "deleteExecution"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "listEvaluations",
+                "listEvaluationsStream",
+                "listEvaluationsAsync"
+              ]
+            },
+            "ListExecutions": {
+              "methods": [
+                "listExecutions",
+                "listExecutionsStream",
+                "listExecutionsAsync"
+              ]
+            },
+            "ListExecutionResults": {
+              "methods": [
+                "listExecutionResults",
+                "listExecutionResultsStream",
+                "listExecutionResultsAsync"
+              ]
+            },
+            "ListScannedResources": {
+              "methods": [
+                "listScannedResources",
+                "listScannedResourcesStream",
+                "listScannedResourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
