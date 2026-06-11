@@ -80,7 +80,6 @@ libraries:
       - path: google/analytics/data/v1beta
       - path: google/analytics/data/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
       client_documentation_override: https://googleapis.dev/nodejs/analytics-data/latest/
@@ -165,7 +164,6 @@ libraries:
     apis:
       - path: google/area120/tables/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha1
       package_name: '@google/area120-tables'
