@@ -404,7 +404,6 @@ libraries:
       - path: google/cloud/bigquery/datapolicies/v2beta1
       - path: google/cloud/bigquery/datapolicies/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
   - name: google-cloud-bigquery-datatransfer
