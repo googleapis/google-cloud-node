@@ -92,7 +92,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stop connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.stop_connector.js) |
 | update connect cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.update_connect_cluster.js) |
 | update connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.update_connector.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/snippet_metadata_google.cloud.managedkafka.v1.json) |
 
 
 ## Supported Node.js Versions

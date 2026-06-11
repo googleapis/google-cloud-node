@@ -67,7 +67,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list deployments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.list_deployments.js) |
 | replace deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.replace_deployment.js) |
 | uninstall deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/g_suite_add_ons.uninstall_deployment.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/generated/v1/snippet_metadata_google.cloud.gsuiteaddons.v1.json) |
 
 
 ## Supported Node.js Versions

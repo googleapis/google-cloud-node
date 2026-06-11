@@ -113,7 +113,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update crypto key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key.js) |
 | update crypto key primary version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_primary_version.js) |
 | update crypto key version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_version.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/snippet_metadata_google.cloud.kms.v1.json) |
 
 
 ## Supported Node.js Versions

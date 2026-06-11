@@ -62,7 +62,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1/hypercompute_cluster.get_cluster.js) |
 | list clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1/hypercompute_cluster.list_clusters.js) |
 | update cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1/hypercompute_cluster.update_cluster.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1/snippet_metadata_google.cloud.hypercomputecluster.v1.json) |
 | create cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1alpha/hypercompute_cluster.create_cluster.js) |
 | delete cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1alpha/hypercompute_cluster.delete_cluster.js) |
 | get cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1alpha/hypercompute_cluster.get_cluster.js) |
@@ -90,13 +89,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list profiler targets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1alpha/machine_learning_runs.list_profiler_targets.js) |
 | update machine learning run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1alpha/machine_learning_runs.update_machine_learning_run.js) |
 | update monitored event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1alpha/machine_learning_runs.update_monitored_event.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1alpha/snippet_metadata_google.cloud.hypercomputecluster.v1alpha.json) |
 | create cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1beta/hypercompute_cluster.create_cluster.js) |
 | delete cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1beta/hypercompute_cluster.delete_cluster.js) |
 | get cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1beta/hypercompute_cluster.get_cluster.js) |
 | list clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1beta/hypercompute_cluster.list_clusters.js) |
 | update cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1beta/hypercompute_cluster.update_cluster.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1beta/snippet_metadata_google.cloud.hypercomputecluster.v1beta.json) |
 
 
 ## Supported Node.js Versions

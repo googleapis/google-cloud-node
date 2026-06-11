@@ -60,7 +60,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list crypto keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_dashboard_service.list_crypto_keys.js) |
 | get protected resources summary | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.get_protected_resources_summary.js) |
 | search protected resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.search_protected_resources.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/snippet_metadata_google.cloud.kms.inventory.v1.json) |
 
 
 ## Supported Node.js Versions

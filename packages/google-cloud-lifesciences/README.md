@@ -57,7 +57,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences/samples/generated/v2beta/snippet_metadata_google.cloud.lifesciences.v2beta.json) |
 | run pipeline | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences/samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js) |
 
 

@@ -60,7 +60,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get cloud location | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-locationfinder/samples/generated/v1/cloud_location_finder.get_cloud_location.js) |
 | list cloud locations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-locationfinder/samples/generated/v1/cloud_location_finder.list_cloud_locations.js) |
 | search cloud locations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-locationfinder/samples/generated/v1/cloud_location_finder.search_cloud_locations.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-locationfinder/samples/generated/v1/snippet_metadata_google.cloud.locationfinder.v1.json) |
 
 
 ## Supported Node.js Versions

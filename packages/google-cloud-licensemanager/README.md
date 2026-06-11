@@ -70,7 +70,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | query configuration license usage | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-licensemanager/samples/generated/v1/license_manager.query_configuration_license_usage.js) |
 | reactivate configuration | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-licensemanager/samples/generated/v1/license_manager.reactivate_configuration.js) |
 | update configuration | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-licensemanager/samples/generated/v1/license_manager.update_configuration.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-licensemanager/samples/generated/v1/snippet_metadata_google.cloud.licensemanager.v1.json) |
 
 
 ## Supported Node.js Versions

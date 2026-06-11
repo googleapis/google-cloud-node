@@ -62,7 +62,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ids/samples/generated/v1/i_d_s.delete_endpoint.js) |
 | get endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ids/samples/generated/v1/i_d_s.get_endpoint.js) |
 | list endpoints | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ids/samples/generated/v1/i_d_s.list_endpoints.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ids/samples/generated/v1/snippet_metadata_google.cloud.ids.v1.json) |
 
 
 ## Supported Node.js Versions

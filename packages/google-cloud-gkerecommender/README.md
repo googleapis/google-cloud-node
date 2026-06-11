@@ -63,7 +63,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | fetch models | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkerecommender/samples/generated/v1/gke_inference_quickstart.fetch_models.js) |
 | fetch profiles | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkerecommender/samples/generated/v1/gke_inference_quickstart.fetch_profiles.js) |
 | generate optimized manifest | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkerecommender/samples/generated/v1/gke_inference_quickstart.generate_optimized_manifest.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkerecommender/samples/generated/v1/snippet_metadata_google.cloud.gkerecommender.v1.json) |
 
 
 ## Supported Node.js Versions

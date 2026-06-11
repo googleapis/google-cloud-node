@@ -68,7 +68,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | reset admin password | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.reset_admin_password.js) |
 | update domain | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.update_domain.js) |
 | validate trust | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.validate_trust.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/snippet_metadata_google.cloud.managedidentities.v1.json) |
 | attach trust | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.attach_trust.js) |
 | create microsoft ad domain | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.create_microsoft_ad_domain.js) |
 | delete domain | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.delete_domain.js) |
@@ -79,7 +78,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | reset admin password | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.reset_admin_password.js) |
 | update domain | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.update_domain.js) |
 | validate trust | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.validate_trust.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/snippet_metadata_google.cloud.managedidentities.v1beta1.json) |
 
 
 ## Supported Node.js Versions

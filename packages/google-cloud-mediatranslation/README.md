@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/generated/v1beta1/snippet_metadata_google.cloud.mediatranslation.v1beta1.json) |
 | streaming translate speech | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js) |
 
 

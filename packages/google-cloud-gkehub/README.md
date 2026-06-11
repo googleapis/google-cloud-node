@@ -102,19 +102,16 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update scope | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.update_scope.js) |
 | update scope namespace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.update_scope_namespace.js) |
 | update scope r b a c role binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.update_scope_r_b_a_c_role_binding.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/snippet_metadata_google.cloud.gkehub.v1.json) |
 | create feature | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.create_feature.js) |
 | delete feature | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.delete_feature.js) |
 | get feature | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.get_feature.js) |
 | list features | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.list_features.js) |
 | update feature | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.update_feature.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/snippet_metadata_google.cloud.gkehub.v1alpha.json) |
 | create feature | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.create_feature.js) |
 | delete feature | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.delete_feature.js) |
 | get feature | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.get_feature.js) |
 | list features | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.list_features.js) |
 | update feature | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.update_feature.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/snippet_metadata_google.cloud.gkehub.v1beta.json) |
 | create membership | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.create_membership.js) |
 | delete membership | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.delete_membership.js) |
 | generate connect manifest | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.generate_connect_manifest.js) |
@@ -123,7 +120,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list memberships | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.list_memberships.js) |
 | update membership | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.update_membership.js) |
 | validate exclusivity | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.validate_exclusivity.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/snippet_metadata_google.cloud.gkehub.v1beta1.json) |
 
 
 ## Supported Node.js Versions

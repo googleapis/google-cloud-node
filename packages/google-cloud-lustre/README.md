@@ -64,7 +64,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | import data | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lustre/samples/generated/v1/lustre.import_data.js) |
 | list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lustre/samples/generated/v1/lustre.list_instances.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lustre/samples/generated/v1/lustre.update_instance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lustre/samples/generated/v1/snippet_metadata_google.cloud.lustre.v1.json) |
 
 
 ## Supported Node.js Versions

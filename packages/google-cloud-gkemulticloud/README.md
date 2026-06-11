@@ -102,7 +102,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list azure node pools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_node_pools.js) |
 | update azure cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_cluster.js) |
 | update azure node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_node_pool.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/snippet_metadata_google.cloud.gkemulticloud.v1.json) |
 
 
 ## Supported Node.js Versions
