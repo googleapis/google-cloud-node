@@ -826,7 +826,6 @@ libraries:
       - path: google/cloud/filestore/v1
       - path: google/cloud/filestore/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-financialservices
