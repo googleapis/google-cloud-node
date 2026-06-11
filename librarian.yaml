@@ -375,7 +375,6 @@ libraries:
     apis:
       - path: google/cloud/bigquery/analyticshub/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-bigquery-connection
@@ -392,7 +391,6 @@ libraries:
     apis:
       - path: google/cloud/bigquery/dataexchange/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/bigquery-data-exchange'
@@ -404,7 +402,6 @@ libraries:
       - path: google/cloud/bigquery/datapolicies/v2beta1
       - path: google/cloud/bigquery/datapolicies/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
   - name: google-cloud-bigquery-datatransfer
@@ -422,7 +419,6 @@ libraries:
       - path: google/cloud/bigquery/migration/v2
       - path: google/cloud/bigquery/migration/v2alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
   - name: google-cloud-bigquery-reservation
@@ -430,7 +426,6 @@ libraries:
     apis:
       - path: google/cloud/bigquery/reservation/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-billing
@@ -438,7 +433,6 @@ libraries:
     apis:
       - path: google/cloud/billing/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       nodejs_apis:
@@ -476,7 +470,6 @@ libraries:
     apis:
       - path: google/cloud/certificatemanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/certificate-manager'
@@ -502,7 +495,6 @@ libraries:
     apis:
       - path: google/cloud/chronicle/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-cloudcontrolspartner
@@ -511,7 +503,6 @@ libraries:
       - path: google/cloud/cloudcontrolspartner/v1
       - path: google/cloud/cloudcontrolspartner/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-clouddms
@@ -519,7 +510,6 @@ libraries:
     apis:
       - path: google/cloud/clouddms/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/dms'
