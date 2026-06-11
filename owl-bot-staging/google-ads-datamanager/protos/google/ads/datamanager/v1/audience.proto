@@ -1,0 +1,139 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package google.ads.datamanager.v1;
+
+import "google/ads/datamanager/v1/consent.proto";
+import "google/ads/datamanager/v1/user_data.proto";
+import "google/api/field_behavior.proto";
+import "google/api/field_info.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Google.Ads.DataManager.V1";
+option go_package = "cloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb";
+option java_multiple_files = true;
+option java_outer_classname = "AudienceProto";
+option java_package = "com.google.ads.datamanager.v1";
+option php_namespace = "Google\\Ads\\DataManager\\V1";
+option ruby_package = "Google::Ads::DataManager::V1";
+
+// The audience member to be operated on.
+message AudienceMember {
+  // Optional. Defines which
+  // [Destination][google.ads.datamanager.v1.Destination] to send the audience
+  // member to.
+  repeated string destination_references = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // The type of identifying data to be operated on.
+  oneof data {
+    // User-provided data that identifies the user.
+    UserData user_data = 2;
+
+    // [Publisher Advertiser Identity Reconciliation (PAIR)
+    // IDs](//support.google.com/admanager/answer/15067908).
+    //
+    // This feature is only available to data partners.
+    PairData pair_data = 4;
+
+    // Data identifying the user's mobile devices.
+    MobileData mobile_data = 5;
+
+    // Data related to unique identifiers for a user, as defined by the
+    // advertiser.
+    UserIdData user_id_data = 6;
+
+    // Data related to publisher provided identifiers.
+    //
+    // This feature is only available to data partners.
+    PpidData ppid_data = 7;
+
+    // Group of multiple identifier types.
+    CompositeData composite_data = 8;
+  }
+
+  // Optional. The consent setting for the user.
+  Consent consent = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// [PAIR](//support.google.com/admanager/answer/15067908) IDs for the audience.
+// At least one PAIR ID is required.
+//
+// This feature is only available to data partners.
+message PairData {
+  // Required. Cleanroom-provided PII data, hashed with SHA256, and encrypted
+  // with an EC commutative cipher using publisher key for the
+  // [PAIR]((//support.google.com/admanager/answer/15067908)) user list. At most
+  // 10 `pairIds` can be provided in a single
+  // [AudienceMember][google.ads.datamanager.v1.AudienceMember].
+  repeated string pair_ids = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Mobile IDs for the audience. At least one mobile ID is required.
+message MobileData {
+  // Required. The list of mobile device IDs (advertising ID/IDFA). At most 10
+  // `mobileIds` can be provided in a single
+  // [AudienceMember][google.ads.datamanager.v1.AudienceMember].
+  repeated string mobile_ids = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// User id data holding the user id.
+message UserIdData {
+  // Required. A unique identifier for a user, as defined by the
+  // advertiser.
+  string user_id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Publisher provided identifiers data holding the ppids. At least one ppid is
+// required.
+//
+// This feature is only available to data partners.
+message PpidData {
+  // Required. The list of publisher provided identifiers for a user.
+  repeated string ppids = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Composite data holding identifiers and associated data for a user.
+// At least one of `user_data` or `ip_data` is required.
+message CompositeData {
+  // Optional. User-provided data that identifies the user.
+  UserData user_data = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. IP address data representing customer interaction used to build
+  // the audience.
+  repeated IpData ip_data = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// IP address information for a user.
+// We recommend including observe_start_time and observe_end_time to help
+// improve Customer Match match rates.
+message IpData {
+  // Required. IP address captured at the time of customer interaction.
+  // Accepts standard string formats for both IPv4 and IPv6.
+  string ip_address = 1 [
+    (google.api.field_info).format = IPV4_OR_IPV6,
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // Optional. First recorded interaction time from this IP address in a
+  // session.
+  google.protobuf.Timestamp observe_start_time = 2
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Last recorded interaction time from this IP address in a session.
+  google.protobuf.Timestamp observe_end_time = 3
+      [(google.api.field_behavior) = OPTIONAL];
+}
