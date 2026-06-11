@@ -4,13 +4,12 @@
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/ces/latest",
     "default_version": "v1",
     "distribution_name": "@google-cloud/ces",
-    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1157150",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "ces",
-    "name_pretty": "Gemini Enterprise for Customer Experience API",
+    "name_pretty": "Gemini Enterprise for Customer Experience",
     "product_documentation": "https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps",
     "release_level": "preview",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }
