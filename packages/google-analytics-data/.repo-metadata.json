@@ -1,17 +1,16 @@
 {
+    "api_description": "Accesses report data in Google Analytics. Warning: Creating multiple\nCustomer Applications, Accounts, or Projects to simulate or act as a\nsingle Customer Application, Account, or Project (respectively) or to\ncircumvent Service-specific usage limits or quotas is a direct violation\nof Google Cloud Platform Terms of Service as well as Google APIs Terms of\nService. These actions can result in immediate termination of your GCP\nproject(s) without any warning.",
     "api_id": "analyticsdata.googleapis.com",
     "api_shortname": "analyticsdata",
-    "client_documentation": "https://googleapis.dev/nodejs/analytics-data/latest/index.html",
-    "codeowner_team": "@googleapis/ga-devrel",
+    "client_documentation": "https://googleapis.dev/nodejs/analytics-data/latest/",
     "default_version": "v1beta",
     "distribution_name": "@google-analytics/data",
-    "issue_tracker": "https://issuetracker.google.com/issues/new?component=326380x",
+    "issue_tracker": "https://issuetracker.google.com/issues?q=componentid:187400",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
-    "name": "analytics-data",
+    "name": "analyticsdata",
     "name_pretty": "Google Analytics Data",
-    "product_documentation": "https://developers.google.com/analytics/trusted-testing/analytics-data",
+    "product_documentation": "https://developers.google.com/analytics/",
     "release_level": "preview",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": false
+    "repo": "googleapis/google-cloud-node"
 }
