@@ -92,7 +92,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update dvr session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_dvr_session.js) |
 | update input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_input.js) |
 | update pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_pool.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/snippet_metadata_google.cloud.video.livestream.v1.json) |
 
 
 ## Supported Node.js Versions

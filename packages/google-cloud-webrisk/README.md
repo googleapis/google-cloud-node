@@ -58,13 +58,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/snippet_metadata_google.cloud.webrisk.v1.json) |
 | compute threat list diff | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.compute_threat_list_diff.js) |
 | create submission | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.create_submission.js) |
 | search hashes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.search_hashes.js) |
 | search uris | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.search_uris.js) |
 | submit uri | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.submit_uri.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/snippet_metadata_google.cloud.webrisk.v1beta1.json) |
 | compute threat list diff | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.compute_threat_list_diff.js) |
 | search hashes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.search_hashes.js) |
 | search uris | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.search_uris.js) |

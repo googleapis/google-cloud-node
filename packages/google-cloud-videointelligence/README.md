@@ -58,15 +58,10 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1/snippet_metadata_google.cloud.videointelligence.v1.json) |
 | annotate video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1/video_intelligence_service.annotate_video.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1beta2/snippet_metadata_google.cloud.videointelligence.v1beta2.json) |
 | annotate video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1beta2/video_intelligence_service.annotate_video.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p1beta1/snippet_metadata_google.cloud.videointelligence.v1p1beta1.json) |
 | annotate video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p1beta1/video_intelligence_service.annotate_video.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p2beta1/snippet_metadata_google.cloud.videointelligence.v1p2beta1.json) |
 | annotate video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p2beta1/video_intelligence_service.annotate_video.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/snippet_metadata_google.cloud.videointelligence.v1p3beta1.json) |
 | streaming annotate video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js) |
 | annotate video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/video_intelligence_service.annotate_video.js) |
 

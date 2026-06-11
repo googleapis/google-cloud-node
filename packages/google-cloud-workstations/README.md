@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/snippet_metadata_google.cloud.workstations.v1.json) |
 | create workstation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation.js) |
 | create workstation cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation_cluster.js) |
 | create workstation config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.create_workstation_config.js) |
@@ -79,7 +78,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update workstation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation.js) |
 | update workstation cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation_cluster.js) |
 | update workstation config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1/workstations.update_workstation_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/snippet_metadata_google.cloud.workstations.v1beta.json) |
 | create workstation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation.js) |
 | create workstation cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation_cluster.js) |
 | create workstation config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.create_workstation_config.js) |
@@ -95,6 +93,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list workstation clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstation_clusters.js) |
 | list workstation configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstation_configs.js) |
 | list workstations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.list_workstations.js) |
+| push credentials | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.push_credentials.js) |
 | start workstation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.start_workstation.js) |
 | stop workstation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.stop_workstation.js) |
 | update workstation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workstations/samples/generated/v1beta/workstations.update_workstation.js) |

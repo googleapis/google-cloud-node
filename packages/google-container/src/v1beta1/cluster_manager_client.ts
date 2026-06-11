@@ -1050,6 +1050,12 @@ export class ClusterManagerClient {
    *   Required. The desired image type for the node pool. Please see
    *   https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
    *   for available image types.
+   * @param {string} request.image
+   *   The desired name of the image name to use for this node.
+   *   This is used to create clusters using a custom image.
+   * @param {string} request.imageProject
+   *   The project containing the desired image to use for this node pool.
+   *   This is used to create clusters using a custom image.
    * @param {string[]} request.locations
    *   The desired list of Google Compute Engine
    *   [zones](https://cloud.google.com/compute/docs/zones#available)
