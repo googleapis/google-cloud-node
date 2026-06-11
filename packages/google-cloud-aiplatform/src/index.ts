@@ -16,166 +16,79 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta1 from './v1beta1';
 import * as v1 from './v1';
+import * as v1beta1 from './v1beta1';
 
+const DataFoundryServiceClient = v1.DataFoundryServiceClient;
+type DataFoundryServiceClient = v1.DataFoundryServiceClient;
 const DatasetServiceClient = v1.DatasetServiceClient;
 type DatasetServiceClient = v1.DatasetServiceClient;
+const DeploymentResourcePoolServiceClient = v1.DeploymentResourcePoolServiceClient;
+type DeploymentResourcePoolServiceClient = v1.DeploymentResourcePoolServiceClient;
 const EndpointServiceClient = v1.EndpointServiceClient;
 type EndpointServiceClient = v1.EndpointServiceClient;
-const JobServiceClient = v1.JobServiceClient;
-type JobServiceClient = v1.JobServiceClient;
-const MigrationServiceClient = v1.MigrationServiceClient;
-type MigrationServiceClient = v1.MigrationServiceClient;
-const ModelServiceClient = v1.ModelServiceClient;
-type ModelServiceClient = v1.ModelServiceClient;
-const PipelineServiceClient = v1.PipelineServiceClient;
-type PipelineServiceClient = v1.PipelineServiceClient;
-const PredictionServiceClient = v1.PredictionServiceClient;
-type PredictionServiceClient = v1.PredictionServiceClient;
-const SpecialistPoolServiceClient = v1.SpecialistPoolServiceClient;
-type SpecialistPoolServiceClient = v1.SpecialistPoolServiceClient;
-const IndexEndpointServiceClient = v1.IndexEndpointServiceClient;
-type IndexEndpointServiceClient = v1.IndexEndpointServiceClient;
-const IndexServiceClient = v1.IndexServiceClient;
-type IndexServiceClient = v1.IndexServiceClient;
-const VizierServiceClient = v1.VizierServiceClient;
-type VizierServiceClient = v1.VizierServiceClient;
-const FeaturestoreServiceClient = v1.FeaturestoreServiceClient;
-type FeaturestoreServiceClient = v1.FeaturestoreServiceClient;
-const FeaturestoreOnlineServingServiceClient =
-  v1.FeaturestoreOnlineServingServiceClient;
-type FeaturestoreOnlineServingServiceClient =
-  v1.FeaturestoreOnlineServingServiceClient;
-const MetadataServiceClient = v1.MetadataServiceClient;
-type MetadataServiceClient = v1.MetadataServiceClient;
-const TensorboardServiceClient = v1.TensorboardServiceClient;
-type TensorboardServiceClient = v1.TensorboardServiceClient;
-const MatchServiceClient = v1.MatchServiceClient;
-type MatchServiceClient = v1.MatchServiceClient;
-const ModelGardenServiceClient = v1.ModelGardenServiceClient;
-type ModelGardenServiceClient = v1.ModelGardenServiceClient;
-const ScheduleServiceClient = v1.ScheduleServiceClient;
-type ScheduleServiceClient = v1.ScheduleServiceClient;
-const FeatureOnlineStoreAdminServiceClient =
-  v1.FeatureOnlineStoreAdminServiceClient;
-type FeatureOnlineStoreAdminServiceClient =
-  v1.FeatureOnlineStoreAdminServiceClient;
+const EvaluationServiceClient = v1.EvaluationServiceClient;
+type EvaluationServiceClient = v1.EvaluationServiceClient;
+const FeatureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient;
+type FeatureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient;
 const FeatureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient;
 type FeatureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient;
 const FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient;
 type FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient;
-const LlmUtilityServiceClient = v1.LlmUtilityServiceClient;
-type LlmUtilityServiceClient = v1.LlmUtilityServiceClient;
-const DeploymentResourcePoolServiceClient =
-  v1.DeploymentResourcePoolServiceClient;
-type DeploymentResourcePoolServiceClient =
-  v1.DeploymentResourcePoolServiceClient;
+const FeaturestoreOnlineServingServiceClient = v1.FeaturestoreOnlineServingServiceClient;
+type FeaturestoreOnlineServingServiceClient = v1.FeaturestoreOnlineServingServiceClient;
+const FeaturestoreServiceClient = v1.FeaturestoreServiceClient;
+type FeaturestoreServiceClient = v1.FeaturestoreServiceClient;
+const GenAiCacheServiceClient = v1.GenAiCacheServiceClient;
+type GenAiCacheServiceClient = v1.GenAiCacheServiceClient;
 const GenAiTuningServiceClient = v1.GenAiTuningServiceClient;
 type GenAiTuningServiceClient = v1.GenAiTuningServiceClient;
+const IndexEndpointServiceClient = v1.IndexEndpointServiceClient;
+type IndexEndpointServiceClient = v1.IndexEndpointServiceClient;
+const IndexServiceClient = v1.IndexServiceClient;
+type IndexServiceClient = v1.IndexServiceClient;
+const JobServiceClient = v1.JobServiceClient;
+type JobServiceClient = v1.JobServiceClient;
+const LlmUtilityServiceClient = v1.LlmUtilityServiceClient;
+type LlmUtilityServiceClient = v1.LlmUtilityServiceClient;
+const MatchServiceClient = v1.MatchServiceClient;
+type MatchServiceClient = v1.MatchServiceClient;
+const MetadataServiceClient = v1.MetadataServiceClient;
+type MetadataServiceClient = v1.MetadataServiceClient;
+const MigrationServiceClient = v1.MigrationServiceClient;
+type MigrationServiceClient = v1.MigrationServiceClient;
+const ModelGardenServiceClient = v1.ModelGardenServiceClient;
+type ModelGardenServiceClient = v1.ModelGardenServiceClient;
+const ModelServiceClient = v1.ModelServiceClient;
+type ModelServiceClient = v1.ModelServiceClient;
 const NotebookServiceClient = v1.NotebookServiceClient;
 type NotebookServiceClient = v1.NotebookServiceClient;
 const PersistentResourceServiceClient = v1.PersistentResourceServiceClient;
 type PersistentResourceServiceClient = v1.PersistentResourceServiceClient;
-const EvaluationServiceClient = v1.EvaluationServiceClient;
-type EvaluationServiceClient = v1.EvaluationServiceClient;
-const GenAiCacheServiceClient = v1.GenAiCacheServiceClient;
-type GenAiCacheServiceClient = v1.GenAiCacheServiceClient;
-const ReasoningEngineExecutionServiceClient =
-  v1.ReasoningEngineExecutionServiceClient;
-type ReasoningEngineExecutionServiceClient =
-  v1.ReasoningEngineExecutionServiceClient;
+const PipelineServiceClient = v1.PipelineServiceClient;
+type PipelineServiceClient = v1.PipelineServiceClient;
+const PredictionServiceClient = v1.PredictionServiceClient;
+type PredictionServiceClient = v1.PredictionServiceClient;
+const ReasoningEngineExecutionServiceClient = v1.ReasoningEngineExecutionServiceClient;
+type ReasoningEngineExecutionServiceClient = v1.ReasoningEngineExecutionServiceClient;
 const ReasoningEngineServiceClient = v1.ReasoningEngineServiceClient;
 type ReasoningEngineServiceClient = v1.ReasoningEngineServiceClient;
-const VertexRagServiceClient = v1.VertexRagServiceClient;
-type VertexRagServiceClient = v1.VertexRagServiceClient;
+const ScheduleServiceClient = v1.ScheduleServiceClient;
+type ScheduleServiceClient = v1.ScheduleServiceClient;
+const SessionServiceClient = v1.SessionServiceClient;
+type SessionServiceClient = v1.SessionServiceClient;
+const SpecialistPoolServiceClient = v1.SpecialistPoolServiceClient;
+type SpecialistPoolServiceClient = v1.SpecialistPoolServiceClient;
+const TensorboardServiceClient = v1.TensorboardServiceClient;
+type TensorboardServiceClient = v1.TensorboardServiceClient;
 const VertexRagDataServiceClient = v1.VertexRagDataServiceClient;
 type VertexRagDataServiceClient = v1.VertexRagDataServiceClient;
-const DataFoundryServiceClient = v1.DataFoundryServiceClient;
-type DataFoundryServiceClient = v1.DataFoundryServiceClient;
-export {
-  v1beta1,
-  v1,
-  DatasetServiceClient,
-  EndpointServiceClient,
-  JobServiceClient,
-  MigrationServiceClient,
-  ModelServiceClient,
-  PipelineServiceClient,
-  PredictionServiceClient,
-  SpecialistPoolServiceClient,
-  IndexEndpointServiceClient,
-  IndexServiceClient,
-  VizierServiceClient,
-  FeaturestoreServiceClient,
-  FeaturestoreOnlineServingServiceClient,
-  MetadataServiceClient,
-  TensorboardServiceClient,
-  MatchServiceClient,
-  ModelGardenServiceClient,
-  ScheduleServiceClient,
-  FeatureOnlineStoreAdminServiceClient,
-  FeatureOnlineStoreServiceClient,
-  FeatureRegistryServiceClient,
-  LlmUtilityServiceClient,
-  DeploymentResourcePoolServiceClient,
-  GenAiTuningServiceClient,
-  NotebookServiceClient,
-  PersistentResourceServiceClient,
-  EvaluationServiceClient,
-  VertexRagServiceClient,
-  GenAiCacheServiceClient,
-  ReasoningEngineExecutionServiceClient,
-  ReasoningEngineServiceClient,
-  VertexRagDataServiceClient,
-  DataFoundryServiceClient,
-};
-export default {
-  v1beta1,
-  v1,
-  DatasetServiceClient,
-  EndpointServiceClient,
-  JobServiceClient,
-  MigrationServiceClient,
-  ModelServiceClient,
-  PipelineServiceClient,
-  PredictionServiceClient,
-  SpecialistPoolServiceClient,
-  IndexEndpointServiceClient,
-  IndexServiceClient,
-  VizierServiceClient,
-  FeaturestoreServiceClient,
-  FeaturestoreOnlineServingServiceClient,
-  MetadataServiceClient,
-  TensorboardServiceClient,
-  MatchServiceClient,
-  ModelGardenServiceClient,
-  ScheduleServiceClient,
-  FeatureOnlineStoreAdminServiceClient,
-  FeatureOnlineStoreServiceClient,
-  FeatureRegistryServiceClient,
-  LlmUtilityServiceClient,
-  DeploymentResourcePoolServiceClient,
-  GenAiTuningServiceClient,
-  NotebookServiceClient,
-  PersistentResourceServiceClient,
-  EvaluationServiceClient,
-  GenAiCacheServiceClient,
-  ReasoningEngineExecutionServiceClient,
-  VertexRagServiceClient,
-  ReasoningEngineServiceClient,
-  VertexRagDataServiceClient,
-  DataFoundryServiceClient,
-};
+const VertexRagServiceClient = v1.VertexRagServiceClient;
+type VertexRagServiceClient = v1.VertexRagServiceClient;
+const VizierServiceClient = v1.VizierServiceClient;
+type VizierServiceClient = v1.VizierServiceClient;
+
+export {v1, v1beta1, DataFoundryServiceClient, DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiCacheServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SessionServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VertexRagDataServiceClient, VertexRagServiceClient, VizierServiceClient};
+export default {v1, v1beta1, DataFoundryServiceClient, DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiCacheServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SessionServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VertexRagDataServiceClient, VertexRagServiceClient, VizierServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
-
-import {fromValue, toValue} from './helpers';
-
-const helpers = {toValue, fromValue};
-
-export {helpers};
-
-import {_enhance} from './decorator';
-_enhance('v1beta1');
-_enhance('v1');
