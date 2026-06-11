@@ -1195,7 +1195,6 @@ libraries:
       - path: google/cloud/osconfig/v1beta
       - path: google/cloud/osconfig/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: OsConfigServiceClient
